@@ -598,7 +598,7 @@ def update_Patient_Vital_master():
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.1',port=5052,debug=True)
+    app.run(host='0.0.0.1',port=5053,debug=True)
 
 
 
