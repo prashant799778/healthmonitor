@@ -551,7 +551,7 @@ def Patient_Vital_master_select():
     try:
     
         # query = " select distinct userid,username,usertype from usermaster where usertype <> 'Admin';"
-        query = "select Id,PatientId,BP,SPO2,TEMP,usercreate from Patient_Vital_master  "
+        query = "select * from Patient_Vital_master  "
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
