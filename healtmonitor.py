@@ -99,20 +99,18 @@ def signup():
         if data != None:
         	output={"output": "Name already registered ,Please enter the other Name","status":"false"}
         else:
-        	json1=request.get_data() 
-        	data=json.loads(json1.decode("utf-8"))  
-        	print("77787878")
-        	query2  = " insert into signup (name,mobile,password,Usertype_Id,Hospital_Id,usercreate)"
-        	query2 = query2 +" values("+'"'+str(data["name"])+'"'+','+'"'+str(data["mobile"])+'"'+','+'"'+str(data["password"])+'"'+','+'"'+str(data["Usertype_Id"])+'"'+','+'"'+str(data["Hospital_Id"])+'"'+','+'"'+str(data["usercreate"])+'"'+' '+");"
-        	print(query2)
-        	conn=Connection()
-        	cursor = conn.cursor()
-        	cursor.execute(query2)
-        	conn.commit()
+            json1=request.get_data() 
+            data=json.loads(json1.decode("utf-8"))  
+            print("77787878")
+            query2  = " insert into signup (name,mobile,password,Usertype_Id,Hospital_Id,usercreate)"
+            query2 = query2 +" values("+'"'+str(data["name"])+'"'+','+'"'+str(data["mobile"])+'"'+','+'"'+str(data["password"])+'"'+','+'"'+str(data["Usertype_Id"])+'"'+','+'"'+str(data["Hospital_Id"])+'"'+','+'"'+str(data["usercreate"])+'"'+' '+");"
+            print(query2)
+            conn=Connection()
+            cursor = conn.cursor()
+            cursor.execute(query2)
+            conn.commit()
             cursor.close()
-            
-        	
-        	output={"output": "User Signup succesfully","status":"true"}
+            output={"output": "User Signup succesfully","status":"true"}
         
     except Exception as e :
         print("Exception---->" + str(e))    
@@ -182,7 +180,7 @@ def Usertype_master():
         cursor.execute(query1)
         data= cursor.fetchone()
         conn.commit()
-        #cursor.close()
+        cursor.close()
         if data != None:
             output={"output": "Usertype already registered ,Please enter the other Usertype ","status":"false"}
         else:
