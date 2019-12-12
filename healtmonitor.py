@@ -110,7 +110,7 @@ def Signuplist():
     try:
     
         # query = " select distinct userid,username,usertype from usermaster where usertype <> 'Admin';"
-        query = "select * from Signup "
+        query = "select * from signup "
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
@@ -135,7 +135,7 @@ def updateSignup():
         json1=request.get_data() 
         data=json.loads(json1.decode("utf-8")) 
         print("yy")
-        query1 = " update Signup  set  name= '" + str(data["name"]) + "',  password ='" + str(data["password"]) + "'  ,  mobile ='" + str(data["mobile"]) + "'  ,  Usertype_Id ='" + str(data["Usertype_Id"]) + "' ,  Hospital_Id ='" + str(data["Hospital_Id"]) + "' ,  UserUpdate ='" + str(data["UserUpdate"]) + "' , Status ='1' where ID = '" + str(data["ID"])+ "';"
+        query1 = " update signup  set  name= '" + str(data["name"]) + "',  password ='" + str(data["password"]) + "'  ,  mobile ='" + str(data["mobile"]) + "'  ,  Usertype_Id ='" + str(data["Usertype_Id"]) + "' ,  Hospital_Id ='" + str(data["Hospital_Id"]) + "' ,  UserUpdate ='" + str(data["UserUpdate"]) + "' , Status ='1' where ID = '" + str(data["ID"])+ "';"
         print(query1)
         conn=Connection()
         cursor = conn.cursor()
