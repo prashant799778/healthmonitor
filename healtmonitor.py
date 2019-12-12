@@ -1,27 +1,15 @@
-from flask import Flask,request,render_template,send_from_directory, abort
-from pymongo import MongoClient
-from bson.objectid import ObjectId
+from flask import Flask,request, abort
+
 import json
 import numpy as np
 import pymysql
 import requests
-from pymongo import MongoClient
 import json
-from bson.objectid import ObjectId
-import urllib.parse
 import pymysql
 from flask_cors import CORS
 from datetime import datetime
 import pytz 
-import math, random
-from flask_mail import Mail
-from flask_mail import Message
-import xlrd
 import pytz
-import os
-from sendgrid import SendGridAPIClient
-from sendgrid.helpers.mail import Mail
-import cv2
 from config import Connection
 
 
