@@ -500,7 +500,8 @@ def Patient_Vital_master(json1):
         socketio.emit(json1)
         print(json1)
         json1=request.get_data() 
-        data=json.loads(json1.decode("utf-8")) 
+        data=json.loads(json1.decode("utf-8"))
+        socketio.send(data) 
         # socketio.emit(data) 
         # print(data)
            
@@ -517,8 +518,11 @@ def Patient_Vital_master(json1):
         if data != None:
             output={"output": "PatientId already registered ,Please enter other PatientId ","status":"false"}
         else:
+            socketio.emit(json1)
+            print(json1)
             json1=request.get_data() 
             data=json.loads(json1.decode("utf-8"))
+            socketio.send(data)
             
 
            
