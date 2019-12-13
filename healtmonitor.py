@@ -517,7 +517,7 @@ def Patient_Vital_master():
             
 
            
-            query2  = " insert into Patient_Vital_master(PatientId,RESP,ECG,SPO2,NIBP,TEMP,usercreate)"
+            query2  = " insert into Patient_Vital_master(Patient_Id,RESP,ECG,SPO2,NIBP,TEMP,usercreate)"
             query2 =query2 +" values("+'"'+str(data["PatientId"])+'"'+','+'"'+str(data["RESP"])+'"'+','+'"'+str(data["ECG"])+'"'+','+'"'+str(data["SPO2"])+'"'+','+'"'+str(data["NIBP"])+'"'+','+'"'+str(data["TEMP"])+'"'+','+'"'+str(data["usercreate"])+'"'+' '+");"
             print(query2)
             conn=Connection()
@@ -536,7 +536,8 @@ def Patient_Vital_master():
 def Patient_Vital_master_select():
     try:
         PatientId = request.args["PatientId"]
-        query = "select  PVM.PatientId as PatientId,PVM.RESP,PVM.ECG,PVM.SPO2,PVM.NIBP,PVM.TEMP,Pm.DeviceMac from Patient_Vital_master as PVM INNER JOIN Patient_master as Pm ON Pm.PatientId= PVM.PatientId where PatientId = '" + PatientId + "' "
+        query = "select  PVM.Patient_Id as PatientId,PVM.RESP,PVM.ECG,PVM.SPO2,PVM.NIBP,PVM.TEMP,Pm.DeviceMac from Patient_Vital_master as PVM INNER JOIN Patient_master as Pm ON Pm.PatientId= PVM.Patient_Id where PatientId = '" + PatientId + "' "
+        print(query)
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
