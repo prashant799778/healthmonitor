@@ -517,8 +517,8 @@ def Patient_Vital_master():
             
 
            
-            query2  = " insert into Patient_Vital_master(PatientId,Bp,SPO2,TEMP,usercreate)"
-            query2 =query2 +" values("+'"'+str(data["PatientId"])+'"'+','+'"'+str(data["Bp"])+'"'+','+'"'+str(data["SPO2"])+'"'+','+'"'+str(data["TEMP"])+'"'+','+'"'+str(data["usercreate"])+'"'+' '+");"
+            query2  = " insert into Patient_Vital_master(PatientId,RESP,ECG,SPO2,NIBP,TEMP,usercreate)"
+            query2 =query2 +" values("+'"'+str(data["PatientId"])+'"'+','+'"'+str(data["RESP"])+'"'+','+'"'+str(data["ECG"])+'"'+','+'"'+str(data["SPO2"])+'"'+','+'"'+str(data["NIBP"])+'"'+','+'"'+str(data["TEMP"])+'"'+','+'"'+str(data["usercreate"])+'"'+' '+");"
             print(query2)
             conn=Connection()
             cursor = conn.cursor()
@@ -535,9 +535,8 @@ def Patient_Vital_master():
 @app.route('/Patient_Vital_master_select', methods=['GET'])
 def Patient_Vital_master_select():
     try:
-    
-        # query = " select distinct userid,username,usertype from usermaster where usertype <> 'Admin';"
-        query = "select *  from Patient_Vital_master  "
+        PatientId = request.args["PatientId"]
+        query = "select  PVM.PatientId,PVM.RESP,PVM.ECG,PVM.SPO2,PVM.NIBP,PVM.TEMP,Pm.DeviceMac from Patient_Vital_master as PVM INNER JOIN Patient_master as Pm ON Pm.PatientId= PVM.PatientId where PatientId = '" + PatientId + "' "
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
@@ -562,7 +561,7 @@ def update_Patient_Vital_master():
         json1=request.get_data() 
         data=json.loads(json1.decode("utf-8")) 
         print("yy")
-        query1 = " update Patient_Vital_master set  PatientId ='" + str(data["PatientId"]) + "' , Bp ='" + str(data["Bp"]) + "' , SPO2 = '" + str(data["SPO2"]) + "' , TEMP ='" + str(data["TEMP"]) + "'  ,  UserUpdate ='" + str(data["UserUpdate"]) + "' , Status ='1'  where Id = '" + str(data["Id"])+ "';"
+        query1 = " update Patient_Vital_master set  PatientId ='" + str(data["PatientId"]) + "' , RESP ='" + str(data["RESP"]) + "' , ECG ='" + str(data["ECG"]) + "' , SPO2 = '" + str(data["SPO2"]) + "' , NIBP = '" + str(data["NIBP"]) + "', TEMP ='" + str(data["TEMP"]) + "'  ,  UserUpdate ='" + str(data["UserUpdate"]) + "' , Status ='1'  where Id = '" + str(data["Id"])+ "';"
         print(query1)
         conn=Connection()
         cursor = conn.cursor()
