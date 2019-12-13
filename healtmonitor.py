@@ -360,7 +360,7 @@ def Device_master_select():
     try:
     
         # query = " select distinct userid,username,usertype from usermaster where usertype <> 'Admin';"
-        query = "select  * from Device_master  "
+        query = "select  de.DeviceMac,de.Bed_Number,de.Vard_Name,de.Hospital_Id,hm.hospital_name as hospital_Name from Device_master as de INNER JOIN Hospital_master as hm on hm.ID= de.Hospital_Id "
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
