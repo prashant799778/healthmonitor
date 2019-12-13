@@ -501,7 +501,7 @@ def Patient_Vital_master():
            
        
 
-        query = "select     * from Patient_Vital_master where PatientId = "+'"'+str(data["PatientId"])+'"'+" ;"
+        query = "select     * from Patient_Vital_master where Patient_Id = "+'"'+str(data["PatientId"])+'"'+" ;"
         
         conn=Connection()
         cursor = conn.cursor()
