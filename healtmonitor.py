@@ -494,19 +494,16 @@ def update_Patient_type():
         print("Exception---->" +str(e))    
         output = {"result":"somthing went wrong","status":"false"}
         return output
-@app.route('/Patient_Vital_master', methods=['POST'])
-def Patient_Vital_master(json1):
+        
+@socketio.on('/Patient_Vital_master')
+def handle_json(json):
     try:
-        socketio.emit(json1)
-        print(json1)
-        json1=request.get_data() 
-        data=json.loads(json1.decode("utf-8"))
+        print('received json: ' + str(json))
+        socketio.emit(json)
+        data=json.loads(json.decode("utf-8"))
         socketio.send(data) 
         # socketio.emit(data) 
         # print(data)
-           
-       
-
         query = "select     * from Patient_Vital_master where Patient_Id = "+'"'+str(data["PatientId"])+'"'+" ;"
         
         conn=Connection()
@@ -518,10 +515,9 @@ def Patient_Vital_master(json1):
         if data != None:
             output={"output": "PatientId already registered ,Please enter other PatientId ","status":"false"}
         else:
-            socketio.emit(json1)
-            print(json1)
-            json1=request.get_data() 
-            data=json.loads(json1.decode("utf-8"))
+            socketio.emit(json)
+            json=request.get_data() 
+            data=json.loads(json.decode("utf-8"))
             socketio.send(data)
             
 
