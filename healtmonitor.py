@@ -49,12 +49,10 @@ def login():
         cursor = conn.cursor()
         cursor.execute(query)
         loginuser = cursor.fetchone()
-        l= {"status":"true"}
-        loginuser.update(l)
         cursor.close()
         if loginuser:   
-            Data = json.dumps(loginuser, default=str)                       
-            return Data
+            data={"status":"true","result":loginuser}                      
+            return data
         else:
             data={"status":"false","result":"Login Failed"}
             return data
@@ -117,12 +115,10 @@ def Signuplist():
         cursor = conn.cursor()
         cursor.execute(query)
         data = cursor.fetchall()
-        l={"status":"true"}
-        data.update(l)
         cursor.close()
         if data:           
-            Data = json.dumps(data, default=str)
-            return str(Data)
+            Data = {"result":data,"status":"true"}
+            return Data
         else:
             output = {"result":"No Data Found","status":"false"}
             return output
