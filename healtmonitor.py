@@ -496,13 +496,15 @@ def update_Patient_type():
         return output
 
 @socketio.on('/Patient_Vital_master', methods=['POST'])
-def Patient_Vital_master(json):
+def Patient_Vital_master(json1):
     try:
+        socketio.emit(json1)
+        print(json1)
        
-        json=request.get_data() 
-        data=json.loads(json.decode("utf-8")) 
-        socketio.emit(data) 
-        print(data)
+        json1=request.get_data() 
+        data=json.loads(json1.decode("utf-8")) 
+        # socketio.emit(data) 
+        # print(data)
            
        
 
