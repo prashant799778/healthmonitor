@@ -49,12 +49,14 @@ def login():
         cursor = conn.cursor()
         cursor.execute(query)
         loginuser = cursor.fetchone()
+        l= {"status":"true"}
+        loginuser.update(l)
         cursor.close()
         if loginuser:   
             Data = json.dumps(loginuser, default=str)                       
             return Data
         else:
-            data={"status":"Failed","result":"Login Failed"}
+            data={"status":"false","result":"Login Failed"}
             return data
 
     except KeyError as e:
@@ -115,6 +117,8 @@ def Signuplist():
         cursor = conn.cursor()
         cursor.execute(query)
         data = cursor.fetchall()
+        l={"status":"true"}
+        data.update(l)
         cursor.close()
         if data:           
             Data = json.dumps(data, default=str)
