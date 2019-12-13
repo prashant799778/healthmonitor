@@ -282,7 +282,7 @@ def hospital_master_list():
         cursor.close()
         if data:           
             Data = {"result":data,"status":"true"}
-            return str(Data)
+            return Data
         else:
             output = {"result":"No Data Found","status":"false"}
             return output
@@ -365,7 +365,7 @@ def Device_master_select():
         cursor.close()
         if data:           
             Data = {"result":data,"status":"true"}
-            return str(Data)
+            return Data
         else:
             output = {"result":"No Data Found","status":"false"}
             return output
@@ -456,7 +456,7 @@ def Patient_master_select():
         cursor.close()
         if data:           
             Data = {"result":data,"status":"true"}
-            return str(Data)
+            return Data
         else:
             output = {"result":"No Data Found","status":"false"}
             return output
