@@ -494,16 +494,11 @@ def update_Patient_type():
         print("Exception---->" +str(e))    
         output = {"result":"somthing went wrong","status":"false"}
         return output
-
-
-
-
-@socketio.on('/Patient_Vital_master', methods=['POST'])
+@app.route('/Patient_Vital_master', methods=['POST'])
 def Patient_Vital_master(json1):
     try:
         socketio.emit(json1)
         print(json1)
-       
         json1=request.get_data() 
         data=json.loads(json1.decode("utf-8")) 
         # socketio.emit(data) 
