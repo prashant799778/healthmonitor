@@ -1,4 +1,5 @@
 from flask import Flask,request, abort
+from flask_socketio import SocketIO,emit
 
 import json
 import numpy as np
@@ -16,6 +17,8 @@ from config import Connection
 
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'qF67IYUWYU'
+socketio = SocketIO(app)
 
 
 class JSONEncoder(json.JSONEncoder):
@@ -492,12 +495,13 @@ def update_Patient_type():
         output = {"result":"somthing went wrong","status":"false"}
         return output
 
-@app.route('/Patient_Vital_master', methods=['POST'])
-def Patient_Vital_master():
+@socketio.on('/Patient_Vital_master', methods=['POST'])
+def Patient_Vital_master(json):
     try:
        
-        json1=request.get_data() 
-        data=json.loads(json1.decode("utf-8"))  
+        json=request.get_data() 
+        data=json.loads(json.decode("utf-8")) 
+        socketio.emit(data) 
            
        
 
@@ -592,6 +596,7 @@ def update_Patient_Vital_master():
 if __name__ == "__main__":
     CORS(app, support_credentials=True)
     app.run(host='0.0.0.0',port=5053,debug=True)
+    socketio.run(app,port=5053,debug=True)
 
    
 
