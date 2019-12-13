@@ -281,7 +281,7 @@ def hospital_master_list():
         data = cursor.fetchall()
         cursor.close()
         if data:           
-            Data = json.dumps(data, default=str)
+            Data = {"result":data,"status":"true"}
             return str(Data)
         else:
             output = {"result":"No Data Found","status":"false"}
@@ -364,7 +364,7 @@ def Device_master_select():
         data = cursor.fetchall()
         cursor.close()
         if data:           
-            Data = json.dumps(data, default=str)
+            Data = {"result":data,"status":"true"}
             return str(Data)
         else:
             output = {"result":"No Data Found","status":"false"}
@@ -455,7 +455,7 @@ def Patient_master_select():
         data = cursor.fetchall()
         cursor.close()
         if data:           
-            Data = json.dumps(data, default=str)
+            Data = {"result":data,"status":"true"}
             return str(Data)
         else:
             output = {"result":"No Data Found","status":"false"}
