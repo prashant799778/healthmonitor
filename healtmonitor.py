@@ -536,7 +536,7 @@ def Patient_Vital_master():
 def Patient_Vital_master_select():
     try:
         PatientId = request.args["PatientId"]
-        query = "select  PVM.PatientId,PVM.RESP,PVM.ECG,PVM.SPO2,PVM.NIBP,PVM.TEMP,Pm.DeviceMac from Patient_Vital_master as PVM INNER JOIN Patient_master as Pm ON Pm.PatientId= PVM.PatientId where PatientId = '" + PatientId + "' "
+        query = "select  PVM.PatientId as PatientId,PVM.RESP,PVM.ECG,PVM.SPO2,PVM.NIBP,PVM.TEMP,Pm.DeviceMac from Patient_Vital_master as PVM INNER JOIN Patient_master as Pm ON Pm.PatientId= PVM.PatientId where PatientId = '" + PatientId + "' "
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
