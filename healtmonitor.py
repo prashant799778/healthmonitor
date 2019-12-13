@@ -495,6 +495,9 @@ def update_Patient_type():
         output = {"result":"somthing went wrong","status":"false"}
         return output
 
+
+
+
 @socketio.on('/Patient_Vital_master', methods=['POST'])
 def Patient_Vital_master(json1):
     try:
