@@ -502,6 +502,7 @@ def Patient_Vital_master(json):
         json=request.get_data() 
         data=json.loads(json.decode("utf-8")) 
         socketio.emit(data) 
+        print(data)
            
        
 
