@@ -44,7 +44,7 @@ def login():
         
                
         #query="select userid,usertype from usermaster where userid = '" + userid + "' and password='" + password + "';"      
-        query ="select mobile,Usertype_Id,Hospital_Id  from Signup where name = '" + name + "' and password='" + password + "';"   
+        query ="select mobile,Usertype_Id,Hospital_Id  from signup where name = '" + name + "' and password='" + password + "';"   
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
