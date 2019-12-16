@@ -512,10 +512,10 @@ def handle_json(json):
         socketio.emit(json)
         print(type(json))
         data=json  
-        # sio.connect('http://159.65.146.25:3015')
+        sio.connect('http://159.65.146.25:3015')
 
-        # sio.emit("RealTimeData", json)
-        # sio.send("hello")
+        sio.emit("RealTimeData", json)
+        sio.send("hello")
         
         # socketio.send(data) 
         # socketio.emit(data) 
