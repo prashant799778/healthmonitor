@@ -587,7 +587,7 @@ def Patient_Vital_master_select():
         cursor.close()
         
         #print( data[-1])
-        data[-1]["ECG"]=data[-1]["ECG"].replace("'",'"')
+        data[-1]["ECG"]=data[-1]["ECG"].replace('"','"""').replace("'",'"').replace('"""',"'")
         if data:
             Data = {"result":data[-1],"status":"true"}
             return  Data
