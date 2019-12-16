@@ -588,7 +588,7 @@ def Patient_Vital_master_select():
         print(data)
         data1=data[-1]
         print(data1)
-        data1["ECG"]=json.loads(data1["ECG"]).
+        data1["ECG"]=json.loads(data1["ECG"])
         print(data2)
         #print( data[-1])      
         if data:
