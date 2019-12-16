@@ -675,8 +675,8 @@ def disconnect(sid):
 if __name__ == "__main__":
     CORS(app, support_credentials=True)
     app.run(host='0.0.0.0',port=5053,debug=True)
-    #socketio.run(app,port=5053,debug=True)
-    app = socketio.Middleware(sio, app)
+    socketio.run(app,port=5053,debug=True)
+    ##app = socketio.Middleware(sio, app)
 
     # deploy as an eventlet WSGI server
     eventlet.wsgi.server(eventlet.listen(('', 5053)), app)
