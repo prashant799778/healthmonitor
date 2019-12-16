@@ -3,9 +3,10 @@ from flask_socketio import SocketIO
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
-socketio = SocketIO(app)
+#socketio = SocketIO(app)
 
-
+mgr = socketio.KafkaManager('kafka://')
+socketio = socketio.Server(client_manager=mgr)
 
 
 # @socketio.on('message')
