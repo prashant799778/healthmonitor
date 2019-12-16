@@ -555,7 +555,7 @@ def Patient_Vital_master_select():
         
         if DeviceMac != "":
             WhereCondition1 =  " where  DeviceMac   = '" + DeviceMac + "'  "
-            y = y +  WhereCondition2
+            y = y +  WhereCondition1
         
         if  PatientName != "":
             WhereCondition1 =  " where  PatientName   = '" + PatientName + "'  "
