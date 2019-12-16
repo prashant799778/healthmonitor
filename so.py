@@ -31,8 +31,8 @@ from flask_socketio import SocketIO, emit
 import os
 
 import eventlet
-eventlet.monkey_patch()
-app = create_app(debug=True)
+#eventlet.monkey_patch()
+
 root_dir = os.path.dirname(os.getcwd())
 static_path = os.path.join(root_dir, 'web-server', 'static')
 
