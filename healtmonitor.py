@@ -505,17 +505,17 @@ def update_Patient_type():
         output = {"result":"somthing went wrong","status":"false"}
         return output
  
-@sio.on('new message')
-def on_message(data):
-    print('I received a message!')
+# @sio.on('new message')
+# def on_message(data):
+    # print('I received a message!')
 
 #io.connect("http://localhost:8000")
 
 
-    sio.connect('http://159.65.146.25:3015')
+    # sio.connect('http://159.65.146.25:3015')
 
-    sio.emit("RealTimeData", json)
-    sio.send("hello")
+    # sio.emit("RealTimeData", json)
+    # sio.send("hello")
 
  
 @socketio.on('new message')
@@ -526,7 +526,7 @@ def handle_json(json):
         print(type(json))
         data=json  
         sio.connect('http://159.65.146.25:3015')
-        
+        sio.emit('my event', {'data': 'foobar'})
         # socketio.send(data) 
         # socketio.emit(data) 
         print(data)
