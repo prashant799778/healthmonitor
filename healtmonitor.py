@@ -1,7 +1,7 @@
 from flask import Flask,request, abort
 from flask_socketio import SocketIO,emit
 
-
+import json
 #import socketio
 
 
@@ -588,7 +588,7 @@ def Patient_Vital_master_select():
         print(data)
         data1=data[-1]
         print(data1)
-        data2=data1.replace("'", '"')
+        data1["ECG"]=json.loads(data1["ECG"]).
         print(data2)
         #print( data[-1])      
         if data:
