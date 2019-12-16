@@ -503,11 +503,12 @@ def handle_json(json):
     try:
         print('received json: ' + str(json))
         socketio.emit(json)
+        print(type(json))
         data=json.loads(json.decode("utf-8"))
         socketio.send(data) 
         socketio.emit(data) 
         print(data)
-        query = "select     * from Patient_Vital_master where Patient_Id = "+'"'+str(data["PatientId"])+'"'+" ;"
+        query = "select * from Patient_Vital_master where Patient_Id = "+'"'+str(data["PatientId"])+'"'+" ;"
         
         conn=Connection()
         cursor = conn.cursor()
