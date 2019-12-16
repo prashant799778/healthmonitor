@@ -504,15 +504,8 @@ def update_Patient_type():
         print("Exception---->" +str(e))    
         output = {"result":"somthing went wrong","status":"false"}
         return output
-        
-@socketio.on('new message')
-def handle_json(json):
-    try:
-        print('received json: ' + str(json))
-        socketio.emit(json)
-        print(type(json))
-        data=json  
-        @sio.on('new message')
+ 
+@sio.on('new message')
         def on_message(data):
             print('I received a message!')
 
@@ -523,15 +516,17 @@ def handle_json(json):
 
         sio.emit("RealTimeData", json)
         sio.send("hello")
-        try:
-          # sio.wait() # doesn't raise it, so have to implement it manually ;-)
-          while True:
-            time.sleep(1)
-        except KeyboardInterrupt:
-          print("handling interrupt...")
-          sio.disconnect()
 
-        print("done")
+ 
+@socketio.on('new message')
+def handle_json(json):
+    try:
+        print('received json: ' + str(json))
+        socketio.emit(json)
+        print(type(json))
+        data=json  
+        
+        
         # socketio.send(data) 
         # socketio.emit(data) 
         print(data)
