@@ -528,7 +528,7 @@ def handle_json(json):
         @sio.event
         def connect():
            print('connection established')
-        @sio.event
+        @sio.on("my message")
         def my_message(data):
            print('message received with ', data)
            sio.emit('my response', {'response': 'my response'})
