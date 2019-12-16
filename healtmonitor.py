@@ -586,7 +586,7 @@ def Patient_Vital_master_select():
         data = cursor.fetchall()
         cursor.close()
         
-               
+        print( data)      
         if data:
             Data = {"result":data,"status":"true"}
             return  Data
