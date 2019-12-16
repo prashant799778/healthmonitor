@@ -505,7 +505,7 @@ def handle_json(json):
         socketio.emit(json)
         print(type(json))
         data=json  
-        socketio.connect('http://localhost:3004')
+        socketio.connect('http://159.65.146.25:3015')
 
         socketio.emit("RealTimeData", json)
         socketio.send("hello")
