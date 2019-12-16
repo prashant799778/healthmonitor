@@ -527,7 +527,15 @@ def handle_json(json):
 
         sio.emit("RealTimeData", json)
         sio.send("hello")
-        
+        try:
+          # sio.wait() # doesn't raise it, so have to implement it manually ;-)
+          while True:
+            time.sleep(1)
+        except KeyboardInterrupt:
+          print("handling interrupt...")
+          sio.disconnect()
+
+        print("done")
         # socketio.send(data) 
         # socketio.emit(data) 
         print(data)
