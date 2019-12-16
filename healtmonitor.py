@@ -519,6 +519,7 @@ def handle_json(json):
         if data != None:
             output={"output": "PatientId already registered ,Please enter other PatientId ","status":"false"}
         else:
+
             print('received json: ' + str(json))
             socketio.emit(json)
             print(type(json))
@@ -526,6 +527,7 @@ def handle_json(json):
             socketio.send(data) 
             socketio.emit(data) 
             print("Final _data",data)
+
 
            
             query2  = " insert into Patient_Vital_master(Patient_Id,RESP,ECG,SPO2,NIBP,TEMP,usercreate)"
@@ -615,9 +617,6 @@ def update_Patient_Vital_master():
         print("Exception---->" +str(e))    
         output = {"result":"somthing went wrong","status":"false"}
         return output
-
-
-
 
 
 
