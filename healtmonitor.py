@@ -554,12 +554,12 @@ def Patient_Vital_master_select():
             y = y +  WhereCondition1
         
         if DeviceMac != "":
-            WhereCondition2 =  " where  DeviceMac   = '" + DeviceMac + "'  "
-            y2 = y2 +  WhereCondition2
+            WhereCondition1 =  " where  DeviceMac   = '" + DeviceMac + "'  "
+            y = y +  WhereCondition2
         
         if  PatientName != "":
-            WhereCondition3 =  " where  PatientName   = '" + PatientName + "'  "
-            y3 = y3 +  WhereCondition3
+            WhereCondition1 =  " where  PatientName   = '" + PatientName + "'  "
+            y = y +  WhereCondition1
 
         
         query = "select  PVM.Patient_Id as PatientId,Pm.PatientName as PatientName,PVM.RESP,PVM.ECG,PVM.SPO2,PVM.NIBP,PVM.TEMP,Pm.DeviceMac AS DeviceMac from Patient_Vital_master as PVM INNER JOIN Patient_master as Pm ON Pm.PatientId= PVM.Patient_Id  " +y
@@ -570,21 +570,21 @@ def Patient_Vital_master_select():
         data = cursor.fetchall()
         cursor.close()
 
-        query = "select  PVM.Patient_Id as PatientId,Pm.PatientName as PatientName,PVM.RESP,PVM.ECG,PVM.SPO2,PVM.NIBP,PVM.TEMP,Pm.DeviceMac AS DeviceMac from Patient_Vital_master as PVM INNER JOIN Patient_master as Pm ON Pm.PatientId= PVM.Patient_Id  " +y2
-        print(query)
-        conn=Connection()
-        cursor = conn.cursor()
-        cursor.execute(query)
-        data = cursor.fetchall()
-        cursor.close()
+        # query2 = "select  PVM.Patient_Id as PatientId,Pm.PatientName as PatientName,PVM.RESP,PVM.ECG,PVM.SPO2,PVM.NIBP,PVM.TEMP,Pm.DeviceMac AS DeviceMac from Patient_Vital_master as PVM INNER JOIN Patient_master as Pm ON Pm.PatientId= PVM.Patient_Id  " +y2
+        # print(query2)
+        # conn=Connection()
+        # cursor = conn.cursor()
+        # cursor.execute(query2)
+        # data = cursor.fetchall()
+        # cursor.close()
 
-        query = "select  PVM.Patient_Id as PatientId,Pm.PatientName as PatientName,PVM.RESP,PVM.ECG,PVM.SPO2,PVM.NIBP,PVM.TEMP,Pm.DeviceMac AS DeviceMac from Patient_Vital_master as PVM INNER JOIN Patient_master as Pm ON Pm.PatientId= PVM.Patient_Id  " +y3
-        print(query)
-        conn=Connection()
-        cursor = conn.cursor()
-        cursor.execute(query)
-        data = cursor.fetchall()
-        cursor.close()
+        # query3 = "select  PVM.Patient_Id as PatientId,Pm.PatientName as PatientName,PVM.RESP,PVM.ECG,PVM.SPO2,PVM.NIBP,PVM.TEMP,Pm.DeviceMac AS DeviceMac from Patient_Vital_master as PVM INNER JOIN Patient_master as Pm ON Pm.PatientId= PVM.Patient_Id  " +y3
+        # print(query3)
+        # conn=Connection()
+        # cursor = conn.cursor()
+        # cursor.execute(query3)
+        # data = cursor.fetchall()
+        # cursor.close()
         
         if data:           
             Data = json.dumps(data, default=str)
