@@ -517,15 +517,7 @@ def update_Patient_type():
     # sio.emit("RealTimeData", json)
     # sio.send("hello")
 
- 
-@socketio.on('new message')
-def handle_json(json):
-    try:
-        print('received json: ' + str(json))
-        socketio.emit(json)
-        print(type(json))
-        data=json  
-@sio.event
+ @sio.event
 def connect():
    print('connection established')
 @sio.on("my message")
@@ -537,6 +529,14 @@ def disconnect():
    print('disconnected from server')
 sio.connect('http://0.0.0.0:3015')
 sio.wait()
+@socketio.on('new message')
+def handle_json(json):
+    try:
+        print('received json: ' + str(json))
+        socketio.emit(json)
+        print(type(json))
+        data=json  
+
 
         
         # sio.connect('http://0.0.0.0:3015')
