@@ -17,13 +17,19 @@ import socketio
 import eventlet
 import eventlet.wsgi
 from flask import Flask, render_template
+from flask import Flask, render_template
+from flask_socketio import SocketIO
+
+app = Flask(__name__)
+app.config['SECRET_KEY'] = 'vnkdjnfjknfl1232#'
+#socketio = SocketIO(app)
 
 sio = socketio.Server()
-app = Flask(__name__)
+#app = Flask(__name__)
 
 
-app = Flask(__name__)
-app.config['SECRET_KEY'] = 'qF67IYUWYU'
+#app = Flask(__name__)
+#app.config['SECRET_KEY'] = 'qF67IYUWYU'
 socketio = SocketIO(app)
 
 
@@ -621,29 +627,43 @@ def update_Patient_Vital_master():
 
 
 
+# @app.route('/')
+# def index():
+#     """Serve the client-side application."""
+#     return render_template('index.html')
+
+# @sio.on('connect', namespace='/')
+# def connect(sid, environ):
+#     print("connect ", sid)
+
+# @sio.on('add user', namespace='/')
+# def login1(sid, environ):
+#     print("login1 ", sid)
+#     sio.emit('login1', room=sid)
+
+# @sio.on('new message', namespace='/')
+# def message(sid, data):
+#     print("message ", data)
+#     sio.emit('reply', room=sid)
+
+# @sio.on('disconnect', namespace='/')
+# def disconnect(sid):
+#     print('disconnect ', sid)
+
 @app.route('/')
-def index():
-    """Serve the client-side application."""
-    return render_template('index.html')
+def sessions():
+    return render_template('session.html')
 
-@sio.on('connect', namespace='/')
-def connect(sid, environ):
-    print("connect ", sid)
+def messageReceived(methods=['GET', 'POST']):
+    print('message was received!!!')
 
-@sio.on('add user', namespace='/')
-def login1(sid, environ):
-    print("login1 ", sid)
-    sio.emit('login1', room=sid)
+@socketio.on('my event')
+def handle_my_custom_event(json, methods=['GET', 'POST']):
+    print('received my event: ' + str(json))
+    socketio.emit('my response', json, callback=messageReceived)
 
-@sio.on('new message', namespace='/')
-def message(sid, data):
-    print("message ", data)
-    sio.emit('reply', room=sid)
-
-@sio.on('disconnect', namespace='/')
-def disconnect(sid):
-    print('disconnect ', sid)
-
+if __name__ == '__main__':
+    socketio.run(app, debug=True)
 # if __name__ == '__main__':
 #     # wrap Flask application with engineio's middleware
 #     app = socketio.Middleware(sio, app)
