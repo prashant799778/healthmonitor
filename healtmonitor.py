@@ -525,7 +525,7 @@ def handle_json(json):
         socketio.emit(json)
         print(type(json))
         data=json  
-        sio.connect('http://159.65.146.25:3015')
+        sio.connect('http://0.0.0.0:3015')
         sio.emit('my event', {'data': 'foobar'})
         # socketio.send(data) 
         # socketio.emit(data) 
