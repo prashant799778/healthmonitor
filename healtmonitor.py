@@ -505,8 +505,13 @@ def handle_json(json):
         socketio.emit(json)
         print(type(json))
         data=json  
-        socketio.send(data) 
-        socketio.emit(data) 
+        socketio.connect('http://localhost:3004')
+
+        socketio.emit("RealTimeData", json)
+        socketio.send("hello")
+        
+        # socketio.send(data) 
+        # socketio.emit(data) 
         print(data)
         query = "select * from Patient_Vital_master where Patient_Id = "+'"'+str(data["PatientId"])+'"'+" ;"
         
@@ -579,7 +584,7 @@ def Patient_Vital_master_select():
         cursor.execute(query)
         data = cursor.fetchall()
         cursor.close()
-
+        
                
         if data:
             Data = {"result":data,"status":"true"}
