@@ -550,15 +550,7 @@ def handle_json(json):
     
 
 
-@sio.on("my message")
-def my_message(data):
-   print('message received with ', data)
-   sio.emit('my response', {'response': 'my response'})
-# @sio.event
-# def disconnect():
-   # print('disconnected from server')
-sio.connect('http://0.0.0.0:3015')
-sio.wait()
+
 
 
 @app.route('/Patient_Vital_master_select', methods=['GET'])
