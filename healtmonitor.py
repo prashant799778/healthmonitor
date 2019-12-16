@@ -13,24 +13,15 @@ import pytz
 import pytz
 from config import Connection
 
-import socketio
-import eventlet
-import eventlet.wsgi
-from flask import Flask, render_template
+
 from flask import Flask, render_template
 from flask_socketio import SocketIO
-#eventlet.monkey_patch()
+
+
+
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'vnkdjnfjknfl1232#'
-#socketio = SocketIO(app)
-
-sio = socketio.Server()
-#app = Flask(__name__)
-
-socketio =  SocketIO(app, async_mode='eventlet')
-#app = Flask(__name__)
-#app.config['SECRET_KEY'] = 'qF67IYUWYU'
-#socketio = SocketIO(app)
+app.config['SECRET_KEY'] = 'secret!'
+socketio = SocketIO(app)
 
 
 class JSONEncoder(json.JSONEncoder):
@@ -100,7 +91,7 @@ def signup():
         cursor.close()
        
         if data != None:
-        	output={"output": "Name already registered ,Please enter the other Name","status":"false"}
+            output={"output": "Name already registered ,Please enter the other Name","status":"false"}
         else:
             json1=request.get_data() 
             data=json.loads(json1.decode("utf-8"))  
@@ -507,48 +498,51 @@ def update_Patient_type():
         output = {"result":"somthing went wrong","status":"false"}
         return output
         
-# @socketio.on('/json')
-# def handle_json(json):
-#     try:
-#         print('received json: ' + str(json))
-#         socketio.emit(json)
-#         data=json.loads(json.decode("utf-8"))
-#         socketio.send(data) 
-#         # socketio.emit(data) 
-#         # print(data)
-#     #     query = "select     * from Patient_Vital_master where Patient_Id = "+'"'+str(data["PatientId"])+'"'+" ;"
+@socketio.on('new message')
+def handle_json(json):
+    try:
+        print('received json: ' + str(json))
+        socketio.emit(json)
+        print(type(json))
+        data=json.loads(json)  
+        socketio.send(data) 
+        socketio.emit(data) 
+        print(data)
+        query = "select * from Patient_Vital_master where Patient_Id = "+'"'+str(data["PatientId"])+'"'+" ;"
         
-#     #     conn=Connection()
-#     #     cursor = conn.cursor()
-#     #     cursor.execute(query)
-#     #     data= cursor.fetchone()
-#     #     conn.commit()
-#     #     cursor.close()
-#     #     if data != None:
-#     #         output={"output": "PatientId already registered ,Please enter other PatientId ","status":"false"}
-#     #     else:
-#     #         socketio.emit(json)
-#     #         json=request.get_data() 
-#     #         data=json.loads(json.decode("utf-8"))
-#     #         socketio.send(data)
-            
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data= cursor.fetchone()
+        conn.commit()
+        cursor.close()
+        if data != None:
+            output={"output": "PatientId already registered ,Please enter other PatientId ","status":"false"}
+        else:
+            print('received json: ' + str(json))
+            socketio.emit(json)
+            print(type(json))
+            data=json.loads(json) 
+            socketio.send(data) 
+            socketio.emit(data) 
+            print("Final _data",data)
 
            
-#     #         query2  = " insert into Patient_Vital_master(Patient_Id,RESP,ECG,SPO2,NIBP,TEMP,usercreate)"
-#     #         query2 =query2 +" values("+'"'+str(data["PatientId"])+'"'+','+'"'+str(data["RESP"])+'"'+','+'"'+str(data["ECG"])+'"'+','+'"'+str(data["SPO2"])+'"'+','+'"'+str(data["NIBP"])+'"'+','+'"'+str(data["TEMP"])+'"'+','+'"'+str(data["usercreate"])+'"'+' '+");"
-#     #         print(query2)
-#     #         conn=Connection()
-#     #         cursor = conn.cursor()
-#     #         cursor.execute(query2)
-#     #         conn.commit()
-#     #         cursor.close()
-#     #         output={"output": "Patient Vital Details Added succesfully","status":"true"}
+            query2  = " insert into Patient_Vital_master(Patient_Id,RESP,ECG,SPO2,NIBP,TEMP,usercreate)"
+            query2 =query2 +" values("+'"'+str(data["PatientId"])+'"'+','+'"'+str(data["RESP"])+'"'+','+'"'+str(data["ECG"])+'"'+','+'"'+str(data["SPO2"])+'"'+','+'"'+str(data["NIBP"])+'"'+','+'"'+str(data["TEMP"])+'"'+','+'"'+str(data["usercreate"])+'"'+' '+");"
+            print(query2)
+            conn=Connection()
+            cursor = conn.cursor()
+            cursor.execute(query2)
+            conn.commit()
+            cursor.close()
+            output={"output": "Patient Vital Details Added succesfully","status":"true"}
         
-#     except Exception as e :
-#         print("Exception---->" + str(e))    
-#         output = {"result":"something went wrong","status":"false"}
-#     # return output
-#     return "connected"
+    except Exception as e :
+        print("Exception---->" + str(e))    
+        output = {"result":"something went wrong","status":"false"}
+    return output
+    
 
 @app.route('/Patient_Vital_master_select', methods=['GET'])
 def Patient_Vital_master_select():
@@ -627,60 +621,10 @@ def update_Patient_Vital_master():
 
 
 
-# @app.route('/')
-# def index():
-#     """Serve the client-side application."""
-#     return render_template('index.html')
 
-@sio.on('connect', namespace='/')
-def connect(sid, environ):
-    print("connect ", sid)
 
-@sio.on('add user', namespace='/')
-def login1(sid, environ):
-    print("login1 ", sid)
-    sio.emit('login1', room=sid)
-
-@sio.on('new message', namespace='/')
-def message(sid, data):
-    print("message ", data)
-    sio.emit('reply', room=sid)
-
-@sio.on('disconnect', namespace='/')
-def disconnect(sid):
-    print('disconnect ', sid)
-
-# @app.route('/')
-# def sessions():
-#     return render_template('session.html')
-
-# def messageReceived(methods=['GET', 'POST']):
-#     print('message was received!!!')
-
-# @socketio.on('my event')
-# def handle_my_custom_event(json, methods=['GET', 'POST']):
-#     print('received my event: ' + str(json))
-#     socketio.emit('my response', json, callback=messageReceived)
-#     return "recieved"
-
-# if __name__ == '__main__':
-#     socketio.run(app, debug=True)
-# if __name__ == '__main__':
-#     # wrap Flask application with engineio's middleware
-#     app = socketio.Middleware(sio, app)
-
-#     # deploy as an eventlet WSGI server
-#     eventlet.wsgi.server(eventlet.listen(('', 8000)), app)
 
 if __name__ == "__main__":
     CORS(app, support_credentials=True)
     app.run(host='0.0.0.0',port=5053,debug=True)
-    socketio.run(app,port=5053,debug=True)
-    ##app = socketio.Middleware(sio, app)
-
-    # deploy as an eventlet WSGI server
-    eventlet.wsgi.server(eventlet.listen(('0.0.0.0', 5053)), app)
-   
-
-
-
+    socketio.run(app)
