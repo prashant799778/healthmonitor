@@ -13,7 +13,7 @@ def handle_message(message):
     print('received message: ' + message)
 
 
-@socketio.on('json')
+@socketio.on('new message')
 def handle_json(json):
     print('received json: ' + str(json))
 
