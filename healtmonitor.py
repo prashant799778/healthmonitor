@@ -21,7 +21,10 @@ from config import Connection
 from flask import Flask, render_template
 from flask_socketio import SocketIO
 
+import socketio
 
+# standard Python
+sio = socketio.Client()
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
