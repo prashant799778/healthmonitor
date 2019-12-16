@@ -517,18 +517,10 @@ def update_Patient_type():
     # sio.emit("RealTimeData", json)
     # sio.send("hello")
 
-@sio.event
-def connect():
-   print('connection established')
-@sio.on("my message")
-def my_message(data):
-   print('message received with ', data)
-   sio.emit('my response', {'response': 'my response'})
-@sio.event
-def disconnect():
-   print('disconnected from server')
-sio.connect('http://0.0.0.0:3015')
-sio.wait()
+# @sio.event
+# def connect():
+   # print('connection established')
+
 @socketio.on('new message')
 def handle_json(json):
     try:
@@ -560,6 +552,18 @@ def handle_json(json):
         output = {"result":"something went wrong","status":"false"}
     return output
     
+
+
+@sio.on("my message")
+def my_message(data):
+   print('message received with ', data)
+   sio.emit('my response', {'response': 'my response'})
+# @sio.event
+# def disconnect():
+   # print('disconnected from server')
+sio.connect('http://0.0.0.0:3015')
+sio.wait()
+
 
 @app.route('/Patient_Vital_master_select', methods=['GET'])
 def Patient_Vital_master_select():
