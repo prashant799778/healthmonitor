@@ -520,7 +520,7 @@ def handle_json(json):
         def on_disconnect():
           print("disconnected")
 
-        s#io.connect("http://localhost:8000")
+        #io.connect("http://localhost:8000")
 
         
         sio.connect('http://159.65.146.25:3015')
