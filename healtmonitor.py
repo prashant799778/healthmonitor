@@ -632,36 +632,36 @@ def update_Patient_Vital_master():
 #     """Serve the client-side application."""
 #     return render_template('index.html')
 
-# @sio.on('connect', namespace='/')
-# def connect(sid, environ):
-#     print("connect ", sid)
+@sio.on('connect', namespace='/')
+def connect(sid, environ):
+    print("connect ", sid)
 
-# @sio.on('add user', namespace='/')
-# def login1(sid, environ):
-#     print("login1 ", sid)
-#     sio.emit('login1', room=sid)
+@sio.on('add user', namespace='/')
+def login1(sid, environ):
+    print("login1 ", sid)
+    sio.emit('login1', room=sid)
 
-# @sio.on('new message', namespace='/')
-# def message(sid, data):
-#     print("message ", data)
-#     sio.emit('reply', room=sid)
+@sio.on('new message', namespace='/')
+def message(sid, data):
+    print("message ", data)
+    sio.emit('reply', room=sid)
 
-# @sio.on('disconnect', namespace='/')
-# def disconnect(sid):
-#     print('disconnect ', sid)
+@sio.on('disconnect', namespace='/')
+def disconnect(sid):
+    print('disconnect ', sid)
 
 # @app.route('/')
 # def sessions():
 #     return render_template('session.html')
 
-def messageReceived(methods=['GET', 'POST']):
-    print('message was received!!!')
+# def messageReceived(methods=['GET', 'POST']):
+#     print('message was received!!!')
 
-@socketio.on('my event')
-def handle_my_custom_event(json, methods=['GET', 'POST']):
-    print('received my event: ' + str(json))
-    socketio.emit('my response', json, callback=messageReceived)
-    return "recieved"
+# @socketio.on('my event')
+# def handle_my_custom_event(json, methods=['GET', 'POST']):
+#     print('received my event: ' + str(json))
+#     socketio.emit('my response', json, callback=messageReceived)
+#     return "recieved"
 
 # if __name__ == '__main__':
 #     socketio.run(app, debug=True)
@@ -675,11 +675,11 @@ def handle_my_custom_event(json, methods=['GET', 'POST']):
 if __name__ == "__main__":
     CORS(app, support_credentials=True)
     app.run(host='0.0.0.0',port=5053,debug=True)
-    socketio.run(app,port=5053,debug=True)
-    #app = socketio.Middleware(sio, app)
+    #socketio.run(app,port=5053,debug=True)
+    app = socketio.Middleware(sio, app)
 
     # deploy as an eventlet WSGI server
-    #eventlet.wsgi.server(eventlet.listen(('', 5053)), app)
+    eventlet.wsgi.server(eventlet.listen(('', 5053)), app)
    
 
 
