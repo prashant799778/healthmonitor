@@ -5,8 +5,8 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
 #socketio = SocketIO(app)
 
-mgr = socketio.KafkaManager('kafka://')
-socketio = socketio.Server(client_manager=mgr)
+mgr = Socketio.KafkaManager('kafka://')
+socketio = Socketio.Server(client_manager=mgr)
 
 
 # @socketio.on('message')
