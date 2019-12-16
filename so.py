@@ -22,5 +22,5 @@ def handle_my_custom_event(json):
     print('received json: ' + str(json))    
     
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=80, debug=True) 
+    app.run(host='0.0.0.0', port=5054, debug=True) 
     socketio.run(app)
