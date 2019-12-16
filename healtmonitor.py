@@ -662,8 +662,8 @@ def handle_my_custom_event(json, methods=['GET', 'POST']):
     print('received my event: ' + str(json))
     socketio.emit('my response', json, callback=messageReceived)
 
-if __name__ == '__main__':
-    socketio.run(app, debug=True)
+# if __name__ == '__main__':
+#     socketio.run(app, debug=True)
 # if __name__ == '__main__':
 #     # wrap Flask application with engineio's middleware
 #     app = socketio.Middleware(sio, app)
@@ -674,11 +674,11 @@ if __name__ == '__main__':
 if __name__ == "__main__":
     CORS(app, support_credentials=True)
     app.run(host='0.0.0.0',port=5053,debug=True)
-    #socketio.run(app,port=5053,debug=True)
-    app = socketio.Middleware(sio, app)
+    socketio.run(app,port=5053,debug=True)
+    #app = socketio.Middleware(sio, app)
 
     # deploy as an eventlet WSGI server
-    eventlet.wsgi.server(eventlet.listen(('', 5053)), app)
+    #eventlet.wsgi.server(eventlet.listen(('', 5053)), app)
    
 
 
