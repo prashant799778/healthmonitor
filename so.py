@@ -1,12 +1,12 @@
 from flask import Flask, render_template
 from flask_socketio import SocketIO
-
+import socketio
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
 #socketio = SocketIO(app)
 
-mgr = Socketio.KafkaManager('kafka://')
-socketio = Socketio.Server(client_manager=mgr)
+mgr = socketio.KafkaManager('kafka://')
+socketio = socketio.Server(client_manager=mgr)
 
 
 # @socketio.on('message')
