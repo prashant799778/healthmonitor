@@ -2,7 +2,7 @@ from flask import Flask,request, abort
 from flask_socketio import SocketIO,emit
 
 
-import socketio
+#import socketio
 
 
 import json
@@ -26,7 +26,7 @@ from flask_socketio import SocketIO
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app)
-sio = socketio.Client()
+# sio = socketio.Client()
 
 class JSONEncoder(json.JSONEncoder):
     def default(self, o):
@@ -509,10 +509,10 @@ def handle_json(json):
         socketio.emit(json)
         print(type(json))
         data=json  
-        sio.connect('http://159.65.146.25:3015')
+        # sio.connect('http://159.65.146.25:3015')
 
-        sio.emit("RealTimeData", json)
-        sio.send("hello")
+        # sio.emit("RealTimeData", json)
+        # sio.send("hello")
         
         # socketio.send(data) 
         # socketio.emit(data) 
