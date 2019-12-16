@@ -13,7 +13,13 @@ import pytz
 import pytz
 from config import Connection
 
+import socketio
+import eventlet
+import eventlet.wsgi
+from flask import Flask, render_template
 
+sio = socketio.Server()
+app = Flask(__name__)
 
 
 app = Flask(__name__)
@@ -613,13 +619,7 @@ def update_Patient_Vital_master():
 
 
 
-import socketio
-import eventlet
-import eventlet.wsgi
-from flask import Flask, render_template
 
-sio = socketio.Server()
-app = Flask(__name__)
 
 @app.route('/')
 def index():
