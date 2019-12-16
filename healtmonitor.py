@@ -19,7 +19,7 @@ import eventlet.wsgi
 from flask import Flask, render_template
 from flask import Flask, render_template
 from flask_socketio import SocketIO
-eventlet.monkey_patch()
+#eventlet.monkey_patch()
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'vnkdjnfjknfl1232#'
 #socketio = SocketIO(app)
