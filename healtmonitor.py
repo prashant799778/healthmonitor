@@ -13,24 +13,15 @@ import pytz
 import pytz
 from config import Connection
 
-import socketio
-import eventlet
-import eventlet.wsgi
-from flask import Flask, render_template
+
 from flask import Flask, render_template
 from flask_socketio import SocketIO
-#eventlet.monkey_patch()
+
+
+
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'vnkdjnfjknfl1232#'
-#socketio = SocketIO(app)
-
-sio = socketio.Server()
-#app = Flask(__name__)
-
-socketio =  SocketIO(app, async_mode='eventlet')
-#app = Flask(__name__)
-#app.config['SECRET_KEY'] = 'qF67IYUWYU'
-#socketio = SocketIO(app)
+app.config['SECRET_KEY'] = 'secret!'
+socketio = SocketIO(app)
 
 
 class JSONEncoder(json.JSONEncoder):
