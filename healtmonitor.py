@@ -504,7 +504,7 @@ def handle_json(json):
         print('received json: ' + str(json))
         socketio.emit(json)
         print(type(json))
-        data=json.loads(json)  
+        data=json  
         socketio.send(data) 
         socketio.emit(data) 
         print(data)
@@ -523,7 +523,8 @@ def handle_json(json):
             print('received json: ' + str(json))
             socketio.emit(json)
             print(type(json))
-            data=json.loads(json) 
+            data=json
+
             socketio.send(data) 
             socketio.emit(data) 
             print("Final _data",data)
