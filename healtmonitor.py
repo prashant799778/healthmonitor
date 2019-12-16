@@ -588,7 +588,8 @@ def Patient_Vital_master_select():
         
         #print( data[-1])
         data[-1]["ECG"]=json.loads(data[-1]["ECG"].replace("'",'"'))
-        
+        data[-1]["NIBP"]=json.loads(data[-1]["NIBP"].replace("'",'"'))
+        data[-1]["SPO2"]=json.loads(data[-1]["SPO2"].replace("'",'"'))
         if data:
             Data = {"result":data[-1],"status":"true"}
             return  Data
