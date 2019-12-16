@@ -532,9 +532,9 @@ def handle_json(json):
     #         cursor.close()
     #         output={"output": "Patient Vital Details Added succesfully","status":"true"}
         
-    # except Exception as e :
-    #     print("Exception---->" + str(e))    
-    #     output = {"result":"something went wrong","status":"false"}
+    except Exception as e :
+        print("Exception---->" + str(e))    
+        output = {"result":"something went wrong","status":"false"}
     # return output
     return "connected"
 
