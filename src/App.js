@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 // import { subscribeToTimer } from "./api";
 import openSocket from 'socket.io-client';
-const socket = openSocket('http://localhost:3015');
+const socket = openSocket('http://159.65.146.25:3015');
 
 // import logo from "./logo.svg";
 // import "./App.css";
