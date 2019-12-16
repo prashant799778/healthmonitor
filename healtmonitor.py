@@ -512,6 +512,17 @@ def handle_json(json):
         socketio.emit(json)
         print(type(json))
         data=json  
+        @sio.on("connect")
+        def on_connect():
+          print("connected")
+
+        @sio.on("disconnect")
+        def on_disconnect():
+          print("disconnected")
+
+        s#io.connect("http://localhost:8000")
+
+        
         sio.connect('http://159.65.146.25:3015')
 
         sio.emit("RealTimeData", json)
