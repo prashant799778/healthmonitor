@@ -512,13 +512,9 @@ def handle_json(json):
         socketio.emit(json)
         print(type(json))
         data=json  
-        @sio.on("connect")
-        def on_connect():
-          print("connected")
-
-        @sio.on("disconnect")
-        def on_disconnect():
-          print("disconnected")
+        @sio.on('new message')
+        def on_message(data):
+            print('I received a message!')
 
         #io.connect("http://localhost:8000")
 
