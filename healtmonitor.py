@@ -535,7 +535,7 @@ def handle_json(json):
         @sio.event
         def disconnect():
            print('disconnected from server')
-        sio.connect('http://localhost:3015')
+        await sio.connect('http://0.0.0.0:3015')
         sio.wait()
         
         
