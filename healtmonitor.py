@@ -506,16 +506,16 @@ def update_Patient_type():
         return output
  
 @sio.on('new message')
-        def on_message(data):
-            print('I received a message!')
+def on_message(data):
+    print('I received a message!')
 
-        #io.connect("http://localhost:8000")
+#io.connect("http://localhost:8000")
 
-        
-        sio.connect('http://159.65.146.25:3015')
 
-        sio.emit("RealTimeData", json)
-        sio.send("hello")
+    sio.connect('http://159.65.146.25:3015')
+
+    sio.emit("RealTimeData", json)
+    sio.send("hello")
 
  
 @socketio.on('new message')
