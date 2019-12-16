@@ -529,12 +529,8 @@ def handle_json(json):
         print(type(json))
         data=json  
 
-
-        
-        # sio.connect('http://0.0.0.0:3015')
-        # sio.emit('my event', {'data': 'foobar'})
-        # socketio.send(data) 
-        # socketio.emit(data) 
+        socketio.send(data) 
+        socketio.emit(data) 
         print(data)
         
         query2  = " insert into Patient_Vital_master(Patient_Id,RESP,ECG,SPO2,NIBP,TEMP,usercreate)"
