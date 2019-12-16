@@ -495,48 +495,48 @@ def update_Patient_type():
         output = {"result":"somthing went wrong","status":"false"}
         return output
         
-@socketio.on('/json')
-def handle_json(json):
-    try:
-        print('received json: ' + str(json))
-        socketio.emit(json)
-        data=json.loads(json.decode("utf-8"))
-        socketio.send(data) 
-        # socketio.emit(data) 
-        # print(data)
-    #     query = "select     * from Patient_Vital_master where Patient_Id = "+'"'+str(data["PatientId"])+'"'+" ;"
+# @socketio.on('/json')
+# def handle_json(json):
+#     try:
+#         print('received json: ' + str(json))
+#         socketio.emit(json)
+#         data=json.loads(json.decode("utf-8"))
+#         socketio.send(data) 
+#         # socketio.emit(data) 
+#         # print(data)
+#     #     query = "select     * from Patient_Vital_master where Patient_Id = "+'"'+str(data["PatientId"])+'"'+" ;"
         
-    #     conn=Connection()
-    #     cursor = conn.cursor()
-    #     cursor.execute(query)
-    #     data= cursor.fetchone()
-    #     conn.commit()
-    #     cursor.close()
-    #     if data != None:
-    #         output={"output": "PatientId already registered ,Please enter other PatientId ","status":"false"}
-    #     else:
-    #         socketio.emit(json)
-    #         json=request.get_data() 
-    #         data=json.loads(json.decode("utf-8"))
-    #         socketio.send(data)
+#     #     conn=Connection()
+#     #     cursor = conn.cursor()
+#     #     cursor.execute(query)
+#     #     data= cursor.fetchone()
+#     #     conn.commit()
+#     #     cursor.close()
+#     #     if data != None:
+#     #         output={"output": "PatientId already registered ,Please enter other PatientId ","status":"false"}
+#     #     else:
+#     #         socketio.emit(json)
+#     #         json=request.get_data() 
+#     #         data=json.loads(json.decode("utf-8"))
+#     #         socketio.send(data)
             
 
            
-    #         query2  = " insert into Patient_Vital_master(Patient_Id,RESP,ECG,SPO2,NIBP,TEMP,usercreate)"
-    #         query2 =query2 +" values("+'"'+str(data["PatientId"])+'"'+','+'"'+str(data["RESP"])+'"'+','+'"'+str(data["ECG"])+'"'+','+'"'+str(data["SPO2"])+'"'+','+'"'+str(data["NIBP"])+'"'+','+'"'+str(data["TEMP"])+'"'+','+'"'+str(data["usercreate"])+'"'+' '+");"
-    #         print(query2)
-    #         conn=Connection()
-    #         cursor = conn.cursor()
-    #         cursor.execute(query2)
-    #         conn.commit()
-    #         cursor.close()
-    #         output={"output": "Patient Vital Details Added succesfully","status":"true"}
+#     #         query2  = " insert into Patient_Vital_master(Patient_Id,RESP,ECG,SPO2,NIBP,TEMP,usercreate)"
+#     #         query2 =query2 +" values("+'"'+str(data["PatientId"])+'"'+','+'"'+str(data["RESP"])+'"'+','+'"'+str(data["ECG"])+'"'+','+'"'+str(data["SPO2"])+'"'+','+'"'+str(data["NIBP"])+'"'+','+'"'+str(data["TEMP"])+'"'+','+'"'+str(data["usercreate"])+'"'+' '+");"
+#     #         print(query2)
+#     #         conn=Connection()
+#     #         cursor = conn.cursor()
+#     #         cursor.execute(query2)
+#     #         conn.commit()
+#     #         cursor.close()
+#     #         output={"output": "Patient Vital Details Added succesfully","status":"true"}
         
-    except Exception as e :
-        print("Exception---->" + str(e))    
-        output = {"result":"something went wrong","status":"false"}
-    # return output
-    return "connected"
+#     except Exception as e :
+#         print("Exception---->" + str(e))    
+#         output = {"result":"something went wrong","status":"false"}
+#     # return output
+#     return "connected"
 
 @app.route('/Patient_Vital_master_select', methods=['GET'])
 def Patient_Vital_master_select():
