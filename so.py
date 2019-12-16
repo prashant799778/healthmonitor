@@ -32,7 +32,7 @@ import os
 
 import eventlet
 eventlet.monkey_patch()
-
+app = create_app(debug=True)
 root_dir = os.path.dirname(os.getcwd())
 static_path = os.path.join(root_dir, 'web-server', 'static')
 
