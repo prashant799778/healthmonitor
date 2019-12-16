@@ -16,8 +16,7 @@ def handle_message(message):
 @socketio.on('new message')
 def handle_json(json):
     print('received json: ' + str(json))
-    return  "{'hello': 'connected successfully'}"
-
+    
 @socketio.on('my event')
 def handle_my_custom_event(json):
     print('received json: ' + str(json))    
