@@ -517,7 +517,7 @@ def update_Patient_type():
     # sio.emit("RealTimeData", json)
     # sio.send("hello")
 
- @sio.event
+@sio.event
 def connect():
    print('connection established')
 @sio.on("my message")
