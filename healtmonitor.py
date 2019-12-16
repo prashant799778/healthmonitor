@@ -650,9 +650,9 @@ def update_Patient_Vital_master():
 # def disconnect(sid):
 #     print('disconnect ', sid)
 
-@app.route('/')
-def sessions():
-    return render_template('session.html')
+# @app.route('/')
+# def sessions():
+#     return render_template('session.html')
 
 def messageReceived(methods=['GET', 'POST']):
     print('message was received!!!')
