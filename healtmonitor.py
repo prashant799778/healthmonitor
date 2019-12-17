@@ -409,9 +409,17 @@ def Device_master():
 @app.route('/Device_master_select', methods=['GET'])
 def Device_master_select():
     try:
+        hospital_Name, y="",""
     
-        # query = " select distinct userid,username,usertype from usermaster where usertype <> 'Admin';"
-        query = "select  de.DeviceMac,de.Bed_Number,de.Vard_Name,de.Hospital_Id,hm.hospital_name as hospital_Name from Device_master as de INNER JOIN Hospital_master as hm on hm.ID= de.Hospital_Id "
+       
+        if 'hospital_Name' in request.args:
+            hospital_Name=request.args["hospital_Name"]
+
+        if  hospital_Name != "":
+            WhereCondition1 =  " where hospital_name   = '" + hospital_Name + "'  "
+            y = y +  WhereCondition1
+
+        query = "select  de.DeviceMac,de.Bed_Number,de.Vard_Name,de.Hospital_Id,hm.hospital_name as hospital_Name from Device_master as de INNER JOIN Hospital_master as hm on hm.ID= de.Hospital_Id " +y
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
