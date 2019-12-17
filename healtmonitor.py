@@ -334,6 +334,29 @@ def hospital_master_list():
         cursor.execute(query)
         data = cursor.fetchall()
         cursor.close()
+        if data:           
+            Data = {"result":data,"status":"true"}
+            return Data
+        else:
+            output = {"result":"No Data Found","status":"false"}
+            return output
+
+    except Exception as e :
+        print("Exception---->" + str(e))    
+        output = {"result":"something went wrong","status":"false"}
+        return output
+
+@app.route('/hospital_master_list1', methods=['GET'])
+def hospital_master_list2():
+    try:
+    
+        # query = " select distinct userid,username,usertype from usermaster where usertype <> 'Admin';"
+        query = "select hospital_name from Hospital_master  "
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data = cursor.fetchall()
+        cursor.close()
         print(data)
         data1=[]
         for i in data:
