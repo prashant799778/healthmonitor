@@ -441,8 +441,8 @@ def Patient_master():
             
 
            
-            query2  = " insert into Patient_master(PatientName,DeviceMac,Bed_Number,hospital_Name,startdate,enddate,usercreate)"
-            query2 =query2 +" values("+'"'+str(data["PatientName"])+'"'+','+'"'+str(data["DeviceMac"])+'"'+','+'"'+str(data["Bed_Number"])+'"'+','+'"'+str(data["hospital_name"])+'"'+','+'"'+str(data["startdate"])+'"'+','+'"'+str(data["enddate"])+'"'+','+'"'+str(data["usercreate"])+'"'+''+");"
+            query2  = " insert into Patient_master(PatientName,DeviceMac,Bed_Number,Usertype_Id,hospital_Name,startdate,enddate,usercreate)"
+            query2 =query2 +" values("+'"'+str(data["PatientName"])+'"'+','+'"'+str(data["DeviceMac"])+'"'+','+'"'+str(data["Bed_Number"])+'"'+','+'"'+str(data["Usertype_Id"])+'"'+','+'"'+str(data["hospital_name"])+'"'+','+'"'+str(data["startdate"])+'"'+','+'"'+str(data["enddate"])+'"'+','+'"'+str(data["usercreate"])+'"'+''+");"
             print(query2)
             conn=Connection()
             cursor = conn.cursor()
