@@ -2,7 +2,7 @@ from flask import Flask, render_template
 from flask_socketio import SocketIO
 import socketio
 #import flaskext.couchdb
-from flask.ext.socketio import SocketIO
+#from flask.ext.socketio import SocketIO
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
