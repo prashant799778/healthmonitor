@@ -539,7 +539,7 @@ def Patient_master_select():
             y = y +  WhereCondition1
 
        
-        query = "select * from Patient_master  " + y + " and  enddate = 'NULLL'"
+        query = "select * from Patient_master  " + y + " and  enddate='NULL' "
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
