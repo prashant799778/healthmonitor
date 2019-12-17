@@ -635,7 +635,7 @@ def Patient_Vital_master_select():
         if  PatientName != "":
             WhereCondition1 =  " where  PatientName   = '" + PatientName + "'  "
             y = y +  WhereCondition1
-             
+
         if  hospital_Name != "":
             WhereCondition1 =  " where hospital_Name   = '" + hospital_Name + "'  "
             y = y +  WhereCondition1
@@ -643,7 +643,7 @@ def Patient_Vital_master_select():
 
 
         
-        query = "select  PVM.Patient_Id as PatientId,Pm.PatientName as PatientName,PVM.RESP,PVM.ECG,PVM.SPO2,PVM.NIBP,PVM.TEMP,Pm.DeviceMac, AS DeviceMac from Patient_Vital_master as PVM INNER JOIN Patient_master as Pm ON Pm.PatientId= PVM.Patient_Id  " +y
+        query = "select  PVM.Patient_Id as PatientId,Pm.PatientName as PatientName,PVM.RESP,PVM.ECG,PVM.SPO2,PVM.NIBP,PVM.TEMP,Pm.DeviceMac AS DeviceMac,Pm.hospital_Name from Patient_Vital_master as PVM INNER JOIN Patient_master as Pm ON Pm.PatientId= PVM.Patient_Id  " +y
         print(query)
         conn=Connection()
         cursor = conn.cursor()
