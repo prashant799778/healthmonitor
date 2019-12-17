@@ -586,18 +586,20 @@ def Patient_Vital_master_select():
         data = cursor.fetchall()
         cursor.close()
         # print("prashant",data)
+        a=[]
 
-        for  data1 in data:
-            data1["ECG"]=json.loads(data1["ECG"].replace("'",'"'))
-            data1["NIBP"]=json.loads(data1["NIBP"].replace("'",'"'))
-            data1["SPO2"]=json.loads(data1["SPO2"].replace("'",'"'))
+        # for  data1 in data:
+        #     data1["ECG"]=json.loads(data1["ECG"].replace("'",'"'))
+        #     data1["NIBP"]=json.loads(data1["NIBP"].replace("'",'"'))
+        #     data1["SPO2"]=json.loads(data1["SPO2"].replace("'",'"'))
+
            
         data[-1]["ECG"]=json.loads(data[-1]["ECG"].replace("'",'"'))
         data[-1]["NIBP"]=json.loads(data[-1]["NIBP"].replace("'",'"'))
         data[-1]["SPO2"]=json.loads(data[-1]["SPO2"].replace("'",'"'))
         
         if data:
-            Data = {"result":data1,"status":"true"}
+            Data = {"result":data[-1],"status":"true"}
             return  Data
         else:
             output = {"result":"No Data Found","status":"false"}
