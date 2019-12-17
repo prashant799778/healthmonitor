@@ -586,7 +586,7 @@ def Patient_Vital_master_select():
         data = cursor.fetchall()
         cursor.close()
         # print("prashant",data)
-        a=[]
+       
 
         # for  data1 in data:
         #     data1["ECG"]=json.loads(data1["ECG"].replace("'",'"'))
