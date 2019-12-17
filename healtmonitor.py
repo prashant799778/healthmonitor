@@ -61,7 +61,7 @@ def login():
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
-        loginuser = cursor.fetchone()
+        loginuser = cursor.fetchall()
         cursor.close()
         if loginuser:   
             data={"status":"true","result":loginuser}                      
