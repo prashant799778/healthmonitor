@@ -489,9 +489,30 @@ def Patient_master():
 @app.route('/Patient_master_select', methods=['GET'])
 def Patient_master_select():
     try:
-    
-        # query = " select distinct userid,username,usertype from usermaster where usertype <> 'Admin';"
-        query = "select * from Patient_master  "
+        PatientName,DeviceMac,PatientId,y,y2,y3= "","","","","",""
+        if 'PatientId' in request.args:
+            PatientId=request.args["PatientId"]
+        if 'DeviceMac' in request.args:
+            DeviceMac=request.args["DeviceMac"]
+        if 'PatientName' in request.args:
+            PatientName=request.args["PatientName"]
+      
+        WhereCondition=""
+        
+        if PatientId != "":
+            WhereCondition1 =  " where  PatientId    = '" + PatientId + "'  "
+            y = y +  WhereCondition1
+        
+        if DeviceMac != "":
+            WhereCondition1 =  " where  DeviceMac   = '" + DeviceMac + "'  "
+            y = y +  WhereCondition1
+        
+        if  PatientName != "":
+            WhereCondition1 =  " where  PatientName   = '" + PatientName + "'  "
+            y = y +  WhereCondition1
+
+       
+        query = "select * from Patient_master  " + y
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
