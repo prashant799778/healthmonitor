@@ -57,12 +57,14 @@ def login():
         
                
         #query="select userid,usertype from usermaster where userid = '" + userid + "' and password='" + password + "';"      
-        query ="select si.mobile as mobile,si.name as name,si.password as password,si.Usertype_Id as Usertype_Id,si.Hospital_Id as Hospital_Id,us.Usertype,hm.hospital_name,Pa.PatientId,Pa.PatientName,Pa.Bed_Number,Pa.DeviceMac,Pa.startdate,Pa.enddate from signup as si INNER JOIN Usertype_master as us on us.ID=si.Usertype_Id  INNER JOIN Hospital_master AS hm on hm.ID=si.Hospital_Id INNER join Patient_master as Pa on Pa.Usertype_Id=us.ID where name = '" + name + "' and password='" + password + "';"   
+        query ="select si.mobile as mobile,si.name as name,si.password as password,si.Usertype_Id as Usertype_Id,si.Hospital_Id as Hospital_Id,us.Usertype,hm.hospital_name from signup as si INNER JOIN Usertype_master as us on us.ID=si.Usertype_Id  INNER JOIN Hospital_master AS hm on hm.ID=si.Hospital_Id  where name = '" + name + "' and password='" + password + "';"   
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
-        loginuser = cursor.fetchall()
+        loginuser = cursor.fetchone()
+        print(loginuser["Usertype_Id"])
         cursor.close()
+        
         if loginuser:   
             data={"status":"true","result":loginuser}                      
             return data
