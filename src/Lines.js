@@ -94,10 +94,10 @@ componentWillReceiveProps(){
   let x= Date.now();
   let y=this.props.data;
 
-  // if(this.data.length>30){
-  //   this.data=this.data.slice(this.data.length - 10, this.data.length);;
+  if(this.data.length>30){
+    this.data=this.data.slice(this.data.length - 10, this.data.length);;
   
-  // }
+  }
   this.data.push({x,y})
 
  

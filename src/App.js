@@ -23,8 +23,8 @@ componentDidMount() {
 getData=()=>{
   axios.get(`http://159.65.146.25:5053/Patient_Vital_master_select`)
   .then(res => {
-    
- 
+     
+       console.log(res)
       if(res.data.status=="true"){
         let rs=res.data.result;
        
@@ -41,7 +41,7 @@ getData=()=>{
   })
 }
   render(){
-    console.log("ghhh")
+    console.log(this.state.spo)
   return (
     <React.Fragment >
    <p style={{color:"#FFFFFF"}}>Patient Name: {this.state.PatientName}</p>
@@ -54,7 +54,7 @@ getData=()=>{
   </div>
   <hr></hr>
   <div className="col-12">
-  <Lines tc="#E4352C" tt="SPO2" data={this.state.spo['SPO2']?this.state.ECG['SPO2']:0} id="bsd"></Lines>
+  <Lines tc="#E4352C" tt="SPO2" data={this.state.spo['SPO2']?this.state.spo['SPO2']:0} id="bsd"></Lines>
   </div>
   <hr></hr>
   <div className="col-12">
