@@ -239,7 +239,8 @@ def Usertypelist():
 @app.route('/getCurrentpatient', methods=['GET'])
 def getCurrentpatient():
     try:
-        query2 = "select  * from Patient_master where Status<>'2'  and Usertype_Id ='" + str(y) + "'"
+        Usertype_Id = request.args['Usertype_Id']
+        query2 = "select  * from Patient_master where Status<>'2'  and Usertype_Id ='" +  Usertype_Id + "'"
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query2)
