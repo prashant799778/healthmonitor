@@ -70,6 +70,7 @@ def login():
         cursor = conn.cursor()
         cursor.execute(query2)
         ii= cursor.fetchone()
+        cursor.close()
         if ii != None:
             Count= 1
         else:
@@ -234,6 +235,31 @@ def Usertypelist():
         print("Exception---->" + str(e))    
         output = {"result":"something went wrong","status":"false"}
         return output
+
+@app.route('/getCurrentpatient', methods=['GET'])
+def getCurrentpatient():
+    try:
+        query2 = "select  * from Patient_master where Status<>'2'  and Usertype_Id ='" + str(y) + "'"
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query2)
+        ii= cursor.fetchone()
+        if ii != None:
+            Count= 1
+        else:
+            Count=0
+        if data:           
+            Data =  {"result":data,"Count":Count,"status":"True"}
+            return str(Data)
+        else:
+            output = {"result":"No Data Found","status":"false"}
+            return output
+
+    except Exception as e :
+        print("Exception---->" + str(e))    
+        output = {"result":"something went wrong","status":"false"}
+        return output
+
 
 @app.route('/update_Usertype', methods=['POST'])
 def update_Usertype():
@@ -478,7 +504,7 @@ def update_Patient_type():
        
         json1=request.get_data() 
         data=json.loads(json1.decode("utf-8")) 
-        query2= "select * from Patient_master where Status <>2 "
+        query2= "select * from Patient_master where Status<>'2' "
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query2)
