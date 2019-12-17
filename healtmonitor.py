@@ -328,7 +328,7 @@ def hospital_master_list():
     try:
     
         # query = " select distinct userid,username,usertype from usermaster where usertype <> 'Admin';"
-        query = "select * from Hospital_master  "
+        query = "select hospital_name from Hospital_master  "
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
