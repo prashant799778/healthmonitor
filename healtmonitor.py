@@ -246,11 +246,12 @@ def getCurrentpatient():
         cursor.execute(query2)
 
         ii= cursor.fetchone()
+        cursor.close()
         if ii != None:
             Count= 1
         else:
             Count=0
-        if data:           
+        if ii:           
             Data =  {"result":ii,"Count":Count,"status":"True"}
             return Data
         else:
