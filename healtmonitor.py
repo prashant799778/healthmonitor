@@ -244,13 +244,14 @@ def getCurrentpatient():
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query2)
+
         ii= cursor.fetchone()
         if ii != None:
             Count= 1
         else:
             Count=0
         if data:           
-            Data =  {"result":data,"Count":Count,"status":"True"}
+            Data =  {"result":ii,"Count":Count,"status":"True"}
             return str(Data)
         else:
             output = {"result":"No Data Found","status":"false"}
@@ -513,8 +514,9 @@ def update_Patient_type():
         print("prahhhhhhhhhhhhhhhhh",type(data))
         conn.commit()
         cursor.close()
+
         print("yy")
-        query1 = " update Patient_master set  PatientName ='" + str(data["PatientName"]) + "' , DeviceMac ='" + str(data["DeviceMac"]) + "' , Bed_Number = '" + str(data["Bed_Number"]) + "', Usertype_Id = '" + (data["Usertype_Id"]) + "' , hospital_Name ='" + str(data["hospital_Name"]) + "' , startdate='" + str(data["startdate"]) + "', enddate = '" + str(data["enddate"]) + "'  ,  UserUpdate ='" + str(data["UserUpdate"]) + "'  where PatientId = '" + str(data["PatientId"])+ "';"
+        query1 = " update Patient_master set  PatientName ='" + str(data["PatientName"]) + "' , DeviceMac ='" + str(data["DeviceMac"]) + "' , Bed_Number = '" + str(data["Bed_Number"]) + "', Usertype_Id = '" + str(data["Usertype_Id"]) + "' , hospital_Name ='" + str(data["hospital_Name"]) + "' , startdate='" + str(data["startdate"]) + "', enddate = '" + str(data["enddate"]) + "'  ,  UserUpdate ='" + str(data["UserUpdate"]) + "'  where PatientId = '" + str(data["PatientId"])+ "' and Status= '2' ;"
         print(query1)
         conn=Connection()
         cursor = conn.cursor()
@@ -540,7 +542,7 @@ def update_Patient_Discharge():
         json1=request.get_data() 
         data=json.loads(json1.decode("utf-8")) 
         print("yy")
-        query1 = " update Patient_master set   Status ='2'  where PatientId = '" + str(data["PatientId"])+ "' and Usertype_Id = '" + str(data["Usertype_Id"])+ "';"
+        query1 = " update Patient_master set   Status ='2'  where PatientId = '" + str(data["PatientId"])+ "' and Usertype_Id = '" + str(data["Usertype_Id"])+ "' and  DeviceMac = '" + str(data["DeviceMac"])+ "';"
         print(query1)
         conn=Connection()
         cursor = conn.cursor()
