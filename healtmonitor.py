@@ -334,8 +334,11 @@ def hospital_master_list():
         cursor.execute(query)
         data = cursor.fetchall()
         cursor.close()
+        data1=[]
+        for i in data:
+            data1.append(i.values)
         if data:           
-            Data = {"result":data,"status":"true"}
+            Data = {"result":data1,"status":"true"}
             return Data
         else:
             output = {"result":"No Data Found","status":"false"}
