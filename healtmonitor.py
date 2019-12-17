@@ -585,17 +585,18 @@ def Patient_Vital_master_select():
         cursor.execute(query)
         data = cursor.fetchall()
         cursor.close()
-        # for  data1 in data:
 
-        #     data[data1]["ECG"]=json.loads(data[data1]["ECG"].replace("'",'"'))
-        #     data[data1]["NIBP"]=json.loads(data[data1]["NIBP"].replace("'",'"'))
-        #     data[data1]["SPO2"]=json.loads(data[data1]["SPO2"].replace("'",'"'))
-
+        for  data1 in data:
+            
+            data1[data]["ECG"]=json.loads(data1[data]["ECG"].replace("'",'"'))
+            data1[data]["NIBP"]=json.loads(data1[data]["NIBP"].replace("'",'"'))
+            data1[data]["SPO2"]=json.loads(data1[data]["SPO2"].replace("'",'"'))
+            print("prashant",data1)
         
-        #print("prashant",data1)
         data[-1]["ECG"]=json.loads(data[-1]["ECG"].replace("'",'"'))
         data[-1]["NIBP"]=json.loads(data[-1]["NIBP"].replace("'",'"'))
         data[-1]["SPO2"]=json.loads(data[-1]["SPO2"].replace("'",'"'))
+        
         if data:
             Data = {"result":data[-1],"status":"true"}
             return  Data
