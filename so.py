@@ -19,7 +19,11 @@ socketio = SocketIO(app, cors_allowed_origins="*")
 @socketio.on('new message')
 def handle_json(json):
     print('received json: ' + str(json))
-    
+    socketio.emit(json)
+    data=json  
+
+    socketio.send(data) 
+    socketio.emit(data) 
 # @socketio.on('my event')
 # def handle_my_custom_event(json):
     # print('received json: ' + str(json))    
