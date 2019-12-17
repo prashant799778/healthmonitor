@@ -527,19 +527,19 @@ def Patient_master_select():
         WhereCondition=""
         
         if PatientId != "":
-            WhereCondition1 =  " where  PatientId    = '" + PatientId + "'  "
+            WhereCondition1 =  " and  PatientId    = '" + PatientId + "'  "
             y = y +  WhereCondition1
         
         if DeviceMac != "":
-            WhereCondition1 =  " where  DeviceMac   = '" + DeviceMac + "'  "
+            WhereCondition1 =  " and DeviceMac   = '" + DeviceMac + "'  "
             y = y +  WhereCondition1
         
         if  PatientName != "":
-            WhereCondition1 =  " where  PatientName   = '" + PatientName + "'  "
+            WhereCondition1 =  "  and  PatientName   = '" + PatientName + "'  "
             y = y +  WhereCondition1
 
        
-        query = "select * from Patient_master  " + y + " and  enddate='NULL' "
+        query = "select * from Patient_master  where enddate='NULL' " + y 
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
