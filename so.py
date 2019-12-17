@@ -23,7 +23,8 @@ def handle_json(json):
     data=json  
 
     socketio.send(data) 
-    socketio.emit(data) 
+    socketio.emit(data)
+    return data
 # @socketio.on('my event')
 # def handle_my_custom_event(json):
     # print('received json: ' + str(json))    
