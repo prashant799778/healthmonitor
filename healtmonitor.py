@@ -466,12 +466,12 @@ def update_Patient_type():
        
         json1=request.get_data() 
         data=json.loads(json1.decode("utf-8")) 
-        query2= "select * from Patient_master where status<> '2'"
+        query2= "select * from Patient_master where status<>2 "
         conn=Connection()
         cursor = conn.cursor()
-        cursor.execute(query1)
+        cursor.execute(query2)
         data=cursor.fetchall()
-        print(type(data))
+        print("prahhhhhhhhhhhhhhhhh",type(data))
         conn.commit()
         cursor.close()
         print("yy")
