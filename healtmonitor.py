@@ -63,10 +63,20 @@ def login():
         cursor.execute(query)
         loginuser = cursor.fetchone()
         print(loginuser["Usertype_Id"])
+        y= loginuser["Usertype_Id"]
         cursor.close()
-        
+        query2 = "select  * from Patient_master where Status<>2  where Usertype_Id ='" + y + "'"
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query2)
+        ii= cursor.fetchone()
+        if ii != None:
+            Count= 1
+        else:
+            Count=0
+
         if loginuser:   
-            data={"status":"true","result":loginuser}                      
+            data={"status":"true","result":loginuser,"Patient Details":ii,"Count":Count}                      
             return data
         else:
             data={"status":"false","result":"Login Failed"}
