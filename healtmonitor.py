@@ -57,7 +57,7 @@ def login():
         
                
         #query="select userid,usertype from usermaster where userid = '" + userid + "' and password='" + password + "';"      
-        query ="select si.mobile as mobile,si.name as name,si.password as password,si.Usertype_Id as Usertype_Id,si.Hospital_Id as Hospital_Id,us.Usertype,hm.hospital_name from signup as si INNER JOIN Usertype_master as us on us.ID=si.Usertype_Id  INNER JOIN Hospital_master AS hm on hm.ID=si.Hospital_Id where name = '" + name + "' and password='" + password + "';"   
+        query ="select si.mobile as mobile,si.name as name,si.password as password,si.Usertype_Id as Usertype_Id,si.Hospital_Id as Hospital_Id,us.Usertype,hm.hospital_name,Pa.PatientId,Pa.PatientName,Pa.Bed_Number,Pa.DeviceMac,Pa.startdate,Pa.enddate from signup as si INNER JOIN Usertype_master as us on us.ID=si.Usertype_Id  INNER JOIN Hospital_master AS hm on hm.ID=si.Hospital_Id INNER join Patient_master as Pa on Pa.Usertype_Id=us.ID where name = '" + name + "' and password='" + password + "';"   
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
@@ -399,7 +399,7 @@ def update_device_type():
         print(query1)
         conn=Connection()
         cursor = conn.cursor()
-        cursor.execute(query1)
+        cursor.execute(query2)
         conn.commit()
         cursor.close()
         output = {"result":"Updated Successfully","status":"true"}
@@ -422,34 +422,15 @@ def Patient_master():
        
         json1=request.get_data() 
         data=json.loads(json1.decode("utf-8"))  
-           
-       
-
-        query = "select     * from Patient_master where PatientName = "+'"'+str(data["PatientName"])+'"'+" ;"
-        
+        query2  = " insert into Patient_master(PatientName,DeviceMac,Bed_Number,Usertype_Id,hospital_Name,startdate,enddate,usercreate)"
+        query2 =query2 +" values("+'"'+str(data["PatientName"])+'"'+','+'"'+str(data["DeviceMac"])+'"'+','+'"'+str(data["Bed_Number"])+'"'+','+'"'+str(data["Usertype_Id"])+'"'+','+'"'+str(data["hospital_name"])+'"'+','+'"'+str(data["startdate"])+'"'+','+'"'+str(data["enddate"])+'"'+','+'"'+str(data["usercreate"])+'"'+''+");"
+        print(query2)
         conn=Connection()
         cursor = conn.cursor()
-        cursor.execute(query)
-        data= cursor.fetchone()
+        cursor.execute(query2)
         conn.commit()
         cursor.close()
-        if data != None:
-            output={"output": "PatientName already registered ,Please enter other PatientName "}
-        else:
-            json1=request.get_data() 
-            data=json.loads(json1.decode("utf-8"))
-            
-
-           
-            query2  = " insert into Patient_master(PatientName,DeviceMac,Bed_Number,Usertype_Id,hospital_Name,startdate,enddate,usercreate)"
-            query2 =query2 +" values("+'"'+str(data["PatientName"])+'"'+','+'"'+str(data["DeviceMac"])+'"'+','+'"'+str(data["Bed_Number"])+'"'+','+'"'+str(data["Usertype_Id"])+'"'+','+'"'+str(data["hospital_name"])+'"'+','+'"'+str(data["startdate"])+'"'+','+'"'+str(data["enddate"])+'"'+','+'"'+str(data["usercreate"])+'"'+''+");"
-            print(query2)
-            conn=Connection()
-            cursor = conn.cursor()
-            cursor.execute(query2)
-            conn.commit()
-            cursor.close()
-            output={"output": "Patient Added succesfully","status":"true"}
+        output={"output": "Patient Added succesfully","status":"true"}
         
     except Exception as e :
         print("Exception---->" + str(e))    
@@ -485,8 +466,42 @@ def update_Patient_type():
        
         json1=request.get_data() 
         data=json.loads(json1.decode("utf-8")) 
+        query2= "select * from Patient_master where status<> '2'"
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query1)
+        data=cursor.fetchall()
+        print(type(data))
+        conn.commit()
+        cursor.close()
         print("yy")
-        query1 = " update Patient_master set  PatientName ='" + str(data["PatientName"]) + "' , DeviceMac ='" + str(data["DeviceMac"]) + "' , Bed_Number = '" + str(data["Bed_Number"]) + "' , hospital_Name ='" + str(data["hospital_Name"]) + "' , startdate='" + str(data["startdate"]) + "', enddate = '" + str(data["enddate"]) + "'  ,  UserUpdate ='" + str(data["UserUpdate"]) + "' , Status ='1'  where PatientId = '" + str(data["PatientId"])+ "';"
+        query1 = " update Patient_master set  PatientName ='" + str(data["PatientName"]) + "' , DeviceMac ='" + str(data["DeviceMac"]) + "' , Bed_Number = '" + str(data["Bed_Number"]) + "', Usertype_Id = '" + str(data["Usertype_Id"]) + "' , hospital_Name ='" + str(data["hospital_Name"]) + "' , startdate='" + str(data["startdate"]) + "', enddate = '" + str(data["enddate"]) + "'  ,  UserUpdate ='" + str(data["UserUpdate"]) + "' , Status ='1'  where PatientId = '" + str(data["PatientId"])+ "';"
+        print(query1)
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query1)
+        conn.commit()
+        cursor.close()
+        output = {"result":"Updated Successfully","status":"true"}
+        return output  
+    except KeyError :
+        print("Key Exception---->")   
+        output = {"result":"key error","status":"false"}
+        return output  
+
+    except Exception as e :
+        print("Exception---->" +str(e))    
+        output = {"result":"somthing went wrong","status":"false"}
+        return output
+
+@app.route('/Discharge', methods=['POST'])
+def update_Patient_Discharge():
+    try:
+       
+        json1=request.get_data() 
+        data=json.loads(json1.decode("utf-8")) 
+        print("yy")
+        query1 = " update Patient_master set   Status ='2'  where PatientId = '" + str(data["PatientId"])+ "' and Usertype_Id = '" + str(data["Usertype_Id"])+ "';"
         print(query1)
         conn=Connection()
         cursor = conn.cursor()
