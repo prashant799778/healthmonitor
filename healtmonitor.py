@@ -252,7 +252,7 @@ def getCurrentpatient():
             Count=0
         if data:           
             Data =  {"result":ii,"Count":Count,"status":"True"}
-            return str(Data)
+            return Data
         else:
             output = {"result":"No Data Found","status":"false"}
             return output
