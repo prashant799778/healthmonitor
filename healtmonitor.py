@@ -65,7 +65,7 @@ def login():
         print(loginuser["Usertype_Id"])
         y= loginuser["Usertype_Id"]
         cursor.close()
-        query2 = "select  * from Patient_master where Status<>2  where Usertype_Id ='" + y + "'"
+        query2 = "select  * from Patient_master where Status<>2  and Usertype_Id ='" + y + "'"
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query2)
