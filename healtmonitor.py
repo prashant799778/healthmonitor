@@ -613,13 +613,15 @@ def handle_json(json):
 @app.route('/Patient_Vital_master_select', methods=['GET'])
 def Patient_Vital_master_select():
     try:
-        PatientName,DeviceMac,PatientId, y,y2,y3= "","","","","",""
+        PatientName,DeviceMac,PatientId,hospital_Name, y,y2,y3= "","","","","","",""
         if 'PatientId' in request.args:
             PatientId=request.args["PatientId"]
         if 'DeviceMac' in request.args:
             DeviceMac=request.args["DeviceMac"]
         if 'PatientName' in request.args:
             PatientName=request.args["PatientName"]
+        if 'hospital_Name' in request.args:
+            hospital_Name=request.args["hospital_Name"]
         WhereCondition=""
         
         if PatientId != "":
@@ -633,9 +635,15 @@ def Patient_Vital_master_select():
         if  PatientName != "":
             WhereCondition1 =  " where  PatientName   = '" + PatientName + "'  "
             y = y +  WhereCondition1
+             
+        if  hospital_Name != "":
+            WhereCondition1 =  " where hospital_Name   = '" + hospital_Name + "'  "
+            y = y +  WhereCondition1
+
+
 
         
-        query = "select  PVM.Patient_Id as PatientId,Pm.PatientName as PatientName,PVM.RESP,PVM.ECG,PVM.SPO2,PVM.NIBP,PVM.TEMP,Pm.DeviceMac AS DeviceMac from Patient_Vital_master as PVM INNER JOIN Patient_master as Pm ON Pm.PatientId= PVM.Patient_Id  " +y
+        query = "select  PVM.Patient_Id as PatientId,Pm.PatientName as PatientName,PVM.RESP,PVM.ECG,PVM.SPO2,PVM.NIBP,PVM.TEMP,Pm.DeviceMac, AS DeviceMac from Patient_Vital_master as PVM INNER JOIN Patient_master as Pm ON Pm.PatientId= PVM.Patient_Id  " +y
         print(query)
         conn=Connection()
         cursor = conn.cursor()
