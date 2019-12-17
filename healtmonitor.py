@@ -463,8 +463,8 @@ def Patient_master():
        
         json1=request.get_data() 
         data=json.loads(json1.decode("utf-8"))  
-        query2  = " insert into Patient_master(PatientName,DeviceMac,Bed_Number,Usertype_Id,hospital_Name,startdate,enddate,usercreate)"
-        query2 =query2 +" values("+'"'+str(data["PatientName"])+'"'+','+'"'+str(data["DeviceMac"])+'"'+','+'"'+str(data["Bed_Number"])+'"'+','+'"'+str(data["Usertype_Id"])+'"'+','+'"'+str(data["hospital_name"])+'"'+','+'"'+str(data["startdate"])+'"'+','+'"'+str(data["enddate"])+'"'+','+'"'+str(data["usercreate"])+'"'+''+");"
+        query2  = " insert into Patient_master(PatientName,DeviceMac,Bed_Number,Usertype_Id,hospital_Name,startdate,usercreate)"
+        query2 =query2 +" values("+'"'+str(data["PatientName"])+'"'+','+'"'+str(data["DeviceMac"])+'"'+','+'"'+str(data["Bed_Number"])+'"'+','+'"'+str(data["Usertype_Id"])+'"'+','+'"'+str(data["hospital_name"])+'"'+','+'"'+str(data["startdate"])+'"'+','+'"'+str(data["usercreate"])+'"'+''+");"
         print(query2)
         conn=Connection()
         cursor = conn.cursor()
@@ -543,7 +543,11 @@ def update_Patient_Discharge():
         json1=request.get_data() 
         data=json.loads(json1.decode("utf-8")) 
         print("yy")
-        query1 = " update Patient_master set   Status ='2'  where PatientId = '" + str(data["PatientId"])+ "' and Usertype_Id = '" + str(data["Usertype_Id"])+ "' and  DeviceMac = '" + str(data["DeviceMac"])+ "';"
+        ist = pytz.timezone('Asia/Kolkata')
+        print("======5======" )
+        ist_time = datetime.now(tz=ist)
+        ist_f_time = ist_time.strftime("%Y-%m-%d %H:%M:%S")
+        query1 = " update Patient_master set   Status ='2'  ,enddate='"+str(ist_f_time)+"'  where PatientId = '" + str(data["PatientId"])+ "' and Usertype_Id = '" + str(data["Usertype_Id"])+ "' and  DeviceMac = '" + str(data["DeviceMac"])+ "';"
         print(query1)
         conn=Connection()
         cursor = conn.cursor()
