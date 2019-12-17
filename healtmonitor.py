@@ -336,7 +336,7 @@ def hospital_master_list():
         cursor.close()
         data1=[]
         for i in data:
-            data1.append(i.values)
+            data1.append(i.values())
         if data:           
             Data = {"result":data1,"status":"true"}
             return Data
