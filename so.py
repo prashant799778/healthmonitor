@@ -1,12 +1,21 @@
-from flask import Flask, render_template
-from flask_socketio import SocketIO
+# from flask import Flask, render_template
+# from flask_socketio import SocketIO
+# import socketio
 import socketio
-#import flaskext.couchdb
-#from flask.ext.socketio import SocketIO
-from flask_cors import CORS
-app = Flask(__name__)
-app.config['SECRET_KEY'] = 'secret!'
-socketio = SocketIO(app, cors_allowed_origins="*")
+from bocadillo import App, configure, Templates
+
+app = App()
+configure(app)
+templates = Templates()
+
+sio = socketio.AsyncServer(async_mode="asgi",cors_allowed_origins="*")
+app.mount("/sio", socketio.ASGIApp(sio))
+# import flaskext.couchdb
+# from flask.ext.socketio import SocketIO
+# from flask_cors import CORS
+# app = Flask(__name__)
+# app.config['SECRET_KEY'] = 'secret!'
+# socketio = SocketIO(app, cors_allowed_origins="*")
 
 
 
@@ -14,16 +23,19 @@ socketio = SocketIO(app, cors_allowed_origins="*")
 # @socketio.on('message')
 # def handle_message(message):
     # print('received message: ' + message)
+@sio.on("new message")
+async def broadcast(sid, data: str):
+    print("message:", data)
+    await sio.emit("response", data)
 
+# @socketio.on('new message')
+# def handle_json(json):
+    # print('received json: ' + str(json))
+    # socketio.emit(json)
+    # data=json  
 
-@socketio.on('new message')
-def handle_json(json):
-    print('received json: ' + str(json))
-    socketio.emit(json)
-    data=json  
-
-    socketio.send(data) 
-    socketio.emit(data) 
+    # socketio.send(data) 
+    # socketio.emit(data) 
 # @socketio.on('my event')
 # def handle_my_custom_event(json):
     # print('received json: ' + str(json))    
