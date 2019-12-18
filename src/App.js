@@ -37,7 +37,7 @@ sendMessageClicked=(e) =>{
 }
 
 componentDidMount() {
-    socketIOClient.on('new message',function(result){
+    socketIOClient.on('message',function(result){
       console.log('on new message');
       console.log(result);
         //let messageHtml = 'new message';
