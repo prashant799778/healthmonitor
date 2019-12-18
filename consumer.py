@@ -10,7 +10,7 @@ def on_connect(client, userdata, flags, rc):
 def on_message(client, userdata, msg):    
   data = msg.payload.decode('utf-8')
 #   data = json.loads(data) 
-  client.publish("outTopic1", "Hello worldddddd!")  
+  client.publish("outTopic1",data)  
   print(data)
     
 client = mqtt.Client()
