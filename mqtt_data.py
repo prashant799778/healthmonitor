@@ -55,7 +55,7 @@ topic = 'test'
 
 # Connect
 #mqttc.username_pw_set(url.username, url.password)
-mqttc.connect("159.65.146.25", "5054")
+mqttc.connect("159.65.146.25",1883,60)
 
 # Start subscribe, with QoS level 0
 mqttc.subscribe(topic, 0)
