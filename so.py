@@ -12,9 +12,9 @@ socketio = SocketIO(app, cors_allowed_origins="*")
 
 
 @socketio.on('message')
-def handle_message(message="aaaaaaaa"):
+def handle_message(message):
     print('received message: ' + message)
-    emit('my response', message, broadcast=True)
+    #emit('my response', message, broadcast=True)
 
 @socketio.on('new message')
 def handle_json(json):
