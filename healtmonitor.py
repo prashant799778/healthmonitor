@@ -691,19 +691,20 @@ def Patient_master_select1():
 
 
        
-        query = "select * from Patient_master  where enddate is NULL " + y 
+        query = "select PatientId,PatientName from Patient_master  where enddate is NULL " + y 
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
         data = cursor.fetchall()
         cursor.close()
+        print(data)
         data1=[]
         data2=[]
         for i in data:
-            data1.append(i[" PatientId"])
+            
             data1.append(i[" PatientName"])
         if data:           
-            Data = {"Patient Id":data1,"status":"true","PatientName":data2}
+            Data = {"status":"true","PatientName":data2}
             return Data
         else:
             output = {"result":"No Data Found","status":"false"}
