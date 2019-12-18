@@ -534,7 +534,7 @@ def Device_master_select2():
             WhereCondition1 =  " where hospital_name   = '" + hospital_Name + "'  "
             y = y +  WhereCondition1
 
-        query = "select  de.DeviceMac as DeviceMac,hm.hospital_name as hospital_Name  from Device_master as de INNER JOIN Hospital_master1 as hm on hm.ID= de.Hospital_Id " +y
+        query = "select  de.DeviceMac as DeviceMac,hm.hospital_name,de.Hospital_Id as hospital_Name  from Device_master as de INNER JOIN Hospital_master1 as hm on hm.ID= de.Hospital_Id " +y
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
@@ -544,7 +544,7 @@ def Device_master_select2():
         for i in data:
             data1.append(i["DeviceMac"])
         if data:           
-            Data = {"result":data1,"status":"true"}
+            Data = {"DeviceMac":data1,"status":"true"}
             return Data
         else:
             output = {"result":"No Data Found","status":"false"}
