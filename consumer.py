@@ -3,11 +3,12 @@ import json
 
 
 def on_connect(client, userdata, flags, rc):
-  print("-------Connected-------")
-  client.subscribe("outTopic")
-  while True:
-    #client.publish("outTopic", "Hello world!")
-    client.publish("outTopic1", "Hello worlddddddddddddddddd!");
+    print("-------Connected-------")
+    client.subscribe("outTopic")
+    client = mqtt.Client()
+    client.connect("159.65.146.25",1883,60)
+    while True:
+        client.publish("outTopic", "Hello world!")
 
 def on_message(client, userdata, msg):    
   data = msg.payload.decode('utf-8')
