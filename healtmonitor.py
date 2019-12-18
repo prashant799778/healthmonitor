@@ -506,7 +506,15 @@ def Patient_master():
         cursor.execute(query2)
         conn.commit()
         cursor.close()
-        output={"output": "Patient Added succesfully","status":"true"}
+        query = "select PatientId,PatientName,DeviceMac,Usertype_Id from Patient_master  where enddate is NULL " 
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data = cursor.fetchall()
+        conn.commit()
+        cursor.close()
+
+        output={"output": "Patient Added succesfully","Patient Details":data[-1],"status":"true"}
         
     except Exception as e :
         print("Exception---->" + str(e))    
