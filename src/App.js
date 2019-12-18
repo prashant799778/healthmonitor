@@ -25,7 +25,7 @@ this.setState({msg:e.target.value},()=>{
 sendMessageClicked=(e) =>{
     e.preventDefault();
     let message = this.state.msg;
-    console.log("222",message)
+    //console.log("222",message)
     var data = {
         message:message,
         time: Date.now()
@@ -38,6 +38,7 @@ sendMessageClicked=(e) =>{
 
 componentDidMount() {
     socketIOClient.on('new message',function(result){
+      console.log('on new message');
       console.log(result);
         //let messageHtml = 'new message';
         //let messageBox = document.getElementById('messageBox');
@@ -49,7 +50,6 @@ componentDidMount() {
 }
 
 render(){
-  console.log(this.state.msg,"222")
     return(
         <div>
             <form >
