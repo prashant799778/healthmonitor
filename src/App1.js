@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 
 import Lines from './Lines';
-import Grabh from "./grabh"
+
 
 class App extends React.Component{
   constructor(props) {
@@ -50,15 +50,15 @@ getData=()=>{
     <div className="col-8">
 <div className="row">
   <div className="col-12">
-    <Grabh tc="#78A960"  tt="ECG" data={this.state.ECG['Heart Rate']?this.state.ECG['Heart Rate']:0} id="asd"></Grabh>
+    <Lines tc="#78A960"  tt="ECG" data={this.state.ECG['Heart Rate']?this.state.ECG['Heart Rate']:0} id="asd"></Lines>
   </div>
   <hr></hr>
   <div className="col-12">
-  <Grabh tc="#E4352C" tt="SPO2" data={this.state.spo['SPO2']?this.state.spo['SPO2']:0} id="bsd"></Grabh>
+  <Lines tc="#E4352C" tt="SPO2" data={this.state.spo['SPO2']?this.state.spo['SPO2']:0} id="bsd"></Lines>
   </div>
   <hr></hr>
   <div className="col-12">
-  <Grabh  tc="#F0AF19" tt="RESP" data={this.state.ECG['Resp Rate']?this.state.ECG['Resp Rate']:0}  id="csd"></Grabh>
+  <Lines tc="#F0AF19" tt="RESP" data={this.state.ECG['Resp Rate']?this.state.ECG['Resp Rate']:0}  id="csd"></Lines>
   </div>
   <hr></hr>
 </div>
