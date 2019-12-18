@@ -16,14 +16,16 @@ def handle_message(message):
     print('received message: ' + message)
     emit('new message', message, broadcast=True)
     #send(message, broadcast=True)
+
+
 @socketio.on('new message')
 def handle_json(json):
     print('received json: ' + str(json))
     socketio.emit(json)
     data=json  
 
-    socketio.send(data) 
-    socketio.emit(data)
+    send(data) 
+    semit(data)
     
 @socketio.on('my event')
 def handle_my_custom_event(json):
