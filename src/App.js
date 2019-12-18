@@ -32,20 +32,20 @@ sendMessageClicked=(e) =>{
     }
    //console.log(JSON.stringify(data))
    
-    socketIOClient.send(JSON.stringify(data));
-    console.log(JSON.stringify(data),socketIOClient.emit("message",JSON.stringify(data)))
+    //socketIOClient.send(JSON.stringify(data));
+    //console.log(JSON.stringify(data),socketIOClient.emit("message",JSON.stringify(data)))
+    socketIOClient.emit("message",JSON.stringify(data));
 }
 
 componentDidMount() {
     socketIOClient.on('message',function(result){
+      console.log('on message');
+      console.log(result);
+    })
+    
+    socketIOClient.on('newmessage',function(result){
       console.log('on new message');
       console.log(result);
-        //let messageHtml = 'new message';
-        //let messageBox = document.getElementById('messageBox');
-
-        //if (messageBox ) {
-          //  messageBox.appendChild(messageHtml);
-        //}
     })
 }
 
