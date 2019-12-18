@@ -14,6 +14,8 @@ socketio = SocketIO(app, cors_allowed_origins="*")
 @socketio.on('message')
 def handle_message(message):
     print('received message: ' + message)
+    emit('message', message, broadcast=True)
+    print("ok")
     emit('newmessage', message, broadcast=True)
     #send(message, broadcast=True)
 
