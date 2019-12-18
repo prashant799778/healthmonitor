@@ -32,7 +32,7 @@ sendMessageClicked=(e) =>{
     }
    console.log(JSON.stringify(data))
    
-    socketIOClient.emit(JSON.stringify(data));
+    socketIOClient.send(JSON.stringify(data));
     console.log(JSON.stringify(data),socketIOClient.emit("message",JSON.stringify(data)))
 }
 
