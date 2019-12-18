@@ -103,7 +103,7 @@ def login1():
         
                
         #query="select userid,usertype from usermaster where userid = '" + userid + "' and password='" + password + "';"      
-        query ="select hm.hospital_name  as hospital_Name from signup as si INNER JOIN Usertype_master as us on us.ID=si.Usertype_Id  INNER JOIN Hospital_master1 AS hm on hm.Usermaster_Id=si.ID  where name = '" + name + "' and password='" + password + "';"   
+        query ="select si.name as name,si.password as password ,hm.hospital_name  as hospital_Name from signup as si INNER JOIN Usertype_master as us on us.ID=si.Usertype_Id  INNER JOIN Hospital_master1 AS hm on hm.Usermaster_Id=si.ID  where name = '" + name + "' and password='" + password + "';"   
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
