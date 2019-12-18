@@ -328,7 +328,7 @@ def hospital_master_list():
     try:
     
         # query = " select distinct userid,username,usertype from usermaster where usertype <> 'Admin';"
-        query = "select * from Hospital_master  "
+        query = "select hospital_name from Hospital_master  "
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
@@ -336,6 +336,33 @@ def hospital_master_list():
         cursor.close()
         if data:           
             Data = {"result":data,"status":"true"}
+            return Data
+        else:
+            output = {"result":"No Data Found","status":"false"}
+            return output
+
+    except Exception as e :
+        print("Exception---->" + str(e))    
+        output = {"result":"something went wrong","status":"false"}
+        return output
+
+@app.route('/hospital_master_list1', methods=['GET'])
+def hospital_master_list2():
+    try:
+    
+        # query = " select distinct userid,username,usertype from usermaster where usertype <> 'Admin';"
+        query = "select hospital_name from Hospital_master  "
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data = cursor.fetchall()
+        cursor.close()
+        print(data)
+        data1=[]
+        for i in data:
+            data1.append(i["hospital_name"])
+        if data:           
+            Data = {"result":data1,"status":"true"}
             return Data
         else:
             output = {"result":"No Data Found","status":"false"}
@@ -409,9 +436,17 @@ def Device_master():
 @app.route('/Device_master_select', methods=['GET'])
 def Device_master_select():
     try:
+        hospital_Name, y="",""
     
-        # query = " select distinct userid,username,usertype from usermaster where usertype <> 'Admin';"
-        query = "select  de.DeviceMac,de.Bed_Number,de.Vard_Name,de.Hospital_Id,hm.hospital_name as hospital_Name from Device_master as de INNER JOIN Hospital_master as hm on hm.ID= de.Hospital_Id "
+       
+        if 'hospital_Name' in request.args:
+            hospital_Name=request.args["hospital_Name"]
+
+        if  hospital_Name != "":
+            WhereCondition1 =  " where hospital_name   = '" + hospital_Name + "'  "
+            y = y +  WhereCondition1
+
+        query = "select  de.DeviceMac,de.Bed_Number,de.Vard_Name,de.Hospital_Id,hm.hospital_name as hospital_Name from Device_master as de INNER JOIN Hospital_master as hm on hm.ID= de.Hospital_Id " +y
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
@@ -463,15 +498,23 @@ def Patient_master():
        
         json1=request.get_data() 
         data=json.loads(json1.decode("utf-8"))  
-        query2  = " insert into Patient_master(PatientName,DeviceMac,Bed_Number,Usertype_Id,hospital_Name,startdate,enddate,usercreate)"
-        query2 =query2 +" values("+'"'+str(data["PatientName"])+'"'+','+'"'+str(data["DeviceMac"])+'"'+','+'"'+str(data["Bed_Number"])+'"'+','+'"'+str(data["Usertype_Id"])+'"'+','+'"'+str(data["hospital_name"])+'"'+','+'"'+str(data["startdate"])+'"'+','+'"'+str(data["enddate"])+'"'+','+'"'+str(data["usercreate"])+'"'+''+");"
+        query2  = " insert into Patient_master(PatientName,DeviceMac,Bed_Number,Usertype_Id,hospital_Name,startdate,usercreate)"
+        query2 =query2 +" values("+'"'+str(data["PatientName"])+'"'+','+'"'+str(data["DeviceMac"])+'"'+','+'"'+str(data["Bed_Number"])+'"'+','+'"'+str(data["Usertype_Id"])+'"'+','+'"'+str(data["hospital_name"])+'"'+','+'"'+str(data["startdate"])+'"'+','+'"'+str(data["usercreate"])+'"'+''+");"
         print(query2)
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query2)
         conn.commit()
         cursor.close()
-        output={"output": "Patient Added succesfully","status":"true"}
+        query = "select PatientId,PatientName,DeviceMac,Usertype_Id from Patient_master  where enddate is NULL " 
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data = cursor.fetchall()
+        conn.commit()
+        cursor.close()
+
+        output={"output": "Patient Added succesfully","Patient Details":data[-1],"status":"true"}
         
     except Exception as e :
         print("Exception---->" + str(e))    
@@ -481,9 +524,30 @@ def Patient_master():
 @app.route('/Patient_master_select', methods=['GET'])
 def Patient_master_select():
     try:
-    
-        # query = " select distinct userid,username,usertype from usermaster where usertype <> 'Admin';"
-        query = "select * from Patient_master  "
+        PatientName,DeviceMac,PatientId,y,y2,y3= "","","","","",""
+        if 'PatientId' in request.args:
+            PatientId=request.args["PatientId"]
+        if 'DeviceMac' in request.args:
+            DeviceMac=request.args["DeviceMac"]
+        if 'PatientName' in request.args:
+            PatientName=request.args["PatientName"]
+      
+        WhereCondition=""
+        
+        if PatientId != "":
+            WhereCondition1 =  " and  PatientId    = '" + PatientId + "'  "
+            y = y +  WhereCondition1
+        
+        if DeviceMac != "":
+            WhereCondition1 =  " and DeviceMac   = '" + DeviceMac + "'  "
+            y = y +  WhereCondition1
+        
+        if  PatientName != "":
+            WhereCondition1 =  "  and  PatientName   = '" + PatientName + "'  "
+            y = y +  WhereCondition1
+
+       
+        query = "select * from Patient_master  where enddate is NULL " + y 
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
@@ -543,7 +607,11 @@ def update_Patient_Discharge():
         json1=request.get_data() 
         data=json.loads(json1.decode("utf-8")) 
         print("yy")
-        query1 = " update Patient_master set   Status ='2'  where PatientId = '" + str(data["PatientId"])+ "' and Usertype_Id = '" + str(data["Usertype_Id"])+ "' and  DeviceMac = '" + str(data["DeviceMac"])+ "';"
+        ist = pytz.timezone('Asia/Kolkata')
+        print("======5======" )
+        ist_time = datetime.now(tz=ist)
+        ist_f_time = ist_time.strftime("%Y-%m-%d %H:%M:%S")
+        query1 = " update Patient_master set   Status ='2'  ,enddate='"+str(ist_f_time)+"'  where PatientId = '" + str(data["PatientId"])+ "' and Usertype_Id = '" + str(data["Usertype_Id"])+ "' and  DeviceMac = '" + str(data["DeviceMac"])+ "';"
         print(query1)
         conn=Connection()
         cursor = conn.cursor()
@@ -613,15 +681,14 @@ def handle_json(json):
 @app.route('/Patient_Vital_master_select', methods=['GET'])
 def Patient_Vital_master_select():
     try:
-        PatientName,DeviceMac,PatientId,hospital_Name, y,y2,y3= "","","","","","",""
+        PatientName,DeviceMac,PatientId,y,y2,y3= "","","","","",""
         if 'PatientId' in request.args:
             PatientId=request.args["PatientId"]
         if 'DeviceMac' in request.args:
             DeviceMac=request.args["DeviceMac"]
         if 'PatientName' in request.args:
             PatientName=request.args["PatientName"]
-        if 'hospital_Name' in request.args:
-            hospital_Name=request.args["hospital_Name"]
+      
         WhereCondition=""
         
         if PatientId != "":
@@ -636,9 +703,7 @@ def Patient_Vital_master_select():
             WhereCondition1 =  " where  PatientName   = '" + PatientName + "'  "
             y = y +  WhereCondition1
 
-        if  hospital_Name != "":
-            WhereCondition1 =  " where hospital_Name   = '" + hospital_Name + "'  "
-            y = y +  WhereCondition1
+       
 
 
 
