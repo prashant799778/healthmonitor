@@ -16,7 +16,7 @@ msg:""
   }
 handleMessageChange=(e)=>{
 this.setState({msg:e.target.value},()=>{
-  console.log(this.state.msg)
+  //console.log(this.state.msg)
 })
 }
 
@@ -30,7 +30,7 @@ sendMessageClicked=(e) =>{
         message:message,
         time: Date.now()
     }
-   console.log(JSON.stringify(data))
+   //console.log(JSON.stringify(data))
    
     socketIOClient.send(JSON.stringify(data));
     console.log(JSON.stringify(data),socketIOClient.emit("message",JSON.stringify(data)))
@@ -38,12 +38,13 @@ sendMessageClicked=(e) =>{
 
 componentDidMount() {
     socketIOClient.on('new message',function(result){
-        let messageHtml = 'new message';
-        let messageBox = document.getElementById('messageBox');
+      console.log(result);
+        //let messageHtml = 'new message';
+        //let messageBox = document.getElementById('messageBox');
 
-        if (messageBox ) {
-            messageBox.appendChild(messageHtml);
-        }
+        //if (messageBox ) {
+          //  messageBox.appendChild(messageHtml);
+        //}
     })
 }
 
