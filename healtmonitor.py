@@ -671,7 +671,7 @@ def Patient_master_select():
         return output
 
 @app.route('/Patient_master_select1', methods=['GET'])
-def Patient_master_select():
+def Patient_master_select1():
     try:
         PatientName,DeviceMac,PatientId,y,y2,y3,hospital_Name= "","","","","","",""
         if 'PatientId' in request.args:
