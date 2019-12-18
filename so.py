@@ -16,18 +16,18 @@ def handle_message(message):
     print('received message: ' + message)
 
 
-# @socketio.on('new message')
-# def handle_json(json):
-    # print('received json: ' + str(json))
-    # socketio.emit(json)
-    # data=json  
+@socketio.on('new message')
+def handle_json(json):
+    print('received json: ' + str(json))
+    socketio.emit(json)
+    data=json  
 
-    # socketio.send(data) 
-    # socketio.emit(data)
+    socketio.send(data) 
+    socketio.emit(data)
     
-# @socketio.on('my event')
-# def handle_my_custom_event(json):
-    # print('received json: ' + str(json))    
+@socketio.on('my event')
+def handle_my_custom_event(json):
+    print('received json: ' + str(json))    
     
 if __name__ == '__main__':
     CORS(app, support_credentials=True)
