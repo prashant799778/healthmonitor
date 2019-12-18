@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-from flask_socketio import SocketIO
+from flask_socketio import SocketIO,emit,send
 import socketio
 #import flaskext.couchdb
 #from flask.ext.socketio import SocketIO
