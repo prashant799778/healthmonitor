@@ -11,7 +11,7 @@ import logging
   
 #Create and configure logger 
 logging.basicConfig(filename="/var/www/HealthCare/Healthmonitor/newfile.log", 
-                    format='%(asctime)s %(message)s', 
+                    format='%(message)s', 
                     filemode='w') 
   
 #Creating an object 
