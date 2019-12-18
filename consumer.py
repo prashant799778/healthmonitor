@@ -2,9 +2,9 @@ import paho.mqtt.client as mqtt
 import json
 
 
-def on_connect(client, userdata, flags, rc):
-  print("-------Connected-------")
-  client.subscribe("outTopic")
+# def on_connect(client, userdata, flags, rc):
+  # print("-------Connected-------")
+  # client.subscribe("outTopic")
   # client.publish("outTopic", "Hello world!");
 
 def on_message(client, userdata, msg):    
