@@ -21,7 +21,7 @@
 # def handle_my_custom_event(json):
     # print('received json: ' + str(json))    
 import paho.mqtt.client as mqtt
-import os, urlparse
+import os
 
 # Define event callbacks
 def on_connect(client, userdata, flags, rc):
@@ -50,9 +50,8 @@ mqttc.on_subscribe = on_subscribe
 #mqttc.on_log = on_log
 
 # Parse CLOUDMQTT_URL (or fallback to localhost)
-url_str = os.environ.get('CLOUDMQTT_URL', 'mqtt://localhost:1883')
-url = urlparse.urlparse(url_str)
-topic = url.path[1:] or 'test'
+
+topic = 'test'
 
 # Connect
 mqttc.username_pw_set(url.username, url.password)
