@@ -2,7 +2,7 @@ from flask import Flask, render_template
 # from flask_socketio import SocketIO
 
 #app = Flask(__name__)
-app.config['SECRET_KEY'] = 'secret!'
+
 # socketio = SocketIO(app)
 
 
@@ -21,7 +21,7 @@ app.config['SECRET_KEY'] = 'secret!'
 # def handle_my_custom_event(json):
     # print('received json: ' + str(json))    
 import paho.mqtt.client as mqtt
-
+app.config['SECRET_KEY'] = 'secret!'
 client = mqtt.Client()                       
 app = Flask(__name__)
 #Called on connection to server/broker
