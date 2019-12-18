@@ -5,7 +5,7 @@ import json
 def on_connect(client, userdata, flags, rc):
     print("-------Connected-------")
     client.subscribe("outTopic")
-    client.publish("outTopic1", "Hello worldddddd!")
+    
 
 def on_message(client, userdata, msg):    
   data = msg.payload.decode('utf-8')
@@ -17,5 +17,5 @@ client.connect("159.65.146.25",1883,60)
 
 client.on_connect = on_connect
 client.on_message = on_message
-
+client.publish("outTopic1", "Hello worldddddd!")
 client.loop_forever()
