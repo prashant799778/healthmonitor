@@ -701,9 +701,10 @@ def Patient_master_select1():
         data1=[]
         data2=[]
         for i in data:
+            data1.append(i["PatientId"])
             data2.append(i["PatientName"])
         if data:           
-            Data = {"status":"true","PatientName":data2}
+            Data = {"PatientId":data1"status":"true","PatientName":data2}
             return Data
         else:
             output = {"result":"No Data Found","status":"false"}
