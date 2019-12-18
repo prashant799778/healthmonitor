@@ -110,7 +110,7 @@ def login1():
         data = cursor.fetchall()
         data1=[]
         for i in data:
-            data1.append(i["hospital_name"])
+            data1.append(i["hospital_Name"])
         if data:           
             Data = {"result":data1,"status":"true"}
             return Data
