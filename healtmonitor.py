@@ -511,9 +511,7 @@ def Patient_master():
         cursor = conn.cursor()
         cursor.execute(query)
         data = cursor.fetchall()
-        conn.commit()
         cursor.close()
-
         output={"output": "Patient Added succesfully","Patient Details":data[-1],"status":"true"}
         
     except Exception as e :
