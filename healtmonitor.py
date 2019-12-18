@@ -365,28 +365,14 @@ def Hospital_master1():
        
         json1=request.get_data() 
         data=json.loads(json1.decode("utf-8"))  
-        query1 = "select ID,hospital_name,City,State from Hospital_master1 where hospital_name = "+'"'+str(data["hospital_name"])+'"'+" ;"
-        print(query1)
+        query2  = " insert into Hospital_master1 (hospital_name,City,Usermaster_Id,State,usercreate)"
+        query2 = query2 +" values("+'"'+str(data["hospital_name"])+'"'+','+'"'+str(data["City"])+'"'+','+'"'+str(data["Usermaster_Id"])+'"'+','+'"'+str(data["State"])+'"'+','+'"'+str(data["usercreate"])+'"'+' '+");"
+        print(query2)
         conn=Connection()
         cursor = conn.cursor()
-        cursor.execute(query1)
-        data= cursor.fetchone()
+        cursor.execute(query2)
         conn.commit()
-        cursor.close()
-        if data != None:
-            output={"output": "Hospital name already registered ,Please enter the other Hospital name ","status":"false"}
-        else:
-            json1=request.get_data() 
-            data=json.loads(json1.decode("utf-8"))  
-            print("77787878")
-            query2  = " insert into Hospital_master1 (hospital_name,City,Usermaster_Id,State,usercreate)"
-            query2 = query2 +" values("+'"'+str(data["hospital_name"])+'"'+','+'"'+str(data["City"])+'"'+','+'"'+str(data["Usermaster_Id"])+'"'+','+'"'+str(data["State"])+'"'+','+'"'+str(data["usercreate"])+'"'+' '+");"
-            print(query2)
-            conn=Connection()
-            cursor = conn.cursor()
-            cursor.execute(query2)
-            conn.commit()
-            output={"output": "Hospital Name Added succesfully","status":"true"}
+        output={"output": "Hospital Name Added succesfully","status":"true"}
     except Exception as e :
         print("Exception---->" + str(e))    
         output = {"result":"something went wrong","status":"false"}
