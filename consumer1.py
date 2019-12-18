@@ -39,7 +39,7 @@ import json
 def on_connect(client, userdata, flags, rc):
   print("-------Connected-------")
   client.subscribe("outTopic1")
-  # client.publish("outTopic", "Hello world!");
+  client.publish("outTopic", "Hello world!");
 
 def on_message(client, userdata, msg):    
   data = msg.payload.decode('utf-8')
