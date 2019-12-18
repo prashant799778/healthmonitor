@@ -5,7 +5,7 @@ import json
 def on_connect(client, userdata, flags, rc):
     print("-------Connected-------")
     client.subscribe("outTopic")
-    client = mqtt.Client()
+    
     client.connect("159.65.146.25",1883,60)
     while True:
         client.publish("outTopic", "Hello world!")
