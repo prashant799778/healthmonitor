@@ -9,13 +9,14 @@ def on_connect(client, userdata, flags, rc):
 
 def on_message(client, userdata, msg):    
   data = msg.payload.decode('utf-8')
-#   data = json.loads(data)  
+#   data = json.loads(data) 
+  client.publish("outTopic1", "Hello worldddddd!")  
   print(data)
     
 client = mqtt.Client()
 client.connect("159.65.146.25",1883,60)
-while True:
-    client.publish("outTopic1", "Hello worldddddd!")
+# while True:
+    # client.publish("outTopic1", "Hello worldddddd!")
 client.on_connect = on_connect
 client.on_message = on_message
 
