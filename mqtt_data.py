@@ -54,8 +54,8 @@ mqttc.on_subscribe = on_subscribe
 topic = 'test'
 
 # Connect
-mqttc.username_pw_set(url.username, url.password)
-mqttc.connect(url.hostname, url.port)
+#mqttc.username_pw_set(url.username, url.password)
+mqttc.connect("159.65.146.25", 5054)
 
 # Start subscribe, with QoS level 0
 mqttc.subscribe(topic, 0)
