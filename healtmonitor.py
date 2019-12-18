@@ -91,7 +91,43 @@ def login():
     except Exception as e :
         print("Exception---->" +str(e))           
         output = {"result":"something went wrong","status":"false"}
+        return output
+
+@app.route('/Login1', methods=['GET'])
+def login1():
+    try:
+       
+       
+        name = request.args['name']
+        password= request.args['password']
+        
+               
+        #query="select userid,usertype from usermaster where userid = '" + userid + "' and password='" + password + "';"      
+        query ="select hm.hospital_name  as hospital_Name from signup as si INNER JOIN Usertype_master as us on us.ID=si.Usertype_Id  INNER JOIN Hospital_master1 AS hm on hm.Usermaster_Id=si.ID  where name = '" + name + "' and password='" + password + "';"   
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data = cursor.fetchall()
+        data1=[]
+        for i in data:
+            data1.append(i["hospital_name"])
+        if data:           
+            Data = {"result":data1,"status":"true"}
+            return Data
+        else:
+            data={"status":"false","result":"Login Failed"}
+            return data
+
+    except KeyError as e:
+        print("Exception---->" +str(e))        
+        output = {"result":"Input Keys are not Found","status":"false"}
         return output 
+    
+    except Exception as e :
+        print("Exception---->" +str(e))           
+        output = {"result":"something went wrong","status":"false"}
+        return output 
+
 @app.route('/signup', methods=['POST'])
 def signup():
     try:
@@ -289,6 +325,7 @@ def update_Usertype():
         print("Exception---->" +str(e))    
         output = {"result":"somthing went wrong","status":"false"}
         return output
+
 @app.route('/Hospital_master', methods=['POST'])
 def Hospital_master():
     try:
@@ -311,6 +348,39 @@ def Hospital_master():
             print("77787878")
             query2  = " insert into Hospital_master (hospital_name,City,State,usercreate)"
             query2 = query2 +" values("+'"'+str(data["hospital_name"])+'"'+','+'"'+str(data["City"])+'"'+','+'"'+str(data["State"])+'"'+','+'"'+str(data["usercreate"])+'"'+' '+");"
+            print(query2)
+            conn=Connection()
+            cursor = conn.cursor()
+            cursor.execute(query2)
+            conn.commit()
+            output={"output": "Hospital Name Added succesfully","status":"true"}
+    except Exception as e :
+        print("Exception---->" + str(e))    
+        output = {"result":"something went wrong","status":"false"}
+    return output
+    
+@app.route('/Hospital_master1', methods=['POST'])
+def Hospital_master1():
+    try:
+       
+        json1=request.get_data() 
+        data=json.loads(json1.decode("utf-8"))  
+        query1 = "select ID,hospital_name,City,State from Hospital_master1 where hospital_name = "+'"'+str(data["hospital_name"])+'"'+" ;"
+        print(query1)
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query1)
+        data= cursor.fetchone()
+        conn.commit()
+        cursor.close()
+        if data != None:
+            output={"output": "Hospital name already registered ,Please enter the other Hospital name ","status":"false"}
+        else:
+            json1=request.get_data() 
+            data=json.loads(json1.decode("utf-8"))  
+            print("77787878")
+            query2  = " insert into Hospital_master (hospital_name,City,Usermaster_Id,State,usercreate)"
+            query2 = query2 +" values("+'"'+str(data["hospital_name"])+'"'+','+'"'+str(data["City"])+'"'+','+'"'+str(data[" Usermaster_Id"])+'"'+','+'"'+str(data["State"])+'"'+','+'"'+str(data["usercreate"])+'"'+' '+");"
             print(query2)
             conn=Connection()
             cursor = conn.cursor()
@@ -464,6 +534,42 @@ def Device_master_select():
         output = {"result":"something went wrong","status":"false"}
         return output
 
+
+@app.route('/Device_master_select1', methods=['GET'])
+def Device_master_select2():
+    try:
+        hospital_Name, y="",""
+    
+       
+        if 'hospital_Name' in request.args:
+            hospital_Name=request.args["hospital_Name"]
+
+        if  hospital_Name != "":
+            WhereCondition1 =  " where hospital_name   = '" + hospital_Name + "'  "
+            y = y +  WhereCondition1
+
+        query = "select  de.DeviceMac as DeviceMac,hm.hospital_name as hospital_Name  from Device_master as de INNER JOIN Hospital_master1 as hm on hm.ID= de.Hospital_Id " +y
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data = cursor.fetchall()
+        cursor.close()
+        data1=[]
+        for i in data:
+            data1.append(i["DeviceMac"])
+        if data:           
+            Data = {"result":data1,"status":"true"}
+            return Data
+        else:
+            output = {"result":"No Data Found","status":"false"}
+            return output
+
+    except Exception as e :
+        print("Exception---->" + str(e))    
+        output = {"result":"something went wrong","status":"false"}
+        return output
+
+
 @app.route('/update_Device_master', methods=['POST'])
 def update_device_type():
     try:
@@ -553,6 +659,65 @@ def Patient_master_select():
         cursor.close()
         if data:           
             Data = {"result":data,"status":"true"}
+            return Data
+        
+        else:
+            output = {"result":"No Data Found","status":"false"}
+            return output
+
+    except Exception as e :
+        print("Exception---->" + str(e))    
+        output = {"result":"something went wrong","status":"false"}
+        return output
+
+@app.route('/Patient_master_select1', methods=['GET'])
+def Patient_master_select():
+    try:
+        PatientName,DeviceMac,PatientId,y,y2,y3,hospital_Name= "","","","","","",""
+        if 'PatientId' in request.args:
+            PatientId=request.args["PatientId"]
+        if 'DeviceMac' in request.args:
+            DeviceMac=request.args["DeviceMac"]
+        if 'PatientName' in request.args:
+            PatientName=request.args["PatientName"]
+
+        if 'hospital_Name' in request.args:
+            hospital_Name = request.args["hospital_Name"]
+      
+      
+        WhereCondition=""
+        
+        if PatientId != "":
+            WhereCondition1 =  " and  PatientId    = '" + PatientId + "'  "
+            y = y +  WhereCondition1
+        
+        if DeviceMac != "":
+            WhereCondition1 =  " and DeviceMac   = '" + DeviceMac + "'  "
+            y = y +  WhereCondition1
+        
+        if  PatientName != "":
+            WhereCondition1 =  "  and  PatientName   = '" + PatientName + "'  "
+            y = y +  WhereCondition1
+
+        if  hospital_Name != "":
+            WhereCondition1 =  "  and  hospital_Name   = '" + PatientName + "'  "
+            y = y +  WhereCondition1
+
+
+       
+        query = "select * from Patient_master  where enddate is NULL " + y 
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data = cursor.fetchall()
+        cursor.close()
+        data1=[]
+        data2=[]
+        for i in data:
+            data1.append(i[" PatientId"])
+            data1.append(i[" PatientName"])
+        if data:           
+            Data = {"Patient Id":data1,"status":"true","PatientName":data2}
             return Data
         else:
             output = {"result":"No Data Found","status":"false"}
