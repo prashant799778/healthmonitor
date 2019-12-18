@@ -1,7 +1,7 @@
 # from flask import Flask, render_template
 # from flask_socketio import SocketIO
 
-# app = Flask(__name__)
+#app = Flask(__name__)
 # app.config['SECRET_KEY'] = 'secret!'
 # socketio = SocketIO(app)
 
@@ -23,7 +23,7 @@
 import paho.mqtt.client as mqtt
 
 client = mqtt.Client()                       
-
+app = Flask(__name__)
 #Called on connection to server/broker
 def on_connect(client, userdata, rc):                                               
     print("connected with result code"+str(rc))                                 
