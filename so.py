@@ -10,7 +10,7 @@ socketio = SocketIO(app, cors_allowed_origins="*")
 import logging 
   
 #Create and configure logger 
-logging.basicConfig(filename="newfile.log", 
+logging.basicConfig(filename="/var/www/HealthCare/Healthmonitor/newfile.log", 
                     format='%(asctime)s %(message)s', 
                     filemode='w') 
   
