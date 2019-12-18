@@ -112,7 +112,7 @@ def login1():
         for i in data:
             data1.append(i["hospital_Name"])
         if data:           
-            Data = {"result":data1,"status":"true"}
+            Data = {"Hospitals":data1,"status":"true"}
             return Data
         else:
             data={"status":"false","result":"Login Failed"}
