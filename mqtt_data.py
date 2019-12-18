@@ -21,9 +21,12 @@ from flask import Flask, render_template
 # def handle_my_custom_event(json):
     # print('received json: ' + str(json))    
 import paho.mqtt.client as mqtt
+
+
+app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
 client = mqtt.Client()                       
-app = Flask(__name__)
+
 #Called on connection to server/broker
 def on_connect(client, userdata, rc):                                               
     print("connected with result code"+str(rc))                                 
