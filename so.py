@@ -17,6 +17,7 @@ def handle_message(message):
     emit('message', message, broadcast=True)
     print("ok")
     emit('newmessage', message, broadcast=True)
+    print("newmessage")
     #send(message, broadcast=True)
 
 
