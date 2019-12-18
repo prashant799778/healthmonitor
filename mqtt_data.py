@@ -21,52 +21,33 @@
 # def handle_my_custom_event(json):
     # print('received json: ' + str(json))    
 import paho.mqtt.client as mqtt
-import os
 
-# Define event callbacks
-def on_connect(client, userdata, flags, rc):
-    print("rc: " + str(rc))
+client = mqtt.Client()                       
 
-def on_message(client, obj, msg):
-    print(msg.topic + " " + str(msg.qos) + " " + str(msg.payload))
+#Called on connection to server/broker
+def on_connect(client, userdata, rc):                                               
+    print("connected with result code"+str(rc))                                 
 
-def on_publish(client, obj, mid):
-    print("mid: " + str(mid))
+#Called when new message published to subscribed topic
+def on_message(client, userdata, msg):          
+    print("NEW PUBLISH: "+msg.topic+" "+str(msg.payload))
 
-def on_subscribe(client, obj, mid, granted_qos):
-    print("Subscribed: " + str(mid) + " " + str(granted_qos))
+#configure connection to the broker
+def setup():                                    
+    client.on_connect = on_connect
+    client.on_message = on_message
 
-def on_log(client, obj, level, string):
-    print(string)
+#Subscribe
+def subscribe(topic):
+    print("subscribing to topic: " +topic)
+    client.subscribe(topic)
 
-mqttc = mqtt.Client()
-# Assign event callbacks
-mqttc.on_message = on_message
-mqttc.on_connect = on_connect
-mqttc.on_publish = on_publish
-mqttc.on_subscribe = on_subscribe
+#Connect to broker
+def connect():
+    client.connect("127.0.0.1", 1883, 60)
 
-# Uncomment to enable debug messages
-#mqttc.on_log = on_log
-
-# Parse CLOUDMQTT_URL (or fallback to localhost)
-
-topic = 'test'
-
-# Connect
-#mqttc.username_pw_set(url.username, url.password)
-mqttc.connect("159.65.146.25",9001)
-
-# Start subscribe, with QoS level 0
-mqttc.subscribe(topic, 0)
-
-# Publish a message
-mqttc.publish(topic, "my message")
-rc = 0
-while rc == 0:
-    rc = mqttc.loop()
-print("rc: " + str(rc))
-# Continue the network loop, exit when an error occurs
+def publish(topic, msg):
+    client.publish(topic, msg)
    
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5054, debug=True) 
