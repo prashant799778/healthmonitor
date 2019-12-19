@@ -95,6 +95,32 @@ def login():
         output = {"result":"something went wrong","status":"false"}
         return output
 
+
+@app.route('/login2', methods=['post'])
+def login2():
+    try:
+        json1=request.get_data() 
+        data=json.loads(json1.decode("utf-8")) 
+        query="select count(1) as count from signup where Email='"+data["Email"]+"';"
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data= cursor.fetchone()
+        cursor.close()
+        return (data)
+               
+        
+    
+    except Exception as e :
+        print("Exception---->" +str(e))           
+        output = {"result":"something went wrong","status":"false"}
+        return output
+
+
+
+
+
+
 @app.route('/Login1', methods=['GET'])
 def login1():
     try:
