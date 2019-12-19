@@ -562,6 +562,39 @@ def insertHubMaster():
         return output
 
 
+@app.route('/insertHospitalMaster', methods=['POST'])
+def insertHospitalMaster():
+    try:
+        json1=request.get_data() 
+        data1=json.loads(json1.decode("utf-8"))  
+        
+        query = "select * from Hospital_master where HubId='"+str(data1["HubId"])+ "' and hospital_name='"+str(data1["hospital_name"])+"';"
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data = cursor.fetchall()
+        cursor.close()
+        print(data)
+        HubId | hospital_name
+        if data==():           
+            query2  = " insert into HubMaster (HubName)"
+            query2 = query2 +" values('"+str(data1["HubId"])+"','"+str(data1["HubId"])+")';"
+            print(query2)
+            conn=Connection()
+            cursor = conn.cursor()
+            cursor.execute(query2)
+            conn.commit()
+            output = {"result":"data inserted successfully","status":"true"}
+            return output
+        else:
+            output = {"result":"HubName already Exist","status":"true"}
+            return output 
+    except Exception as e :
+        print("Exception---->" + str(e))    
+        output = {"result":"something went wrong","status":"false"}
+        return output
+
+
 @app.route('/update_hospital_master', methods=['POST'])
 def update_hospital_master():
     try:
