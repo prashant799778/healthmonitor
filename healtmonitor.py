@@ -535,7 +535,7 @@ def insertHubMaster():
         json1=request.get_data() 
         data=json.loads(json1.decode("utf-8"))  
         
-        query = "select HubName from HubMaster where HubName="+'"'+str(data["HubName"])+'";'
+        query = "select * from HubMaster where HubName="+'"'+str(data["HubName"])+'";'
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
