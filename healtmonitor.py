@@ -372,8 +372,8 @@ def update_Usertype():
         output = {"result":"somthing went wrong","status":"false"}
         return output
 
-@app.route('/Hospital_master', methods=['POST'])
-def Hospital_master():
+@app.route('/hospital_master', methods=['POST'])
+def hospital_master():
     try:
        
         json1=request.get_data() 
@@ -406,7 +406,44 @@ def Hospital_master():
         print("Exception---->" + str(e))    
         output = {"result":"something went wrong","status":"false"}
     return output
-    
+ 
+@app.route('/doctorMaster', methods=['POST'])
+def doctorMaster():
+    try:
+       
+        json1=request.get_data() 
+        data=json.loads(json1.decode("utf-8"))  
+        query1 = "select ID,DoctorName from DoctorMaster where HospitalId = "+str(data["ID"])+" ;"
+        
+        print(query1)
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query1)
+        data= cursor.fetchall()
+        conn.commit()
+        cursor.close()
+        print(data)
+        if data != None:
+            return {"result":data}
+        # else:
+            # json1=request.get_data() 
+            # data=json.loads(json1.decode("utf-8"))  
+            # print("77787878")
+            # query2  = " insert into Hospital_master (hospital_name,City,State,usercreate)"
+            # query2 = query2 +" values("+'"'+str(data["hospital_name"])+'"'+','+'"'+str(data["City"])+'"'+','+'"'+str(data["State"])+'"'+','+'"'+str(data["usercreate"])+'"'+' '+");"
+            # print(query2)
+            # conn=Connection()
+            # cursor = conn.cursor()
+            # cursor.execute(query2)
+            # conn.commit()
+            # output={"output": "Hospital Name Added succesfully","status":"true"}
+    except Exception as e :
+        print("Exception---->" + str(e))    
+        output = {"result":"something went wrong","status":"false"}
+    return output
+
+
+ 
 @app.route('/Hospital_master1', methods=['POST'])
 def Hospital_master1():
     try:
