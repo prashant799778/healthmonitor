@@ -575,7 +575,7 @@ def insertHospitalMaster():
         data = cursor.fetchall()
         cursor.close()
         print(data)
-        HubId | hospital_name
+        
         if data==():           
             query2  = " insert into HubMaster (HubId,hospital_name)"
             query2 = query2 +" values('"+str(data1["HubId"])+"','"+str(data1["hospital_name"])+")';"
