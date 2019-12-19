@@ -148,7 +148,7 @@ def allHospital():
             i["total_patient"]=count
     
         cursor.close()
-        return {"data":data}
+        return {"data":data,"status":"true"}
     except Exception as e :
         print("Exception---->" +str(e))           
         output = {"result":"something went wrong","status":"false"}
@@ -158,23 +158,23 @@ def allHospital():
 @app.route('/allDoctor', methods=['post'])
 def allDoctor():
     try:
-        json1=request.get_data() 
-        data=json.loads(json1.decode("utf-8")) 
-        query="select count(1) as count from signup where Email='"+data["Email"]+"';"
-        conn=Connection()
+        
+        query= "select DM.ID,DM.DoctorName,HM.hospital_name,(HM.Address)hospital_address,"
+        query=query+"(select count(*) as count from Patient_master where DM.ID=Patient_master.DoctorID)patient,"
+        query=query+"HBS.HubName from DoctorMaster DM,Hospital_master HM,HubMaster as HBS where  DM.HospitalId=HM.ID and HM.HubId=HBS.ID;"conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
-        data= cursor.fetchone()
-        cursor.close()
-        return "ok"
-            
-               
+        data= cursor.fetchall()
         
-    
+        if data:
+            return {"result":data,"status":"true"}
+        else:
+            return {"result":"No Record Found","status":"true"}
     except Exception as e :
         print("Exception---->" +str(e))           
         output = {"result":"something went wrong","status":"false"}
         return output
+
 
 @app.route('/allPatient', methods=['post'])
 def allPatient():
