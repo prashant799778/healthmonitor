@@ -291,7 +291,7 @@ def hubMaster():
             i["total_hospital"]=data1[0]["count"]
             
             query2 = "select * from Hospital_master where HubId= '"+str(i["ID"])+"';"
-            cursor.execute(query1)
+            cursor.execute(query2)
             data2 = cursor.fetchall()
             print(data2)
             #i["total_hospital"]=data1[0]["count"]
