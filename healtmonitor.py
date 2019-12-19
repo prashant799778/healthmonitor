@@ -284,14 +284,17 @@ def hubMaster():
         #counter=[]
         for i in data:
             print("11111111111")
-            query = "select count(*) as count from Hospital_master where HubId= '"+str(i["ID"])+"';"
-            # cursor = conn.cursor()
-            cursor.execute(query)
+            query1 = "select count(*) as count from Hospital_master where HubId= '"+str(i["ID"])+"';"
+            cursor.execute(query1)
             data1 = cursor.fetchall()
             print(data)
             i["total_hospital"]=data1[0]["count"]
-            # counter.append({"HubId":i["ID"],"Total_Hospital":data1[0]["count"]})
-            # print(counter)
+            
+            query2 = "select * from Hospital_master where HubId= '"+str(i["ID"])+"';"
+            cursor.execute(query1)
+            data2 = cursor.fetchall()
+            print(data2)
+            #i["total_hospital"]=data1[0]["count"]
             
         cursor.close()
         if data:           
