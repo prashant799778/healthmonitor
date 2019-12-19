@@ -289,7 +289,7 @@ def hubMaster():
             cursor.execute(query)
             data = cursor.fetchall()
             print(data)
-            counter.append({"HubId":i["ID"],"Total_Hospital":data[0]["count"})
+            counter.append({"HubId":i["ID"],"Total_Hospital":data[0]["count"])
             print(counter)
             
         cursor.close()
