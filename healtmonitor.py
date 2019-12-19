@@ -387,7 +387,7 @@ def Hospital_master():
         conn.commit()
         cursor.close()
         if data != None:
-            output={"output": "Hospital name already registered ,Please enter the other Hospital name ","status":"false"}
+            return data
         # else:
             # json1=request.get_data() 
             # data=json.loads(json1.decode("utf-8"))  
