@@ -384,7 +384,7 @@ def Hospital_master():
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query1)
-        data= cursor.fetchone()
+        data= cursor.fetchall()
         conn.commit()
         cursor.close()
         if data != None:
