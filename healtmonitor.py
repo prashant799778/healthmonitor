@@ -529,8 +529,8 @@ def userTypeMaster():
         return output
 
 
-@app.route('/inserHubMaster', methods=['GET'])
-def inserHubMaster():
+@app.route('/insertHubMaster', methods=['POST'])
+def insertHubMaster():
     try:
     
         # query = " select distinct userid,username,usertype from usermaster where usertype <> 'Admin';"
