@@ -544,7 +544,7 @@ def insertHubMaster():
         print(data)
         
         if data==():           
-         
+            print("111111")
             
             query2  = " insert into HubMaster (HubName)"
             query2 = query2 +" values("+'"'+str(data["HubName"])+'";'
