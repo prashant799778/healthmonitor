@@ -272,6 +272,29 @@ def Usertypelist():
         output = {"result":"something went wrong","status":"false"}
         return output
 
+@app.route('/HubMaster', methods=['GET'])
+def Usertypelist():
+    try:
+        query = "select * from HubMaster "
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data = cursor.fetchall()
+        cursor.close()
+        if data:           
+            Data = json.dumps(data, default=str)
+            return str(Data)
+        else:
+            output = {"result":"No Data Found","status":"false"}
+            return output
+
+    except Exception as e :
+        print("Exception---->" + str(e))    
+        output = {"result":"something went wrong","status":"false"}
+        return output
+
+
+
 @app.route('/getCurrentpatient', methods=['GET'])
 def getCurrentpatient():
     try:
