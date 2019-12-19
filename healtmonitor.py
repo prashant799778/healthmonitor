@@ -1,6 +1,6 @@
 from flask import Flask,request, abort
 from flask_socketio import SocketIO,emit
-
+import uuid
 import json
 #import socketio
 
@@ -145,15 +145,15 @@ def signup():
         data= cursor.fetchone()
         conn.commit()
         cursor.close()
-       
+        UserID=uuid.uuid1()
         if data != None:
             output={"output": "Name already registered ,Please enter the other Name","status":"false"}
         else:
             json1=request.get_data() 
             data=json.loads(json1.decode("utf-8"))  
             print("77787878")
-            query2  = " insert into signup (name,mobile,password,Usertype_Id,Hospital_Id,usercreate)"
-            query2 = query2 +" values("+'"'+str(data["name"])+'"'+','+'"'+str(data["mobile"])+'"'+','+'"'+str(data["password"])+'"'+','+'"'+str(data["Usertype_Id"])+'"'+','+'"'+str(data["Hospital_Id"])+'"'+','+'"'+str(data["usercreate"])+'"'+' '+");"
+            query2  = " insert into signup (name,mobile,password,Usertype_Id,Hospital_Id,usercreate,UserID)"
+            query2 = query2 +" values("+'"'+str(data["name"])+'"'+','+'"'+str(data["mobile"])+'"'+','+'"'+str(data["password"])+'"'+','+'"'+str(data["Usertype_Id"])+'"'+','+'"'+str(data["Hospital_Id"])+'"'+','+'"'+str(data["usercreate"])+'"'+','+'"'+str(UserID)+'"'++");"
             print(query2)
             conn=Connection()
             cursor = conn.cursor()
