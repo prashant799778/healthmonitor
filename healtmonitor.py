@@ -96,18 +96,38 @@ def login():
         return output
 
 
-@app.route('/login2', methods=['post'])
-def login2():
+# @app.route('/login2', methods=['post'])
+# def login2():
+    # try:
+        # json1=request.get_data() 
+        # data=json.loads(json1.decode("utf-8")) 
+        # query="select count(1) as count from signup where Email='"+data["Email"]+"';"
+        # conn=Connection()
+        # cursor = conn.cursor()
+        # cursor.execute(query)
+        # data= cursor.fetchone()
+        # cursor.close()
+        # if data["count"]==1:
+            
+               
+        
+    
+    # except Exception as e :
+        # print("Exception---->" +str(e))           
+        # output = {"result":"something went wrong","status":"false"}
+        # return output
+@app.route('/allHospital', methods=['post'])
+def allHospital():
     try:
-        json1=request.get_data() 
-        data=json.loads(json1.decode("utf-8")) 
-        query="select count(1) as count from signup where Email='"+data["Email"]+"';"
+        
+        query="select Hospital_master.ID,Hospital_master.hospital_name,Hospital_master.Address,HubMaster.HubName from Hospital_master inner join HubMaster on Hospital_master.HubId=HubMaster.ID;"
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
-        data= cursor.fetchone()
+        data= cursor.fetchall()
         cursor.close()
-        return (data)
+        return data
+            
                
         
     
@@ -117,7 +137,47 @@ def login2():
         return output
 
 
+@app.route('/allDoctor', methods=['post'])
+def allDoctor():
+    try:
+        json1=request.get_data() 
+        data=json.loads(json1.decode("utf-8")) 
+        query="select count(1) as count from signup where Email='"+data["Email"]+"';"
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data= cursor.fetchone()
+        cursor.close()
+        if data["count"]==1:
+            
+               
+        
+    
+    except Exception as e :
+        print("Exception---->" +str(e))           
+        output = {"result":"something went wrong","status":"false"}
+        return output
 
+@app.route('/allPatient', methods=['post'])
+def allPatient():
+    try:
+        json1=request.get_data() 
+        data=json.loads(json1.decode("utf-8")) 
+        query="select count(1) as count from signup where Email='"+data["Email"]+"';"
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data= cursor.fetchone()
+        cursor.close()
+        if data["count"]==1:
+            
+               
+        
+    
+    except Exception as e :
+        print("Exception---->" +str(e))           
+        output = {"result":"something went wrong","status":"false"}
+        return output
 
 
 
