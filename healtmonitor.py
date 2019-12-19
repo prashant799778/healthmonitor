@@ -324,6 +324,7 @@ def hospitalMaster():
     try:
        
         json1=request.get_data() 
+        print(json1)
         data=json.loads(json1.decode("utf-8")) 
         print(data)
         if "ID" in data:
