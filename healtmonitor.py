@@ -57,7 +57,7 @@ def login():
         
                
         #query="select userid,usertype from usermaster where userid = '" + userid + "' and password='" + password + "';"      
-        query ="select si.mobile as mobile,si.name as name,si.password as password,si.Usertype_Id as Usertype_Id,"
+        query ="select si.mobile as mobile,si.name as name,si.Usertype_Id as Usertype_Id,"
         query=query+" si.Hospital_Id as Hospital_Id,us.Usertype,hm.hospital_name,si.UserID from signup as si INNER JOIN Usertype_master as us on us.ID=si.Usertype_Id"
         query=query+" INNER JOIN Hospital_master AS hm on hm.ID=si.Hospital_Id  where name = '" + name + "' and password='" + password + "';"   
         conn=Connection()
