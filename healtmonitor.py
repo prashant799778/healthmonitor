@@ -626,7 +626,7 @@ def insertHospitalMaster():
 
 
 @app.route('/addUser', methods=['POST'])
-def addDoctor():
+def addUser():
     try:
         json1=request.get_data() 
         data1=json.loads(json1.decode("utf-8"))  
