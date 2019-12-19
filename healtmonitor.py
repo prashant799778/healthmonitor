@@ -280,7 +280,7 @@ def hubMaster():
         cursor = conn.cursor()
         cursor.execute(query)
         data = cursor.fetchall()
-        cursor.close()
+        #cursor.close()
         counter=[]
         for i in data:
             print("11111111111")
