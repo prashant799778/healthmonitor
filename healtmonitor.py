@@ -301,7 +301,7 @@ def hubMaster():
                 data3 = cursor.fetchall()
                 print(data3)
                 count+=data3[0]["count"]
-            i["total_hospital"]=count
+            i["total_doctor"]=count
             
         cursor.close()
         if data:           
