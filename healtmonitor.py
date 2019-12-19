@@ -272,7 +272,7 @@ def Usertypelist():
         output = {"result":"something went wrong","status":"false"}
         return output
 
-@app.route('hubMaster', methods=['GET'])
+@app.route('/hubMaster', methods=['GET'])
 def hubMaster():
     try:
         query = "select ID,HubName from HubMaster "
