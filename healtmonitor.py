@@ -134,7 +134,7 @@ def allHospital():
             data1 = cursor.fetchall()
             
             i["total_doctor"]=data1[0]["count"]
-            query2="select ID  from DoctorMaster where HospitalId="
+            query2="select ID  from DoctorMaster "
             cursor.execute(query2)
             data2 = cursor.fetchall()
             print(data2)
