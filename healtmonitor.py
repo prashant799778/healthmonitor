@@ -148,7 +148,7 @@ def allDoctor():
         cursor.execute(query)
         data= cursor.fetchone()
         cursor.close()
-        if data["count"]==1:
+        return "ok"
             
                
         
@@ -169,7 +169,7 @@ def allPatient():
         cursor.execute(query)
         data= cursor.fetchone()
         cursor.close()
-        if data["count"]==1:
+        return "ok"
             
                
         
