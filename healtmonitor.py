@@ -549,7 +549,7 @@ def inserHubMaster():
             json1=request.get_data() 
             data=json.loads(json1.decode("utf-8"))  
             query2  = " insert into HubMaster (HubName)"
-            query2 = query2 +" values("+'"'+str(data["HubName"])+'"'+
+            query2 = query2 +" values("+'"'+str(data["HubName"])+'";'
             print(query2)
             conn=Connection()
             cursor = conn.cursor()
