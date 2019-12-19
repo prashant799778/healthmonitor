@@ -389,7 +389,7 @@ def Hospital_master():
         cursor.close()
         print(data)
         if data != None:
-            return data
+            return {"result":data}
         # else:
             # json1=request.get_data() 
             # data=json.loads(json1.decode("utf-8"))  
