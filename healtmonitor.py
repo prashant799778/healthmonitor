@@ -503,6 +503,34 @@ def hospital_master_list2():
         output = {"result":"something went wrong","status":"false"}
         return output
 
+@app.route('/userTypeMaster', methods=['GET'])
+def userTypeMaster():
+    try:
+    
+        # query = " select distinct userid,username,usertype from usermaster where usertype <> 'Admin';"
+        query = "select ID,Usertype from Usertype_master "
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data = cursor.fetchall()
+        cursor.close()
+        print(data)
+        data1=[]
+        for i in data:
+            data1.append(i["hospital_name"])
+        if data:           
+            Data = {"result":data1,"status":"true"}
+            return Data
+        else:
+            output = {"result":"No Data Found","status":"false"}
+            return output
+
+    except Exception as e :
+        print("Exception---->" + str(e))    
+        output = {"result":"something went wrong","status":"false"}
+        return output
+
+
 @app.route('/update_hospital_master', methods=['POST'])
 def update_hospital_master():
     try:
