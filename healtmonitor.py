@@ -292,7 +292,9 @@ def hubMaster():
         print("Exception---->" + str(e))    
         output = {"result":"something went wrong","status":"false"}
         return output
-@app.route('/hospitalMmaster', methods=['POST'])
+
+
+@app.route('/hospitalmaster', methods=['POST'])
 def hospitalMaster():
     try:
        
