@@ -325,6 +325,7 @@ def hospitalMaster():
        
         json1=request.get_data() 
         data=json.loads(json1.decode("utf-8")) 
+        print(data)
         if "ID" in data:
             query1 = "select ID,hospital_name from Hospital_master where HubId = "+str(data["ID"])+" ;"
         else:
