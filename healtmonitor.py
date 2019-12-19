@@ -138,6 +138,7 @@ def allHospital():
             cursor.execute(query2)
             data2 = cursor.fetchall()
             print(data2)
+            count=0
             for j in data2:
                 query1 = "select count(*) as count from Patient_master where DoctorID= '"+str(j["ID"])+"';"
                 cursor.execute(query1)
