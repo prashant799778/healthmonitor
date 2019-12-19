@@ -643,11 +643,11 @@ def addUser():
         data = cursor.fetchall()
         cursor.close()
         print(data)
-        
+        UserID=uuid.uuid1()
         if data==():
             if data1["password"]==data1["confirm_password"]:
-                query2  = " insert into signup (name,mobile,Usertype_Id,Hospital_Id,password,Email,Gender)"
-                query2 = query2 +" values('"+str(data1["name"])+"','"+str(data1["mobile"])+"','"+str(data1["Usertype_Id"])
+                query2  = " insert into signup (name,mobile,Usertype_Id,UserID,Hospital_Id,password,Email,Gender)"
+                query2 = query2 +" values('"+str(data1["name"])+"','"+str(data1["mobile"])+"','"+str(data1["Usertype_Id"])+"','"+str(UserID)
                 query2=query2+"','"+str(data1["Hospital_Id"])+"','"+str(data1["password"])+"','"+str(data1["Email"])+"','"+str(data1["Gender"])+"');"
                 print(query2)
                 conn=Connection()
