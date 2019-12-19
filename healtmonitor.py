@@ -125,12 +125,18 @@ def allHospital():
         cursor = conn.cursor()
         cursor.execute(query)
         data= cursor.fetchall()
+        
+        return {"data":data}
+        for i in data:
+            query="select count(*) from DoctorMaster where HospitalId='"+i["ID"]+"';" 
+            query1 = "select count(*) as count from Hospital_master where HubId= '"+str(i["ID"])+"';"
+            cursor.execute(query1)
+            data1 = cursor.fetchall()
+            
+            i["total_doctor"]=data1[0]["count"]
+               
         cursor.close()
         return {"data":data}
-            
-               
-        
-    
     except Exception as e :
         print("Exception---->" +str(e))           
         output = {"result":"something went wrong","status":"false"}
