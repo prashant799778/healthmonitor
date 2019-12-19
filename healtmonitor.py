@@ -153,7 +153,7 @@ def signup():
             data=json.loads(json1.decode("utf-8"))  
             print("77787878")
             query2  = " insert into signup (name,mobile,password,Usertype_Id,Hospital_Id,usercreate,UserID)"
-            query2 = query2 +" values("+'"'+str(data["name"])+'"'+','+'"'+str(data["mobile"])+'"'+','+'"'+str(data["password"])+'"'+','+'"'+str(data["Usertype_Id"])+'"'+','+'"'+str(data["Hospital_Id"])+'"'+','+'"'+str(data["usercreate"])+'"'+','+'"'+str(UserID)+'"'++");"
+            query2 = query2 +" values("+'"'+str(data["name"])+'"'+','+'"'+str(data["mobile"])+'"'+','+'"'+str(data["password"])+'"'+','+'"'+str(data["Usertype_Id"])+'"'+','+'"'+str(data["Hospital_Id"])+'"'+','+'"'+str(data["usercreate"])+'"'+','+'"'+(UserID)+'"'++");"
             print(query2)
             conn=Connection()
             cursor = conn.cursor()
