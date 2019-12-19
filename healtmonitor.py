@@ -57,7 +57,9 @@ def login():
         
                
         #query="select userid,usertype from usermaster where userid = '" + userid + "' and password='" + password + "';"      
-        query ="select si.mobile as mobile,si.name as name,si.password as password,si.Usertype_Id as Usertype_Id,si.Hospital_Id as Hospital_Id,us.Usertype,hm.hospital_name from signup as si INNER JOIN Usertype_master as us on us.ID=si.Usertype_Id  INNER JOIN Hospital_master AS hm on hm.ID=si.Hospital_Id  where name = '" + name + "' and password='" + password + "';"   
+        query ="select si.mobile as mobile,si.name as name,si.password as password,si.Usertype_Id as Usertype_Id,"
+        query=query+" si.Hospital_Id as Hospital_Id,us.Usertype,hm.hospital_name from signup as si INNER JOIN Usertype_master as us on us.ID=si.Usertype_Id"
+        query=query+" INNER JOIN Hospital_master AS hm on hm.ID=si.Hospital_Id  where name = '" + name + "' and password='" + password + "';"   
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
@@ -317,14 +319,16 @@ def hubMaster():
         return output
 
 
-@app.route('/hospitalmaster', methods=['POST'])
+@app.route('/hospitalMaster', methods=['POST'])
 def hospitalMaster():
     try:
        
         json1=request.get_data() 
-        data=json.loads(json1.decode("utf-8"))  
-        query1 = "select ID,hospital_name from Hospital_master where HubId = "+str(data["ID"])+" ;"
-        
+        data=json.loads(json1.decode("utf-8")) 
+        if "ID" in data:
+            query1 = "select ID,hospital_name from Hospital_master where HubId = "+str(data["ID"])+" ;"
+        else:
+            query1 = "select ID,hospital_name from Hospital_master"
         print(query1)
         conn=Connection()
         cursor = conn.cursor()
@@ -621,6 +625,41 @@ def insertHospitalMaster():
 
 
 
+@app.route('/addUser', methods=['POST'])
+def addDoctor():
+    try:
+        json1=request.get_data() 
+        data1=json.loads(json1.decode("utf-8"))  
+        
+        query = "select * from DoctorMaster where Email='"+str(data1["Email"])+ "';"
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data = cursor.fetchall()
+        cursor.close()
+        print(data)
+        
+        if data==():           
+            query2  = " insert into DoctorMaster (HospitalId,DoctorName,Email,Gender)"
+            query2 = query2 +" values('"+str(data1["HospitalId"])+"','"+str(data1["DoctorName"])+"','"+str(data1["Email"])+"','"+str(data1["Gender"])+"');"
+            print(query2)
+            conn=Connection()
+            cursor = conn.cursor()
+            cursor.execute(query2)
+            conn.commit()
+            output = {"result":"data inserted successfully","status":"true"}
+            return output
+        else:
+            output = {"result":"HubName already Exist","status":"true"}
+            return output 
+    except Exception as e :
+        print("Exception---->" + str(e))    
+        output = {"result":"something went wrong","status":"false"}
+        return output
+
+
+
+
 @app.route('/addDoctor', methods=['POST'])
 def addDoctor():
     try:
@@ -815,7 +854,7 @@ def update_device_type():
 @app.route('/Patient_master', methods=['POST'])
 def Patient_master():
     try:
-       
+         
         json1=request.get_data() 
         data=json.loads(json1.decode("utf-8"))  
         query2  = " insert into Patient_master(PatientName,DoctorID,DeviceMac,Bed_Number,Usertype_Id,hospital_Name,startdate,usercreate)"
