@@ -180,18 +180,18 @@ def allDoctor():
 @app.route('/allPatient', methods=['post'])
 def allPatient():
     try:
-        json1=request.get_data() 
-        data=json.loads(json1.decode("utf-8")) 
-        query="select count(1) as count from signup where Email='"+data["Email"]+"';"
+        
+        query="select PM.PatientId as ID,PM.PatientName,PM.PhoneNo,PM.Address,PM.BloodGroup,PM.DeviceMac,"
+        query=query+"PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.hospital_Name from Patient_master as PM;"
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
         data= cursor.fetchone()
         cursor.close()
-        return "ok"
-            
-               
-        
+        if data:
+            return {"result":data,"status":"true"}
+        else:
+            return {"result":"No Record Found","status":"true"}
     
     except Exception as e :
         print("Exception---->" +str(e))           
