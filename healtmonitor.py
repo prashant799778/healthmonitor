@@ -620,7 +620,7 @@ def insertHospitalMaster():
         return output
 
 
-DoctorMaster
+
 @app.route('/addDoctor', methods=['POST'])
 def addDoctor():
     try:
