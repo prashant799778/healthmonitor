@@ -289,13 +289,13 @@ def hubMaster():
             cursor.execute(query)
             data = cursor.fetchall()
             print(data)
-            counter.append({"HubId":i["ID"],"Total_Hospital":"0"})
+            counter.append({"HubId":i["ID"],"Total_Hospital":data[0]["count"})
             print(counter)
             
         cursor.close()
         if data:           
             Data = json.dumps(data, default=str)
-            return str(Data)
+            return {"HubMaster":str(Data),"counter":counter}
         else:
             output = {"result":"No Data Found","status":"false"}
             return output
