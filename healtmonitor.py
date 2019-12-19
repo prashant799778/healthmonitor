@@ -292,6 +292,64 @@ def hubMaster():
         print("Exception---->" + str(e))    
         output = {"result":"something went wrong","status":"false"}
         return output
+@app.route('/hospitalMmaster', methods=['POST'])
+def hospitalMaster():
+    try:
+       
+        json1=request.get_data() 
+        data=json.loads(json1.decode("utf-8"))  
+        query1 = "select ID,hospital_name from Hospital_master where HubId = "+str(data["ID"])+" ;"
+        
+        print(query1)
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query1)
+        data= cursor.fetchall()
+        conn.commit()
+        cursor.close()
+        print(data)
+        if data != None:
+            return {"result":data,"status":"True"}
+        else:
+            json1=request.get_data() 
+            data=json.loads(json1.decode("utf-8"))  
+            print("77787878")
+            query2  = " insert into Hospital_master (hospital_name,City,State,usercreate)"
+            query2 = query2 +" values("+'"'+str(data["hospital_name"])+'"'+','+'"'+str(data["City"])+'"'+','+'"'+str(data["State"])+'"'+','+'"'+str(data["usercreate"])+'"'+' '+");"
+            print(query2)
+            conn=Connection()
+            cursor = conn.cursor()
+            cursor.execute(query2)
+            conn.commit()
+            output={"output": "Hospital Name Added succesfully","status":"true"}
+    except Exception as e :
+        print("Exception---->" + str(e))    
+        output = {"result":"something went wrong","status":"false"}
+    return output
+ 
+@app.route('/doctorMaster', methods=['POST'])
+def doctorMaster():
+    try:
+       
+        json1=request.get_data() 
+        data=json.loads(json1.decode("utf-8"))  
+        query1 = "select ID,DoctorName from DoctorMaster where HospitalId = "+str(data["ID"])+" ;"
+        
+        print(query1)
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query1)
+        data= cursor.fetchall()
+        conn.commit()
+        cursor.close()
+        print(data)
+        if data != None:
+            return {"result":data,"status":"True"}
+        
+    except Exception as e :
+        print("Exception---->" + str(e))    
+        output = {"result":"something went wrong","status":"false"}
+    return output
 
 
 # @app.route('/HubMaster', methods=['GET'])
@@ -372,64 +430,6 @@ def update_Usertype():
         output = {"result":"somthing went wrong","status":"false"}
         return output
 
-@app.route('/hospitalMmaster', methods=['POST'])
-def hospitalMaster():
-    try:
-       
-        json1=request.get_data() 
-        data=json.loads(json1.decode("utf-8"))  
-        query1 = "select ID,hospital_name from Hospital_master where HubId = "+str(data["ID"])+" ;"
-        
-        print(query1)
-        conn=Connection()
-        cursor = conn.cursor()
-        cursor.execute(query1)
-        data= cursor.fetchall()
-        conn.commit()
-        cursor.close()
-        print(data)
-        if data != None:
-            return {"result":data,"status":"True"}
-        else:
-            json1=request.get_data() 
-            data=json.loads(json1.decode("utf-8"))  
-            print("77787878")
-            query2  = " insert into Hospital_master (hospital_name,City,State,usercreate)"
-            query2 = query2 +" values("+'"'+str(data["hospital_name"])+'"'+','+'"'+str(data["City"])+'"'+','+'"'+str(data["State"])+'"'+','+'"'+str(data["usercreate"])+'"'+' '+");"
-            print(query2)
-            conn=Connection()
-            cursor = conn.cursor()
-            cursor.execute(query2)
-            conn.commit()
-            output={"output": "Hospital Name Added succesfully","status":"true"}
-    except Exception as e :
-        print("Exception---->" + str(e))    
-        output = {"result":"something went wrong","status":"false"}
-    return output
- 
-@app.route('/doctorMaster', methods=['POST'])
-def doctorMaster():
-    try:
-       
-        json1=request.get_data() 
-        data=json.loads(json1.decode("utf-8"))  
-        query1 = "select ID,DoctorName from DoctorMaster where HospitalId = "+str(data["ID"])+" ;"
-        
-        print(query1)
-        conn=Connection()
-        cursor = conn.cursor()
-        cursor.execute(query1)
-        data= cursor.fetchall()
-        conn.commit()
-        cursor.close()
-        print(data)
-        if data != None:
-            return {"result":data,"status":"True"}
-        
-    except Exception as e :
-        print("Exception---->" + str(e))    
-        output = {"result":"something went wrong","status":"false"}
-    return output
 
 
  
