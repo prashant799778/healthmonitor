@@ -532,9 +532,10 @@ def userTypeMaster():
 @app.route('/insertHubMaster', methods=['POST'])
 def insertHubMaster():
     try:
-    
-        # query = " select distinct userid,username,usertype from usermaster where usertype <> 'Admin';"
-        query = "select HubName from HubMaster "
+        json1=request.get_data() 
+        data=json.loads(json1.decode("utf-8"))  
+        
+        query = "select HubName from HubMaster where HubName="+'"'+str(data["HubName"])+'";'
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
@@ -542,12 +543,9 @@ def insertHubMaster():
         cursor.close()
         print(data)
         
-        if data:           
-            Data = {"result":data,"status":"true"}
-            return Data
-        else:
-            json1=request.get_data() 
-            data=json.loads(json1.decode("utf-8"))  
+        if not data:           
+         
+            
             query2  = " insert into HubMaster (HubName)"
             query2 = query2 +" values("+'"'+str(data["HubName"])+'";'
             print(query2)
