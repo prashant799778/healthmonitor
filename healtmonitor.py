@@ -389,7 +389,7 @@ def hospital_master():
         cursor.close()
         print(data)
         if data != None:
-            return {"result":data}
+            return {"result":data,"status":"True"}
         # else:
             # json1=request.get_data() 
             # data=json.loads(json1.decode("utf-8"))  
@@ -424,19 +424,8 @@ def doctorMaster():
         cursor.close()
         print(data)
         if data != None:
-            return {"result":data}
-        # else:
-            # json1=request.get_data() 
-            # data=json.loads(json1.decode("utf-8"))  
-            # print("77787878")
-            # query2  = " insert into Hospital_master (hospital_name,City,State,usercreate)"
-            # query2 = query2 +" values("+'"'+str(data["hospital_name"])+'"'+','+'"'+str(data["City"])+'"'+','+'"'+str(data["State"])+'"'+','+'"'+str(data["usercreate"])+'"'+' '+");"
-            # print(query2)
-            # conn=Connection()
-            # cursor = conn.cursor()
-            # cursor.execute(query2)
-            # conn.commit()
-            # output={"output": "Hospital Name Added succesfully","status":"true"}
+            return {"result":data,"status":"True"}
+        
     except Exception as e :
         print("Exception---->" + str(e))    
         output = {"result":"something went wrong","status":"false"}
