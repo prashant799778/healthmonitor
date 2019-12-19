@@ -161,11 +161,12 @@ def allDoctor():
         
         query= "select DM.ID,DM.DoctorName,HM.hospital_name,(HM.Address)hospital_address,"
         query=query+"(select count(*) as count from Patient_master where DM.ID=Patient_master.DoctorID)patient,"
-        query=query+"HBS.HubName from DoctorMaster DM,Hospital_master HM,HubMaster as HBS where  DM.HospitalId=HM.ID and HM.HubId=HBS.ID;"conn=Connection()
+        query=query+"HBS.HubName from DoctorMaster DM,Hospital_master HM,HubMaster as HBS where  DM.HospitalId=HM.ID and HM.HubId=HBS.ID;"
+        conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
         data= cursor.fetchall()
-        
+        cursor.close()
         if data:
             return {"result":data,"status":"true"}
         else:
