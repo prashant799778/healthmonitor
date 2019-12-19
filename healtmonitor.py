@@ -556,7 +556,7 @@ def insertHubMaster():
             output = {"result":"data inserted successfully","status":"true"}
             return output
         else:
-            output = {"result":"Hub already Exist","status":"true"}
+            output = {"result":"HubName already Exist","status":"true"}
             return output 
     except Exception as e :
         print("Exception---->" + str(e))    
