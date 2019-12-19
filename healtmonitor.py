@@ -128,12 +128,12 @@ def allHospital():
         
         #return {"data":data}
         for i in data:
-            query="select count(*) from DoctorMaster where HospitalId='"+i["ID"]+"';" 
-            query1 = "select count(*) as count from Hospital_master where HubId= '"+str(i["ID"])+"';"
+            query1="select count(*) from DoctorMaster where HospitalId='"+str(i["ID"])+"';" 
+            
             cursor.execute(query1)
             data1 = cursor.fetchall()
             
-            i["total_doctor"]=str(data1[0]["count"])
+            i["total_doctor"]=data1[0]["count"]
                
         cursor.close()
         return {"data":data}
