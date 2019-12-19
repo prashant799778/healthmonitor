@@ -126,7 +126,7 @@ def allHospital():
         cursor.execute(query)
         data= cursor.fetchall()
         cursor.close()
-        return data
+        return {"data":data}
             
                
         
