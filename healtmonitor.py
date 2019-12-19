@@ -291,8 +291,8 @@ def hubMaster():
             print(data)
             counter.append({"HubId":i["ID"],"Total_Hospital":"0"})
             print(counter)
-            cursor.close()
-        
+            
+        cursor.close()
         if data:           
             Data = json.dumps(data, default=str)
             return str(Data)
