@@ -283,6 +283,7 @@ def hubMaster():
         cursor.close()
         counter=[]
         for i in data:
+            print("11111111111")
             query = "select count(*) from Hospital_master where HubId= '"+i["ID"]+"';"
             # cursor = conn.cursor()
             cursor.execute(query)
