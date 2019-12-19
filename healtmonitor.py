@@ -789,23 +789,29 @@ def Patient_master_select():
             DeviceMac=request.args["DeviceMac"]
         if 'PatientName' in request.args:
             PatientName=request.args["PatientName"]
-      
+        if 'ID' in request.args:
+            ID=request.args["ID"]
+       
         WhereCondition=""
+        
+        if ID !="":
+            
+            WhereCondition1 =  " and  DoctorId    = '" + ID + "'  "
         
         if PatientId != "":
             WhereCondition1 =  " and  PatientId    = '" + PatientId + "'  "
-            y = y +  WhereCondition1
+            # y = y +  WhereCondition1
         
         if DeviceMac != "":
             WhereCondition1 =  " and DeviceMac   = '" + DeviceMac + "'  "
-            y = y +  WhereCondition1
+            # y = y +  WhereCondition1
         
         if  PatientName != "":
             WhereCondition1 =  "  and  PatientName   = '" + PatientName + "'  "
-            y = y +  WhereCondition1
+            # y = y +  WhereCondition1
 
        
-        query = "select * from Patient_master  where enddate is NULL " + y 
+        query = "select * from Patient_master  where enddate is NULL " +WhereCondition1  # y 
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
