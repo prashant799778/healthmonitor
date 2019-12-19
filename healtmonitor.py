@@ -378,7 +378,8 @@ def Hospital_master():
        
         json1=request.get_data() 
         data=json.loads(json1.decode("utf-8"))  
-        query1 = "select ID,hospital_name from Hospital_master where HubId = "+'"'+str(data["ID"])+'"'+" ;"
+        query1 = "select ID,hospital_name from Hospital_master where HubId = "+str(data["ID"])+" ;"
+        
         print(query1)
         conn=Connection()
         cursor = conn.cursor()
