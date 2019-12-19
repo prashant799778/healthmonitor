@@ -275,7 +275,7 @@ def Usertypelist():
 @app.route('/HubMaster', methods=['GET'])
 def HubMaster():
     try:
-        query = "select * from HubMaster "
+        query = "select ID,HubName from HubMaster "
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
