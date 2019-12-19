@@ -281,6 +281,17 @@ def hubMaster():
         cursor.execute(query)
         data = cursor.fetchall()
         cursor.close()
+        counter=[]
+        for i in data:
+            query = "select count(*) from Hospital_master where HubId= '"+i["ID"]+"';"
+            # cursor = conn.cursor()
+            cursor.execute(query)
+            data = cursor.fetchall()
+            print(data)
+            counter.append({"HubId":i["ID"],"Total_Hospital":0})
+            print(counter)
+            cursor.close()
+        
         if data:           
             Data = json.dumps(data, default=str)
             return str(Data)
@@ -1089,6 +1100,8 @@ def update_Patient_Vital_master():
         print("Exception---->" +str(e))    
         output = {"result":"somthing went wrong","status":"false"}
         return output
+
+
 
 
 
