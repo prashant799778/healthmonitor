@@ -547,7 +547,7 @@ def insertHubMaster():
             print("111111")
             
             query2  = " insert into HubMaster (HubName)"
-            query2 = query2 +" values("+'"'+str(data1["HubName"])+'";'
+            query2 = query2 +" values("+'"'+str(data1["HubName"])+'");'
             print(query2)
             conn=Connection()
             cursor = conn.cursor()
@@ -555,7 +555,9 @@ def insertHubMaster():
             conn.commit()
             output = {"result":"data inserted successfully","status":"true"}
             return output
-
+        else:
+            output = {"result":"Hub already Exist","status":"true"}
+            return output 
     except Exception as e :
         print("Exception---->" + str(e))    
         output = {"result":"something went wrong","status":"false"}
