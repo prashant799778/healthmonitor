@@ -387,6 +387,7 @@ def Hospital_master():
         data= cursor.fetchall()
         conn.commit()
         cursor.close()
+        print(data)
         if data != None:
             return data
         # else:
