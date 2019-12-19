@@ -273,7 +273,7 @@ def Usertypelist():
         return output
 
 @app.route('/HubMaster', methods=['GET'])
-def Usertypelist():
+def HubMaster():
     try:
         query = "select * from HubMaster "
         conn=Connection()
