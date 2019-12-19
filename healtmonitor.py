@@ -533,9 +533,9 @@ def userTypeMaster():
 def insertHubMaster():
     try:
         json1=request.get_data() 
-        data=json.loads(json1.decode("utf-8"))  
+        data1=json.loads(json1.decode("utf-8"))  
         
-        query = "select * from HubMaster where HubName="+'"'+str(data["HubName"])+'";'
+        query = "select * from HubMaster where HubName="+'"'+str(data1["HubName"])+'";'
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
@@ -547,7 +547,7 @@ def insertHubMaster():
             print("111111")
             
             query2  = " insert into HubMaster (HubName)"
-            query2 = query2 +" values("+'"'+str(data["HubName"])+'";'
+            query2 = query2 +" values("+'"'+str(data1["HubName"])+'";'
             print(query2)
             conn=Connection()
             cursor = conn.cursor()
