@@ -299,7 +299,7 @@ def hubMaster():
                 cursor.execute(query1)
                 data3 = cursor.fetchall()
             
-            i["total_doctor"]=data2[0]["count"]
+            i["total_doctor"]=data3[0]["count"]
             #i["total_hospital"]=data1[0]["count"]
             
         cursor.close()
