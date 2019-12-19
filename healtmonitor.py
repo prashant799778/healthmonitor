@@ -145,7 +145,7 @@ def allHospital():
                 data3 = cursor.fetchall()
                 print(data3)
                 count+=data3[0]["count"]
-            i["total_doctor"]=count
+            i["total_patient"]=count
     
         cursor.close()
         return {"data":data}
