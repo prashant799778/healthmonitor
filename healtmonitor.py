@@ -327,10 +327,12 @@ def hospitalMaster():
         print(json1)
         data=json.loads(json1.decode("utf-8")) 
         print(data)
-        if "ID" in data:
-            query1 = "select ID,hospital_name from Hospital_master where HubId = "+str(data["ID"])+" ;"
-        else:
+        if json1==b'':
             query1 = "select ID,hospital_name from Hospital_master"
+        else:
+            query1 = "select ID,hospital_name from Hospital_master where HubId = "+str(data["ID"])+" ;"
+        
+            
         print(query1)
         conn=Connection()
         cursor = conn.cursor()
