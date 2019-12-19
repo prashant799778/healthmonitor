@@ -543,7 +543,7 @@ def insertHubMaster():
         cursor.close()
         print(data)
         
-        if not data:           
+        if data==():           
          
             
             query2  = " insert into HubMaster (HubName)"
