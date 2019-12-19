@@ -515,11 +515,9 @@ def userTypeMaster():
         data = cursor.fetchall()
         cursor.close()
         print(data)
-        data1=[]
-        for i in data:
-            data1.append(i["hospital_name"])
+        
         if data:           
-            Data = {"result":data1,"status":"true"}
+            Data = {"result":data,"status":"true"}
             return Data
         else:
             output = {"result":"No Data Found","status":"false"}
