@@ -95,6 +95,50 @@ def login():
         output = {"result":"something went wrong","status":"false"}
         return output
 
+@app.route('/Login1', methods=['GET'])
+def login1():
+    try:
+        # userid = request.args['userid']
+        password = request.args['password']
+        name = request.args['name']
+        
+               
+            
+        query ="select si.name as name,si.Usertype_Id as Usertype_Id,"
+        query=query+" si.Hospital_Id as Hospital_Id,us.Usertype as Usertype ,si.UserID from signup as si INNER JOIN Usertype_master as us on us.ID=si.Usertype_Id"
+        query=query+" INNER JOIN Hospital_master AS hm on hm.ID=si.Hospital_Id  where name = '" + name + "' and password='" + password + "' ;"   
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        loginuser = cursor.fetchone()
+        cursor.close()
+       
+        y= loginuser["Usertype"]
+        y2= loginuser['Hospital_Id']
+        if  y = 'Nurse':
+            query2 = "select  hm.hospital_name  as hospital_Name,Dm.DoctorName as DoctorName  from Hospital_master  as hm INNER JOIN DoctorMaster as Dm on Dm.HospitalId= hm.ID where  hm.ID ='" + str(y2) + "'"
+            conn=Connection()
+            cursor = conn.cursor()
+            cursor.execute(query2)
+            Nurse= cursor.fetchall()
+            cursor.close()
+        if loginuser:   
+            data={"status":"true","result":loginuser,"Nurse Details":Nurse}                      
+            return data
+        else:
+            data={"status":"false","result":"Login Failed"}
+            return data
+
+    except KeyError as e:
+        print("Exception---->" +str(e))        
+        output = {"result":"Input Keys are not Found","status":"false"}
+        return output 
+    
+    except Exception as e :
+        print("Exception---->" +str(e))           
+        output = {"result":"something went wrong","status":"false"}
+        return output
+
 
 # @app.route('/login2', methods=['post'])
 # def login2():
@@ -771,6 +815,58 @@ def addUser():
         print("Exception---->" + str(e))    
         output = {"result":"something went wrong","status":"false"}
         return output
+
+
+# @app.route('/hospital_master_Select', methods=['GET'])
+# def hospital_master_Select():
+#     try:
+    
+        
+#         DoctorName= request.args['DoctorName']
+#         query = "select hm.hospital_name  as Hospital_Name,Dm.DoctorName as DoctorName from Hospital_master as hm INNER join DoctorMaster as Dm on Dm.HospitalId=hm.ID where DoctorName = '" + DoctorName + "'  "
+#         conn=Connection()
+#         cursor = conn.cursor()
+#         cursor.execute(query)
+#         data = cursor.fetchall()
+#         cursor.close()
+#         if data:           
+#             Data = {"result":data,"status":"true"}
+#             return Data
+#         else:
+#             output = {"result":"No Data Found","status":"false"}
+#             return output
+
+#     except Exception as e :
+#         print("Exception---->" + str(e))    
+#         output = {"result":"something went wrong","status":"false"}
+#         return output
+
+
+
+# @app.route('/Doctor_master_Select', methods=['GET'])
+# def Doctor_master_Select():
+#     try:
+    
+       
+       
+#         query = "select  DoctorName,Email from  DoctorMaster  "
+#         conn=Connection()
+#         cursor = conn.cursor()
+#         cursor.execute(query)
+#         data = cursor.fetchall()
+#         cursor.close()
+#         if data:           
+#             Data = {"result":data,"status":"true"}
+#             return Data
+#         else:
+#             output = {"result":"No Data Found","status":"false"}
+#             return output
+
+#     except Exception as e :
+#         print("Exception---->" + str(e))    
+#         output = {"result":"something went wrong","status":"false"}
+#         return output
+
 
 
 
