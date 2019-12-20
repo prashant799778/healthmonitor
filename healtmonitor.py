@@ -314,7 +314,7 @@ def allPatientPatientDetails():
        
         
                
-        query="select Usertype from Usertype_master where Usertype_Id = '" +Usertype_Id + "' ;"
+        query="select Usertype from Usertype_master where ID = '" +Usertype_Id + "' ;"
         print(query)
         conn=Connection()
         cursor = conn.cursor()
