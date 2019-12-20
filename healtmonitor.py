@@ -438,8 +438,10 @@ def doctorLoginDashboard():
 @app.route('/doctorPatientDetails', methods=['POST'])
 def doctorPatientDetails():
     try:
-        Email = request.args['Email']
-        query2 ="select ID as DoctorID,Email as Email from DoctorMaster where Email ='" + str(Email) + "';"  
+        json1=request.get_data()
+        print(json1)
+        data=json.loads(json1.decode("utf-8"))
+        query2 ="select ID as DoctorID,Email as Email from DoctorMaster where Email ='"+str(data["Email"])+"';"  
         print(query2)
         conn=Connection() 
         cursor = conn.cursor()
