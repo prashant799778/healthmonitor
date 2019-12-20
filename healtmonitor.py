@@ -115,7 +115,8 @@ def login8888():
 
        
         y= loginuser["Usertype"]
-        y2= loginuser['Hospital_Id']
+        y3= loginuser["Usertype_Id"]
+        y2= loginuser["Hospital_Id"]
 
 
         if  y == 'Nurse':
@@ -125,8 +126,23 @@ def login8888():
             cursor.execute(query2)
             Nurse= cursor.fetchall()
             cursor.close()
+
+            query2 = "select  * from Patient_master where Status<>'2'  and Usertype_Id ='" + str(y3) + "'"
+            conn=Connection()
+            cursor = conn.cursor()
+            cursor.execute(query2)
+            ii= cursor.fetchone()
+            cursor.close()
+            
+            
+            if ii != None:
+                Count= 1
+            
+            else:
+                Count=0
+
         if loginuser:   
-            data={"status":"true","result":loginuser,"Nurse Details":Nurse}                      
+            data={"status":"true","result":loginuser,"Nurse Details":Nurse,"Patient Details":ii,"Count":Count}                      
             return data
         else:
             data={"status":"false","result":"Login Failed"}
@@ -247,17 +263,16 @@ def allPatient():
 
 
 
-@app.route('/Login1', methods=['GET'])
-def login1():
+@app.route('/Lj', methods=['GET'])
+def log():
     try:
+        Usertype_Id=request.args['Usertype_Id']
        
        
-        name = request.args['name']
-        password= request.args['password']
         
                
         #query="select userid,usertype from usermaster where userid = '" + userid + "' and password='" + password + "';"      
-        query ="select si.name as name,si.password as password ,hm.hospital_name  as hospital_Name from signup as si INNER JOIN Usertype_master as us on us.ID=si.Usertype_Id  INNER JOIN Hospital_master1 AS hm on hm.Usermaster_Id=si.ID  where name = '" + name + "' and password='" + password + "';"   
+        query ="select UID  from signup as si INNER JOIN Usertype_master as us on us.ID=si.Usertype_Id  INNER JOIN Hospital_master1 AS hm on hm.Usermaster_Id=si.ID  where name = '" + name + "' and password='" + password + "';"   
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
