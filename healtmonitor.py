@@ -400,7 +400,7 @@ def allPatientPatientDetails():
             cursor = conn.cursor()
             cursor.execute(query2)
             data1 = cursor.fetchall()
-            
+            l1=[ ]
             for dat in data1:
                 doctor_Id=dat["DoctorID"]
                 print(doctor_Id)
@@ -411,13 +411,12 @@ def allPatientPatientDetails():
                 cursor.execute(query3)
                 data27 = cursor.fetchall()
                 print("1111111111111",data27)
-                l.append(data27)
+                l1.append(data27)
                 
         cursor.close()
-        Finaldata=data27
-        print("final data",Finaldata)
-        if Finaldata:           
-            Data = {"Patient Details":l,"status":"true"}
+        print(l1)
+        if l1:           
+            Data = {"Patient Details":l1,"status":"true"}
             return Data
         else:
             data={"status":"false","result":"Login Failed"}
