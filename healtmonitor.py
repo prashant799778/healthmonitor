@@ -432,6 +432,67 @@ def allPatientPatientDetails():
         output = {"result":"something went wrong","status":"false"}
         return output 
 
+@app.route('/doctorPatientDetails', methods=['POST'])
+def doctorPatientDetails():
+    try:
+        Usertype_Id=request.args['Usertype_Id']
+        Email = request.args['Email']
+       
+       
+        
+               
+        query="select Usertype from Usertype_master where ID = '" +Usertype_Id + "' ;"
+        print(query)
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data = cursor.fetchone()
+        l=[]
+        
+        Usertype = data["Usertype"]
+       
+
+        if Usertype == 'Doctor':
+            
+            Email = request.args['Email']
+            query2 ="select ID as DoctorID,Email as Email from DoctorMaster where Email ='" + str(Email) + "';"  
+            print(query2) 
+            
+            cursor = conn.cursor()
+            cursor.execute(query2)
+            data1 = cursor.fetchall()
+            l1=[ ]
+            for dat in data1:
+                doctor_Id=dat["DoctorID"]
+               
+                query3 ="select PM.PatientId as ID,PM.PatientName,PM.DoctorID as DoctorID,PM.PhoneNo,PM.Address,PM.BloodGroup,PM.DeviceMac,PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.hospital_Name from Patient_master as PM  where  Status<>'2' and DoctorID='" + str(doctor_Id) + "';"   
+                print(query3)
+                
+                cursor = conn.cursor()
+                cursor.execute(query3)
+                data27 = cursor.fetchall()
+               
+                l1.append(data27)
+                
+        cursor.close()
+       
+        if l1:           
+            Data = {"Patient Details":l1,"status":"true"}
+            return Data
+        else:
+            data={"status":"false","result":"Invalid Email "}
+            return data
+
+    except KeyError as e:
+        print("Exception---->" +str(e))        
+        output = {"result":"Input Keys are not Found","status":"false"}
+        return output 
+    
+    except Exception as e :
+        print("Exception---->" +str(e))           
+        output = {"result":"something went wrong","status":"false"}
+        return output 
+
 @app.route('/signup', methods=['POST'])
 def signup():
     try:
