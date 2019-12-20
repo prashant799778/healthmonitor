@@ -435,49 +435,24 @@ def doctorLoginDashboard():
 @app.route('/doctorPatientDetails', methods=['POST'])
 def doctorPatientDetails():
     try:
-        Usertype_Id=request.args['Usertype_Id']
         Email = request.args['Email']
-       
-       
-        
-               
-        query="select Usertype from Usertype_master where ID = '" +Usertype_Id + "' ;"
-        print(query)
-        conn=Connection()
+        query2 ="select ID as DoctorID,Email as Email from DoctorMaster where Email ='" + str(Email) + "';"  
+        print(query2) 
         cursor = conn.cursor()
-        cursor.execute(query)
-        data = cursor.fetchone()
-        l=[]
-        
-        Usertype = data["Usertype"]
-       
-
-        if Usertype == 'Doctor':
-            
-            Email = request.args['Email']
-            query2 ="select ID as DoctorID,Email as Email from DoctorMaster where Email ='" + str(Email) + "';"  
-            print(query2) 
-            
+        cursor.execute(query2)
+        data1 = cursor.fetchall()
+        l1=[ ]
+        for dat in data1:
+            doctor_Id=dat["DoctorID"]
+            l2=[]
+            query3 ="select PM.PatientId as ID,PM.PatientName,PM.DoctorID as DoctorID,PM.PhoneNo,PM.Address,PM.BloodGroup,PM.DeviceMac,PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.hospital_Name from Patient_master as PM  where  Status<>'2' and DoctorID='" + str(doctor_Id) + "';"   
+            print(query3)
             cursor = conn.cursor()
-            cursor.execute(query2)
-            data1 = cursor.fetchall()
-            l1=[ ]
-            for dat in data1:
-                doctor_Id=dat["DoctorID"]
-                l2=[]
-               
-                query3 ="select PM.PatientId as ID,PM.PatientName,PM.DoctorID as DoctorID,PM.PhoneNo,PM.Address,PM.BloodGroup,PM.DeviceMac,PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.hospital_Name from Patient_master as PM  where  Status<>'2' and DoctorID='" + str(doctor_Id) + "';"   
-                print(query3)
-                
-                cursor = conn.cursor()
-                cursor.execute(query3)
-                data27 = cursor.fetchall()
-
-                
-                if data27 != ():
-                    uu= data27
-                    l1.append(data27)
-                
+            cursor.execute(query3)
+            data27 = cursor.fetchall()
+            if data27 != ():
+                uu= data27
+                l1.append(data27)
         cursor.close()
        
         if uu:           
