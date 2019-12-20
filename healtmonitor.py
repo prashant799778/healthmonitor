@@ -351,7 +351,7 @@ def allPatientPatientDetails():
             cursor = conn.cursor()
             cursor.execute(query3)
             data2 = cursor.fetchall()
-            print(data2)
+            print("1111111111111",data2)
             cursor.close()
 
 
@@ -359,7 +359,7 @@ def allPatientPatientDetails():
 
         
         
-        if data:           
+        if data2:           
             Data = {"Patient Details":data2,"status":"true"}
             return Data
         else:
