@@ -332,7 +332,7 @@ def allPatientPatientDetails():
             conn=Connection()
             cursor = conn.cursor()
             cursor.execute(query2)
-            data1 = cursor.fetchall()
+            data1 = cursor.fetchone()
             cursor.close()
             doctor_Id=data1["DoctorID"]
             print(doctor_Id)
