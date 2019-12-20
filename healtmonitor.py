@@ -598,6 +598,32 @@ def Signuplist():
         output = {"result":"something went wrong","status":"false"}
         return output
 
+@app.route('/doctorDropdown', methods=['POST'])
+def doctorDropdown():
+    try:
+        json1=request.get_data() 
+        data=json.loads(json1.decode("utf-8"))
+        # query = " select distinct userid,username,usertype from usermaster where usertype <> 'Admin';"
+        query = "select ID,DoctorName where HospitalId ='"+data["hospitalId"]+"';"
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data = cursor.fetchall()
+        cursor.close()
+        if data:           
+            Data = {"result":data,"status":"true"}
+            return Data
+        else:
+            output = {"result":"No Data Found","status":"false"}
+            return output
+
+    except Exception as e :
+        print("Exception---->" + str(e))    
+        output = {"result":"something went wrong","status":"false"}
+        return output
+
+
+
 @app.route('/update_Signup', methods=['POST'])
 def updateSignup():
     try:
