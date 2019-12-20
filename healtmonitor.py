@@ -1022,7 +1022,8 @@ def addUser():
         data = cursor.fetchall()
         cursor.close()
         print(data)
-        UserID=uuid.uuid1()
+        UserId=uuid.uuid1()
+        UserID=UserId.hex
         if data==():
             if data1["password"]==data1["confirm_password"]:
                 query2  = " insert into signup (name,mobile,Usertype_Id,UserID,Hospital_Id,password,Email,Gender)"
