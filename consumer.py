@@ -4,13 +4,13 @@ import json
 
 def on_connect(client, userdata, flags, rc):
     print("-------Connected-------")
-    client.subscribe("outTopic")
+    client.subscribe("#")
     
 
 def on_message(client, userdata, msg):
 	try:
 		data = msg.payload.decode('utf-8')
-		client.publish("outTopic1","data111111")  
+		#client.publish("outTopic1","data111111")  
 		print(data)
        
         
