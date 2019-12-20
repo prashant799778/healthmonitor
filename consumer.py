@@ -22,11 +22,9 @@ def on_message(client, userdata, msg):
 		cursor.execute(query2)
 		conn.commit()
 		cursor.close()
-       
-        
-    except Exception as e :
-        print("Exception---->" + str(e))    
-        output = {"result":"something went wrong","status":"false"}
+	except Exception as e :
+		print("Exception---->" + str(e))    
+		output = {"result":"something went wrong","status":"false"}
      
   
     
