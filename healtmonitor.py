@@ -315,25 +315,30 @@ def allPatientPatientDetails():
         
                
         query="select Usertype from Usertype_master where Usertype_Id = '" +Usertype_Id + "' ;"
+        print(query)
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
         data = cursor.fetchone()
         cursor.close()
         Usertype = data["Usertype"]
+        print(Usertype)
+
         if Usertype == 'Doctor':
            
-            query ="select ID as DoctorID,Email as Email from DoctorMaster where Email='" + Email + "';"   
+            query2 ="select ID as DoctorID,Email as Email from DoctorMaster where Email ='" + Email + "';"   
             conn=Connection()
             cursor = conn.cursor()
-            cursor.execute(query)
+            cursor.execute(query2)
             data1 = cursor.fetchall()
             cursor.close()
             doctor_Id=data1["DoctorID"]
-            query ="select PM.PatientId as ID,PM.PatientName,PM.DoctorID as DoctorID,PM.PhoneNo,PM.Address,PM.BloodGroup,PM.DeviceMac,PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.hospital_Name from Patient_master as PM  where  status<>'2' and DoctorID='" + str(doctor_Id) + "';"   
+            print(doctor_Id)
+            
+            query3 ="select PM.PatientId as ID,PM.PatientName,PM.DoctorID as DoctorID,PM.PhoneNo,PM.Address,PM.BloodGroup,PM.DeviceMac,PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.hospital_Name from Patient_master as PM  where  Status<>'2' and DoctorID='" + str(doctor_Id) + "';"   
             conn=Connection()
             cursor = conn.cursor()
-            cursor.execute(query)
+            cursor.execute(query3)
             data2 = cursor.fetchall()
             cursor.close()
 
