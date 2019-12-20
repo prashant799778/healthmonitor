@@ -152,6 +152,7 @@ def login888111():
         cursor = conn.cursor()
         cursor.execute(query2)
         ii= cursor.fetchall()
+        print(ii)
         for i in ii:
             Count=i["Count"]
 
