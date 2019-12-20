@@ -386,6 +386,7 @@ def allPatientPatientDetails():
         cursor = conn.cursor()
         cursor.execute(query)
         data = cursor.fetchone()
+        l=[]
         
         Usertype = data["Usertype"]
         print(Usertype)
@@ -410,12 +411,13 @@ def allPatientPatientDetails():
                 cursor.execute(query3)
                 data27 = cursor.fetchall()
                 print("1111111111111",data27)
+                l.append(data27)
                 
         cursor.close()
         Finaldata=data27
         print("final data",Finaldata)
         if Finaldata:           
-            Data = {"Patient Details":Finaldata,"status":"true"}
+            Data = {"Patient Details":l,"status":"true"}
             return Data
         else:
             data={"status":"false","result":"Login Failed"}
