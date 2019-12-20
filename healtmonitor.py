@@ -105,7 +105,7 @@ def login8888():
                
             
         query ="select si.name as name,si.Usertype_Id as Usertype_Id,"
-        query=query+" si.Hospital_Id as Hospital_Id,us.Usertype as Usertype  from signup as si INNER JOIN Usertype_master as us on us.ID=si.Usertype_Id"
+        query=query+" si.Hospital_Id as Hospital_Id,us.Usertype as Usertype,si.Email as Email  from signup as si INNER JOIN Usertype_master as us on us.ID=si.Usertype_Id"
         query=query+" INNER JOIN Hospital_master AS hm on hm.ID=si.Hospital_Id  where name = '" + name + "' and password='" + password + "' ;"   
         conn=Connection()
         cursor = conn.cursor()
@@ -338,18 +338,19 @@ def allPatientPatientDetails():
             conn=Connection()
             cursor = conn.cursor()
             cursor.execute(query2)
-            data1 = cursor.fetchone()
+            data1 = cursor.fetchall()
             cursor.close()
-            doctor_Id=data1["DoctorID"]
-            print(doctor_Id)
-            
-            query3 ="select PM.PatientId as ID,PM.PatientName,PM.DoctorID as DoctorID,PM.PhoneNo,PM.Address,PM.BloodGroup,PM.DeviceMac,PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.hospital_Name from Patient_master as PM  where  Status<>'2' and DoctorID='" + str(doctor_Id) + "';"   
-            print(query3)
-            conn=Connection()
-            cursor = conn.cursor()
-            cursor.execute(query3)
-            data2 = cursor.fetchall()
-            cursor.close()
+            for dat in data1:
+                doctor_Id=dat["DoctorID"]
+                print(doctor_Id)
+
+                query3 ="select PM.PatientId as ID,PM.PatientName,PM.DoctorID as DoctorID,PM.PhoneNo,PM.Address,PM.BloodGroup,PM.DeviceMac,PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.hospital_Name from Patient_master as PM  where  Status<>'2' and DoctorID='" + str(doctor_Id) + "';"   
+                print(query3)
+                conn=Connection()
+                cursor = conn.cursor()
+                cursor.execute(query3)
+                data2 = cursor.fetchall()
+                cursor.close()
 
 
 
