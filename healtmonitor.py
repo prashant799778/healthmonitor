@@ -218,6 +218,7 @@ def allPatient():
         # cursor.execute(query)
         # data2= cursor.fetchall()
         
+        
         cursor.close()
         if data:
             return {"result":data,"status":"true"}
