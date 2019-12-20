@@ -129,8 +129,8 @@ def login8888():
             Nurse = cursor.fetchall()
             l=[]
             for i in Nurse:
-                doctor= i["DoctorName"]
-                l.append(doctor) 
+                i["DoctorName"]=[i["DoctorName"]]
+                
             
         query2 = "select  * from Patient_master where Status<>'2'  and Usertype_Id ='" + str(y3) + "'"
       
