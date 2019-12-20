@@ -415,7 +415,10 @@ def doctorLoginDashboard():
             # data3= cursor.fetchall()
             # i["hospital_name"]=data3[0]['hospital_name']
             total_patient+=int(i["patient_count"])
-        
+        for i in data:
+            if i["patient_count"]==0:
+                data.remove(i)
+            
         cursor.close()
         if data:
             # data.append({"Total_hospital":len(data)})
