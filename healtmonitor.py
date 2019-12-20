@@ -48,52 +48,6 @@ class JSONEncoder(json.JSONEncoder):
 
 # cursor = mysqlcon.cursor()
 
-@app.route('/Login', methods=['GET'])
-def login():
-    try:
-        # userid = request.args['userid']
-        password = request.args['password']
-        name = request.args['name']
-        
-               
-        #query="select userid,usertype from usermaster where userid = '" + userid + "' and password='" + password + "';"      
-        query ="select si.mobile as mobile,si.name as name,si.Usertype_Id as Usertype_Id,"
-        query=query+" si.Hospital_Id as Hospital_Id,us.Usertype,hm.hospital_name,si.UserID from signup as si INNER JOIN Usertype_master as us on us.ID=si.Usertype_Id"
-        query=query+" INNER JOIN Hospital_master AS hm on hm.ID=si.Hospital_Id  where name = '" + name + "' and password='" + password + "';"   
-        conn=Connection()
-        cursor = conn.cursor()
-        cursor.execute(query)
-        loginuser = cursor.fetchone()
-        print(loginuser["Usertype_Id"])
-        y= loginuser["Usertype_Id"]
-        cursor.close()
-        query2 = "select  * from Patient_master where Status<>'2'  and Usertype_Id ='" + str(y) + "'"
-        conn=Connection()
-        cursor = conn.cursor()
-        cursor.execute(query2)
-        ii= cursor.fetchone()
-        cursor.close()
-        if ii != None:
-            Count= 1
-        else:
-            Count=0
-
-        if loginuser:   
-            data={"status":"true","result":loginuser,"Patient Details":ii,"Count":Count}                      
-            return data
-        else:
-            data={"status":"false","result":"Login Failed"}
-            return data
-
-    except KeyError as e:
-        print("Exception---->" +str(e))        
-        output = {"result":"Input Keys are not Found","status":"false"}
-        return output 
-    
-    except Exception as e :
-        print("Exception---->" +str(e))           
-        output = {"result":"something went wrong","status":"false"}
-        return output
 
 @app.route('/login', methods=['GET'])
 def login8888():
@@ -157,6 +111,73 @@ def login8888():
         print("Exception---->" +str(e))           
         output = {"result":"something went wrong","status":"false"}
         return output
+
+
+@app.route('/login_pras', methods=['GET'])
+def login888111():
+    try:
+        # userid = request.args['userid']
+        password = request.args['password']
+        name = request.args['name']
+        
+               
+            
+        query ="select si.name as name,si.Usertype_Id as Usertype_Id,"
+        query=query+" si.Hospital_Id as Hospital_Id,us.Usertype as Usertype,si.UserID as UserID,si.Email as Email  from signup as si INNER JOIN Usertype_master as us on us.ID=si.Usertype_Id"
+        query=query+" INNER JOIN Hospital_master AS hm on hm.ID=si.Hospital_Id  where name = '" + name + "' and password='" + password + "' ;"   
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        loginuser = cursor.fetchone()
+       
+
+       
+        y= loginuser["Usertype"]
+        y3= loginuser["Usertype_Id"]
+        y2= loginuser["Hospital_Id"]
+        Nurse = ""
+        
+
+
+        if  y == 'Nurse':
+            query2 = "select  hm.hospital_name  as hospital_Name,hm.HubId as HubId,Dm.DoctorName as DoctorName,Dm.ID as DoctorID  from Hospital_master  as hm INNER JOIN DoctorMaster as Dm on Dm.HospitalId= hm.ID where  hm.ID ='" + str(y2) + "'"
+           
+            cursor = conn.cursor()
+            cursor.execute(query2)
+            Nurse = cursor.fetchall()
+            
+         #(select count(PatientId) from Patient_master)count   
+        query2 = "select PatientId,count(PatientId),PatientName  from Patient_master where Status<>'2'  and Usertype_Id ='" + str(y3) + "'"
+      
+        cursor = conn.cursor()
+        cursor.execute(query2)
+        ii= cursor.fetchall()
+        print(ii)
+        for i in ii:
+            Count=i["count"]
+
+        cursor.close()
+        
+        if loginuser:   
+            data={"status":"true","result":loginuser,"Nurse Details":Nurse,"Patient Details":ii,"Count":Count}                      
+            return data
+        else:
+            data={"status":"false","result":"Login Failed"}
+            return data
+
+    except KeyError as e:
+        print("Exception---->" +str(e))        
+        output = {"result":"Input Keys are not Found","status":"false"}
+        return output 
+    
+    except Exception as e :
+        print("Exception---->" +str(e))           
+        output = {"result":"something went wrong","status":"false"}
+        return output
+
+
+
+
 
 
 # @app.route('/login2', methods=['post'])
@@ -410,66 +431,6 @@ def doctorLoginDashboard():
 
 
 
-@app.route('/allPatientDetails', methods=['GET'])
-def allPatientPatientDetails():
-    try:
-        Usertype_Id=request.args['Usertype_Id']
-        Email = request.args['Email']
-       
-       
-        
-               
-        query="select Usertype from Usertype_master where ID = '" +Usertype_Id + "' ;"
-        print(query)
-        conn=Connection()
-        cursor = conn.cursor()
-        cursor.execute(query)
-        data = cursor.fetchone()
-        l=[]
-        
-        Usertype = data["Usertype"]
-        print(Usertype)
-
-        if Usertype == 'Doctor':
-            
-            Email = request.args['Email']
-            query2 ="select ID as DoctorID,Email as Email from DoctorMaster where Email ='" + str(Email) + "';"  
-            print(query2) 
-            
-            cursor = conn.cursor()
-            cursor.execute(query2)
-            data1 = cursor.fetchall()
-            l1=[ ]
-            for dat in data1:
-                doctor_Id=dat["DoctorID"]
-                print(doctor_Id)
-                query3 ="select PM.PatientId as ID,PM.PatientName,PM.DoctorID as DoctorID,PM.PhoneNo,PM.Address,PM.BloodGroup,PM.DeviceMac,PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.hospital_Name from Patient_master as PM  where  Status<>'2' and DoctorID='" + str(doctor_Id) + "';"   
-                print(query3)
-                
-                cursor = conn.cursor()
-                cursor.execute(query3)
-                data27 = cursor.fetchall()
-                print("1111111111111",data27)
-                l1.append(data27)
-                
-        cursor.close()
-        print(l1)
-        if l1:           
-            Data = {"Patient Details":l1,"status":"true"}
-            return Data
-        else:
-            data={"status":"false","result":"Login Failed"}
-            return data
-
-    except KeyError as e:
-        print("Exception---->" +str(e))        
-        output = {"result":"Input Keys are not Found","status":"false"}
-        return output 
-    
-    except Exception as e :
-        print("Exception---->" +str(e))           
-        output = {"result":"something went wrong","status":"false"}
-        return output 
 
 @app.route('/doctorPatientDetails', methods=['POST'])
 def doctorPatientDetails():
