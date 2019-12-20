@@ -117,29 +117,29 @@ def login8888():
         y= loginuser["Usertype"]
         y3= loginuser["Usertype_Id"]
         y2= loginuser["Hospital_Id"]
+        Nurse = ""
+        
 
 
         if  y == 'Nurse':
-            query2 = "select  hm.hospital_name  as hospital_Name,Dm.DoctorName as DoctorName  from Hospital_master  as hm INNER JOIN DoctorMaster as Dm on Dm.HospitalId= hm.ID where  hm.ID ='" + str(y2) + "'"
+            query2 = "select  hm.hospital_name  as hospital_Name,Dm.DoctorName as DoctorName,Dm.Email as Doctor_Email  from Hospital_master  as hm INNER JOIN DoctorMaster as Dm on Dm.HospitalId= hm.ID where  hm.ID ='" + str(y2) + "'"
             conn=Connection()
             cursor = conn.cursor()
             cursor.execute(query2)
-            Nurse= cursor.fetchall()
+            Nurse = cursor.fetchall()
             cursor.close()
 
-            query2 = "select  * from Patient_master where Status<>'2'  and Usertype_Id ='" + str(y3) + "'"
-            conn=Connection()
-            cursor = conn.cursor()
-            cursor.execute(query2)
-            ii= cursor.fetchone()
-            cursor.close()
-            
-            
-            if ii != None:
-                Count= 1
-            
-            else:
-                Count=0
+        query2 = "select  * from Patient_master where Status<>'2'  and Usertype_Id ='" + str(y3) + "'"
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query2)
+        ii= cursor.fetchone()
+        cursor.close()
+        if ii != None:
+            Count= 1
+        
+        else:
+            Count=0
 
         if loginuser:   
             data={"status":"true","result":loginuser,"Nurse Details":Nurse,"Patient Details":ii,"Count":Count}                      
@@ -387,7 +387,8 @@ def allPatientPatientDetails():
         cursor = conn.cursor()
         cursor.execute(query)
         data = cursor.fetchone()
-        cursor.close()
+        l=[]
+        
         Usertype = data["Usertype"]
         print(Usertype)
 
@@ -396,30 +397,95 @@ def allPatientPatientDetails():
             Email = request.args['Email']
             query2 ="select ID as DoctorID,Email as Email from DoctorMaster where Email ='" + str(Email) + "';"  
             print(query2) 
-            conn=Connection()
+            
             cursor = conn.cursor()
             cursor.execute(query2)
             data1 = cursor.fetchall()
-            cursor.close()
+            l1=[ ]
             for dat in data1:
                 doctor_Id=dat["DoctorID"]
                 print(doctor_Id)
                 query3 ="select PM.PatientId as ID,PM.PatientName,PM.DoctorID as DoctorID,PM.PhoneNo,PM.Address,PM.BloodGroup,PM.DeviceMac,PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.hospital_Name from Patient_master as PM  where  Status<>'2' and DoctorID='" + str(doctor_Id) + "';"   
                 print(query3)
-                conn=Connection()
+                
                 cursor = conn.cursor()
                 cursor.execute(query3)
                 data27 = cursor.fetchall()
                 print("1111111111111",data27)
-                cursor.close()
+                l1.append(data27)
                 
-        Finaldata=data27
-
-        if data:           
-            Data = {"Patient Details":Finaldata,"status":"true"}
+        cursor.close()
+        print(l1)
+        if l1:           
+            Data = {"Patient Details":l1,"status":"true"}
             return Data
         else:
             data={"status":"false","result":"Login Failed"}
+            return data
+
+    except KeyError as e:
+        print("Exception---->" +str(e))        
+        output = {"result":"Input Keys are not Found","status":"false"}
+        return output 
+    
+    except Exception as e :
+        print("Exception---->" +str(e))           
+        output = {"result":"something went wrong","status":"false"}
+        return output 
+
+@app.route('/doctorPatientDetails', methods=['POST'])
+def doctorPatientDetails():
+    try:
+        Usertype_Id=request.args['Usertype_Id']
+        Email = request.args['Email']
+       
+       
+        
+               
+        query="select Usertype from Usertype_master where ID = '" +Usertype_Id + "' ;"
+        print(query)
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data = cursor.fetchone()
+        l=[]
+        
+        Usertype = data["Usertype"]
+       
+
+        if Usertype == 'Doctor':
+            
+            Email = request.args['Email']
+            query2 ="select ID as DoctorID,Email as Email from DoctorMaster where Email ='" + str(Email) + "';"  
+            print(query2) 
+            
+            cursor = conn.cursor()
+            cursor.execute(query2)
+            data1 = cursor.fetchall()
+            l1=[ ]
+            for dat in data1:
+                doctor_Id=dat["DoctorID"]
+                l2=[]
+               
+                query3 ="select PM.PatientId as ID,PM.PatientName,PM.DoctorID as DoctorID,PM.PhoneNo,PM.Address,PM.BloodGroup,PM.DeviceMac,PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.hospital_Name from Patient_master as PM  where  Status<>'2' and DoctorID='" + str(doctor_Id) + "';"   
+                print(query3)
+                
+                cursor = conn.cursor()
+                cursor.execute(query3)
+                data27 = cursor.fetchall()
+
+                
+                if data27 != ():
+                    uu= data27
+                    l1.append(data27)
+                
+        cursor.close()
+       
+        if uu:           
+            Data = {"Patient Details":uu,"status":"true"}
+            return Data
+        else:
+            data={"status":"false","result":"Invalid Email "}
             return data
 
     except KeyError as e:
@@ -609,8 +675,8 @@ def hubMaster():
             
         cursor.close()
         if data:           
-            #Data = json.dumps(data, default=str)
-            return {"HubMaster":data}#,"counter":counter}
+            Data =  {"HubMaster":data,"status":"true"}
+            return Data
         else:
             output = {"result":"No Data Found","status":"false"}
             return output
