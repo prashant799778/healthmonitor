@@ -287,6 +287,7 @@ def doctorLoginHospital():
             cursor = conn.cursor()
             cursor.execute(query2)
             data2= cursor.fetchall()
+            print(data2)
             i["hospital_name"]=data2[0]['hospital_name']
             # query3="select hospital_name,HubId from Hospital_master where ID='"+str(i["HospitalId"])+"';"
             # cursor = conn.cursor()
