@@ -95,7 +95,7 @@ def login():
         output = {"result":"something went wrong","status":"false"}
         return output
 
-@app.route('/Login13333', methods=['GET'])
+@app.route('/login', methods=['GET'])
 def login8888():
     try:
         # userid = request.args['userid']
@@ -105,13 +105,14 @@ def login8888():
                
             
         query ="select si.name as name,si.Usertype_Id as Usertype_Id,"
-        query=query+" si.Hospital_Id as Hospital_Id,us.Usertype as Usertype ,si.UserID from signup as si INNER JOIN Usertype_master as us on us.ID=si.Usertype_Id"
+        query=query+" si.Hospital_Id as Hospital_Id,us.Usertype as Usertype  from signup as si INNER JOIN Usertype_master as us on us.ID=si.Usertype_Id"
         query=query+" INNER JOIN Hospital_master AS hm on hm.ID=si.Hospital_Id  where name = '" + name + "' and password='" + password + "' ;"   
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
         loginuser = cursor.fetchone()
         cursor.close()
+
        
         y= loginuser["Usertype"]
         y2= loginuser['Hospital_Id']
