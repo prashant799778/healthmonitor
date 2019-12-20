@@ -267,7 +267,7 @@ def doctorLoginHospital():
     try:
         json1=request.get_data() 
         data=json.loads(json1.decode("utf-8"))
-        query="select ID HospitalId from DoctorMaster where Email="+str(data[Email])
+        query="select ID, HospitalId from DoctorMaster where Email="+str(data[Email])
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
