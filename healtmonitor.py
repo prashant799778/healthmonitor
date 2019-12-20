@@ -117,6 +117,7 @@ def login8888():
         y= loginuser["Usertype"]
         y3= loginuser["Usertype_Id"]
         y2= loginuser["Hospital_Id"]
+        Nurse = ""
 
 
         if  y == 'Nurse':
@@ -124,7 +125,7 @@ def login8888():
             conn=Connection()
             cursor = conn.cursor()
             cursor.execute(query2)
-            Nurse= cursor.fetchall()
+            Nurse = cursor.fetchall()
             cursor.close()
 
             query2 = "select  * from Patient_master where Status<>'2'  and Usertype_Id ='" + str(y3) + "'"
@@ -401,7 +402,7 @@ def allPatientPatientDetails():
                 data27 = cursor.fetchall()
                 print("1111111111111",data27)
                 cursor.close()
-                
+
         Finaldata=data27
 
         if data:           
