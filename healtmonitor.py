@@ -262,6 +262,47 @@ def allPatient():
         return output
 
 
+@app.route('/doctorLoginHospital', methods=['post'])
+def doctorLoginHospital():
+    try:
+        json1=request.get_data()
+        print(json1)
+        data=json.loads(json1.decode("utf-8"))
+        print(data)
+        query="select ID, HospitalId from DoctorMaster where Email='"+(data["Email"])+"';"
+        print(query)
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data= cursor.fetchall()
+        for i in data["result"]:
+        
+            query1="select count(*) as patient_count where DoctorID='"+str(i["ID"])+"';"
+            cursor = conn.cursor()
+            cursor.execute(query)
+            data1= cursor.fetchall()
+            print(data1)
+            # i[]
+            # query2="select ID HospitalId from DoctorMaster where Email="+str(data[Email])
+            # cursor = conn.cursor()
+            # cursor.execute(query)
+            # data2= cursor.fetchall()
+        
+        
+        cursor.close()
+        if data:
+            return {"result":data,"status":"true"}
+        else:
+            return {"result":"No Record Found","status":"true"}
+    
+    except Exception as e :
+        print("Exception---->" +str(e))           
+        output = {"result":"something went wrong","status":"false"}
+        return output
+
+
+
+
 
 @app.route('/allPatientDetails', methods=['GET'])
 def allPatientPatientDetails():
