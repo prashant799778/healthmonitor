@@ -440,7 +440,8 @@ def doctorPatientDetails():
     try:
         Email = request.args['Email']
         query2 ="select ID as DoctorID,Email as Email from DoctorMaster where Email ='" + str(Email) + "';"  
-        print(query2) 
+        print(query2)
+        conn=Connection() 
         cursor = conn.cursor()
         cursor.execute(query2)
         data1 = cursor.fetchall()
