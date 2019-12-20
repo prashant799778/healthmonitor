@@ -1156,7 +1156,7 @@ def Patient_master():
         cursor.execute(query2)
         conn.commit()
         cursor.close()
-        query = "select PatientId,PatientName,DeviceMac,Usertype_Id from Patient_master  where enddate is NULL " 
+        query = "select PatientId,Bed_Number,hospital_Name,PatientName,DeviceMac,Usertype_Id from Patient_master  where enddate is NULL " 
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
