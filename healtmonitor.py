@@ -310,6 +310,56 @@ def doctorLoginHospital():
 
 
 
+@app.route('/doctorLoginDashboard', methods=['post'])
+def doctorLoginDashboard():
+    try:
+        json1=request.get_data()
+        print(json1)
+        data=json.loads(json1.decode("utf-8"))
+        print(data)
+        query="select ID, HospitalId from DoctorMaster where Email='"+(data["Email"])+"';"
+        print(query)
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data= cursor.fetchall()
+        print(data)
+        total_patient=0
+        for i in data:
+            print("11111111")
+            query1="select count(*) as patient_count from Patient_master where Status=0 and  DoctorID='"+str(i["ID"])+"';"
+            cursor = conn.cursor()
+            cursor.execute(query1)
+            data1= cursor.fetchall()
+            i["patient_count"]=data1[0]['patient_count']
+            query2="select hospital_name,HubId from Hospital_master where ID='"+str(i["HospitalId"])+"';"
+            cursor = conn.cursor()
+            cursor.execute(query2)
+            data2= cursor.fetchall()
+            print(data2)
+            i["hospital_name"]=data2[0]['hospital_name']
+            i["HubId"]=data2[0]['HubId']
+            # query3="select hospital_name,HubId from Hospital_master where ID='"+str(i["HospitalId"])+"';"
+            # cursor = conn.cursor()
+            # cursor.execute(query3)
+            # data3= cursor.fetchall()
+            # i["hospital_name"]=data3[0]['hospital_name']
+            total_patient+=int(i["patient_count"])
+        
+        cursor.close()
+        if data:
+            data.append({"Total_hospital":len(data)})
+            data.append(total_patient)
+            return {"result":data,"status":"true"}
+        else:
+            return {"result":"No Record Found","status":"true"}
+    
+    except Exception as e :
+        print("Exception---->" +str(e))           
+        output = {"result":"something went wrong","status":"false"}
+        return output
+
+
 
 @app.route('/allPatientDetails', methods=['GET'])
 def allPatientPatientDetails():
