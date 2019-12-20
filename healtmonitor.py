@@ -289,7 +289,7 @@ def doctorLoginHospital():
             data2= cursor.fetchall()
             print(data2)
             i["hospital_name"]=data2[0]['hospital_name']
-            i["HubId"]=data2[1]['HubId']
+            i["HubId"]=data2[0]['HubId']
             # query3="select hospital_name,HubId from Hospital_master where ID='"+str(i["HospitalId"])+"';"
             # cursor = conn.cursor()
             # cursor.execute(query3)
