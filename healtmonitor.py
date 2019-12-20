@@ -415,7 +415,7 @@ def allPatientPatientDetails():
 
         Finaldata=data27
 
-        if data:           
+        if Finaldata:           
             Data = {"Patient Details":Finaldata,"status":"true"}
             return Data
         else:
