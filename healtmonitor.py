@@ -283,12 +283,16 @@ def doctorLoginHospital():
             cursor.execute(query1)
             data1= cursor.fetchall()
             i["patient_count"]=data1[0]['patient_count']
-            query2="select hospital_name from Hospital_master where ID='"+str(i["HospitalId"])+"';"
+            query2="select hospital_name,HubId from Hospital_master where ID='"+str(i["HospitalId"])+"';"
             cursor = conn.cursor()
             cursor.execute(query2)
             data2= cursor.fetchall()
             i["hospital_name"]=data2[0]['hospital_name']
-        
+            # query3="select hospital_name,HubId from Hospital_master where ID='"+str(i["HospitalId"])+"';"
+            # cursor = conn.cursor()
+            # cursor.execute(query3)
+            # data3= cursor.fetchall()
+            # i["hospital_name"]=data3[0]['hospital_name']
         
         cursor.close()
         if data:
