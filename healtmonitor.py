@@ -262,20 +262,58 @@ def allPatient():
         return output
 
 
+@app.route('/nurseLogin', methods=['post'])
+def nurseLogin():
+    try:
+        json1=request.get_data()
+        
+        data=json.loads(json1.decode("utf-8"))
+        query1="select Hospital_Id from signup where  Email= '"+str(data["Email"])+"';"
+        
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query1)
+        data1= cursor.fetchall()
+        
+        for i in data1:
+            query2="select hospital_name,HubId from Hospital_master where  ID= '"+str(data1["Hospital_Id"])+"';"
+            
+            conn=Connection()
+            cursor = conn.cursor()
+            cursor.execute(query2)
+            data2= cursor.fetchall()
+            
+        
+        
+        cursor.close()
+        
+        if data1:
+            return {"result":data1,"status":"true"}
+        else:
+            return {"result":"No Record Found","status":"true"}
+    
+    except Exception as e :
+        print("Exception---->" +str(e))           
+        output = {"result":"something went wrong","status":"false"}
+        return output
+
+
+
+
 @app.route('/doctorLoginHospital', methods=['post'])
 def doctorLoginHospital():
     try:
         json1=request.get_data()
-        print(json1)
+        
         data=json.loads(json1.decode("utf-8"))
-        print(data)
+        
         query="select ID, HospitalId from DoctorMaster where Email='"+(data["Email"])+"';"
-        print(query)
+        
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
         data= cursor.fetchall()
-        print(data)
+        
         for i in data:
             print("11111111")
             query1="select count(*) as patient_count from Patient_master where Status=0 and  DoctorID='"+str(i["ID"])+"';"
@@ -283,13 +321,14 @@ def doctorLoginHospital():
             cursor.execute(query1)
             data1= cursor.fetchall()
             i["patient_count"]=data1[0]['patient_count']
-            query2="select hospital_name,HubId from Hospital_master where ID='"+str(i["HospitalId"])+"';"
+            query2="select hospital_name,HubId,Address from Hospital_master where ID='"+str(i["HospitalId"])+"';"
             cursor = conn.cursor()
             cursor.execute(query2)
             data2= cursor.fetchall()
             print(data2)
             i["hospital_name"]=data2[0]['hospital_name']
             i["HubId"]=data2[0]['HubId']
+            i["hospital_address"]=data2[0]['Address']
             # query3="select hospital_name,HubId from Hospital_master where ID='"+str(i["HospitalId"])+"';"
             # cursor = conn.cursor()
             # cursor.execute(query3)
@@ -358,9 +397,9 @@ def doctorLoginDashboard():
         
         cursor.close()
         if data:
-            data.append({"Total_hospital":len(data)})
-            data.append({"total_patient":total_patient})
-            return {"result":data,"status":"true"}
+            # data.append({"Total_hospital":len(data)})
+            # data.append({"total_patient":total_patient})
+            return {"result":data,"Total_hospital":len(data),"total_patient":total_patient,"status":"true"}
         else:
             return {"result":"No Record Found","status":"true"}
     
