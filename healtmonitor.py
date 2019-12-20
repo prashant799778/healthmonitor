@@ -282,7 +282,7 @@ def doctorLoginHospital():
             cursor = conn.cursor()
             cursor.execute(query1)
             data1= cursor.fetchall()
-            print(data1)
+            i["patient_count"]=data1[0]['patient_count']
             # i[]
             # query2="select ID HospitalId from DoctorMaster where Email="+str(data[Email])
             # cursor = conn.cursor()
