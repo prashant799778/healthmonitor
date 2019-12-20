@@ -464,6 +464,7 @@ def doctorPatientDetails():
             l1=[ ]
             for dat in data1:
                 doctor_Id=dat["DoctorID"]
+                l2=[]
                
                 query3 ="select PM.PatientId as ID,PM.PatientName,PM.DoctorID as DoctorID,PM.PhoneNo,PM.Address,PM.BloodGroup,PM.DeviceMac,PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.hospital_Name from Patient_master as PM  where  Status<>'2' and DoctorID='" + str(doctor_Id) + "';"   
                 print(query3)
@@ -471,13 +472,14 @@ def doctorPatientDetails():
                 cursor = conn.cursor()
                 cursor.execute(query3)
                 data27 = cursor.fetchall()
-               
-                l1.append(data27)
+
+                if data27 != ():
+                    Fin= data27
                 
         cursor.close()
        
         if l1:           
-            Data = {"Patient Details":l1,"status":"true"}
+            Data = {"Patient Details":Fin,"status":"true"}
             return Data
         else:
             data={"status":"false","result":"Invalid Email "}
