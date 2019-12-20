@@ -9,6 +9,11 @@ def on_connect(client, userdata, flags, rc):
     client.subscribe("#")
     
 
+def on_message(client, userdata, msg):    
+  data = msg.payload.decode('utf-8')
+#   data = json.loads(data) 
+  #client.publish("outTopic1","data111111")  
+  print(data)
 def on_message(client, userdata, msg):
 	try:
 		data = msg.payload.decode('utf-8')
