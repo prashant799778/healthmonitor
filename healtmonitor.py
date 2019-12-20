@@ -393,22 +393,17 @@ def allPatientPatientDetails():
             for dat in data1:
                 doctor_Id=dat["DoctorID"]
                 print(doctor_Id)
-
                 query3 ="select PM.PatientId as ID,PM.PatientName,PM.DoctorID as DoctorID,PM.PhoneNo,PM.Address,PM.BloodGroup,PM.DeviceMac,PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.hospital_Name from Patient_master as PM  where  Status<>'2' and DoctorID='" + str(doctor_Id) + "';"   
                 print(query3)
                 conn=Connection()
                 cursor = conn.cursor()
                 cursor.execute(query3)
-                data2 = cursor.fetchall()
+                data27 = cursor.fetchall()
+                print("1111111111111",data27)
                 cursor.close()
 
-
-
-
-        
-        
         if data:           
-            Data = {"Patient Details":data2,"status":"true"}
+            Data = {"Patient Details":data27,"status":"true"}
             return Data
         else:
             data={"status":"false","result":"Login Failed"}
