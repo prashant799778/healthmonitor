@@ -414,7 +414,7 @@ def allPatientPatientDetails():
                 
         cursor.close()
         Finaldata=data27
-
+        print("final data",Finaldata)
         if Finaldata:           
             Data = {"Patient Details":Finaldata,"status":"true"}
             return Data
