@@ -397,9 +397,9 @@ def doctorLoginDashboard():
         
         cursor.close()
         if data:
-            # data.append({"Total_hospital":len(data)})
-            # data.append({"total_patient":total_patient})
-            return {"result":data,{"Total_hospital":len(data)},{"total_patient":total_patient},"status":"true"}
+            data.append({"Total_hospital":len(data)})
+            data.append({"total_patient":total_patient})
+            return {"result":data,"status":"true"}
         else:
             return {"result":"No Record Found","status":"true"}
     
