@@ -275,13 +275,14 @@ def nurseLogin():
         cursor.execute(query1)
         data1= cursor.fetchall()
         
-        # query="select Hospital_Id from signup where  Email= '"+str(data["Email"])+"';"
-        
-        # conn=Connection()
-        # cursor = conn.cursor()
-        # cursor.execute(query)
-        # data= cursor.fetchall()
-        
+        for i in data1:
+            query2="select hospital_name,HubId from Hospital_master where  ID= '"+str(data1["Hospital_Id"])+"';"
+            
+            conn=Connection()
+            cursor = conn.cursor()
+            cursor.execute(query2)
+            data2= cursor.fetchall()
+            
         
         
         cursor.close()
@@ -396,9 +397,9 @@ def doctorLoginDashboard():
         
         cursor.close()
         if data:
-            data.append({"Total_hospital":len(data)})
-            data.append({"total_patient":total_patient})
-            return {"result":data,"status":"true"}
+            # data.append({"Total_hospital":len(data)})
+            # data.append({"total_patient":total_patient})
+            return {"result":data,{"Total_hospital":len(data)},{"total_patient":total_patient},"status":"true"}
         else:
             return {"result":"No Record Found","status":"true"}
     
