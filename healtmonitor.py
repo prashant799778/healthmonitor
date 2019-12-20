@@ -95,8 +95,8 @@ def login():
         output = {"result":"something went wrong","status":"false"}
         return output
 
-@app.route('/Login1', methods=['GET'])
-def login1():
+@app.route('/Login13333', methods=['GET'])
+def login8888():
     try:
         # userid = request.args['userid']
         password = request.args['password']
