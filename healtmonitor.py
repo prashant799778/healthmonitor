@@ -401,9 +401,11 @@ def allPatientPatientDetails():
                 data27 = cursor.fetchall()
                 print("1111111111111",data27)
                 cursor.close()
+                
+        Finaldata=data27
 
         if data:           
-            Data = {"Patient Details":data27,"status":"true"}
+            Data = {"Patient Details":Finaldata,"status":"true"}
             return Data
         else:
             data={"status":"false","result":"Login Failed"}
