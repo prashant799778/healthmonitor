@@ -286,8 +286,8 @@ def nurseLogin():
         
         cursor.close()
         
-        if data:
-            return {"result":data,"status":"true"}
+        if data1:
+            return {"result":data1,"status":"true"}
         else:
             return {"result":"No Record Found","status":"true"}
     
