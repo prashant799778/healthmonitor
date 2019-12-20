@@ -263,7 +263,7 @@ def allPatient():
 
 
 @app.route('/doctorLoginHospital', methods=['post'])
-def allPatient():
+def doctorLoginHospital():
     try:
         json1=request.get_data() 
         data=json.loads(json1.decode("utf-8"))
