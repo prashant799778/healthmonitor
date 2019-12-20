@@ -474,12 +474,12 @@ def doctorPatientDetails():
                 data27 = cursor.fetchall()
 
                 if data27 != ():
-                    Fin= data27
+                    l2.append(data27)
                 
         cursor.close()
        
         if l1:           
-            Data = {"Patient Details":Fin,"status":"true"}
+            Data = {"Patient Details":l2,"status":"true"}
             return Data
         else:
             data={"status":"false","result":"Invalid Email "}
