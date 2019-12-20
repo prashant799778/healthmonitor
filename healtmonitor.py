@@ -287,7 +287,7 @@ def doctorLoginHospital():
             cursor = conn.cursor()
             cursor.execute(query2)
             data2= cursor.fetchall()
-            i["hospital_name"]=data1[0]['hospital_name']
+            i["hospital_name"]=data2[0]['hospital_name']
         
         
         cursor.close()
