@@ -81,12 +81,12 @@ def login8888():
             cursor = conn.cursor()
             cursor.execute(query2)
             Nurse = cursor.fetchall()
-            for i in Nurse:
-                query3= "select ID as DoctorID from signup where name= '"+str(i["DoctorName"])+"';"
-                cursor = conn.cursor()
-                cursor.execute(query3)
-                data3= cursor.fetchall()
-                i["DoctorID"]=data3[0]["DoctorID"]
+            # for i in Nurse:
+                # query3= "select ID as DoctorID from signup where name= '"+str(i["DoctorName"])+"';"
+                # cursor = conn.cursor()
+                # cursor.execute(query3)
+                # data3= cursor.fetchall()
+                # i["DoctorID"]=data3[0]["DoctorID"]
                 
         query2 = "select  * from Patient_master where Status<>'2'  and Usertype_Id ='" + str(y3) + "'"
       
