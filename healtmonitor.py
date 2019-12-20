@@ -305,25 +305,45 @@ def doctorLoginHospital():
 
 
 
-@app.route('/Lj', methods=['GET'])
-def log():
+@app.route('/allPatientDetails', methods=['GET'])
+def allPatientPatientDetails():
     try:
         Usertype_Id=request.args['Usertype_Id']
+        Email =request.args['Email']
        
        
         
                
-        #query="select userid,usertype from usermaster where userid = '" + userid + "' and password='" + password + "';"      
-        query ="select UID  from signup as si INNER JOIN Usertype_master as us on us.ID=si.Usertype_Id  INNER JOIN Hospital_master1 AS hm on hm.Usermaster_Id=si.ID  where name = '" + name + "' and password='" + password + "';"   
+        query="select Usertype from Usertype_master where Usertype_Id = '" +Usertype_Id + "' ;"
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
-        data = cursor.fetchall()
-        data1=[]
-        for i in data:
-            data1.append(i["hospital_Name"])
+        data = cursor.fetchone()
+        cursor.close()
+        Usertype = data["Usertype"]
+        if Usertype == 'Doctor':
+           
+            query ="select ID as DoctorID,Email as Email from DoctorMaster where Email='" + Email + "';"   
+            conn=Connection()
+            cursor = conn.cursor()
+            cursor.execute(query)
+            data1 = cursor.fetchall()
+            cursor.close()
+            doctor_Id=data1["DoctorID"]
+            query ="select PM.PatientId as ID,PM.PatientName,PM.DoctorID as DoctorID,PM.PhoneNo,PM.Address,PM.BloodGroup,PM.DeviceMac,PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.hospital_Name from Patient_master as PM  where  status<>'2' and DoctorID='" + str(doctor_Id) + "';"   
+            conn=Connection()
+            cursor = conn.cursor()
+            cursor.execute(query)
+            data2 = cursor.fetchall()
+            cursor.close()
+
+
+
+
+        
+        
         if data:           
-            Data = {"Hospitals":data1,"status":"true"}
+            Data = {"Patient Details":data2,"status":"true"}
             return Data
         else:
             data={"status":"false","result":"Login Failed"}
