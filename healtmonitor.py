@@ -122,7 +122,7 @@ def login8888():
 
 
         if  y == 'Nurse':
-            query2 = "select  hm.hospital_name  as hospital_Name,Dm.DoctorName as DoctorName,Dm.Email as Doctor_Email  from Hospital_master  as hm INNER JOIN DoctorMaster as Dm on Dm.HospitalId= hm.ID where  hm.ID ='" + str(y2) + "'"
+            query2 = "select  hm.hospital_name  as hospital_Name,Dm.DoctorName as DoctorName,Dm.Email as Doctor_Email,Dm.ID as DoctorID  from Hospital_master  as hm INNER JOIN DoctorMaster as Dm on Dm.HospitalId= hm.ID where  hm.ID ='" + str(y2) + "'"
             conn=Connection()
             cursor = conn.cursor()
             cursor.execute(query2)
