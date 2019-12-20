@@ -105,7 +105,7 @@ def login8888():
                
             
         query ="select si.name as name,si.Usertype_Id as Usertype_Id,"
-        query=query+" si.Hospital_Id as Hospital_Id,us.Usertype as Usertype,si.Email as Email  from signup as si INNER JOIN Usertype_master as us on us.ID=si.Usertype_Id"
+        query=query+" si.Hospital_Id as Hospital_Id,us.Usertype as Usertype,si.UserID ad UserID,si.Email as Email  from signup as si INNER JOIN Usertype_master as us on us.ID=si.Usertype_Id"
         query=query+" INNER JOIN Hospital_master AS hm on hm.ID=si.Hospital_Id  where name = '" + name + "' and password='" + password + "' ;"   
         conn=Connection()
         cursor = conn.cursor()
@@ -262,40 +262,40 @@ def allPatient():
         return output
 
 
-@app.route('/nurseLogin', methods=['post'])
-def nurseLogin():
-    try:
-        json1=request.get_data()
+# @app.route('/nurseLogin', methods=['post'])
+# def nurseLogin():
+    # try:
+        # json1=request.get_data()
         
-        data=json.loads(json1.decode("utf-8"))
-        query1="select Hospital_Id from signup where  Email= '"+str(data["Email"])+"';"
+        # data=json.loads(json1.decode("utf-8"))
+        # query1="select Hospital_Id from signup where  Email= '"+str(data["Email"])+"';"
         
-        conn=Connection()
-        cursor = conn.cursor()
-        cursor.execute(query1)
-        data1= cursor.fetchall()
+        # conn=Connection()
+        # cursor = conn.cursor()
+        # cursor.execute(query1)
+        # data1= cursor.fetchall()
         
-        for i in data1:
-            query2="select hospital_name,HubId from Hospital_master where  ID= '"+str(data1["Hospital_Id"])+"';"
+        # for i in data1:
+            # query2="select hospital_name,HubId from Hospital_master where  ID= '"+str(data1["Hospital_Id"])+"';"
             
-            conn=Connection()
-            cursor = conn.cursor()
-            cursor.execute(query2)
-            data2= cursor.fetchall()
+            # conn=Connection()
+            # cursor = conn.cursor()
+            # cursor.execute(query2)
+            # data2= cursor.fetchall()
             
         
         
-        cursor.close()
+        # cursor.close()
         
-        if data1:
-            return {"result":data1,"status":"true"}
-        else:
-            return {"result":"No Record Found","status":"true"}
+        # if data1:
+            # return {"result":data1,"status":"true"}
+        # else:
+            # return {"result":"No Record Found","status":"true"}
     
-    except Exception as e :
-        print("Exception---->" +str(e))           
-        output = {"result":"something went wrong","status":"false"}
-        return output
+    # except Exception as e :
+        # print("Exception---->" +str(e))           
+        # output = {"result":"something went wrong","status":"false"}
+        # return output
 
 
 
