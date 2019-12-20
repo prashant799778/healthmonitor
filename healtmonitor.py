@@ -275,7 +275,7 @@ def doctorLoginHospital():
         cursor = conn.cursor()
         cursor.execute(query)
         data= cursor.fetchall()
-        
+        print(data)
         for i in data["result"]:
             print("11111111")
             query1="select count(*) as patient_count from Patient_master where DoctorID='"+str(i["ID"])+"';"
