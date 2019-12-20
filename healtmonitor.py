@@ -105,7 +105,7 @@ def login8888():
                
             
         query ="select si.name as name,si.Usertype_Id as Usertype_Id,"
-        query=query+" si.Hospital_Id as Hospital_Id,us.Usertype as Usertype,si.UserID ad UserID,si.Email as Email  from signup as si INNER JOIN Usertype_master as us on us.ID=si.Usertype_Id"
+        query=query+" si.Hospital_Id as Hospital_Id,us.Usertype as Usertype,si.UserID as UserID,si.Email as Email  from signup as si INNER JOIN Usertype_master as us on us.ID=si.Usertype_Id"
         query=query+" INNER JOIN Hospital_master AS hm on hm.ID=si.Hospital_Id  where name = '" + name + "' and password='" + password + "' ;"   
         conn=Connection()
         cursor = conn.cursor()
