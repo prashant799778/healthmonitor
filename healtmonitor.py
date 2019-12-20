@@ -111,7 +111,7 @@ def login8888():
         cursor = conn.cursor()
         cursor.execute(query)
         loginuser = cursor.fetchone()
-        cursor.close()
+       
 
        
         y= loginuser["Usertype"]
@@ -122,15 +122,15 @@ def login8888():
 
 
         if  y == 'Nurse':
-            query2 = "select  hm.hospital_name  as hospital_Name,Dm.DoctorName as DoctorName,Dm.Email as Doctor_Email  from Hospital_master  as hm INNER JOIN DoctorMaster as Dm on Dm.HospitalId= hm.ID where  hm.ID ='" + str(y2) + "'"
-            conn=Connection()
+            query2 = "select  hm.hospital_name  as hospital_Name,hm.HubId as HubId,Dm.DoctorName as DoctorName,Dm.ID as DoctorID  from Hospital_master  as hm INNER JOIN DoctorMaster as Dm on Dm.HospitalId= hm.ID where  hm.ID ='" + str(y2) + "'"
+           
             cursor = conn.cursor()
             cursor.execute(query2)
             Nurse = cursor.fetchall()
-            cursor.close()
-
+            
+            
         query2 = "select  * from Patient_master where Status<>'2'  and Usertype_Id ='" + str(y3) + "'"
-        conn=Connection()
+      
         cursor = conn.cursor()
         cursor.execute(query2)
         ii= cursor.fetchone()
