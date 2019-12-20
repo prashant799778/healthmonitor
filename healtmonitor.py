@@ -117,7 +117,7 @@ def login1():
         y2= loginuser['Hospital_Id']
 
 
-        if  y = 'Nurse':
+        if  y == 'Nurse':
             query2 = "select  hm.hospital_name  as hospital_Name,Dm.DoctorName as DoctorName  from Hospital_master  as hm INNER JOIN DoctorMaster as Dm on Dm.HospitalId= hm.ID where  hm.ID ='" + str(y2) + "'"
             conn=Connection()
             cursor = conn.cursor()
