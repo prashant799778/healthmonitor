@@ -48,52 +48,6 @@ class JSONEncoder(json.JSONEncoder):
 
 # cursor = mysqlcon.cursor()
 
-@app.route('/Login', methods=['GET'])
-def login():
-    try:
-        # userid = request.args['userid']
-        password = request.args['password']
-        name = request.args['name']
-        
-               
-        #query="select userid,usertype from usermaster where userid = '" + userid + "' and password='" + password + "';"      
-        query ="select si.mobile as mobile,si.name as name,si.Usertype_Id as Usertype_Id,"
-        query=query+" si.Hospital_Id as Hospital_Id,us.Usertype,hm.hospital_name,si.UserID from signup as si INNER JOIN Usertype_master as us on us.ID=si.Usertype_Id"
-        query=query+" INNER JOIN Hospital_master AS hm on hm.ID=si.Hospital_Id  where name = '" + name + "' and password='" + password + "';"   
-        conn=Connection()
-        cursor = conn.cursor()
-        cursor.execute(query)
-        loginuser = cursor.fetchone()
-        print(loginuser["Usertype_Id"])
-        y= loginuser["Usertype_Id"]
-        cursor.close()
-        query2 = "select  * from Patient_master where Status<>'2'  and Usertype_Id ='" + str(y) + "'"
-        conn=Connection()
-        cursor = conn.cursor()
-        cursor.execute(query2)
-        ii= cursor.fetchone()
-        cursor.close()
-        if ii != None:
-            Count= 1
-        else:
-            Count=0
-
-        if loginuser:   
-            data={"status":"true","result":loginuser,"Patient Details":ii,"Count":Count}                      
-            return data
-        else:
-            data={"status":"false","result":"Login Failed"}
-            return data
-
-    except KeyError as e:
-        print("Exception---->" +str(e))        
-        output = {"result":"Input Keys are not Found","status":"false"}
-        return output 
-    
-    except Exception as e :
-        print("Exception---->" +str(e))           
-        output = {"result":"something went wrong","status":"false"}
-        return output
 
 @app.route('/login', methods=['GET'])
 def login8888():
@@ -157,6 +111,7 @@ def login8888():
         print("Exception---->" +str(e))           
         output = {"result":"something went wrong","status":"false"}
         return output
+
 
 
 # @app.route('/login2', methods=['post'])
