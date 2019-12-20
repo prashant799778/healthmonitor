@@ -86,7 +86,7 @@ def login8888():
                 cursor = conn.cursor()
                 cursor.execute(query3)
                 data3= cursor.fetchall()
-                print(data3)
+                i["DoctorID"]=data3[0]["DoctorID"]
                 
         query2 = "select  * from Patient_master where Status<>'2'  and Usertype_Id ='" + str(y3) + "'"
       
