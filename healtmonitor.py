@@ -262,20 +262,57 @@ def allPatient():
         return output
 
 
+@app.route('/nurseLogin', methods=['post'])
+def nurseLogin():
+    try:
+        json1=request.get_data()
+        
+        data=json.loads(json1.decode("utf-8"))
+        query1="select Hospital_Id from signup where  Email= '"+str(data["Email"])+"';"
+        
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query1)
+        data1= cursor.fetchall()
+        
+        # query="select Hospital_Id from signup where  Email= '"+str(data["Email"])+"';"
+        
+        # conn=Connection()
+        # cursor = conn.cursor()
+        # cursor.execute(query)
+        # data= cursor.fetchall()
+        
+        
+        
+        cursor.close()
+        
+        if data:
+            return {"result":data,"status":"true"}
+        else:
+            return {"result":"No Record Found","status":"true"}
+    
+    except Exception as e :
+        print("Exception---->" +str(e))           
+        output = {"result":"something went wrong","status":"false"}
+        return output
+
+
+
+
 @app.route('/doctorLoginHospital', methods=['post'])
 def doctorLoginHospital():
     try:
         json1=request.get_data()
-        print(json1)
+        
         data=json.loads(json1.decode("utf-8"))
-        print(data)
+        
         query="select ID, HospitalId from DoctorMaster where Email='"+(data["Email"])+"';"
-        print(query)
+        
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
         data= cursor.fetchall()
-        print(data)
+        
         for i in data:
             print("11111111")
             query1="select count(*) as patient_count from Patient_master where Status=0 and  DoctorID='"+str(i["ID"])+"';"
