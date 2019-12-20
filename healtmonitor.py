@@ -275,9 +275,10 @@ def doctorLoginHospital():
         cursor = conn.cursor()
         cursor.execute(query)
         data= cursor.fetchall()
-        for i in data["result"]:
         
-            query1="select count(*) as patient_count where DoctorID='"+str(i["ID"])+"';"
+        for i in data["result"]:
+            print("11111111")
+            query1="select count(*) as patient_count from Patient_master where DoctorID='"+str(i["ID"])+"';"
             cursor = conn.cursor()
             cursor.execute(query)
             data1= cursor.fetchall()
@@ -1153,7 +1154,7 @@ def Patient_master():
         json1=request.get_data() 
         data=json.loads(json1.decode("utf-8"))  
         query2  = " insert into Patient_master(PatientName,DoctorID,DeviceMac,Bed_Number,Usertype_Id,hospital_Name,startdate,usercreate)"
-        query2 =query2 +" values("+'"'+str(data["PatientName"])+'"'+','+'"'+str(data["DoctorID"])+'"'+','+'"'+str(data["DeviceMac"])+'"'+','+'"'+str(data["Bed_Number"])+'"'+','+'"'+str(data["Usertype_Id"])+'"'+','+'"'+str(data["hospital_name"])+'"'+','+'"'+str(data["startdate"])+'"'+','+'"'+str(data["usercreate"])+'"'+''+");"
+        query2 =query2 +" values("+'"'+str(data["PatientName"])+'"'+','+'"'+str(data["DoctorID"])+'"'+','+'"'+str(data["DeviceMac"])+'"'+','+'"'+str(data["Bed_Number"])+'"'+','+'"'+str(data["Usertype_Id"])+'"'+','+'"'+str(data["hospital_Name"])+'"'+','+'"'+str(data["startdate"])+'"'+','+'"'+str(data["usercreate"])+'"'+''+");"
         print(query2)
         conn=Connection()
         cursor = conn.cursor()
