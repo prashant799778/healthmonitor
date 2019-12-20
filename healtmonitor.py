@@ -122,15 +122,12 @@ def login8888():
 
 
         if  y == 'Nurse':
-            query2 = "select  hm.hospital_name  as hospital_Name,hm.HubId as HubId,Dm.DoctorName as DoctorName,Dm.Email as Doctor_Email,Dm.ID as DoctorID  from Hospital_master  as hm INNER JOIN DoctorMaster as Dm on Dm.HospitalId= hm.ID where  hm.ID ='" + str(y2) + "'"
+            query2 = "select  hm.hospital_name  as hospital_Name,hm.HubId as HubId,Dm.DoctorName as DoctorName,Dm.ID as DoctorID  from Hospital_master  as hm INNER JOIN DoctorMaster as Dm on Dm.HospitalId= hm.ID where  hm.ID ='" + str(y2) + "'"
            
             cursor = conn.cursor()
             cursor.execute(query2)
             Nurse = cursor.fetchall()
-            l=[]
-            for i in Nurse:
-                i["DoctorName"]=[i["DoctorName"]]
-                
+            
             
         query2 = "select  * from Patient_master where Status<>'2'  and Usertype_Id ='" + str(y3) + "'"
       
@@ -145,7 +142,7 @@ def login8888():
             Count=0
 
         if loginuser:   
-            data={"status":"true","result":loginuser,"Nurse Details":Nurse,"Patient Details":ii,"Count":Count,"DoctorName":l}                      
+            data={"status":"true","result":loginuser,"Nurse Details":Nurse,"Patient Details":ii,"Count":Count}                      
             return data
         else:
             data={"status":"false","result":"Login Failed"}
