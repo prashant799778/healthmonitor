@@ -309,7 +309,7 @@ def doctorLoginHospital():
 def allPatientPatientDetails():
     try:
         Usertype_Id=request.args['Usertype_Id']
-        Email =request.args['Email']
+        Email = request.args['Email']
        
        
         
@@ -325,8 +325,9 @@ def allPatientPatientDetails():
         print(Usertype)
 
         if Usertype == 'Doctor':
-           
-            query2 ="select ID as DoctorID,Email as Email from DoctorMaster where Email ='" + Email + "';"   
+            
+            Email = request.args['Email']
+            query2 ="select ID as DoctorID,Email as Email from DoctorMaster where Email ='" + str(Email) + "';"   
             conn=Connection()
             cursor = conn.cursor()
             cursor.execute(query2)
