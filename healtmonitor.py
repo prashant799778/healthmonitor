@@ -344,13 +344,15 @@ def allPatientPatientDetails():
                 doctor_Id=dat["DoctorID"]
                 print(doctor_Id)
 
-                query3 ="select PM.PatientId as ID,PM.PatientName,PM.DoctorID as DoctorID,PM.PhoneNo,PM.Address,PM.BloodGroup,PM.DeviceMac,PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.hospital_Name from Patient_master as PM  where  Status<>'2' and DoctorID='" + str(doctor_Id) + "';"   
-                print(query3)
-                conn=Connection()
-                cursor = conn.cursor()
-                cursor.execute(query3)
-                data2 = cursor.fetchall()
-                cursor.close()
+           
+            query3 ="select PM.PatientId as ID,PM.PatientName,PM.DoctorID as DoctorID,PM.PhoneNo,PM.Address,PM.BloodGroup,PM.DeviceMac,PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.hospital_Name from Patient_master as PM  where  Status<>'2' and DoctorID='" + str(doctor_Id) + "';"   
+            print(query3)
+            conn=Connection()
+            cursor = conn.cursor()
+            cursor.execute(query3)
+            data2 = cursor.fetchall()
+            print(data2)
+            cursor.close()
 
 
 
