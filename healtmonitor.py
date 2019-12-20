@@ -146,8 +146,8 @@ def login888111():
             cursor.execute(query2)
             Nurse = cursor.fetchall()
             
-         #(select count(PatientId) from Patient_master)count   
-        query2 = "select PatientId,count(PatientId),PatientName  from Patient_master where Status<>'2'  and Usertype_Id ='" + str(y3) + "'"
+            
+        query2 = "select (select count(PatientId) from Patient_master  where Status<>'2' and Usertype_Id ='" + str(y3) + "' )count,PatientId,PatientName,Bed_Number,BloodGroup  from Patient_master where Status<>'2'  and Usertype_Id ='" + str(y3) + "'"
       
         cursor = conn.cursor()
         cursor.execute(query2)
@@ -1286,8 +1286,8 @@ def Patient_master():
          
         json1=request.get_data() 
         data=json.loads(json1.decode("utf-8"))  
-        query2  = " insert into Patient_master(PatientName,DoctorID,DeviceMac,Bed_Number,Usertype_Id,hospital_Name,startdate,usercreate)"
-        query2 =query2 +" values("+'"'+str(data["PatientName"])+'"'+','+'"'+str(data["DoctorID"])+'"'+','+'"'+str(data["DeviceMac"])+'"'+','+'"'+str(data["Bed_Number"])+'"'+','+'"'+str(data["Usertype_Id"])+'"'+','+'"'+str(data["hospital_Name"])+'"'+','+'"'+str(data["startdate"])+'"'+','+'"'+str(data["usercreate"])+'"'+''+");"
+        query2  = " insert into Patient_master(PatientName,DoctorID,Address,BloodGroup,Email,DeviceMac,Bed_Number,Usertype_Id,hospital_Name,startdate,usercreate)"
+        query2 =query2 +" values("+'"'+str(data["PatientName"])+'"'+','+'"'+str(data["DoctorID"])+'"'+','+'"'+str(data["Address"])+'"'+','+'"'+str(data["BloodGroup"])+'"'+','+'"'+str(data["Email"])+'"'+','+'"'+str(data["DeviceMac"])+'"'+','+'"'+str(data["Bed_Number"])+'"'+','+'"'+str(data["Usertype_Id"])+'"'+','+'"'+str(data["hospital_Name"])+'"'+','+'"'+str(data["startdate"])+'"'+','+'"'+str(data["usercreate"])+'"'+''+");"
         print(query2)
         conn=Connection()
         cursor = conn.cursor()
