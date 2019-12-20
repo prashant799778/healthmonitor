@@ -332,6 +332,16 @@ def doctorLoginDashboard():
             cursor.execute(query1)
             data1= cursor.fetchall()
             i["patient_count"]=data1[0]['patient_count']
+            
+            query3="select PatientId,PatientName from Patient_master where Status=0 and  DoctorID='"+str(i["ID"])+"';"
+            cursor = conn.cursor()
+            cursor.execute(query3)
+            data3= cursor.fetchall()
+            print(data3)
+            #i["patient_count"]=data1[0]['patient_count']
+            
+            
+            
             query2="select hospital_name,HubId from Hospital_master where ID='"+str(i["HospitalId"])+"';"
             cursor = conn.cursor()
             cursor.execute(query2)
