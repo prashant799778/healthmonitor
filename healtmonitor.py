@@ -147,7 +147,7 @@ def login888111():
             Nurse = cursor.fetchall()
             
             
-        query2 = "select  count(*) as count,PatientId,PatientName  from Patient_master where Status<>'2'  and Usertype_Id ='" + str(y3) + "'"
+        query2 = "select  count(PatientName) as count,PatientId,PatientName  from Patient_master where Status<>'2'  and Usertype_Id ='" + str(y3) + "'"
       
         cursor = conn.cursor()
         cursor.execute(query2)
