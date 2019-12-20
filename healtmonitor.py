@@ -565,7 +565,7 @@ def doctorDropdown():
         json1=request.get_data() 
         data=json.loads(json1.decode("utf-8"))
         # query = " select distinct userid,username,usertype from usermaster where usertype <> 'Admin';"
-        query = "select ID,DoctorName where HospitalId ='"+str(data["hospitalId"])+"';"
+        query = "select ID,DoctorName from DoctorMaster where HospitalId ='"+str(data["hospitalId"])+"';"
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
