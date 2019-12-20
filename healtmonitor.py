@@ -674,8 +674,8 @@ def hubMaster():
             
         cursor.close()
         if data:           
-            #Data = json.dumps(data, default=str)
-            return {"HubMaster":data}#,"counter":counter}
+            Data =  {"HubMaster":data,"status":"true"}
+            return Data
         else:
             output = {"result":"No Data Found","status":"false"}
             return output
