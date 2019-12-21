@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import  {DetailStyled}  from './DetailStyled'
 import Grabh from "../Report/grabh"
-
+import backImg from "./image/backimg.png" 
 class Detail extends React.Component{
 
     constructor(){
@@ -79,7 +79,12 @@ return(<DetailStyled>
               <div className="uppr-box-card">
                 <h2 className="hading-up">home - <span>Patient Details</span></h2>
               </div>
-              <div className="wrap-patient">
+              <div className="wrap-patient" style={{backgroundImage: 'url('+backImg+')',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+      backgroundSize: 'cover',
+      
+      }} >
                 <div className="patient-detail">
                   <div className="patient-info border-bottomm">
                   <h2 className="patient-hading" onClick={()=>{this.props.goBack()}} style={{cursor: 'pointer'}}><font color="green">Go Back</font></h2>

@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { LoginStyled } from "./LoginStyled";
+import backImg from "./image/backimg.png"
 
 class Login extends React.Component {
   constructor() {
@@ -243,6 +244,7 @@ class Login extends React.Component {
     }
     return (
       <LoginStyled>
+        <template>
         <div className="container">
           {/* Outer Row */}
           <div className="row justify-content-center">
@@ -465,7 +467,7 @@ class Login extends React.Component {
                               >
                                 Back To Sign In
                               </button>
-                              <button className="btn btn-primary btn-user next-cl">
+                              <button  className="btn btn-primary btn-user next-cl">
                                 Submit
                               </button>
                             </div>
@@ -541,6 +543,56 @@ class Login extends React.Component {
             </div>
           </div>
         </div>
+        </template>
+        <div className="sign-container" style={{backgroundImage: 'url('+backImg+')',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+      backgroundSize: 'cover',
+      
+      }}>
+        <div className="container">
+          <div className="row">
+            <div className="col-md-12 col-sm-12">
+              <div className="innr-container-sign">
+                <div className="rwap-box">
+                  <div className="in-box">
+                    <h3 className="logo-title"><img src={require("./image/web_icon.png")}></img></h3>
+                    <h2 className="upper-title">sign in</h2>
+                    <div className="form-container">
+                      <div className="form-group">
+                        <input  onChange={e => {
+                                  this.setState({ name: e.target.value });
+                                }}
+                                value={this.state.name} type="text" className="form-control" placeholder="username" />
+                      </div>
+                      <div className="form-group">
+                        <input onChange={e => {
+                                  this.setState({ pass: e.target.value });
+                                }}
+                                value={this.state.pass} type="password" className="form-control" placeholder="password" />
+                      </div>
+
+                              <font color="red">{this.state.err}</font>
+                      <div className="check-info">
+                        <div className="chiller_cb">
+                          <input id="myCheckbox1" type="checkbox" />
+                          <label htmlFor="myCheckbox1">Remember me</label>
+                          <span />
+                        </div>
+
+                      </div>
+                      <button   onClick={this.loginHandler} type="button" className="btn btn-cust btn-lg btn-block">log In</button>
+                      <div className="forget-pass">
+                      <img src={require("./image/padlock.svg")}/><span>forget your password ?</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       </LoginStyled>
     );
   }
