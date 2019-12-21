@@ -9,7 +9,7 @@ class grabh extends React.Component {
   lastDate = 0;
    data = []
     TICKINTERVAL = 86400000
-   XAXISRANGE = 7776000
+   XAXISRANGE = 777600000
     getDayWiseTimeSeries=(baseval, count, yrange)=> {
         var i = 0;
         while (i < count) {
