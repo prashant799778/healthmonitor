@@ -726,7 +726,7 @@ def hospitalMaster():
         conn.commit()
         cursor.close()
         print(data)
-        if data != None:
+        if data != ():
             return {"result":data,"status":"True"}
         else:
             json1=request.get_data() 
