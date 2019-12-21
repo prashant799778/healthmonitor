@@ -1,0 +1,165 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.monitor"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="25"
+8-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="29" />
+9-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+11-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:5:5-79
+11-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:5:22-76
+12    <uses-permission android:name="android.permission.BLUETOOTH" />
+12-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:6:5-68
+12-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:6:22-65
+13    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+13-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:7:5-74
+13-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:7:22-71
+14    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+14-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:8:5-81
+14-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:8:22-78
+15    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+15-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:9:5-76
+15-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:9:22-73
+16
+17    <uses-feature
+17-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:11:5-13:35
+18        android:name="android.hardware.usb.host"
+18-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:12:9-49
+19        android:required="true" /> <!-- For Android 6.0+ -->
+19-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:13:9-32
+20    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+20-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:14:5-79
+20-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:14:22-76
+21    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+21-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:15:5-81
+21-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:15:22-78
+22    <uses-permission android:name="android.permission.CAMERA" />
+22-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:16:5-65
+22-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:16:22-62
+23    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+23-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:14:5-79
+23-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:14:22-76
+24    <uses-permission android:name="android.permission.INTERNET" />
+24-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:18:5-67
+24-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:18:22-64
+25    <uses-permission android:name="android.permission.WAKE_LOCK" />
+25-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:19:5-68
+25-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:19:22-65
+26    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+26-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:20:5-75
+26-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:20:22-72
+27
+28    <application
+28-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:22:5-65:19
+29        android:name="com.monitor.IcuApplication"
+29-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:23:9-39
+30        android:allowBackup="true"
+30-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:24:9-35
+31        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+31-->[androidx.core:core:1.1.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\7f6c41cc2a14c0fbaa8d0166c17dc544\core-1.1.0\AndroidManifest.xml:24:18-86
+32        android:debuggable="true"
+33        android:icon="@mipmap/app_icon"
+33-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:25:9-40
+34        android:label="@string/app_name"
+34-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:26:9-41
+35        android:networkSecurityConfig="@xml/network_security_config"
+35-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:27:9-69
+36        android:roundIcon="@mipmap/app_icon"
+36-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:28:9-45
+37        android:supportsRtl="true"
+37-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:29:9-35
+38        android:theme="@style/AppTheme" >
+38-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:30:9-40
+39        <activity
+39-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:31:9-32:62
+40            android:name="com.monitor.activities.Main2Activity"
+40-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:31:19-59
+41            android:screenOrientation="landscape" />
+41-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:32:13-50
+42        <activity android:name="com.monitor.activities.UserDashboard" />
+42-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:33:9-62
+42-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:33:19-59
+43        <activity
+43-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:34:9-36:53
+44            android:name="com.monitor.activities.UserDisplayActivity"
+44-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:35:13-59
+45            android:screenOrientation="landscape" />
+45-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:36:13-50
+46
+47        <service android:name="org.eclipse.paho.android.service.MqttService" />
+47-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:38:9-88
+47-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:38:18-77
+48
+49        <uses-library
+49-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:40:9-42:40
+50            android:name="org.apache.http.legacy"
+50-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:41:13-50
+51            android:required="false" />
+51-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:42:13-37
+52
+53        <activity android:name="com.monitor.activities.BaseActivity" />
+53-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:44:9-61
+53-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:44:19-58
+54        <activity android:name="com.monitor.activities.StatusActivity" />
+54-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:45:9-63
+54-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:45:19-60
+55        <activity android:name="com.monitor.activities.StartActivity" />
+55-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:46:9-62
+55-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:46:19-59
+56        <activity
+56-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:47:9-49:52
+57            android:name="com.monitor.activities.ConfigActivity"
+57-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:48:13-54
+58            android:screenOrientation="portrait" />
+58-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:49:13-49
+59        <activity android:name="com.monitor.activities.DetailActivity" />
+59-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:50:9-63
+59-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:50:19-60
+60        <activity android:name="com.monitor.activities.SignupActivity" />
+60-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:51:9-63
+60-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:51:19-60
+61        <activity android:name="com.monitor.activities.LoginActivity" />
+61-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:52:9-62
+61-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:52:19-59
+62        <activity
+62-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:53:9-61:20
+63            android:name="com.monitor.activities.SplashActivity"
+63-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:54:13-54
+64            android:screenOrientation="portrait" >
+64-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:55:13-49
+65            <intent-filter>
+65-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:56:13-60:29
+66                <action android:name="android.intent.action.MAIN" />
+66-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:57:17-69
+66-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:57:25-66
+67
+68                <category android:name="android.intent.category.LAUNCHER" />
+68-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:59:17-77
+68-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:59:27-74
+69            </intent-filter>
+70        </activity>
+71        <activity
+71-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:62:9-64:53
+72            android:name="com.monitor.activities.MainActivity"
+72-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:63:13-52
+73            android:screenOrientation="landscape" />
+73-->C:\Users\fourbrick\Desktop\21-12\Monitor\app\src\main\AndroidManifest.xml:64:13-50
+74
+75        <provider
+75-->[androidx.lifecycle:lifecycle-process:2.0.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\7309f8169174f11110ad56440ca8f929\lifecycle-process-2.0.0\AndroidManifest.xml:23:9-27:43
+76            android:name="androidx.lifecycle.ProcessLifecycleOwnerInitializer"
+76-->[androidx.lifecycle:lifecycle-process:2.0.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\7309f8169174f11110ad56440ca8f929\lifecycle-process-2.0.0\AndroidManifest.xml:24:13-79
+77            android:authorities="com.monitor.lifecycle-process"
+77-->[androidx.lifecycle:lifecycle-process:2.0.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\7309f8169174f11110ad56440ca8f929\lifecycle-process-2.0.0\AndroidManifest.xml:25:13-69
+78            android:exported="false"
+78-->[androidx.lifecycle:lifecycle-process:2.0.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\7309f8169174f11110ad56440ca8f929\lifecycle-process-2.0.0\AndroidManifest.xml:26:13-37
+79            android:multiprocess="true" />
+79-->[androidx.lifecycle:lifecycle-process:2.0.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\7309f8169174f11110ad56440ca8f929\lifecycle-process-2.0.0\AndroidManifest.xml:27:13-40
+80    </application>
+81
+82</manifest>
