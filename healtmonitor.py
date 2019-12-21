@@ -107,6 +107,15 @@ def login8888():
             data={"status":"false","result":"Login Failed"}
             return data
 
+
+            
+        if y == 'admin':
+            data={ "status":"false","result":"Please login through Authenticated user"}
+            return data
+
+
+
+
     except KeyError as e:
         print("Exception---->" +str(e))        
         output = {"result":"Input Keys are not Found","status":"false"}
