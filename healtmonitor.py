@@ -715,7 +715,7 @@ def hospitalMaster():
             query1 = "select ID,hospital_name from Hospital_master"
         else:
             data=json.loads(json1.decode("utf-8")) 
-            query1 = "select ID,hospital_name from Hospital_master where HubId = "+str(data["ID"])+" ;"
+            query1 = "select ID,hospital_name from Hospital_master where HubId = "+str(data["HubId"])+" ;"
         
             
         print(query1)
@@ -732,13 +732,14 @@ def hospitalMaster():
             json1=request.get_data() 
             data=json.loads(json1.decode("utf-8"))  
             print("77787878")
-            query2  = " insert into Hospital_master (hospital_name,City,State,usercreate)"
-            query2 = query2 +" values("+'"'+str(data["hospital_name"])+'"'+','+'"'+str(data["City"])+'"'+','+'"'+str(data["State"])+'"'+','+'"'+str(data["usercreate"])+'"'+' '+");"
+            query2  = " insert into Hospital_master (hospital_name,HubId,Address)"
+            query2 = query2 +" values("+'"'+str(data["hospital_name"])+'"'+','+'"'+str(data["HubId"])+'"'+','+'"'+str(data["Address"])+'"'+' '+");"
             print(query2)
             conn=Connection()
             cursor = conn.cursor()
             cursor.execute(query2)
             conn.commit()
+            cursor.close()
             output={"output": "Hospital Name Added succesfully","status":"true"}
     except Exception as e :
         print("Exception---->" + str(e))    
@@ -994,7 +995,7 @@ def insertHospitalMaster():
         cursor.close()
         print(data)
         
-        if data==():           
+        if data ==():           
             query2  = " insert into Hospital_master (HubId,hospital_name,Address)"
             query2 = query2 +" values("+'"'+str(int(data["HubId"]))+'"'+','+'"'+str(data["hospital_name"])+'"'+','+'"'+str(data["Address"])+'"'+''+");"
             print(query2)
