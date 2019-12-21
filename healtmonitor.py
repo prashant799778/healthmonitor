@@ -152,13 +152,18 @@ def login888111():
             Nurse = cursor.fetchall()
             
             
-        query2 = "select (select count(PatientId) from Patient_master  where Status<>'2' and Usertype_Id ='" + str(y3) + "' )count,PatientId,PatientName,Bed_Number,BloodGroup  from Patient_master where Status<>'2'  and Usertype_Id ='" + str(y3) + "'"
+        query2 = "select  *  from Patient_master where Status<>'2'  and Usertype_Id ='" + str(y3) + "'"
       
         cursor = conn.cursor()
         cursor.execute(query2)
         ii= cursor.fetchall()
         print(ii)
-        for i in ii:
+
+        query3= " select count(PatientId)  as count from Patient_master  where Status<>'2' and Usertype_Id ='" + str(y3) + "' "
+        cursor = conn.cursor()
+        cursor.execute(query3)
+        iii= cursor.fetchall()
+        for i in iii:
             Count=i["count"]
 
         cursor.close()
@@ -398,7 +403,7 @@ def doctorLoginDashboard():
             data1= cursor.fetchall()
             i["patient_count"]=data1[0]['patient_count']
             
-            query3="select PatientId,PatientName from Patient_master where Status=0 and  DoctorID='"+str(i["ID"])+"';"
+            query3="select  *  from Patient_master where Status=0 and  DoctorID='"+str(i["ID"])+"';"
             cursor = conn.cursor()
             cursor.execute(query3)
             data3= cursor.fetchall()
@@ -990,8 +995,8 @@ def insertHospitalMaster():
         print(data)
         
         if data==():           
-            query2  = " insert into Hospital_master (HubId,hospital_name)"
-            query2 = query2 +" values('"+str(data1["HubId"])+"','"+str(data1["hospital_name"])+"');"
+            query2  = " insert into Hospital_master (HubId,hospital_name,Address)"
+            query2 = query2 +" values("+'"'+str(data["HubId"])+'"'+','+'"'+str(data["hospital_name"])+'"'+','+'"'+str(data["Address"])+'"'+''+");"
             print(query2)
             conn=Connection()
             cursor = conn.cursor()
