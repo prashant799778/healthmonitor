@@ -66,7 +66,7 @@ currentinnerItem:"",
   //   }
   // })}
   // client.on('connect', ()=> {
-  // if( Array.isArray(this.state.HospitalList)){
+   if( Array.isArray(this.state.HospitalList)){
 
 
     this.state.HospitalList.map((item,i)=>{
@@ -84,7 +84,7 @@ currentinnerItem:"",
 
 
     })
-  // }
+   }
   
   })
  

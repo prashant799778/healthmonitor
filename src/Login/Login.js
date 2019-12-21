@@ -37,7 +37,7 @@ class Login extends React.Component {
             let res = response.data.result;
 
             localStorage.setItem("login", "yes");
-            localStorage.setItem("user_type", res.usertype);
+            localStorage.setItem("user_type", res.Usertype);
             localStorage.setItem("user_id", res.UserID);
             localStorage.setItem("user_type_id", res.Usertype_Id);
             localStorage.setItem("user", res.name);
