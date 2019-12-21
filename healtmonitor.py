@@ -159,7 +159,7 @@ def login888111():
         ii= cursor.fetchall()
         print(ii)
 
-        query3= " select count(PatientId)  as count from Patient_master  where Status<>'2' and Usertype_Id ='" + str(y3) + "' ,"
+        query3= " select count(PatientId)  as count from Patient_master  where Status<>'2' and Usertype_Id ='" + str(y3) + "' "
         cursor = conn.cursor()
         cursor.execute(query3)
         iii= cursor.fetchall()
