@@ -1644,23 +1644,23 @@ def adminPannel():
        
         conn=Connection()
         cursor = conn.cursor()
-        query1 = " select  count(*) from HubMaster;"
+        query1 = " select  count(*) as count from HubMaster;"
         print(query1)
         cursor.execute(query1)
         data1 = cursor.fetchall()
         
         
-        query2 = " select  count(*) from Hospital_master;"
+        query2 = " select  count(*) as count from Hospital_master;"
         print(query2)
         cursor.execute(query2)
         data2 = cursor.fetchall()
         
-        query3 = " select  count(*) from DoctorMaster;"
+        query3 = " select  count(*) as count from DoctorMaster;"
         print(query3)
         cursor.execute(query3)
         data3 = cursor.fetchall()
         
-        query3 = " select  count(*) from Patient_master;"
+        query3 = " select  count(*) as count from Patient_master;"
         print(query3)
         cursor.execute(query3)
         data4 = cursor.fetchall()
