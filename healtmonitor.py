@@ -1632,6 +1632,47 @@ def update_Patient_Vital_master():
         return output
 
 
+#tital hub total hospital total doctor total doctor
+@app.route('/adminPannel', methods=['POST'])
+def adminPannel():
+    try:
+       
+        conn=Connection()
+        cursor = conn.cursor()
+        query1 = " select  count(*) from HubMaster;"
+        print(query1)
+        cursor.execute(query1)
+        data1 = cursor.fetchall()
+        
+        
+        query2 = " select  count(*) from Hospital_master;"
+        print(query2)
+        cursor.execute(query2)
+        data2 = cursor.fetchall()
+        
+        query3 = " select  count(*) from DoctorMaster;"
+        print(query3)
+        cursor.execute(query3)
+        data3 = cursor.fetchall()
+        
+        query3 = " select  count(*) from Patient_master;"
+        print(query3)
+        cursor.execute(query3)
+        data3 = cursor.fetchall()
+        
+        data4={"totalHub":data1,"totalHospital":data2,"totalDoctor":data3,"totalPatient":data4}
+        cursor.close()
+        output = {"result":data4,"status":"true"}
+        return output  
+    except KeyError :
+        print("Key Exception---->")   
+        output = {"result":"key error","status":"false"}
+        return output  
+
+    except Exception as e :
+        print("Exception---->" +str(e))    
+        output = {"result":"somthing went wrong","status":"false"}
+        return output
 
 
 
