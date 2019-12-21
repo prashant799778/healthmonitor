@@ -987,17 +987,20 @@ def insertHospitalMaster():
         json1=request.get_data() 
         data1=json.loads(json1.decode("utf-8"))  
         
-        query = "select * from Hospital_master where HubId='"+str(int(data1["HubId"]))+ "' and hospital_name='"+str(data1["hospital_name"])+"';"
+        query = "select * from Hospital_master where HubId='"+str(data1["HubId"])+ "' and hospital_name='"+str(data1["hospital_name"])+"';"
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
         data = cursor.fetchall()
         cursor.close()
         print(data)
+       
+        if data==(): 
         
-        if data ==():           
+            print("1111111")
+
             query2  = " insert into Hospital_master (HubId,hospital_name,Address)"
-            query2 = query2 +" values("+'"'+str(int(data["HubId"]))+'"'+','+'"'+str(data["hospital_name"])+'"'+','+'"'+str(data["Address"])+'"'+''+");"
+            query2 = query2 +" values('"+str(data1["HubId"])+"','"+str(data1["hospital_name"])+"','"+str(data1["Address"])+"');"
             print(query2)
             conn=Connection()
             cursor = conn.cursor()
