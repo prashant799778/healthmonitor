@@ -5,7 +5,7 @@ import {withRouter} from 'react-router-dom';
 import dashimg from '../../image/dashboard.svg';
 
 import { Link } from "react-router-dom";
-
+import logo from '../../image/web_icon.png';
 class SideBar extends React.Component{
 
   constructor(){
@@ -97,7 +97,7 @@ return(
       <div className="sidebar-brand-icon">
       </div>
       <div className="sidebar-brand-text mx-3">
-        <img src="https://www.medadvisor.com.au/Content/landing/logo-small.png"></img>
+      <img src={logo}></img>  
         
       </div>
     </a>
