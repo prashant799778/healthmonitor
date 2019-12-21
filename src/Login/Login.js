@@ -45,7 +45,7 @@ class Login extends React.Component {
             localStorage.setItem("email", res.Email);
             console.log("login",response)
             this.setState({ isLogin: true, err: "" }, () => {
-              if (res.usertype === "admin") {
+              if (res.Usertype === "admin") {
                 this.props.history.push("/dash");
               } else {
                 this.props.history.push("/home");
