@@ -108,11 +108,8 @@ def login8888():
             return data
 
 
-            
-        if y == 'admin':
-            data={ "status":"false","result":"Please login through Authenticated user"}
-            return data
 
+        
 
 
 
