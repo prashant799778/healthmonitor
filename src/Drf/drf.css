@@ -1,0 +1,20 @@
+/* .rcs_right {
+    position: absolute;
+    right: 0px;
+    top: 70% !important;
+    transform: translateY(-50%);
+} */
+/* .rcs_left {
+    position: absolute;
+    right: 0px;
+    top: % !important;
+    transform: translateY(-50%);
+} */
+.itemWrapper {
+    margin: 0px 10px !important;
+}
+rcs_sliderSet {
+    width: 93% !important;
+    margin-left: 5% !important;
+}
+

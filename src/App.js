@@ -1,64 +1,203 @@
-import React, { Component } from 'react'
-// import io from 'socket.io/node_modules/socket.io-client'
-import io from 'socket.io-client';
+import React, { useState, useEffect } from "react";
 
+import logo from "./logo.svg";
+import "./App.css";
+import Dash from "./Dash/Dash";
+import User from "./User/User";
 
+import Drf from "./Drf/Drf";
+import Mom from "./Drf/Mom";
+import Drfs from "./Drfs/Drf";
+import Login from "./Login/Login";
+import Try from "./Login/Try";
+import Role from "./Role/roles";
+import Home from "./Report/home";
+import { Router, Route, Link } from "react-router-dom";
+import history from "./History";
+import Smart from "./Drf/Smart";
+import DealStatus from "./dealStatus/dealStatus";
+import spin from "../src/Drf/spinner.svg";
+import NewDetail from "./Add_new/NewDetail";
+import New2 from "./Add_new/new2";
+import Hospital from './User/Hospital'
+import HospitalList from "./Report/hospitalList";
+import PatientList from "./Report/patientList";
+import Hub  from "./User/hub"
+import Doctor  from "./User/doctor"
+import  UserDash  from "./Report/UserDashnew";
+import  Uhospital from "./User/DHospital"
+import  Upatient from "./User/DPatient"
+class App extends React.Component {
+  constructor(props) {
+    super(props);
 
-var socketIOClient = io('http://159.65.146.25:5054');
-
-
- class App extends Component {
-  constructor(){
-    super()
     this.state = {
-msg:""
+      isOpen: true,
+      loading: true
+    };
+  }
+
+  open = () => {
+    this.setState({ isOpen: !this.state.isOpen });
+  };
+  componentDidMount() {
+    this.setState({ loading: false });
+  }
+
+  render() {
+    if (this.state.loading) {
+      return (
+        <div>
+          <img src={spin} alt="" />
+        </div>
+      );
+    } else {
+      return (
+        <div className="App">
+          <Router history={history}>
+            <Route exact path="/" component={Login} />
+           
+           
+
+
+ <Route
+            path="/hubs"
+              render={props => (
+                <Hub isOpen={this.state.isOpen} Open={this.open} />
+              )}    />
+         
+
+            <Route
+              path="/user"
+              render={props => (
+                <User isOpen={this.state.isOpen} Open={this.open} />
+              )}
+            />
+            {/* <Route path='/status'
+              render={(props) => (
+                <DealStatus  isOpen={this.state.isOpen}  Open={this.open} />
+              )}
+              /> */}
+
+
+<Route
+            path="/doctor"
+              render={props => (
+                <Doctor isOpen={this.state.isOpen} Open={this.open} />
+              )}    />
+            <Route
+              path="/drf"
+              render={props => (
+                <Drf isOpen={this.state.isOpen} Open={this.open} />
+              )}
+            />
+
+            <Route
+              path="/drfs"
+              render={props => (
+                <Drfs isOpen={this.state.isOpen} Open={this.open} />
+              )}
+            />
+
+            <Route
+              path="/role"
+              render={props => (
+                <Role isOpen={this.state.isOpen} Open={this.open} />
+              )}
+            />
+            <Route
+              path="/dash"
+              render={props => (
+                <Home isOpen={this.state.isOpen} Open={this.open} />
+              )}
+            />
+            <Route
+              path="/home"
+              render={props => (
+                <UserDash isOpen={this.state.isOpen} Open={this.open} />
+              )}
+            />
+<Route
+              path="/uhospital"
+              render={props => (
+                <Uhospital isOpen={this.state.isOpen} Open={this.open} />
+              )}
+            />
+            <Route
+              path="/upatient"
+              render={props => (
+                <Upatient isOpen={this.state.isOpen} Open={this.open} />
+              )}
+            />
+            <Route
+              path="/hospital"
+              render={props => (
+                <Hospital isOpen={this.state.isOpen} Open={this.open} />
+              )}
+            />
+
+            <Route
+              path="/patient"
+              render={props => (
+                <User isOpen={this.state.isOpen} Open={this.open} />
+              )}
+            />
+
+            <Route
+              path="/smart"
+              render={props => (
+                <Smart isOpen={this.state.isOpen} Open={this.open} />
+              )}
+            />
+            {/* <Route path='/add_new_fields'   render={(props) => (
+                <NewDetail  isOpen={this.state.isOpen}  Open={this.open} />
+              )}  /> */}
+            <Route
+              path="/add2"
+              render={props => (
+                <New2 isOpen={this.state.isOpen} Open={this.open} />
+              )}
+            />
+          </Router>
+        </div>
+      );
     }
   }
-handleMessageChange=(e)=>{
-this.setState({msg:e.target.value},()=>{
-  //console.log(this.state.msg)
-})
 }
 
- 
+// const App = () => {
+//    const [timestamp, setTimestamp] = useState('no time stamp yet')
+//   const [data, setData] = useState("");
+//   const [connected, setConnected] = useState(false);
 
-sendMessageClicked=(e) =>{
-    e.preventDefault();
-    let message = this.state.msg;
-    //console.log("222",message)
-    var data = {
-        message:message,
-        time: Date.now()
-    }
-   //console.log(JSON.stringify(data))
-   
-    //socketIOClient.send(JSON.stringify(data));
-    //console.log(JSON.stringify(data),socketIOClient.emit("message",JSON.stringify(data)))
-    socketIOClient.emit("message",JSON.stringify(data));
-}
+//   subscribeToTimer(1, (err, timestamp) => setTimestamp(timestamp));
 
-componentDidMount() {
-    socketIOClient.on('message',function(result){
-      console.log('on message');
-      console.log(result);
-    })
-    
-    socketIOClient.on('newmessage',function(result){
-      console.log('on new message');
-      console.log(result);
-    })
-}
+//   useEffect(() => {
+//     socket.on("new message", data => {
+//       // this.setState({ data, connected: true })
+//       setData(data);
+//       setConnected(true);
+//     });
 
-render(){
-    return(
-        <div>
-            <form >
-                <textarea onChange={this.handleMessageChange} name="originalMessage" value={this.state.msg}></textarea>
-                <input type="button" value="Submit"  onClick={this.sendMessageClicked}/>
-            </form>
-        </div>
-    );
-}
-}
+//     socket.on("disconnect", () => {
+//       // this.setState({ connected: false })
+//       setConnected(false);
+//     });
+
+//     socket.on("reconnect", () => {
+//       // this.setState({ connected: true })
+//       setConnected(true);
+//     });
+//   });
+
+//   return (
+//     <div className="App">
+//       {/* <p className="App-intro"> */}
+//       <h1>{data}</h1>
+//       <p>This is the timer value: {timestamp}</p>
+//       {/* </p> */}
+//     </div>
+//   );
+// };
 
 export default App;
