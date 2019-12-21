@@ -152,13 +152,18 @@ def login888111():
             Nurse = cursor.fetchall()
             
             
-        query2 = "select (select count(PatientId) from Patient_master  where Status<>'2' and Usertype_Id ='" + str(y3) + "' )count,PatientId,PatientName,Bed_Number,BloodGroup  from Patient_master where Status<>'2'  and Usertype_Id ='" + str(y3) + "'"
+        query2 = "select  *  from Patient_master where Status<>'2'  and Usertype_Id ='" + str(y3) + "'"
       
         cursor = conn.cursor()
         cursor.execute(query2)
         ii= cursor.fetchall()
         print(ii)
-        for i in ii:
+
+        query3= " select count(PatientId)  as count from Patient_master  where Status<>'2' and Usertype_Id ='" + str(y3) + "' ,"
+        cursor = conn.cursor()
+        cursor.execute(query3)
+        iii= cursor.fetchall()
+        for i in iii:
             Count=i["count"]
 
         cursor.close()
