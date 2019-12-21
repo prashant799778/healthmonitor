@@ -42,40 +42,18 @@ class Detail extends React.Component{
          
             let jsn=   JSON.parse(message.toString())
 
-            this.setState({
-             
-                temp:jsn.TEMP,
-                 id:jsn.PatientId,
-                 user:jsn.usercreate,
-                 resp:jsn.RESP
-  
-  
-             },()=>{
 
-                if(jsn && jsn.NIBP && jsn.NIBP["High"] &&  jsn.NIBP["High"]!=""  && jsn.NIBP["Low"] &&  jsn.NIBP["Low"]!=""){
-                    this.setState({
-                        temp:jsn.TEMP,
-                       nibp:jsn.NIBP,
-                    })
-                    }
-                    if(jsn && jsn.SPO2 && jsn.SPO2['SPO2']  &&  jsn.SPO2['SPO2']!=""  && jsn.SPO2['Pulse Rate'] &&  jsn.SPO2['Pulse Rate']!=""){
-                       this.setState({
-                        temp:jsn.TEMP,
-                           spo:jsn.SPO2,
-                       })
-                       }
-               
-                       if(jsn && jsn.ECG && jsn.ECG["Heart Rate"]  &&  jsn.ECG["Heart Rate"]!=""  && jsn.ECG['Resp Rate'] &&  jsn.ECG['Resp Rate']!=""){
-                           this.setState({
-                            temp:jsn.TEMP,
-                               ecg:jsn.ECG,
-                           })
-                           }
-             })
-            
-            
+           this.setState({
+              ecg:jsn.ECG,
+              spo:jsn.SPO2,
+              nibp:jsn.NIBP,
+              temp:jsn.TEMP,
+               id:jsn.PatientId,
+               user:jsn.usercreate,
+               resp:jsn.RESP
 
-         
+
+           })
           
           
           }
