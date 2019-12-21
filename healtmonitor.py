@@ -1125,7 +1125,6 @@ def addDoctor():
         data = cursor.fetchall()
         cursor.close()
         print(data)
-        
         if data==():           
             query2  = " insert into DoctorMaster (HospitalId,DoctorName,Email,Gender)"
             query2 = query2 +" values('"+str(data1["HospitalId"])+"','"+str(data1["DoctorName"])+"','"+str(data1["Email"])+"','"+str(data1["Gender"])+"');"
@@ -1143,6 +1142,62 @@ def addDoctor():
         print("Exception---->" + str(e))    
         output = {"result":"something went wrong","status":"false"}
         return output
+
+
+@app.route('/addDoctor1', methods=['POST'])
+def addDoctor1():
+    try:
+        json1=request.get_data() 
+        data1=json.loads(json1.decode("utf-8"))  
+        
+        query = "select * from DoctorMaster where Email='"+str(data1["Email"])+ "';"
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data = cursor.fetchall()
+        cursor.close()
+        print(data)
+
+        query = "select * from signup where Email='"+str(data1["Email"])+ "';"
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data2 = cursor.fetchall()
+        cursor.close()
+        print(data)
+        
+        if data and data2 ==():           
+            query2  = " insert into DoctorMaster (HospitalId,DoctorName,Email,Gender)"
+            query2 = query2 +" values('"+str(data1["HospitalId"])+"','"+str(data1["DoctorName"])+"','"+str(data1["Email"])+"','"+str(data1["Gender"])+"');"
+            print(query2)
+            conn=Connection()
+            cursor = conn.cursor()
+            cursor.execute(query2)
+            conn.commit()
+
+            
+              
+            query3  = " insert into  signup (Hospital_Id,name,Usertype_Id,Email,password)"
+            query3 = query3 +" values('"+str(data1["HospitalId"])+"','"+str(data1["DoctorName"])+"','"+str('2')+"','"+str(data1["Email"])+"','"+str(data1["password"])+"');"
+            print(query2)
+            conn=Connection()
+            cursor = conn.cursor()
+            cursor.execute(query3)
+            conn.commit()
+            cursor.close()
+            output = {"result":"data inserted successfully","status":"true"}
+            return output
+            
+
+        else:
+            output = {"result":"record already Exist","status":"true"}
+            return output 
+    except Exception as e :
+        print("Exception---->" + str(e))    
+        output = {"result":"something went wrong","status":"false"}
+        return output
+
+
 
 
 
