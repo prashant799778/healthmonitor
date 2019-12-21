@@ -995,8 +995,8 @@ def insertHospitalMaster():
         print(data)
         
         if data==():           
-            query2  = " insert into Hospital_master (HubId,hospital_name,City,Address)"
-            query2 = query2 +" values("+'"'+str(data["HubId"])+'"'+','+'"'+str(data["hospital_name"])+'"'+','+'"'+str(data["City"])+'"'+','+'"'+str(data["Address"])+'"'+''+");"
+            query2  = " insert into Hospital_master (HubId,hospital_name,Address)"
+            query2 = query2 +" values("+'"'+str(data["HubId"])+'"'+','+'"'+str(data["hospital_name"])+'"'+','+'"'+str(data["Address"])+'"'+''+");"
             print(query2)
             conn=Connection()
             cursor = conn.cursor()
