@@ -1663,11 +1663,11 @@ def adminPannel():
         query3 = " select  count(*) from Patient_master;"
         print(query3)
         cursor.execute(query3)
-        data3 = cursor.fetchall()
+        data4 = cursor.fetchall()
         
-        data4={"totalHub":data1,"totalHospital":data2,"totalDoctor":data3,"totalPatient":data4}
+        data5={"totalHub":data1,"totalHospital":data2,"totalDoctor":data3,"totalPatient":data4}
         cursor.close()
-        output = {"result":data4,"status":"true"}
+        output = {"result":data5,"status":"true"}
         return output  
     except KeyError :
         print("Key Exception---->")   
