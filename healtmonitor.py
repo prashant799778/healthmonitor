@@ -1169,7 +1169,7 @@ def addDoctor1():
         json1=request.get_data() 
         data1=json.loads(json1.decode("utf-8"))  
         
-        query = "select * from DoctorMaster where Email='"+str(data1["Email"])+ "';"
+        query = "select * from DoctorMaster where Email='"+str(data1["Email"])+ "' and HospitalId='"+str(data1["HospitalId"])+"';"
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
@@ -1177,7 +1177,7 @@ def addDoctor1():
         cursor.close()
         print(data)
 
-        query = "select * from signup where Email='"+str(data1["Email"])+ "';"
+        query = "select * from signup where Email='"+str(data1["Email"])+ "' and Hospital_Id= '"+str(data1["HospitalId"])+"';"
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
