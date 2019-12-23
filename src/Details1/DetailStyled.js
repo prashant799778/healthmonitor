@@ -723,6 +723,13 @@ export const DetailStyled = styled.div`
       padding: 20px;
       background: #25293bd4;
   }
+
+  .patient-box-1:first-child {
+    width: 83%;
+    overflow: hidden;
+}
+
+  
   .innr-patient {
       padding: 20px;
   }
