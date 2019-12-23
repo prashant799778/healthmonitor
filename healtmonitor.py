@@ -1769,6 +1769,8 @@ def doctorProfile():
         query=query+"Hospital_master HSM ,HubMaster HM,DoctorMaster DM where HSM.HubId=HM.ID and DoctorMaster.HospitalId=HSM.ID" 
         query=query+"and DM.Email='"+str(data["Email"])+"';"
         print(query)
+        conn=Connection()
+        cursor = conn.cursor()
         cursor.execute(query)
         data1 = cursor.fetchall()
         cursor.close()
