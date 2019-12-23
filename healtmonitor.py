@@ -1254,7 +1254,7 @@ def addDoctor1():
 
             UserId=uuid.uuid1()
             UserId=UserId.hex 
-            if  data1["password"] not in data1:
+            if  "password" not in data1:
                 data1["password"]= '1234'
                 query3  = " insert into  signup (Hospital_Id,name,Usertype_Id,Email,password,Gender,UserID)"
                 query3 = query3 +" values('"+str(data1["HospitalId"])+"','"+str(data1["DoctorName"])+"','"+str('2')+"','"+str(data1["Email"])+"','"+str(data1['1234'])+"','"+str(data1["Gender"])+"','"+str(UserId)+"');"
