@@ -465,15 +465,18 @@ def HospitalPatientDetails():
         json1=request.get_data()
         print(json1)
         data=json.loads(json1.decode("utf-8"))
-        query2 ="select ID as DoctorID  from DoctorMaster where HospitalId='"+str(data["HospitalId"])+"' and  Email ='"+str(data["Email"])+"';"  
+        query2 ="select Dm.ID as DoctorID ,Dm.Email as Email ,hm.HubId as HubId ,Hm.HubName as HubName,Dm.HospitalId as HospitalId from DoctorMaster as Dm INNER JOIN Hospital_master as hm on hm.ID=Dm.HospitalId  INNER JOIN HubMaster as Hm on Hm.ID= hm.HubId where HospitalId='"+str(data["HospitalId"])+"' and  Email ='"+str(data["Email"])+"';"  
         print(query2)
         conn=Connection() 
         cursor = conn.cursor()
         cursor.execute(query2)
         data1 = cursor.fetchall()
+        print(data1)
         l1=[ ]
         for dat in data1:
             doctor_Id=dat["DoctorID"]
+            Hubname= dat["HubName"]
+
             l2=[]
             query3 ="select PM.PatientId as ID,PM.PatientName from Patient_master as PM  where  Status<>'2' and DoctorID='" + str(doctor_Id) + "'  ORDER BY  ID DESC;;"   
             print(query3)
@@ -482,11 +485,13 @@ def HospitalPatientDetails():
             data27 = cursor.fetchall()
             if data27 != ():
                 uu= data27
-                l1.append(data27)
+                for data8 in uu:
+                    data8.update({"HubName":Hubname})
+                l1.append(data8)
         cursor.close()
        
         if uu:           
-            Data = {"result":uu,"status":"true"}
+            Data = {"result":l1,"status":"true"}
             return Data
         else:
             data={"status":"false","result":"Invalid Email "}
