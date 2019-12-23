@@ -1186,7 +1186,8 @@ def addDoctor1():
         cursor.close()
         print(data2)
         
-        if data and data2 ==():           
+        if data==() and data2 ==():  
+            print("1111111111111111111111111111")
             query2  = " insert into DoctorMaster (HospitalId,DoctorName,Email,Gender)"
             query2 = query2 +" values('"+str(data1["HospitalId"])+"','"+str(data1["DoctorName"])+"','"+str(data1["Email"])+"','"+str(data1["Gender"])+"');"
             print(query2)
@@ -1207,7 +1208,7 @@ def addDoctor1():
 
 
             query3  = " insert into  signup (Hospital_Id,name,Usertype_Id,Email,password,Gender,UserID)"
-            query3 = query3 +" values('"+str(data1["HospitalId"])+"','"+str(data1["DoctorName"])+"','"+str('2')+"','"+str(data1["Email"])+"','"+str(data1["password"])+"','"+str(data1["Gender"])+"','"+str(data1["UserID"])+"');"
+            query3 = query3 +" values('"+str(data1["HospitalId"])+"','"+str(data1["DoctorName"])+"','"+str('2')+"','"+str(data1["Email"])+"','"+str(data1["password"])+"','"+str(data1["Gender"])+"','"+str(UserId)+"');"
             print(query3)
             conn=Connection()
             cursor = conn.cursor()
