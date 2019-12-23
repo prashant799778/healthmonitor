@@ -479,7 +479,7 @@ def HospitalPatientDetails():
             Hub_Id=dat["HubId"]
 
             l2=[]
-            query3 ="select PM.PatientId as ID,PM.PatientName from Patient_master as PM  where  Status<>'2' and DoctorID='" + str(doctor_Id) + "'  ORDER BY  ID DESC;;"   
+            query3 ="select PM.PatientId as ID,PM.PatientName from Patient_master as PM  where  Status=0 and DoctorID='" + str(doctor_Id) + "'  ORDER BY  ID DESC;"   
             print(query3)
             cursor = conn.cursor()
             cursor.execute(query3)
@@ -489,7 +489,7 @@ def HospitalPatientDetails():
                 for data8 in uu:
                     data8.update({"HubName":Hubname})
                     data8.update({"HubId":Hub_Id})
-                l1.append(data8)
+            l1.append(data8)
         cursor.close()
        
         if uu:           
