@@ -226,7 +226,7 @@ def allHospital():
         cursor.execute(query)
         data= cursor.fetchall()
         
-        #return {"data":data}
+        
         for i in data:
             query1="select count(*) as count from DoctorMaster where HospitalId='"+str(i["ID"])+"';" 
             
@@ -297,42 +297,6 @@ def allPatient():
         print("Exception---->" +str(e))           
         output = {"result":"something went wrong","status":"false"}
         return output
-
-
-# @app.route('/nurseLogin', methods=['post'])
-# def nurseLogin():
-    # try:
-        # json1=request.get_data()
-        
-        # data=json.loads(json1.decode("utf-8"))
-        # query1="select Hospital_Id from signup where  Email= '"+str(data["Email"])+"';"
-        
-        # conn=Connection()
-        # cursor = conn.cursor()
-        # cursor.execute(query1)
-        # data1= cursor.fetchall()
-        
-        # for i in data1:
-            # query2="select hospital_name,HubId from Hospital_master where  ID= '"+str(data1["Hospital_Id"])+"';"
-            
-            # conn=Connection()
-            # cursor = conn.cursor()
-            # cursor.execute(query2)
-            # data2= cursor.fetchall()
-            
-        
-        
-        # cursor.close()
-        
-        # if data1:
-            # return {"result":data1,"status":"true"}
-        # else:
-            # return {"result":"No Record Found","status":"true"}
-    
-    # except Exception as e :
-        # print("Exception---->" +str(e))           
-        # output = {"result":"something went wrong","status":"false"}
-        # return output
 
 
 
@@ -479,6 +443,50 @@ def doctorPatientDetails():
        
         if uu:           
             Data = {"Patient Details":uu,"status":"true"}
+            return Data
+        else:
+            data={"status":"false","result":"Invalid Email "}
+            return data
+
+    except KeyError as e:
+        print("Exception---->" +str(e))        
+        output = {"result":"Input Keys are not Found","status":"false"}
+        return output 
+    
+    except Exception as e :
+        print("Exception---->" +str(e))           
+        output = {"result":"something went wrong","status":"false"}
+        return output 
+
+#after Doctor login ,in hospital section click on hospital eye show the hospital and patient information pass arguments  hospitalId  and doctor Email
+@app.route('/HospitalPatientDetails', methods=['POST'])
+def HospitalPatientDetails():
+    try:
+        json1=request.get_data()
+        print(json1)
+        data=json.loads(json1.decode("utf-8"))
+        query2 ="select ID as DoctorID  from DoctorMaster where hospitalId='"+str(data["hospitalId"])+"' and  Email ='"+str(data["Email"])+"';"  
+        print(query2)
+        conn=Connection() 
+        cursor = conn.cursor()
+        cursor.execute(query2)
+        data1 = cursor.fetchall()
+        l1=[ ]
+        for dat in data1:
+            doctor_Id=dat["DoctorID"]
+            l2=[]
+            query3 ="select PM.PatientId as ID,PM.PatientName from Patient_master as PM  where  Status<>'2' and DoctorID='" + str(doctor_Id) + "'  ORDER BY  ID DESC;;"   
+            print(query3)
+            cursor = conn.cursor()
+            cursor.execute(query3)
+            data27 = cursor.fetchall()
+            if data27 != ():
+                uu= data27
+                l1.append(data27)
+        cursor.close()
+       
+        if uu:           
+            Data = {"result":uu,"status":"true"}
             return Data
         else:
             data={"status":"false","result":"Invalid Email "}
@@ -1644,7 +1652,7 @@ def Patient_Vital_master_select():
 
 
         
-        query = "select  PVM.Patient_Id as PatientId,Pm.PatientName as PatientName,PVM.RESP,PVM.ECG,PVM.SPO2,PVM.NIBP,PVM.TEMP,Pm.DeviceMac AS DeviceMac,Pm.hospital_Name from Patient_Vital_master as PVM INNER JOIN Patient_master as Pm ON Pm.PatientId= PVM.Patient_Id  " +y
+        query = "select  PVM.Patient_Id as PatientId,Pm.PatientName as PatientName,PVM.RESP,PVM.ECG,PVM.SPO2,PVM.NIBP,PVM.TEMP,Pm.DeviceMac AS DeviceMac,Pm.hospital_Name,Pm.Gender as Gender,Pm.age AS Age,Pm.roomNumber as roomNumber from Patient_Vital_master as PVM INNER JOIN Patient_master as Pm ON Pm.PatientId= PVM.Patient_Id  " +y
         print(query)
         conn=Connection()
         cursor = conn.cursor()
