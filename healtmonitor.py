@@ -216,6 +216,7 @@ def login888111():
         # print("Exception---->" +str(e))           
         # output = {"result":"something went wrong","status":"false"}
         # return output
+
 @app.route('/allHospital', methods=['post'])
 def allHospital():
     try:
@@ -1294,6 +1295,14 @@ def updateDoctormaster():
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query1)
+        conn.commit()
+        cursor.close()
+
+        query2 = " update signup set  Hospital_Id ='" + str(data["HospitalId"]) + "' , name ='" + str(data["DoctorName"]) + "' ,Usertype_Id ='2' ,Email = '" + str(data["Email"]) + "'  ,  Gender ='" + str(data["Gender"]) + "' ,password='" + str(data["password"]) + "'  ,Status ='1'  where ID = '" + str(data["ID"])+ "';"
+        print(query2)
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query2)
         conn.commit()
         cursor.close()
         output = {"result":"Updated Successfully","status":"true"}
