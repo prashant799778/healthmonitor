@@ -1185,7 +1185,7 @@ def addDoctor1():
         cursor.close()
         print(data)
         
-        if data and data2 ==():           
+        if data and data2 == ():  
             query2  = " insert into DoctorMaster (HospitalId,DoctorName,Email,Gender)"
             query2 = query2 +" values('"+str(data1["HospitalId"])+"','"+str(data1["DoctorName"])+"','"+str(data1["Email"])+"','"+str(data1["Gender"])+"');"
             print(query2)
