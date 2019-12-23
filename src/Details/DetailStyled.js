@@ -717,8 +717,9 @@ export const DetailStyled = styled.div`
     justify-content: space-between;
   }
   .patient-box-crd {
-      display: grid;
-      grid-template-columns: 5fr 1fr;
+      display: flex;
+      justify-content:flex-end;
+      width:100%;
       padding: 20px;
       background: #25293bd4;
   }
@@ -773,8 +774,9 @@ export const DetailStyled = styled.div`
       padding: 15px;
   }
   .patient-box-crd {
-      display: grid;
-      grid-template-columns: 1fr;
+     display: flex;
+      justify-content:flex-end;
+      width:100%;
       padding: 15px;
       background: #25293bd4;
   }
