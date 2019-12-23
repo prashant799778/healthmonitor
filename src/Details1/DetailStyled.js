@@ -717,10 +717,10 @@ export const DetailStyled = styled.div`
     justify-content: space-between;
   }
   .patient-box-crd {
-      display: flex;
-      justify-content:flex-end;
+     display: flex;
+      justify-content:space-around;
       width:100%;
-      padding: 20px;
+      padding: 15px;
       background: #25293bd4;
   }
 
