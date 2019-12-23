@@ -93,7 +93,7 @@ totalDoctorCount:"",
           <div className="row">
             <div className="col-sm-12 col-md-12">
               <div className="page-hadding">
-                <h2>Dashborad</h2>
+                <h2>Dashboard</h2>
                 <h3>Monitoring </h3>
               </div>
             </div>
@@ -137,7 +137,7 @@ totalDoctorCount:"",
                   <h2 className="box-title">Hospitals</h2>
                 </div>
                 <div className="box-1">
-                  <h3 className="number-title">{this.state.totalHospitalCount}</h3>
+                  <h3 className="number-title">{this.state.TotalHospitalCount}</h3>
                 </div>
               </div>
             </div>
