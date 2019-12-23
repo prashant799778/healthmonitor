@@ -870,6 +870,61 @@ def update_Usertype():
         output = {"result":"somthing went wrong","status":"false"}
         return output
 
+#update hub
+
+@app.route('/updatehubmaster', methods=['POST'])
+def updatehubmaster():
+    try:
+       
+        json1=request.get_data() 
+        data=json.loads(json1.decode("utf-8")) 
+        print("yy")
+        query1 = " update HubMaster set   HubName ='" + str(data[" HubName "]) + "'  , Status ='1'  where ID = '" + str(data["ID"])+ "';"
+        print(query1)
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query1)
+        conn.commit()
+        cursor.close()
+        output = {"result":"Updated Successfully","status":"true"}
+        return output  
+    except KeyError :
+        print("Key Exception---->")   
+        output = {"result":"key error","status":"false"}
+        return output  
+
+    except Exception as e :
+        print("Exception---->" +str(e))    
+        output = {"result":"somthing went wrong","status":"false"}
+        return output
+
+@app.route('/updateHospitalmaster', methods=['POST'])
+def hpsapitalmaster():
+    try:
+       
+        json1=request.get_data() 
+        data=json.loads(json1.decode("utf-8")) 
+        print("yy")
+        query1 = " update Hospital_master set   HubId ='" + str(data[" HubId "]) + "', hospital_name='" + str(data["hospital_name"]) + "' , Address='" + str(data["Address"]) + "' , Status ='1'  where ID = '" + str(data["ID"])+ "';"
+        print(query1)
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query1)
+        conn.commit()
+        cursor.close()
+        output = {"result":"Updated Successfully","status":"true"}
+        return output  
+    except KeyError :
+        print("Key Exception---->")   
+        output = {"result":"key error","status":"false"}
+        return output  
+
+    except Exception as e :
+        print("Exception---->" +str(e))    
+        output = {"result":"somthing went wrong","status":"false"}
+        return output
+
+
 
 
  
@@ -1226,7 +1281,7 @@ def addDoctor1():
         print("Exception---->" + str(e))    
         output = {"result":"something went wrong","status":"false"}
         return output
-
+#doctor master update
 @app.route('/updateDoctormaster', methods=['POST'])
 def updateDoctormaster():
     try:
@@ -1257,33 +1312,6 @@ def updateDoctormaster():
 
 
 
-
-
-@app.route('/update_hospital_master', methods=['POST'])
-def update_hospital_master():
-    try:
-       
-        json1=request.get_data() 
-        data=json.loads(json1.decode("utf-8")) 
-        print("yy")
-        query1 = " update Hospital_master set  hospital_name='" + str(data["hospital_name"]) + "' , City='" + str(data["City"]) + "' , State = '" + str(data["State"]) + "'  ,  UserUpdate ='" + str(data["UserUpdate"]) + "' , Status ='1'  where ID = '" + str(data["ID"])+ "';"
-        print(query1)
-        conn=Connection()
-        cursor = conn.cursor()
-        cursor.execute(query1)
-        conn.commit()
-        cursor.close()
-        output = {"result":"Updated Successfully","status":"true"}
-        return output  
-    except KeyError :
-        print("Key Exception---->")   
-        output = {"result":"key error","status":"false"}
-        return output  
-
-    except Exception as e :
-        print("Exception---->" +str(e))    
-        output = {"result":"somthing went wrong","status":"false"}
-        return output
 @app.route('/Device_master', methods=['POST'])
 def Device_master():
     try:
