@@ -781,12 +781,16 @@ export const DetailStyled = styled.div`
       padding: 15px;
   }
   .patient-box-crd {
-     display: flex;
-      justify-content:flex-end;
+      display: flex;
+      justify-content:space-around;
       width:100%;
-      padding: 15px;
+      padding: 20px;
       background: #25293bd4;
   }
+    .patient-box-1:first-child {
+    width: 83%;
+    overflow: hidden;
+}
   .patient-info {
     display: block;
     align-items: center;
