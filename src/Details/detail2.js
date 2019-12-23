@@ -9,14 +9,11 @@ class Detail extends React.Component{
       super()
     
     
-      this.state = {   
-         spo2:"-- -- --",
-         plsRate:"-- -- --",
-         heartRate:"-- -- --",
-         rsp:"-- -- --",
-         nibp_low:"-- -- --",
-         nibp_high:"-- -- --",
-         temp:"-- -- --",
+      this.state = {
+        ecg:"",
+         spo:"",
+         nibp:"",
+         temp:"",
          resp:"",
           id:"",
           user:""
@@ -40,25 +37,40 @@ class Detail extends React.Component{
      
       this.props.client.on('message', (topic, message) =>{
           // message is Buffer
-
-          if(this.props.currentTopic===topic)
           if(message){
-       
-            console.log("messageOne1", message.toString()  )
+          console.log("messageOne",message.toString())
+         
             let jsn=   JSON.parse(message.toString())
-            
+
             this.setState({
              
-                temp:(jsn.hasOwnProperty("TEMP")  && jsn.TEMP!=="" )?jsn.TEMP:this.state.temp,
+                temp:jsn.TEMP,
                  id:jsn.PatientId,
                  user:jsn.usercreate,
-                 resp:jsn.RESP,
-                 spo2: (jsn.hasOwnProperty("SPO2")  && jsn.SPO2.hasOwnProperty('SPO2')  &&  jsn.SPO2['SPO2']!==""  && jsn.SPO2['SPO2']!=127)?jsn.SPO2['SPO2']:this.state.spo2,
-                 plsRate:  (jsn.hasOwnProperty("SPO2")   && jsn.SPO2.hasOwnProperty('Pulse Rate')  &&  jsn.SPO2['Pulse Rate']!=="" &&  jsn.SPO2['Pulse Rate']!=255)?jsn.SPO2['Pulse Rate']:this.state. plsRate,
-                 heartRate:  (jsn.hasOwnProperty('ECG') && jsn.ECG.hasOwnProperty("Heart Rate")  &&  jsn.ECG["Heart Rate"]!=="")?jsn.ECG["Heart Rate"]:this.state.heartRate,
-                  rsp: (jsn.hasOwnProperty('ECG')  && jsn.ECG.hasOwnProperty("Resp Rate")  &&  jsn.ECG["Resp Rate"]!=="")?jsn.ECG["Resp Rate"]:this.state.rsp,
-                   nibp_high:(jsn.hasOwnProperty('NIBP')  &&  jsn.NIBP.hasOwnProperty("High") &&  jsn.NIBP["High"]!=="")?jsn.NIBP["High"]:this.state.nibp_high,
-                  nibp_low: (jsn.hasOwnProperty('NIBP')  && jsn.NIBP.hasOwnProperty("Low")   &&  jsn.NIBP["Low"]!=="")?jsn.NIBP["Low"]:this.state.nibp_low,
+                 resp:jsn.RESP
+  
+  
+             },()=>{
+
+                if(jsn && jsn.NIBP && jsn.NIBP["High"] &&  jsn.NIBP["High"]!=""  && jsn.NIBP["Low"] &&  jsn.NIBP["Low"]!=""){
+                    this.setState({
+                        temp:jsn.TEMP,
+                       nibp:jsn.NIBP,
+                    })
+                    }
+                    if(jsn && jsn.SPO2 && jsn.SPO2['SPO2']  &&  jsn.SPO2['SPO2']!=""  && jsn.SPO2['Pulse Rate'] &&  jsn.SPO2['Pulse Rate']!=""){
+                       this.setState({
+                        temp:jsn.TEMP,
+                           spo:jsn.SPO2,
+                       })
+                       }
+               
+                       if(jsn && jsn.ECG && jsn.ECG["Heart Rate"]  &&  jsn.ECG["Heart Rate"]!=""  && jsn.ECG['Resp Rate'] &&  jsn.ECG['Resp Rate']!=""){
+                           this.setState({
+                            temp:jsn.TEMP,
+                               ecg:jsn.ECG,
+                           })
+                           }
              })
             
             
@@ -108,44 +120,44 @@ return(<DetailStyled>
                       <div className="innr-patient height-box">
                         <h2 className="green-clr">ECG</h2>
 
-                        <Grabh tc="#78A960"  tt="" data={this.state.heartRate!="-- -- --"?this.state.heartRate:0} id="asd"></Grabh>
+                        <Grabh tc="#78A960"  tt="" data={this.state.ecg['Heart Rate']?this.state.ecg['Heart Rate']:0} id="asd"></Grabh>
                       </div>
                       <div className="innr-patient height-box">
                         <h2 className="red-clr">SP02</h2>
                         
-  <Grabh tc="#E4352C" tt="" data={this.state.spo2!="-- -- --"?this.state.spo2:0} id="def"></Grabh>
+  <Grabh tc="#E4352C" tt="" data={this.state.spo['SPO2']?this.state.spo['SPO2']:0} id="def"></Grabh>
                       </div>
                       <div className="innr-patient height-box rem-boder">
                         <h2 className="orange-clr">RESP</h2>
-                        <Grabh  tc="#F0AF19" tt="" data={this.state.rsp!="-- -- --"?this.state.rsp:0}  id="jkl"></Grabh>
+                        <Grabh  tc="#F0AF19" tt="" data={this.state.ecg['Resp Rate']?this.state.ecg['Resp Rate']:0}  id="jkl"></Grabh>
                       </div>
                     </div>
                     <div className="patient-box-1">
                       <div className="innr-patient">
                         <h2 className="green-clr">HR (bpm)</h2>
-                        <p className="green-clr">{this.state.heartRate}</p>
+                        <p className="green-clr">{this.state.ecg!=""?this.state.ecg["Heart Rate"]:"-- -- --"}</p>
                       </div>
                       <div className="innr-patient">
                         <h2 className="gray-clr">NIBP (mmHg)</h2>
-                        <p className="gray-clr">{this.state.nibp_high+"/"+this.state.nibp_low}</p>
+                        <p className="gray-clr">{this.state.nibp!=""?this.state.nibp["High"]+"/"+this.state.nibp["Low"]:"--/--"}</p>
                       </div>
                       <div className="rap-innr-patient">
                         <div className="innr-patient">
                           <h2 className="red-clr">SP02(%)</h2>
-                          <p className="red-clr">{this.state.spo2}</p>
+                          <p className="red-clr">{this.state.spo['SPO2']?this.state.spo['SPO2']:"-- -- --"}</p>
                         </div>
                         <div className="innr-patient">
                           <h2 className="red-clr">Pulse Rate(bpm)</h2>
-                          <p className="red-clr">{this.state.plsRate}</p>
+                          <p className="red-clr">{this.state.spo['Pulse Rate']?this.state.spo['Pulse Rate']:"-- -- --"}</p>
                         </div>
                       </div>
                       <div className="innr-patient">
                         <h2 className="gray-clr">Temp(o C)</h2>
-                        <p className="gray-clr">{this.state.temp}</p>
+                        <p className="gray-clr">{this.state.temp!=""?this.state.temp:"-- -- --"}</p>
                       </div>
                       <div className="innr-patient">
                         <h2 className="orange-clr">RESP(brpm)</h2>
-                        <p className="orange-clr">{this.state.rsp}</p>
+                        <p className="orange-clr">{this.state.ecg!=""?this.state.ecg["Resp Rate"]:"-- -- --"}</p>
                       </div>
                     </div>
                   </div>

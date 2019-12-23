@@ -11,10 +11,14 @@ class CardComponent extends React.Component {
 
 
  this.state = {
-    ecg:"",
-     spo:"",
-     nibp:"",
-     temp:"",
+  spo2:"-- --",
+  plsRate:"-- --",
+  heartRate:"-- --",
+  rsp:"-- --",
+  nibp_low:"-- --",
+  nibp_high:"-- --",
+  temp:"-- --",
+  resp:"",
       id:"",
       user:""
 
@@ -41,36 +45,19 @@ class CardComponent extends React.Component {
    if(this.props.id==jsn.PatientId)
      {
 
-        this.setState({
+      this.setState({
              
-            temp:jsn.TEMP,
-             id:jsn.PatientId,
-             user:jsn.usercreate,
-             resp:jsn.RESP
-
-
-         },()=>{
-             
-            if(jsn && jsn.NIBP && jsn.NIBP["High"] &&  jsn.NIBP["High"]!=""  && jsn.NIBP["Low"] &&  jsn.NIBP["Low"]!=""){
-                this.setState({
-                    temp:jsn.TEMP,
-                   nibp:jsn.NIBP,
-                })
-                }
-                if(jsn && jsn.SPO2 && jsn.SPO2['SPO2']  &&  jsn.SPO2['SPO2']!=""  && jsn.SPO2['Pulse Rate'] &&  jsn.SPO2['Pulse Rate']!=""){
-                   this.setState({
-                    temp:jsn.TEMP,
-                       spo:jsn.SPO2,
-                   })
-                   }
-           
-                   if(jsn && jsn.ECG && jsn.ECG["Heart Rate"]  &&  jsn.ECG["Heart Rate"]!=""  && jsn.ECG['Resp Rate'] &&  jsn.ECG['Resp Rate']!=""){
-                       this.setState({
-                        temp:jsn.TEMP,
-                           ecg:jsn.ECG,
-                       })
-                       }
-         })
+        temp:(jsn.hasOwnProperty("TEMP")  && jsn.TEMP!=="" )?jsn.TEMP:this.state.temp,
+         id:jsn.PatientId,
+         user:jsn.usercreate,
+         resp:jsn.RESP,
+         spo2: (jsn.hasOwnProperty("SPO2")  && jsn.SPO2.hasOwnProperty('SPO2')  &&  jsn.SPO2['SPO2']!==""  && jsn.SPO2['SPO2']!=127)?jsn.SPO2['SPO2']:this.state.spo2,
+         plsRate:  (jsn.hasOwnProperty("SPO2")   && jsn.SPO2.hasOwnProperty('Pulse Rate')  &&  jsn.SPO2['Pulse Rate']!=="" &&  jsn.SPO2['Pulse Rate']!=255)?jsn.SPO2['Pulse Rate']:this.state. plsRate,
+         heartRate:  (jsn.hasOwnProperty('ECG') && jsn.ECG.hasOwnProperty("Heart Rate")  &&  jsn.ECG["Heart Rate"]!=="")?jsn.ECG["Heart Rate"]:this.state.heartRate,
+          rsp: (jsn.hasOwnProperty('ECG')  && jsn.ECG.hasOwnProperty("Resp Rate")  &&  jsn.ECG["Resp Rate"]!=="")?jsn.ECG["Resp Rate"]:this.state.rsp,
+           nibp_high:(jsn.hasOwnProperty('NIBP')  &&  jsn.NIBP.hasOwnProperty("High") &&  jsn.NIBP["High"]!=="")?jsn.NIBP["High"]:this.state.nibp_high,
+          nibp_low: (jsn.hasOwnProperty('NIBP')  && jsn.NIBP.hasOwnProperty("Low")   &&  jsn.NIBP["Low"]!=="")?jsn.NIBP["Low"]:this.state.nibp_low,
+     })
               
      }
           
@@ -98,17 +85,18 @@ class CardComponent extends React.Component {
             
             <div class="innr-new-card-wrap">
               <div class="innr-new-box-card">
-        <h2 class="innr-text-hd">{this.state.ecg!=""?this.state.ecg["Heart Rate"]:"--"}</h2>
-                <h3 class="innr-info-text-hd">HR (bpm)</h3>
+        <h2 class="innr-text-hd">{this.state.spo2}</h2>
+                <h3 class="innr-info-text-hd">SPO2(%)</h3>
               </div>
+              <div class="innr-new-box-card">
+                <h2 class="innr-text-hd">{this.state.plsRate}</h2>
+                <h3 class="innr-info-text-hd">Pulse Rate(bpm)</h3>
+              </div> 
                <div class="innr-new-box-card">
-                <h2 class="innr-text-hd">{this.state.nibp!=""?this.state.nibp["High"]+"/"+this.state.nibp["Low"]:"--/--"}</h2>
+                <h2 class="innr-text-hd">{this.state.nibp_high+"/"+this.state.nibp_low }</h2>
                 <h3 class="innr-info-text-hd">NIBP (mmHg)</h3>
               </div>
-               <div class="innr-new-box-card">
-                <h2 class="innr-text-hd">{this.state.ecg!=""?this.state.ecg["Resp Rate"]:"--"}</h2>
-                <h3 class="innr-info-text-hd">RESP(bpm)</h3>
-              </div>
+              
             
             </div>
             </div>
