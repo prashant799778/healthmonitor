@@ -1776,6 +1776,7 @@ def doctorProfile():
         return output  
     except KeyError :
         print("Key Exception---->")   
+        output = {"result":"key error","status":"false"}
         return output  
 
     except Exception as e :
