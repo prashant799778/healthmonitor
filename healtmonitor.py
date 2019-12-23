@@ -1597,7 +1597,6 @@ def update_Patient_Discharge():
    # print('connection established')
 
 
-        cursor = conn.cursor()
     
 
 
