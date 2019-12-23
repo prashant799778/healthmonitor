@@ -1758,7 +1758,30 @@ def adminPannel():
         output = {"result":"somthing went wrong","status":"false"}
         return output
 
+#Doctor Profile
+@app.route('/doctorProfile', methods=['POST'])
+def doctorProfile():
+    try:
+       
+        json=request.get_data() 
+        data=json.loads(json.decode("utf-8")) 
+        query = "select HSM.ID as hospitalId,HSM.hospital_name As hospitalName,HM.ID as hubId,HM.HubName from"
+        query=query+"Hospital_master HSM ,HubMaster HM,DoctorMaster DM where HSM.HubId=HM.ID and DoctorMaster.HospitalId=HSM.ID" 
+        query=query+"and DM.Email='"+str(data["Email"])+"';"
+        print(query)
+        cursor.execute(query)
+        data1 = cursor.fetchall()
+        cursor.close()
+        output = {"result":data1,"status":"true"}
+        return output  
+    except KeyError :
+        print("Key Exception---->")   
+        return output  
 
+    except Exception as e :
+        print("Exception---->" +str(e))    
+        output = {"result":"somthing went wrong","status":"false"}
+        return output
 
 
 
