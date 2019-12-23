@@ -491,7 +491,7 @@ def HospitalPatientDetails():
         cursor.close()
        
         if uu:           
-            Data = {"result":data9,"status":"true","HubName":Hubname,"HubId":Hub_Id}
+            Data = {"result":uu,"status":"true","HubName":Hubname,"HubId":Hub_Id}
             return Data
         else:
             data={"status":"false","result":"Invalid Email "}
