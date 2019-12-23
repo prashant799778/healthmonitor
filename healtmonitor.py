@@ -479,21 +479,24 @@ def HospitalPatientDetails():
             Hub_Id=dat["HubId"]
 
             l2=[]
-            query3 ="select PM.PatientId as ID,PM.PatientName from Patient_master as PM  where  Status=0 and DoctorID='" + str(doctor_Id) + "'  ORDER BY  ID DESC;"   
+            query3 ="select * from Patient_master as PM  where  Status=0 and DoctorID='" + str(doctor_Id) + "'  ORDER BY  ID DESC;"   
             print(query3)
             cursor = conn.cursor()
             cursor.execute(query3)
             data27 = cursor.fetchall()
             if data27 != ():
                 uu= data27
+                print(uu)
                 for data8 in uu:
+
                     data8.update({"HubName":Hubname})
                     data8.update({"HubId":Hub_Id})
             l1.append(data8)
+            data8= [ ]
         cursor.close()
        
         if uu:           
-            Data = {"result":l1,"status":"true"}
+            Data = {"result":data8,"status":"true"}
             return Data
         else:
             data={"status":"false","result":"Invalid Email "}
