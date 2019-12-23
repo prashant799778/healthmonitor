@@ -476,6 +476,7 @@ def HospitalPatientDetails():
         for dat in data1:
             doctor_Id=dat["DoctorID"]
             Hubname= dat["HubName"]
+            Hub_Id=dat["HubId"]
 
             l2=[]
             query3 ="select PM.PatientId as ID,PM.PatientName from Patient_master as PM  where  Status<>'2' and DoctorID='" + str(doctor_Id) + "'  ORDER BY  ID DESC;;"   
@@ -487,6 +488,7 @@ def HospitalPatientDetails():
                 uu= data27
                 for data8 in uu:
                     data8.update({"HubName":Hubname})
+                    data8.update({"HubId":Hub_Id})
                 l1.append(data8)
         cursor.close()
        
