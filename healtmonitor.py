@@ -1183,7 +1183,7 @@ def addDoctor1():
         cursor.execute(query)
         data2 = cursor.fetchall()
         cursor.close()
-        print(data)
+        print(data2)
         
         if data and data2 ==():           
             query2  = " insert into DoctorMaster (HospitalId,DoctorName,Email,Gender)"
