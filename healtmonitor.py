@@ -1763,8 +1763,8 @@ def adminPannel():
 def doctorProfile():
     try:
        
-        json=request.get_data() 
-        data=json.loads(json.decode("utf-8")) 
+        json1=request.get_data() 
+        data=json.loads(json1.decode("utf-8")) 
         query = "select HSM.ID as hospitalId,HSM.hospital_name As hospitalName,HM.ID as hubId,HM.HubName from"
         query=query+"Hospital_master HSM ,HubMaster HM,DoctorMaster DM where HSM.HubId=HM.ID and DoctorMaster.HospitalId=HSM.ID" 
         query=query+"and DM.Email='"+str(data["Email"])+"';"
