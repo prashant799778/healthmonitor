@@ -1183,7 +1183,7 @@ def addDoctor1():
         cursor.execute(query)
         data2 = cursor.fetchall()
         cursor.close()
-        print(data)
+        print(data2)
         
         if data and data2 ==():           
             query2  = " insert into DoctorMaster (HospitalId,DoctorName,Email,Gender)"
@@ -1765,7 +1765,7 @@ def doctorProfile():
        
         json1=request.get_data() 
         data=json.loads(json1.decode("utf-8")) 
-        query = "select DM.ID,DM.DoctorName,DM.Gender, HSM.ID as hospitalId,HSM.hospital_name As hospitalName,HM.ID as hubId,HM.HubName from"
+        query = "select DM.ID as doctorId,DM.DoctorName as doctorNmae,DM.Gender as genser, HSM.ID as hospitalId,HSM.hospital_name As hospitalName,HM.ID as hubId,HM.HubName from"
         query=query+" Hospital_master HSM ,HubMaster HM,DoctorMaster DM where HSM.HubId=HM.ID and DM.HospitalId=HSM.ID " 
         query=query+" and DM.Email='"+str(data["Email"])+"';"
         print(query)
