@@ -93,7 +93,7 @@ totalDoctorCount:"",
           <div className="row">
             <div className="col-sm-12 col-md-12">
               <div className="page-hadding">
-                <h2>Dashborad</h2>
+                <h2>Dashboard</h2>
                 <h3>Monitoring </h3>
               </div>
             </div>
