@@ -486,17 +486,12 @@ def HospitalPatientDetails():
             data27 = cursor.fetchall()
             if data27 != ():
                 uu= data27
-                print(uu)
-                for data8 in uu:
-
-                    data8.update({"HubName":Hubname})
-                    data8.update({"HubId":Hub_Id})
-            l1.append(data8)
-            data9= [ data8]
+               
+                
         cursor.close()
        
         if uu:           
-            Data = {"result":data9,"status":"true"}
+            Data = {"result":data9,"status":"true","HubName":Hubname,"HubId":Hub_Id}
             return Data
         else:
             data={"status":"false","result":"Invalid Email "}
