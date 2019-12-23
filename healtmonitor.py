@@ -254,6 +254,7 @@ def allHospital():
         output = {"result":"something went wrong","status":"false"}
         return output
 
+#admin doctors
 
 @app.route('/allDoctor', methods=['post'])
 def allDoctor():
@@ -276,13 +277,13 @@ def allDoctor():
         output = {"result":"something went wrong","status":"false"}
         return output
 
-
+#admin patients
 @app.route('/allPatient', methods=['post'])
 def allPatient():
     try:
         
         query="select PM.PatientId as ID,PM.PatientName,PM.PhoneNo,PM.Address,PM.BloodGroup,PM.DeviceMac,"
-        query=query+"PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.hospital_Name from Patient_master as PM;"
+        query=query+"PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.hospital_Name,PM.age,PM.Gender,PM.roomNumber from Patient_master as PM;"
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
@@ -431,7 +432,7 @@ def doctorPatientDetails():
         for dat in data1:
             doctor_Id=dat["DoctorID"]
             l2=[]
-            query3 ="select PM.PatientId as ID,PM.PatientName,PM.DoctorID as DoctorID,PM.PhoneNo,PM.Address,PM.BloodGroup,PM.DeviceMac,PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.hospital_Name from Patient_master as PM  where  Status<>'2' and DoctorID='" + str(doctor_Id) + "'  ORDER BY  ID DESC;;"   
+            query3 ="select PM.PatientId as ID,PM.PatientName,PM.DoctorID as DoctorID,PM.PhoneNo,PM.Address,PM.BloodGroup,PM.DeviceMac,PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.hospital_Name,Pm.roomNumber,Pm.age,Pm.Gender from Patient_master as PM  where  Status<>'2' and DoctorID='" + str(doctor_Id) + "'  ORDER BY  ID DESC;;"   
             print(query3)
             cursor = conn.cursor()
             cursor.execute(query3)
@@ -479,7 +480,7 @@ def HospitalPatientDetails():
             Hub_Id=dat["HubId"]
 
             l2=[]
-            query3 ="select * from Patient_master as PM  where  Status=0 and DoctorID='" + str(doctor_Id) + "'  ORDER BY  PatientId DESC;"   
+            query3 ="select * from Patient_master   where  Status=0 and DoctorID='" + str(doctor_Id) + "'  ORDER BY  PatientId DESC;"   
             print(query3)
             cursor = conn.cursor()
             cursor.execute(query3)
@@ -1169,7 +1170,7 @@ def addDoctor1():
         json1=request.get_data() 
         data1=json.loads(json1.decode("utf-8"))  
         
-        query = "select * from DoctorMaster where Email='"+str(data1["Email"])+ "';"
+        query = "select * from DoctorMaster where Email='"+str(data1["Email"])+ "' and HospitalId='"+str(data1["HospitalId"])+"';"
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
@@ -1177,7 +1178,7 @@ def addDoctor1():
         cursor.close()
         print(data)
 
-        query = "select * from signup where Email='"+str(data1["Email"])+ "';"
+        query = "select * from signup where Email='"+str(data1["Email"])+ "' and Hospital_Id= '"+str(data1["HospitalId"])+"';"
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
@@ -1197,6 +1198,15 @@ def addDoctor1():
 
             UserId=uuid.uuid1()
             UserId=UserId.hex 
+            if  data1["password"] == None:
+                data1["password"]= '1234'
+
+            else:
+
+                data1["password"]= data1["password"]
+
+
+
             query3  = " insert into  signup (Hospital_Id,name,Usertype_Id,Email,password,Gender,UserID)"
             query3 = query3 +" values('"+str(data1["HospitalId"])+"','"+str(data1["DoctorName"])+"','"+str('2')+"','"+str(data1["Email"])+"','"+str(data1["password"])+"','"+str(data1["Gender"])+"','"+str(UserId)+"');"
             print(query3)
@@ -1215,6 +1225,32 @@ def addDoctor1():
     except Exception as e :
         print("Exception---->" + str(e))    
         output = {"result":"something went wrong","status":"false"}
+        return output
+
+@app.route('/updateDoctormaster', methods=['POST'])
+def updateDoctormaster():
+    try:
+       
+        json1=request.get_data() 
+        data=json.loads(json1.decode("utf-8")) 
+        print("yy")
+        query1 = " update Doctormaster set  HospitalId ='" + str(data["HospitalId"]) + "' , DoctorName='" + str(data["DoctorName"]) + "' , Email = '" + str(data["Email"]) + "'  ,  Gender ='" + str(data["Gender"]) + "' , Status ='1'  where ID = '" + str(data["ID"])+ "';"
+        print(query1)
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query1)
+        conn.commit()
+        cursor.close()
+        output = {"result":"Updated Successfully","status":"true"}
+        return output  
+    except KeyError :
+        print("Key Exception---->")   
+        output = {"result":"key error","status":"false"}
+        return output  
+
+    except Exception as e :
+        print("Exception---->" +str(e))    
+        output = {"result":"somthing went wrong","status":"false"}
         return output
 
 
