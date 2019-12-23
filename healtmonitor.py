@@ -479,7 +479,7 @@ def HospitalPatientDetails():
             Hub_Id=dat["HubId"]
 
             l2=[]
-            query3 ="select * from Patient_master as PM  where  Status=0 and DoctorID='" + str(doctor_Id) + "'  ORDER BY  ID DESC;"   
+            query3 ="select * from Patient_master as PM  where  Status=0 and DoctorID='" + str(doctor_Id) + "'  ORDER BY  PatientId DESC;"   
             print(query3)
             cursor = conn.cursor()
             cursor.execute(query3)
