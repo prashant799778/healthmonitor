@@ -1185,7 +1185,7 @@ def addDoctor1():
         cursor.close()
         print(data)
         
-        if data== () and data2 == ():  
+        if data and data2 ==():           
             query2  = " insert into DoctorMaster (HospitalId,DoctorName,Email,Gender)"
             query2 = query2 +" values('"+str(data1["HospitalId"])+"','"+str(data1["DoctorName"])+"','"+str(data1["Email"])+"','"+str(data1["Gender"])+"');"
             print(query2)
@@ -1194,10 +1194,10 @@ def addDoctor1():
             cursor.execute(query2)
             conn.commit()
 
-            
-              
-            query3  = " insert into  signup (Hospital_Id,name,Usertype_Id,Email,password,Gender)"
-            query3 = query3 +" values('"+str(data1["HospitalId"])+"','"+str(data1["DoctorName"])+"','"+str('2')+"','"+str(data1["Email"])+"','"+str(data1["password"])+"','"+str(data1["Gender"])+"');"
+            UserID=uuid.uuid1()
+            UserID=UserId.hex 
+            query3  = " insert into  signup (Hospital_Id,name,Usertype_Id,Email,password,UserID)"
+            query3 = query3 +" values('"+str(data1["HospitalId"])+"','"+str(data1["DoctorName"])+"','"+str('2')+"','"+str(data1["Email"])+"','"+str(data1["password"])+"','"+str(data1["password"])+"');"
             print(query3)
             conn=Connection()
             cursor = conn.cursor()
