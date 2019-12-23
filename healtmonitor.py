@@ -465,7 +465,7 @@ def HospitalPatientDetails():
         json1=request.get_data()
         print(json1)
         data=json.loads(json1.decode("utf-8"))
-        query2 ="select ID as DoctorID  from DoctorMaster where hospitalId='"+str(data["hospitalId"])+"' and  Email ='"+str(data["Email"])+"';"  
+        query2 ="select ID as DoctorID  from DoctorMaster where HospitalId='"+str(data["HospitalId"])+"' and  Email ='"+str(data["Email"])+"';"  
         print(query2)
         conn=Connection() 
         cursor = conn.cursor()
