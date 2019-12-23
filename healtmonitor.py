@@ -1259,7 +1259,7 @@ def addDoctor1():
                 data1["password"]= '1234'
 
                 query3  = " insert into  signup (Hospital_Id,name,Usertype_Id,Email,password,Gender,UserID)"
-                query3 = query3 +" values('"+str(data1["HospitalId"])+"','"+str(data1["DoctorName"])+"','"+str('2')+"','"+str(data1["Email"])+"','"+str('1234')+"','"+str(data1["Gender"])+"','"+str(UserId)+"');"
+                query3 = query3 +" values('"+str(data1["HospitalId"])+"','"+str(data1["DoctorName"])+"','"+str('2')+"','"+str(data1["Email"])+"','"+str('123')+"','"+str(data1["Gender"])+"','"+str(UserId)+"');"
                 print(query3)
                 conn=Connection()
                 cursor = conn.cursor()
