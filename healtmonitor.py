@@ -1194,8 +1194,8 @@ def addDoctor1():
             cursor.execute(query2)
             conn.commit()
 
-            UserID=uuid.uuid1()
-            UserID=UserId.hex 
+            UserId=uuid.uuid1()
+            UserId=UserId.hex 
             query3  = " insert into  signup (Hospital_Id,name,Usertype_Id,Email,password,Gender,UserID)"
             query3 = query3 +" values('"+str(data1["HospitalId"])+"','"+str(data1["DoctorName"])+"','"+str('2')+"','"+str(data1["Email"])+"','"+str(data1["password"])+"','"+str(data1["Gender"])+"','"+str(data1["UserID"])+"');"
             print(query3)
