@@ -1,0 +1,564 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/bg"
+    android:id="@+id/top_view"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:id="@+id/top"
+        android:visibility="visible"
+        android:background="@color/toolbarcolor"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:gravity="right"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <com.monitor.widget.Lato_Regular_Font
+                android:layout_width="wrap_content"
+                android:text="Logout"
+                android:id="@+id/bck1"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/textcolor"
+                android:layout_height="wrap_content">
+            </com.monitor.widget.Lato_Regular_Font>
+            <ImageButton
+                android:layout_width="50dp"
+                android:id="@+id/bck"
+                android:layout_height="52dp"
+                android:layout_marginRight="10dp"
+                android:padding="13dp"
+                android:visibility="visible"
+                android:scaleType="fitCenter"
+                android:background="@color/toolbarcolor"
+                android:src="@drawable/logout"></ImageButton>
+        </LinearLayout>
+        <com.monitor.widget.Lato_Regular_Font
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_height="match_parent"
+            android:text="@string/addpatient"
+            android:textSize="22dp"
+            ></com.monitor.widget.Lato_Regular_Font>
+
+    </RelativeLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+    <com.monitor.widget.latoheavy
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/addpatient"
+        android:textSize="15dp"
+        android:textColor="@color/headingcolor"
+        android:layout_marginLeft="23.3dp"
+        android:layout_marginTop="18.1dp"/>
+    <com.monitor.widget.Lato_Regular_Font
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="23.3dp"
+        android:layout_marginTop="17.6dp"
+        android:text="@string/patientname"
+        android:textSize="14dp"
+        android:textColor="@color/headingcolor"
+        />
+    <com.monitor.widget.EditTextFontGothamBook
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="32.9dp"
+        android:layout_marginLeft="23.3dp"
+        android:layout_marginTop="8.7dp"
+        android:textColor="@color/white"
+        android:layout_marginRight="22.4dp"
+        android:background="@color/textfieldcolor"
+        android:inputType="text"
+        android:paddingLeft="10dp"
+        android:textSize="14dp" />
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <com.monitor.widget.Lato_Regular_Font
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="23.3dp"
+            android:layout_marginTop="12.6dp"
+            android:layout_weight="1"
+            android:layout_marginRight="12dp"
+            android:text="@string/Gender"
+            android:textColor="@color/textcolor"
+            android:textSize="14dp" />
+
+        <com.monitor.widget.Lato_Regular_Font
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12.6dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="22.4dp"
+            android:layout_weight="1.0"
+            android:text="@string/bloodgp"
+            android:textColor="@color/textcolor"
+            android:textSize="14dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+        <com.jaredrummler.materialspinner.MaterialSpinner
+            android:layout_weight="1"
+            android:id="@+id/gender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="23.3dp"
+            android:layout_marginTop="8.7dp"
+            android:layout_marginRight="12dp"
+            android:theme="@style/Animation.Design.BottomSheetDialog"
+            app:ms_dropdown_height="200dp"
+            app:ms_background_color="@color/textfieldcolor"
+            app:ms_hint="Select"
+            app:ms_text_color="@color/textcolor"
+            app:ms_padding_bottom="5dp"
+            app:ms_padding_left="10dp"
+            app:ms_padding_top="5dp"
+            app:ms_hint_color="@android:color/darker_gray"
+            />
+        <com.jaredrummler.materialspinner.MaterialSpinner
+            android:layout_weight="1"
+            android:id="@+id/bloodgp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="8.7dp"
+            app:ms_background_color="@color/textfieldcolor"
+            android:layout_marginRight="22.4dp"
+            android:theme="@style/Animation.Design.BottomSheetDialog"
+            app:ms_dropdown_height="200dp"
+            app:ms_hint="Select"
+            app:ms_text_color="@android:color/darker_gray"
+            app:ms_padding_bottom="5dp"
+            app:ms_padding_left="10dp"
+            app:ms_padding_top="5dp"
+            app:ms_hint_color="@android:color/darker_gray"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <com.monitor.widget.Lato_Regular_Font
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="23.3dp"
+            android:layout_marginTop="12.6dp"
+            android:layout_weight="1"
+            android:layout_marginRight="12dp"
+            android:text="@string/Age"
+            android:textColor="@color/textcolor"
+            android:textSize="14dp" />
+
+        <com.monitor.widget.Lato_Regular_Font
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12.6dp"
+            android:layout_marginRight="22.4dp"
+            android:layout_weight="1.0"
+            android:text="@string/Room"
+            android:layout_marginLeft="12dp"
+            android:textColor="@color/textcolor"
+            android:textSize="14dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+        <com.monitor.widget.EditTextFontGothamBook
+            android:id="@+id/age"
+            android:layout_width="match_parent"
+            android:paddingLeft="10dp"
+            android:layout_height="33dp"
+            android:layout_marginTop="8.7dp"
+            android:layout_marginLeft="23.4dp"
+            android:inputType="number"
+            android:textSize="14dp"
+            android:textColor="@color/white"
+            android:maxLength="9"
+            android:layout_marginRight="12dp"
+            android:layout_weight="1"
+            android:background="@color/textfieldcolor"
+            android:spinnerMode="dialog">
+        </com.monitor.widget.EditTextFontGothamBook>
+        <com.monitor.widget.EditTextFontGothamBook
+            android:id="@+id/roomNo"
+            android:layout_width="match_parent"
+            android:paddingLeft="10dp"
+            android:layout_height="33dp"
+            android:layout_marginTop="8.7dp"
+            android:layout_marginRight="22.4dp"
+            android:layout_marginLeft="12dp"
+            android:inputType="number"
+            android:textSize="14dp"
+            android:textColor="@color/white"
+            android:maxLength="9"
+            android:layout_weight="1"
+            android:background="@color/textfieldcolor"
+            android:spinnerMode="dialog">
+
+        </com.monitor.widget.EditTextFontGothamBook>
+    </LinearLayout>
+
+    <com.monitor.widget.Lato_Regular_Font
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="23.3dp"
+        android:layout_marginTop="17.6dp"
+        android:text="@string/BedNo"
+        android:textSize="14dp"
+        android:textColor="@color/headingcolor"
+        />
+    <com.monitor.widget.EditTextFontGothamBook
+        android:id="@+id/bedno"
+        android:layout_width="match_parent"
+        android:layout_height="32.9dp"
+        android:layout_marginLeft="23.3dp"
+        android:layout_marginTop="8.7dp"
+        android:layout_marginRight="22.4dp"
+        android:background="@color/textfieldcolor"
+        android:inputType="numberDecimal"
+        android:textColor="@color/white"
+        android:paddingLeft="10dp"
+        android:textSize="14dp" />
+
+    <com.monitor.widget.Lato_Regular_Font
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="23.3dp"
+        android:layout_marginTop="17.6dp"
+        android:text="@string/hospitalname"
+        android:textSize="14dp"
+        android:textColor="@color/headingcolor"
+        />
+    <com.monitor.widget.EditTextFontGothamBook
+        android:id="@+id/hospitalname"
+        android:layout_width="match_parent"
+        android:layout_height="32.9dp"
+        android:layout_marginLeft="23.3dp"
+        android:layout_marginTop="8.7dp"
+        android:layout_marginRight="22.4dp"
+        android:enabled="false"
+        android:background="@color/textfieldcolor"
+        android:textColor="@color/white"
+        android:inputType="numberDecimal"
+        android:paddingLeft="10dp"
+        android:textSize="14dp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <com.monitor.widget.Lato_Regular_Font
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="23.3dp"
+        android:layout_marginTop="12.6dp"
+        android:text="@string/Docotor"
+        android:textSize="14dp"
+        android:textColor="@color/textcolor"
+        />
+    <com.jaredrummler.materialspinner.MaterialSpinner
+        android:id="@+id/doctorList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="23.3dp"
+        android:layout_marginTop="8.7dp"
+        android:layout_marginRight="22.4dp"
+        android:theme="@style/Animation.Design.BottomSheetDialog"
+        android:background="@color/white"
+        app:ms_dropdown_height="200dp"
+        app:ms_hint="Select"
+        app:ms_background_color="@color/textfieldcolor"
+        app:ms_text_color="@android:color/darker_gray"
+        app:ms_padding_bottom="5dp"
+        app:ms_padding_left="10dp"
+        app:ms_padding_top="5dp"
+        app:ms_hint_color="@android:color/darker_gray"
+        />
+
+
+
+
+
+
+
+
+<!--            <com.monitor.widget.GothamBookFontForLable-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Hospital"-->
+<!--                android:textSize="16sp"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:layout_marginRight="28.5dp"-->
+<!--                android:layout_marginLeft="28.5dp"-->
+<!--                />-->
+<!--            <androidx.cardview.widget.CardView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:layout_marginRight="28.5dp"-->
+<!--                android:layout_marginLeft="28.5dp">-->
+<!--                <com.jaredrummler.materialspinner.MaterialSpinner-->
+<!--                    android:id="@+id/hospital"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="43dp"-->
+<!--                    app:ms_padding_bottom="5dp"-->
+<!--                    app:ms_hint="Select"-->
+<!--                    app:ms_padding_left="15dp"-->
+<!--                    app:ms_padding_top="5dp"/>-->
+<!--            </androidx.cardview.widget.CardView>-->
+<!--            <com.monitor.widget.GothamBookFontForLable-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/Docotor"-->
+<!--                android:textSize="16sp"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:layout_marginRight="28.5dp"-->
+<!--                android:layout_marginLeft="28.5dp"-->
+<!--                />-->
+<!--            <androidx.cardview.widget.CardView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:layout_marginRight="28.5dp"-->
+<!--                android:layout_marginLeft="28.5dp">-->
+<!--                <com.jaredrummler.materialspinner.MaterialSpinner-->
+<!--                    android:id="@+id/bed_no"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="43dp"-->
+<!--                    app:ms_padding_bottom="5dp"-->
+<!--                    app:ms_padding_left="15dp"-->
+<!--                    app:ms_hint="Select"-->
+<!--                    app:ms_padding_top="5dp"/>-->
+<!--            </androidx.cardview.widget.CardView>-->
+
+<!--            <com.monitor.widget.GothamBookFontForLable-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/Room"-->
+<!--                android:textSize="16sp"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:layout_marginRight="28.5dp"-->
+<!--                android:layout_marginLeft="28.5dp"-->
+<!--                />-->
+<!--            <androidx.cardview.widget.CardView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:layout_marginRight="28.5dp"-->
+<!--                android:layout_marginLeft="28.5dp">-->
+<!--                <com.monitor.widget.EditTextFontGothamBook-->
+<!--                    android:id="@+id/roomNo"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="43dp"-->
+<!--                    android:visibility="gone"-->
+<!--                    android:paddingLeft="15dp"-->
+<!--                    android:textSize="14dp"-->
+<!--                    android:hint="@string/Room"-->
+<!--                    android:inputType="numberDecimal"-->
+<!--                    android:drawablePadding="15dp"-->
+<!--                    android:background="@color/white">-->
+<!--                </com.monitor.widget.EditTextFontGothamBook>-->
+<!--            </androidx.cardview.widget.CardView>-->
+<!--            <com.monitor.widget.GothamBookFontForLable-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/BedNo"-->
+<!--                android:textSize="16sp"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:layout_marginRight="28.5dp"-->
+<!--                android:layout_marginLeft="28.5dp"-->
+<!--                />-->
+<!--            <androidx.cardview.widget.CardView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:layout_marginRight="28.5dp"-->
+<!--                android:layout_marginLeft="28.5dp">-->
+<!--                <com.monitor.widget.EditTextFontGothamBook-->
+<!--                    android:id="@+id/bedNo"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="43dp"-->
+<!--                    android:paddingLeft="15dp"-->
+<!--                    android:textSize="14dp"-->
+<!--                    android:hint="@string/BedNo"-->
+<!--                    android:visibility="gone"-->
+<!--                    android:inputType="numberDecimal"-->
+<!--                    android:drawablePadding="15dp"-->
+<!--                    android:background="@color/white">-->
+<!--                </com.monitor.widget.EditTextFontGothamBook>-->
+<!--            </androidx.cardview.widget.CardView>-->
+
+
+
+
+
+
+
+<!--            <com.monitor.widget.GothamBookFontForLable-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Date"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="16sp"-->
+<!--                android:layout_marginRight="28.5dp"-->
+<!--                android:layout_marginLeft="28.5dp"-->
+<!--                />-->
+<!--            <androidx.cardview.widget.CardView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:layout_marginRight="28.5dp"-->
+<!--                android:layout_marginLeft="28.5dp">-->
+<!--                <com.monitor.widget.EditTextFontGothamBook-->
+<!--                    android:id="@+id/date"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="43dp"-->
+<!--                    android:paddingLeft="15dp"-->
+<!--                    android:textSize="14dp"-->
+<!--                    android:inputType="date"-->
+<!--                    android:drawablePadding="15dp"-->
+<!--                    android:background="@color/white">-->
+<!--                </com.monitor.widget.EditTextFontGothamBook>-->
+<!--            </androidx.cardview.widget.CardView>-->
+<!--            <com.monitor.widget.GothamBookFontForLable-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Time"-->
+<!--                android:textSize="16sp"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:layout_marginRight="28.5dp"-->
+<!--                android:layout_marginLeft="28.5dp"-->
+<!--                />-->
+<!--            <androidx.cardview.widget.CardView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:layout_marginBottom="10dp"-->
+<!--                android:layout_marginRight="28.5dp"-->
+<!--                android:layout_marginLeft="28.5dp">-->
+<!--                <com.monitor.widget.EditTextFontGothamBook-->
+<!--                    android:id="@+id/time"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="43dp"-->
+<!--                    android:paddingLeft="15dp"-->
+<!--                    android:textSize="14dp"-->
+<!--                    android:inputType="time"-->
+<!--                    android:drawablePadding="15dp"-->
+<!--                    android:background="@color/white">-->
+<!--                </com.monitor.widget.EditTextFontGothamBook>-->
+<!--            </androidx.cardview.widget.CardView>-->
+<!--            <com.monitor.widget.GothamMediumFont-->
+<!--                android:visibility="gone"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/forgot_Password"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:layout_marginTop="20dp"-->
+<!--                android:textSize="14dp"-->
+<!--                android:clickable="true"-->
+<!--                android:gravity="right"-->
+<!--                android:id="@+id/forgot"-->
+<!--                android:layout_marginRight="28dp">-->
+<!--            </com.monitor.widget.GothamMediumFont>-->
+<!--            <com.monitor.widget.GothamMediumFont-->
+<!--                android:visibility="gone"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/Donthave_account"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="18dp"-->
+<!--                android:textAlignment="center"-->
+<!--                android:gravity="center_vertical"-->
+<!--                android:layout_marginRight="33.5dp"-->
+<!--                android:layout_marginLeft="33.5dp"-->
+<!--                android:layout_marginTop="20dp">-->
+<!--            </com.monitor.widget.GothamMediumFont>-->
+<!--            <com.monitor.widget.GothamMediumFont-->
+<!--                android:visibility="gone"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/Sign_up"-->
+<!--                android:textColor="@color/signinbuttoncolor"-->
+<!--                android:textSize="18dp"-->
+<!--                android:textAlignment="center"-->
+<!--                android:gravity="center_vertical"-->
+<!--                android:clickable="true"-->
+<!--                android:id="@+id/SignupTextbutton"-->
+<!--                android:layout_marginBottom="60dp"-->
+<!--                android:layout_marginRight="33.5dp"-->
+<!--                android:layout_marginLeft="33.5dp"-->
+<!--                android:layout_marginTop="20dp">-->
+<!--            </com.monitor.widget.GothamMediumFont>-->
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="32.9dp"
+        android:text="save"
+        android:textColor="@color/white"
+        android:textAlignment="center"
+        android:id="@+id/LoginButton"
+        android:textSize="14dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/welcomrbutton"
+        android:layout_marginRight="23.5dp"
+        android:layout_marginLeft="23.5dp">
+    </Button>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
+

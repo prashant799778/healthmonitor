@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tool"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:layout_alignParentTop="true"
+        app:title="Start"
+        app:titleTextColor="@color/white"
+        ></androidx.appcompat.widget.Toolbar>
+
+    <Button
+        android:layout_centerInParent="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/start"
+        android:textColor="@color/white"
+        android:textAlignment="center"
+        android:id="@+id/LoginButton"
+        android:textSize="14dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/welcomrbutton"
+        android:layout_marginRight="33.5dp"
+        android:layout_marginLeft="33.5dp">
+    </Button>
+
+
+</RelativeLayout>

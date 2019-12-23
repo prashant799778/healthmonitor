@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/home"
+        android:icon="@drawable/open_book"
+        android:title="@string/Home" />
+
+    <item
+        android:id="@+id/bullhorn"
+        android:icon="@drawable/hospital"
+        android:title="@string/Hospital" />
+    <item
+        android:id="@+id/disscuss"
+        android:icon="@drawable/hospitalisation"
+        android:title="@string/Patients" />
+
+    <item
+        android:id="@+id/rocket_launch"
+        android:icon="@drawable/hospital"
+        android:title="@string/other" />
+
+</menu>

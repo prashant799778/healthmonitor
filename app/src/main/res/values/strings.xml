@@ -1,0 +1,72 @@
+<resources>
+    <string name="app_name">Smart ICU</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="login">Login</string>
+    <string name="discharge">Discharge</string>
+    <string name="Send">Send</string>
+    <string name="Smrticu">Smart ICU</string>
+    <string name="Select_hospital">Select Hospital</string>
+    <string name="Hospital">Hospital</string>
+    <string name="hospitalname">Hospital Name</string>
+    <string name="Location">Location</string>
+    <string name="noofpatient">No Of Patients</string>
+    <string name="Select_bed">Select Bed</string>
+    <string name="Patients">Patients</string>
+    <string name="AllPatients">AllPatients</string>
+    <string name="AllHospitall">AllHospital</string>
+    <string name="r_address">Reciever Address</string>
+    <string name="Donthave_account">Don\'t have an account ?</string>
+    <string name="Sign_up">Sign up </string>
+    <string name="HR">HR (bpm)</string>
+    <string name="Home">Home</string>
+    <string name="other">Other</string>
+    <string name="SP02">SP02/PR(bpm)</string>
+    <string name="resp">RESP(bpm)</string>
+    <string name="Emial_ID">UserName</string>
+    <string name="Password">Password?</string>
+    <string name="forgot_Password">forgot Password?</string>
+    <string name="Please_enter_a_new_password">Please enter a new password</string>
+    <string name="BacktoLogin">Back to Login </string>
+    <string name="Confirm_Password">Confirm Password</string>
+    <string name="Already_haev_an_account">Already have an account ?</string>
+    <string name="Forgot_Password">Forgot Password</string>
+    <string name="MobileNo">Mobile Number</string>
+    <string name="Continue">Sign Up</string>
+
+
+    <string name="start">Start</string>
+    <string name="version">Version 0.0.1</string>
+    <string name="connect">Connect</string>
+    <string name="disconnect">Disconnect</string>
+    <string name="view">View</string>
+    <string name="name">Name</string>
+    <string name="Overall">Overall</string>
+    <string name="BedNo">Bed Number</string>
+    <string name="BedN">Bed No</string>
+    <string name="Signnin">Sign In</string>
+    <string name="forgot">Forgot your password ?</string>
+    <string name="Docotor">Doctor</string>
+    <string name="Room">Room No.</string>
+    <string name="Action">Action</string>
+    <string name="Dashboard">DashBoard</string>
+    <string name="Config">Add Patient</string>
+    <string name="userdashboard">DashBoard</string>
+    <string name="bp">Blood Pressure</string>
+    <string name="addpatient">Add Pateints</string>
+    <string name="patientname">Patients Name </string>
+    <string name="Gender">Gender</string>
+    <string name="bloodgp">Blood Group</string>
+    <string name="Age">Age</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+</resources>

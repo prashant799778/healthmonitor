@@ -1,0 +1,511 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/r"
+    android:background="@color/black"
+    android:orientation="vertical"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:visibility="visible"
+        android:layout_height="match_parent">
+<!--        <ImageView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:scaleType="centerCrop"-->
+<!--            android:src="@drawable/new_login_them">-->
+<!--        </ImageView>-->
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="1"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_weight=".2"
+                android:orientation="horizontal">
+                <com.monitor.widget.Lato_Regular_Font
+                    android:layout_weight="1"
+                    android:textColor="@color/textcolor"
+                    android:text="@string/patientname"
+                    android:textSize="@dimen/textsize"
+                    android:paddingLeft="15dp"
+                    android:gravity="center_vertical|left"
+                    android:id="@+id/p_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                </com.monitor.widget.Lato_Regular_Font>
+                <com.monitor.widget.Lato_Regular_Font
+                    android:layout_weight="1.1"
+                    android:textColor="@color/textcolor"
+                    android:text="@string/Age"
+                    android:id="@+id/age"
+                    android:textSize="@dimen/textsize"
+                    android:gravity="center_vertical|center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                </com.monitor.widget.Lato_Regular_Font>
+                <com.monitor.widget.Lato_Regular_Font
+                    android:layout_weight="1"
+                    android:textColor="@color/textcolor"
+                    android:text="@string/hospitalname"
+                    android:id="@+id/location"
+                    android:textSize="@dimen/textsize"
+                    android:gravity="center_vertical|center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                </com.monitor.widget.Lato_Regular_Font>
+                <com.monitor.widget.Lato_Regular_Font
+                    android:layout_weight="1"
+                    android:textColor="@color/textcolor"
+                    android:text="@string/BedN"
+                    android:textSize="@dimen/textsize"
+                    android:gravity="center_vertical|center"
+                    android:id="@+id/bedNo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                </com.monitor.widget.Lato_Regular_Font>
+            </LinearLayout>
+            <View
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/lineWidth">
+            </View>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:weightSum="3"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_weight="0.70"
+                    android:weightSum="3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <com.monitor.widget.GothamBookFontForLable
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="ECG"
+                        android:paddingLeft="15dp"
+                        android:textColor="@color/Green"
+                        android:textSize="12sp"
+                        >
+                    </com.monitor.widget.GothamBookFontForLable>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/wave_height">
+                        <com.monitor.widget.WaveformView
+                            android:id="@+id/wfECG"
+                            app:maxValue="250"
+                            app:pointStep="12dp"
+                            app:waveColor="@color/Green"
+                            app:backgroundColor="@color/black"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+                    <View
+                        android:layout_marginVertical="5dp"
+                        android:background="@color/white"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/lineWidth">
+
+                    </View>
+
+
+
+                    <com.monitor.widget.GothamBookFontForLable
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="SP02"
+                        android:paddingLeft="15dp"
+                        android:textColor="@color/red"
+                        android:textSize="12sp"
+                        >
+                    </com.monitor.widget.GothamBookFontForLable>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/wave_height">
+                        <com.monitor.widget.WaveformView
+                            android:id="@+id/wfSp02"
+                            app:maxValue="250"
+                            app:pointStep="12dp"
+
+                            app:waveColor="@color/red"
+                            app:backgroundColor="@color/black"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+                    <View
+                        android:layout_marginVertical="5dp"
+                        android:background="@color/white"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/lineWidth">
+
+                    </View>
+
+
+
+                    <com.monitor.widget.GothamBookFontForLable
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="RESP"
+                        android:paddingLeft="15dp"
+                        android:textColor="@color/yallow"
+                        android:textSize="12sp"
+                        >
+                    </com.monitor.widget.GothamBookFontForLable>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/wave_height">
+                        <com.monitor.widget.WaveformView
+                            android:id="@+id/wfResp"
+                            app:maxValue="250"
+                            app:pointStep="12dp"
+                            app:waveColor="@color/cc"
+                            app:backgroundColor="@color/black"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+
+                </LinearLayout>
+                <View
+
+                    android:background="@color/white"
+                    android:layout_width="@dimen/lineWidth"
+                    android:layout_height="match_parent"/>
+                <LinearLayout
+                    android:layout_weight="2.30"
+                    android:orientation="vertical"
+                    android:weightSum="4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+                        <com.monitor.widget.GothamBookFontForLable
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="HR(bpm)"
+                            android:textSize="12sp"
+                            android:textColor="@color/Green"
+                            android:layout_margin="5dp">
+                        </com.monitor.widget.GothamBookFontForLable>
+
+                        <com.monitor.widget.GothamBookFontForLable
+                            android:id="@+id/tvECGinfo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="- -"
+                            android:textSize="20sp"
+                            android:textColor="@color/Green"
+                            android:layout_margin="10dp">
+                        </com.monitor.widget.GothamBookFontForLable>
+                    </LinearLayout>
+                    <View
+                        android:background="@color/white"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/lineWidth">
+
+                    </View>
+
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+                        <com.monitor.widget.GothamBookFontForLable
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="NIBP(mmHg)"
+                            android:textSize="12sp"
+                            android:textColor="@color/white"
+                            android:layout_margin="5dp">
+                        </com.monitor.widget.GothamBookFontForLable>
+
+                        <com.monitor.widget.GothamBookFontForLable
+                            android:id="@+id/tvNIBPinfo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="- - -/- -"
+                            android:textSize="12sp"
+                            android:textColor="@color/white"
+                            android:layout_margin="5dp">
+                        </com.monitor.widget.GothamBookFontForLable>
+                    </LinearLayout>
+                    <View
+                        android:background="@color/white"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/lineWidth">
+
+                    </View>
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+                        <LinearLayout
+                            android:weightSum="2"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <LinearLayout
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                                <com.monitor.widget.GothamBookFontForLable
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="SP02(%)"
+                                    android:textSize="12sp"
+                                    android:textColor="@color/red"
+                                    android:layout_margin="5dp">
+                                </com.monitor.widget.GothamBookFontForLable>
+
+                                <com.monitor.widget.GothamBookFontForLable
+                                    android:id="@+id/tvSPO2info"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="20dp"
+                                    android:text="- -"
+                                    android:textSize="20sp"
+                                    android:textColor="@color/red"
+                                    android:layout_margin="10dp">
+                                </com.monitor.widget.GothamBookFontForLable>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                                <com.monitor.widget.GothamBookFontForLable
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="PR(bpm)"
+                                    android:textSize="12sp"
+                                    android:textColor="@color/red"
+                                    android:layout_margin="5dp">
+                                </com.monitor.widget.GothamBookFontForLable>
+
+                                <com.monitor.widget.GothamBookFontForLable
+                                    android:layout_width="match_parent"
+                                    android:layout_height="20dp"
+                                    android:text="- -"
+                                    android:id="@+id/pr"
+                                    android:textSize="20sp"
+                                    android:textColor="@color/red"
+                                    android:layout_margin="10dp">
+                                </com.monitor.widget.GothamBookFontForLable>
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <View
+                        android:background="@color/white"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/lineWidth">
+
+                    </View>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+                        <com.monitor.widget.GothamBookFontForLable
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Temp(celcius)"
+                            android:textSize="12sp"
+                            android:textColor="@color/white"
+                            android:layout_margin="5dp">
+                        </com.monitor.widget.GothamBookFontForLable>
+
+                        <com.monitor.widget.GothamBookFontForLable
+                            android:id="@+id/tvTEMPinfo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="- - , - "
+                            android:textSize="12sp"
+                            android:textColor="@color/white"
+                            android:layout_margin="10dp">
+                        </com.monitor.widget.GothamBookFontForLable>
+                    </LinearLayout>
+                    <View
+                        android:background="@color/white"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/lineWidth">
+
+                    </View>
+                    <com.monitor.widget.GothamBookFontForLable
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="RESP(bpm)"
+                        android:textSize="12sp"
+                        android:textColor="@color/yallow"
+                        android:layout_margin="5dp">
+                    </com.monitor.widget.GothamBookFontForLable>
+
+                    <com.monitor.widget.GothamBookFontForLable
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="- -"
+                        android:textSize="20sp"
+                        android:id="@+id/resp"
+                        android:textColor="@color/yallow"
+                        android:layout_margin="10dp">
+                    </com.monitor.widget.GothamBookFontForLable>
+
+
+                </LinearLayout>
+                <View
+
+                    android:background="@color/white"
+                    android:layout_width="@dimen/lineWidth"
+                    android:layout_height="match_parent"/>
+                <LinearLayout
+                    android:layout_weight="1.35"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:weightSum="4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <LinearLayout
+                        android:id="@+id/bluetooth"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <ImageView
+                            android:src="@drawable/blutooth"
+                            android:layout_marginVertical="10dp"
+                            android:layout_width="50dp"
+                            android:padding="10dp"
+                            android:layout_height="40dp">
+
+                        </ImageView>
+                        <com.monitor.widget.GothamBookFontForLable
+                            android:id="@+id/connect"
+                            android:textColor="@color/white"
+                            android:textAlignment="center"
+                            android:textSize="10dp"
+                            android:text="Search devices"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                        </com.monitor.widget.GothamBookFontForLable>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/add"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:visibility="visible"
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <ImageView
+                            android:layout_marginVertical="10dp"
+                            android:src="@drawable/alarm"
+                            android:layout_width="40dp"
+                            android:padding="10dp"
+                            android:layout_height="50dp">
+
+                        </ImageView>
+                        <com.monitor.widget.GothamBookFontForLable
+                            android:textColor="@color/white"
+                            android:textAlignment="center"
+                            android:textSize="10dp"
+                            android:text="Alert"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                        </com.monitor.widget.GothamBookFontForLable>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/pb"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <ImageView
+                            android:layout_marginVertical="10dp"
+                            android:src="@drawable/sphygmomanometer"
+                            android:layout_width="40dp"
+                            android:padding="10dp"
+                            android:layout_height="50dp">
+
+                        </ImageView>
+                        <com.monitor.widget.GothamBookFontForLable
+                            android:textColor="@color/white"
+                            android:textAlignment="center"
+                            android:textSize="8dp"
+                            android:text="@string/bp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                        </com.monitor.widget.GothamBookFontForLable>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/logout"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <ImageView
+                            android:layout_marginVertical="10dp"
+                            android:src="@drawable/discharge"
+                            android:layout_width="50dp"
+                            android:padding="10dp"
+                            android:layout_height="40dp">
+
+                        </ImageView>
+                        <com.monitor.widget.GothamBookFontForLable
+                            android:textColor="@color/white"
+                            android:textAlignment="center"
+                            android:textSize="8dp"
+                            android:text="@string/discharge"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                        </com.monitor.widget.GothamBookFontForLable>
+                    </LinearLayout>
+                </LinearLayout>
+
+
+
+
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Coonect"
+        android:id="@+id/cnt"
+        android:visibility="gone"
+        android:background="@color/white">
+    </Button>
+
+</LinearLayout>
