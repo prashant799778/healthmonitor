@@ -49,38 +49,38 @@ class JSONEncoder(json.JSONEncoder):
 # cursor = mysqlcon.cursor()
 
 
-@app.route('/login1', methods=['GET'])
-def login8888():
-    try:
-        # userid = request.args['userid']
-        password = request.args['password']
-        name = request.args['name']
+# @app.route('/login1', methods=['GET'])
+# def login8888():
+    # try:
+        #userid = request.args['userid']
+        # password = request.args['password']
+        # name = request.args['name']
         
                
             
-        query ="select si.name as name,si.Usertype_Id as Usertype_Id,"
-        query=query+" si.Hospital_Id as Hospital_Id,us.Usertype as Usertype,si.UserID as UserID,si.ID as mainId,si.Email as Email  from signup as si INNER JOIN Usertype_master as us on us.ID=si.Usertype_Id"
-        query=query+" INNER JOIN Hospital_master AS hm on hm.ID=si.Hospital_Id  where name = '" + name + "' and password='" + password + "' ;"   
-        conn=Connection()
-        cursor = conn.cursor()
-        cursor.execute(query)
-        loginuser = cursor.fetchone()
+        # query ="select si.name as name,si.Usertype_Id as Usertype_Id,"
+        # query=query+" si.Hospital_Id as Hospital_Id,us.Usertype as Usertype,si.UserID as UserID,si.ID as mainId,si.Email as Email  from signup as si INNER JOIN Usertype_master as us on us.ID=si.Usertype_Id"
+        # query=query+" INNER JOIN Hospital_master AS hm on hm.ID=si.Hospital_Id  where name = '" + name + "' and password='" + password + "' ;"   
+        # conn=Connection()
+        # cursor = conn.cursor()
+        # cursor.execute(query)
+        # loginuser = cursor.fetchone()
        
 
        
-        y= loginuser["Usertype"]
-        y3= loginuser["Usertype_Id"]
-        y2= loginuser["Hospital_Id"]
-        Nurse = ""
+        # y= loginuser["Usertype"]
+        # y3= loginuser["Usertype_Id"]
+        # y2= loginuser["Hospital_Id"]
+        # Nurse = ""
         
 
 
-        if  y == 'Nurse':
-            query2 = "select  hm.hospital_name  as hospital_Name,hm.HubId as HubId,Dm.DoctorName as DoctorName,Dm.ID as DoctorID  from Hospital_master  as hm INNER JOIN DoctorMaster as Dm on Dm.HospitalId= hm.ID where  hm.ID ='" + str(y2) + "'"
+        # if  y == 'Nurse':
+            # query2 = "select  hm.hospital_name  as hospital_Name,hm.HubId as HubId,Dm.DoctorName as DoctorName,Dm.ID as DoctorID  from Hospital_master  as hm INNER JOIN DoctorMaster as Dm on Dm.HospitalId= hm.ID where  hm.ID ='" + str(y2) + "'"
             
-            cursor = conn.cursor()
-            cursor.execute(query2)
-            Nurse = cursor.fetchall()
+            # cursor = conn.cursor()
+            # cursor.execute(query2)
+            # Nurse = cursor.fetchall()
             # for i in Nurse:
                 # query3= "select ID as DoctorID from signup where name= '"+str(i["DoctorName"])+"';"
                 # cursor = conn.cursor()
@@ -88,24 +88,24 @@ def login8888():
                 # data3= cursor.fetchall()
                 # i["DoctorID"]=data3[0]["DoctorID"]
                 
-        query2 = "select  * from Patient_master where Status<>'2'  and Usertype_Id ='" + str(y3) + "'"
+        # query2 = "select  * from Patient_master where Status<>'2'  and Usertype_Id ='" + str(y3) + "'"
       
-        cursor = conn.cursor()
-        cursor.execute(query2)
-        ii= cursor.fetchone()
-        cursor.close()
-        if ii != None:
-            Count= 1
+        # cursor = conn.cursor()
+        # cursor.execute(query2)
+        # ii= cursor.fetchone()
+        # cursor.close()
+        # if ii != None:
+            # Count= 1
         
-        else:
-            Count=0
+        # else:
+            # Count=0
 
-        if loginuser:   
-            data={"status":"true","result":loginuser,"Nurse Details":Nurse,"Patient Details":ii,"Count":Count}                      
-            return data
-        else:
-            data={"status":"false","result":"Login Failed"}
-            return data
+        # if loginuser:   
+            # data={"status":"true","result":loginuser,"Nurse Details":Nurse,"Patient Details":ii,"Count":Count}                      
+            # return data
+        # else:
+            # data={"status":"false","result":"Login Failed"}
+            # return data
 
 
 
@@ -113,15 +113,15 @@ def login8888():
 
 
 
-    except KeyError as e:
-        print("Exception---->" +str(e))        
-        output = {"result":"Input Keys are not Found","status":"false"}
-        return output 
+    # except KeyError as e:
+        # print("Exception---->" +str(e))        
+        # output = {"result":"Input Keys are not Found","status":"false"}
+        # return output 
     
-    except Exception as e :
-        print("Exception---->" +str(e))           
-        output = {"result":"something went wrong","status":"false"}
-        return output
+    # except Exception as e :
+        # print("Exception---->" +str(e))           
+        # output = {"result":"something went wrong","status":"false"}
+        # return output
 
 
 @app.route('/login', methods=['GET'])
@@ -228,100 +228,6 @@ def login88881():
         output = {"result":"something went wrong","status":"false"}
         return output
 
-
-
-@app.route('/login_pras', methods=['GET'])
-def login888111():
-    try:
-        # userid = request.args['userid']
-        password = request.args['password']
-        name = request.args['name']
-        
-               
-            
-        query ="select si.name as name,si.Usertype_Id as Usertype_Id,"
-        query=query+" si.Hospital_Id as Hospital_Id,us.Usertype as Usertype,si.UserID as UserID,si.Email as Email  from signup as si INNER JOIN Usertype_master as us on us.ID=si.Usertype_Id"
-        query=query+" INNER JOIN Hospital_master AS hm on hm.ID=si.Hospital_Id  where name = '" + name + "' and password='" + password + "' ;"   
-        conn=Connection()
-        cursor = conn.cursor()
-        cursor.execute(query)
-        loginuser = cursor.fetchone()
-       
-
-       
-        y= loginuser["Usertype"]
-        y3= loginuser["Usertype_Id"]
-        y2= loginuser["Hospital_Id"]
-        Nurse = ""
-        
-
-
-        if  y == 'Nurse':
-            query2 = "select  hm.hospital_name  as hospital_Name,hm.HubId as HubId,Dm.DoctorName as DoctorName,Dm.ID as DoctorID  from Hospital_master  as hm INNER JOIN DoctorMaster as Dm on Dm.HospitalId= hm.ID where  hm.ID ='" + str(y2) + "'"
-           
-            cursor = conn.cursor()
-            cursor.execute(query2)
-            Nurse = cursor.fetchall()
-            
-            
-        query2 = "select  *  from Patient_master where Status<>'2'  and Usertype_Id ='" + str(y3) + "'"
-      
-        cursor = conn.cursor()
-        cursor.execute(query2)
-        ii= cursor.fetchall()
-        print(ii)
-
-        query3= " select count(PatientId)  as count from Patient_master  where Status<>'2' and Usertype_Id ='" + str(y3) + "' "
-        cursor = conn.cursor()
-        cursor.execute(query3)
-        iii= cursor.fetchall()
-        for i in iii:
-            Count=i["count"]
-
-        cursor.close()
-        
-        if loginuser:   
-            data={"status":"true","result":loginuser,"Nurse Details":Nurse,"Patient Details":ii,"Count":Count}                      
-            return data
-        else:
-            data={"status":"false","result":"Login Failed"}
-            return data
-
-    except KeyError as e:
-        print("Exception---->" +str(e))        
-        output = {"result":"Input Keys are not Found","status":"false"}
-        return output 
-    
-    except Exception as e :
-        print("Exception---->" +str(e))           
-        output = {"result":"something went wrong","status":"false"}
-        return output
-
-
-
-
-
-
-# @app.route('/login2', methods=['post'])
-# def login2():
-    # try:
-        # json1=request.get_data() 
-        # data=json.loads(json1.decode("utf-8")) 
-        # query="select count(1) as count from signup where Email='"+data["Email"]+"';"
-        # conn=Connection()
-        # cursor = conn.cursor()
-        # cursor.execute(query)
-        # data= cursor.fetchone()
-        # cursor.close()
-        # if data["count"]==1:
-            
-               
-        
-    
-    # except Exception as e :
-        # print("Exception---->" +str(e))           
-        # output = {"result":"something went wrong","status":"false"}
-        # return output
 
 @app.route('/allHospital', methods=['post'])
 def allHospital():
@@ -642,67 +548,67 @@ def HospitalPatientDetails():
         output = {"result":"something went wrong","status":"false"}
         return output 
 
-@app.route('/signup', methods=['POST'])
-def signup():
-    try:
+# @app.route('/signup', methods=['POST'])
+# def signup():
+    # try:
        
-        json1=request.get_data() 
-        data=json.loads(json1.decode("utf-8"))  
+        # json1=request.get_data() 
+        # data=json.loads(json1.decode("utf-8"))  
            
        
 
-        query1 = "select Usertype_Id,Hospital_Id,mobile from signup where name = "+'"'+str(data["name"])+'"'+" ;"
-        print(query1)
-        conn=Connection()
-        cursor = conn.cursor()
-        cursor.execute(query1)
-        data= cursor.fetchone()
-        conn.commit()
-        cursor.close()
-        UserID=uuid.uuid1()
-        if data != None:
-            output={"output": "Name already registered ,Please enter the other Name","status":"false"}
-        else:
-            json1=request.get_data() 
-            data=json.loads(json1.decode("utf-8"))  
-            print("77787878")
-            query2  = " insert into signup (name,mobile,password,Usertype_Id,Hospital_Id,usercreate,UserID)"
-            query2 = query2 +" values("+'"'+str(data["name"])+'"'+','+'"'+str(data["mobile"])+'"'+','+'"'+str(data["password"])+'"'+','+'"'+str(data["Usertype_Id"])+'"'+','+'"'+str(data["Hospital_Id"])+'"'+','+'"'+str(data["usercreate"])+'"'+','+'"'+str(UserID)+'"'+");"
-            print(query2)
-            conn=Connection()
-            cursor = conn.cursor()
-            cursor.execute(query2)
-            conn.commit()
-            cursor.close()
-            output={"output": "User Signup succesfully","status":"true"}
+        # query1 = "select Usertype_Id,Hospital_Id,mobile from signup where name = "+'"'+str(data["name"])+'"'+" ;"
+        # print(query1)
+        # conn=Connection()
+        # cursor = conn.cursor()
+        # cursor.execute(query1)
+        # data= cursor.fetchone()
+        # conn.commit()
+        # cursor.close()
+        # UserID=uuid.uuid1()
+        # if data != None:
+            # output={"output": "Name already registered ,Please enter the other Name","status":"false"}
+        # else:
+            # json1=request.get_data() 
+            # data=json.loads(json1.decode("utf-8"))  
+            # print("77787878")
+            # query2  = " insert into signup (name,mobile,password,Usertype_Id,Hospital_Id,usercreate,UserID)"
+            # query2 = query2 +" values("+'"'+str(data["name"])+'"'+','+'"'+str(data["mobile"])+'"'+','+'"'+str(data["password"])+'"'+','+'"'+str(data["Usertype_Id"])+'"'+','+'"'+str(data["Hospital_Id"])+'"'+','+'"'+str(data["usercreate"])+'"'+','+'"'+str(UserID)+'"'+");"
+            # print(query2)
+            # conn=Connection()
+            # cursor = conn.cursor()
+            # cursor.execute(query2)
+            # conn.commit()
+            # cursor.close()
+            # output={"output": "User Signup succesfully","status":"true"}
         
-    except Exception as e :
-        print("Exception---->" + str(e))    
-        output = {"result":"something went wrong","status":"false"}
-    return output
+    # except Exception as e :
+        # print("Exception---->" + str(e))    
+        # output = {"result":"something went wrong","status":"false"}
+    # return output
    
-@app.route('/Signuplist', methods=['GET'])
-def Signuplist():
-    try:
+# @app.route('/Signuplist', methods=['GET'])
+# def Signuplist():
+    # try:
     
-        # query = " select distinct userid,username,usertype from usermaster where usertype <> 'Admin';"
-        query = "select * from signup "
-        conn=Connection()
-        cursor = conn.cursor()
-        cursor.execute(query)
-        data = cursor.fetchall()
-        cursor.close()
-        if data:           
-            Data = {"result":data,"status":"true"}
-            return Data
-        else:
-            output = {"result":"No Data Found","status":"false"}
-            return output
+        ##query = " select distinct userid,username,usertype from usermaster where usertype <> 'Admin';"
+        # query = "select * from signup "
+        # conn=Connection()
+        # cursor = conn.cursor()
+        # cursor.execute(query)
+        # data = cursor.fetchall()
+        # cursor.close()
+        # if data:           
+            # Data = {"result":data,"status":"true"}
+            # return Data
+        # else:
+            # output = {"result":"No Data Found","status":"false"}
+            # return output
 
-    except Exception as e :
-        print("Exception---->" + str(e))    
-        output = {"result":"something went wrong","status":"false"}
-        return output
+    # except Exception as e :
+        # print("Exception---->" + str(e))    
+        # output = {"result":"something went wrong","status":"false"}
+        # return output
 
 @app.route('/doctorDropdown', methods=['POST'])
 def doctorDropdown():
@@ -730,66 +636,66 @@ def doctorDropdown():
 
 
 
-@app.route('/update_Signup', methods=['POST'])
-def updateSignup():
-    try:
+# @app.route('/update_Signup', methods=['POST'])
+# def updateSignup():
+    # try:
        
-        json1=request.get_data() 
-        data=json.loads(json1.decode("utf-8")) 
-        print("yy")
-        query1 = " update signup  set  name= '" + str(data["name"]) + "',  password ='" + str(data["password"]) + "'  ,  mobile ='" + str(data["mobile"]) + "'  ,  Usertype_Id ='" + str(data["Usertype_Id"]) + "' ,  Hospital_Id ='" + str(data["Hospital_Id"]) + "' ,  UserUpdate ='" + str(data["UserUpdate"]) + "' , Status ='1' where ID = '" + str(data["ID"])+ "';"
-        print(query1)
-        conn=Connection()
-        cursor = conn.cursor()
-        cursor.execute(query1)
-        conn.commit()
-        cursor.close()
-        output = {"result":"Updated Successfully","status":"true"}
-        return output  
+        # json1=request.get_data() 
+        # data=json.loads(json1.decode("utf-8")) 
+        # print("yy")
+        # query1 = " update signup  set  name= '" + str(data["name"]) + "',  password ='" + str(data["password"]) + "'  ,  mobile ='" + str(data["mobile"]) + "'  ,  Usertype_Id ='" + str(data["Usertype_Id"]) + "' ,  Hospital_Id ='" + str(data["Hospital_Id"]) + "' ,  UserUpdate ='" + str(data["UserUpdate"]) + "' , Status ='1' where ID = '" + str(data["ID"])+ "';"
+        # print(query1)
+        # conn=Connection()
+        # cursor = conn.cursor()
+        # cursor.execute(query1)
+        # conn.commit()
+        # cursor.close()
+        # output = {"result":"Updated Successfully","status":"true"}
+        # return output  
 
-    except KeyError :
-        print("Key Exception---->")   
-        output = {"result":"key error","status":"false"}
-        return output  
+    # except KeyError :
+        # print("Key Exception---->")   
+        # output = {"result":"key error","status":"false"}
+        # return output  
 
-    except Exception as e :
-        print("Exception---->" +str(e))    
-        output = {"result":"somthing went wrong","status":"false"}
-        return output
+    # except Exception as e :
+        # print("Exception---->" +str(e))    
+        # output = {"result":"somthing went wrong","status":"false"}
+        # return output
 
-@app.route('/Usertype_master', methods=['POST'])
-def Usertype_master():
-    try:
+# @app.route('/Usertype_master', methods=['POST'])
+# def Usertype_master():
+    # try:
        
-        json1=request.get_data() 
-        data=json.loads(json1.decode("utf-8"))  
-        query1 = "select ID,Usertype from Usertype_master where Usertype = "+'"'+str(data["Usertype"])+'"'+" ;"
-        print(query1)
-        conn=Connection()
-        cursor = conn.cursor()
-        cursor.execute(query1)
-        data= cursor.fetchone()
-        conn.commit()
-        cursor.close()
-        if data != None:
-            output={"output": "Usertype already registered ,Please enter the other Usertype ","status":"false"}
-        else:
-            json1=request.get_data() 
-            data=json.loads(json1.decode("utf-8"))  
-            print("77787878")
-            query2  = " insert into Usertype_master (Usertype,usercreate)"
-            query2 = query2 +" values("+'"'+str(data["Usertype"])+'"'+','+'"'+str(data["usercreate"])+'"'+' '+");"
-            print(query2)
-            conn=Connection()
-            cursor = conn.cursor()
-            cursor.execute(query2)
-            conn.commit()
-            cursor.close()
-            output={"output": "Usertype Added succesfully","status":"true"}
-    except Exception as e :
-        print("Exception---->" + str(e))    
-        output = {"result":"something went wrong","status":"false"}
-    return output
+        # json1=request.get_data() 
+        # data=json.loads(json1.decode("utf-8"))  
+        # query1 = "select ID,Usertype from Usertype_master where Usertype = "+'"'+str(data["Usertype"])+'"'+" ;"
+        # print(query1)
+        # conn=Connection()
+        # cursor = conn.cursor()
+        # cursor.execute(query1)
+        # data= cursor.fetchone()
+        # conn.commit()
+        # cursor.close()
+        # if data != None:
+            # output={"output": "Usertype already registered ,Please enter the other Usertype ","status":"false"}
+        # else:
+            # json1=request.get_data() 
+            # data=json.loads(json1.decode("utf-8"))  
+            # print("77787878")
+            # query2  = " insert into Usertype_master (Usertype,usercreate)"
+            # query2 = query2 +" values("+'"'+str(data["Usertype"])+'"'+','+'"'+str(data["usercreate"])+'"'+' '+");"
+            # print(query2)
+            # conn=Connection()
+            # cursor = conn.cursor()
+            # cursor.execute(query2)
+            # conn.commit()
+            # cursor.close()
+            # output={"output": "Usertype Added succesfully","status":"true"}
+    # except Exception as e :
+        # print("Exception---->" + str(e))    
+        # output = {"result":"something went wrong","status":"false"}
+    # return output
  
 @app.route('/Usertypelist', methods=['GET'])
 def Usertypelist():
@@ -950,59 +856,59 @@ def doctorMaster():
 
 
 
-@app.route('/getCurrentpatient', methods=['GET'])
-def getCurrentpatient():
-    try:
-        Usertype_Id = request.args['Usertype_Id']
-        query2 = "select  * from Patient_master where Status<>'2'  and Usertype_Id ='" +  Usertype_Id + "'"
-        conn=Connection()
-        cursor = conn.cursor()
-        cursor.execute(query2)
+# @app.route('/getCurrentpatient', methods=['GET'])
+# def getCurrentpatient():
+    # try:
+        # Usertype_Id = request.args['Usertype_Id']
+        # query2 = "select  * from Patient_master where Status<>'2'  and Usertype_Id ='" +  Usertype_Id + "'"
+        # conn=Connection()
+        # cursor = conn.cursor()
+        # cursor.execute(query2)
 
-        ii= cursor.fetchone()
-        cursor.close()
-        if ii != None:
-            Count= 1
-        else:
-            Count=0
-        if ii:           
-            Data =  {"result":ii,"Count":Count,"status":"True"}
-            return Data
-        else:
-            output = {"result":"No Data Found","status":"false"}
-            return output
+        # ii= cursor.fetchone()
+        # cursor.close()
+        # if ii != None:
+            # Count= 1
+        # else:
+            # Count=0
+        # if ii:           
+            # Data =  {"result":ii,"Count":Count,"status":"True"}
+            # return Data
+        # else:
+            # output = {"result":"No Data Found","status":"false"}
+            # return output
 
-    except Exception as e :
-        print("Exception---->" + str(e))    
-        output = {"result":"something went wrong","status":"false"}
-        return output
+    # except Exception as e :
+        # print("Exception---->" + str(e))    
+        # output = {"result":"something went wrong","status":"false"}
+        # return output
 
 
-@app.route('/update_Usertype', methods=['POST'])
-def update_Usertype():
-    try:
+# @app.route('/update_Usertype', methods=['POST'])
+# def update_Usertype():
+    # try:
        
-        json1=request.get_data() 
-        data=json.loads(json1.decode("utf-8")) 
-        print("yy")
-        query1 = " update Usertype_master set  Usertype='" + str(data["Usertype"]) + "' ,  UserUpdate ='" + str(data["UserUpdate"]) + "' , Status ='1'  where ID = '" + str(data["ID"])+ "';"
-        print(query1)
-        conn=Connection()
-        cursor = conn.cursor()
-        cursor.execute(query1)
-        conn.commit()
-        cursor.close()
-        output = {"result":"Updated Successfully","status":"true"}
-        return output  
-    except KeyError :
-        print("Key Exception---->")   
-        output = {"result":"key error","status":"false"}
-        return output  
+        # json1=request.get_data() 
+        # data=json.loads(json1.decode("utf-8")) 
+        # print("yy")
+        # query1 = " update Usertype_master set  Usertype='" + str(data["Usertype"]) + "' ,  UserUpdate ='" + str(data["UserUpdate"]) + "' , Status ='1'  where ID = '" + str(data["ID"])+ "';"
+        # print(query1)
+        # conn=Connection()
+        # cursor = conn.cursor()
+        # cursor.execute(query1)
+        # conn.commit()
+        # cursor.close()
+        # output = {"result":"Updated Successfully","status":"true"}
+        # return output  
+    # except KeyError :
+        # print("Key Exception---->")   
+        # output = {"result":"key error","status":"false"}
+        # return output  
 
-    except Exception as e :
-        print("Exception---->" +str(e))    
-        output = {"result":"somthing went wrong","status":"false"}
-        return output
+    # except Exception as e :
+        # print("Exception---->" +str(e))    
+        # output = {"result":"somthing went wrong","status":"false"}
+        # return output
 
 #update hub
 
@@ -1062,24 +968,24 @@ def hpsapitalmaster():
 
 
  
-@app.route('/Hospital_master1', methods=['POST'])
-def Hospital_master1():
-    try:
+# @app.route('/Hospital_master1', methods=['POST'])
+# def Hospital_master1():
+    # try:
        
-        json1=request.get_data() 
-        data=json.loads(json1.decode("utf-8"))  
-        query2  = " insert into Hospital_master1 (hospital_name,City,Usermaster_Id,State,usercreate)"
-        query2 = query2 +" values("+'"'+str(data["hospital_name"])+'"'+','+'"'+str(data["City"])+'"'+','+'"'+str(data["Usermaster_Id"])+'"'+','+'"'+str(data["State"])+'"'+','+'"'+str(data["usercreate"])+'"'+' '+");"
-        print(query2)
-        conn=Connection()
-        cursor = conn.cursor()
-        cursor.execute(query2)
-        conn.commit()
-        output={"output": "Hospital Name Added succesfully","status":"true"}
-    except Exception as e :
-        print("Exception---->" + str(e))    
-        output = {"result":"something went wrong","status":"false"}
-    return output
+        # json1=request.get_data() 
+        # data=json.loads(json1.decode("utf-8"))  
+        # query2  = " insert into Hospital_master1 (hospital_name,City,Usermaster_Id,State,usercreate)"
+        # query2 = query2 +" values("+'"'+str(data["hospital_name"])+'"'+','+'"'+str(data["City"])+'"'+','+'"'+str(data["Usermaster_Id"])+'"'+','+'"'+str(data["State"])+'"'+','+'"'+str(data["usercreate"])+'"'+' '+");"
+        # print(query2)
+        # conn=Connection()
+        # cursor = conn.cursor()
+        # cursor.execute(query2)
+        # conn.commit()
+        # output={"output": "Hospital Name Added succesfully","status":"true"}
+    # except Exception as e :
+        # print("Exception---->" + str(e))    
+        # output = {"result":"something went wrong","status":"false"}
+    # return output
 
 
 @app.route('/hospital_master_list', methods=['GET'])
@@ -1469,140 +1375,6 @@ def addDoctor():
 #         output = {"result":"somthing went wrong","status":"false"}
 #         return output
 
-
-
-
-
-@app.route('/Device_master', methods=['POST'])
-def Device_master():
-    try:
-       
-        json1=request.get_data() 
-        data=json.loads(json1.decode("utf-8"))  
-        query1 = "select * from Device_master where DeviceMac = "+'"'+str(data["DeviceMac"])+'"'+" ;"
-        print(query1)
-        conn=Connection()
-        cursor = conn.cursor()
-        cursor.execute(query1)
-        data= cursor.fetchone()
-        conn.commit()
-        cursor.close()
-        if data != None:
-            output={"output": " DeviceMac name already registered ,Please enter the other DeviceMac ","status":"false"}
-        else:
-            json1=request.get_data() 
-            data=json.loads(json1.decode("utf-8"))  
-            print("77787878")
-            query2  = " insert into Device_master (DeviceMac,Bed_Number,Vard_Name,Hospital_Id,usercreate)"
-            query2 = query2 +" values("+'"'+str(data["DeviceMac"])+'"'+','+'"'+str(data["Bed_Number"])+'"'+','+'"'+str(data["Vard_Name"])+'"'+','+'"'+str(data["Hospital_Id"])+'"'+','+'"'+str(data["usercreate"])+'"'+' '+");"
-            print(query2)
-            conn=Connection()
-            cursor = conn.cursor()
-            cursor.execute(query2)
-            conn.commit()
-            output={"output": "DeviceMac Added succesfully","status":"true"}
-    except Exception as e :
-        print("Exception---->" + str(e))    
-        output = {"result":"something went wrong","status":"false"}
-    return output
-
-
-
-@app.route('/Device_master_select', methods=['GET'])
-def Device_master_select():
-    try:
-        hospital_Name, y="",""
-    
-       
-        if 'hospital_Name' in request.args:
-            hospital_Name=request.args["hospital_Name"]
-
-        if  hospital_Name != "":
-            WhereCondition1 =  " where hospital_name   = '" + hospital_Name + "'  "
-            y = y +  WhereCondition1
-
-        query = "select  de.DeviceMac,de.Bed_Number,de.Vard_Name,de.Hospital_Id,hm.hospital_name as hospital_Name from Device_master as de INNER JOIN Hospital_master as hm on hm.ID= de.Hospital_Id " +y
-        conn=Connection()
-        cursor = conn.cursor()
-        cursor.execute(query)
-        data = cursor.fetchall()
-        cursor.close()
-        if data:           
-            Data = {"result":data,"status":"true"}
-            return Data
-        else:
-            output = {"result":"No Data Found","status":"false"}
-            return output
-
-    except Exception as e :
-        print("Exception---->" + str(e))    
-        output = {"result":"something went wrong","status":"false"}
-        return output
-
-
-@app.route('/Device_master_select1', methods=['GET'])
-def Device_master_select2():
-    try:
-        hospital_Name, y="",""
-    
-       
-        if 'hospital_Name' in request.args:
-            hospital_Name=request.args["hospital_Name"]
-
-        if  hospital_Name != "":
-            WhereCondition1 =  " where hospital_name   = '" + hospital_Name + "'  "
-            y = y +  WhereCondition1
-
-        query = "select  de.DeviceMac as DeviceMac,hm.hospital_name,de.Hospital_Id as hospital_Name  from Device_master as de INNER JOIN Hospital_master1 as hm on hm.ID= de.Hospital_Id " +y
-        conn=Connection()
-        cursor = conn.cursor()
-        cursor.execute(query)
-        data = cursor.fetchall()
-        cursor.close()
-        data1=[]
-        for i in data:
-            data1.append(i["DeviceMac"])
-        if data:           
-            Data = {"DeviceMac":data1,"status":"true"}
-            return Data
-        else:
-            output = {"result":"No Data Found","status":"false"}
-            return output
-
-    except Exception as e :
-        print("Exception---->" + str(e))    
-        output = {"result":"something went wrong","status":"false"}
-        return output
-
-
-@app.route('/update_Device_master', methods=['POST'])
-def update_device_type():
-    try:
-       
-        json1=request.get_data() 
-        data=json.loads(json1.decode("utf-8")) 
-        print("yy")
-        query1 = " update Device_master set  DeviceMac ='" + str(data["DeviceMac"]) + "' , Bed_Number ='" + str(data["Bed_Number"]) + "' , Vard_Name = '" + str(data["Vard_Name"]) + "' , Hospital_Id ='" + str(data["Hospital_Id"]) + "'  ,  UserUpdate ='" + str(data["UserUpdate"]) + "' , Status ='1'  where ID = '" + str(data["ID"])+ "';"
-        print(query1)
-        conn=Connection()
-        cursor = conn.cursor()
-        cursor.execute(query2)
-        conn.commit()
-        cursor.close()
-        output = {"result":"Updated Successfully","status":"true"}
-        return output  
-    except KeyError :
-        print("Key Exception---->")   
-        output = {"result":"key error","status":"false"}
-        return output  
-
-    except Exception as e :
-        print("Exception---->" +str(e))    
-        output = {"result":"somthing went wrong","status":"false"}
-        return output
-
-
-
 @app.route('/Patient_master', methods=['POST'])
 def Patient_master():
     try:
@@ -1681,64 +1453,64 @@ def Patient_master_select():
         output = {"result":"something went wrong","status":"false"}
         return output
 
-@app.route('/Patient_master_select1', methods=['GET'])
-def Patient_master_select1():
-    try:
-        PatientName,DeviceMac,PatientId,y,y2,y3,hospital_Name= "","","","","","",""
-        if 'PatientId' in request.args:
-            PatientId=request.args["PatientId"]
-        if 'DeviceMac' in request.args:
-            DeviceMac=request.args["DeviceMac"]
-        if 'PatientName' in request.args:
-            PatientName=request.args["PatientName"]
+# @app.route('/Patient_master_select1', methods=['GET'])
+# def Patient_master_select1():
+    # try:
+        # PatientName,DeviceMac,PatientId,y,y2,y3,hospital_Name= "","","","","","",""
+        # if 'PatientId' in request.args:
+            # PatientId=request.args["PatientId"]
+        # if 'DeviceMac' in request.args:
+            # DeviceMac=request.args["DeviceMac"]
+        # if 'PatientName' in request.args:
+            # PatientName=request.args["PatientName"]
 
-        if 'hospital_Name' in request.args:
-            hospital_Name = request.args["hospital_Name"]
+        # if 'hospital_Name' in request.args:
+            # hospital_Name = request.args["hospital_Name"]
       
       
-        WhereCondition=""
+        # WhereCondition=""
         
-        if PatientId != "":
-            WhereCondition1 =  " and  PatientId    = '" + PatientId + "'  "
-            y = y +  WhereCondition1
+        # if PatientId != "":
+            # WhereCondition1 =  " and  PatientId    = '" + PatientId + "'  "
+            # y = y +  WhereCondition1
         
-        if DeviceMac != "":
-            WhereCondition1 =  " and DeviceMac   = '" + DeviceMac + "'  "
-            y = y +  WhereCondition1
+        # if DeviceMac != "":
+            # WhereCondition1 =  " and DeviceMac   = '" + DeviceMac + "'  "
+            # y = y +  WhereCondition1
         
-        if  PatientName != "":
-            WhereCondition1 =  "  and  PatientName   = '" + PatientName + "'  "
-            y = y +  WhereCondition1
+        # if  PatientName != "":
+            # WhereCondition1 =  "  and  PatientName   = '" + PatientName + "'  "
+            # y = y +  WhereCondition1
 
-        if  hospital_Name != "":
-            WhereCondition1 =  "  and  hospital_Name   = '" + PatientName + "'  "
-            y = y +  WhereCondition1
+        # if  hospital_Name != "":
+            # WhereCondition1 =  "  and  hospital_Name   = '" + PatientName + "'  "
+            # y = y +  WhereCondition1
 
 
        
-        query = "select PatientId,PatientName from Patient_master  where enddate is NULL " + y 
-        conn=Connection()
-        cursor = conn.cursor()
-        cursor.execute(query)
-        data = cursor.fetchall()
-        cursor.close()
-        print(data)
-        data1=[]
-        data2=[]
-        for i in data:
-            data1.append(i["PatientId"])
-            data2.append(i["PatientName"])
-        if data:           
-            Data = {"PatientId":data1,"status":"true","PatientName":data2}
-            return Data
-        else:
-            output = {"result":"No Data Found","status":"false"}
-            return output
+        # query = "select PatientId,PatientName from Patient_master  where enddate is NULL " + y 
+        # conn=Connection()
+        # cursor = conn.cursor()
+        # cursor.execute(query)
+        # data = cursor.fetchall()
+        # cursor.close()
+        # print(data)
+        # data1=[]
+        # data2=[]
+        # for i in data:
+            # data1.append(i["PatientId"])
+            # data2.append(i["PatientName"])
+        # if data:           
+            # Data = {"PatientId":data1,"status":"true","PatientName":data2}
+            # return Data
+        # else:
+            # output = {"result":"No Data Found","status":"false"}
+            # return output
 
-    except Exception as e :
-        print("Exception---->" + str(e))    
-        output = {"result":"something went wrong","status":"false"}
-        return output
+    # except Exception as e :
+        # print("Exception---->" + str(e))    
+        # output = {"result":"something went wrong","status":"false"}
+        # return output
 
 @app.route('/update_Patient_master', methods=['POST'])
 def update_Patient_type():
@@ -1917,7 +1689,7 @@ def update_Patient_Vital_master():
         return output
 
 
-#tital hub total hospital total doctor total doctor
+#total hub total hospital total doctor total doctor
 @app.route('/adminPannel', methods=['POST'])
 def adminPannel():
     try:
@@ -1987,31 +1759,34 @@ def doctorProfile():
         print("Exception---->" +str(e))    
         output = {"result":"somthing went wrong","status":"false"}
         return output
-@app.route('/userMaster', methods=['POST'])
-def userMaster():
-    try:
-       
-        json1=request.get_data() 
-        data=json.loads(json1.decode("utf-8")) 
-        query = "select * from userMaster where Hospital_Id in (1,2,3,4,5);"
-        print(query)
-        conn=Connection()
-        cursor = conn.cursor()
-        cursor.execute(query)
-        data1 = cursor.fetchall()
-        cursor.close()
-        output = {"result":data1,"status":"true"}
-        return output  
-    except KeyError :
-        print("Key Exception---->")   
-        output = {"result":"key error","status":"false"}
-        output = {"result":"key error","status":"false"}
-        return output  
 
-    except Exception as e :
-        print("Exception---->" +str(e))    
-        output = {"result":"somthing went wrong","status":"false"}
-        return output
+
+
+# @app.route('/userMaster', methods=['POST'])
+# def userMaster():
+    # try:
+       
+        # json1=request.get_data() 
+        # data=json.loads(json1.decode("utf-8")) 
+        # query = "select * from userMaster where Hospital_Id in (1,2,3,4,5);"
+        # print(query)
+        # conn=Connection()
+        # cursor = conn.cursor()
+        # cursor.execute(query)
+        # data1 = cursor.fetchall()
+        # cursor.close()
+        # output = {"result":data1,"status":"true"}
+        # return output  
+    # except KeyError :
+        # print("Key Exception---->")   
+        # output = {"result":"key error","status":"false"}
+        # output = {"result":"key error","status":"false"}
+        # return output  
+
+    # except Exception as e :
+        # print("Exception---->" +str(e))    
+        # output = {"result":"somthing went wrong","status":"false"}
+        # return output
 
 
  
