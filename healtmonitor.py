@@ -924,7 +924,7 @@ def hpsapitalmaster():
         json1=request.get_data() 
         data=json.loads(json1.decode("utf-8")) 
         print("yy")
-        query1 = " update Hospital_master set   HubId ='" + str(data[" HubId "]) + "', hospital_name='" + str(data["hospital_name"]) + "' , Address='" + str(data["Address"]) + "' , Status ='1'  where ID = '" + str(data["ID"])+ "';"
+        query1 = " update Hospital_master set   HubId ='" + str(data["HubId"]) + "', hospital_name='" + str(data["hospital_name"]) + "' , Address='" + str(data["Address"]) + "' , Status ='1'  where ID = '" + str(data["ID"])+ "';"
         print(query1)
         conn=Connection()
         cursor = conn.cursor()
