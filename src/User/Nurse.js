@@ -409,16 +409,16 @@ isValid:true,emailError:false,
     updatetapi=()=>{
       
      
-     let api="http://134.209.153.34:5004/updateNursemaster"
-     let json={"id":this.state.userid,"name":this.state.name
-     ,"mobile":1234567890,"usertype_id":3,"hospital_id":this.state.hospital_id,"password":this.state.password,"confirm_password":this.state.password,"email":this.state.email,"Gender":this.state.gen}     
+     let api="http://159.65.146.25:5053/updateNursemaster"
+     let json={"ID":this.state.userid,"name":this.state.name
+     ,"mobile":1234567890,"Usertype_Id":3,"Hospital_Id":this.state.hospital_id,"password":this.state.password,"confirm_password":this.state.password,"Email":this.state.email,"Gender":this.state.gen}     
      
     
    
       axios.post(api,json)
     .then((response)=> {
       // handle success
-        
+        console.log(response)  
      
       if(response){
        
@@ -636,7 +636,7 @@ isValid:true,emailError:false,
                                    
                                  
                                 }
-                                  }  value={this.state.password} className="fom-wd" type="password" name placeholder="password" />
+                                  }  value={this.state.password} className="fom-wd" type="text" name placeholder="password" />
                               
                               </div>
                              
