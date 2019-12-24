@@ -304,7 +304,7 @@ class Login extends React.Component {
                               </div>
                             </div>
                             <button
-                              type="submit"
+                              // type="submit"
                               id="mySubmit"
                               className="btn btn-primary btn-user btn-block sbmtbtn"
                             >
@@ -558,10 +558,8 @@ class Login extends React.Component {
                   <div className="in-box">
                     <h3 className="logo-title"><img src={require("./image/web_icon.png")}></img></h3>
                     <h2 className="upper-title">sign in</h2>
-                    <form>
                     <div className="form-container">
                       <div className="form-group">
-                        
                         <input  onChange={e => {
                                   this.setState({ name: e.target.value });
                                 }}
@@ -583,13 +581,11 @@ class Login extends React.Component {
                         </div>
 
                       </div>
-                      <button   onClick={this.loginHandler} type="submit" className="btn btn-cust btn-lg btn-block">log In</button>
-                      
+                      <button   onClick={this.loginHandler} type="button" className="btn btn-cust btn-lg btn-block">log In</button>
                       <div className="forget-pass">
                       <img src={require("./image/padlock.svg")}/><span>forget your password ?</span>
                       </div>
                     </div>
-                    </form>
                   </div>
                 </div>
               </div>

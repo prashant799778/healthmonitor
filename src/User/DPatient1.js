@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import AppBar from '../AppBar/AppBar'
-import SideBar from '../AppBar/Sidebar/SideBar';
+import SideBar from '../AppBar/Sidebar//USidebar';
 import history from '../History';
 import {UserStyled} from './UserStyled';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
@@ -195,20 +195,21 @@ isValid:true,emailError:false,
 
 
 
-     let api="http://159.65.146.25:5053/allPatient"
-      axios.post(api)
+     let api="http://159.65.146.25:5053/doctorPatientDetails"
+     let jssn={"Email": localStorage.getItem("email","") }
+      axios.post(api,jssn)
     .then((response)=> {
       // handle success
-         
+        
       
       console.log("allPatient",response)
    
 
        if(response.data && response.statusText && response.statusText=="OK"){
          console.log("allPatient",response)
-               if(Array.isArray(response.data.result)){
+               if(Array.isArray(response.data["Patient Details"])){
                
-                 this.setState({patients: response.data.result})
+                 this.setState({patients: response.data["Patient Details"]})
 
 
                }
@@ -330,19 +331,6 @@ isValid:true,emailError:false,
    
       
     }
-    genderDisplay=(gender)=>{
-      if(gender===0){
-        return "Female"
-      }
-      else if(gender===1){
-        return "Male"
-      }
-      else{
-        return "other"
-      }
-      
-    }
-    
     render() {
   //     if(localStorage.getItem("login","no")==="yes" && localStorage.getItem("usertype","")!=="ADMIN"){
   //       this.props.history.push("/drfs")
@@ -379,9 +367,9 @@ isValid:true,emailError:false,
                 {/* End of Topbar */}
                 {/* Begin Page Content */}
                 <div className="container-fluid">
-                  <div className="row">
+                  {/* <div className="row">
                     <div className="col-sm-12 col-md-12">
-                      {/* <div className="wrap-had">
+                      <div className="wrap-had">
                         <button  style={{ background:'#E96729 !important',   cursor: "pointer"}}  className="clk" onClick={()=>{this.setState({
                             email:'',
                             name:'',
@@ -397,9 +385,9 @@ isValid:true,emailError:false,
             {!this.state.isList &&  <span style={{color:'#ffffff'}} className="adu">Cancel</span>}
                          
                         </button>
-                      </div> */}
+                      </div>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
           {!this.state.isList &&     <div style={{background:'#26293B'}}   className="container-fluid" >
                   <div className="row" style={{background:'#1E1E2F'}}  >
@@ -687,11 +675,11 @@ isValid:true,emailError:false,
 <tr  id={i}>
                                   <td>{item.ID}</td>
                                   <td>{item.PatientName}</td>
-                                  <td>{this.genderDisplay(item.Gender)} </td>
+                                  <td> </td>
                                   <td>{item.DeviceMac}</td>
                                   
                                   <td>{item.hospital_Name}</td>
-                                  <td>{item.roomNumber}</td>
+                                  <td></td>
                                   <td>{item.Bed_Number}</td>
                                   <td>{item.Address}</td>
                                   <td>{item.BloodGroup}</td>
