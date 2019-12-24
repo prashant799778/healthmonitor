@@ -7,8 +7,8 @@ import {UserStyled} from './UserStyled';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from 'react-loader-spinner';
 import { withTheme } from 'styled-components';
-import 'react-widgets/dist/css/react-widgets.css';
-import Multiselect from 'react-widgets/lib/Multiselect'
+
+       
 class User extends React.Component{
 
   constructor(){
