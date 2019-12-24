@@ -180,7 +180,7 @@ def login88881():
             DeviceMac=request.args["DeviceMac"]
 
         if DeviceMac != "":
-            query2="Select * from Patient_master where Status<>'2' and Usertype_Id ='" +str(y3) +"' and DeviceMac='"+str(DeviceMac)+ "';"
+            query2=""
           
             print(query2)
             cursor = conn.cursor()
