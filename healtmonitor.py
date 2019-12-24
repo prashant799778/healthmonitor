@@ -276,6 +276,7 @@ def allDoctor():
         query= "select DM.ID,DM.DoctorName,HM.hospital_name,(HM.Address)hospital_address,HM.ID as Hospital_Id,HBS.ID as HubId,"
         query=query+"(select count(*) as count from Patient_master where DM.ID=Patient_master.DoctorID)patient,"
         query=query+"HBS.HubName from DoctorMaster DM,Hospital_master HM,HubMaster as HBS where  DM.HospitalId=HM.ID and HM.HubId=HBS.ID;"
+        print(query)
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
@@ -290,13 +291,16 @@ def allDoctor():
         output = {"result":"something went wrong","status":"false"}
         return output
 
-@app.route('/allnurses', methods=['post'])
-def allnurses():
+@app.route('/allNurse', methods=['post'])
+def allNurse():
     try:
         
         query= "select si.ID,si.name as name,si.Hospital_Id as Hospital_Id,Hm.HubId,Hm.hospital_name,HBS.HubName,"
-        query=query+"(select count(*) as count from Patient_master where si.ID=Patient_master.nurseId)patient"
-        query=query+" from signup si,Usertype_master ui,Hospital_master Hm,HubMaster as HBS where  si.Hospital_Id=Hm.ID and Hm.HubId=HBS.ID and si.Usertype_Id='3';"
+        query=query+"(select count(*) as count from Patient_master where status<>'2' and si.ID=Patient_master.nurseId)patient"
+
+        query=query+" from signup si,Usertype_master ui,Hospital_master Hm,HubMaster as HBS where  si.Hospital_Id=Hm.ID and Hm.HubId=HBS.ID and si.Usertype_Id=3 ;"
+        print(query)
+
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
