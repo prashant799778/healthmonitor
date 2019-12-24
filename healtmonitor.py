@@ -1365,50 +1365,50 @@ def addDoctor1():
         output = {"result":"something went wrong","status":"false"}
         return output
 #doctor master update
-@app.route('/updateDoctormaster', methods=['POST'])
-def updateDoctormaster():
-    try:
+# @app.route('/updateDoctormaster', methods=['POST'])
+# def updateDoctormaster():
+#     try:
        
-        json1=request.get_data() 
-        data=json.loads(json1.decode("utf-8")) 
-        print("yy")
-        query1 = " update Doctormaster set  HospitalId ='" + str(data["HospitalId"]) + "' , DoctorName='" + str(data["DoctorName"]) + "' , Email = '" + str(data["Email"]) + "'  ,  Gender ='" + str(data["Gender"]) + "' , Status ='1'  where ID = '" + str(data["ID"])+ "';"
-        print(query1)
-        conn=Connection()
-        cursor = conn.cursor()
-        cursor.execute(query1)
-        conn.commit()
-        cursor.close()
+#         json1=request.get_data() 
+#         data=json.loads(json1.decode("utf-8")) 
+#         print("yy")
+#         query1 = " update Doctormaster set  HospitalId ='" + str(data["HospitalId"]) + "' , DoctorName='" + str(data["DoctorName"]) + "' , Email = '" + str(data["Email"]) + "'  ,  Gender ='" + str(data["Gender"]) + "' , Status ='1'  where ID = '" + str(data["ID"])+ "';"
+#         print(query1)
+#         conn=Connection()
+#         cursor = conn.cursor()
+#         cursor.execute(query1)
+#         conn.commit()
+#         cursor.close()
 
-         if  "password" not in data:
-                print("2222222222222222222222222222")
-                query2 = " update signup set  Hospital_Id ='" + str(data["HospitalId"]) + "' , name ='" + str(data["DoctorName"]) + "' ,Usertype_Id ='2' ,Email = '" + str(data["Email"]) + "'  ,  Gender ='" + str(data["Gender"]) + "' ,password='123'  ,Status ='1'  where ID = '" + str(data["ID"])+ "';"
-                print(query2)
-                conn=Connection()
-                cursor = conn.cursor()
-                cursor.execute(query2)
-                conn.commit()
-                cursor.close()
-        else:
-            query2 = " update signup set  Hospital_Id ='" + str(data["HospitalId"]) + "' , name ='" + str(data["DoctorName"]) + "' ,Usertype_Id ='2' ,Email = '" + str(data["Email"]) + "'  ,  Gender ='" + str(data["Gender"]) + "' ,password='" + str(data["password"]) + "'  ,Status ='1'  where ID = '" + str(data["ID"])+ "';"
-            print(query2)
-            conn=Connection()
-            cursor = conn.cursor()
-            cursor.execute(query2)
-            conn.commit()
-            cursor.close()
+#          if  "password" not in data:
+#                 print("2222222222222222222222222222")
+#                 query2 = " update signup set  Hospital_Id ='" + str(data["HospitalId"]) + "' , name ='" + str(data["DoctorName"]) + "' ,Usertype_Id ='2' ,Email = '" + str(data["Email"]) + "'  ,  Gender ='" + str(data["Gender"]) + "' ,password='123'  ,Status ='1'  where ID = '" + str(data["ID"])+ "';"
+#                 print(query2)
+#                 conn=Connection()
+#                 cursor = conn.cursor()
+#                 cursor.execute(query2)
+#                 conn.commit()
+#                 cursor.close()
+#         else:
+#             query2 = " update signup set  Hospital_Id ='" + str(data["HospitalId"]) + "' , name ='" + str(data["DoctorName"]) + "' ,Usertype_Id ='2' ,Email = '" + str(data["Email"]) + "'  ,  Gender ='" + str(data["Gender"]) + "' ,password='" + str(data["password"]) + "'  ,Status ='1'  where ID = '" + str(data["ID"])+ "';"
+#             print(query2)
+#             conn=Connection()
+#             cursor = conn.cursor()
+#             cursor.execute(query2)
+#             conn.commit()
+#             cursor.close()
 
-        output = {"result":"Updated Successfully","status":"true"}
-        return output  
-    except KeyError :
-        print("Key Exception---->")   
-        output = {"result":"key error","status":"false"}
-        return output  
+#         output = {"result":"Updated Successfully","status":"true"}
+#         return output  
+#     except KeyError :
+#         print("Key Exception---->")   
+#         output = {"result":"key error","status":"false"}
+#         return output  
 
-    except Exception as e :
-        print("Exception---->" +str(e))    
-        output = {"result":"somthing went wrong","status":"false"}
-        return output
+#     except Exception as e :
+#         print("Exception---->" +str(e))    
+#         output = {"result":"somthing went wrong","status":"false"}
+#         return output
 
 
 
