@@ -326,7 +326,7 @@ def login888111():
 def allHospital():
     try:
         
-        query="select Hospital_master.ID,Hospital_master.hospital_name,Hospital_master.Address,HubMaster.HubName from Hospital_master inner join HubMaster on Hospital_master.HubId=HubMaster.ID;"
+        query="select Hospital_master.ID,Hospital_master.hospital_name,Hospital_master.Address,HubMaster.HubName,HubMaster.ID as HubId  from Hospital_master inner join HubMaster on Hospital_master.HubId=HubMaster.ID;"
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
@@ -382,6 +382,7 @@ def allDoctor():
         print("Exception---->" +str(e))           
         output = {"result":"something went wrong","status":"false"}
         return output
+
 
 #admin patients
 @app.route('/allPatient', methods=['post'])
@@ -580,17 +581,22 @@ def HospitalPatientDetails():
         data1 = cursor.fetchall()
         print(data1)
         l1=[ ]
+
+        uu= 'NULL'
+
         for dat in data1:
             doctor_Id=dat["DoctorID"]
             Hubname= dat["HubName"]
             Hub_Id=dat["HubId"]
 
             l2=[]
+            
             query3 ="select * from Patient_master   where  Status=0 and DoctorID='" + str(doctor_Id) + "'  ORDER BY  PatientId DESC;"   
             print(query3)
             cursor = conn.cursor()
             cursor.execute(query3)
             data27 = cursor.fetchall()
+            
             if data27 != ():
                 uu= data27
                
