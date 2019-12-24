@@ -49,7 +49,7 @@ class JSONEncoder(json.JSONEncoder):
 # cursor = mysqlcon.cursor()
 
 
-@app.route('/login', methods=['GET'])
+@app.route('/login1', methods=['GET'])
 def login8888():
     try:
         # userid = request.args['userid']
@@ -124,7 +124,7 @@ def login8888():
         return output
 
 
-@app.route('/login1', methods=['GET'])
+@app.route('/login', methods=['GET'])
 def login88881():
     try:
         # userid = request.args['userid']
@@ -181,8 +181,10 @@ def login88881():
 
         if DeviceMac != "":
             
+
             query2="Select * from Patient_master where Status<>'2' and Usertype_Id ='" +str(y3) + "' and DeviceMac='"+str(DeviceMac)+ "';"
           
+
             print(query2)
             cursor = conn.cursor()
             cursor.execute(query2)
@@ -325,7 +327,7 @@ def login888111():
 def allHospital():
     try:
         
-        query="select Hospital_master.ID,Hospital_master.hospital_name,Hospital_master.Address,HubMaster.HubName from Hospital_master inner join HubMaster on Hospital_master.HubId=HubMaster.ID;"
+        query="select Hospital_master.ID,Hospital_master.hospital_name,Hospital_master.Address,HubMaster.HubName,HubMaster.ID as HubId  from Hospital_master inner join HubMaster on Hospital_master.HubId=HubMaster.ID;"
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
@@ -365,7 +367,7 @@ def allHospital():
 def allDoctor():
     try:
         
-        query= "select DM.ID,DM.DoctorName,HM.hospital_name,(HM.Address)hospital_address,"
+        query= "select DM.ID,DM.DoctorName,HM.hospital_name,(HM.Address)hospital_address,HM.ID as Hospital_Id,HBS.ID as HubId"
         query=query+"(select count(*) as count from Patient_master where DM.ID=Patient_master.DoctorID)patient,"
         query=query+"HBS.HubName from DoctorMaster DM,Hospital_master HM,HubMaster as HBS where  DM.HospitalId=HM.ID and HM.HubId=HBS.ID;"
         conn=Connection()
@@ -381,6 +383,7 @@ def allDoctor():
         print("Exception---->" +str(e))           
         output = {"result":"something went wrong","status":"false"}
         return output
+
 
 #admin patients
 @app.route('/allPatient', methods=['post'])
@@ -579,17 +582,22 @@ def HospitalPatientDetails():
         data1 = cursor.fetchall()
         print(data1)
         l1=[ ]
+
+        uu= 'NULL'
+
         for dat in data1:
             doctor_Id=dat["DoctorID"]
             Hubname= dat["HubName"]
             Hub_Id=dat["HubId"]
 
             l2=[]
+            
             query3 ="select * from Patient_master   where  Status=0 and DoctorID='" + str(doctor_Id) + "'  ORDER BY  PatientId DESC;"   
             print(query3)
             cursor = conn.cursor()
             cursor.execute(query3)
             data27 = cursor.fetchall()
+            
             if data27 != ():
                 uu= data27
                
@@ -1292,41 +1300,42 @@ def addUser():
 
 
 
+# @app.route('/addDoctor', methods=['POST'])
+# def addDoctor():
+#     try:
+#         json1=request.get_data() 
+#         data1=json.loads(json1.decode("utf-8"))  
+        
+#         query = "select * from DoctorMaster where Email='"+str(data1["Email"])+ "';"
+#         conn=Connection()
+#         cursor = conn.cursor()
+#         cursor.execute(query)
+#         data = cursor.fetchall()
+#         cursor.close()
+#         print(data)
+#         if data==():           
+#             query2  = " insert into DoctorMaster (HospitalId,DoctorName,Email,Gender)"
+#             query2 = query2 +" values('"+str(data1["HospitalId"])+"','"+str(data1["DoctorName"])+"','"+str(data1["Email"])+"','"+str(data1["Gender"])+"');"
+#             print(query2)
+#             conn=Connection()
+#             cursor = conn.cursor()
+#             cursor.execute(query2)
+#             conn.commit()
+#             output = {"result":"data inserted successfully","status":"true"}
+#             return output
+#         else:
+#             output = {"result":"record already Exist","status":"true"}
+#             return output 
+#     except Exception as e :
+#         print("Exception---->" + str(e))    
+#         output = {"result":"something went wrong","status":"false"}
+#         return output
+
+
 @app.route('/addDoctor', methods=['POST'])
 def addDoctor():
     try:
-        json1=request.get_data() 
-        data1=json.loads(json1.decode("utf-8"))  
         
-        query = "select * from DoctorMaster where Email='"+str(data1["Email"])+ "';"
-        conn=Connection()
-        cursor = conn.cursor()
-        cursor.execute(query)
-        data = cursor.fetchall()
-        cursor.close()
-        print(data)
-        if data==():           
-            query2  = " insert into DoctorMaster (HospitalId,DoctorName,Email,Gender)"
-            query2 = query2 +" values('"+str(data1["HospitalId"])+"','"+str(data1["DoctorName"])+"','"+str(data1["Email"])+"','"+str(data1["Gender"])+"');"
-            print(query2)
-            conn=Connection()
-            cursor = conn.cursor()
-            cursor.execute(query2)
-            conn.commit()
-            output = {"result":"data inserted successfully","status":"true"}
-            return output
-        else:
-            output = {"result":"record already Exist","status":"true"}
-            return output 
-    except Exception as e :
-        print("Exception---->" + str(e))    
-        output = {"result":"something went wrong","status":"false"}
-        return output
-
-
-@app.route('/addDoctor1', methods=['POST'])
-def addDoctor1():
-    try:
         json1=request.get_data() 
         data1=json.loads(json1.decode("utf-8"))  
         
@@ -1392,6 +1401,7 @@ def addDoctor1():
         print("Exception---->" + str(e))    
         output = {"result":"something went wrong","status":"false"}
         return output
+
 #doctor master update
 # @app.route('/updateDoctormaster', methods=['POST'])
 # def updateDoctormaster():
