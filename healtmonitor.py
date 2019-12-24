@@ -302,7 +302,7 @@ def allNurse():
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
-        data= cursor.fetchall()
+        data= cursor.fetchone()
         cursor.close()
         if data:
             return {"result":data,"status":"true"}
