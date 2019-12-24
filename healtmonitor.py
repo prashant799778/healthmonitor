@@ -182,7 +182,7 @@ def login88881():
         if DeviceMac != "":
             
             
-            query2 = "select   * from Patient_master where Status<>'2'  and Usertype_Id ='" + str(y3) + "'  and DeviceMac='"+ DeviceMac+"'"
+            query2 = "select   * from Patient_master where Status<>'2'  and Usertype_Id ='" + str(y3) + "'  and DeviceMac='"+ str(DeviceMac)+"';"
             print(query2)
             cursor = conn.cursor()
             cursor.execute(query2)
