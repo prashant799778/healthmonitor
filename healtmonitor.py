@@ -188,6 +188,7 @@ def login88881():
                 
         
         query2 = " select   * from Patient_master where Status<>'2'  and Usertype_Id ='" + str(y3) + "' " +y9
+        print(query2)
 
         cursor = conn.cursor()
         cursor.execute(query2)
