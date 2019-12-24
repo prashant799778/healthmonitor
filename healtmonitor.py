@@ -1972,7 +1972,7 @@ def userMaster():
        
         json1=request.get_data() 
         data=json.loads(json1.decode("utf-8")) 
-        query = "select * from userMaster where Hospital_Id in 1,2,3,4,5;"
+        query = "select * from userMaster where Hospital_Id in (1,2,3,4,5);"
         print(query)
         conn=Connection()
         cursor = conn.cursor()
