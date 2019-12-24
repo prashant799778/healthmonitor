@@ -495,9 +495,9 @@ return (
                     <div className="id-info border-bottomm">
                       <h3> {item.HubName}</h3>
                       <ul>
-                        {/* <li>
+                        <li>
                           <button type="button" className="act-button"><img src={require("./img/eye.svg")} /></button>
-                        </li> */}
+                        </li>
                         <li onClick={()=>{this.edit(item)}}>
                           <button type="button" className="act-button"><img src={require("./img/edit.svg")} /></button>
                         </li>

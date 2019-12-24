@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import AppBar from '../AppBar/AppBar'
-import SideBar from '../AppBar/Sidebar/SideBar';
+import SideBar from '../AppBar/Sidebar//USidebar';
 import history from '../History';
 import {UserStyled} from './UserStyled';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
@@ -169,22 +169,22 @@ isValid:true,emailError:false,
        
        this.setState({isList:true,isEdit:false})
 
+     let jsons={"Email":localStorage.getItem("email", "")}
 
-
-        let api="http://159.65.146.25:5053/hubMaster"
-         axios.get(api)
+        let api="http://159.65.146.25:5053/doctorLoginHospital"
+         axios.post(api,jsons)
        .then((response)=> {
          // handle success
             
          
-         console.log("hubMaster",response)
+         console.log("doctorLoginHospital",response)
       
 
           if(response.data && response.statusText && response.statusText=="OK"){
             console.log("hubMaster",response)
-                  if(Array.isArray(response.data.HubMaster)){
+                  if(Array.isArray(response.data.result)){
                   
-                    this.setState({hubs: response.data.HubMaster})
+                    this.setState({hubs: response.data.result})
 
 
                   }
@@ -336,7 +336,7 @@ alert("User Created Successfully")
                 {/* Begin Page Content */}
                 <div className="container-fluid">
                   <div className="row">
-                    <div className="col-sm-12 col-md-12">
+                    {/* <div className="col-sm-12 col-md-12">
                       <div className="wrap-had">
                         <button  style={{ background:'#E96729 !important',   cursor: "pointer"}}  className="clk" onClick={()=>{this.setState({
                             email:'',
@@ -348,69 +348,15 @@ alert("User Created Successfully")
                             error1:'',err:"",emailError:false,
                           isList:this.state.isList?false:true,isEdit:this.state.isList?false:this.state.isEdit})
                           }}>
-            {this.state.isList && <span style={{color:'#ffffff'}} className="adu"><i className="fas fa-plus" />Add Hub</span>}
+            {this.state.isList && <span style={{color:'#ffffff'}} className="adu"><i className="fas fa-plus" />Add Hospital</span>}
             
             {!this.state.isList &&  <span style={{color:'#ffffff'}} className="adu">Cancel</span>}
                          
                         </button>
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
-
-              {/* add new css */}
-
-              {!this.state.isList &&        <div className="container-box">
-        <div className="container">
-          <div className="row">
-            <div className="col-sm-12 col-md-12">
-              <div className="page-hadding">
-                <h2>HOME</h2>
-                <h3>Hubs / Add Hub </h3>
-              </div>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-sm-12 col-md-12">
-              <div className="add-hospital-section box-bg-color">
-                <div className="add-inner-box">
-                  <h2 className="box-hading">Add Hub</h2>
-                </div>
-                
-                  <div className="info-box">
-                    <div className="form-group text-left">
-                      <label className="label-sz">Hub Name</label>
-                      <input    onChange={(e)=>{
-                               
-                               if(e.target.value.length < 25){
-                                 this.setState({name: e.target.value},()=>{
-                                
-                                   
-                                 })
-                                 }}}  value={this.state.name} type="email" className="form-control" placeholder="..." />
-                    </div>
-                  </div>
-                <div className="btn-section box-bg-color spc-bottom-1-padding">
-                {!this.state.isEdit &&    <button type="reset" onClick={()=>{this.reset()}} className="add-btn spc-right">Reset</button>}
-                  <button type="button"  onClick={()=>{this.submitapi()}} className="add-btn">{this.state.isEdit ? "update" :"save" } </button>
-          
-                             
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-                                }
-
-              {/* end new css */}
-
-
-
-<template>
-
-
           {!this.state.isList &&     <div style={{background:'#26293B'}}   className="container-fluid" >
                   <div className="row" style={{background:'#1E1E2F'}}  >
                     <div className="col-sm-12 col-md-12">
@@ -423,7 +369,7 @@ alert("User Created Successfully")
                       
                         </div>
                         <div style={{background:'#26293B'}}   className="info-headding">
-                          <h6 className="m-0 text-black"><font color="white">Hub Information</font></h6>
+                          <h6 className="m-0 text-black"><font color="white">Hospital Information</font></h6>
                           <span className="line" />
                         </div>
 
@@ -467,154 +413,39 @@ alert("User Created Successfully")
                
                             }
                
-               </template>
+               
                {/* table data */}
 
               {/* add new section */}
-              {this.state.isList &&  
-              <div className="container-box innr-card-bg-color">
-        <div className="container">
-          <div className="row">
-            <div className="col-sm-12 col-md-12">
-              <div className="uppr-box-card">
-                <h2 className="hading-up">home - <span>Hubs</span></h2>
-              </div>
-            </div>
-               <div className="col-sm-12 col-md-12">
-              <div className="main-card innr-card-bg-color">
-                <div className="card-box">
-                  <h2 className="text-hd">All Hubs</h2>
-                </div>
-                <div className="card-wrap-box">
-                { Array.isArray(this.state.hubs)  && this.state.hubs.map((item,i)=>{
+              <div class="container-box">
+    <div class="container">
+      <div class="row">
+      { Array.isArray(this.state.hubs)  && this.state.hubs.map((item,i)=>{
 
 return (
-
-
-                  <div className="card-hub box-bg-color">
-                    <div className="id-info border-bottomm">
-                      <h3> {item.HubName}</h3>
-                      <ul>
-                        {/* <li>
-                          <button type="button" className="act-button"><img src={require("./img/eye.svg")} /></button>
-                        </li> */}
-                        <li onClick={()=>{this.edit(item)}}>
-                          <button type="button" className="act-button"><img src={require("./img/edit.svg")} /></button>
-                        </li>
-                        <li  onClick={()=>{this.deletes(item.userid)}}>
-                          <button type="button" className="act-button"><img src={require("./img/delete.svg")} /></button>
-                        </li>
-                      </ul>
-                    </div>
-                    <div className="num-box">
-                      <div className="count-box">
-                        <h2 className="innr-text-hd text-center"> {item.total_hospital}</h2>
-                        <p className="info-doc">Hospital</p>
-                      </div>
-                      <div className="count-box">
-                        <h2 className="innr-text-hd text-center"> {item.total_doctor}</h2>
-                        <p className="info-doc">Doctor</p>
-                      </div>
-                    </div>
-                  </div>            
-              
-)})}
-              
-              </div>
-              </div>
+        <div class="col-sm-6 col-md-3 col-12">
+          <div class="box-container box-bg-color">
+            <div class="innr-box-info border-bottomm">
+              <h2 class="box-hadingg">{item.hospital_name}</h2>
+              <img src={require("../image/eye.svg")}/>
+            </div>
+            <div class="innr-box-info">
+              <p class="text-hading">Patients</p>
+              <h3 class="lg-hading">  {item.patient_count}</h3>
             </div>
           </div>
-        </div>
-      </div>}
-            
-            
-            
-              {/* add new section */}
+        </div>)})}
 
+      
+      
+      
+      
+      </div>
+    </div>
+  </div>
+              {/* End New Section */}
 
-
-
-
-
-
-
-
-<template>
-               {this.state.isList &&     <div className="container-fluid tbl-b animated--grow-in adduserr">
-                  <div className="row">
-                    <div className="col-sm-12 col-md-12">
-                      <div   style={{background:'#1E1E2F'}} className="card mb-4">
-                        <div className="card-header py-3 d-flex justify-content-between"  style={{background:'#1E1E2F'}}>
-                          <h6  className="m-0 text-white">All Hubs</h6>
-                          {/* <div className="icon-bx">
-                            <ul>
-                              <li><i className="fas fa-chevron-down" /></li>
-                              <li><i className="fas fa-sync" /></li>
-                              <li><i className="fas fa-times" /></li>
-                            </ul>
-                          </div> */}
-                        </div>
-                        <div className="card-body">
-                            <div class="container-fluid"  >
-                              <div  style={{background:'#1E1E2F'}} class="row">
-                            { Array.isArray(this.state.hubs)  && this.state.hubs.map((item,i)=>{
-
-                        return (
-
-
-                             <div class="col-2 hubs">
-                                   <div class="row" style={{marginLeft: '3px' ,  display: 'flex'
-    ,justifyContent: 'space-between'}}>
-                                   <div class="">
-                                      {item.HubName}
-                                   </div>
-                                <div class="">
-                                <div className="action-bx">
-                                      <ul>
-                                       
-                                        <li onClick={()=>{this.edit(item)}}><i className="far fa-edit" /></li>
-                                        <li  onClick={()=>{this.deletes(item.userid)}} data-toggle="modal" data-target="#deleteModal">   <i className="far fa-trash-alt" /></li>
-                                      </ul>
-                                    </div> 
-                                  </div> 
-                                   </div>
-                                   <div class="row  hubsLine">
-                                       <hr></hr>
-                                   </div>
-                                   <div class="row">
-                                   <div class="">
-                                   <div class="col hubsNumber">
-                                  {item.total_hospital}
-                                       </div>
-                                       <div class="col text10">
-                                     Hospitals
-                                       </div>
-                                   </div>
-                                <div class="" style={{    marginLeft: '38px'}}>
-                                <div class="col hubsNumber">
-                              {item.total_doctor}
-                                       </div>
-                                       <div class="col text10">
-                                      Doctors  
-                                       </div></div> 
-                                   </div>
-                            
-                                  </div>
-                         ); 
-                            })     }
-                {/*  */}
-                                 </div>
-
-                            </div>
-                        
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-               }
-
-</template>
+           
               {/* End Table Data */}
               </div>
               {/* End of Main Content */}
