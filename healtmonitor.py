@@ -150,15 +150,10 @@ def login88881():
         y3= loginuser["Usertype_Id"]
         y2= loginuser["Hospital_Id"]
         
-        Nurse,DeviceMac,y9 = "","",""
+        Nurse=""
 
-        if 'DeviceMac' in request.args:
-            DeviceMac=request.args["DeviceMac"]
 
-        if DeviceMac != "":
-            WhereCondition1 =  " and DeviceMac   = '" + DeviceMac + "'  "
-            y9 = y9 +  WhereCondition1
-        
+       
 
 
         if  y == 'Nurse':
@@ -172,10 +167,28 @@ def login88881():
                 # cursor = conn.cursor()
                 # cursor.execute(query3)
                 # data3= cursor.fetchall()
+               
                 # i["DoctorID"]=data3[0]["DoctorID"]
+
+
+        DeviceMac,y9 = "",""
+
+
+
+
+        if 'DeviceMac' in request.args:
+            DeviceMac=request.args["DeviceMac"]
+
+        if DeviceMac != "":
+            WhereCondition1 =  " and DeviceMac   = '" + DeviceMac + "'  "
+            y9 = y9 +  WhereCondition1
+
+        print(y9)
+        
                 
         
         query2 = " select   * from Patient_master where Status<>'2'  and Usertype_Id ='" + str(y3) + "' " +y9
+
         cursor = conn.cursor()
         cursor.execute(query2)
         PatientData= cursor.fetchone()
