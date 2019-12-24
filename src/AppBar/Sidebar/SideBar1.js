@@ -3,10 +3,9 @@ import history from '../../History';
 import '../style.css';
 import {withRouter} from 'react-router-dom';
 import dashimg from '../../image/dashboard.svg';
-import logo from '../../image/web_icon.png';
 
 import { Link } from "react-router-dom";
-
+import logo from './web_icon.png';
 class SideBar extends React.Component{
 
   constructor(){
@@ -50,6 +49,12 @@ class SideBar extends React.Component{
   else if(window.location.pathname == "/doctor"){
    
     let element = document.getElementById('side55');
+   
+    element.classList.add("active");
+  }
+  else if(window.location.pathname == "/nurse"){
+   
+    let element = document.getElementById('side66');
    
     element.classList.add("active");
   }
@@ -109,7 +114,7 @@ return(
       <div className="sidebar-brand-icon">
       </div>
       <div className="sidebar-brand-text mx-3">
-        <img src={logo}></img>
+      <img src={logo}></img>   
         
       </div>
     </a>
@@ -133,6 +138,11 @@ return(
     <li    className="nav-item">
       <Link   id="side55"  to="/doctor" className="nav-link">
         <img src=""/>Doctors
+      </Link>
+    </li>
+    <li    className="nav-item">
+      <Link   id="side66"  to="/nurse" className="nav-link">
+        <img src=""/>Nurses
       </Link>
     </li>
     <li    className="nav-item">
