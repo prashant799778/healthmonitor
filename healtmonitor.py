@@ -124,6 +124,82 @@ def login8888():
         return output
 
 
+@app.route('/login1', methods=['GET'])
+def login88881():
+    try:
+        # userid = request.args['userid']
+        json1=request.get_data()
+        data=json.loads(json1.decode("utf-8"))
+        
+               
+            
+        query ="select si.name as name,si.Usertype_Id as Usertype_Id,"
+        query=query+" si.Hospital_Id as Hospital_Id,us.Usertype as Usertype,si.UserID as UserID,si.ID as mainId,si.Email as Email  from signup as si INNER JOIN Usertype_master as us on us.ID=si.Usertype_Id"
+        query=query+" INNER JOIN Hospital_master AS hm on hm.ID=si.Hospital_Id  where name = '"+str(data["name"])+"' and password='"+(data["password"])+"' ;"   
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        loginuser = cursor.fetchone()
+       
+
+       
+        y= loginuser["Usertype"]
+        y3= loginuser["Usertype_Id"]
+        y2= loginuser["Hospital_Id"]
+        Nurse = ""
+        
+
+
+        if  y == 'Nurse':
+            query2 = "select  hm.hospital_name  as hospital_Name,hm.HubId as HubId,Dm.DoctorName as DoctorName,Dm.ID as DoctorID  from Hospital_master  as hm INNER JOIN DoctorMaster as Dm on Dm.HospitalId= hm.ID where  hm.ID ='" + str(y2) + "'"
+            
+            cursor = conn.cursor()
+            cursor.execute(query2)
+            Nurse = cursor.fetchall()
+            # for i in Nurse:
+                # query3= "select ID as DoctorID from signup where name= '"+str(i["DoctorName"])+"';"
+                # cursor = conn.cursor()
+                # cursor.execute(query3)
+                # data3= cursor.fetchall()
+                # i["DoctorID"]=data3[0]["DoctorID"]
+                
+        query2 = " select   * from Patient_master where Status<>'2'  and Usertype_Id ='" + str(y3) + "'  and DeviceMac='"+str(data["DeviceMac"])+"' "
+      
+        cursor = conn.cursor()
+        cursor.execute(query2)
+        PatientData= cursor.fetchone()
+        cursor.close()
+        if PatientData != None:
+            Count= 1
+        
+        else:
+            Count=0
+
+        if loginuser:   
+            data={"status":"true","result":loginuser,"Nurse Details":Nurse,"Patient Details":PatientData,"Count":Count}                      
+            return data
+        else:
+            data={"status":"false","result":"Login Failed"}
+            return data
+
+
+
+        
+
+
+
+    except KeyError as e:
+        print("Exception---->" +str(e))        
+        output = {"result":"Input Keys are not Found","status":"false"}
+        return output 
+    
+    except Exception as e :
+        print("Exception---->" +str(e))           
+        output = {"result":"something went wrong","status":"false"}
+        return output
+
+
+
 @app.route('/login_pras', methods=['GET'])
 def login888111():
     try:
@@ -1304,13 +1380,24 @@ def updateDoctormaster():
         conn.commit()
         cursor.close()
 
-        query2 = " update signup set  Hospital_Id ='" + str(data["HospitalId"]) + "' , name ='" + str(data["DoctorName"]) + "' ,Usertype_Id ='2' ,Email = '" + str(data["Email"]) + "'  ,  Gender ='" + str(data["Gender"]) + "' ,password='" + str(data["password"]) + "'  ,Status ='1'  where ID = '" + str(data["ID"])+ "';"
-        print(query2)
-        conn=Connection()
-        cursor = conn.cursor()
-        cursor.execute(query2)
-        conn.commit()
-        cursor.close()
+         if  "password" not in data:
+                print("2222222222222222222222222222")
+                query2 = " update signup set  Hospital_Id ='" + str(data["HospitalId"]) + "' , name ='" + str(data["DoctorName"]) + "' ,Usertype_Id ='2' ,Email = '" + str(data["Email"]) + "'  ,  Gender ='" + str(data["Gender"]) + "' ,password='123'  ,Status ='1'  where ID = '" + str(data["ID"])+ "';"
+                print(query2)
+                conn=Connection()
+                cursor = conn.cursor()
+                cursor.execute(query2)
+                conn.commit()
+                cursor.close()
+        else:
+            query2 = " update signup set  Hospital_Id ='" + str(data["HospitalId"]) + "' , name ='" + str(data["DoctorName"]) + "' ,Usertype_Id ='2' ,Email = '" + str(data["Email"]) + "'  ,  Gender ='" + str(data["Gender"]) + "' ,password='" + str(data["password"]) + "'  ,Status ='1'  where ID = '" + str(data["ID"])+ "';"
+            print(query2)
+            conn=Connection()
+            cursor = conn.cursor()
+            cursor.execute(query2)
+            conn.commit()
+            cursor.close()
+
         output = {"result":"Updated Successfully","status":"true"}
         return output  
     except KeyError :
