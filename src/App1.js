@@ -4,7 +4,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import Dash from "./Dash/Dash";
 import User from "./User/User";
-import Nurse  from "./User/Nurse";
+
 import Drf from "./Drf/Drf";
 import Mom from "./Drf/Mom";
 import Drfs from "./Drfs/Drf";
@@ -84,12 +84,6 @@ class App extends React.Component {
             path="/doctor"
               render={props => (
                 <Doctor isOpen={this.state.isOpen} Open={this.open} />
-              )}    />
-
-<Route
-            path="/nurse"
-              render={props => (
-                <Nurse isOpen={this.state.isOpen} Open={this.open} />
               )}    />
             <Route
               path="/drf"
