@@ -180,7 +180,7 @@ def login88881():
             DeviceMac=request.args["DeviceMac"]
 
         if DeviceMac != "":
-            print(DeviceMac)
+            
             query2="Select * from Patient_master where Status<>'2' and Usertype_Id ='" +str(y3) + "' and DeviceMac='"+str(DeviceMac)+ "';"
           
             print(query2)
@@ -1949,13 +1949,38 @@ def doctorProfile():
     except KeyError :
         print("Key Exception---->")   
         output = {"result":"key error","status":"false"}
+        output = {"result":"key error","status":"false"}
         return output  
 
     except Exception as e :
         print("Exception---->" +str(e))    
         output = {"result":"somthing went wrong","status":"false"}
         return output
+@app.route('/userMaster', methods=['POST'])
+def userMaster():
+    try:
+       
+        json1=request.get_data() 
+        data=json.loads(json1.decode("utf-8")) 
+        query = "select * from userMaster where ID=7;"
+        print(query)
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data1 = cursor.fetchall()
+        cursor.close()
+        output = {"result":data1,"status":"true"}
+        return output  
+    except KeyError :
+        print("Key Exception---->")   
+        output = {"result":"key error","status":"false"}
+        output = {"result":"key error","status":"false"}
+        return output  
 
+    except Exception as e :
+        print("Exception---->" +str(e))    
+        output = {"result":"somthing went wrong","status":"false"}
+        return output
 
 
  
