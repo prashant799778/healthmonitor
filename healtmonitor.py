@@ -128,14 +128,17 @@ def login8888():
 def login88881():
     try:
         # userid = request.args['userid']
-        json1=request.get_data()
-        data=json.loads(json1.decode("utf-8"))
+        password = request.args['password']
+        name = request.args['name']
+        
+               
+       
         
                
             
         query ="select si.name as name,si.Usertype_Id as Usertype_Id,"
         query=query+" si.Hospital_Id as Hospital_Id,us.Usertype as Usertype,si.UserID as UserID,si.ID as mainId,si.Email as Email  from signup as si INNER JOIN Usertype_master as us on us.ID=si.Usertype_Id"
-        query=query+" INNER JOIN Hospital_master AS hm on hm.ID=si.Hospital_Id  where name = '"+str(data["name"])+"' and password='"+(data["password"])+"' ;"   
+        query=query+" INNER JOIN Hospital_master AS hm on hm.ID=si.Hospital_Id  where name = '" + name + "' and password='" + password + "' ;"   
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
@@ -146,7 +149,15 @@ def login88881():
         y= loginuser["Usertype"]
         y3= loginuser["Usertype_Id"]
         y2= loginuser["Hospital_Id"]
-        Nurse = ""
+        
+        Nurse,DeviceMac,y9 = "","",""
+
+        if 'DeviceMac' in request.args:
+            DeviceMac=request.args["DeviceMac"]
+
+        if DeviceMac != "":
+            WhereCondition1 =  " and DeviceMac   = '" + DeviceMac + "'  "
+            y9 = y9 +  WhereCondition1
         
 
 
@@ -163,8 +174,8 @@ def login88881():
                 # data3= cursor.fetchall()
                 # i["DoctorID"]=data3[0]["DoctorID"]
                 
-        query2 = " select   * from Patient_master where Status<>'2'  and Usertype_Id ='" + str(y3) + "'  and DeviceMac='"+str(data["DeviceMac"])+"' "
-      
+        
+        query2 = " select   * from Patient_master where Status<>'2'  and Usertype_Id ='" + str(y3) + "' " +y9
         cursor = conn.cursor()
         cursor.execute(query2)
         PatientData= cursor.fetchone()
