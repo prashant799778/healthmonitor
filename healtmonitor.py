@@ -182,18 +182,22 @@ def login88881():
         if DeviceMac != "":
             WhereCondition1 =  " and DeviceMac   = '" + DeviceMac + "'  "
             y9 = y9 +  WhereCondition1
+            query2 = " select   * from Patient_master where Status<>'2'  and Usertype_Id ='" + str(y3) + "' " +WhereCondition1
+            print(query2)
+            cursor = conn.cursor()
+            cursor.execute(query2)
+            PatientData= cursor.fetchone()
+           
 
-        print(y9)
+        else:
+            query2 = " select   * from Patient_master where Status<>'2'  and Usertype_Id ='" + str(y3) + "' " 
+            print(query2)
+            cursor = conn.cursor()
+            cursor.execute(query2)
+            PatientData= cursor.fetchone()
         
-                
-        
-        query2 = " select   * from Patient_master where Status<>'2'  and Usertype_Id ='" + str(y3) + "' " +y9
-        print(query2)
-
-        cursor = conn.cursor()
-        cursor.execute(query2)
-        PatientData= cursor.fetchone()
         cursor.close()
+        
         if PatientData != None:
             Count= 1
         
