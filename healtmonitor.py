@@ -295,7 +295,7 @@ def allDoctor():
 def allNurse():
     try:
         
-        query= "select si.name as name,Hm.ID as Hospital_Id,Hm.HubId,Hm.hospital_name,HBS.HubName,"
+        query= "select si.name as name,si.ID,si.Gender,si.mobile,si.password,Hm.ID as Hospital_Id,Hm.HubId,Hm.hospital_name,HBS.HubName,"
         query=query+"(select count(*) as count from Patient_master where status<>'2' and si.ID=Patient_master.nurseId)patient"
         query=query+" from signup si,Hospital_master Hm,HubMaster as HBS where  si.Hospital_Id=Hm.ID and Hm.HubId=HBS.ID and si.Usertype_Id=3 ;"
         print(query)
@@ -1332,50 +1332,87 @@ def addDoctor():
         return output
 
 #doctor master update
-# @app.route('/updateDoctormaster', methods=['POST'])
-# def updateDoctormaster():
-#     try:
+@app.route('/updateDoctormaster', methods=['POST'])
+def updateDoctormaster():
+    try:
        
-#         json1=request.get_data() 
-#         data=json.loads(json1.decode("utf-8")) 
-#         print("yy")
-#         query1 = " update Doctormaster set  HospitalId ='" + str(data["HospitalId"]) + "' , DoctorName='" + str(data["DoctorName"]) + "' , Email = '" + str(data["Email"]) + "'  ,  Gender ='" + str(data["Gender"]) + "' , Status ='1'  where ID = '" + str(data["ID"])+ "';"
-#         print(query1)
-#         conn=Connection()
-#         cursor = conn.cursor()
-#         cursor.execute(query1)
-#         conn.commit()
-#         cursor.close()
+        json1=request.get_data() 
+        data=json.loads(json1.decode("utf-8")) 
+        print("yy")
+        query1 = " update Doctormaster set  HospitalId ='" + str(data["HospitalId"]) + "' , DoctorName='" + str(data["DoctorName"]) + "' , Email = '" + str(data["Email"]) + "'  ,  Gender ='" + str(data["Gender"]) + "' , Status ='1'  where ID = '" + str(data["ID"])+ "';"
+        print(query1)
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query1)
+        conn.commit()
+        cursor.close()
+        if  "password" not in data:
+            print("2222222222222222222222222222")
+            query2 = " update signup set  Hospital_Id ='" + str(data["HospitalId"]) + "' , name ='" + str(data["DoctorName"]) + "' ,Usertype_Id ='2' ,Email = '" + str(data["Email"]) + "'  ,  Gender ='" + str(data["Gender"]) + "' ,password='123'  ,Status ='1'  where ID = '" + str(data["ID"])+ "';"
+            print(query2)
+            conn=Connection()
+            cursor = conn.cursor()
+            cursor.execute(query2)
+            conn.commit()
+            cursor.close()
+        else:
+            query2 = " update signup set  Hospital_Id ='" + str(data["HospitalId"]) + "' , name ='" + str(data["DoctorName"]) + "' ,Usertype_Id ='2' ,Email = '" + str(data["Email"]) + "'  ,  Gender ='" + str(data["Gender"]) + "' ,password='" + str(data["password"]) + "'  ,Status ='1'  where ID = '" + str(data["ID"])+ "';"
+            print(query2)
+            conn=Connection()
+            cursor = conn.cursor()
+            cursor.execute(query2)
+            conn.commit()
+            cursor.close()
 
-#          if  "password" not in data:
-#                 print("2222222222222222222222222222")
-#                 query2 = " update signup set  Hospital_Id ='" + str(data["HospitalId"]) + "' , name ='" + str(data["DoctorName"]) + "' ,Usertype_Id ='2' ,Email = '" + str(data["Email"]) + "'  ,  Gender ='" + str(data["Gender"]) + "' ,password='123'  ,Status ='1'  where ID = '" + str(data["ID"])+ "';"
-#                 print(query2)
-#                 conn=Connection()
-#                 cursor = conn.cursor()
-#                 cursor.execute(query2)
-#                 conn.commit()
-#                 cursor.close()
-#         else:
-#             query2 = " update signup set  Hospital_Id ='" + str(data["HospitalId"]) + "' , name ='" + str(data["DoctorName"]) + "' ,Usertype_Id ='2' ,Email = '" + str(data["Email"]) + "'  ,  Gender ='" + str(data["Gender"]) + "' ,password='" + str(data["password"]) + "'  ,Status ='1'  where ID = '" + str(data["ID"])+ "';"
-#             print(query2)
-#             conn=Connection()
-#             cursor = conn.cursor()
-#             cursor.execute(query2)
-#             conn.commit()
-#             cursor.close()
+        output = {"result":"Updated Successfully","status":"true"}
+        return output  
+    except KeyError :
+        print("Key Exception---->")   
+        output = {"result":"key error","status":"false"}
+        return output  
 
-#         output = {"result":"Updated Successfully","status":"true"}
-#         return output  
-#     except KeyError :
-#         print("Key Exception---->")   
-#         output = {"result":"key error","status":"false"}
-#         return output  
+    except Exception as e :
+        print("Exception---->" +str(e))    
+        output = {"result":"somthing went wrong","status":"false"}
+        return output
 
-#     except Exception as e :
-#         print("Exception---->" +str(e))    
-#         output = {"result":"somthing went wrong","status":"false"}
-#         return output
+@app.route('/updateNursemaster', methods=['POST'])
+def updateNursemaster():
+    try:
+       
+        json1=request.get_data() 
+        data=json.loads(json1.decode("utf-8")) 
+        
+        
+        if  "password" not in data:
+            print("2222222222222222222222222222")
+            query2 = " update signup set  Hospital_Id ='" + str(data["Hospital_Id"]) + "' , name ='" + str(data["name"]) + "' ,Usertype_Id ='3' ,Email = '" + str(data["Email"]) + "'  ,  Gender ='" + str(data["Gender"]) + "' ,password='123'  ,Status ='1'  where ID = '" + str(data["ID"])+ "';"
+            print(query2)
+            conn=Connection()
+            cursor = conn.cursor()
+            cursor.execute(query2)
+            conn.commit()
+            cursor.close()
+        else:
+            query2 = " update signup set  Hospital_Id ='" + str(data["Hospital_Id"]) + "' , name ='" + str(data["name"]) + "' ,Usertype_Id ='3' ,Email = '" + str(data["Email"]) + "'  ,  Gender ='" + str(data["Gender"]) + "' ,password='" + str(data["password"]) + "'  ,Status ='1'  where ID = '" + str(data["ID"])+ "';"
+            print(query2)
+            conn=Connection()
+            cursor = conn.cursor()
+            cursor.execute(query2)
+            conn.commit()
+            cursor.close()
+
+        output = {"result":"Updated Successfully","status":"true"}
+        return output  
+    except KeyError :
+        print("Key Exception---->")   
+        output = {"result":"key error","status":"false"}
+        return output  
+
+    except Exception as e :
+        print("Exception---->" +str(e))    
+        output = {"result":"somthing went wrong","status":"false"}
+        return output
 
 @app.route('/Patient_master', methods=['POST'])
 def Patient_master():
