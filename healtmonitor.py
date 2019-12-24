@@ -180,7 +180,7 @@ def login88881():
             DeviceMac=request.args["DeviceMac"]
 
         if DeviceMac != "":
-            WhereCondition1 =  " and DeviceMac   = '" + DeviceMac + "'  ;"
+            WhereCondition1 =  " and DeviceMac='"+ DeviceMac+"';"
             y9 = y9 +  WhereCondition1
             
             query2 = " select   * from Patient_master where Status<>'2'  and Usertype_Id ='" + str(y3) + "' " + WhereCondition1
@@ -191,7 +191,7 @@ def login88881():
            
 
         else:
-            query2 = " select   * from Patient_master where Status<>'2'  and Usertype_Id ='" + str(y3) + "' ;" 
+            query2 = " select   * from Patient_master where Status<>'2'  and Usertype_Id ='" + str(y3) + "';" 
             cursor = conn.cursor()
             cursor.execute(query2)
             PatientData= cursor.fetchone()
