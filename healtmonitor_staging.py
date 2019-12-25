@@ -63,7 +63,7 @@ def login88881():
                
             
         query ="select um.name as name,um.Usertype_Id as Usertype_Id,"
-        query=query+" um.Hospital_Id as Hospital_Id,us.Usertype as Usertype,um.UserID as UserID,um.UserID as mainId,um.Email as Email  from userMaster as um INNER JOIN Usertype_master as us on us.ID=um.Usertype_Id"
+        query=query+" um.Hospital_Id as Hospital_Id,um.UserID as UserID,um.UserID as mainId,um.Email as Email  from userMaster as um INNER JOIN Usertype_master as us on us.ID=um.Usertype_Id"
         query=query+" INNER JOIN Hospital_master AS hm on hm.ID=um.Hospital_Id  where name = '" + name + "' and password='" + password + "' ;"   
         conn=Connection()
         cursor = conn.cursor()
