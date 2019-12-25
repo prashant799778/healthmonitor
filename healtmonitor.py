@@ -1843,7 +1843,7 @@ def userM():
         data2 = cursor.fetchall()
         cursor.close()
         print(data2)
-        b=data2["Hospital_Id"].replace(",","")
+        b=data2[0]["Hospital_Id"].replace(",","")
         b=list(b)
         b=tuple([int(i) for i in b])
         print(b)
