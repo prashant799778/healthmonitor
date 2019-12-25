@@ -1842,7 +1842,7 @@ def userM():
         cursor.execute(query1)
         data2 = cursor.fetchall()
         cursor.close()
-        
+        print(data2)
         query = " select um.ID,um.name,um.Email,um.Gender,hm.hospital_name from healthmonitor_staging.userMaster um,healthmonitor_staging.Hospital_master hm where hm.ID in("+data2['Hospital_Id'] +")+ and um.Email='rakesh@gmail.com';"
         print("!22222222")
         print(query)
