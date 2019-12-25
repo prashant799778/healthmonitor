@@ -1847,6 +1847,7 @@ def userM():
         b=list(b)
         b=tuple([int(i) for i in b])
         print(b)
+        print("333333333333333333333")
         query = " select um.ID,um.name,um.Email,um.Gender,hm.hospital_name from healthmonitor_staging.userMaster um,healthmonitor_staging.Hospital_master hm where hm.ID in'"+ b +"'+ and um.Email='rakesh@gmail.com';"
         print("!22222222")
         print(query)
