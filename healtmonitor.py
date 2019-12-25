@@ -1834,7 +1834,7 @@ def userM():
         # json1=request.get_data() 
         # data=json.loads(json1.decode("utf-8")) 
         print("!1111111111")
-        query1 = " select Hospital_Id from healthmonitor_staging.userMaster where Email='rakesh@gmail.com' ;"
+        query1 = " select password from healthmonitor_staging.userMaster where Email='rakesh@gmail.com' ;"
         print("!22222222")
         print(query1)
         conn=Connection()
