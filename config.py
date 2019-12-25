@@ -11,7 +11,7 @@ def Connection():
     connection = pymysql.connect(host='localhost',
                                 user='root',
                                 password='tynor123',
-                                db='healthmonitor',
+                                db='healthmonitor_staging',
                                 charset='utf8mb4',
                                 cursorclass=pymysql.cursors.DictCursor)
 
