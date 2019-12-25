@@ -1836,7 +1836,7 @@ def userM():
         print("!1111111111")
         query1 = " select Hospital_Id from healthmonitor_staging.userMaster where Email='rakesh@gmail.com' ;"
         print("!22222222")
-        print(query)
+        print(query1)
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query1)
