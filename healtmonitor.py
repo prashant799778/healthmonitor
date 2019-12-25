@@ -1842,7 +1842,7 @@ def userM():
         cursor.execute(query1)
         data2 = cursor.fetchall()
         cursor.close()
-        b=data2["Hospital_Id"].replace('"',"'").replace(",","','")
+        b=data2[0]["Hospital_Id"].replace('"',"'").replace(",","','")
         # print(data2)
         # b=data2[0]["Hospital_Id"].replace(",","")
         # b=list(b)
