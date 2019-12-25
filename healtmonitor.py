@@ -1827,7 +1827,31 @@ def doctorProfile():
         # output = {"result":"somthing went wrong","status":"false"}
         # return output
 
+@app.route('/userM', methods=['POST'])
+def userM():
+    try:
+       
+        json1=request.get_data() 
+        data=json.loads(json1.decode("utf-8")) 
+        query = " select um.ID,um.name,um.Email,um.Gender,hm.hospital_name from userMaster um,Hospital_master hm where hm.ID in(select Hospital_Id from um where Email='rakesh@gmail.com') and um.Email='rakesh@gmail.com';"
+        print(query)
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data1 = cursor.fetchall()
+        cursor.close()
+        output = {"result":data1,"status":"true"}
+        return output  
+    except KeyError :
+        print("Key Exception---->")   
+        output = {"result":"key error","status":"false"}
+        output = {"result":"key error","status":"false"}
+        return output  
 
+    except Exception as e :
+        print("Exception---->" +str(e))    
+        output = {"result":"somthing went wrong","status":"false"}
+        return output
  
 if __name__ == "__main__":
     CORS(app, support_credentials=True)
