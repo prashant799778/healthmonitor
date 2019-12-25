@@ -57,7 +57,7 @@ def login88881():
         password = request.args['password']
         name = request.args['name']
         
-               
+        print(name)       
        
         
                
@@ -69,7 +69,7 @@ def login88881():
         cursor = conn.cursor()
         cursor.execute(query)
         loginuser = cursor.fetchone()
-       
+        print("11111111111")
 
        
         y= loginuser["Usertype"]
