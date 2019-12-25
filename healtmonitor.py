@@ -1834,6 +1834,15 @@ def userM():
         # json1=request.get_data() 
         # data=json.loads(json1.decode("utf-8")) 
         print("!1111111111")
+        query1 = " select Hospital_Id from healthmonitor_staging.userMaster where Email='rakesh@gmail.com' ;"
+        print("!22222222")
+        print(query)
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query1)
+        data2 = cursor.fetchall()
+        cursor.close()
+        
         query = " select um.ID,um.name,um.Email,um.Gender,hm.hospital_name from healthmonitor_staging.userMaster um,healthmonitor_staging.Hospital_master hm where hm.ID in(select Hospital_Id from healthmonitor_staging.userMaster where Email='rakesh@gmail.com') and um.Email='rakesh@gmail.com';"
         print("!22222222")
         print(query)
@@ -1842,7 +1851,7 @@ def userM():
         cursor.execute(query)
         data1 = cursor.fetchall()
         cursor.close()
-        output = {"result":data1,"status":"true"}
+        output = {"result":data1,"data2":data2,"status":"true"}
         return output  
     except KeyError :
         print("Key Exception---->")   
