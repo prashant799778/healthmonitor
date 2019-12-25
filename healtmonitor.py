@@ -1834,7 +1834,7 @@ def userM():
         # json1=request.get_data() 
         # data=json.loads(json1.decode("utf-8")) 
         print("!1111111111")
-        query = " select um.ID,um.name,um.Email,um.Gender,hm.hospital_name from userMaster um,Hospital_master hm where hm.ID in(select Hospital_Id from um where Email='rakesh@gmail.com') and um.Email='rakesh@gmail.com';"
+        query = " select um.ID,um.name,um.Email,um.Gender,hm.hospital_name from healthmonitor_staging.userMaster um,healthmonitor_staging.Hospital_master hm where hm.ID in(select Hospital_Id from healthmonitor_staging.userMAster where Email='rakesh@gmail.com') and um.Email='rakesh@gmail.com';"
         print("!22222222")
         print(query)
         conn=Connection()
