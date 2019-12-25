@@ -1843,7 +1843,7 @@ def userM():
         data2 = cursor.fetchall()
         cursor.close()
         print(data2)
-        data3=data2["Hospital_Id"].replace('"',"'")
+        print("asasasasas")
         print(data3)
         query = " select um.ID,um.name,um.Email,um.Gender,hm.hospital_name from healthmonitor_staging.userMaster um,healthmonitor_staging.Hospital_master hm where hm.ID in("+ data3 +")+ and um.Email='rakesh@gmail.com';"
         print("!22222222")
