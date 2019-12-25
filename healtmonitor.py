@@ -1843,9 +1843,10 @@ def userM():
         data2 = cursor.fetchall()
         cursor.close()
         print(data2)
-        print("asasasasas")
+        b=data2["Hospital_Id"].replace(",","")
+        b=tuple(b)
         print(data3)
-        query = " select um.ID,um.name,um.Email,um.Gender,hm.hospital_name from healthmonitor_staging.userMaster um,healthmonitor_staging.Hospital_master hm where hm.ID in("+ data3 +")+ and um.Email='rakesh@gmail.com';"
+        query = " select um.ID,um.name,um.Email,um.Gender,hm.hospital_name from healthmonitor_staging.userMaster um,healthmonitor_staging.Hospital_master hm where hm.ID in"+ b +"+ and um.Email='rakesh@gmail.com';"
         print("!22222222")
         print(query)
         conn=Connection()
