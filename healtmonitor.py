@@ -1831,9 +1831,11 @@ def doctorProfile():
 def userM():
     try:
        
-        json1=request.get_data() 
-        data=json.loads(json1.decode("utf-8")) 
+        # json1=request.get_data() 
+        # data=json.loads(json1.decode("utf-8")) 
+        print("!1111111111")
         query = " select um.ID,um.name,um.Email,um.Gender,hm.hospital_name from userMaster um,Hospital_master hm where hm.ID in(select Hospital_Id from um where Email='rakesh@gmail.com') and um.Email='rakesh@gmail.com';"
+        print("!22222222")
         print(query)
         conn=Connection()
         cursor = conn.cursor()
