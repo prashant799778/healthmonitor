@@ -273,7 +273,7 @@ def allHospital():
 def allDoctor():
     try:
         
-        query= "select DM.ID,DM.DoctorName,HM.hospital_name,(HM.Address)hospital_address,HM.ID as Hospital_Id,HBS.ID as HubId,"
+        query= "select DM.ID,DM.DoctorName,Dm.Gender,Dm.Email,HM.hospital_name,(HM.Address)hospital_address,HM.ID as Hospital_Id,HBS.ID as HubId,"
         query=query+"(select count(*) as count from Patient_master where DM.ID=Patient_master.DoctorID)patient,"
         query=query+"HBS.HubName from DoctorMaster DM,Hospital_master HM,HubMaster as HBS where  DM.HospitalId=HM.ID and HM.HubId=HBS.ID;"
         print(query)
@@ -295,7 +295,7 @@ def allDoctor():
 def allNurse():
     try:
         
-        query= "select si.name as name,si.ID,si.Gender,si.mobile,si.password,si.Usertype_Id,Hm.ID as Hospital_Id,Hm.HubId,Hm.hospital_name,HBS.HubName,"
+        query= "select si.name as name,si.ID,si.Email,si.Gender,si.mobile,si.password,si.Usertype_Id,Hm.ID as Hospital_Id,Hm.HubId,Hm.hospital_name,HBS.HubName,"
         query=query+"(select count(*) as count from Patient_master where status<>'2' and si.ID=Patient_master.nurseId)patient"
         query=query+" from signup si,Hospital_master Hm,HubMaster as HBS where  si.Hospital_Id=Hm.ID and Hm.HubId=HBS.ID and si.Usertype_Id=3 ;"
         print(query)
