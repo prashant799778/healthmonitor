@@ -1331,6 +1331,7 @@ def patientDoctorMapping():
             
             cursor.execute(query)
             data1 = cursor.fetchall()
+            conn.commit()
         cursor.close()
         output = {"result":data1,"status":"true"}
         return output  
