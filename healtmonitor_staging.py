@@ -62,20 +62,19 @@ def login88881():
         
                
             
-        query ="select um.name as name,um.Usertype_Id as Usertype_Id,"
-        query=query+" um.Hospital_Id as Hospital_Id,us.Usertype as Usertype,um.UserID as UserID,um.UserID as mainId,um.Email as Email  from userMaster as um INNER JOIN Usertype_master as us on us.ID=um.Usertype_Id"
-        query=query+" INNER JOIN Hospital_master AS hm on hm.ID=um.Hospital_Id  where name = '" + name + "' and password='" + password + "' ;"   
+        query ="select um.name as name,mpum.Usertype_Id as Usertype_Id,mpum.Hospital_Id"
+        query=query+",hm.hospital_name as Hospital_Name ,us.Usertype as Usertype,um.UserID as UserID,um.ID as mainId,um.Email as Email  from userMaster as um INNER JOIN Usertype_master as us on us.ID=um.Usertype_Id "
+        query=query+"INNER JOIN mappinguserMaster  as mpum on mpum.mainId=um.ID  INNER JOIN Hospital_master as hm on hm.ID=mpum.Hospital_Id where name = '" + name + "' and password='" + password + "' ;"   
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
         loginuser = cursor.fetchall()
         print("11111111111",loginuser)
-        
         for d in loginuser:
-            
             y=  d["Usertype"]
             y3= d["Usertype_Id"]
             y2= d["Hospital_Id"]
+           
         
 
 
@@ -88,7 +87,7 @@ def login88881():
 
 
         if  y == 'Nurse':
-            query2 = "select  hm.hospital_name  as hospital_Name,hm.HubId as HubId,um.name as DoctorName,um.UserID as DoctorID  from Hospital_master  as hm INNER JOIN userMaster as um on um.Hospital_Id= hm.ID where um.Usertype_Id=2 and  hm.ID ='" + str(y2) + "'"
+            query2 = "  select um.ID as DoctorID,um.name as DoctorName,um.Email as Email,um.Gender,um.mobile from userMaster as um INNER JOIN mappinguserMaster as mpum  on mpum.mainId=um.ID where  mpum.Usertype_Id=2 and  mpum.Hospital_Id ='" + str(y2) + "'"
             
             cursor = conn.cursor()
             cursor.execute(query2)
@@ -892,14 +891,30 @@ def addUser():
         UserID=UserId.hex
         if data==():
             if data1["password"]==data1["confirm_password"]:
-                query2  = " insert into signup (name,mobile,Usertype_Id,UserID,Hospital_Id,password,Email,Gender)"
+                query2  = " insert into userMaster (name,mobile,Usertype_Id,UserID,password,Email,Gender)"
                 query2 = query2 +" values('"+str(data1["name"])+"','"+str(data1["mobile"])+"','"+str(data1["Usertype_Id"])+"','"+str(UserID)
-                query2=query2+"','"+str(data1["Hospital_Id"])+"','"+str(data1["password"])+"','"+str(data1["Email"])+"','"+str(data1["Gender"])+"');"
+                query2=query2+"','"+str(data1["password"])+"','"+str(data1["Email"])+"','"+str(data1["Gender"])+"');"
                 print(query2)
                 conn=Connection()
                 cursor = conn.cursor()
                 cursor.execute(query2)
                 conn.commit()
+                query = "select ID as mainId,Usertype_Id from signup where name= '"+str(data1["name"])+ "' and  Email='"+str(data1["Email"])+ "';"
+                conn=Connection()
+                cursor = conn.cursor()
+                cursor.execute(query)
+                data=cursor.fetchone()
+                mainId=data["mainId"]
+                Usertype_Id=data["Usertype_Id"]
+                HospitalId = data1["Hospital_Id"]
+                for i in HospitalId:
+                    query2  = " insert into MappinguserMaster (mainId,Usertype_Id,Hospital_Id)"
+                    query2 = query2 +" values('"+str(data1["mainId"])+"','"+str(data1["Usertype_Id"])+"','"+str(i)+"');"
+                    conn=Connection()
+                    cursor = conn.cursor()
+                    cursor.execute(query)
+                    conn.commit()
+
                 output = {"result":"data inserted successfully","status":"true"}
                 return output
             else:
