@@ -1304,18 +1304,31 @@ def doctorProfile():
         print(data)
         
         
+        
         query1= "select count(*) as hospital from userHospitalMapping as uhm  where uhm.userId='"+str(data[0]["doctorId"])+"';"
         cursor.execute(query1)
         data1 = cursor.fetchall()
         
-        query2= "select hospitalId  from userHospitalMapping as uhm  where uhm.userId='"+str(data[0]["doctorId"])+"';"
+        query2= "select userId,hospitalId  from userHospitalMapping as uhm  where uhm.userId='"+str(data[0]["doctorId"])+"';"
         cursor.execute(query2)
         data2 = cursor.fetchall()
         print(data2)
+        hub_count=0
+        for i in data2:
+            query3= "select count(*)as count  from HubMaster  where HubMaster.ID ='"+str(i["hospitalId"])+"';"
+            cursor.execute(query3)
+            data3 = cursor.fetchall()
+            hub_count+=data3[0]["count"]
+            
         
+        query4= "select count(*) as count from patientDoctorMapping as pdm  where pdm.doctorId='"+str(data[0]["doctorId"])+"';"
+        cursor.execute(query4)
+        data4 = cursor.fetchall()
+        print(data4)
         
         cursor.close()
-        output = {"result":data,"hospital":data1[0],"status":"true"}
+        output = {"result":data,"patient_count":data4[0]["count"],"hub_count":hub_count,"status":"true"}
+        output["hospital_count"]=data1[0]["hospital"]
         return output  
     
 
