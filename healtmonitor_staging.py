@@ -1322,6 +1322,7 @@ def doctorProfile():
         
         cursor.close()
         output = {"result":data,"hospital":data1[0],"hub_count":hub_count,"status":"true"}
+        output["hospital_count"]=data1[0]["hospital"]
         return output  
     
 
