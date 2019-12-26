@@ -1292,21 +1292,29 @@ def doctorProfile():
     try:
        
         json1=request.get_data() 
-        data=json.loads(json1.decode("utf-8")) 
-        query = "select um.ID as doctorId,um.name as doctorNmae,um.Email,um.Gender as gender from userMaster as um where um.Email='"+str(data["Email"])+"';"
-        print(query)
+        data=json.loads(json1.decode("utf-8"))
         conn=Connection()
         cursor = conn.cursor()
+        
+        query = "select um.ID as doctorId,um.name as doctorNmae,um.Email,um.Gender as gender from userMaster as um where um.Email='"+str(data["Email"])+"';"
+        
+        cursor.execute(query)
+        data = cursor.fetchall()
+        
+        
+        
+        query = "select count(*) as countfrom userHospitalMapping as uhm  where uhm.userId='"+str(data["doctorId"])+"';"
+        
         cursor.execute(query)
         data1 = cursor.fetchall()
+        
+        
+        
+        
         cursor.close()
-        output = {"result":data1,"status":"true"}
+        output = {"result":data,"data":data,"data1":data1,"status":"true"}
         return output  
-    except KeyError :
-        print("Key Exception---->")   
-        output = {"result":"key error","status":"false"}
-        output = {"result":"key error","status":"false"}
-        return output  
+    
 
     except Exception as e :
         print("Exception---->" +str(e))    
