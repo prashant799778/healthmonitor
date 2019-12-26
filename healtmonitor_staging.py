@@ -1303,11 +1303,12 @@ def doctorProfile():
         print(data)
         
         
+        
         query1= "select count(*) as hospital from userHospitalMapping as uhm  where uhm.userId='"+str(data[0]["doctorId"])+"';"
         cursor.execute(query1)
         data1 = cursor.fetchall()
         
-        query2= "select hospitalId  from userHospitalMapping as uhm  where uhm.userId='"+str(data[0]["doctorId"])+"';"
+        query2= "select userId,hospitalId  from userHospitalMapping as uhm  where uhm.userId='"+str(data[0]["doctorId"])+"';"
         cursor.execute(query2)
         data2 = cursor.fetchall()
         print(data2)
