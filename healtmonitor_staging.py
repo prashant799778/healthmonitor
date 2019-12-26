@@ -68,14 +68,19 @@ def login88881():
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
-        loginuser = cursor.fetchone()
+        loginuser = cursor.fetchall()
         print("11111111111",loginuser)
+        
+        for d in loginuser:
+            
+            y=  d["Usertype"]
+            y3= d["Usertype_Id"]
+            y2= d["Hospital_Id"]
+        
+
 
        
-        y= loginuser["Usertype"]
-        y3= loginuser["Usertype_Id"]
-        y2= loginuser["Hospital_Id"]
-        
+       
         Nurse=""
 
 
