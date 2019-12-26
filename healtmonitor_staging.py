@@ -1325,7 +1325,7 @@ def doctorProfile():
             hub_count+=data3[0]["count"]
             
         
-        query4= "select count(*) as count from patientDoctorMapping as pdm,Patient_master as pm  where pm.Status<>'2' and pdm.doctorId='"+str(data[0]["doctorId"])+"';"
+        query4= "select count(*) as count from patientDoctorMapping as pdm,Patient_master as pm  where pm.PatientId=pdm.Patient_Id and pm.Status<>'2' and pdm.doctorId='"+str(data[0]["doctorId"])+"';"
         cursor.execute(query4)
         data4 = cursor.fetchall()
         print(data4)
