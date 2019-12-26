@@ -1293,7 +1293,7 @@ def doctorProfile():
        
         json1=request.get_data() 
         data=json.loads(json1.decode("utf-8")) 
-        query = "select um.ID as doctorId,um.name as doctorNmae,um.Gender as gender from userMaster as um where um.Email='"+str(data["Email"])+"';"
+        query = "select um.ID as doctorId,um.name as doctorNmae,um.Email,um.Gender as gender from userMaster as um where um.Email='"+str(data["Email"])+"';"
         print(query)
         conn=Connection()
         cursor = conn.cursor()
