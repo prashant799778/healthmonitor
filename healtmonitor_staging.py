@@ -229,7 +229,7 @@ def allNurse():
     try:
         
         query= "select us.name as name,us.ID,us.Gender,us.mobile,us.password,us.Usertype_Id,Hm.ID as Hospital_Id,Hm.HubId,Hm.hospital_name,HBS.HubName,"
-        query=query+"(select count(*) as count from Patient_master where status<>'2' and si.ID=Patient_master.nurseId)patient"
+        query=query+"(select count(*) as count from Patient_master where status<>'2' and us.ID=Patient_master.nurseId)patient"
         query=query+" from userMaster us,Hospital_master Hm,HubMaster as HBS where  us.Hospital_Id=Hm.ID and Hm.HubId=HBS.ID and us.Usertype_Id=3 ;"
         print(query)
         conn=Connection()
