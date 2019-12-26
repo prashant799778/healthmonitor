@@ -1326,7 +1326,7 @@ def patientDoctorMapping():
         conn=Connection()
         cursor = conn.cursor()
         for i in range(1,31):
-            query = " insert into  patientDoctorMapping(Patient_Id,doctorId) values('"+str(i)+"','"+str(1)+"');"
+            query = " insert into  patientNurseMapping(Patient_Id,nurse_Id) values('"+str(i)+"','"+str(4)+"');"
             print(query)
             
             cursor.execute(query)
