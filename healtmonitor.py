@@ -1854,7 +1854,7 @@ def doctorProfile1():
 
 
         cursor.close()
-        output = {"result":data1,"patient_count":patient_count,"hospital_count":hospital_count,"hub_count":hub_count,"status":"true"}
+        output = {"result":[{"patient_count":patient_count,"hospital_count":hospital_count,"hub_count":hub_count}],"status":"true"}
         return output  
 
 
