@@ -1833,7 +1833,7 @@ def doctorProfile1():
             data4 = cursor.fetchall()
             
             
-            query5= "select count(*) as count from HubMaster where ID='"+str(i[0]["HubId"])+"';"
+            query5= "select count(*) as count from HubMaster where ID='"+str(data4[0]["HubId"])+"';"
             print(query)
             conn=Connection()
             cursor = conn.cursor()
@@ -1854,7 +1854,7 @@ def doctorProfile1():
 
 
         cursor.close()
-        output = {"result":data1,"patient_count":patient_count,"hospital_count":hospital_count,"status":"true"}
+        output = {"result":data1,"patient_count":patient_count,"hospital_count":hospital_count,"hub_count":hub_count,"status":"true"}
         return output  
 
 
