@@ -178,19 +178,19 @@ def allHospital():
         
         
         for i in data:
-            query1="select count(*) as count from userMaster where  Usertype_Id=2 and  Hospital_Id='"+str(i["ID"])+"';" 
+            query1="select count(*) as count from userHospitalMapping where  Usertype_Id=2 and  hospitalId='"+str(i["ID"])+"';" 
             
             cursor.execute(query1)
             data1 = cursor.fetchall()
             
             i["total_doctor"]=data1[0]["count"]
-            query2="select ID  from userMaster where Usertype_Id=2 and  Hospital_Id='"+str(i["ID"])+"';"
+            query2="select userid as ID  from userHospitalMapping where  Usertype_Id=2 and  Hospital_Id='"+str(i["ID"])+"';"
             cursor.execute(query2)
             data2 = cursor.fetchall()
             print(data2)
             count=0
             for j in data2:
-                query1 = "select count(*) as count from Patient_master  where  DoctorID= '"+str(j["ID"])+"';"
+                query1 = "select count(*) as count from Patient_master  where  Status<>'2' AND DoctorID= '"+str(j["ID"])+"';"
                 cursor.execute(query1)
                 data3 = cursor.fetchall()
                 print(data3)
@@ -210,9 +210,9 @@ def allHospital():
 def allDoctor():
     try:
         
-        query= "select us.ID,us.name as DoctorName,us.password,us.Email as Email,us.mobile,us.Gender,HM.hospital_name,HM.Address AS hospital_address,us.Hospital_Id as Hospital_Id,HBS.ID as HubId,"
-        query=query+"(select count(*) as count from Patient_master where us.ID=Patient_master.DoctorID)patient,"
-        query=query+"HBS.HubName from userMaster us,Hospital_master HM,HubMaster as HBS where  us.Hospital_Id=HM.ID and us.Usertype_Id=2 and  HM.HubId=HBS.ID;"
+        query= "select us.ID,us.name as DoctorName,us.password,us.Email as Email,us.mobile,us.Gender,HM.hospital_name,HM.Address AS hospital_address,ushm.Hospital_Id as Hospital_Id,HBS.ID as HubId,"
+        query=query+"(select count(*) as count from Patient_master where status<>'2' and   us.ID=Patient_master.DoctorID)patient,"
+        query=query+"HBS.HubName from userMaster us,userHospitalMapping AS ushm,Hospital_master HM,HubMaster as HBS where  ushm.userId=us.ID and  ushm.hospitalId=HM.ID and us.Usertype_Id=2 and  HM.HubId=HBS.ID;"
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
