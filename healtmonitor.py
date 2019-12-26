@@ -295,7 +295,9 @@ def allDoctor():
 def allNurse():
     try:
         
+
         query= "select si.name as name,si.ID,si.Email,si.Gender,si.mobile,si.password,si.Usertype_Id,Hm.ID as Hospital_Id,Hm.HubId,Hm.hospital_name,HBS.HubName,"
+
         query=query+"(select count(*) as count from Patient_master where status<>'2' and si.ID=Patient_master.nurseId)patient"
         query=query+" from signup si,Hospital_master Hm,HubMaster as HBS where  si.Hospital_Id=Hm.ID and Hm.HubId=HBS.ID and si.Usertype_Id=3 ;"
         print(query)
@@ -1827,7 +1829,50 @@ def doctorProfile():
         # output = {"result":"somthing went wrong","status":"false"}
         # return output
 
+@app.route('/userM', methods=['POST'])
+def userM():
+    try:
+       
+        # json1=request.get_data() 
+        # data=json.loads(json1.decode("utf-8")) 
+        print("!1111111111")
+        query1 = " select Hospital_Id from healthmonitor_staging.userMaster where ID=2 ;"#Email='rakesh@gmail.com'
+        print("!22222222")
+        print(query1)
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query1)
+        data2 = cursor.fetchall()
+        cursor.close()
+        b=data2[0]["Hospital_Id"].replace('"',"'").replace(",","','")
+        # print(data2)
+        # b=data2[0]["Hospital_Id"].replace(",","")
+        # b=list(b)
+        # b=tuple([int(i) for i in b])hm.ID in"+ str(b) +"
+        # print(b)
+        print("333333333333333333333")
+        query = " select um.ID,um.name,um.Email,um.Gender,hm.hospital_name from healthmonitor_staging.userMaster um,"
+        query = query + " healthmonitor_staging.Hospital_master hm where hm.ID in('"+ str(b) +"') and um.Email='rakesh@gmail.com'"
+        query = query + " and um.Hospital_Id = hm.ID ;"
+        print("!22222222")
+        print(query)
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data1 = cursor.fetchall()
+        cursor.close()
+        output = {"result":data1,"data2":data2,"status":"true"}
+        return output  
+    except KeyError :
+        print("Key Exception---->")   
+        output = {"result":"key error","status":"false"}
+        output = {"result":"key error","status":"false"}
+        return output  
 
+    except Exception as e :
+        print("Exception---->" +str(e))    
+        output = {"result":"somthing went wrong","status":"false"}
+        return output
  
 if __name__ == "__main__":
     CORS(app, support_credentials=True)
