@@ -1813,7 +1813,7 @@ def doctorProfile1():
         cursor = conn.cursor()
         cursor.execute(query)
         data1 = cursor.fetchall()
-        count=0
+        hub_count,hospital_count,patient_count,=0,0,0
         for i in data1:
             query2 = "select count(*) as count from Hospital_master where ID='"+str(i["HospitalId"])+"';"
             print(query)
@@ -1821,7 +1821,16 @@ def doctorProfile1():
             cursor = conn.cursor()
             cursor.execute(query2)
             data2 = cursor.fetchall()
+            hospital_count+=data2[0]["count"]
             print(data2)
+            query3 = "select count(*) as count from Patient_master where DoctorID='"+str(i["ID"])+"';"
+            print(query)
+            conn=Connection()
+            cursor = conn.cursor()
+            cursor.execute(query3)
+            data3 = cursor.fetchall()
+            patient_count+=data3[0]["count"]
+            print(patient_count)
         
 
 
