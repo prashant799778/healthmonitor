@@ -416,7 +416,7 @@ def HospitalPatientDetails():
         json1=request.get_data()
         print(json1)
         data=json.loads(json1.decode("utf-8"))
-        query2 ="select us.ID as DoctorID ,us.Email as Email ,hm.HubId as HubId ,Hm.HubName as HubName,ushm.hospitalId as Hospital_Id from userMaster as us ,Hospital_master as hm,HubMaster as Hm,userHospitalMapping as ushm where ushm.userId=us.Id and  hm.ID=ushm.hospitalId   and  Hm.ID= hm.HubId and   us.Usertype_Id=2  where Hospital_Id='"+str(data["HospitalId"])+"' and  Email ='"+str(data["Email"])+"';"  
+        query2 ="select us.ID as DoctorID ,us.Email as Email ,hm.HubId as HubId ,Hm.HubName as HubName,ushm.hospitalId as Hospital_Id from userMaster as us ,Hospital_master as hm,HubMaster as Hm,userHospitalMapping as ushm where ushm.userId=us.Id and  hm.ID=ushm.hospitalId   and  Hm.ID= hm.HubId and   us.Usertype_Id=2  and  Hospital_Id='"+str(data["HospitalId"])+"' and  Email ='"+str(data["Email"])+"';"  
         print(query2)
         conn=Connection() 
         cursor = conn.cursor()
