@@ -1807,6 +1807,15 @@ def doctorProfile1():
        
         json1=request.get_data() 
         data=json.loads(json1.decode("utf-8")) 
+        
+        query6 = "select * from DoctorMaster where Email='"+str(data["Email"])+"';"
+        print(query)
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query6)
+        data6 = cursor.fetchall()
+        
+        
         query = "select ID,HospitalId from DoctorMaster where Email='"+str(data["Email"])+"';"
         print(query)
         conn=Connection()
@@ -1854,7 +1863,7 @@ def doctorProfile1():
 
 
         cursor.close()
-        output = {"result":[{"patient_count":patient_count,"hospital_count":hospital_count,"hub_count":hub_count}],"status":"true"}
+        output = {"result":data6,"patient_count":patient_count,"hospital_count":hospital_count,"hub_count":hub_count,"status":"true"}
         return output  
 
 
