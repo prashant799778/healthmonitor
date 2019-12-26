@@ -58,10 +58,7 @@ def login88881():
         name = request.args['name']
         
         print(name)       
-       
-        
-               
-            
+          
         query ="select um.name as name,us.Usertype as Usertype,mpum.Usertype_Id as Usertype_Id,hm.HubId as HubId,Hbs.HubName as HubName,mpum.hospitalId as Hospital_Id "
         query=query+",hm.hospital_name as Hospital_Name ,us.Usertype as Usertype,um.UserID as UserID,um.ID as mainId,um.Email as Email  from userMaster as um INNER JOIN Usertype_master as us on us.ID=um.Usertype_Id "
         query=query+"INNER JOIN userHospitalMapping   as mpum on mpum.userId=um.ID  INNER JOIN Hospital_master as hm on hm.ID=mpum.hospitalId   INNER JOIN HubMaster as Hbs on Hbs.ID=hm.HubId where name = '" + name + "' and password='" + password + "' ;"   
@@ -74,20 +71,8 @@ def login88881():
             y=  d["Usertype"]
             y3= d["Usertype_Id"]
             y2= d["Hospital_Id"]
-            
 
-           
-        
-
-
-       
-       
         Nurse=""
-
-
-       
-
-
         if  y == 'Nurse':
             query2 = " select hm.ID as Hospital_Id,hm.hospital_name,hm.HubId as HubId,Hbs.HubName as HubName,um.ID as DoctorID,um.name as DoctorName,um.Email as Email,um.Gender,um.mobile from userMaster as um ,userHospitalMapping  as mpum,HubMaster as Hbs,Hospital_master as hm  where  mpum.userId=um.ID and mpum.hospitalId=hm.ID and  hm.HubId=Hbs.ID  and  um.Usertype_Id=2  and hm.ID = '" + str(y2) + "';"
             print(query2)
@@ -108,20 +93,12 @@ def login88881():
 
         DeviceMac,y9 = " ", ""
 
-
-
-
-        
         if 'DeviceMac' in request.args:
             DeviceMac=request.args["DeviceMac"]
 
         
         if DeviceMac != "":
-            
-
             query2="Select * from Patient_master where Status<>'2' and Usertype_Id ='" +str(y3) + "' and DeviceMac='"+str(DeviceMac)+ "';"
-          
-
             print(query2)
             cursor = conn.cursor()
             cursor.execute(query2)
@@ -148,13 +125,6 @@ def login88881():
         else:
             data={"status":"false","result":"Login Failed"}
             return data
-
-
-
-        
-
-
-
     except KeyError as e:
         print("Exception---->" +str(e))        
         output = {"result":"Input Keys are not Found","status":"false"}
@@ -1073,6 +1043,8 @@ def Patient_master():
         output = {"result":"something went wrong","status":"false"}
     return output
 
+
+
 @app.route('/Patient_master_select', methods=['GET'])
 def Patient_master_select():
     try:
@@ -1255,6 +1227,7 @@ def Patient_Vital_master_select():
         output = {"result":"something went wrong","status":"false"}
         return output
 
+#not done
 @app.route('/update_Patient_Vital_master', methods=['POST'])
 def update_Patient_Vital_master():
     try:
@@ -1358,7 +1331,7 @@ def doctorProfile():
             hub_count+=data3[0]["count"]
             
         
-        query4= "select count(*) as count from patientDoctorMapping as pdm  where pdm.doctorId='"+str(data[0]["doctorId"])+"';"
+        query4= "select count(*) as count from patientDoctorMapping as pdm,Patient_master as pm  where pm.PatientId=pdm.Patient_Id and pm.Status<>'2' and pdm.doctorId='"+str(data[0]["doctorId"])+"';"
         cursor.execute(query4)
         data4 = cursor.fetchall()
         print(data4)
