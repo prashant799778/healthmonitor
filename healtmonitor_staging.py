@@ -1312,7 +1312,7 @@ def doctorProfile():
         
         
         cursor.close()
-        output = {"result":data,"data":data,"data1":data1,"status":"true"}
+        output = {"result":data,"data1":data1,"status":"true"}
         return output  
     
 
