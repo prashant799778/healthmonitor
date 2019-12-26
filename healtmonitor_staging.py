@@ -910,12 +910,13 @@ def addUser():
                 conn=Connection()
                 cursor = conn.cursor()
                 cursor.execute(query)
-                data=cursor.fetchone()
-                mainId=data["mainId"]
-                Usertype_Id=data["Usertype_Id"]
-                HospitalId = data1["Hospital_Id"]
+                data=cursor.fetchall()
+                yu=data[-1]
+                mainId=yu["mainId"]
+                Usertype_Id=yu["Usertype_Id"]
+                HospitalId = data["Hospital_Id"]
                 for i in HospitalId:
-                    query2  = " insert into MappinguserMaster (mainId,Usertype_Id,Hospital_Id)"
+                    query2  = " insert into userHospitalMapping (mainId,Usertype_Id,Hospital_Id)"
                     query2 = query2 +" values('"+str(data1["mainId"])+"','"+str(data1["Usertype_Id"])+"','"+str(i)+"');"
                     conn=Connection()
                     cursor = conn.cursor()
@@ -1028,9 +1029,44 @@ def Patient_master():
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
-        data = cursor.fetchall()
+        data9 = cursor.fetchall()
+        query = "select PatientId  from Patient_master where Status<>'2'  and enddate is NULL;"
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        
+        data=cursor.fetchall()
+
+        final= data[-1]
+
+        mainId=final["mainId"]
+        
+        Usertype_Id=final["Usertype_Id"]
+        
+        DoctorId = data["DoctorId"]
+
+        for i in DoctorId:
+            
+            query2  = " insert into patientDoctorMapping (PatientId,DoctorId)"
+            query2 = query2 +" values('"+str(data1["PatientId"])+"','"+str(data1["DoctorId"])+"');"
+            conn=Connection()
+            cursor = conn.cursor()
+            cursor.execute(query)
+            conn.commit()
+        
+        nurseId = data["nurseId"]
+        
+        for i in nurseId :
+            
+            query2  = " insert into patientDoctorMapping (PatientId,DoctorId)"
+            query2 = query2 +" values('"+str(data1["PatientId"])+"','"+str(data1["DoctorId"])+"');"
+            conn=Connection()
+            cursor = conn.cursor()
+            cursor.execute(query)
+            conn.commit()
+        
         cursor.close()
-        output={"output": "Patient Added succesfully","Patient Details":data[-1],"status":"true"}
+        output={"output": "Patient Added succesfully","Patient Details":data9[-1],"status":"true"}
         
     except Exception as e :
         print("Exception---->" + str(e))    
