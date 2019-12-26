@@ -1813,6 +1813,18 @@ def doctorProfile1():
         cursor = conn.cursor()
         cursor.execute(query)
         data1 = cursor.fetchall()
+        count=0
+        for i in data1:
+            query2 = "select count(*) from Hospital_master where ID='"+str(i["HospitalId"])+"';"
+            print(query)
+            conn=Connection()
+            cursor = conn.cursor()
+            cursor.execute(query)
+            data2 = cursor.fetchall()
+            print(data2)
+        
+
+
         cursor.close()
         output = {"result":data1,"status":"true"}
         return output  
