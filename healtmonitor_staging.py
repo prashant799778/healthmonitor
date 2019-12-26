@@ -1310,11 +1310,11 @@ def doctorProfile():
         query2= "select hospitalId  from userHospitalMapping as uhm  where uhm.userId='"+str(data[0]["doctorId"])+"';"
         cursor.execute(query1)
         data2 = cursor.fetchall()
-        
+        print(data2)
         
         
         cursor.close()
-        output = {"result":data,"hospital":data1[0],"status":"true"}
+        output = {"result":data,"hospital":data1[0][],"status":"true"}
         return output  
     
 
