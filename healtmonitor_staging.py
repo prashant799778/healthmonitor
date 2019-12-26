@@ -190,7 +190,7 @@ def allHospital():
             print(data2)
             count=0
             for j in data2:
-                query1 = "select count(*) as count from Patient_master  where  Status<>'2' AND DoctorID= '"+str(j["ID"])+"';"
+                query1 = " select  count(*) as count from Patient_master  where  Status<>'2'  AND PatientId IN (select Patient_Id  from patientDoctorMapping  where  Status<>'2' AND  DoctorID= '"+str(j["ID"])+"') ;"
                 cursor.execute(query1)
                 data3 = cursor.fetchall()
                 print(data3)
@@ -211,7 +211,7 @@ def allDoctor():
     try:
         
         query= "select us.ID,us.name as DoctorName,us.password,us.Email as Email,us.mobile,us.Gender,HM.hospital_name,HM.Address AS hospital_address,ushm.Hospital_Id as Hospital_Id,HBS.ID as HubId,"
-        query=query+"(select count(*) as count from Patient_master where status<>'2' and   us.ID=Patient_master.DoctorID)patient,"
+        query=query+"(select  count(*) as count from Patient_master  where  Status<>'2'  AND PatientId IN (select Patient_Id  from patientDoctorMapping  where  Status<>'2' AND  us.ID=patientDoctorMapping.DoctorID)patient,"
         query=query+"HBS.HubName from userMaster us,userHospitalMapping AS ushm,Hospital_master HM,HubMaster as HBS where  ushm.userId=us.ID and  ushm.hospitalId=HM.ID and us.Usertype_Id=2 and  HM.HubId=HBS.ID;"
         conn=Connection()
         cursor = conn.cursor()
