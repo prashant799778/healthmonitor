@@ -379,8 +379,9 @@ def doctorPatientDetails():
         for dat in data1:
             doctor_Id=dat["DoctorID"]
             l2=[]
-            query3 ="select PM.PatientId as ID,PM.PatientName,PM.DoctorID as DoctorID,PM.PhoneNo,PM.Address,PM.BloodGroup,PM.DeviceMac,PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.hospital_Name,PM.roomNumber,PM.age,PM.Gender from Patient_master as PM  where  Status<>'2' and DoctorID='" + str(doctor_Id) + "'  ORDER BY  ID DESC;;"   
-            print(query3)
+            query3 ="select  PM.PatientId as PatientId,PM.PatientName,PM.PhoneNo,PM.Address,PM.BloodGroup,PM.DeviceMac,Hm.HubId,Hm.hospital_name "
+            query3=query3+" PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.age,PM.Gender,PM.roomNumber,pdm.DoctorID as DoctorID"
+            query3= query3 + " from Patient_master  as PM ,patientDoctorMapping as pdm,Hospital_master as Hm,HubMaster as Hbs  where PM.hospitalId=Hm.ID and Hm.HubId=Hbs.ID and  pdm.Patient_Id=PM.PatientId  and PM.Status<>'2'   and DoctorID='" + str(doctor_Id) + "'  ORDER BY  PatientId DESC;"
             cursor = conn.cursor()
             cursor.execute(query3)
             data27 = cursor.fetchall()
@@ -407,18 +408,20 @@ def doctorPatientDetails():
         return output 
 
 #after Doctor login ,in hospital section click on hospital eye show the hospital and patient information pass arguments  hospitalId  and doctor Email
+
+
 @app.route('/HospitalPatientDetails', methods=['POST'])
 def HospitalPatientDetails():
     try:
         json1=request.get_data()
         print(json1)
         data=json.loads(json1.decode("utf-8"))
-        query2 ="select us.ID as DoctorID ,us.Email as Email ,hm.HubId as HubId ,Hm.HubName as HubName,us.Hospital_Id as HospitalId from userMaster as us INNER JOIN Hospital_master as hm on hm.ID=us.Hospital_Id  INNER JOIN HubMaster as Hm on Hm.ID= hm.HubId where  us.Usertype_Id=2  where HospitalId='"+str(data["HospitalId"])+"' and  Email ='"+str(data["Email"])+"';"  
+        query2 ="select us.ID as DoctorID ,us.Email as Email ,hm.HubId as HubId ,Hm.HubName as HubName,ushm.hospitalId as Hospital_Id from userMaster as us ,Hospital_master as hm,HubMaster as Hm,userHospitalMapping as ushm where ushm.userId=us.Id and  hm.ID=ushm.hospitalId   and  Hm.ID= hm.HubId and   us.Usertype_Id=2  where Hospital_Id='"+str(data["HospitalId"])+"' and  Email ='"+str(data["Email"])+"';"  
         print(query2)
         conn=Connection() 
         cursor = conn.cursor()
         cursor.execute(query2)
-        data1 = cursor.fetchall()
+        data1 = cursor.fetchall()          
         print(data1)
         l1=[ ]
 
@@ -431,7 +434,9 @@ def HospitalPatientDetails():
 
             l2=[]
             
-            query3 ="select * from Patient_master   where  Status=0 and DoctorID='" + str(doctor_Id) + "'  ORDER BY  PatientId DESC;"   
+            query3 ="select  PM.PatientId as PatientId,PM.PatientName,PM.PhoneNo,PM.Address,PM.BloodGroup,PM.DeviceMac,Hm.HubId,Hm.hospital_name "
+            query3=query3+" PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.age,PM.Gender,PM.roomNumber,pdm.DoctorID as DoctorID"
+            query3= query3 + " from Patient_master  as PM ,patientDoctorMapping as pdm,Hospital_master as Hm,HubMaster as Hbs  where PM.hospitalId=Hm.ID and Hm.HubId=Hbs.ID and  pdm.Patient_Id=PM.PatientId  and PM.Status<>'2'   and DoctorID='" + str(doctor_Id) + "'  ORDER BY  PatientId DESC;"   
             print(query3)
             cursor = conn.cursor()
             cursor.execute(query3)
@@ -468,7 +473,7 @@ def doctorDropdown():
         json1=request.get_data() 
         data=json.loads(json1.decode("utf-8"))
         # query = " select distinct userid,username,usertype from usermaster where usertype <> 'Admin';"
-        query = "select ID,name  as DoctorName from userMaster where Usertype_Id=2 and Hospital_Id ='"+str(data["hospitalId"])+"';"
+        query = " select um.ID as ID,um.name as DoctorName from userMaster as um ,userHospitalMapping  as mpum,HubMaster as Hbs,Hospital_master as hm  where  mpum.userId=um.ID and mpum.hospitalId=hm.ID and  hm.HubId=Hbs.ID  and  um.Usertype_Id=2  and hm.ID ='"+str(data["hospitalId"])+"';"
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
