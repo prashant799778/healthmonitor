@@ -253,7 +253,7 @@ def allNurse():
 def allPatient():
     try:
         
-        query="select PM.PatientId as ID,PM.PatientName,PM.PhoneNo,PM.Address,PM.BloodGroup,PM.DeviceMac,"
+        query="select PM.PatientId as ID,Pm.DoctorID,Pm.nurseId,PM.PatientName,PM.PhoneNo,PM.Address,PM.BloodGroup,PM.DeviceMac,"
         query=query+"PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.hospital_Name,PM.age,PM.Gender,PM.roomNumber from Patient_master as PM;"
         conn=Connection()
         cursor = conn.cursor()
