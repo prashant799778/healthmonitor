@@ -1819,7 +1819,7 @@ def doctorProfile1():
             print(query)
             conn=Connection()
             cursor = conn.cursor()
-            cursor.execute(query)
+            cursor.execute(query2)
             data2 = cursor.fetchall()
             print(data2)
         
