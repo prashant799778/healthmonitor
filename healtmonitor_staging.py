@@ -1326,7 +1326,7 @@ def doctorProfile():
         print(data4)
         
         cursor.close()
-        output = {"result":data,"hub_count":hub_count,"status":"true"}
+        output = {"result":data,"patient_count":data4[0]["count"],"hub_count":hub_count,"status":"true"}
         output["hospital_count"]=data1[0]["hospital"]
         return output  
     
