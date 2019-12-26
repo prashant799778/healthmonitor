@@ -1320,6 +1320,10 @@ def doctorProfile():
             hub_count+=data3[0]["count"]
             
         
+        query4= "select count(*) as count from patientDoctorMapping as pdm  where pdm.doctorId='"+str(data[0]["doctorId"])+"';"
+        cursor.execute(query4)
+        data4 = cursor.fetchall()
+        print(data4)
         
         cursor.close()
         output = {"result":data,"hub_count":hub_count,"status":"true"}
