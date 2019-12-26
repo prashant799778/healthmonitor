@@ -68,7 +68,7 @@ def login88881():
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
-        loginuser = cursor.fetchall()
+        loginuser = cursor.fetchone()
         print("11111111111",loginuser)
 
        
