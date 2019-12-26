@@ -1317,31 +1317,29 @@ def doctorProfile():
 
 
 
-# @app.route('/userMaster', methods=['POST'])
-# def userMaster():
-    # try:
+@app.route('/patientDoctorMapping', methods=['POST'])
+def patientDoctorMapping():
+    try:
        
-        # json1=request.get_data() 
-        # data=json.loads(json1.decode("utf-8")) 
-        # query = "select * from userMaster where Hospital_Id in (1,2,3,4,5);"
-        # print(query)
-        # conn=Connection()
-        # cursor = conn.cursor()
-        # cursor.execute(query)
-        # data1 = cursor.fetchall()
-        # cursor.close()
-        # output = {"result":data1,"status":"true"}
-        # return output  
-    # except KeyError :
-        # print("Key Exception---->")   
-        # output = {"result":"key error","status":"false"}
-        # output = {"result":"key error","status":"false"}
-        # return output  
+        json1=request.get_data() 
+        data=json.loads(json1.decode("utf-8")) 
+        conn=Connection()
+        cursor = conn.cursor()
+        for i in range(1,31):
+            query = " insert into  patientDoctorMapping(PatientId,doctorId) values('"+str(i)+"';'"+str(1)+"');"
+            print(query)
+            
+            cursor.execute(query)
+            data1 = cursor.fetchall()
+        cursor.close()
+        output = {"result":data1,"status":"true"}
+        return output  
+     
 
-    # except Exception as e :
-        # print("Exception---->" +str(e))    
-        # output = {"result":"somthing went wrong","status":"false"}
-        # return output
+    except Exception as e :
+        print("Exception---->" +str(e))    
+        output = {"result":"somthing went wrong","status":"false"}
+        return output
 
 
  
