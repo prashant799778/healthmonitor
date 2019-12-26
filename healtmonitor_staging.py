@@ -1244,7 +1244,7 @@ def update_Patient_Vital_master():
         return output
 
 
-#total hub total hospital total doctor total doctor
+#total hub total hospital total doctor total totalPatient
 @app.route('/adminPannel', methods=['POST'])
 def adminPannel():
     try:
@@ -1262,7 +1262,7 @@ def adminPannel():
         cursor.execute(query2)
         data2 = cursor.fetchall()
         
-        query3 = " select  count(*) as count from DoctorMaster;"
+        query3 = " select  count(*) as count from userMaster where Usertype_Id=2;"
         print(query3)
         cursor.execute(query3)
         data3 = cursor.fetchall()
