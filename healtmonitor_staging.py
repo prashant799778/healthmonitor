@@ -214,6 +214,7 @@ def allDoctor():
         query= "select us.ID,us.name as DoctorName,us.password,us.Email as Email,us.mobile,us.Gender,HM.hospital_name,HM.Address AS hospital_address,ushm.Hospital_Id as Hospital_Id,HBS.ID as HubId,"
         query=query+"(select  count(*) as patient from Patient_master  where  Status<>'2'  and PatientId IN (select Patient_Id  from patientDoctorMapping  where  Status<>'2' AND  us.ID=patientDoctorMapping.DoctorID)patient,"
         query=query+"HBS.HubName from userMaster us,userHospitalMapping  ushm,Hospital_master HM,HubMaster as HBS where  ushm.userId=us.ID and  ushm.hospitalId=HM.ID and us.Usertype_Id=2 and  HM.HubId=HBS.ID;"
+        print(query)
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
