@@ -1292,23 +1292,31 @@ def doctorProfile():
     try:
        
         json1=request.get_data() 
-        data=json.loads(json1.decode("utf-8")) 
-        query = "select DM.ID as doctorId,DM.DoctorName as doctorNmae,DM.Gender as gender, HSM.ID as hospitalId,HSM.hospital_name As hospitalName,HM.ID as hubId,HM.HubName from"
-        query=query+" Hospital_master HSM ,HubMaster HM,DoctorMaster DM where HSM.HubId=HM.ID and DM.HospitalId=HSM.ID " 
-        query=query+" and DM.Email='"+str(data["Email"])+"';"
-        print(query)
+        data=json.loads(json1.decode("utf-8"))
         conn=Connection()
         cursor = conn.cursor()
+        
+        query = "select um.ID as doctorId,um.name as doctorName,um.Email,um.Gender as gender from userMaster as um where um.Email='"+str(data["Email"])+"';"
+        
         cursor.execute(query)
+        data = cursor.fetchall()
+        print(data)
+        
+        
+        query1= "select count(*) as hospital from userHospitalMapping as uhm  where uhm.userId='"+str(data[0]["doctorId"])+"';"
+        cursor.execute(query1)
         data1 = cursor.fetchall()
+        
+        query2= "select hospitalId  from userHospitalMapping as uhm  where uhm.userId='"+str(data[0]["doctorId"])+"';"
+        cursor.execute(query2)
+        data2 = cursor.fetchall()
+        print(data2)
+        
+        
         cursor.close()
-        output = {"result":data1,"status":"true"}
+        output = {"result":data,"hospital":data1[0],"status":"true"}
         return output  
-    except KeyError :
-        print("Key Exception---->")   
-        output = {"result":"key error","status":"false"}
-        output = {"result":"key error","status":"false"}
-        return output  
+    
 
     except Exception as e :
         print("Exception---->" +str(e))    
@@ -1317,30 +1325,30 @@ def doctorProfile():
 
 
 
-@app.route('/patientDoctorMapping', methods=['POST'])
-def patientDoctorMapping():
-    try:
+# @app.route('/patientDoctorMapping', methods=['POST'])
+# def patientDoctorMapping():
+    # try:
        
-        json1=request.get_data() 
-        data=json.loads(json1.decode("utf-8")) 
-        conn=Connection()
-        cursor = conn.cursor()
-        for i in range(1,31):
-            query = " insert into  patientNurseMapping(Patient_Id,nurse_Id) values('"+str(i)+"','"+str(4)+"');"
-            print(query)
+        # json1=request.get_data() 
+        # data=json.loads(json1.decode("utf-8")) 
+        # conn=Connection()
+        # cursor = conn.cursor()
+        # for i in range(1,31):
+            # query = " insert into  patientNurseMapping(Patient_Id,nurse_Id) values('"+str(i)+"','"+str(4)+"');"
+            # print(query)
             
-            cursor.execute(query)
-            data1 = cursor.fetchall()
-            conn.commit()
-        cursor.close()
-        output = {"result":data1,"status":"true"}
-        return output  
+            # cursor.execute(query)
+            # data1 = cursor.fetchall()
+            # conn.commit()
+        # cursor.close()
+        # output = {"result":data1,"status":"true"}
+        # return output  
      
 
-    except Exception as e :
-        print("Exception---->" +str(e))    
-        output = {"result":"somthing went wrong","status":"false"}
-        return output
+    # except Exception as e :
+        # print("Exception---->" +str(e))    
+        # output = {"result":"somthing went wrong","status":"false"}
+        # return output
 
 
  
