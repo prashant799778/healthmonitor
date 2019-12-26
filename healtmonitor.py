@@ -1808,7 +1808,7 @@ def doctorProfile1():
         json1=request.get_data() 
         data=json.loads(json1.decode("utf-8")) 
         
-        query6 = "select * from DoctorMaster where Email='"+str(data["Email"])+"';"
+        query6 = "select distinct(DoctorName),distinct(Email),distinct(Gender) from DoctorMaster where Email='"+str(data["Email"])+"';"
         print(query6)
         conn=Connection()
         cursor = conn.cursor()
