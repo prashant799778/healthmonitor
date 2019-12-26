@@ -1311,6 +1311,12 @@ def doctorProfile():
         cursor.execute(query2)
         data2 = cursor.fetchall()
         print(data2)
+        for i in data2:
+            query3= "select count(*)as count  from HubMaster  where HubMaster.ID ='"+str(i["hospitalId"])+"';"
+            cursor.execute(query3)
+            data3 = cursor.fetchall()
+            hub_count+=data3[0]["count"]
+            
         
         
         cursor.close()
