@@ -184,7 +184,7 @@ def allHospital():
             data1 = cursor.fetchall()
             
             i["total_doctor"]=data1[0]["count"]
-            query2="select userId as ID  from userHospitalMapping where  Usertype_Id=2 and  hospitalId='"+str(i["ID"])+"';"
+            query2="select mpum.userId as ID  from userMaster as um ,userHospitalMapping  as mpum,HubMaster as Hbs,Hospital_master as hm  where  mpum.userId=um.ID and mpum.hospitalId=hm.ID and  hm.HubId=Hbs.ID  and  um.Usertype_Id=2  and  hm.ID='"+str(i["ID"])+"';"
             print(query2)
             cursor.execute(query2)
             data2 = cursor.fetchall()
@@ -212,8 +212,9 @@ def allDoctor():
     try:
         
         query= "select us.ID,us.name as DoctorName,us.password,us.Email as Email,us.mobile,us.Gender,HM.hospital_name,HM.Address AS hospital_address,ushm.Hospital_Id as Hospital_Id,HBS.ID as HubId,"
-        query=query+"select  count(*) as patient from Patient_master  where  Status<>'2'  AND PatientId IN (select Patient_Id  from patientDoctorMapping  where  Status<>'2' AND  us.ID=patientDoctorMapping.DoctorID),"
+        query=query+"(select  count(*) as patient from Patient_master  where  Status<>'2'  and PatientId IN (select Patient_Id  from patientDoctorMapping  where  Status<>'2' AND  us.ID=patientDoctorMapping.DoctorID)patient,"
         query=query+"HBS.HubName from userMaster us,userHospitalMapping  ushm,Hospital_master HM,HubMaster as HBS where  ushm.userId=us.ID and  ushm.hospitalId=HM.ID and us.Usertype_Id=2 and  HM.HubId=HBS.ID;"
+        print(query)
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
