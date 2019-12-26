@@ -1823,6 +1823,17 @@ def doctorProfile1():
             data2 = cursor.fetchall()
             hospital_count+=data2[0]["count"]
             print(data2)
+            
+            
+            query4= "select HubId from Hospital_master where ID='"+str(i["HospitalId"])+"';"
+            print(query)
+            conn=Connection()
+            cursor = conn.cursor()
+            cursor.execute(query4)
+            data4 = cursor.fetchall()
+            hospital_count+=data2[0]["count"]
+            print(data4)
+            
             query3 = "select count(*) as count from Patient_master where DoctorID='"+str(i["ID"])+"';"
             print(query)
             conn=Connection()
