@@ -1268,9 +1268,9 @@ def adminPannel():
         cursor.execute(query3)
         data3 = cursor.fetchall()
         
-        query3 = " select  count(*) as count from Patient_master;"
-        print(query3)
-        cursor.execute(query3)
+        query4= " select  count(*) as count from Patient_master;"
+        print(query4)
+        cursor.execute(query4)
         data4 = cursor.fetchall()
         
         data5={"totalHub":data1,"totalHospital":data2,"totalDoctor":data3,"totalPatient":data4}
