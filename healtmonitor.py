@@ -1809,7 +1809,7 @@ def doctorProfile1():
         data=json.loads(json1.decode("utf-8")) 
         
         query6 = "select * from DoctorMaster where Email='"+str(data["Email"])+"';"
-        print(query)
+        print(query6)
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query6)
