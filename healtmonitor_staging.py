@@ -62,9 +62,9 @@ def login88881():
         
                
             
-        query ="select um.name as name,mpum.Usertype_Id as Usertype_Id,mpum.Hospital_Id"
+        query ="select um.name as name,mpum.Usertype_Id as Usertype_Id,hm.HubId as HubId,Hbs.HubName as HubName,mpum.Hospital_Id"
         query=query+",hm.hospital_name as Hospital_Name ,us.Usertype as Usertype,um.UserID as UserID,um.ID as mainId,um.Email as Email  from userMaster as um INNER JOIN Usertype_master as us on us.ID=um.Usertype_Id "
-        query=query+"INNER JOIN mappinguserMaster  as mpum on mpum.mainId=um.ID  INNER JOIN Hospital_master as hm on hm.ID=mpum.Hospital_Id where name = '" + name + "' and password='" + password + "' ;"   
+        query=query+"INNER JOIN userHospitalMapping   as mpum on mpum.userId=um.ID  INNER JOIN Hospital_master as hm on hm.ID=mpum.hospitalId   INNER JOIN HubMaster as Hbs on Hbs.ID=hm.HubId where name = '" + name + "' and password='" + password + "' ;"   
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
@@ -74,6 +74,8 @@ def login88881():
             y=  d["Usertype"]
             y3= d["Usertype_Id"]
             y2= d["Hospital_Id"]
+            
+
            
         
 
@@ -87,11 +89,14 @@ def login88881():
 
 
         if  y == 'Nurse':
-            query2 = "  select um.ID as DoctorID,um.name as DoctorName,um.Email as Email,um.Gender,um.mobile from userMaster as um INNER JOIN mappinguserMaster as mpum  on mpum.mainId=um.ID where  mpum.Usertype_Id=2 and  mpum.Hospital_Id ='" + str(y2) + "'"
-            
+            query2 = "  select hm.HubId as HubId,Hbs.HubName as HubName,um.ID as DoctorID,um.name as DoctorName,um.Email as Email,um.Gender,um.mobile from userMaster as um ,userHospitalMapping  as mpum,HubMaster as Hbs,Hospital_master as hm  where hm.HubId=Hbs.ID and  mpum.userId=um.ID and  mpum.Usertype_Id=um.Usertype_Id and  um.Usertype_Id=2 where  mpum.Usertype_Id=2 and  mpum.hospitalId ='" + str(y2) + "'"
+            print(query2)
             cursor = conn.cursor()
             cursor.execute(query2)
             Nurse = cursor.fetchall()
+
+
+
             # for i in Nurse:
                 # query3= "select ID as DoctorID from signup where name= '"+str(i["DoctorName"])+"';"
                 # cursor = conn.cursor()
