@@ -1293,9 +1293,7 @@ def doctorProfile():
        
         json1=request.get_data() 
         data=json.loads(json1.decode("utf-8")) 
-        query = "select DM.ID as doctorId,DM.DoctorName as doctorNmae,DM.Gender as gender, HSM.ID as hospitalId,HSM.hospital_name As hospitalName,HM.ID as hubId,HM.HubName from"
-        query=query+" Hospital_master HSM ,HubMaster HM,DoctorMaster DM where HSM.HubId=HM.ID and DM.HospitalId=HSM.ID " 
-        query=query+" and DM.Email='"+str(data["Email"])+"';"
+        query = "select DM.ID as doctorId,DM.DoctorName as doctorNmae,DM.Gender as gender, HSM.ID as hospitalId,HSM.hospital_name As DM.Email='"+str(data["Email"])+"';"
         print(query)
         conn=Connection()
         cursor = conn.cursor()
@@ -1317,30 +1315,30 @@ def doctorProfile():
 
 
 
-@app.route('/patientDoctorMapping', methods=['POST'])
-def patientDoctorMapping():
-    try:
+# @app.route('/patientDoctorMapping', methods=['POST'])
+# def patientDoctorMapping():
+    # try:
        
-        json1=request.get_data() 
-        data=json.loads(json1.decode("utf-8")) 
-        conn=Connection()
-        cursor = conn.cursor()
-        for i in range(1,31):
-            query = " insert into  patientNurseMapping(Patient_Id,nurse_Id) values('"+str(i)+"','"+str(4)+"');"
-            print(query)
+        # json1=request.get_data() 
+        # data=json.loads(json1.decode("utf-8")) 
+        # conn=Connection()
+        # cursor = conn.cursor()
+        # for i in range(1,31):
+            # query = " insert into  patientNurseMapping(Patient_Id,nurse_Id) values('"+str(i)+"','"+str(4)+"');"
+            # print(query)
             
-            cursor.execute(query)
-            data1 = cursor.fetchall()
-            conn.commit()
-        cursor.close()
-        output = {"result":data1,"status":"true"}
-        return output  
+            # cursor.execute(query)
+            # data1 = cursor.fetchall()
+            # conn.commit()
+        # cursor.close()
+        # output = {"result":data1,"status":"true"}
+        # return output  
      
 
-    except Exception as e :
-        print("Exception---->" +str(e))    
-        output = {"result":"somthing went wrong","status":"false"}
-        return output
+    # except Exception as e :
+        # print("Exception---->" +str(e))    
+        # output = {"result":"somthing went wrong","status":"false"}
+        # return output
 
 
  
