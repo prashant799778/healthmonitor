@@ -62,7 +62,7 @@ def login88881():
         
                
             
-        query ="select um.name as name,mpum.Usertype_Id as Usertype_Id,hm.HubId as HubId,Hbs.HubName as HubName,mpum.hospitalId as Hospital_Id "
+        query ="select um.name as name,us.Usertype as Usertype,mpum.Usertype_Id as Usertype_Id,hm.HubId as HubId,Hbs.HubName as HubName,mpum.hospitalId as Hospital_Id "
         query=query+",hm.hospital_name as Hospital_Name ,us.Usertype as Usertype,um.UserID as UserID,um.ID as mainId,um.Email as Email  from userMaster as um INNER JOIN Usertype_master as us on us.ID=um.Usertype_Id "
         query=query+"INNER JOIN userHospitalMapping   as mpum on mpum.userId=um.ID  INNER JOIN Hospital_master as hm on hm.ID=mpum.hospitalId   INNER JOIN HubMaster as Hbs on Hbs.ID=hm.HubId where name = '" + name + "' and password='" + password + "' ;"   
         conn=Connection()
