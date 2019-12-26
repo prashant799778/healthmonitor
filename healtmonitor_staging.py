@@ -206,7 +206,7 @@ def allHospital():
 def allDoctor():
     try:
         
-        query= "select us.ID,us.name as DoctorName,us.Email as Email,us.mobile,us.Gender,HM.hospital_name,HM.Address AS hospital_address,us.Hospital_Id as Hospital_Id,HBS.ID as HubId,"
+        query= "select us.ID,us.name as DoctorName,us.password,us.Email as Email,us.mobile,us.Gender,HM.hospital_name,HM.Address AS hospital_address,us.Hospital_Id as Hospital_Id,HBS.ID as HubId,"
         query=query+"(select count(*) as count from Patient_master where us.ID=Patient_master.DoctorID)patient,"
         query=query+"HBS.HubName from userMaster us,Hospital_master HM,HubMaster as HBS where  us.Hospital_Id=HM.ID and us.Usertype_Id=2 and  HM.HubId=HBS.ID;"
         conn=Connection()
