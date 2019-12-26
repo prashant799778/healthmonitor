@@ -89,7 +89,7 @@ def login88881():
 
 
         if  y == 'Nurse':
-            query2 = " select hm.ID as Hospital_Id,hm.hospital_name,hm.HubId as HubId,Hbs.HubName as HubName,um.ID as DoctorID,um.name as DoctorName,um.Email as Email,um.Gender,um.mobile from userMaster as um ,userHospitalMapping  as mpum,HubMaster as Hbs,Hospital_master as hm  where hm.HubId=Hbs.ID and  mpum.userId=um.ID and  mpum.Usertype_Id=um.Usertype_Id and  um.Usertype_Id=2 and  mpum.Usertype_Id=2 and hm.ID = '" + str(y2) + "';"
+            query2 = " select hm.ID as Hospital_Id,hm.hospital_name,hm.HubId as HubId,Hbs.HubName as HubName,um.ID as DoctorID,um.name as DoctorName,um.Email as Email,um.Gender,um.mobile from userMaster as um ,userHospitalMapping  as mpum,HubMaster as Hbs,Hospital_master as hm  where hm.HubId=Hbs.ID and  mpum.userId=um.ID and  um.Usertype_Id=2 and  mpum.Usertype_Id=2 and hm.ID = '" + str(y2) + "';"
             print(query2)
             cursor = conn.cursor()
             cursor.execute(query2)
