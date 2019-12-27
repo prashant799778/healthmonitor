@@ -249,7 +249,7 @@ def allPatient():
         query3= query3 + " from Patient_master  as PM ,patientDoctorMapping as pdm,Hospital_master as Hm,HubMaster as Hbs  where PM.hospitalId=Hm.ID and Hm.HubId=Hbs.ID and  pdm.Patient_Id=PM.PatientId  and PM.Status<>'2'   ORDER BY  ID DESC;"
         conn=Connection()
         cursor = conn.cursor()
-        cursor.execute(query)
+        cursor.execute(query3)
         data= cursor.fetchall()
         cursor.close()
         if data:
