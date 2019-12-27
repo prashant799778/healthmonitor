@@ -140,7 +140,8 @@ def login88881():
 def allHospital():
     try:
         
-        query="select Hospital_master.ID,Hospital_master.hospital_name,Hospital_master.Address,HubMaster.HubName,HubMaster.ID as HubId  from Hospital_master inner join HubMaster on Hospital_master.HubId=HubMaster.ID;"
+        query="select Hospital_master.ID,Hospital_master.hospital_name,Hospital_master.Address,"
+        query=query+"HubMaster.HubName,HubMaster.ID as HubId  from Hospital_master inner join HubMaster on Hospital_master.HubId=HubMaster.ID;"
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
