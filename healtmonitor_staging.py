@@ -337,7 +337,7 @@ def doctorLoginDashboard():
             cursor.execute(query1)
             data1= cursor.fetchall()
             print("patient_count",data1)
-            i["patient_count"]=data1['patient_count']
+            i["patient_count"]=data1[0]['patient_count']
             
             query3 ="select  PM.PatientId as PatientId,PM.PatientName,PM.PhoneNo,PM.Address,PM.BloodGroup,PM.DeviceMac,Hm.HubId,Hm.hospital_name, "
             query3=query3+" PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.age,PM.Gender,PM.roomNumber,pdm.DoctorID as DoctorID"
