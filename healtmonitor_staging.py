@@ -182,7 +182,7 @@ def allHospital():
 def allDoctor():
     try:
         
-        query= " select um.ID,um.name,um.Gender,hsm.hospital_name,hm.HubName,hsm.ID from userMaster um,HubMaster hm,Hospital_master hsm,"
+        query= " select um.ID,um.name as DoctorName,um.Email,um.Gender,hsm.ID as Hospital_Id,hsm.hospital_name,hm.ID as HubId,hsm.hospital_address,hm.HubName from userMaster um,HubMaster hm,Hospital_master hsm,"
         query=query+"userHospitalMapping uhm where um.Usertype_Id=2 and hm.ID=hsm.HubId and um.ID=uhm.userId and uhm.hospitalId=hsm.ID;"
         print(query)
         conn=Connection()
