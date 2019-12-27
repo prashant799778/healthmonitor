@@ -486,7 +486,7 @@ def HospitalPatientDetails():
         return output 
 
 
-
+#pass hospitalId
 @app.route('/doctorDropdown', methods=['POST'])
 def doctorDropdown():
     try:
@@ -536,6 +536,8 @@ def Usertypelist():
         output = {"result":"something went wrong","status":"false"}
         return output
 
+
+#admin hubdetail tab  -----not done
 @app.route('/hubMaster', methods=['GET'])
 def hubMaster():
     try:
@@ -625,29 +627,29 @@ def hospitalMaster():
         output = {"result":"something went wrong","status":"false"}
     return output
  
-@app.route('/doctorMaster', methods=['POST'])
-def doctorMaster():
-    try:
+# @app.route('/doctorMaster', methods=['POST'])
+# def doctorMaster():
+    # try:
        
-        json1=request.get_data() 
-        data=json.loads(json1.decode("utf-8"))  
-        query1 = "select ID,DoctorName from DoctorMaster where HospitalId = "+str(data["ID"])+" ;"
+        # json1=request.get_data() 
+        # data=json.loads(json1.decode("utf-8"))  
+        # query1 = "select ID,DoctorName from DoctorMaster where HospitalId = "+str(data["ID"])+" ;"
         
-        print(query1)
-        conn=Connection()
-        cursor = conn.cursor()
-        cursor.execute(query1)
-        data= cursor.fetchall()
-        conn.commit()
-        cursor.close()
-        print(data)
-        if data != None:
-            return {"result":data,"status":"True"}
+        # print(query1)
+        # conn=Connection()
+        # cursor = conn.cursor()
+        # cursor.execute(query1)
+        # data= cursor.fetchall()
+        # conn.commit()
+        # cursor.close()
+        # print(data)
+        # if data != None:
+            # return {"result":data,"status":"True"}
         
-    except Exception as e :
-        print("Exception---->" + str(e))    
-        output = {"result":"something went wrong","status":"false"}
-    return output
+    # except Exception as e :
+        # print("Exception---->" + str(e))    
+        # output = {"result":"something went wrong","status":"false"}
+    # return output
 
 
 # @app.route('/HubMaster', methods=['GET'])
