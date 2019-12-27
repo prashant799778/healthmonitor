@@ -882,7 +882,7 @@ def addUser():
         json1=request.get_data() 
         data1=json.loads(json1.decode("utf-8"))  
         
-        query = "select * from signup where Email='"+str(data1["Email"])+ "';"
+        query = "select * from userMaster where Email='"+str(data1["Email"])+ "';"
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
@@ -894,29 +894,35 @@ def addUser():
         if data==():
             if data1["password"]==data1["confirm_password"]:
                 query2  = " insert into userMaster (name,mobile,Usertype_Id,UserID,password,Email,Gender)"
-                query2 = query2 +" values('"+str(data1["name"])+"','"+str(data1["mobile"])+"','"+str(data1["Usertype_Id"])+"','"+str(UserID)
+                query2 = query2 +" values('"+str(data1["name"])+"','"+str(data1["mobile"])+"','"+str('3')+"','"+str(UserID)
                 query2=query2+"','"+str(data1["password"])+"','"+str(data1["Email"])+"','"+str(data1["Gender"])+"');"
                 print(query2)
                 conn=Connection()
                 cursor = conn.cursor()
                 cursor.execute(query2)
                 conn.commit()
-                query = "select ID as mainId,Usertype_Id from signup where name= '"+str(data1["name"])+ "' and  Email='"+str(data1["Email"])+ "';"
+                query = "select ID as userId,Usertype_Id from userMaster where name= '"+str(data1["name"])+ "' and  Email='"+str(data1["Email"])+ "';"
                 conn=Connection()
                 cursor = conn.cursor()
                 cursor.execute(query)
                 data=cursor.fetchall()
                 yu=data[-1]
-                mainId=yu["mainId"]
+                mainId=yu["userId"]
                 Usertype_Id=yu["Usertype_Id"]
                 HospitalId = data["Hospital_Id"]
                 for i in HospitalId:
-                    query2  = " insert into userHospitalMapping (mainId,Usertype_Id,Hospital_Id)"
-                    query2 = query2 +" values('"+str(data1["mainId"])+"','"+str(data1["Usertype_Id"])+"','"+str(i)+"');"
+                    query = "select * from userHospitalMapping where Hospital_Id='"+str(i)+"';"
                     conn=Connection()
                     cursor = conn.cursor()
                     cursor.execute(query)
-                    conn.commit()
+                    userHospitalMappingdata = cursor.fetchall()
+                    if userHospitalMappingdata==():
+                        query2  = " insert into userHospitalMapping (mainId,Usertype_Id,Hospital_Id)"
+                        query2 = query2 +" values('"+str(data1["mainId"])+"','"+str(data1["Usertype_Id"])+"','"+str(i)+"');"
+                        conn=Connection()
+                        cursor = conn.cursor()
+                        cursor.execute(query)
+                        conn.commit()
 
                 output = {"result":"data inserted successfully","status":"true"}
                 return output
@@ -935,70 +941,61 @@ def addUser():
 
 
 
-@app.route('/addDoctor', methods=['POST'])
-def addDoctor():
+@app.route('/adddoctor', methods=['POST'])
+def adddoctor():
     try:
-        
         json1=request.get_data() 
         data1=json.loads(json1.decode("utf-8"))  
         
-        query = "select * from DoctorMaster where Email='"+str(data1["Email"])+ "' and HospitalId='"+str(data1["HospitalId"])+"';"
+        query = "select * from userMaster where Email='"+str(data1["Email"])+ "';"
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
         data = cursor.fetchall()
         cursor.close()
         print(data)
-
-        query = "select * from signup where Email='"+str(data1["Email"])+ "' and Hospital_Id= '"+str(data1["HospitalId"])+"';"
-        conn=Connection()
-        cursor = conn.cursor()
-        cursor.execute(query)
-        data2 = cursor.fetchall()
-        cursor.close()
-        print(data2)
-        
-        if data==() and data2 ==():  
-            print("1111111111111111111111111111")
-            query2  = " insert into DoctorMaster (HospitalId,DoctorName,Email,Gender)"
-            query2 = query2 +" values('"+str(data1["HospitalId"])+"','"+str(data1["DoctorName"])+"','"+str(data1["Email"])+"','"+str(data1["Gender"])+"');"
-            print(query2)
-            conn=Connection()
-            cursor = conn.cursor()
-            cursor.execute(query2)
-            conn.commit()
-
-            UserId=uuid.uuid1()
-            UserId=UserId.hex 
-            if  "password" not in data1:
-                print("2222222222222222222222222222")
-                data1["password"]= '1234'
-
-                query3  = " insert into  signup (Hospital_Id,name,Usertype_Id,Email,password,Gender,UserID)"
-                query3 = query3 +" values('"+str(data1["HospitalId"])+"','"+str(data1["DoctorName"])+"','"+str('2')+"','"+str(data1["Email"])+"','"+str('123')+"','"+str(data1["Gender"])+"','"+str(UserId)+"');"
-                print(query3)
+        UserId=uuid.uuid1()
+        UserID=UserId.hex
+        if data==():
+            if data1["password"]==data1["confirm_password"]:
+                query2  = " insert into userMaster (name,mobile,Usertype_Id,UserID,password,Email,Gender)"
+                query2 = query2 +" values('"+str(data1["name"])+"','"+str(data1["mobile"])+"','"+str('2')+"','"+str(UserID)
+                query2=query2+"','"+str(data1["password"])+"','"+str(data1["Email"])+"','"+str(data1["Gender"])+"');"
+                print(query2)
                 conn=Connection()
                 cursor = conn.cursor()
-                cursor.execute(query3)
+                cursor.execute(query2)
                 conn.commit()
-                cursor.close()
+                query = "select ID as userId,Usertype_Id from userMaster where name= '"+str(data1["name"])+ "' and  Email='"+str(data1["Email"])+ "';"
+                conn=Connection()
+                cursor = conn.cursor()
+                cursor.execute(query)
+                data=cursor.fetchall()
+                yu=data[-1]
+                mainId=yu["userId"]
+                Usertype_Id=yu["Usertype_Id"]
+                HospitalId = data["Hospital_Id"]
+                for i in HospitalId:
+                    query = "select * from userHospitalMapping where Hospital_Id='"+str(i)+"';"
+                    conn=Connection()
+                    cursor = conn.cursor()
+                    cursor.execute(query)
+                    userHospitalMappingdata = cursor.fetchall()
+                    if userHospitalMappingdata==():
+                        query2  = " insert into userHospitalMapping (mainId,Usertype_Id,Hospital_Id)"
+                        query2 = query2 +" values('"+str(data1["mainId"])+"','"+str(data1["Usertype_Id"])+"','"+str(i)+"');"
+                        conn=Connection()
+                        cursor = conn.cursor()
+                        cursor.execute(query)
+                        conn.commit()
 
+                output = {"result":"data inserted successfully","status":"true"}
+                return output
             else:
-                query3  = " insert into  signup (Hospital_Id,name,Usertype_Id,Email,password,Gender,UserID)"
-                query3 = query3 +" values('"+str(data1["HospitalId"])+"','"+str(data1["DoctorName"])+"','"+str('2')+"','"+str(data1["Email"])+"','"+str(data1["password"])+"','"+str(data1["Gender"])+"','"+str(UserId)+"');"
-                print(query3)
-                conn=Connection()
-                cursor = conn.cursor()
-                cursor.execute(query3)
-                conn.commit()
-                cursor.close()
-            
-            output = {"result":"data inserted successfully","status":"true"}
-            return output
-            
-
+                output = {"result":"password mismatched","status":"false"}
+                return output
         else:
-            output = {"result":"record already Exist","status":"true"}
+            output = {"result":"HubName already Exist","status":"true"}
             return output 
     except Exception as e :
         print("Exception---->" + str(e))    
@@ -1033,32 +1030,41 @@ def Patient_master():
         data=cursor.fetchall()
 
         final= data[-1]
-
-        mainId=final["mainId"]
-        
-        Usertype_Id=final["Usertype_Id"]
-        
+        P_Id=final["PatientId"]
         DoctorId = data["DoctorId"]
 
         for i in DoctorId:
             
-            query2  = " insert into patientDoctorMapping (PatientId,DoctorId)"
-            query2 = query2 +" values('"+str(data1["PatientId"])+"','"+str(data1["DoctorId"])+"');"
+            query = "select * from patientDoctorMapping where DoctorId='"+str(i)+"';"
             conn=Connection()
             cursor = conn.cursor()
             cursor.execute(query)
-            conn.commit()
+            userHospitalMappingdata = cursor.fetchall()
+            if userHospitalMappingdata==():
+                query2  = " insert into patientDoctorMapping (Patient_Id,DoctorId)"
+                query2 = query2 +" values('"+str(P_Id)+"','"+str(i)+"');"
+                conn=Connection()
+                cursor = conn.cursor()
+                cursor.execute(query)
+                conn.commit()
         
         nurseId = data["nurseId"]
         
         for i in nurseId :
             
-            query2  = " insert into patientDoctorMapping (PatientId,DoctorId)"
-            query2 = query2 +" values('"+str(data1["PatientId"])+"','"+str(data1["DoctorId"])+"');"
+            query = "select * from patientNurseMapping where nurseId='"+str(i)+"';"
             conn=Connection()
             cursor = conn.cursor()
             cursor.execute(query)
-            conn.commit()
+            userHospitalMappingdata = cursor.fetchall()
+            
+            if userHospitalMappingdata==():
+                query2  = " insert into patientNurseMapping (Patient_Id,DoctorId)"
+                query2 = query2 +" values('"+str(P_Id)+"','"+str(i)+"');"
+                conn=Connection()
+                cursor = conn.cursor()
+                cursor.execute(query)
+                conn.commit()
         
         cursor.close()
         output={"output": "Patient Added succesfully","Patient Details":data9[-1],"status":"true"}
