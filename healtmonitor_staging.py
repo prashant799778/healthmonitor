@@ -154,14 +154,14 @@ def allHospital():
             data1 = cursor.fetchall()
             
             i["total_doctor"]=data1[0]["count"]
-            query2="select um.ID as ID  from userMaster as um ,userHospitalMapping  as mpum,Patient_master as Pm,HubMaster as Hbs,Hospital_master as hm  where  Pm.hospitalId=hm.ID and mpum.userId=um.ID and mpum.hospitalId=hm.ID and  hm.HubId=Hbs.ID  and  um.Usertype_Id=2  and  hm.ID='"+str(i["ID"])+"';"
+            query2="select um.ID as ID,mpum.hospitalId as hospitalId  from userMaster as um ,userHospitalMapping  as mpum,Patient_master as Pm,HubMaster as Hbs,Hospital_master as hm  where  Pm.hospitalId=hm.ID and mpum.userId=um.ID and mpum.hospitalId=hm.ID and  hm.HubId=Hbs.ID  and  um.Usertype_Id=2  and  hm.ID='"+str(i["ID"])+"';"
             print(query2)
             cursor.execute(query2)
             data2 = cursor.fetchall()
             print(data2)
             count=0
             for j in data2:
-                query1 = " select  count(*) as count from Patient_master  where  Status<>'2'  AND PatientId IN (select Patient_Id  from patientDoctorMapping  where  Status<>'2' AND  DoctorID= '"+str(j["ID"])+"') ;"
+                query1 = " select  count(*) as count from Patient_master  where  Status<>'2'  AND hospitalId='"+str(j["hospitalId"])+"'  and PatientId IN (select Patient_Id  from patientDoctorMapping  where  Status<>'2' AND  DoctorID= '"+str(j["ID"])+"') ;"
                 cursor.execute(query1)
                 data3 = cursor.fetchall()
                 print(data3)
