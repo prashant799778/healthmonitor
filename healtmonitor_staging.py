@@ -320,21 +320,22 @@ def doctorLoginDashboard():
     try:
         json1=request.get_data()
         data=json.loads(json1.decode("utf-8"))
+        
         conn=Connection()
         cursor = conn.cursor()
         query=" select um.ID as doctorId, hsm.hospital_name,hsm.ID as hospitalId,hm.ID as hubId,hm.HubName from HubMaster hm,Hospital_master hsm,userMaster um,userHospitalMapping uhm" 
         query=query+"where hm.ID=hsm.HubId and hsm.ID=uhm.hospitalId and uhm.userId=um.ID and um.Email='"+str(data["Email"])+"';"
         cursor.execute(query)
-        data= cursor.fetchall()
-        print(data)
+        data1= cursor.fetchall()
+        print(data1)
         
         cursor.close()
-        if data:
+        # if data:
             # data.append({"Total_hospital":len(data)})
             # data.append({"total_patient":total_patient})
             return "ok"#{"result":data,"Total_hospital":len(data),"total_patient":total_patient,"status":"true"}
-        else:
-            return {"result":"No Record Found","status":"true"}
+        # else:
+            # return {"result":"No Record Found","status":"true"}
     
     except Exception as e :
         print("Exception---->" +str(e))           
