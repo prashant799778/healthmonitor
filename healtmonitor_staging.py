@@ -182,9 +182,8 @@ def allHospital():
 def allDoctor():
     try:
         
-        query= "select us.ID,us.name as DoctorName,us.password,us.Email as Email,us.mobile,us.Gender,HM.hospital_name,HM.Address AS hospital_address,ushm.Hospital_Id as Hospital_Id,HBS.ID as HubId,"
-        query=query+"(select  count(*) as patient from Patient_master  where  Status<>'2'  and PatientId IN (select Patient_Id  from patientDoctorMapping  where  Status<>'2' AND  us.ID=patientDoctorMapping.DoctorID)patient,"
-        query=query+"HBS.HubName from userMaster us,userHospitalMapping  ushm,Hospital_master HM,HubMaster as HBS where  ushm.userId=us.ID and  ushm.hospitalId=HM.ID and us.Usertype_Id=2 and  HM.HubId=HBS.ID;"
+        query= " select um.ID,um.name,um.Gender,hsm.hospital_name,hm.HubName from userMaster um,HubMaster hm,Hospital_master hsm,"
+        query=query+"userHospitalMapping uhm where um.Usertype_Id=2 and hm.ID=hsm.HubId and um.ID=uhm.userId and uhm.hospitalId=hsm.ID;"
         print(query)
         conn=Connection()
         cursor = conn.cursor()
