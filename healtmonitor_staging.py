@@ -191,7 +191,7 @@ def allDoctor():
         data= cursor.fetchall()
         
         for i in data:
-            query1="select count(*) as count from patientDoctorMapping where doctorId='"+str(i["ID"])+"';"
+            query1="select count(*) as count from patientDoctorMapping where Patient_master.hospitalId='"+ str(i["Hospital_Id"])+"'and doctorId='"+str(i["ID"])+"';"
             cursor.execute(query1)
             data1= cursor.fetchall()
             print(data1)
