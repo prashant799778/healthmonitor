@@ -338,7 +338,7 @@ def doctorLoginDashboard():
             print(data2)
             i["patient_Details"]=data2
             print("111111111111111111")
-            query3="select count(*) as count from Patient_master pm,patientDoctorMapping pdm where pdm.Patient_Id=pm.PatientId" 
+            query3="select count(*) as count from Patient_master pm,patientDoctorMapping pdm where pdm.Patient_Id=pm.PatientId " 
             query3=query2+" and pdm.doctorId='"+str(i["doctorId"]) +"' and pm.hospitalId='"+str(i["hospitalId"])+"';"
             cursor.execute(query3)
             data3= cursor.fetchall()
