@@ -331,15 +331,15 @@ def doctorLoginDashboard():
         total_patient=0
         for i in data1:
             
-            query2="select * from Patient_master pm,patientDoctorMapping pdm where pdm.Patient_Id=pm.PatientId" 
-            query2=query2+"and pdm.doctorId='"+str(i["doctorId"]) +"'and pm.hospitalId='"+str(i["hospitalId"])+"';"
+            query2="select * from Patient_master pm,patientDoctorMapping pdm where pdm.Patient_Id=pm.PatientId " 
+            query2=query2+" and pdm.doctorId='"+str(i["doctorId"]) +"' and pm.hospitalId='"+str(i["hospitalId"])+"';"
             cursor.execute(query2)
             data2= cursor.fetchall()
             print(data2)
             i["patient_Details"]=data2
         
             query3="select count(*) as count from Patient_master pm,patientDoctorMapping pdm where pdm.Patient_Id=pm.PatientId" 
-            query3=query2+"and pdm.doctorId='"+str(i["doctorId"]) +"'and pm.hospitalId='"+str(i["hospitalId"])+"';"
+            query3=query2+" and pdm.doctorId='"+str(i["doctorId"]) +"' and pm.hospitalId='"+str(i["hospitalId"])+"';"
             cursor.execute(query3)
             data3= cursor.fetchall()
             total_patient+=data3[0]["count"]
