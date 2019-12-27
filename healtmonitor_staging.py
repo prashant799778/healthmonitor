@@ -154,7 +154,7 @@ def allHospital():
             data1 = cursor.fetchall()
             
             i["total_doctor"]=data1[0]["count"]
-            query2="select mpum.userId as ID  from userMaster as um ,userHospitalMapping  as mpum,HubMaster as Hbs,Hospital_master as hm  where  mpum.userId=um.ID and mpum.hospitalId=hm.ID and  hm.HubId=Hbs.ID  and  um.Usertype_Id=2  and  hm.ID='"+str(i["ID"])+"';"
+            query2="select um.ID as ID  from userMaster as um ,userHospitalMapping  as mpum,Patient_master as Pm,HubMaster as Hbs,Hospital_master as hm  where  Pm.hospitalId=hm.ID and mpum.userId=um.ID and mpum.hospitalId=hm.ID and  hm.HubId=Hbs.ID  and  um.Usertype_Id=2  and  hm.ID='"+str(i["ID"])+"';"
             print(query2)
             cursor.execute(query2)
             data2 = cursor.fetchall()
