@@ -319,14 +319,14 @@ def doctorLoginHospital():
 def doctorLoginDashboard():
     try:
         json1=request.get_data()
-        print(json1)
         data=json.loads(json1.decode("utf-8"))
         print(data)
-        query="select ushm.userId as  ID ,ushm.hospitalId as HospitalId from userMaster as us ,Hospital_master as hm,HubMaster as Hm,userHospitalMapping as ushm where ushm.userId=us.Id and  hm.ID=ushm.hospitalId   and  Hm.ID= hm.HubId and   us.Usertype_Id=2  and  us.Email='"+str(data["Email"])+"';"
-        print(query)
         conn=Connection()
         cursor = conn.cursor()
+        query=" select um.ID as doctorId, hsm.hospital_name,hsm.ID as hospitalId,hm.ID as hubId,hm.HubName from HubMaster hm,Hospital_master hsm,userMaster um,userHospitalMapping uhm" 
+        query=query+" where hm.ID=hsm.HubId and hsm.ID=uhm.hospitalId and uhm.userId=um.ID and um.Email='"+str(data["Email"])+"';"
         cursor.execute(query)
+
         data= cursor.fetchall()
         print(data)
         total_patient=0
@@ -368,13 +368,17 @@ def doctorLoginDashboard():
             if i["patient_count"]==0:
                 data1.remove(i)
             
+        data1= cursor.fetchall()
+        print(data1)
+        
+
         cursor.close()
-        if data:
+        # if data:
             # data.append({"Total_hospital":len(data)})
             # data.append({"total_patient":total_patient})
-            return {"result":data,"Total_hospital":len(data),"total_patient":total_patient,"status":"true"}
-        else:
-            return {"result":"No Record Found","status":"true"}
+        return "ok"#{"result":data,"Total_hospital":len(data),"total_patient":total_patient,"status":"true"}
+        # else:
+            # return {"result":"No Record Found","status":"true"}
     
     except Exception as e :
         print("Exception---->" +str(e))           
