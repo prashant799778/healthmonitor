@@ -323,17 +323,31 @@ def doctorLoginDashboard():
         print(data)
         conn=Connection()
         cursor = conn.cursor()
-        query=" select um.ID as doctorId, hsm.hospital_name,hsm.ID as hospitalId,hm.ID as hubId,hm.HubName from HubMaster hm,Hospital_master hsm,userMaster um,userHospitalMapping uhm" 
-        query=query+" where hm.ID=hsm.HubId and hsm.ID=uhm.hospitalId and uhm.userId=um.ID and um.Email='"+str(data["Email"])+"';"
-        cursor.execute(query)
+        query1=" select um.ID as doctorId, hsm.hospital_name,hsm.ID as hospitalId,hm.ID as hubId,hm.HubName from HubMaster hm,Hospital_master hsm,userMaster um,userHospitalMapping uhm" 
+        query1=query1+" where hm.ID=hsm.HubId and hsm.ID=uhm.hospitalId and uhm.userId=um.ID and um.Email='"+str(data["Email"])+"';"
+        cursor.execute(query1)
         data1= cursor.fetchall()
         print(data1)
+        total_patient=0
+        for i in data1:
+            
+            query2="select * from Patient_master pm,patientDoctorMapping pdm where pdm.Patient_Id=pm.PatientId" 
+            query2=query2+"and pdm.doctorId='"+str(i["doctorId"]) +"'and pm.hospitalId='"+str(i["hospitalId"])+"';"
+            cursor.execute(query2)
+            data2= cursor.fetchall()
+            print(data2)
+            i["patient_Details"]=data2
         
+            query3="select count(*) as count from Patient_master pm,patientDoctorMapping pdm where pdm.Patient_Id=pm.PatientId" 
+            query3=query2+"and pdm.doctorId='"+str(i["doctorId"]) +"'and pm.hospitalId='"+str(i["hospitalId"])+"';"
+            cursor.execute(query3)
+            data3= cursor.fetchall()
+            total_patient+=data3[0]["count"]
         cursor.close()
-        # if data:
+        if data1:
             # data.append({"Total_hospital":len(data)})
             # data.append({"total_patient":total_patient})
-        return "ok"#{"result":data,"Total_hospital":len(data),"total_patient":total_patient,"status":"true"}
+        return {"result":data,"Total_hospital":len(data1),"total_patient":total_patient,"status":"true"}
         # else:
             # return {"result":"No Record Found","status":"true"}
     
