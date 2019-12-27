@@ -212,7 +212,6 @@ def allDoctor():
 def allNurse():
     try:
         
-        try:
         conn=Connection()
         cursor = conn.cursor()
         query= " select um.ID,um.name as nurseName,um.Email,um.Gender,hsm.ID as Hospital_Id,hsm.hospital_name,hm.ID as HubId,hsm.Address as hospital_address,hm.HubName from userMaster um,HubMaster hm,Hospital_master hsm,"
