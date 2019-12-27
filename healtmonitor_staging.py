@@ -344,8 +344,8 @@ def doctorLoginDashboard():
             # data3= cursor.fetchall()
             # total_patient+=data3[0]["count"]
         for i in data1:
-            print("123444444444444444444444",i["patient_Details"])
-            if i["patient_Details"]==[]:
+            
+            if i["patient_Details"]==():
                 data1.remove(i)
         for i in data1:
             total_patient+=len(i["patient_Details"])
