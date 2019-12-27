@@ -324,7 +324,7 @@ def doctorLoginDashboard():
         conn=Connection()
         cursor = conn.cursor()
         query=" select um.ID as doctorId, hsm.hospital_name,hsm.ID as hospitalId,hm.ID as hubId,hm.HubName from HubMaster hm,Hospital_master hsm,userMaster um,userHospitalMapping uhm" 
-        query=query+"where hm.ID=hsm.HubId and hsm.ID=uhm.hospitalId and uhm.userId=um.ID and um.Email='"+str(data["Email"])+"';"
+        query=query+" where hm.ID=hsm.HubId and hsm.ID=uhm.hospitalId and uhm.userId=um.ID and um.Email='"+str(data["Email"])+"';"
         cursor.execute(query)
         data1= cursor.fetchall()
         print(data1)
