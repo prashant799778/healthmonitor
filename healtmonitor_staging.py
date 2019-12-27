@@ -865,7 +865,7 @@ def addUser():
         cursor = conn.cursor()
         cursor.execute(query)
         data = cursor.fetchone()
-        mainId=data["userId"]
+        mainId=data["ID"]
         Usertype_Id=data["Usertype_Id"]
         HospitalId = data1["Hospital_Id"]
         for i in HospitalId:
@@ -949,7 +949,7 @@ def adddoctor():
         cursor = conn.cursor()
         cursor.execute(query)
         data = cursor.fetchone()
-        mainId=data["userId"]
+        mainId=data["ID"]
         Usertype_Id=data["Usertype_Id"]
         HospitalId = data1["Hospital_Id"]
         for i in HospitalId:
