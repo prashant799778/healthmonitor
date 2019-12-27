@@ -228,9 +228,9 @@ def allNurse():
 @app.route('/allPatient', methods=['post'])
 def allPatient():
     try:
-        
-        query="select PM.PatientId as ID,Pm.DoctorID,Pm.nurseId,PM.PatientName,PM.PhoneNo,PM.Address,PM.BloodGroup,PM.DeviceMac,"
-        query=query+"PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.hospital_Name,PM.age,PM.Gender,PM.roomNumber from Patient_master as PM;"
+        query3 ="select  PM.PatientId as ID,PM.PatientName,PM.PhoneNo,PM.Address,PM.BloodGroup,PM.DeviceMac,Hm.HubId,Hm.hospital_name, "
+        query3=query3+" PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.age,PM.Gender,PM.roomNumber,pdm.DoctorID as DoctorID"
+        query3= query3 + " from Patient_master  as PM ,patientDoctorMapping as pdm,Hospital_master as Hm,HubMaster as Hbs  where PM.hospitalId=Hm.ID and Hm.HubId=Hbs.ID and  pdm.Patient_Id=PM.PatientId  and PM.Status<>'2'   ORDER BY  ID DESC;"
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
@@ -256,7 +256,7 @@ def doctorLoginHospital():
         
         data=json.loads(json1.decode("utf-8"))
         
-        query="select ID, Hospital_Id from userMaster where  Usertype_Id=2 and Email='"+(data["Email"])+"';"
+        query="select us.ID as  ID ,ushm.hospitalId as Hospital_Id from userMaster as us ,Hospital_master as hm,HubMaster as Hm,userHospitalMapping as ushm where ushm.userId=us.Id and  hm.ID=ushm.hospitalId   and  Hm.ID= hm.HubId and   us.Usertype_Id=2  and  us.Email='"+str(data["Email"])+"';"
         
         conn=Connection()
         cursor = conn.cursor()
@@ -305,7 +305,7 @@ def doctorLoginDashboard():
         print(json1)
         data=json.loads(json1.decode("utf-8"))
         print(data)
-        query="select ID, Hospital_Id from userMaster where Usertype_Id=2 and Email='"+(data["Email"])+"';"
+        query="select us.ID as  ID ,ushm.hospitalId as Hospital_Id from userMaster as us ,Hospital_master as hm,HubMaster as Hm,userHospitalMapping as ushm where ushm.userId=us.Id and  hm.ID=ushm.hospitalId   and  Hm.ID= hm.HubId and   us.Usertype_Id=2  and  us.Email='"+str(data["Email"])+"';"
         print(query)
         conn=Connection()
         cursor = conn.cursor()
