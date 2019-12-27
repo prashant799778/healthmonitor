@@ -545,7 +545,7 @@ def hubMaster():
             print(data2)
             count=0
             for j in data2:
-                query1 = "select count(*) as count from userMaster where Usertype_Id=2 and Hospital_Id= '"+str(j["ID"])+"';"
+                query1 = "select count(*) as count from userHospitalMapping where  Usertype_Id=2 and  hospitalId='"+str(i["ID"])+"';"
                 cursor.execute(query1)
                 data3 = cursor.fetchall()
                 print(data3)
