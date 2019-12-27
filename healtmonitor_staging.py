@@ -319,60 +319,20 @@ def doctorLoginHospital():
 def doctorLoginDashboard():
     try:
         json1=request.get_data()
-        print(json1)
         data=json.loads(json1.decode("utf-8"))
-        print(data)
-        query="select ushm.userId as  ID ,ushm.hospitalId as HospitalId from userMaster as us ,Hospital_master as hm,HubMaster as Hm,userHospitalMapping as ushm where ushm.userId=us.Id and  hm.ID=ushm.hospitalId   and  Hm.ID= hm.HubId and   us.Usertype_Id=2  and  us.Email='"+str(data["Email"])+"';"
-        print(query)
         conn=Connection()
         cursor = conn.cursor()
+        query=" select um.ID as doctorId, hsm.hospital_name,hsm.ID as hospitalId,hm.ID as hubId,hm.HubName from HubMaster hm,Hospital_master hsm,userMaster um,userHospitalMapping uhm" 
+        query=query+"where hm.ID=hsm.HubId and hsm.ID=uhm.hospitalId and uhm.userId=um.ID and um.Email='"+str(data["Email"])+"';"
         cursor.execute(query)
         data= cursor.fetchall()
         print(data)
-        total_patient=0
-        for i in data:
-            print("11111111")
-            query1="select  count(*) as patient_count from Patient_master  where  Status<>'2'  AND hospitalId='"+str(i["HospitalId"])+"'  and PatientId IN (select Patient_Id  from patientDoctorMapping  where  Status<>'2' AND  DoctorID= '"+str(i["ID"])+"');"
-            cursor = conn.cursor()
-            cursor.execute(query1)
-            data1= cursor.fetchall()
-            print("patient_count",data1)
-            i["patient_count"]=data1[0]['patient_count']
-            
-            query3 ="select  PM.PatientId as PatientId,PM.PatientName,PM.PhoneNo,PM.Address,PM.BloodGroup,PM.DeviceMac,Hm.HubId,Hm.hospital_name, "
-            query3=query3+" PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.age,PM.Gender,PM.roomNumber,pdm.DoctorID as DoctorID"
-            query3= query3 + " from Patient_master  as PM ,patientDoctorMapping as pdm,Hospital_master as Hm,HubMaster as Hbs  where PM.hospitalId= Hm.ID and Hm.HubId=Hbs.ID and  pdm.Patient_Id=PM.PatientId  and PM.Status<>'2'   and DoctorID='"+str(i["ID"])+"'  ORDER BY  PatientId DESC;"
-            
-            cursor = conn.cursor()
-            cursor.execute(query3)
-            data3= cursor.fetchall()
-            print(data3)
-            i["patient_Details"]=data3
-            
-            
-            
-            query2="select hospital_name,HubId from Hospital_master where ID='"+str(i["HospitalId"])+"';"
-            cursor = conn.cursor()
-            cursor.execute(query2)
-            data2= cursor.fetchall()
-            print(data2)
-            i["hospital_name"]=data2[0]['hospital_name']
-            i["HubId"]=data2[0]['HubId']
-            # query3="select hospital_name,HubId from Hospital_master where ID='"+str(i["HospitalId"])+"';"
-            # cursor = conn.cursor()
-            # cursor.execute(query3)
-            # data3= cursor.fetchall()
-            # i["hospital_name"]=data3[0]['hospital_name']
-            total_patient+=int(i["patient_count"])
-        for i in data1:
-            if i["patient_count"]==0:
-                data1.remove(i)
-            
+        
         cursor.close()
         if data:
             # data.append({"Total_hospital":len(data)})
             # data.append({"total_patient":total_patient})
-            return {"result":data,"Total_hospital":len(data),"total_patient":total_patient,"status":"true"}
+            return "ok"#{"result":data,"Total_hospital":len(data),"total_patient":total_patient,"status":"true"}
         else:
             return {"result":"No Record Found","status":"true"}
     
