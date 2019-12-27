@@ -343,11 +343,17 @@ def doctorLoginDashboard():
             # cursor.execute(query3)
             # data3= cursor.fetchall()
             # total_patient+=data3[0]["count"]
+        for i in data1:
+            
+            if i["patient_Details"]==():
+                data1.remove(i)
+        for i in data1:
+            total_patient+=len(i["patient_Details"])
         cursor.close()
         if data1:
             # data.append({"Total_hospital":len(data)})
             # data.append({"total_patient":total_patient})
-            return {"result":data1,"Total_hospital":len(data1),"status":"true"}#,"total_patient":total_patient
+            return {"result":data1,"Total_hospital":len(data1),"total_patient":total_patient,"status":"true"}
         else:
             return {"result":"No Record Found","status":"true"}
     
