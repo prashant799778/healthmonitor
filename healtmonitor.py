@@ -170,7 +170,7 @@ def login88881():
                
                 # i["DoctorID"]=data3[0]["DoctorID"]
 
-        if  y == 'Doctor ':
+        if  y == 'Doctor':
             query2 = "select  hm.ID as HospitalId,hm.hospital_name  as hospital_Name,hm.HubId as HubId,Dm.DoctorName as DoctorName,Dm.ID as DoctorID  from Hospital_master  as hm INNER JOIN DoctorMaster as Dm on Dm.HospitalId= hm.ID where  DoctorName = '" + name + "' and  hm.ID ='" + str(y2) + "'"
             
             cursor = conn.cursor()
