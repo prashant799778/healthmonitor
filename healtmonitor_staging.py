@@ -864,7 +864,23 @@ def addUser():
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
-        data = cursor.fetchall()
+        data = cursor.fetchone()
+        mainId=data["userId"]
+        Usertype_Id=data["Usertype_Id"]
+        HospitalId = data1["Hospital_Id"]
+        for i in HospitalId:
+            query = "select * from userHospitalMapping where hospitalId='"+str(i)+"'  and Usertype_Id='"+str(Usertype_Id)+"' and userid= '"+str(mainId)+"' ;"
+            conn=Connection()
+            cursor = conn.cursor()
+            cursor.execute(query)
+            userHospitalMappingdata = cursor.fetchall()
+            if userHospitalMappingdata==():
+                query2  = " insert into userHospitalMapping (userId,Usertype_Id,hospitalId)"
+                query2 = query2 +" values('"+str(mainId)+"','"+str(Usertype_Id)+"','"+str(i)+"');"
+                conn=Connection()
+                cursor = conn.cursor()
+                cursor.execute(query2)
+                conn.commit()
         cursor.close()
         print(data)
         UserId=uuid.uuid1()
@@ -911,7 +927,7 @@ def addUser():
                 output = {"result":"password mismatched","status":"false"}
                 return output
         else:
-            output = {"result":"HubName already Exist","status":"true"}
+            output = {"result":"New Hospital Added Successfully","status":"true"}
             return output 
     except Exception as e :
         print("Exception---->" + str(e))    
@@ -932,7 +948,23 @@ def adddoctor():
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
-        data = cursor.fetchall()
+        data = cursor.fetchone()
+        mainId=data["userId"]
+        Usertype_Id=data["Usertype_Id"]
+        HospitalId = data1["Hospital_Id"]
+        for i in HospitalId:
+            query = "select * from userHospitalMapping where hospitalId='"+str(i)+"'  and Usertype_Id='"+str(Usertype_Id)+"' and userid= '"+str(mainId)+"' ;"
+            conn=Connection()
+            cursor = conn.cursor()
+            cursor.execute(query)
+            userHospitalMappingdata = cursor.fetchall()
+            if userHospitalMappingdata==():
+                query2  = " insert into userHospitalMapping (userId,Usertype_Id,hospitalId)"
+                query2 = query2 +" values('"+str(mainId)+"','"+str(Usertype_Id)+"','"+str(i)+"');"
+                conn=Connection()
+                cursor = conn.cursor()
+                cursor.execute(query2)
+                conn.commit()
         cursor.close()
         print(data)
         UserId=uuid.uuid1()
@@ -977,7 +1009,7 @@ def adddoctor():
                 output = {"result":"password mismatched","status":"false"}
                 return output
         else:
-            output = {"result":"HubName already Exist","status":"true"}
+            output = {"result":"New Hospital Added Successfully","status":"true"}
             return output 
     except Exception as e :
         print("Exception---->" + str(e))    
