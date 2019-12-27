@@ -155,14 +155,14 @@ def allHospital():
             data1 = cursor.fetchall()
             
             i["total_doctor"]=data1[0]["count"]
-            query2="select mpum.userId as ID  from userMaster as um ,userHospitalMapping  as mpum,HubMaster as Hbs,Hospital_master as hm  where  mpum.userId=um.ID and mpum.hospitalId=hm.ID and  hm.HubId=Hbs.ID  and  um.Usertype_Id=2  and  hm.ID='"+str(i["ID"])+"';"
+            query2="select um.ID as ID,mpum.hospitalId as hospitalId  from userMaster as um ,userHospitalMapping  as mpum,HubMaster as Hbs,Hospital_master as hm  where  mpum.userId=um.ID and mpum.hospitalId=hm.ID and  hm.HubId=Hbs.ID  and  um.Usertype_Id=2  and  hm.ID='"+str(i["ID"])+"';"
             print(query2)
             cursor.execute(query2)
             data2 = cursor.fetchall()
             print(data2)
             count=0
             for j in data2:
-                query1 = " select  count(*) as count from Patient_master  where  Status<>'2'  AND PatientId IN (select Patient_Id  from patientDoctorMapping  where  Status<>'2' AND  DoctorID= '"+str(j["ID"])+"') ;"
+                query1 = " select  count(*) as count from Patient_master  where  Status<>'2'  AND hospitalId='"+str(j["hospitalId"])+"'  and PatientId IN (select Patient_Id  from patientDoctorMapping  where  Status<>'2' AND  DoctorID= '"+str(j["ID"])+"') ;"
                 cursor.execute(query1)
                 data3 = cursor.fetchall()
                 print(data3)
@@ -380,8 +380,9 @@ def doctorPatientDetails():
         for dat in data1:
             doctor_Id=dat["DoctorID"]
             l2=[]
-            query3 ="select PM.PatientId as ID,PM.PatientName,PM.DoctorID as DoctorID,PM.PhoneNo,PM.Address,PM.BloodGroup,PM.DeviceMac,PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.hospital_Name,PM.roomNumber,PM.age,PM.Gender from Patient_master as PM  where  Status<>'2' and DoctorID='" + str(doctor_Id) + "'  ORDER BY  ID DESC;;"   
-            print(query3)
+            query3 ="select  PM.PatientId as PatientId,PM.PatientName,PM.PhoneNo,PM.Address,PM.BloodGroup,PM.DeviceMac,Hm.HubId,Hm.hospital_name, "
+            query3=query3+" PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.age,PM.Gender,PM.roomNumber,pdm.DoctorID as DoctorID"
+            query3= query3 + " from Patient_master  as PM ,patientDoctorMapping as pdm,Hospital_master as Hm,HubMaster as Hbs  where PM.hospitalId=Hm.ID and Hm.HubId=Hbs.ID and  pdm.Patient_Id=PM.PatientId  and PM.Status<>'2'   and DoctorID='" + str(doctor_Id) + "'  ORDER BY  PatientId DESC;"
             cursor = conn.cursor()
             cursor.execute(query3)
             data27 = cursor.fetchall()
@@ -408,18 +409,20 @@ def doctorPatientDetails():
         return output 
 
 #after Doctor login ,in hospital section click on hospital eye show the hospital and patient information pass arguments  hospitalId  and doctor Email
+
+
 @app.route('/HospitalPatientDetails', methods=['POST'])
 def HospitalPatientDetails():
     try:
         json1=request.get_data()
         print(json1)
         data=json.loads(json1.decode("utf-8"))
-        query2 ="select us.ID as DoctorID ,us.Email as Email ,hm.HubId as HubId ,Hm.HubName as HubName,us.Hospital_Id as HospitalId from userMaster as us INNER JOIN Hospital_master as hm on hm.ID=us.Hospital_Id  INNER JOIN HubMaster as Hm on Hm.ID= hm.HubId where  us.Usertype_Id=2  where HospitalId='"+str(data["HospitalId"])+"' and  Email ='"+str(data["Email"])+"';"  
+        query2 ="select us.ID as DoctorID ,us.Email as Email ,hm.HubId as HubId ,Hm.HubName as HubName,hm.ID as Hospital_Id from userMaster as us ,Hospital_master as hm,HubMaster as Hm,userHospitalMapping as ushm where ushm.userId=us.Id and  hm.ID=ushm.hospitalId   and  Hm.ID= hm.HubId and   us.Usertype_Id=2  and  Hospital_Id='"+str(data["HospitalId"])+"' and  Email ='"+str(data["Email"])+"';"  
         print(query2)
         conn=Connection() 
         cursor = conn.cursor()
         cursor.execute(query2)
-        data1 = cursor.fetchall()
+        data1 = cursor.fetchall()          
         print(data1)
         l1=[ ]
 
@@ -432,7 +435,9 @@ def HospitalPatientDetails():
 
             l2=[]
             
-            query3 ="select * from Patient_master   where  Status=0 and DoctorID='" + str(doctor_Id) + "'  ORDER BY  PatientId DESC;"   
+            query3 ="select  PM.PatientId as PatientId,PM.PatientName,PM.PhoneNo,PM.Address,PM.BloodGroup,PM.DeviceMac,Hm.HubId,Hm.hospital_name ,"
+            query3=query3+" PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.age,PM.Gender,PM.roomNumber,pdm.DoctorID as DoctorID"
+            query3= query3 + " from Patient_master  as PM ,patientDoctorMapping as pdm,Hospital_master as Hm,HubMaster as Hbs  where PM.hospitalId=Hm.ID and Hm.HubId=Hbs.ID and  pdm.Patient_Id=PM.PatientId  and PM.Status<>'2'   and DoctorID='" + str(doctor_Id) + "'  ORDER BY  PatientId DESC;"   
             print(query3)
             cursor = conn.cursor()
             cursor.execute(query3)
@@ -469,7 +474,7 @@ def doctorDropdown():
         json1=request.get_data() 
         data=json.loads(json1.decode("utf-8"))
         # query = " select distinct userid,username,usertype from usermaster where usertype <> 'Admin';"
-        query = "select ID,name  as DoctorName from userMaster where Usertype_Id=2 and Hospital_Id ='"+str(data["hospitalId"])+"';"
+        query = " select um.ID as ID,um.name as DoctorName from userMaster as um ,userHospitalMapping  as mpum,HubMaster as Hbs,Hospital_master as hm  where  mpum.userId=um.ID and mpum.hospitalId=hm.ID and  hm.HubId=Hbs.ID  and  um.Usertype_Id=2  and hm.ID ='"+str(data["hospitalId"])+"';"
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
@@ -881,12 +886,13 @@ def addUser():
                 conn=Connection()
                 cursor = conn.cursor()
                 cursor.execute(query)
-                data=cursor.fetchone()
-                mainId=data["mainId"]
-                Usertype_Id=data["Usertype_Id"]
-                HospitalId = data1["Hospital_Id"]
+                data=cursor.fetchall()
+                yu=data[-1]
+                mainId=yu["mainId"]
+                Usertype_Id=yu["Usertype_Id"]
+                HospitalId = data["Hospital_Id"]
                 for i in HospitalId:
-                    query2  = " insert into MappinguserMaster (mainId,Usertype_Id,Hospital_Id)"
+                    query2  = " insert into userHospitalMapping (mainId,Usertype_Id,Hospital_Id)"
                     query2 = query2 +" values('"+str(data1["mainId"])+"','"+str(data1["Usertype_Id"])+"','"+str(i)+"');"
                     conn=Connection()
                     cursor = conn.cursor()
@@ -999,9 +1005,44 @@ def Patient_master():
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
-        data = cursor.fetchall()
+        data9 = cursor.fetchall()
+        query = "select PatientId  from Patient_master where Status<>'2'  and enddate is NULL;"
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        
+        data=cursor.fetchall()
+
+        final= data[-1]
+
+        mainId=final["mainId"]
+        
+        Usertype_Id=final["Usertype_Id"]
+        
+        DoctorId = data["DoctorId"]
+
+        for i in DoctorId:
+            
+            query2  = " insert into patientDoctorMapping (PatientId,DoctorId)"
+            query2 = query2 +" values('"+str(data1["PatientId"])+"','"+str(data1["DoctorId"])+"');"
+            conn=Connection()
+            cursor = conn.cursor()
+            cursor.execute(query)
+            conn.commit()
+        
+        nurseId = data["nurseId"]
+        
+        for i in nurseId :
+            
+            query2  = " insert into patientDoctorMapping (PatientId,DoctorId)"
+            query2 = query2 +" values('"+str(data1["PatientId"])+"','"+str(data1["DoctorId"])+"');"
+            conn=Connection()
+            cursor = conn.cursor()
+            cursor.execute(query)
+            conn.commit()
+        
         cursor.close()
-        output={"output": "Patient Added succesfully","Patient Details":data[-1],"status":"true"}
+        output={"output": "Patient Added succesfully","Patient Details":data9[-1],"status":"true"}
         
     except Exception as e :
         print("Exception---->" + str(e))    
