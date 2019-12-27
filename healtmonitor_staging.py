@@ -566,7 +566,7 @@ def hubMaster():
                 cursor.execute(query1)
                 data3 = cursor.fetchall()
                 print(data3)
-                count+=data3[0]["count"]
+                count =data3[0]["count"]
             i["total_doctor"]=count
             
         cursor.close()
