@@ -320,7 +320,7 @@ def doctorLoginDashboard():
     try:
         json1=request.get_data()
         data=json.loads(json1.decode("utf-8"))
-        
+        print(data)
         conn=Connection()
         cursor = conn.cursor()
         query=" select um.ID as doctorId, hsm.hospital_name,hsm.ID as hospitalId,hm.ID as hubId,hm.HubName from HubMaster hm,Hospital_master hsm,userMaster um,userHospitalMapping uhm" 
