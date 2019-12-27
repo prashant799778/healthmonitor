@@ -250,6 +250,7 @@ def allPatient():
 
 
 
+
 @app.route('/doctorLoginHospital', methods=['post'])
 def doctorLoginHospital():
     try:
@@ -266,7 +267,7 @@ def doctorLoginHospital():
         
         for i in data:
             print("11111111")
-            query1="select count(*) as patient_count from Patient_master where Status=0 and  DoctorID='"+str(i["ID"])+"';"
+            query1="select  count(*) as patient_count from Patient_master  where  Status<>'2'  AND hospitalId='"+str(i["hospitalId"])+"'  and PatientId IN (select Patient_Id  from patientDoctorMapping  where  Status<>'2' AND  DoctorID= '"+str(i["ID"])+"');"
             cursor = conn.cursor()
             cursor.execute(query1)
             data1= cursor.fetchall()
@@ -316,13 +317,16 @@ def doctorLoginDashboard():
         total_patient=0
         for i in data:
             print("11111111")
-            query1="select count(*) as patient_count from Patient_master where Status=0 and  DoctorID='"+str(i["ID"])+"';"
+            query1="select  count(*) as patient_count from Patient_master  where  Status<>'2'  AND hospitalId='"+str(i["hospitalId"])+"'  and PatientId IN (select Patient_Id  from patientDoctorMapping  where  Status<>'2' AND  DoctorID= '"+str(i["ID"])+"');"
             cursor = conn.cursor()
             cursor.execute(query1)
             data1= cursor.fetchall()
             i["patient_count"]=data1[0]['patient_count']
+
+            query3 ="select  PM.PatientId as PatientId,PM.PatientName,PM.PhoneNo,PM.Address,PM.BloodGroup,PM.DeviceMac,Hm.HubId,Hm.hospital_name, "
+            query3=query3+" PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.age,PM.Gender,PM.roomNumber,pdm.DoctorID as DoctorID"
+            query3= query3 + " from Patient_master  as PM ,patientDoctorMapping as pdm,Hospital_master as Hm,HubMaster as Hbs  where PM.hospitalId=Hm.ID and Hm.HubId=Hbs.ID and  pdm.Patient_Id=PM.PatientId  and PM.Status<>'2'   and DoctorID='" + str(doctor_Id) + "'  ORDER BY  PatientId DESC;"
             
-            query3="select  *  from Patient_master where Status=0 and  DoctorID='"+str(i["ID"])+"';"
             cursor = conn.cursor()
             cursor.execute(query3)
             data3= cursor.fetchall()
