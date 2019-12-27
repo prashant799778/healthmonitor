@@ -228,9 +228,9 @@ def allNurse():
 @app.route('/allPatient', methods=['post'])
 def allPatient():
     try:
-        
-        query="select PM.PatientId as ID,Pm.DoctorID,Pm.nurseId,PM.PatientName,PM.PhoneNo,PM.Address,PM.BloodGroup,PM.DeviceMac,"
-        query=query+"PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.hospital_Name,PM.age,PM.Gender,PM.roomNumber from Patient_master as PM;"
+        query3 ="select  PM.PatientId as ID,PM.PatientName,PM.PhoneNo,PM.Address,PM.BloodGroup,PM.DeviceMac,Hm.HubId,Hm.hospital_name, "
+        query3=query3+" PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.age,PM.Gender,PM.roomNumber,pdm.DoctorID as DoctorID"
+        query3= query3 + " from Patient_master  as PM ,patientDoctorMapping as pdm,Hospital_master as Hm,HubMaster as Hbs  where PM.hospitalId=Hm.ID and Hm.HubId=Hbs.ID and  pdm.Patient_Id=PM.PatientId  and PM.Status<>'2'   ORDER BY  ID DESC;"
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
@@ -249,6 +249,7 @@ def allPatient():
 
 
 
+
 @app.route('/doctorLoginHospital', methods=['post'])
 def doctorLoginHospital():
     try:
@@ -256,7 +257,7 @@ def doctorLoginHospital():
         
         data=json.loads(json1.decode("utf-8"))
         
-        query="select ID, Hospital_Id from userMaster where  Usertype_Id=2 and Email='"+(data["Email"])+"';"
+        query="select us.ID as  ID ,ushm.hospitalId as HospitalId from userMaster as us ,Hospital_master as hm,HubMaster as Hm,userHospitalMapping as ushm where ushm.userId=us.Id and  hm.ID=ushm.hospitalId   and  Hm.ID= hm.HubId and   us.Usertype_Id=2  and  us.Email='"+str(data["Email"])+"';"
         
         conn=Connection()
         cursor = conn.cursor()
@@ -265,12 +266,12 @@ def doctorLoginHospital():
         
         for i in data:
             print("11111111")
-            query1="select count(*) as patient_count from Patient_master where Status=0 and  DoctorID='"+str(i["ID"])+"';"
+            query1="select  count(*) as patient_count from Patient_master  where  Status<>'2'  AND hospitalId='"+str(i["HospitalId"])+"'  and PatientId IN (select Patient_Id  from patientDoctorMapping  where  Status<>'2' AND  DoctorID= '"+str(i["ID"])+"');"
             cursor = conn.cursor()
             cursor.execute(query1)
             data1= cursor.fetchall()
             i["patient_count"]=data1[0]['patient_count']
-            query2="select hospital_name,HubId,Address from Hospital_master where ID='"+str(i["Hospital_Id"])+"';"
+            query2="select hospital_name,HubId,Address from Hospital_master where ID='"+str(i["HospitalId"])+"';"
             cursor = conn.cursor()
             cursor.execute(query2)
             data2= cursor.fetchall()
@@ -305,7 +306,7 @@ def doctorLoginDashboard():
         print(json1)
         data=json.loads(json1.decode("utf-8"))
         print(data)
-        query="select ID, Hospital_Id from userMaster where Usertype_Id=2 and Email='"+(data["Email"])+"';"
+        query="select us.ID as  ID ,ushm.hospitalId as HospitalId from userMaster as us ,Hospital_master as hm,HubMaster as Hm,userHospitalMapping as ushm where ushm.userId=us.Id and  hm.ID=ushm.hospitalId   and  Hm.ID= hm.HubId and   us.Usertype_Id=2  and  us.Email='"+str(data["Email"])+"';"
         print(query)
         conn=Connection()
         cursor = conn.cursor()
@@ -315,13 +316,16 @@ def doctorLoginDashboard():
         total_patient=0
         for i in data:
             print("11111111")
-            query1="select count(*) as patient_count from Patient_master where Status=0 and  DoctorID='"+str(i["ID"])+"';"
+            query1="select  count(*) as patient_count from Patient_master  where  Status<>'2'  AND hospitalId='"+str(i["HospitalId"])+"'  and PatientId IN (select Patient_Id  from patientDoctorMapping  where  Status<>'2' AND  DoctorID= '"+str(i["ID"])+"');"
             cursor = conn.cursor()
             cursor.execute(query1)
             data1= cursor.fetchall()
             i["patient_count"]=data1[0]['patient_count']
+
+            query3 ="select  PM.PatientId as PatientId,PM.PatientName,PM.PhoneNo,PM.Address,PM.BloodGroup,PM.DeviceMac,Hm.HubId,Hm.hospital_name, "
+            query3=query3+" PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.age,PM.Gender,PM.roomNumber,pdm.DoctorID as DoctorID"
+            query3= query3 + " from Patient_master  as PM ,patientDoctorMapping as pdm,Hospital_master as Hm,HubMaster as Hbs  where PM.hospitalId=Hm.ID and Hm.HubId=Hbs.ID and  pdm.Patient_Id=PM.PatientId  and PM.Status<>'2'   and DoctorID='"+str(i["ID"])+"'  ORDER BY  PatientId DESC;"
             
-            query3="select  *  from Patient_master where Status=0 and  DoctorID='"+str(i["ID"])+"';"
             cursor = conn.cursor()
             cursor.execute(query3)
             data3= cursor.fetchall()
@@ -330,7 +334,7 @@ def doctorLoginDashboard():
             
             
             
-            query2="select hospital_name,HubId from Hospital_master where ID='"+str(i["Hospital_Id"])+"';"
+            query2="select hospital_name,HubId from Hospital_master where ID='"+str(i["HospitalId"])+"';"
             cursor = conn.cursor()
             cursor.execute(query2)
             data2= cursor.fetchall()
@@ -540,7 +544,7 @@ def hubMaster():
             print(data2)
             count=0
             for j in data2:
-                query1 = "select count(*) as count from userMaster where Usertype_Id=2 and Hospital_Id= '"+str(j["ID"])+"';"
+                query1 = "select count(*) as count from userHospitalMapping where  Usertype_Id=2 and  hospitalId='"+str(i["ID"])+"';"
                 cursor.execute(query1)
                 data3 = cursor.fetchall()
                 print(data3)
