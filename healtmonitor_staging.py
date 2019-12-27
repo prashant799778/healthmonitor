@@ -322,7 +322,7 @@ def doctorLoginDashboard():
         print(json1)
         data=json.loads(json1.decode("utf-8"))
         print(data)
-        query="select us.ID as  ID ,ushm.hospitalId as HospitalId from userMaster as us ,Hospital_master as hm,HubMaster as Hm,userHospitalMapping as ushm where ushm.userId=us.Id and  hm.ID=ushm.hospitalId   and  Hm.ID= hm.HubId and   us.Usertype_Id=2  and  us.Email='"+str(data["Email"])+"';"
+        query="select us.ID as  ID ,hm.ID as HospitalId from userMaster as us ,Hospital_master as hm,HubMaster as Hm,userHospitalMapping as ushm where ushm.userId=us.Id and  hm.ID=ushm.hospitalId   and  Hm.ID= hm.HubId and   us.Usertype_Id=2  and  us.Email='"+str(data["Email"])+"';"
         print(query)
         conn=Connection()
         cursor = conn.cursor()
