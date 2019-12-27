@@ -338,16 +338,16 @@ def doctorLoginDashboard():
             print(data2)
             i["patient_Details"]=data2
             print("111111111111111111")
-            query3="select count(*) as count from Patient_master pm,patientDoctorMapping pdm where pdm.Patient_Id=pm.PatientId " 
-            query3=query2+" and pdm.doctorId='"+str(i["doctorId"]) +"' and pm.hospitalId='"+str(i["hospitalId"])+"';"
-            cursor.execute(query3)
-            data3= cursor.fetchall()
-            total_patient+=data3[0]["count"]
+            # query3="select count(*) as count from Patient_master pm,patientDoctorMapping pdm where pdm.Patient_Id=pm.PatientId " 
+            # query3=query2+" and pdm.doctorId='"+str(i["doctorId"]) +"' and pm.hospitalId='"+str(i["hospitalId"])+"';"
+            # cursor.execute(query3)
+            # data3= cursor.fetchall()
+            # total_patient+=data3[0]["count"]
         cursor.close()
         if data1:
             # data.append({"Total_hospital":len(data)})
             # data.append({"total_patient":total_patient})
-            return {"result":data1,"Total_hospital":len(data1),"total_patient":total_patient,"status":"true"}
+            return {"result":data1,"Total_hospital":len(data1),"status":"true"}#,"total_patient":total_patient
         else:
             return {"result":"No Record Found","status":"true"}
     
