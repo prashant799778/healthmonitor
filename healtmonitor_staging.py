@@ -440,14 +440,17 @@ def HospitalPatientDetails():
         json1=request.get_data()
         print(json1)
         data=json.loads(json1.decode("utf-8"))
-        query2 ="select us.ID as DoctorID ,us.Email as Email ,hm.HubId as HubId ,Hm.HubName as HubName,hm.ID as Hospital_Id from userMaster as us ,Hospital_master as hm,HubMaster as Hm,userHospitalMapping as ushm where ushm.userId=us.Id and  hm.ID=ushm.hospitalId   and  Hm.ID= hm.HubId and   us.Usertype_Id=2  and  ushm.hospitalId='"+str(data["HospitalId"])+"' and  us.Email ='"+str(data["Email"])+"';"  
+        query2 ="select us.ID as DoctorID ,us.Email as Email ,hm.HubId as HubId ,Hm.HubName as HubName,hm.ID as Hospital_Id" 
+        query2=query2+" from userMaster as us ,Hospital_master as hm,HubMaster as Hm,userHospitalMapping as ushm where" 
+        query2=query2+" ushm.userId=us.Id and  hm.ID=ushm.hospitalId   and  Hm.ID= hm.HubId and   us.Usertype_Id=2  and " 
+        query2=query2+" ushm.hospitalId='"+str(data["HospitalId"])+"' and  us.Email ='"+str(data["Email"])+"';"  
         print(query2)
         conn=Connection() 
         cursor = conn.cursor()
         cursor.execute(query2)
         data1 = cursor.fetchall()          
         print(data1)
-        l1=[ ]
+        l1=[]
 
         uu= 'NULL'
 
