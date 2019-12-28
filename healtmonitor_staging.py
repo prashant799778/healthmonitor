@@ -449,15 +449,15 @@ def HospitalPatientDetails():
         cursor = conn.cursor()
         cursor.execute(query2)
         data1 = cursor.fetchall()          
-        print(data1)
+        print("data1aaaaaaaaaaaaaaaaaaaaaaaaaa",data1)
         l1=[]
 
         uu= 'NULL'
 
-        for dat in data1:
-            doctor_Id=dat["DoctorID"]
-            Hubname= dat["HubName"]
-            Hub_Id=dat["HubId"]
+        for data in data1:
+            doctor_Id=data["DoctorID"]
+            Hubname= data["HubName"]
+            Hub_Id=data["HubId"]
 
             l2=[]
             
