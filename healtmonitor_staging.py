@@ -979,7 +979,7 @@ def addDoctor():
                     
                     cursor.execute(query2)
                     conn.commit()
-        cursor.close()
+            cursor.close()
         print(data)
         UserId=uuid.uuid1()
         UserID=UserId.hex
