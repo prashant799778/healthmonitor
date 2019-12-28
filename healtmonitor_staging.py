@@ -950,8 +950,8 @@ def addUser():
 
 
 
-@app.route('/adddoctor', methods=['POST'])
-def adddoctor():
+@app.route('/addDoctor', methods=['POST'])
+def addDoctor():
     try:
         json1=request.get_data() 
         data1=json.loads(json1.decode("utf-8"))  
