@@ -146,7 +146,7 @@ def login88881():
             return data
 
         else:   
-            data={"status":"true","result":loginuser,"Nurse Details":Nurse,"Patient Details":PatientData,"Count":Count}                      
+            data={"status":"true","result":loginuser[0],"Nurse Details":Nurse,"Patient Details":PatientData,"Count":Count}                      
             return data
 
     
@@ -396,7 +396,7 @@ def doctorPatientDetails():
         cursor = conn.cursor()
         cursor.execute(query2)
         data1 = cursor.fetchall()
-        uu=0
+        
         l1=[]
         for dat in data1:
             doctor_Id=dat["DoctorID"]
