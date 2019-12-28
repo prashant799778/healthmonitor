@@ -144,7 +144,8 @@ def login88881():
         if loginuser:   
             data={"status":"true","result":loginuser,"Nurse Details":Nurse,"Patient Details":PatientData,"Count":Count}                      
             return data
-    else:
+
+    if loginuser == ():
         data={"status":"false","result":"Login Failed"}
         return data
     
