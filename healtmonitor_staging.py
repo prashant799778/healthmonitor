@@ -411,8 +411,8 @@ def doctorPatientDetails():
                 l1.append(data27)
         cursor.close()
        
-        if l1:           
-            Data = {"Patient Details":l1,"status":"true"}
+        if uu:           
+            Data = {"Patient Details":uu,"status":"true"}
             return Data
         else:
             data={"status":"false","result":"Invalid Email "}
