@@ -396,7 +396,7 @@ def doctorPatientDetails():
         cursor = conn.cursor()
         cursor.execute(query2)
         data1 = cursor.fetchall()
-        l1=[ ]
+        l1=[]
         for dat in data1:
             doctor_Id=dat["DoctorID"]
             l2=[]
@@ -411,8 +411,8 @@ def doctorPatientDetails():
                 l1.append(data27)
         cursor.close()
        
-        if uu:           
-            Data = {"Patient Details":uu,"status":"true"}
+        if l1:           
+            Data = {"Patient Details":l1,"status":"true"}
             return Data
         else:
             data={"status":"false","result":"Invalid Email "}
