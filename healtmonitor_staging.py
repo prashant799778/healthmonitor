@@ -71,7 +71,7 @@ def login88881():
           
 
         Nurse=""
-        if  y == 'Nurse':
+        if  d["Usertype"]== 'Nurse':
 
             query= "select hospitalId as Hospital_Id from userHospitalMapping where Usertype_Id=3 and  userId= '" + str(y9) + "' "
             cursor = conn.cursor()
@@ -85,7 +85,7 @@ def login88881():
             cursor.execute(query2)
             Nurse = cursor.fetchall()
 
-        if  y == 'Doctor':
+        if  d["Usertype"]== 'Doctor':
             Nurse=[]
 
 
@@ -144,9 +144,9 @@ def login88881():
         if loginuser:   
             data={"status":"true","result":loginuser,"Nurse Details":Nurse,"Patient Details":PatientData,"Count":Count}                      
             return data
-        else:
-            data={"status":"false","result":"Login Failed"}
-            return data
+    else:
+        data={"status":"false","result":"Login Failed"}
+        return data
     except KeyError as e:
         print("Exception---->" +str(e))        
         output = {"result":"Input Keys are not Found","status":"false"}
