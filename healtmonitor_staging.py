@@ -341,7 +341,7 @@ def doctorLoginDashboard():
         print(data)
         conn=Connection()
         cursor = conn.cursor()
-        query1=" select um.ID as doctorId, hsm.hospital_name,hsm.ID as hospitalId,hm.ID as hubId,hm.HubName from HubMaster hm,Hospital_master hsm,userMaster um,userHospitalMapping uhm" 
+        query1=" select um.ID, hsm.hospital_name,hsm.ID as HospitalId,hm.ID as HubId,hm.HubName from HubMaster hm,Hospital_master hsm,userMaster um,userHospitalMapping uhm" 
         query1=query1+" where hm.ID=hsm.HubId and hsm.ID=uhm.hospitalId and uhm.userId=um.ID and um.Email='"+str(data["Email"])+"';"
         cursor.execute(query1)
         data1= cursor.fetchall()
@@ -350,19 +350,13 @@ def doctorLoginDashboard():
         for i in data1:
             
             query2="select * from Patient_master pm,patientDoctorMapping pdm where pdm.Patient_Id=pm.PatientId " 
-            query2=query2+" and pdm.doctorId='"+str(i["doctorId"]) +"' and pm.hospitalId='"+str(i["hospitalId"])+"';"
+            query2=query2+" and pdm.doctorId='"+str(i["ID"]) +"' and pm.hospitalId='"+str(i["HospitalId"])+"';"
             cursor.execute(query2)
             data2= cursor.fetchall()
             print(data2)
             i["patient_Details"]=data2
-            print("111111111111111111")
-            # query3="select count(*) as count from Patient_master pm,patientDoctorMapping pdm where pdm.Patient_Id=pm.PatientId " 
-            # query3=query2+" and pdm.doctorId='"+str(i["doctorId"]) +"' and pm.hospitalId='"+str(i["hospitalId"])+"';"
-            # cursor.execute(query3)
-            # data3= cursor.fetchall()
-            # total_patient+=data3[0]["count"]
-        for i in data1:
             
+        for i in data1:
             if i["patient_Details"]==():
                 data1.remove(i)
         for i in data1:
