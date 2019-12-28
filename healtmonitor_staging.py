@@ -141,13 +141,14 @@ def login88881():
         else:
             Count=0
 
-        if loginuser:   
-            data={"status":"true","result":loginuser,"Nurse Details":Nurse,"Patient Details":PatientData,"Count":Count}                      
-            return data
-
         if loginuser==():
             data={"status":"false","result":"Login Failed"}
             return data
+
+        else:   
+            data={"status":"true","result":loginuser,"Nurse Details":Nurse,"Patient Details":PatientData,"Count":Count}                      
+            return data
+
     
     except KeyError as e:
         print("Exception---->" +str(e))        
