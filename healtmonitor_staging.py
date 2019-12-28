@@ -327,7 +327,9 @@ def doctorLoginHospital():
             # cursor.execute(query3)
             # data3= cursor.fetchall()
             # i["hospital_name"]=data3[0]['hospital_name']
-        
+        for i in data:
+            if i["patient_count"]==0:
+                data.remove(i)
         cursor.close()
         if data:
             return {"result":data,"status":"true"}
