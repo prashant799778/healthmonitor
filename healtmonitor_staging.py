@@ -962,7 +962,7 @@ def addDoctor():
         cursor = conn.cursor()
         cursor.execute(query)
         data = cursor.fetchone()
-        print(data)
+        print("data",data)
         mainId=data["ID"]
         Usertype_Id=data["Usertype_Id"]
         HospitalId = data1["Hospital_Id"]
