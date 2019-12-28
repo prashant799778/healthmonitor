@@ -396,6 +396,7 @@ def doctorPatientDetails():
         cursor = conn.cursor()
         cursor.execute(query2)
         data1 = cursor.fetchall()
+        uu=0
         l1=[]
         for dat in data1:
             doctor_Id=dat["DoctorID"]
