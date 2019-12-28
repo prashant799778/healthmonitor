@@ -954,8 +954,9 @@ def addUser():
 def addDoctor():
     try:
         json1=request.get_data() 
+        print(json1)
         data1=json.loads(json1.decode("utf-8"))  
-        
+        print(data1)
         query = "select * from userMaster where  Usertype_Id=2 and Email='"+str(data1["Email"])+ "';"
         conn=Connection()
         cursor = conn.cursor()
