@@ -366,6 +366,7 @@ def doctorLoginDashboard():
             data2= cursor.fetchall()
             print(data2)
             i["patient_Details"]=data2
+            i["total_patient"]=len(i["patient_Details"])
             
         for i in data1:
             if i["patient_Details"]==():
