@@ -58,7 +58,7 @@ def login88881():
         
         print(name)       
           
-        query ="select  um.ID,um.name as name,us.Usertype as Usertype,um.Usertype_Id as Usertype_Id from userMaster  as um,Usertype_master as us  where um.Usertype_Id=us.ID and  name = '" + name + "' and password='" + password + "' ;"   
+        query ="select  um.Email,um.ID,um.name as name,us.Usertype as Usertype,um.Usertype_Id as Usertype_Id from userMaster  as um,Usertype_master as us  where um.Usertype_Id=us.ID and  name = '" + name + "' and password='" + password + "' ;"   
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
