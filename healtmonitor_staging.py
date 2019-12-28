@@ -86,6 +86,7 @@ def login88881():
             Nurse = cursor.fetchall()
 
         if  y == 'Doctor':
+            Nurse=[]
 
 
             query= "select hospitalId as Hospital_Id from userHospitalMapping where  Usertype_Id=2 and userId= '" + str(y9) + "' "
@@ -98,7 +99,9 @@ def login88881():
                 print(query2)
                 cursor = conn.cursor()
                 cursor.execute(query2)
-                Nurse = cursor.fetchall()
+                Nurs = cursor.fetchone()
+                Nurse.append(Nurs)
+
 
 
             # for i in Nurse:
