@@ -957,45 +957,43 @@ def addDoctor():
         print(json1)
         data1=json.loads(json1.decode("utf-8"))  
         print(data1)
-        query = "select * from userMaster where  Usertype_Id=2 and Email='"+str(data1["Email"])+ "';"
         conn=Connection()
         cursor = conn.cursor()
+        query = "select * from userMaster where  Usertype_Id=2 and Email='"+str(data1["Email"])+ "';"
+        
         cursor.execute(query)
         data = cursor.fetchone()
-        print("data",data)
-        mainId=data["ID"]
-        Usertype_Id=data["Usertype_Id"]
-        HospitalId = data1["Hospital_Id"]
-        for i in HospitalId:
-            query = "select * from userHospitalMapping where hospitalId='"+str(i)+"'  and Usertype_Id='"+str(Usertype_Id)+"' and userid= '"+str(mainId)+"' ;"
-            conn=Connection()
-            cursor = conn.cursor()
-            cursor.execute(query)
-            userHospitalMappingdata = cursor.fetchall()
-            if userHospitalMappingdata==():
-                query2  = " insert into userHospitalMapping (userId,Usertype_Id,hospitalId)"
-                query2 = query2 +" values('"+str(mainId)+"','"+str(Usertype_Id)+"','"+str(i)+"');"
-                conn=Connection()
-                cursor = conn.cursor()
-                cursor.execute(query2)
-                conn.commit()
+        if data!=None:
+            print("data",data)
+            mainId=data["ID"]
+            Usertype_Id=data["Usertype_Id"]
+            HospitalId = data1["Hospital_Id"]
+            for i in HospitalId:
+                query = "select * from userHospitalMapping where hospitalId='"+str(i)+"'  and Usertype_Id='"+str(Usertype_Id)+"' and userid= '"+str(mainId)+"' ;"
+                
+                cursor.execute(query)
+                userHospitalMappingdata = cursor.fetchall()
+                if userHospitalMappingdata==():
+                    query2  = " insert into userHospitalMapping (userId,Usertype_Id,hospitalId)"
+                    query2 = query2 +" values('"+str(mainId)+"','"+str(Usertype_Id)+"','"+str(i)+"');"
+                    
+                    cursor.execute(query2)
+                    conn.commit()
         cursor.close()
         print(data)
         UserId=uuid.uuid1()
         UserID=UserId.hex
-        if data==():
+        if data==None:
             if data1["password"]==data1["confirm_password"]:
                 query2  = " insert into userMaster (name,mobile,Usertype_Id,UserID,password,Email,Gender)"
                 query2 = query2 +" values('"+str(data1["name"])+"','"+str(data1["mobile"])+"','"+str('2')+"','"+str(UserID)
                 query2=query2+"','"+str(data1["password"])+"','"+str(data1["Email"])+"','"+str(data1["Gender"])+"');"
                 print(query2)
-                conn=Connection()
-                cursor = conn.cursor()
+                
                 cursor.execute(query2)
                 conn.commit()
                 query = "select ID as userId,Usertype_Id from userMaster where name= '"+str(data1["name"])+ "' and  Email='"+str(data1["Email"])+ "';"
-                conn=Connection()
-                cursor = conn.cursor()
+                
                 cursor.execute(query)
                 data=cursor.fetchall()
                 yu=data[-1]
@@ -1005,8 +1003,7 @@ def addDoctor():
                 for i in HospitalId:
 
                     query = "select * from userHospitalMapping where hospitalId='"+str(i)+"'  and Usertype_Id='"+str(Usertype_Id)+"' and userid= '"+str(mainId)+"' ;"
-                    conn=Connection()
-                    cursor = conn.cursor()
+                    
                     cursor.execute(query)
                     userHospitalMappingdata = cursor.fetchall()
                     if userHospitalMappingdata==():
@@ -1016,7 +1013,32 @@ def addDoctor():
                         cursor = conn.cursor()
                         cursor.execute(query2)
                         conn.commit()
-
+                
+                query = "select * from userMaster where  Usertype_Id=2 and Email='"+str(data1["Email"])+ "';"
+                
+                cursor.execute(query)
+                data = cursor.fetchone()
+                if data!=None:
+                    print("data",data)
+                    mainId=data["ID"]
+                    Usertype_Id=data["Usertype_Id"]
+                    HospitalId = data1["Hospital_Id"]
+                    for i in HospitalId:
+                        query = "select * from userHospitalMapping where hospitalId='"+str(i)+"'  and Usertype_Id='"+str(Usertype_Id)+"' and userid= '"+str(mainId)+"' ;"
+                        conn=Connection()
+                        cursor = conn.cursor()
+                        cursor.execute(query)
+                        userHospitalMappingdata = cursor.fetchall()
+                        if userHospitalMappingdata==():
+                            query2  = " insert into userHospitalMapping (userId,Usertype_Id,hospitalId)"
+                            query2 = query2 +" values('"+str(mainId)+"','"+str(Usertype_Id)+"','"+str(i)+"');"
+                            conn=Connection()
+                            cursor = conn.cursor()
+                            cursor.execute(query2)
+                            conn.commit()
+                cursor.close()                
+                
+                
                 output = {"result":"data inserted successfully","status":"true"}
                 return output
             else:
