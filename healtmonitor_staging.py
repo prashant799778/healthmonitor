@@ -49,7 +49,6 @@ class JSONEncoder(json.JSONEncoder):
 # cursor = mysqlcon.cursor()
 
 
-
 @app.route('/login', methods=['GET'])
 def login88881():
     try:
@@ -59,27 +58,46 @@ def login88881():
         
         print(name)       
           
-        query ="select um.name as name,us.Usertype as Usertype,mpum.Usertype_Id as Usertype_Id,hm.HubId as HubId,Hbs.HubName as HubName,mpum.hospitalId as Hospital_Id "
-        query=query+",hm.hospital_name as Hospital_Name ,um.UserID as UserID,um.ID as mainId,um.Email as Email  from userMaster as um INNER JOIN Usertype_master as us on us.ID=um.Usertype_Id "
-        query=query+"INNER JOIN userHospitalMapping   as mpum on mpum.userId=um.ID  INNER JOIN Hospital_master as hm on hm.ID=mpum.hospitalId   INNER JOIN HubMaster as Hbs on Hbs.ID=hm.HubId where name = '" + name + "' and password='" + password + "' ;"   
+        query ="select  um.ID,um.name as name,us.Usertype as Usertype,um.Usertype_Id as Usertype_Id from userMaster  as um,Usertype_master as us  where um.Usertype_Id=us.ID and  name = '" + name + "' and password='" + password + "' ;"   
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
         loginuser = cursor.fetchall()
         print("11111111111",loginuser)
         for d in loginuser:
+            y9=d["ID"]
             y=  d["Usertype"]
             y3= d["Usertype_Id"]
-            y2= d["Hospital_Id"]
+          
 
         Nurse=""
         if  y == 'Nurse':
+
+            query= "select hospitalId as Hospital_Id from userHospitalMapping where Usertype_Id=3 and  userId= '" + str(y9) + "' "
+            cursor = conn.cursor()
+            cursor.execute(query)
+            Nur = cursor.fetchone()
+            y2=Nur["Hospital_Id"]
+
             query2 = " select hm.ID as Hospital_Id,hm.hospital_name,hm.HubId as HubId,Hbs.HubName as HubName,um.ID as DoctorID,um.name as DoctorName,um.Email as Email,um.Gender,um.mobile from userMaster as um ,userHospitalMapping  as mpum,HubMaster as Hbs,Hospital_master as hm  where  mpum.userId=um.ID and mpum.hospitalId=hm.ID and  hm.HubId=Hbs.ID  and  um.Usertype_Id=2  and hm.ID = '" + str(y2) + "';"
             print(query2)
             cursor = conn.cursor()
             cursor.execute(query2)
             Nurse = cursor.fetchall()
 
+        if  y == 'Doctor':
+
+
+            query= "select hospitalId as Hospital_Id from userHospitalMapping where  Usertype_Id=2 and userId= '" + str(y9) + "' "
+            cursor = conn.cursor()
+            cursor.execute(query)
+            Nur = cursor.fetchall()
+            for i in Nur:
+                query2 = " select hm.ID as Hospital_Id,hm.hospital_name,hm.HubId as HubId,Hbs.HubName as HubName,um.ID as DoctorID,um.name as DoctorName,um.Email as Email,um.Gender,um.mobile from userMaster as um ,userHospitalMapping  as mpum,HubMaster as Hbs,Hospital_master as hm  where  mpum.userId=um.ID and mpum.hospitalId=hm.ID and  hm.HubId=Hbs.ID  and  um.Usertype_Id=2  and hm.ID = '" + str(i["Hospital_Id"]) + "';"
+                print(query2)
+                cursor = conn.cursor()
+                cursor.execute(query2)
+                Nurse = cursor.fetchall()
 
 
             # for i in Nurse:
