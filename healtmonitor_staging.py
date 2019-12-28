@@ -145,7 +145,9 @@ def login88881():
             data={"status":"false","result":"Login Failed"}
             return data
 
-        else:   
+        else: 
+            print("loginuser",loginuser)
+            print("loginuser[0]",loginuser[0])
             data={"status":"true","result":loginuser[0],"Nurse Details":Nurse,"Patient Details":PatientData,"Count":Count}                      
             return data
 
