@@ -37,7 +37,7 @@ import json
 
 
 def on_connect(client, userdata, flags, rc):
-  print("-------Connected-------")
+  print("-------Connected-------",client, userdata, flags, rc)
   client.subscribe("/1/1/1/35/ecg")
   #client.publish("#", "Hello world!");
 
