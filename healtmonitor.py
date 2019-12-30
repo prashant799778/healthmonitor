@@ -1067,8 +1067,8 @@ def Patient_master():
          
         json1=request.get_data() 
         data=json.loads(json1.decode("utf-8"))  
-        query2  = " insert into Patient_master(PatientName,roomNumber,Gender,age,BloodGroup,DeviceMac,Bed_Number,Usertype_Id,hospital_Name,startdate,usercreate)"
-        query2 =query2 +" values("+'"'+str(data["PatientName"])+'"'+','+'"'+str(data["roomNumber"])+'"'+','+'"'+str(data["gender"])+'"'+','+'"'+str(data["age"])+'"'+','+'"'+str(data["BloodGroup"])+'"'+','+'"'+str(data["DeviceMac"])+'"'+','+'"'+str(data["Bed_Number"])+'"'+','+'"'+str(data["Usertype_Id"])+'"'+','+'"'+str(data["hospital_Name"])+'"'+','+'"'+str(data["startdate"])+'"'+','+'"'+str(data["usercreate"])+'"'+''+");"
+        query2  = " insert into Patient_master(PatientName,roomNumber,Gender,age,BloodGroup,DeviceMac,Bed_Number,Usertype_Id,hospitalId,startdate,usercreate)"
+        query2 =query2 +" values("+'"'+str(data["PatientName"])+'"'+','+'"'+str(data["roomNumber"])+'"'+','+'"'+str(data["gender"])+'"'+','+'"'+str(data["age"])+'"'+','+'"'+str(data["BloodGroup"])+'"'+','+'"'+str(data["DeviceMac"])+'"'+','+'"'+str(data["Bed_Number"])+'"'+','+'"'+str(data["Usertype_Id"])+'"'+','+'"'+str(data["hospitalId"])+'"'+','+'"'+str(data["startdate"])+'"'+','+'"'+str(data["usercreate"])+'"'+''+");"
         print(query2)
         conn=Connection()
         cursor = conn.cursor()
@@ -1085,9 +1085,9 @@ def Patient_master():
         cursor = conn.cursor()
         cursor.execute(query)
         
-        data=cursor.fetchall()
+        data999=cursor.fetchall()
 
-        final= data[-1]
+        final= data999[-1]
         P_Id=final["PatientId"]
         DoctorId = data["DoctorId"]
 
@@ -1103,7 +1103,7 @@ def Patient_master():
                 query2 = query2 +" values('"+str(P_Id)+"','"+str(i)+"');"
                 conn=Connection()
                 cursor = conn.cursor()
-                cursor.execute(query)
+                cursor.execute(query2)
                 conn.commit()
         
         nurseId = data["nurseId"]
@@ -1233,7 +1233,7 @@ def update_Patient_Discharge():
         print("======5======" )
         ist_time = datetime.now(tz=ist)
         ist_f_time = ist_time.strftime("%Y-%m-%d %H:%M:%S")
-        query1 = " update Patient_master set   Status ='2'  ,enddate='"+str(ist_f_time)+"'  where PatientId = '" + str(data["PatientId"])+ "' and Usertype_Id = '" + str(data["Usertype_Id"])+ "' and  DeviceMac = '" + str(data["DeviceMac"])+ "' and DoctorID='" + str(data["DoctorID"])+ "' ;"
+        query1 = " update Patient_master set   Status ='2'  ,enddate='"+str(ist_f_time)+"'  where PatientId = '" + str(data["PatientId"])+ "' and Usertype_Id = '" + str(data["Usertype_Id"])+ "' and  DeviceMac = '" + str(data["DeviceMac"])+ "'  ;"
         print(query1)
         conn=Connection()
         cursor = conn.cursor()
