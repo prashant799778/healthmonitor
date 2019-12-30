@@ -1086,11 +1086,11 @@ def addUser():
                 userHospitalMappingdata = cursor.fetchall()
                 if userHubMappingdata==():
                     query2  = " insert into userHubMapping (userId,hubId)"
-                        query2 = query2 +" values('"+str(mainId)"','"+str(data1["HubId"])+"' );"
-                        conn=Connection()
-                        cursor = conn.cursor()
-                        cursor.execute(query2)
-                        conn.commit()
+                    query2 = query2 +" values('"+str(mainId)"','"+str(data1["HubId"])+"' );"
+                    conn=Connection()
+                    cursor = conn.cursor()
+                    cursor.execute(query2)
+                    conn.commit()
                 
                 query = "select * from userMaster where  Usertype_Id=5 and Email='"+str(data1["Email"])+ "';"
                 
