@@ -23,20 +23,20 @@ def on_message(client, userdata, msg):
 		data= json.loads(data)
 		print(data)
 		print(type(data))
-		print("1111111111111")
-		if "PatientId" in data:
-			print("aaaaaaaaaaaa")
-			topic=data["PatientId"]
-			print("bbbbbbbbbbbb")
-			client.publish(str(topic),str(data))
-			print("cccccccccc")
-		else:
-			print("ddddddddddddd")
-			topic=data["topic"]+'/spo2'
-			client.publish(str(topic),str(data["value"]))
-			print("eeeeeeeeeeee")
-		print("2222222222222")
-		print(data)
+		# print("1111111111111")
+		# if "PatientId" in data:
+		# 	print("aaaaaaaaaaaa")
+		# 	topic=data["PatientId"]
+		# 	print("bbbbbbbbbbbb")
+		# 	client.publish(str(topic),str(data))
+		# 	print("cccccccccc")
+		# else:
+		# 	print("ddddddddddddd")
+		# 	topic=data["topic"]+'/spo2'
+		# 	client.publish(str(topic),str(data["value"]))
+		# 	print("eeeeeeeeeeee")
+		# print("2222222222222")
+		# print(data)
                 
 		# query2  = " insert into Patient_Vital_master(Patient_Id,RESP,ECG,SPO2,NIBP,TEMP,usercreate)"
 		# query2 =query2 +" values("+'"'+str(data["PatientId"])+'"'+','+'"'+str(data["RESP"])+'"'+','+'"'+str(data["ECG"])+'"'+','+'"'+str(data["SPO2"])+'"'+','+'"'+str(data["NIBP"])+'"'+','+'"'+str(data["TEMP"])+'"'+','+'"'+str(data["usercreate"])+'"'+' '+");"
