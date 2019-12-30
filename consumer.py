@@ -22,9 +22,10 @@ def on_message(client, userdata, msg):
 		print(t*1000)
 		data= json.loads(data)
 		print(data)
+		print(type(data))
 		print("1111111111111")
 		topic=data["PatientId"]
-		client.publish(topic,str(data))
+		client.publish(str(topic),str(data))
 		print("2222222222222")
 		print(data)
                 
