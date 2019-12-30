@@ -21,7 +21,7 @@ def on_message(client, userdata, msg):
 		#client.publish("outTopic1","data111111") 
 		data= json.loads(data)   
 		print(data)
-        print(time.time()*1000)
+        print((time.time())*1000)
 		# query2  = " insert into Patient_Vital_master(Patient_Id,RESP,ECG,SPO2,NIBP,TEMP,usercreate)"
 		# query2 =query2 +" values("+'"'+str(data["PatientId"])+'"'+','+'"'+str(data["RESP"])+'"'+','+'"'+str(data["ECG"])+'"'+','+'"'+str(data["SPO2"])+'"'+','+'"'+str(data["NIBP"])+'"'+','+'"'+str(data["TEMP"])+'"'+','+'"'+str(data["usercreate"])+'"'+' '+");"
 		# print(query2)
