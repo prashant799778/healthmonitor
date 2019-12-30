@@ -296,6 +296,112 @@ def allPatient():
         return output
 
 
+#hubLoginHospital
+@app.route('/hubLoginHospital', methods=['post'])
+def hubLoginHospital():
+    try:
+        json1=request.get_data()
+        Data=json.loads(json1.decode("utf-8"))
+
+        query="select Hospital_master.ID,Hospital_master.hospital_name,Hospital_master.Address,"
+        query=query+"HubMaster.HubName,HubMaster.ID as HubId  from Hospital_master inner join HubMaster on Hospital_master.HubId=HubMaster.ID where Hospital_master.HubId='"+str(Data["HubId"])+"'  order by Hospital_master.ID DESC;"
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data= cursor.fetchall()
+        
+        
+        for i in data:
+            query1="select count(*) as count from userHospitalMapping where  Usertype_Id=2 and  hospitalId='"+str(i["ID"])+"';" 
+            
+            cursor.execute(query1)
+            data1 = cursor.fetchall()
+            
+            i["total_doctor"]=data1[0]["count"]
+            query2="select um.ID as ID,mpum.hospitalId as hospitalId  from userMaster as um ,userHospitalMapping  as mpum,HubMaster as Hbs,Hospital_master as hm  where  mpum.userId=um.ID and mpum.hospitalId=hm.ID and  hm.HubId=Hbs.ID  and  um.Usertype_Id=2  and  hm.ID='"+str(i["ID"])+"';"
+            print(query2)
+            cursor.execute(query2)
+            data2 = cursor.fetchall()
+            print(data2)
+            count=0
+            for j in data2:
+                query1 = " select  count(*) as count from Patient_master  where  Status<>'2'  AND hospitalId='"+str(j["hospitalId"])+"'  and PatientId IN (select Patient_Id  from patientDoctorMapping  where  Status<>'2' AND  DoctorID= '"+str(j["ID"])+"') ;"
+                cursor.execute(query1)
+                data3 = cursor.fetchall()
+                print(data3)
+                count+=data3[0]["count"]
+            i["total_patient"]=count
+    
+        cursor.close()
+        return {"data":data,"status":"true"}
+    except Exception as e :
+        print("Exception---->" +str(e))           
+        output = {"result":"something went wrong","status":"false"}
+        return output
+
+
+#hubLoginDoctor
+@app.route('/hubloginDoctor', methods=['post'])
+def hubloginDoctor():
+    try:
+        json1=request.get_data()
+        Data=json.loads(json1.decode("utf-8"))
+        conn=Connection()
+        cursor = conn.cursor()
+        query= " select um.ID,um.mobile,um.password,um.name as DoctorName,um.Email,um.Gender,hsm.ID as Hospital_Id,hsm.hospital_name,hm.ID as HubId,hsm.Address as hospital_address,hm.HubName from userMaster um,HubMaster hm,Hospital_master hsm,"
+        query=query+"userHospitalMapping uhm where um.Usertype_Id=2 and hm.ID=hsm.HubId and um.ID=uhm.userId and uhm.hospitalId=hsm.ID and hsm.HubId='"+str(Data["HubId"])+"'  ;"
+        print(query)
+        
+        cursor.execute(query)
+        data= cursor.fetchall()
+        
+        for i in data:
+            query1="select count(*) as count from patientDoctorMapping pdm,Patient_master pm where pm.Status<>'2'  and pm.PatientId=pdm.Patient_Id and  pm.hospitalId='"+ str(i["Hospital_Id"])+"'and doctorId='"+str(i["ID"])+"';"
+            cursor.execute(query1)
+            data1= cursor.fetchall()
+            print(data1)
+            i["patient"]=data1[0]["count"]
+        
+        cursor.close()    
+        if data:
+            return {"result":data,"status":"true"}
+        else:
+            return {"result":"No Record Found","status":"true"}
+    except Exception as e :
+        print("Exception---->" +str(e))           
+        output = {"result":"something went wrong","status":"false"}
+        return output
+
+
+#hubloginPatient
+
+
+@app.route('/hubloginPatient', methods=['post'])
+def hubloginPatient():
+    try:
+        
+        json1=request.get_data()
+        Data=json.loads(json1.decode("utf-8"))
+        query3 ="select  PM.PatientId as ID,PM.PatientName,PM.PhoneNo,Hbs.HubName,PM.Address,PM.BloodGroup,PM.DeviceMac,Hm.HubId,Hm.hospital_name as hospital_Name , "
+        query3=query3+" PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.age,PM.Gender,PM.roomNumber,pdm.DoctorID as DoctorID"
+        query3= query3 + " from Patient_master  as PM ,patientDoctorMapping as pdm,Hospital_master as Hm,HubMaster as Hbs  where PM.hospitalId=Hm.ID  and  Hm.HubId='"+str(Data["HubId"])+"' and  Hm.HubId=Hbs.ID and  pdm.Patient_Id=PM.PatientId  and PM.Status<>'2'   ORDER BY  ID DESC;"
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query3)
+        data= cursor.fetchall()
+        cursor.close()
+
+        if data:
+            return {"result":data,"status":"true"}
+        else:
+            return {"result":"No Record Found","status":"true"}
+    
+    except Exception as e :
+        print("Exception---->" +str(e))           
+        output = {"result":"something went wrong","status":"false"}
+        return output
+
+
 
 
 
