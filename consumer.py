@@ -8,7 +8,7 @@ def on_connect(client, userdata, flags, rc):
     print("-------Connected-------")
     
 	client.subscribe("#")
-	print
+	#print
     #client.publish("topic1","data111111")
 	
 #def on_message(client, userdata, msg):    
