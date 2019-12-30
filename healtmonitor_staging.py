@@ -49,6 +49,7 @@ class JSONEncoder(json.JSONEncoder):
 # cursor = mysqlcon.cursor()
 
 
+
 @app.route('/login', methods=['GET'])
 def login88881():
     try:
@@ -64,90 +65,77 @@ def login88881():
         cursor.execute(query)
         loginuser = cursor.fetchall()
         print("11111111111",loginuser)
-        for d in loginuser:
-            y9=d["ID"]
-            y=  d["Usertype"]
-            y3= d["Usertype_Id"]
-          
 
-        Nurse=""
-        if  d["Usertype"]== 'Nurse':
-
-            query= "select hospitalId as Hospital_Id from userHospitalMapping where Usertype_Id=3 and  userId= '" + str(y9) + "' "
-            cursor = conn.cursor()
-            cursor.execute(query)
-            Nur = cursor.fetchone()
-            y2=Nur["Hospital_Id"]
-
-            query2 = " select hm.ID as Hospital_Id,hm.hospital_name,hm.HubId as HubId,Hbs.HubName as HubName,um.ID as DoctorID,um.name as DoctorName,um.Email as Email,um.Gender,um.mobile from userMaster as um ,userHospitalMapping  as mpum,HubMaster as Hbs,Hospital_master as hm  where  mpum.userId=um.ID and mpum.hospitalId=hm.ID and  hm.HubId=Hbs.ID  and  um.Usertype_Id=2  and hm.ID = '" + str(y2) + "';"
-            print(query2)
-            cursor = conn.cursor()
-            cursor.execute(query2)
-            Nurse = cursor.fetchall()
-
-        if  d["Usertype"]== 'Doctor':
-            Nurse=[]
-
-
-            query= "select hospitalId as Hospital_Id from userHospitalMapping where  Usertype_Id=2 and userId= '" + str(y9) + "' "
-            cursor = conn.cursor()
-            cursor.execute(query)
-            Nur = cursor.fetchall()
-            print(Nur)
-            for i in Nur:
-                query2 = " select hm.ID as Hospital_Id,hm.hospital_name,hm.HubId as HubId,Hbs.HubName as HubName,um.ID as DoctorID,um.name as DoctorName,um.Email as Email,um.Gender,um.mobile from userMaster as um ,userHospitalMapping  as mpum,HubMaster as Hbs,Hospital_master as hm  where  mpum.userId=um.ID and mpum.hospitalId=hm.ID and  hm.HubId=Hbs.ID  and  um.Usertype_Id=2 and  um.name='"+name +"'    and hm.ID = '" + str(i["Hospital_Id"]) + "';"
-                print(query2)
-                cursor = conn.cursor()
-                cursor.execute(query2)
-                Nurs = cursor.fetchone()
-                Nurse.append(Nurs)
-
-
-
-            # for i in Nurse:
-                # query3= "select ID as DoctorID from signup where name= '"+str(i["DoctorName"])+"';"
-                # cursor = conn.cursor()
-                # cursor.execute(query3)
-                # data3= cursor.fetchall()
-               
-                # i["DoctorID"]=data3[0]["DoctorID"]
-
-
-        DeviceMac,y9 = " ", ""
-
-        if 'DeviceMac' in request.args:
-            DeviceMac=request.args["DeviceMac"]
-
-        
-        if DeviceMac != "":
-            query2="Select * from Patient_master where Status<>'2' and Usertype_Id ='" +str(y3) + "' and DeviceMac='"+str(DeviceMac)+ "';"
-            print(query2)
-            cursor = conn.cursor()
-            cursor.execute(query2)
-            PatientData= cursor.fetchone()
-           
-
-        else:
-            query2 = " select   * from Patient_master where Status<>'2'  and Usertype_Id ='" + str(y3) + "';" 
-            cursor = conn.cursor()
-            cursor.execute(query2)
-            PatientData= cursor.fetchone()
-        
-        cursor.close()
-
-        if PatientData != None:
-            Count= 1
-        
-        else:
-            Count=0
 
         if loginuser==():
             data={"status":"false","result":"Login Failed"}
             return data
 
-        else: 
-            print("loginuser",loginuser)
-            print("loginuser[0]",loginuser[0])
+        else:
+            for d in loginuser:
+                y9=d["ID"]
+                y=  d["Usertype"]
+                y3= d["Usertype_Id"]
+                Nurse=""
+
+                if  d["Usertype"]== 'Nurse':
+                    
+                    
+                    query= "select hospitalId as Hospital_Id from userHospitalMapping where Usertype_Id=3 and  userId= '" + str(y9) + "' "
+                    cursor = conn.cursor()
+                    cursor.execute(query)
+                    Nur = cursor.fetchone()
+                    y2=Nur["Hospital_Id"]
+                    query2 = " select hm.ID as Hospital_Id,hm.hospital_name,hm.HubId as HubId,Hbs.HubName as HubName,um.ID as DoctorID,um.name as DoctorName,um.Email as Email,um.Gender,um.mobile from userMaster as um ,userHospitalMapping  as mpum,HubMaster as Hbs,Hospital_master as hm  where  mpum.userId=um.ID and mpum.hospitalId=hm.ID and  hm.HubId=Hbs.ID  and  um.Usertype_Id=2  and hm.ID = '" + str(y2) + "';"
+                    print(query2)
+                    cursor = conn.cursor()
+                    cursor.execute(query2)
+                    Nurse = cursor.fetchall()
+
+                
+                if  d["Usertype"]== 'Doctor':
+                    
+                    Nurse=[]
+                    query= "select hospitalId as Hospital_Id from userHospitalMapping where  Usertype_Id=2 and userId= '" + str(y9) + "' "
+                    cursor = conn.cursor()
+                    cursor.execute(query)
+                    Nur = cursor.fetchall()
+                    print(Nur)
+                    for i in Nur:
+                        query2 = " select hm.ID as Hospital_Id,hm.hospital_name,hm.HubId as HubId,Hbs.HubName as HubName,um.ID as DoctorID,um.name as DoctorName,um.Email as Email,um.Gender,um.mobile from userMaster as um ,userHospitalMapping  as mpum,HubMaster as Hbs,Hospital_master as hm  where  mpum.userId=um.ID and mpum.hospitalId=hm.ID and  hm.HubId=Hbs.ID  and  um.Usertype_Id=2 and  um.name='"+name +"'    and hm.ID = '" + str(i["Hospital_Id"]) + "';"
+                        print(query2)
+                        cursor = conn.cursor()
+                        cursor.execute(query2)
+                        Nurs = cursor.fetchone()
+                        Nurse.append(Nurs)
+            
+            
+            DeviceMac,y9 = " ", ""
+            if 'DeviceMac' in request.args:
+                DeviceMac=request.args["DeviceMac"]
+
+            if DeviceMac != "":
+                query2="Select * from Patient_master where Status<>'2' and Usertype_Id ='" +str(y3) + "' and DeviceMac='"+str(DeviceMac)+ "';"
+                print(query2)
+                cursor = conn.cursor()
+                cursor.execute(query2)
+                PatientData= cursor.fetchone()
+            else:
+                query2 = " select   * from Patient_master where Status<>'2'  and Usertype_Id ='" + str(y3) + "';" 
+                cursor = conn.cursor()
+                cursor.execute(query2)
+                PatientData= cursor.fetchone()
+
+            cursor.close()
+            
+            if PatientData != None:
+                
+                Count= 1
+            
+            else:
+                
+                Count=0
+
             data={"status":"true","result":loginuser[0],"Nurse Details":Nurse,"Patient Details":PatientData,"Count":Count}                      
             return data
 
