@@ -76,7 +76,7 @@ def login88881():
                 y9=d["ID"]
                 y=  d["Usertype"]
                 y3= d["Usertype_Id"]
-                Nurse=""
+                Doctor=""
 
                 if  d["Usertype"]== 'Nurse':
                     
@@ -90,12 +90,12 @@ def login88881():
                     print(query2)
                     cursor = conn.cursor()
                     cursor.execute(query2)
-                    Nurse = cursor.fetchall()
+                    Doctor = cursor.fetchall()
 
                 
                 if  d["Usertype"]== 'Doctor':
                     
-                    Nurse=[]
+                    Doctor=[]
                     query= "select hospitalId as Hospital_Id from userHospitalMapping where  Usertype_Id=2 and userId= '" + str(y9) + "' "
                     cursor = conn.cursor()
                     cursor.execute(query)
@@ -107,7 +107,7 @@ def login88881():
                         cursor = conn.cursor()
                         cursor.execute(query2)
                         Nurs = cursor.fetchone()
-                        Nurse.append(Nurs)
+                        Doctor.append(Nurs)
 
                 if  d["Usertype"]== 'HubDoctor':
                     
@@ -122,8 +122,8 @@ def login88881():
                         print(query2)
                         cursor = conn.cursor()
                         cursor.execute(query2)
-                        Nurse = cursor.fetchall()
-                    
+                        Doctor = cursor.fetchall()
+
                        
             
             
@@ -154,7 +154,7 @@ def login88881():
                 
                 Count=0
 
-            data={"status":"true","result":loginuser[0],"Nurse Details":Nurse,"Patient Details":PatientData,"Count":Count}                      
+            data={"status":"true","result":loginuser[0],"Doctor Details":Doctor,"Patient Details":PatientData,"Count":Count}                      
             return data
 
     
