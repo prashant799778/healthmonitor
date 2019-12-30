@@ -1085,9 +1085,9 @@ def Patient_master():
         cursor = conn.cursor()
         cursor.execute(query)
         
-        data=cursor.fetchall()
+        data999=cursor.fetchall()
 
-        final= data[-1]
+        final= data999[-1]
         P_Id=final["PatientId"]
         DoctorId = data["DoctorId"]
 
