@@ -25,12 +25,16 @@ def on_message(client, userdata, msg):
 		print(type(data))
 		print("1111111111111")
 		if "PatientId" in data:
-			print("ppppppp")
+			print("aaaaaaaaaaaa")
 			topic=data["PatientId"]
+			print("bbbbbbbbbbbb")
 			client.publish(str(topic),str(data))
+			print("cccccccccc")
 		else:
-			topic=data["topic"]+"/spo2"
+			print("ddddddddddddd")
+			topic=data["topic"]+'/spo2'
 			client.publish(str(topic),str(data))
+			print("eeeeeeeeeeee")
 		print("2222222222222")
 		print(data)
                 
