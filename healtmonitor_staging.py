@@ -108,6 +108,24 @@ def login88881():
                         cursor.execute(query2)
                         Nurs = cursor.fetchone()
                         Nurse.append(Nurs)
+
+                if  d["Usertype"]== 'HubDoctor':
+                    
+                    Nurse=[]
+                    query= "select hubId as HubId from userHubMapping where   userId= '" + str(y9) + "' "
+                    cursor = conn.cursor()
+                    cursor.execute(query)
+                    Nur = cursor.fetchall()
+                    print(Nur)
+                    for i in Nur:
+                        query2 = " select hm.ID as Hospital_Id,hm.hospital_name,hm.HubId as HubId,Hbs.HubName as HubName,um.ID as DoctorID,um.name as DoctorName,um.Email as Email,um.Gender,um.mobile from userMaster as um ,userHospitalMapping  as mpum,HubMaster as Hbs,Hospital_master as hm  where  mpum.userId=um.ID and mpum.hospitalId=hm.ID and  hm.HubId=Hbs.ID  and  um.Usertype_Id=2    and hm.HubId = '" + str(i["HubId"]) + "';"
+                        print(query2)
+                        cursor = conn.cursor()
+                        cursor.execute(query2)
+                        Nurse = cursor.fetchall()
+                    
+                       
+            
             
             
             DeviceMac,y9 = " ", ""
@@ -1048,7 +1066,7 @@ def addDoctor():
         output = {"result":"something went wrong","status":"false"}
         return output
 
-
+#hubdoctor
 @app.route('/addHubDoctor', methods=['POST'])
 def addHubDoctor():
     try:
