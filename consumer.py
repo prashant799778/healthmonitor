@@ -33,7 +33,7 @@ def on_message(client, userdata, msg):
 		else:
 			print("ddddddddddddd")
 			topic=data["topic"]+'/spo2'
-			client.publish(str(topic),str(data))
+			client.publish(str(topic),str(data["value"]))
 			print("eeeeeeeeeeee")
 		print("2222222222222")
 		print(data)
