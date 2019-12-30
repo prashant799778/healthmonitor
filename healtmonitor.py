@@ -891,7 +891,6 @@ def addUser():
         cursor = conn.cursor()
         cursor.execute(query)
         data = cursor.fetchone()
-        cursor.close()
         print(data)
         UserId=uuid.uuid1()
         UserID=UserId.hex
