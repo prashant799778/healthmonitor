@@ -21,6 +21,7 @@ def on_message(client, userdata, msg):
 		t=time.time()
 		print(t*1000)
 		data= json.loads(data)
+		print(data)
 		client.publish("topic1",data)
 		print(data)
                 
