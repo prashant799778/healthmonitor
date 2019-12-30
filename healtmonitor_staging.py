@@ -154,7 +154,7 @@ def login88881():
                 
                 Count=0
 
-            data={"status":"true","result":loginuser[0],"Doctor Details":Doctor,"Patient Details":PatientData,"Count":Count}                      
+            data={"status":"true","result":loginuser[0],"Nurse Details":Doctor,"Patient Details":PatientData,"Count":Count}                      
             return data
 
     
@@ -241,6 +241,8 @@ def allDoctor():
         return output
 
 
+#admin nurse
+
 @app.route('/allNurse', methods=['post'])
 def allNurse():
     try:
@@ -273,6 +275,7 @@ def allNurse():
 
 
 
+
 #admin patients
 @app.route('/allPatient', methods=['post'])
 def allPatient():
@@ -297,6 +300,7 @@ def allPatient():
 
 
 #hubLoginHospital
+
 @app.route('/hubLoginHospital', methods=['post'])
 def hubLoginHospital():
     try:
@@ -341,7 +345,8 @@ def hubLoginHospital():
 
 
 #hubLoginDoctor
-@app.route('/hubloginDoctor', methods=['post'])
+
+@app.route('/hubLoginDoctor', methods=['post'])
 def hubloginDoctor():
     try:
         json1=request.get_data()
@@ -373,10 +378,12 @@ def hubloginDoctor():
         return output
 
 
-#hubloginPatient
+
+#hubLoginPatient
 
 
-@app.route('/hubloginPatient', methods=['post'])
+
+@app.route('/hubLoginPatient', methods=['post'])
 def hubloginPatient():
     try:
         
