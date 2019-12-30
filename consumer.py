@@ -6,8 +6,7 @@ import time
 
 def on_connect(client, userdata, flags, rc):
     print("-------Connected-------")
-    client.subscribe("#")
-    #client.publish("topic1","data111111")
+    client.subscribe("#")#client.publish("topic1","data111111")
 	print("1111111111111")
 	client.publish("topic1",data)
 	print("2222222222222")
