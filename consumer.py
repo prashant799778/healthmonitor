@@ -6,15 +6,17 @@ import time
 
 def on_connect(client, userdata, flags, rc):
     print("-------Connected-------")
-    client.subscribe("#")
+    
+	client.subscribe("#")
+	print
     #client.publish("topic1","data111111")
 	
-def on_message(client, userdata, msg):    
-  data = msg.payload.decode('utf-8')
-  print(time.time()*1000)
+#def on_message(client, userdata, msg):    
+ # data = msg.payload.decode('utf-8')
+ # print(time.time()*1000)
   #   data = json.loads(data) 
-  client.publish("#","data111111")  
-  print(data)
+ # client.publish("#","data111111")  
+#  print(data)
 def on_message(client, userdata, msg):
 	try:
 		data = msg.payload.decode('utf-8')#client.publish("outTopic1","data111111")
@@ -23,6 +25,7 @@ def on_message(client, userdata, msg):
 		data= json.loads(data)
 		print(data)
 		print("1111111111111")
+		print(client, userdata, msg)
 		client.publish("#",str(data))
 		print("2222222222222")
 		print(data)
