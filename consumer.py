@@ -5,7 +5,7 @@ import time
 
 
 def on_connect(client, userdata, flags, rc):
-	print("-------Connected-------")
+	print("-------Connected-------",rc)
 	client.subscribe("#")
 	client.publish("topic1","data111111")
 	
@@ -24,8 +24,17 @@ def on_message(client, userdata, msg):
 		print(data)
 		print(type(data))
 		print("1111111111111")
-		topic=data["PatientId"]
-		client.publish(str(topic),str(data))
+		if "PatientId" in data:
+			print("aaaaaaaaaaaa")
+			topic=data["PatientId"]
+			print("bbbbbbbbbbbb")
+			client.publish(str(topic),str(data))
+			print("cccccccccc")
+		else:
+			print("ddddddddddddd")
+			topic=data["topic"]+'/spo2'
+			client.publish(str(topic),str(data))
+			print("eeeeeeeeeeee")
 		print("2222222222222")
 		print(data)
                 
