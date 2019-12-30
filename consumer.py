@@ -24,11 +24,11 @@ def on_message(client, userdata, msg):
 		print(data)
 		print(type(data))
 		print("1111111111111")
-		if type(data) is dict:
+		if "PatientId" in data:
 			topic=data["PatientId"]
 			client.publish(str(topic),str(data))
 		else:
-			topic=data["PatientId"]+"/spo2"
+			topic=data["topic"]+"/spo2"
 			client.publish(str(topic),str(data))
 		print("2222222222222")
 		print(data)
