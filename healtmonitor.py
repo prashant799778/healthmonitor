@@ -1233,7 +1233,7 @@ def update_Patient_Discharge():
         print("======5======" )
         ist_time = datetime.now(tz=ist)
         ist_f_time = ist_time.strftime("%Y-%m-%d %H:%M:%S")
-        query1 = " update Patient_master set   Status ='2'  ,enddate='"+str(ist_f_time)+"'  where PatientId = '" + str(data["PatientId"])+ "' and Usertype_Id = '" + str(data["Usertype_Id"])+ "' and  DeviceMac = '" + str(data["DeviceMac"])+ "' and DoctorID='" + str(data["DoctorID"])+ "' ;"
+        query1 = " update Patient_master set   Status ='2'  ,enddate='"+str(ist_f_time)+"'  where PatientId = '" + str(data["PatientId"])+ "' and Usertype_Id = '" + str(data["Usertype_Id"])+ "' and  DeviceMac = '" + str(data["DeviceMac"])+ "'  ;"
         print(query1)
         conn=Connection()
         cursor = conn.cursor()
