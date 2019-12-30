@@ -115,7 +115,7 @@ def login88881():
                 DeviceMac=request.args["DeviceMac"]
 
             if DeviceMac != "":
-                query ="select  PM.PatientId as PatientId,um.name as Doctorname,PM.PatientName,PM.PhoneNo,Hbs.HubName,PM.Address,PM.BloodGroup,PM.DeviceMac,Hm.HubId,Hm.hospital_name as hospital_Name, "
+                query ="select  PM.PatientId as PatientId,um.name as Doctorname,PM.PatientName,PM.PhoneNo,Hbs.HubName,PM.Address,PM.BloodGroup,PM.DeviceMac,Hm.HubId,Hm.hospital_name as hospital_Name,PM.hospitalId as Hospital_Id, "
                 query=query+" PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.age,PM.Gender,PM.roomNumber,pdm.doctorId as DoctorId"
                 query= query+ " from userMaster as um,Patient_master  as PM ,patientDoctorMapping as pdm,Hospital_master as Hm,HubMaster as Hbs  where pdm.doctorId=um.ID and  PM.hospitalId=Hm.ID and Hm.HubId=Hbs.ID and  pdm.Patient_Id=PM.PatientId  and PM.Status<>'2'  and PM.Usertype_Id='" + str(y3) + "' and PM.DeviceMac='"+str(DeviceMac)+ "'  ORDER BY  PatientId DESC ;"
                 print(query)
