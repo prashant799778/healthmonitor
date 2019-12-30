@@ -76,34 +76,7 @@ class Detail extends React.Component{
 // })
         // this.props.currentTopic
         if(this.props.client!=""){
-    if(this.props.client.connected){
-        //console.log("messageOne","connect"+this.props.currentTopic)
-      // this.props.client.subscribe(this.props.currentTopic,  (err)=> {
-      //   //console.log("messageOne",err)
-      //   if (!err) {
-      //     //console.log("messageOne",err)
-      //     // client.publish('/t1', '')
-      //   }
-      // })
-
-      this.props.client.subscribe(this.props.currentTopic+"/spo2",  (err)=> {
-        //console.log("messageOne",this.props.currentTopic+"/spo2")
-        if (!err) {
-          console.log("messageOneSpo",err)
-          // client.publish('/t1', '')
-        }
-      })
-
-     
-      // this.props.client.subscribe(this.props.currentTopic+"/spo2",  (err)=> {
-      //   //console.log("messageOne",this.props.currentTopic+"/spo2")
-      //   if (!err) {
-      //     //console.log("messageOneSpo",err)
-      //     // client.publish('/t1', '')
-      //   }
-      // })
-
-    }
+   
 
      
       this.props.client.on('message', (topic, message) =>{
@@ -153,8 +126,8 @@ class Detail extends React.Component{
 
       render(){
 
-        let item=this.props.currentinnerItem  ;
-
+        let currentinnerItem=this.props.currentinnerItem  ;
+         let currentItem = this.props.currentItem
         //console.log("detail",item)
 return(<DetailStyled>
     
@@ -175,11 +148,11 @@ return(<DetailStyled>
                 <div className="patient-detail">
                   <div className="patient-info border-bottomm">
                   <h2 className="patient-hading" onClick={()=>{this.props.goBack()}} style={{cursor: 'pointer'}}><font color="green">Go Back</font></h2>
-                    <h2 className="patient-hading">{item.PatientName}</h2>
-<h2 className="patient-hading">{'BloodGroup : '+ item.BloodGroup}</h2>
-<h2 className="patient-hading">{'Hospital Name : '+item.hospital_Name }</h2>
-<h2 className="patient-hading">{'Address : '+item.Address}</h2>
-                    <h2 className="patient-hading">{'Bed No : '+ item.Bed_Number}</h2>
+                    <h2 className="patient-hading">{currentinnerItem.PatientName}</h2>
+<h2 className="patient-hading">{'BloodGroup : '+ currentinnerItem.BloodGroup}</h2>
+<h2 className="patient-hading">{'Hospital Name : '+currentItem.hospital_name }</h2>
+<h2 className="patient-hading">{'Address : '+currentinnerItem.Address}</h2>
+                    <h2 className="patient-hading">{'Bed No : '+ currentinnerItem.Bed_Number}</h2>
                   </div>
                   <div className="patient-box-crd">
                     <div className="patient-box-1">

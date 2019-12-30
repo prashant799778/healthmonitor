@@ -26,6 +26,7 @@ totalHospitalCount:"",
 totalPatientCount:"",
 currentTopic:"",
 currentinnerItem:"",
+currentItem:"" ,
   client:"",
   isDetail:false
     }}
@@ -93,7 +94,7 @@ currentinnerItem:"",
   handleClick=(e,item,innerItem)=>{
 
     console.log("click")
-    this.setState({isDetail:!this.state.isDetail,currentinnerItem:innerItem,currentTopic:'/'+item.HubId+'/'+item.HospitalId+'/'+"1/"+innerItem.PatientId})
+    this.setState({isDetail:!this.state.isDetail,currentinnerItem:innerItem,currentTopic:'/'+item.HubId+'/'+item.HospitalId+'/'+"1/"+innerItem.PatientId,currentItem:item})
   }
 
   render(){ if(localStorage.getItem("user_type","")!="Doctor")
@@ -199,7 +200,7 @@ currentinnerItem:"",
   </div>
 </div> 
   }
-  {  this.state.isDetail &&   <Detail goBack={this.goBack} currentinnerItem={this.state.currentinnerItem} client={this.state.client} currentTopic={this.state.currentTopic} ></Detail>}
+  {  this.state.isDetail &&   <Detail goBack={this.goBack} currentItem={this.state.currentItem} currentinnerItem={this.state.currentinnerItem} client={this.state.client} currentTopic={this.state.currentTopic} ></Detail>}
 
 
               </div>
