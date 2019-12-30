@@ -7,13 +7,13 @@ import time
 def on_connect(client, userdata, flags, rc):
     print("-------Connected-------")
     client.subscribe("#")
-    
-
+    #client.publish("topic1","data111111")
+	
 def on_message(client, userdata, msg):    
   data = msg.payload.decode('utf-8')
   print(time.time()*1000)
   #   data = json.loads(data) 
-  #client.publish("outTopic1","data111111")  
+  client.publish("#","data111111")  
   print(data)
 def on_message(client, userdata, msg):
 	try:
@@ -21,6 +21,10 @@ def on_message(client, userdata, msg):
 		t=time.time()
 		print(t*1000)
 		data= json.loads(data)
+		print(data)
+		print("1111111111111")
+		client.publish("#",str(data))
+		print("2222222222222")
 		print(data)
                 
 		# query2  = " insert into Patient_Vital_master(Patient_Id,RESP,ECG,SPO2,NIBP,TEMP,usercreate)"
