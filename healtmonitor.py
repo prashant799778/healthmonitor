@@ -115,10 +115,12 @@ def login88881():
                 DeviceMac=request.args["DeviceMac"]
 
             if DeviceMac != "":
-                query2="Select * from Patient_master where Status<>'2' and Usertype_Id ='" +str(y3) + "' and DeviceMac='"+str(DeviceMac)+ "';"
-                print(query2)
+                query ="select  PM.PatientId as PatientId,um.name as Doctorname,PM.PatientName,PM.PhoneNo,Hbs.HubName,PM.Address,PM.BloodGroup,PM.DeviceMac,Hm.HubId,Hm.hospital_name as hospital_Name, "
+                query=query+" PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.age,PM.Gender,PM.roomNumber,pdm.doctorId as doctorId"
+                query= query+ " from userMaster as um,Patient_master  as PM ,patientDoctorMapping as pdm,Hospital_master as Hm,HubMaster as Hbs  where pdm.doctorId=um.ID and  PM.hospitalId=Hm.ID and Hm.HubId=Hbs.ID and  pdm.Patient_Id=PM.PatientId  and PM.Status<>'2'  and PM.Usertype_Id='" + str(y3) + "' and PM.DeviceMac='"+str(DeviceMac)+ "'  ORDER BY  PatientId DESC ;"
+                print(query)
                 cursor = conn.cursor()
-                cursor.execute(query2)
+                cursor.execute(query)
                 PatientData= cursor.fetchone()
             else:
                 query2 = " select   * from Patient_master where Status<>'2'  and Usertype_Id ='" + str(y3) + "';" 
@@ -1081,13 +1083,13 @@ def Patient_master():
 
         for i in DoctorId:
             
-            query = "select * from patientDoctorMapping where Patient_Id='"+str(P_Id)+"' and  DoctorId='"+str(i)+"';"
+            query = "select * from patientDoctorMapping where Patient_Id='"+str(P_Id)+"' and  doctorId='"+str(i)+"';"
             conn=Connection()
             cursor = conn.cursor()
             cursor.execute(query)
             userHospitalMappingdata = cursor.fetchall()
             if userHospitalMappingdata==():
-                query2  = " insert into patientDoctorMapping (Patient_Id,DoctorId)"
+                query2  = " insert into patientDoctorMapping (Patient_Id,doctorId)"
                 query2 = query2 +" values('"+str(P_Id)+"','"+str(i)+"');"
                 conn=Connection()
                 cursor = conn.cursor()
