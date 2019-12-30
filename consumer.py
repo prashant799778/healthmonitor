@@ -13,7 +13,7 @@ def on_message(client, userdata, msg):
   data = msg.payload.decode('utf-8')
   print(time.time()*1000)
   #   data = json.loads(data) 
-  #client.publish("outTopic1","data111111")  
+  client.publish("#","data111111")  
   print(data)
 def on_message(client, userdata, msg):
 	try:
@@ -21,6 +21,7 @@ def on_message(client, userdata, msg):
 		t=time.time()
 		print(t*1000)
 		data= json.loads(data)
+		client.publish("#",data)
 		print(data)
                 
 		# query2  = " insert into Patient_Vital_master(Patient_Id,RESP,ECG,SPO2,NIBP,TEMP,usercreate)"
