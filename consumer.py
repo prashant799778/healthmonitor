@@ -22,6 +22,7 @@ def on_message(client, userdata, msg):
 		print(t*1000)
 		data= json.loads(data)
 		print(data)
+		print(type(data))
 		print("1111111111111")
 		topic=data["PatientId"]
 		client.publish(str(topic),str(data))
