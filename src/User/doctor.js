@@ -9,6 +9,7 @@ import Loader from 'react-loader-spinner';
 import { withTheme } from 'styled-components';
 import 'react-widgets/dist/css/react-widgets.css';
 import Multiselect from 'react-widgets/lib/Multiselect'
+
 class User extends React.Component{
 
   constructor(){
@@ -341,7 +342,19 @@ isValid:true,emailError:false,
   }
    
   
-  
+  getGender=(gen)=>{
+    if(gen!=undefined){
+      switch(gen){
+        case 0:
+          return "Female";
+          case 1:
+          return "Male";
+          default :
+          return "Other";
+      }
+    }
+   
+    }   
    
       
     // }
@@ -455,7 +468,9 @@ hids.push(this.state. HListId[item])
       
     }
     render() {
-
+      if(localStorage.getItem("user_type","")!="admin")
+      { history.push('/')
+       window.location.reload();}
 
       let colors = ['orange', 'red', 'blue', 'purple1','orange1', 'red1', 'blue1', 'purple1'] 
   //     if(localStorage.getItem("login","no")==="yes" && localStorage.getItem("usertype","")!=="ADMIN"){
@@ -733,7 +748,7 @@ hids.push(this.state. HListId[item])
 <tr  id={i}>
                                   <td>{item.ID}</td>
                                   <td>{item.DoctorName}</td>
-                                  <td> </td>
+                                  <td>{this.getGender(item.Gender)}</td>
                                   <td>{item.HubName}</td>
                                   
                                   <td>{item.hospital_name}</td>

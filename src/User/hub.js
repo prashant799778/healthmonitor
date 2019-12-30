@@ -7,7 +7,7 @@ import {UserStyled} from './UserStyled';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from 'react-loader-spinner';
 import { withTheme } from 'styled-components';
-
+ 
 class User extends React.Component{
 
   constructor(){
@@ -300,6 +300,9 @@ alert("User Created Successfully")
       
     }
     render() {
+      if(localStorage.getItem("user_type","")!="admin")
+      { history.push('/')
+       window.location.reload();}
   //     if(localStorage.getItem("login","no")==="yes" && localStorage.getItem("usertype","")!=="ADMIN"){
   //       this.props.history.push("/drfs")
 

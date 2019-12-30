@@ -9,7 +9,7 @@ import { DashStyled } from "./DashStyled";
 import Device1 from "./device1";
 import Device2 from "./device2";
 import CardComponent from './CardComponent'
-
+import history from '../History';
 
 import PatientId1 from "./patientId1";
 import PatientId2 from "./patientId2";
@@ -68,6 +68,11 @@ totalDoctorCount:"",
 
 
   render(){
+    console.log("ttt",localStorage.getItem("user_type",""))
+    if(localStorage.getItem("user_type","")!="admin")
+   { history.push('/')
+    window.location.reload();}
+
 
 
     return (

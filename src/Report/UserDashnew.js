@@ -9,7 +9,7 @@ import { DashStyled } from "./DashStyled";
 import Device1 from "./device1";
 import Device2 from "./device2";
 import CardComponent from './CardComponent'
-
+import history from '../History';
 
 import PatientId1 from "./patientId1";
 import PatientId2 from "./patientId2";
@@ -96,7 +96,9 @@ currentinnerItem:"",
     this.setState({isDetail:!this.state.isDetail,currentinnerItem:innerItem,currentTopic:'/'+item.HubId+'/'+item.HospitalId+'/'+"1/"+innerItem.PatientId})
   }
 
-  render(){
+  render(){ if(localStorage.getItem("user_type","")!="Doctor")
+  { history.push('/')
+   window.location.reload();}
 
  let totalHospitalCount=this.state.TotalHospitalCount;
  let totalPatientCount=this.state.TotalPatientCount;

@@ -19,8 +19,7 @@ class ECG extends React.Component{
   index=0
   latPoint=null
 
-  lWidth=1;
-  test=1;
+  lWidth=2;
 
     constructor(){
       super()
@@ -42,43 +41,40 @@ class ECG extends React.Component{
   this. buffer= new Array(this. bufferSize);
 this. bufferIndex = 0;
 
-//   this. dt=[113,120,126,130,119,121,132,124,121,126,127,124,117,129,122,127,126,123,120,120,122,129,122,130,137,126,114,126,122,120,123,122,132,132,118,98,134,122,122,126,121,110,94,90,106,88,100,100,108,112,126,123,123,137,123,122,121,122,131,124,128,132,117,120,117,122,127,119,124,122,138,122,133,133,120,132,124]
+//   this. dt=[113,120,126,130,119,121,132,124,121,126,127,124,117,129,122,127,126,123,120,120,122,129,122,130,137,126,114,126,122,120,123,122,132,132,118,98,134,122,122,126,121,1this. bufferSize,94,90,this. bufferSize6,88,this. bufferSize0,this. bufferSize0,this. bufferSize8,112,126,123,123,137,123,122,121,122,131,124,128,132,117,120,117,122,127,119,124,122,138,122,133,133,120,132,124]
 //   this. dt=[61, 38, 38, 70, 29,27,42, 18, 64, 82, 12, 48,79,6, 26, 63, 91, 22, 42,71, 46,26,68,33,37, 84, 86,27, 27, 67, 61, 24, 61, 38, 38, 70, 29,27,42, 18, 64, 82, 12, 48,79,6, 26, 63, 91, 22, 42,71, 46,26,68,33,37, 84, 86,27, 27, 67, 61, 24]
   this. index=0
-
-
-  
      
-///////////////////
-var mqtt1 = require('mqtt')
-var client1  = mqtt1.connect('ws://139.59.78.54:9002')
+  ///////////////////
+var mqtt3 = require('mqtt')
+var client3  = mqtt3.connect('ws://139.59.78.54:9001')
 
- this.setState({client1: client1 },()=>{
-  client1.on('connect', (
+ this.setState({client3: client3 },()=>{
+  client3.on('connect', (
       
 
   ) =>{
-    client1.subscribe(this.props.topic+"/ecg",  (err)=> {
-      console.log("messageOneecg",this.props.topic+"/ecg on subscribe")
+    client3.subscribe(this.props.topic+"/resp",  (err)=> {
+      console.log("messageOneResp",this.props.topic+"/resp  on   subscribe")
       if (!err) {
         //console.log("messageOneSpo",err)
         // client.publish('/t1', '')
       }
     })   
     
-    client1.on('message', (topic, message) =>{
+    client3.on('message', (topic, message) =>{
         // message is Buffer
         
-        console.log("messageOneecg", (topic)+","+ this.props.topic+"/ecg on messgae" )
-        if((this.props.topic+"/ecg")=== topic){
+        console.log("messageOneResp", (topic)+","+ this.props.topic+"/resp  on messages")
+        if((this.props.topic+"/resp")=== topic){
 
-              console.log("asd",topic +" --" +  message.toString() )
+            
             this.loop( message.toString());
         }
       
       
          })
-    console.log("messageOneecg","ecg on con client");
+    console.log("messageOneResp","resp on con client");
   })
  })
 
@@ -86,25 +82,12 @@ var client1  = mqtt1.connect('ws://139.59.78.54:9002')
 
 
   ///////////
-  console.log("messageOneecg","ecg in client"+this.props.client);
-//  if(this.props.client!=""){
-//     console.log("messageOneecg","ecg in client");
    
-// this.props.client.on('message', (topic, message) =>{
-//     // message is Buffer
-    
-//     console.log("messageOneecg", (topic)+","+ this.props.topic+'/'+this.props.level )
-//     if((this.props.topic+'/'+this.props.level)=== topic)
-//     this.loop( message.toString());
-  
-//      })
-  
-//     }
-    }
+}
 
 componentWillReceiveProps(){
 
-
+   
 }
 
     loop=(amp) =>{
@@ -117,7 +100,7 @@ componentWillReceiveProps(){
         if(this.lastPoint == null){
             this.lastPoint ={};
             this.lastPoint.x = 0;
-            this.lastPoint.y = Number(this.h - (this.h /this.props.max )* amp);
+            this.lastPoint.y = Number(this.h - this.h /this.props.max * amp);
             return;
         }
        this.buffer[this.bufferIndex] = amp;
@@ -129,11 +112,11 @@ componentWillReceiveProps(){
 
        if(  this.bufferIndex >= this. bufferSize){
         this.bufferIndex = 0;
-       let  points = Number ((this.w -this.lastPoint.x) /this.test);
+       let  points = Number ((this.w -this.lastPoint.x) /2);
 
         points = points > this. bufferSize? this. bufferSize : points;
 
-        let  xRight = Number(  this.lastPoint.x+this.test*points);
+        let  xRight = Number(  this.lastPoint.x+ 2*points);
        
         if(this.ctx == "") return;
 
@@ -142,8 +125,8 @@ componentWillReceiveProps(){
         //console.log("buffer",points) 
         for(let i = 0; i < points; i++){
             let point={}
-            point.x = Number  (this.lastPoint.x + this.test);
-            point.y = Number (this.h - (this.h/this.props.max )* this.buffer[i]);
+            point.x = Number  (this.lastPoint.x + 2);
+            point.y = Number (this.h - this.h/this.props.max * this.buffer[i]);
 
             this.ctx.clearRect(this.lastPoint.x,0, 10,this.h/0.92);
             this.ctx.beginPath();
@@ -157,7 +140,7 @@ componentWillReceiveProps(){
              
       
                //console.log("chhh",Number(( this.w -this.lastPoint.x) / 2))
-        if(Number(( this.w -this.lastPoint.x) / this.test) < 1){
+        if(Number(( this.w -this.lastPoint.x) / 2) < 1){
             this.lastPoint.x = 0;
            
         }

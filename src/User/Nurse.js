@@ -457,7 +457,9 @@ isValid:true,emailError:false,
       
     }
     render() {
-
+      if(localStorage.getItem("user_type","")!="admin")
+      { history.push('/')
+       window.location.reload();}
 
       let colors = ['orange', 'red', 'blue', 'purple1','orange1', 'red1', 'blue1', 'purple1'] 
   //     if(localStorage.getItem("login","no")==="yes" && localStorage.getItem("usertype","")!=="ADMIN"){

@@ -3,6 +3,8 @@ import axios from 'axios';
 import  {DetailStyled}  from './DetailStyled'
 import Grabh from "../Report/grabh"
 import ECG from "./ecgs"
+import  RESP  from "./resp"
+import SPO from "./spo"
 import backImg from "./image/backimg.png" 
 class Detail extends React.Component{
 
@@ -50,10 +52,10 @@ class Detail extends React.Component{
       componentDidMount() {
 
 
-        var mqtt1 = require('mqtt')
-var client1  = mqtt1.connect('ws://139.59.78.54:9002')
+       
 
- this.setState({client1: client1 })
+
+  
  
 // client1.on('connect', function () {
 //   console.log("clientNew","connect")
@@ -92,13 +94,7 @@ var client1  = mqtt1.connect('ws://139.59.78.54:9002')
         }
       })
 
-      this.props.client.subscribe(this.props.currentTopic+"/ecg",  (err)=> {
-        //console.log("messageOne",this.props.currentTopic+"/spo2")
-        if (!err) {
-          //console.log("messageOneSpo",err)
-          // client.publish('/t1', '')
-        }
-      })    
+     
       // this.props.client.subscribe(this.props.currentTopic+"/spo2",  (err)=> {
       //   //console.log("messageOne",this.props.currentTopic+"/spo2")
       //   if (!err) {
@@ -190,16 +186,16 @@ return(<DetailStyled>
                       <div className="innr-patient height-box">
                         <h2 className="green-clr">ECG</h2>
 
-                        <ECG  level="ecg" topic={this.props.currentTopic}  client={this.state.client1} tc="#78A960"  max='250' tt="" data={this.state.w_ecg} id="asd"></ECG>
+                        <ECG  level="ecg" topic={this.props.currentTopic}  client={this.state.client1} tc="#489114"  max='250' tt="" data={this.state.w_ecg} id="asd"></ECG>
                       </div>
                       <div className="innr-patient height-box">
                         <h2 className="red-clr">SP02</h2>
                         
-  <ECG  level="spo2"  topic={this.props.currentTopic} client={this.props.client} tc="#E4352C"    max='100'  tt="" data={this.state.w_spo} id="def"></ECG>
+  <SPO  level="spo2"  topic={this.props.currentTopic} client={this.props.client} tc="#E4352C"    max='100'  tt="" data={this.state.w_spo} id="def"></SPO>
                       </div>
                       <div className="innr-patient height-box rem-boder">
                         <h2 className="orange-clr">RESP</h2>
-                        <ECG   level="resp"  topic={this.props.currentTopic}    client={this.props.client} tc="#F0AF19"   max='250' tt="" data={this.state.w_resp}  id="jkl"></ECG>
+                        <RESP   level="resp"  topic={this.props.currentTopic}    client={this.props.client} tc="#F0AF19"   max='250' tt="" data={this.state.w_resp}  id="jkl"></RESP>
                       </div>
                     </div>
                     <div className="patient-box-1">

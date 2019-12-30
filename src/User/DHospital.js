@@ -292,6 +292,9 @@ class User extends React.Component {
   };
 
   render() {
+    if(localStorage.getItem("user_type","")!="Doctor")
+  { history.push('/')
+   window.location.reload();}
     //     if(localStorage.getItem("login","no")==="yes" && localStorage.getItem("usertype","")!=="ADMIN"){
     //       this.props.history.push("/drfs")
 
