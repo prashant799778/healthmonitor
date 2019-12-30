@@ -19,7 +19,8 @@ def on_message(client, userdata, msg):
 	try:
 		data = msg.payload.decode('utf-8')
 		#client.publish("outTopic1","data111111") 
-		print((time.time())*1000)
+        t=time.time()
+		print(t*1000)
         data= json.loads(data)   
 		print(data)
                 
