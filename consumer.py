@@ -24,8 +24,12 @@ def on_message(client, userdata, msg):
 		print(data)
 		print(type(data))
 		print("1111111111111")
-		topic=data["PatientId"]
-		client.publish(str(topic),str(data))
+		if type(data) is dict:
+			topic=data["PatientId"]
+			client.publish(str(topic),str(data))
+		else:
+			topic=data["PatientId"]+"/spo2"
+			client.publish(str(topic),str(data))
 		print("2222222222222")
 		print(data)
                 
