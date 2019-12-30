@@ -1050,7 +1050,7 @@ def addDoctor():
 
 
 @app.route('/addHubDoctor', methods=['POST'])
-def addUser():
+def addHubDoctor():
     try:
         json1=request.get_data() 
         data1=json.loads(json1.decode("utf-8"))  
