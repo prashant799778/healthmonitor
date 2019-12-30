@@ -1083,7 +1083,7 @@ def addHubDoctor():
                 
                 query = "select * from userHubMapping where hubId='"+str(data1["HubId"])+"'   and userid= '"+str(mainId)+ "';"
                 cursor.execute(query)
-                userHospitalMappingdata = cursor.fetchall()
+                userHubMappingdata = cursor.fetchall()
                 if userHubMappingdata==():
                     query2  = " insert into userHubMapping (userId,hubId)"
                     query2 = query2 +" values('"+str(mainId)+"','"+str(data1["HubId"])+"' );"
@@ -1103,7 +1103,7 @@ def addHubDoctor():
                     HubId = data1["HubId"]
                     query = "select * from userHubMapping where hubId='"+str(data1["HubId"])+"'   and userid= '"+str(mainId)+ "';"
                     cursor.execute(query)
-                    userHospitalMappingdata = cursor.fetchall()
+                    userHubMappingdata  = cursor.fetchall()
                     if userHubMappingdata==():
                         query2  = " insert into userHubMapping (userId,hubId)"
                         query2 = query2 +" values('"+str(mainId)+"','"+str(data1["HubId"])+"' );"
