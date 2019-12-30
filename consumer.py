@@ -23,7 +23,7 @@ def on_message(client, userdata, msg):
 		data= json.loads(data)
 		print(data)
 		print("1111111111111")
-		client.publish("topic1",data)
+		client.publish("topic1",str(data))
 		print("2222222222222")
 		print(data)
                 
