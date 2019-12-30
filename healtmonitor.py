@@ -1103,7 +1103,7 @@ def Patient_master():
                 query2 = query2 +" values('"+str(P_Id)+"','"+str(i)+"');"
                 conn=Connection()
                 cursor = conn.cursor()
-                cursor.execute(query)
+                cursor.execute(query2)
                 conn.commit()
         
         nurseId = data["nurseId"]
