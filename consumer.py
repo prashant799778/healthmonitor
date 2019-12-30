@@ -1,7 +1,7 @@
 import paho.mqtt.client as mqtt
 import json
 from config import Connection
-
+import time
 
 
 def on_connect(client, userdata, flags, rc):
@@ -11,7 +11,8 @@ def on_connect(client, userdata, flags, rc):
 
 def on_message(client, userdata, msg):    
   data = msg.payload.decode('utf-8')
-#   data = json.loads(data) 
+  print(time.time()*1000)
+  #   data = json.loads(data) 
   #client.publish("outTopic1","data111111")  
   print(data)
 def on_message(client, userdata, msg):
