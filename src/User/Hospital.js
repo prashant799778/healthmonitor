@@ -134,7 +134,8 @@ isValid:true,emailError:false,
      
       userid:item.ID?item.ID:"",
       name:item.hospital_name?item.hospital_name:'',
-         hub_name:item.HubName?item.HubName:'',
+        //  hub_name:item.HubName?item.HubName:'',
+         hub_name:item.HubId?item.HubId:'',
          address:item.Address?item.Address:'',
     })
 
@@ -300,12 +301,13 @@ isValid:true,emailError:false,
     updatetapi=()=>{
       
      
-     let api="http://159.65.146.25:5053/update_hospital_master"
+     let api="http://159.65.146.25:5053/updateHospitalmaster"
      let json={
        "ID":this.state.userid,
       "hospital_name":this.state.name,
-      "City":this.state.hub_name,
-      "State":this.state.address,
+      "HubId":this.state.hub_name ,
+    
+      "Address":this.state.address,
       "UserUpdate": localStorage.getItem("user_id",""),
     
     }
@@ -392,6 +394,8 @@ isValid:true,emailError:false,
                             gen:'',
                             type:'',
                             error1:'',err:"",emailError:false,
+                            hub_name:"",
+                            address:'', 
                           isList:this.state.isList?false:true,isEdit:this.state.isList?false:this.state.isEdit})
                           }}>
             {this.state.isList && <span style={{color:'#ffffff'}} className="adu"><i className="fas fa-plus" />Add Hospital</span>}

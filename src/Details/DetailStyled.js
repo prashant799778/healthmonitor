@@ -717,9 +717,8 @@ export const DetailStyled = styled.div`
     justify-content: space-between;
   }
   .patient-box-crd {
-      display: flex;
-      justify-content:flex-end;
-      width:100%;
+      display: grid;
+      grid-template-columns: 5fr 1fr;
       padding: 20px;
       background: #25293bd4;
   }
@@ -742,7 +741,7 @@ export const DetailStyled = styled.div`
       border-bottom: 1px solid gray;
   }
   .height-box{
-        height: 180px;
+        height: 172px;
   }
   .rem-boder{
     border: 0px
@@ -756,8 +755,15 @@ export const DetailStyled = styled.div`
 .wrap-patient {
   margin-bottom: 1rem;
 }
-  
-  
+.innr-patient canvas {
+  width: 100% !important;
+}
+.rap-innr-patient {
+  border-bottom: 1px solid grey;
+}
+.remo-bord{
+  border:none;
+}
   @media (min-width: 320px) and (max-width: 480px) {
     .new-box-add {
       padding: 0 5px 0px 15px;
@@ -774,16 +780,11 @@ export const DetailStyled = styled.div`
       padding: 15px;
   }
   .patient-box-crd {
-     display: flex;
-      justify-content:flex-end;
-      width:100%;
+      display: grid;
+      grid-template-columns: 1fr;
       padding: 15px;
       background: #25293bd4;
   }
-  .patient-box-1:first-child {
-    width: 83%;
-    overflow: hidden;
-}
   .patient-info {
     display: block;
     align-items: center;

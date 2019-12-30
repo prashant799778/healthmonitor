@@ -1,6 +1,69 @@
 import styled from 'styled-components'
 export const UserStyled = styled.div`
    
+
+.rw-multiselect-taglist {
+    margin: auto;
+    padding: 0;
+    list-style: none;
+    display: inline-block;
+    vertical-align: top;
+    outline: none;
+}
+.rw-list-option rw-state-focus{
+
+    font-size:1rem;
+    color:white;
+}
+
+
+.rw-list-option{
+    font-size:1rem;
+    color:white;
+
+}
+
+.rw-multiselect .rw-input-reset {
+    height: calc(2.429em - 2px);
+    margin-top: -2px\9;
+    height: 2.429em\9;
+    border-width: 0;
+    width: inherit;
+    max-width: 100%;
+    padding: 0 .857em;
+}  
+
+.rw-list-option.rw-state-focus, .rw-list-option.rw-state-focus:hover {
+    background-color: transparent;
+    border-color: #66afe9;
+    color: #fff;
+}
+.rw-widget-input.rw-widget-picker.rw-widget-container:hover {
+    background: #1E1E2F;
+}
+
+li.rw-list-option:hover {
+    background: #1E1E2F;
+    color:white
+} 
+.rw-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 1em;
+    outline: 0;
+    overflow: auto;
+    max-height: 200px;
+    background: #26293B !important;
+}
+
+.rw-multiselect>.rw-widget-picker {
+    height: auto;
+    background: #1E1E2F;
+}
+
+
+
 input.fom-wd {
     
     text-transform: none !important;
@@ -324,6 +387,8 @@ table#dataTable thead tr {
     padding: 15px;
     border-bottom: 1px solid gray;
 }
+
+
 
 
 /*Add hospital*/

@@ -34,16 +34,18 @@ class CardComponent extends React.Component {
        componentDidMount() {
            console.log("topic",this.props.topic);
     
-           console.log("message","in props")
+           
            if(this.props.client!="")
         this.props.client.on('message', (topic, message) =>{
-            // message is Buffer
+          console.log("message",this.props.topic+",in props,"+topic)
+            // message is Bufferthis.props.topic
+             if(this.props.topic==topic)
             if(message){
-            console.log("message11",message.toString())
+            console.log("message11",topic)
            
-              let jsn=   JSON.parse(message.toString())
+            let jsn=   JSON.parse(message.toString())
    if(this.props.id==jsn.PatientId)
-     {
+     { 
 
       this.setState({
              

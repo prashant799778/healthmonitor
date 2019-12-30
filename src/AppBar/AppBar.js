@@ -90,7 +90,12 @@ export default class AppBar extends React.Component{
           <div className="topbar-divider d-none d-sm-block" />
           {/* Nav Item - User Information */}
 
-          <li className="nav-item dropdown no-arrow">
+          <li className="nav-item dropdown no-arrow"   onClick={()=>{
+                   if(localStorage.getItem("user_type","")!="admin")
+                    history.push('/profile')
+                    // window.location.reload();
+
+                  }} >
             <a className="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               {/* <span className="mr-2 d-none d-lg-inline text-gray-600 small sp-c">Admin</span> */}
               <img className="img-profile rounded-circle" src="img/logo.PNG" />

@@ -3,9 +3,9 @@ import history from '../../History';
 import '../style.css';
 import {withRouter} from 'react-router-dom';
 import dashimg from '../../image/dashboard.svg';
-
+import logo from './web_icon.png';
 import { Link } from "react-router-dom";
-import logo from '../../image/web_icon.png';
+
 class SideBar extends React.Component{
 
   constructor(){
@@ -97,7 +97,7 @@ return(
       <div className="sidebar-brand-icon">
       </div>
       <div className="sidebar-brand-text mx-3">
-      <img src={logo}></img>  
+        <img src={logo}></img>
         
       </div>
     </a>

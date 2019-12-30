@@ -347,10 +347,14 @@ isValid:true,emailError:false,
      if(gens==3){
        gens=0
      }
+
+
+      let hls=[]
+      hls.push(this.state.hospital_id)
       
       let api="http://159.65.146.25:5053/addUser"
       let json={
-        "Hospital_Id":this.state.hospital_id,
+        "Hospital_Id":hls,
         "name":this.state.name,
         "Usertype_Id":3,
         "mobile":this.state.mobile,
@@ -407,11 +411,14 @@ isValid:true,emailError:false,
     }
 
     updatetapi=()=>{
-      
+      let gens = this.state.gen;
+      if(gens==3){
+        gens=0
+      }
      
      let api="http://159.65.146.25:5053/updateNursemaster"
      let json={"ID":this.state.userid,"name":this.state.name
-     ,"mobile":1234567890,"Usertype_Id":3,"Hospital_Id":this.state.hospital_id,"password":this.state.password,"confirm_password":this.state.password,"Email":this.state.email,"Gender":this.state.gen}     
+     ,"mobile":1234567890,"Usertype_Id":3,"Hospital_Id":this.state.hospital_id,"password":this.state.password,"confirm_password":this.state.password,"Email":this.state.email,"Gender":gens}     
      
     
    

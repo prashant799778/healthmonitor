@@ -7,7 +7,8 @@ import {UserStyled} from './UserStyled';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from 'react-loader-spinner';
 import { withTheme } from 'styled-components';
-
+import 'react-widgets/dist/css/react-widgets.css';
+import Multiselect from 'react-widgets/lib/Multiselect'
 class User extends React.Component{
 
   constructor(){
@@ -15,8 +16,12 @@ class User extends React.Component{
         this.state={
 doctors:"",
  hubs:"",
+ HList:[],
+ HListId:[],
  hospitals:"",
+ Shospitals:[],
           isList:true,
+          mobile:'',   
           err:'',
           isBar:true,
           email:'',
@@ -25,6 +30,8 @@ doctors:"",
          name:'',
          hub_id:"",
          hospital_id:"",
+         hub_name:"",
+         hospital_name:"",
          userid:'',
          pass:'',
          
@@ -128,18 +135,34 @@ isValid:true,emailError:false,
 
   }
   edit=(item)=>{
+
+    let  gender=item.Gender;
+       if(gender==0){
+         gender=3
+       }
+
+
+       this.getHospitals(item.HubId)
+
+
+       let hls=[];
+       if(item.hospital_name){
+       hls.push( item.hospital_name ) 
+       }
     this.setState({
       isList:false,
       isEdit:true,
     
       name:item.DoctorName?item.DoctorName:"",
       userid:item.ID?item.ID:"",
-      email:'',
-      gen:'',
-     hub_id:item.HubName?item.HubName:"",
-     hospital_id:item.hospital_name?item.hospital_name:"",
+      email:item.Email?item.Email:"",
+      gen:gender?gender:"",  
+      password:item.password?item.password:"",
+      mobile:item.mobile?item.mobile:"",
+     hub_id:item.HubId?item.HubId:"",
+     Shospitals:hls,
     })
-
+   
   }
 
 
@@ -237,10 +260,24 @@ isValid:true,emailError:false,
    
 
        if(response.data && response.statusText && response.statusText=="OK"){
-         console.log("hubs",response)
+         console.log("hospitals",response)
                if(Array.isArray(response.data.result)){
                
-                 this.setState({hospitals: response.data.result})
+                 this.setState({hospitals: response.data.result},()=>{
+                  if( Array.isArray(this.state.hospitals)){
+                           let hl=[]
+                           let hlId = []
+                    this.state.hospitals.map((item,i)=>{
+                         
+                      hl.push(item.hospital_name);
+                      hlId[item.hospital_name]=item.ID;
+
+                    })
+
+
+                    this.setState({HList:hl,HListId:hlId})
+                  }
+                 })
 
 
                }
@@ -309,16 +346,32 @@ isValid:true,emailError:false,
       
     // }
     submitapi=()=>{
-    
-
+      let gens = this.state.gen;
+      if(gens==3){
+        gens=0
+      }
+      let hids=[]  
+      this.state. Shospitals.map((item,i)=>{
+hids.push(this.state. HListId[item])
+      })     
       
       let api="http://159.65.146.25:5053/addDoctor"
-      let json={
-        "HospitalId":this.state.hospital_id,
-        "DoctorName":this.state.name,
-        "Email":this.state.email,
-        "Gender":this.state.gen,
-      }
+      let json=
+      
+      
+      {
+"name":this.state.name,
+"mobile":this.state.mobile,
+"password":this.state.password, 
+"confirm_password":this.state.password,
+"Gender":Number(gens),
+"Hospital_Id":hids,
+
+
+"Email":this.state.email}
+      
+              
+     
       
        axios.post(api,json)
      .then((response)=> {
@@ -352,7 +405,10 @@ isValid:true,emailError:false,
     }
 
     updatetapi=()=>{
-      
+      let gens = this.state.gen;
+      if(gens==3){
+        gens=0
+      }
      
      let api="http://134.209.153.34:5004/edituser"
      let json={
@@ -360,7 +416,7 @@ isValid:true,emailError:false,
        "email":this.state.email,
        "password":this.state.pass,
        "usertype":this.state.type,
-       "gender":this.state.gen,
+       "gender":gens,
        "userid":this.state.userid
      }
    
@@ -399,6 +455,9 @@ isValid:true,emailError:false,
       
     }
     render() {
+
+
+      let colors = ['orange', 'red', 'blue', 'purple1','orange1', 'red1', 'blue1', 'purple1'] 
   //     if(localStorage.getItem("login","no")==="yes" && localStorage.getItem("usertype","")!=="ADMIN"){
   //       this.props.history.push("/drfs")
 
@@ -491,8 +550,23 @@ isValid:true,emailError:false,
                                   })}
                                 </select>
                               </div>
-
                               <div className="col-sm-12 col-md-3 innr-bx">
+                                <label className="title-fom" htmlFor="class-info"><font color="white">Hospital</font></label>
+                                <Multiselect 
+      data={this.state.HList}
+      value={this.state.Shospitals}
+      palceholder="select"
+
+      onChange={value => this.setState({ Shospitals:value}  )}
+    
+      // defaultValue={["orange", "blue"]}
+     
+    />
+                              </div>
+
+
+
+                              {/* <div className="col-sm-12 col-md-3 innr-bx">
                                 <label className="title-fom" htmlFor="class-info"><font color="white">Hospital</font></label>
                                 <select  required  value={this.state.hospital_id} onChange={(e)=>{
                                  
@@ -502,7 +576,7 @@ isValid:true,emailError:false,
                                     return(<option id={item.ID} value={item.ID} >{item.hospital_name}</option>)
                                   })}
                                 </select>
-                              </div>
+                              </div> */}
                              
                               <div className="col-sm-12 col-md-3 innr-bx">
                                 <label className="title-fom"><font color="white">Doctor name</font></label>
@@ -520,17 +594,20 @@ isValid:true,emailError:false,
                              
                                <div className="col-sm-12 col-md-3 innr-bx">
                                 <label className="title-fom" htmlFor="gender-info"><font color="white">Gender</font></label>
-                                <select   value={this.state.gen} onChange={(e)=>{
-                              
+                                <select   value={this.state.gen+""} onChange={(e)=>{
+                                     
                                   this.setState({gen: e.target.value}
+
+                                    
                                   )}
                                   }  className="form-control fom-hit" id="gender-info">
                                   <option>-- Choose --</option>
                                   <option value="1">Male</option>
-                                  <option value="0" >Female</option>
+                                  <option value="3" >Female</option>
                                   <option value="2">Others</option>
                                 </select>
                               </div>
+                              
                               
                              
                               <div className="col-sm-12 col-md-3 innr-bx">
@@ -559,10 +636,33 @@ isValid:true,emailError:false,
                                   }  value={this.state.email} className="fom-wd" type="email" name placeholder="email" />
                               
                               </div>
+
+                              <div className="col-sm-12 col-md-3 innr-bx">
+                                <label className="title-fom"><font color="white">Mobile No.</font></label>
+                                <input required  onChange={(e)=>{
+                                 this.setState({mobile: e.target.value})
+                               
+                                   
+                                 
+                                }
+                                  }  value={this.state.mobile} className="fom-wd" type="text" name placeholder="password" />
+                              
+                              </div>
+                              <div className="col-sm-12 col-md-3 innr-bx">
+                                <label className="title-fom"><font color="white">Password</font></label>
+                                <input required  onChange={(e)=>{
+                                 this.setState({password: e.target.value})
+                               
+                                   
+                                 
+                                }
+                                  }  value={this.state.password} className="fom-wd" type="password" name placeholder="password" />
+                              
+                              </div>
                              
                               <div className="clearfix" />
                               <div className="col-sm-12 col-md-12">
-                                <p style={{color:'red'}}>{this.state.err}</p>
+                                {/* <p style={{color:'red'}}>{this.state.err}</p> */}
                               </div>
                               <div className="col-sm-12 col-md-12">
                                 <div className="btn-bx">

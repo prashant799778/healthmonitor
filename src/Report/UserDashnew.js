@@ -30,10 +30,11 @@ currentinnerItem:"",
   isDetail:false
     }}
     MessageContainer=""
+    // 159.65.146.25
     componentDidMount() {
      
       var mqtt = require('mqtt')
-  var client  = mqtt.connect('ws://159.65.146.25:9001')
+  var client  = mqtt.connect('ws://139.59.78.54:9001')
   this.setState({client:client})
   this.callApi()
     }
@@ -55,18 +56,7 @@ currentinnerItem:"",
 
  this.setState({TotalHospitalCount:res.data.Total_hospital,TotalPatientCount:res.data.total_patient,HospitalList:res.data.result},()=>{
 
-  // 
-  // if(this.state.client.connected){
-  //   console.log("message","connect")
-  // this.state.client.subscribe('/1/1/1/+',  (err)=> {
-  //   console.log("message",err)
-  //   if (!err) {
-  //     console.log("message",err)
-  //     // client.publish('/t1', '')
-  //   }
-  // })}
-  // client.on('connect', ()=> {
-   if( Array.isArray(this.state.HospitalList)){
+ if( Array.isArray(this.state.HospitalList)){
 
 
     this.state.HospitalList.map((item,i)=>{
@@ -84,7 +74,7 @@ currentinnerItem:"",
 
 
     })
-   }
+  }
   
   })
  
@@ -135,7 +125,7 @@ currentinnerItem:"",
     <div class="row">
           <div class="col-sm-12 col-md-12">
             <div class="page-hadding">
-              <h2>Dashboard</h2>
+              <h2>Dashborad</h2>
               <h3>Monitoring </h3>
             </div>
           </div>
@@ -166,7 +156,9 @@ currentinnerItem:"",
   
         { Array.isArray(hospitalList) && hospitalList.map((item,i)=>{
           let cls="col-12 col-sm-12 col-md-6"
-            if(hospitalList.length==1){
+          let l=hospitalList.length;
+          if(l%2!=0 && i==(l-1))
+           {
               cls="col-12 col-sm-12 col-md-12"
 
             }
@@ -175,7 +167,7 @@ currentinnerItem:"",
         <div class="new-box box-bg-color">
           <div class="up-side-box">
       <h2 class="text-hd">{item.hospital_name}</h2>
-            <h2 class="text-hd">{'Pateints :'+item.patient_count}</h2>
+            <h2 class="text-hd">{'Pateints :'+item.total_patient}</h2>
           </div>
           <div class="new-box-add">
         
@@ -185,7 +177,7 @@ currentinnerItem:"",
   
   return(
   
- <CardComponent  onClick={(event)=>this.handleClick(event,item,innerItem)}  id={innerItem.PatientId} client={this.state.client} item={innerItem} index={j}  topic={'/'+item.HubId+'/'+item.HospitalId+'/'+innerItem.PatientId} ></CardComponent>
+ <CardComponent  onClick={(event)=>this.handleClick(event,item,innerItem)}  id={innerItem.PatientId} client={this.state.client} item={innerItem} index={j}  topic={'/'+item.HubId+'/'+item.HospitalId+'/1/'+innerItem.PatientId} ></CardComponent>
   
   
   

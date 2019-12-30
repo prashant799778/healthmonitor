@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import  {DetailStyled}  from './DetailStyled'
 import Grabh from "../Report/grabh"
+import ECG from "./ecgs"
 import backImg from "./image/backimg.png" 
 class Detail extends React.Component{
 
@@ -19,36 +20,113 @@ class Detail extends React.Component{
          temp:"-- -- --",
          resp:"",
           id:"",
-          user:""
+          user:"",
+         
+
+          w_ecg:0,
+          w_spo:0,
+          w_resp:0,
+
+          client1 :""
     
       }
     
     }
 
+
+    byteArrayToLong =(array)=> {
+      var view = new DataView(new ArrayBuffer(8));
+      array.forEach(function (b, i) {
+          view.setUint8(i, b);
+      });
+      return view.getUint8(0);
+  }
+
+
+    subscribeForWave=(type)=>{
+
+    }
+  
       componentDidMount() {
+
+
+        var mqtt1 = require('mqtt')
+var client1  = mqtt1.connect('ws://139.59.78.54:9002')
+
+ this.setState({client1: client1 })
+ 
+// client1.on('connect', function () {
+//   console.log("clientNew","connect")
+//   client1.subscribe('presence', function (err) {
+
+
+//       console.log("clientNew",err)
+//     if (!err) {
+//       // client1.publish('presence', 'Hello mqtt')
+//     }
+//   })
+// })
+ 
+// client1.on('message', function (topic, message) {
+//   // message is Buffer
+//   console.log("clientNew",message.toString())
+ 
+// })
+        // this.props.currentTopic
         if(this.props.client!=""){
     if(this.props.client.connected){
-        console.log("messageOne","connect"+this.props.currentTopic)
-      this.props.client.subscribe(this.props.currentTopic,  (err)=> {
-        console.log("messageOne",err)
+        //console.log("messageOne","connect"+this.props.currentTopic)
+      // this.props.client.subscribe(this.props.currentTopic,  (err)=> {
+      //   //console.log("messageOne",err)
+      //   if (!err) {
+      //     //console.log("messageOne",err)
+      //     // client.publish('/t1', '')
+      //   }
+      // })
+
+      this.props.client.subscribe(this.props.currentTopic+"/spo2",  (err)=> {
+        //console.log("messageOne",this.props.currentTopic+"/spo2")
         if (!err) {
-          console.log("messageOne",err)
+          console.log("messageOneSpo",err)
           // client.publish('/t1', '')
         }
-      })}
+      })
+
+      this.props.client.subscribe(this.props.currentTopic+"/ecg",  (err)=> {
+        //console.log("messageOne",this.props.currentTopic+"/spo2")
+        if (!err) {
+          //console.log("messageOneSpo",err)
+          // client.publish('/t1', '')
+        }
+      })    
+      // this.props.client.subscribe(this.props.currentTopic+"/spo2",  (err)=> {
+      //   //console.log("messageOne",this.props.currentTopic+"/spo2")
+      //   if (!err) {
+      //     //console.log("messageOneSpo",err)
+      //     // client.publish('/t1', '')
+      //   }
+      // })
+
+    }
 
      
       this.props.client.on('message', (topic, message) =>{
           // message is Buffer
+          // //console.log("messageOne1",message.toString() )
 
+          // this.setState({w_spo:message.toString()})
+          //   //console.log("messageOne1",this. byteArrayToLong ( message))
+         
           if(this.props.currentTopic===topic)
           if(message){
        
-            console.log("messageOne1", message.toString()  )
+            console.log("messageOne19", message.toString()  )
             let jsn=   JSON.parse(message.toString())
             
             this.setState({
-             
+               w_ecg:(jsn.hasOwnProperty("waveData")   && jsn.waveData.hasOwnProperty('Ecg')  &&  jsn.waveData['Ecg']!=="" &&  jsn.waveData['Ecg']!=128)?jsn.waveData['Ecg']:this.state.w_ecg,
+               w_spo:(jsn.hasOwnProperty("waveData")   && jsn.waveData.hasOwnProperty('Spo2')  &&  jsn.waveData['Spo2']!=="" &&  jsn.waveData['Spo2']!=128)?jsn.waveData['Spo2']:this.state.w_spo,
+               w_resp:(jsn.hasOwnProperty("waveData")   && jsn.waveData.hasOwnProperty('Resp')  &&  jsn.waveData['Resp']!=="" &&  jsn.waveData['Resp']!=128)?jsn.waveData['Resp']:this.state.w_resp,
                 temp:(jsn.hasOwnProperty("TEMP")  && jsn.TEMP!=="" )?jsn.TEMP:this.state.temp,
                  id:jsn.PatientId,
                  user:jsn.usercreate,
@@ -59,7 +137,9 @@ class Detail extends React.Component{
                   rsp: (jsn.hasOwnProperty('ECG')  && jsn.ECG.hasOwnProperty("Resp Rate")  &&  jsn.ECG["Resp Rate"]!=="")?jsn.ECG["Resp Rate"]:this.state.rsp,
                    nibp_high:(jsn.hasOwnProperty('NIBP')  &&  jsn.NIBP.hasOwnProperty("High") &&  jsn.NIBP["High"]!=="")?jsn.NIBP["High"]:this.state.nibp_high,
                   nibp_low: (jsn.hasOwnProperty('NIBP')  && jsn.NIBP.hasOwnProperty("Low")   &&  jsn.NIBP["Low"]!=="")?jsn.NIBP["Low"]:this.state.nibp_low,
-             })
+           
+           
+                })
             
             
 
@@ -79,11 +159,12 @@ class Detail extends React.Component{
 
         let item=this.props.currentinnerItem  ;
 
-        console.log("detail",item)
+        //console.log("detail",item)
 return(<DetailStyled>
     
     <div className="container-box innr-card-bg-color">
-        <div className="container">
+    {/* <ECG tc="#78A960"  tt="" data={this.state.heartRate!="-- -- --"?this.state.heartRate:0} id="asd"></ECG> */}
+        <div className="container-fluid">
           <div className="row">
             <div className="col-sm-12 col-md-12">
               <div className="uppr-box-card">
@@ -109,16 +190,16 @@ return(<DetailStyled>
                       <div className="innr-patient height-box">
                         <h2 className="green-clr">ECG</h2>
 
-                        <Grabh tc="#78A960"  tt="" data={this.state.heartRate!="-- -- --"?this.state.heartRate:0} id="asd"></Grabh>
+                        <ECG  level="ecg" topic={this.props.currentTopic}  client={this.state.client1} tc="#78A960"  max='250' tt="" data={this.state.w_ecg} id="asd"></ECG>
                       </div>
                       <div className="innr-patient height-box">
                         <h2 className="red-clr">SP02</h2>
                         
-  <Grabh tc="#E4352C" tt="" data={this.state.spo2!="-- -- --"?this.state.spo2:0} id="def"></Grabh>
+  <ECG  level="spo2"  topic={this.props.currentTopic} client={this.props.client} tc="#E4352C"    max='100'  tt="" data={this.state.w_spo} id="def"></ECG>
                       </div>
                       <div className="innr-patient height-box rem-boder">
                         <h2 className="orange-clr">RESP</h2>
-                        <Grabh  tc="#F0AF19" tt="" data={this.state.rsp!="-- -- --"?this.state.rsp:0}  id="jkl"></Grabh>
+                        <ECG   level="resp"  topic={this.props.currentTopic}    client={this.props.client} tc="#F0AF19"   max='250' tt="" data={this.state.w_resp}  id="jkl"></ECG>
                       </div>
                     </div>
                     <div className="patient-box-1">
@@ -131,11 +212,11 @@ return(<DetailStyled>
                         <p className="gray-clr">{this.state.nibp_high+"/"+this.state.nibp_low}</p>
                       </div>
                       <div className="rap-innr-patient">
-                        <div className="innr-patient">
+                        <div className="innr-patient remo-bord">
                           <h2 className="red-clr">SP02(%)</h2>
                           <p className="red-clr">{this.state.spo2}</p>
                         </div>
-                        <div className="innr-patient">
+                        <div className="innr-patient remo-bord">
                           <h2 className="red-clr">Pulse Rate(bpm)</h2>
                           <p className="red-clr">{this.state.plsRate}</p>
                         </div>
@@ -155,6 +236,7 @@ return(<DetailStyled>
             </div>
           </div>
         </div>
+     
       </div>
     
     

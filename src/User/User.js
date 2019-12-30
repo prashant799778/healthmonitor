@@ -330,19 +330,21 @@ isValid:true,emailError:false,
    
       
     }
-    genderDisplay=(gender)=>{
-      if(gender===0){
-        return "Female"
+
+    getGender=(gen)=>{
+      if(gen!=undefined){
+        switch(gen){
+          case 0:
+            return "Female";
+            case 1:
+            return "Male";
+            default :
+            return "Other";
+        }
       }
-      else if(gender===1){
-        return "Male"
-      }
-      else{
-        return "other"
-      }
-      
+     
     }
-    
+
     render() {
   //     if(localStorage.getItem("login","no")==="yes" && localStorage.getItem("usertype","")!=="ADMIN"){
   //       this.props.history.push("/drfs")
@@ -687,7 +689,7 @@ isValid:true,emailError:false,
 <tr  id={i}>
                                   <td>{item.ID}</td>
                                   <td>{item.PatientName}</td>
-                                  <td>{this.genderDisplay(item.Gender)} </td>
+                                  <td> {this.getGender(item.Gender) } </td>
                                   <td>{item.DeviceMac}</td>
                                   
                                   <td>{item.hospital_Name}</td>

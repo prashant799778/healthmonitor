@@ -27,6 +27,7 @@ import Doctor  from "./User/doctor"
 import  UserDash  from "./Report/UserDashnew";
 import  Uhospital from "./User/DHospital"
 import  Upatient from "./User/DPatient"
+import  Profile from "./User/Profile"
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -84,6 +85,12 @@ class App extends React.Component {
             path="/doctor"
               render={props => (
                 <Doctor isOpen={this.state.isOpen} Open={this.open} />
+              )}    />
+
+<Route
+            path="/profile"
+              render={props => (
+                <Profile isOpen={this.state.isOpen} Open={this.open} />
               )}    />
 
 <Route
