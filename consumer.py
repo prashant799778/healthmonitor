@@ -18,7 +18,7 @@ def on_message(client, userdata, msg):
 def on_message(client, userdata, msg):
 	try:
 		data = msg.payload.decode('utf-8')
-		#client.publish("outTopic1","data111111") 
+		#client.publish("outTopic1","data111111")
         t=time.time()
 		print(t*1000)
         data= json.loads(data)   
