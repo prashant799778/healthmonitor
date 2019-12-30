@@ -20,7 +20,7 @@ def on_message(client, userdata, msg):
 		data = msg.payload.decode('utf-8')#client.publish("outTopic1","data111111")
 		t=time.time()
 		print(t*1000)
-        data= json.loads(data)   
+		data= json.loads(data)
 		print(data)
                 
 		# query2  = " insert into Patient_Vital_master(Patient_Id,RESP,ECG,SPO2,NIBP,TEMP,usercreate)"
