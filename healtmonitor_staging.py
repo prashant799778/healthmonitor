@@ -561,11 +561,11 @@ def HospitalPatientDetails():
     try:
         json1=request.get_data()
         print(json1)
-        data=json.loads(json1.decode("utf-8"))
+        data9=json.loads(json1.decode("utf-8"))
         query2 ="select us.ID as DoctorID ,us.Email as Email ,hm.HubId as HubId ,Hm.HubName as HubName,hm.ID as Hospital_Id" 
         query2=query2+" from userMaster as us ,Hospital_master as hm,HubMaster as Hm,userHospitalMapping as ushm where" 
         query2=query2+" ushm.userId=us.Id and  hm.ID=ushm.hospitalId   and  Hm.ID= hm.HubId and   us.Usertype_Id=2  and " 
-        query2=query2+" ushm.hospitalId='"+str(data["HospitalId"])+"' and  us.Email ='"+str(data["Email"])+"';"  
+        query2=query2+" ushm.hospitalId='"+str(data9["HospitalId"])+"' and  us.Email ='"+str(data9["Email"])+"';"  
         print(query2)
         conn=Connection() 
         cursor = conn.cursor()
@@ -587,7 +587,7 @@ def HospitalPatientDetails():
             query3=query3+" PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.age,PM.Gender,PM.roomNumber,pdm.DoctorID as DoctorID"
             query3= query3 + " from Patient_master  as PM ,patientDoctorMapping as pdm,Hospital_master as Hm,HubMaster as Hbs " 
             query3=query3+" where PM.hospitalId=Hm.ID and Hm.HubId=Hbs.ID and  pdm.Patient_Id=PM.PatientId  and PM.Status<>'2'   and "
-            query3=query3+" pdm.doctorId='" + str(doctor_Id) + "' and PM.hospitalId='" + str(data["Hospital_Id"]) + "'  ORDER BY  PatientId DESC;"   
+            query3=query3+" pdm.doctorId='" + str(doctor_Id) + "' and PM.hospitalId='" + str(data["Hospital_Id"]) + "'  ORDER BY   PatientId DESC  Limit    '" + int(data9["startlimit"]) + "','" + int(data9["endlimit"]) + "' ;"   
             print(query3)
             cursor = conn.cursor()
             cursor.execute(query3)
