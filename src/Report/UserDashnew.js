@@ -9,6 +9,7 @@ import { DashStyled } from "./DashStyled";
 import Device1 from "./device1";
 import Device2 from "./device2";
 import CardComponent from './CardComponent'
+import MainCard from './MainCard'
 import history from '../History';
 
 import PatientId1 from "./patientId1";
@@ -172,21 +173,20 @@ currentItem:"" ,
       <h2 class="text-hd">{item.hospital_name}</h2>
             <h2 class="text-hd">{'Pateints :'+item.total_patient}</h2>
           </div>
-          <div class="new-box-add">
+         
         
   
-          {Array.isArray(item.patient_Details) && item.patient_Details.map((innerItem,j)=>{
+         
   
       
-  return(
+
   
- <CardComponent  onClick={(event)=>this.handleClick(event,item,innerItem)}  id={innerItem.PatientId} client={this.state.client} item={innerItem} index={j}  topic={'/'+item.HubId+'/'+item.HospitalId+'/'+item.ID+'/'+innerItem.PatientId} ></CardComponent>
+ <MainCard  detail={item.patient_Details} Click={(event,item,innerItem)=>this.handleClick(event,item,innerItem)}   client={this.state.client}   item={item} topic={'/'+item.HubId+'/'+item.HospitalId+'/'+item.ID+'/'} ></MainCard>
   
   
   
-  );
-          })}
-          </div>
+
+        
 
           
         </div>

@@ -91,9 +91,11 @@ export default class AppBar extends React.Component{
           {/* Nav Item - User Information */}
 
           <li className="nav-item dropdown no-arrow"   onClick={()=>{
+            console.log("admin")
                    if(localStorage.getItem("user_type","")!="admin")
                     history.push('/profile')
                     // window.location.reload();
+
 
                   }} >
             <a className="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
