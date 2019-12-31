@@ -180,7 +180,7 @@ currentItem:"" ,
       
   return(
   
- <CardComponent  onClick={(event)=>this.handleClick(event,item,innerItem)}  id={innerItem.PatientId} client={this.state.client} item={innerItem} index={j}  topic={'/'+item.HubId+'/'+item.HospitalId+'/1/'+innerItem.PatientId} ></CardComponent>
+ <CardComponent  onClick={(event)=>this.handleClick(event,item,innerItem)}  id={innerItem.PatientId} client={this.state.client} item={innerItem} index={j}  topic={'/'+item.HubId+'/'+item.HospitalId+'/'+item.ID+'/'+innerItem.PatientId} ></CardComponent>
   
   
   
