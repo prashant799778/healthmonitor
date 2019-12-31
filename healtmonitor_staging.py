@@ -587,7 +587,7 @@ def HospitalPatientDetails():
             query3=query3+" PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.age,PM.Gender,PM.roomNumber,pdm.DoctorID as DoctorID"
             query3= query3 + " from Patient_master  as PM ,patientDoctorMapping as pdm,Hospital_master as Hm,HubMaster as Hbs " 
             query3=query3+" where PM.hospitalId=Hm.ID and Hm.HubId=Hbs.ID and  pdm.Patient_Id=PM.PatientId  and PM.Status<>'2'   and "
-            query3=query3+" pdm.doctorId='" + str(doctor_Id) + "' and PM.hospitalId='" + str(data["Hospital_Id"]) + "'  ORDER BY   PatientId DESC  Limit    '" + int(data9["startlimit"]) + "','" + int(data9["endlimit"]) + "' ;"   
+            query3=query3+" pdm.doctorId='" + str(doctor_Id) + "' and PM.hospitalId='" + str(data["Hospital_Id"]) + "'  ORDER BY   PatientId DESC  Limit    '" + str(data9["startlimit"]) + "','" + str(data9["endlimit"]) + "' ;"   
             print(query3)
             cursor = conn.cursor()
             cursor.execute(query3)
