@@ -85,7 +85,7 @@ class User extends React.Component{
           age:"",
           gender: this.getGender(rsA.gender),
           Address:"",
-          Contact:"",
+          Contact:rsA.mobile,
           email:rsA.Email
          })
 
@@ -218,9 +218,9 @@ class User extends React.Component{
                                 <h2>Email Id</h2>
       <h2 className="text-right">{this.state.email}</h2>
                                 <h2>Contact</h2>
-                                <h2 className="text-right">+91-094 04X X90X</h2>
-                                <h2>Address</h2>
-                                <h2 className="text-right">Address line 1 <br></br> line 2</h2>
+      <h2 className="text-right">{this.state.Contact}</h2>
+                                {/* <h2>Address</h2>
+                                <h2 className="text-right">Address line 1 <br></br> line 2</h2> */}
                             </div>
                         </div>
                     </div>
