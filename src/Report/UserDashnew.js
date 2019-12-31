@@ -64,7 +64,7 @@ currentItem:"" ,
       console.log("message",'/'+item.HubId+'/'+item.HospitalId+'/'+ localStorage.getItem("user_id", "")+'/+')
       if(this.state.client.connected){
         console.log("message","connect")
-      this.state.client.subscribe('/'+item.HubId+'/'+item.HospitalId+'/'+ '1'+'/+',  (err)=> {
+      this.state.client.subscribe('/'+item.HubId+'/'+item.HospitalId+'/'+ item.ID+'/+',  (err)=> {
         console.log("message",err)
         if (!err) {
           console.log("message",err)
@@ -94,7 +94,7 @@ currentItem:"" ,
   handleClick=(e,item,innerItem)=>{
 
     console.log("click")
-    this.setState({isDetail:!this.state.isDetail,currentinnerItem:innerItem,currentTopic:'/'+item.HubId+'/'+item.HospitalId+'/'+"1/"+innerItem.PatientId,currentItem:item})
+    this.setState({isDetail:!this.state.isDetail,currentinnerItem:innerItem,currentTopic:'/'+item.HubId+'/'+item.HospitalId+'/'+ item.ID +"/"+innerItem.PatientId,currentItem:item})
   }
 
   render(){ if(localStorage.getItem("user_type","")!="Doctor")
@@ -177,7 +177,7 @@ currentItem:"" ,
   
           {Array.isArray(item.patient_Details) && item.patient_Details.map((innerItem,j)=>{
   
-  
+      
   return(
   
  <CardComponent  onClick={(event)=>this.handleClick(event,item,innerItem)}  id={innerItem.PatientId} client={this.state.client} item={innerItem} index={j}  topic={'/'+item.HubId+'/'+item.HospitalId+'/1/'+innerItem.PatientId} ></CardComponent>
@@ -187,6 +187,8 @@ currentItem:"" ,
   );
           })}
           </div>
+
+          
         </div>
       </div>
  
