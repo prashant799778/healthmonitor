@@ -378,11 +378,12 @@ def doctorLoginDashboard():
         total_patient=0
         for i in data1:
             
-            query2="select * from Patient_master pm,patientDoctorMapping pdm where pm.Status<>'2' and pdm.Patient_Id=pm.PatientId " 
+            query2="select PatientId,hospitalId,PatientName,heartRate,spo2,highPressure,lowPressure,pulseRate,temperature,BloodGroup,DeviceMac,Bed_Number,roomNumber,Gender,age from Patient_master pm,patientDoctorMapping pdm where pm.Status<>'2' and pdm.Patient_Id=pm.PatientId " 
             query2=query2+" and pdm.doctorId='"+str(i["ID"]) +"' and pm.hospitalId='"+str(i["HospitalId"])+"';"
             cursor.execute(query2)
             data2= cursor.fetchall()
-            print(data2)
+            print("data22222222222222222222222222222222222222222222",data2)
+            print("data22222222222222222222222222222222222222222222")
             i["patient_Details"]=data2
             i["total_patient"]=len(i["patient_Details"])
             
@@ -395,7 +396,8 @@ def doctorLoginDashboard():
         if data1:
             # data.append({"Total_hospital":len(data)})
             # data.append({"total_patient":total_patient})
-            return {"result":data1,"Total_hospital":len(data1),"total_patient":total_patient,"status":"true"}
+            data={"result":data1,"Total_hospital":len(data1),"total_patient":total_patient,"status":"true"}
+            return json.loads(json.dumps(data))
         else:
             return {"result":"No Record Found","status":"true"}
     
