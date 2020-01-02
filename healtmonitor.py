@@ -218,7 +218,7 @@ def allDoctor():
             cursor.execute(query2)
             data2= cursor.fetchall()
             print(data2)
-            #i["totalHospitals"]=data1[0]["count"]
+            i["totalHospitals"]=data2
         
         cursor.close()    
         if data:
