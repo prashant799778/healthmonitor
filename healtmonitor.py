@@ -1104,8 +1104,13 @@ def updateDoctorMaster():
 
         print(HospitalId)
         for i in HospitalId:
-            query2="update userHospitalMapping set hospitalId='"+str(i)+"' where Usertype_Id=2 and userId='" + str(data["ID"])+ "' and hospitalId='"+str(i)+"' "
-            print(query2)
+            query= "delete from userHospitalMapping where userId='" + str(data["ID"])+ "'  and Usertype_Id= 2 "
+            conn=Connection()
+            cursor = conn.cursor()
+            cursor.execute(query)
+            conn.commit()
+            query2  = " insert into userHospitalMapping (userId,Usertype_Id,hospitalId)"
+            query2 = query2 +" values('" + str(data["ID"])+ "','"+str('2')+"','"+str(i)+"');"
             conn=Connection()
             cursor = conn.cursor()
             cursor.execute(query2)
