@@ -25,6 +25,7 @@ import PatientList from "./Report/patientList";
 import Hub  from "./User/hub"
 import Doctor  from "./User/doctor"
 import  UserDash  from "./Report/UserDashnew";
+import   Operationdash  from "./Report/Operationdash";
 import  Uhospital from "./User/DHospital"
 import  Upatient from "./User/DPatient"
 import  Profile from "./User/Profile"
@@ -128,6 +129,12 @@ class App extends React.Component {
               path="/home"
               render={props => (
                 <UserDash isOpen={this.state.isOpen} Open={this.open} />
+              )}
+            />
+             <Route
+              path="/Odash"
+              render={props => (
+                <Operationdash isOpen={this.state.isOpen} Open={this.open} />
               )}
             />
 <Route

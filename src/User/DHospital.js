@@ -489,7 +489,7 @@ class User extends React.Component {
                                     <h2 class="box-hadingg">
                                       {item.hospital_name}
                                     </h2>
-                                    <img src={require("../image/eye.svg")} />
+                                    <img  style={{cursor:'pointer'}}  src={require("../image/eye.svg")} />
                                   </div>
                                   <div class="innr-box-info">
                                     <p class="text-hading">Patients</p>

@@ -82,7 +82,7 @@ class CardComponent extends React.Component {
       
             <div class="card-hading-box border-bottomm">
         <h2 class="text-hading">{item.PatientName}</h2>
-              <img src={require("./img/eye.svg")}/>
+              <img style={{cursor:'pointer'}} src={require("./img/eye.svg")}/>
             </div>
             
             <div class="innr-new-card-wrap">

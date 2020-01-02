@@ -1,7 +1,10 @@
 import styled from 'styled-components'
 export const UserStyled = styled.div`
    
-
+.form-control:disabled, .form-control[readonly] {
+    background-color: #26293b;
+    opacity: 1;
+  }   
 .rw-multiselect-taglist {
     margin: auto;
     padding: 0;

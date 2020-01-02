@@ -253,7 +253,9 @@ isValid:true,emailError:false,
        let hub_id= this.state.hub_id;
        if(id){
         hub_id=id;
+
        }
+       this.setState({  Shospitals:[]})
     console.log("edit hospital")
   
 
@@ -566,7 +568,7 @@ hids.push(this.state. HListId[item])
 
                             <div className="col-sm-12 col-md-3 innr-bx">
                                 <label className="title-fom" htmlFor="class-info"><font color="white">Hub</font></label>
-                                <select  required  value={this.state.hub_id} onChange={(e)=>{
+                                <select  required  disabled={this.state.isEdit} value={this.state.hub_id} onChange={(e)=>{
                                  
                                   this.setState({hub_id: e.target.value},()=>{
                                    
