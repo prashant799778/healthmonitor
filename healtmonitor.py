@@ -382,7 +382,8 @@ def doctorLoginDashboard():
             query2=query2+" and pdm.doctorId='"+str(i["ID"]) +"' and pm.hospitalId='"+str(i["HospitalId"])+"';"
             cursor.execute(query2)
             data2= cursor.fetchall()
-            print(data2)
+            print("data22222222222222222222222222222222222222222222",data2)
+            print("data22222222222222222222222222222222222222222222")
             i["patient_Details"]=data2
             i["total_patient"]=len(i["patient_Details"])
             
