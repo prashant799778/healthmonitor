@@ -1436,8 +1436,15 @@ def Patient_master():
          
         json1=request.get_data() 
         data=json.loads(json1.decode("utf-8"))  
-        query2  = " insert into Patient_master(PatientName,roomNumber,Gender,age,BloodGroup,DeviceMac,Bed_Number,Usertype_Id,hospitalId,startdate,usercreate)"
-        query2 =query2 +" values("+'"'+str(data["PatientName"])+'"'+','+'"'+str(data["roomNumber"])+'"'+','+'"'+str(data["gender"])+'"'+','+'"'+str(data["age"])+'"'+','+'"'+str(data["BloodGroup"])+'"'+','+'"'+str(data["DeviceMac"])+'"'+','+'"'+str(data["Bed_Number"])+'"'+','+'"'+str(data["Usertype_Id"])+'"'+','+'"'+str(data["hospitalId"])+'"'+','+'"'+str(data["startdate"])+'"'+','+'"'+str(data["usercreate"])+'"'+''+");"
+        query2  = " insert into Patient_master(PatientName,heartRate,spo2,pulseRate,highPressure,lowPressure,temperature,roomNumber,Gender,age,BloodGroup,DeviceMac,Bed_Number,Usertype_Id,hospitalId,startdate,usercreate)"
+        query2 =query2 +" values("+'"'+str(data["PatientName"])+'"'+','+'"'+str(data["heartRate"])+'"'+','
+        query2=query2+'"'+str(data["spo2"])+'"'+','+'"'+str(data["pulseRate"])+'"'+','+'"'+str(data["highPressure"])+'"'+','
+        query2=query2+'"'+str(data["lowPressure"])+'"'+','+'"'+str(data["temperature"])+'"'+','
+        query2=query2+'"'+str(data["roomNumber"])+'"'+','+'"'+str(data["gender"])+'"'+','
+        query2=query2+'"'+str(data["age"])+'"'+','+'"'+str(data["BloodGroup"])+'"'+','
+        query2=query2+'"'+str(data["DeviceMac"])+'"'+','+'"'+str(data["Bed_Number"])+'"'+','
+        query2=query2+'"'+str(data["Usertype_Id"])+'"'+','+'"'+str(data["hospitalId"])+'"'+','
+        query2=query2+'"'+str(data["startdate"])+'"'+','+'"'+str(data["usercreate"])+'"'+");"
         print(query2)
         conn=Connection()
         cursor = conn.cursor()
@@ -1462,7 +1469,7 @@ def Patient_master():
 
         for i in DoctorId:
             
-            query = "select * from patientDoctorMapping where Patient_Id='"+str(P_Id)+"' and  doctorId='"+str(i)+"';"
+            query = "select * from patientDoctorMapping where Patient_Id='"+str(P_Id)+"' and  doctorId ='"+str(i)+"';"
             conn=Connection()
             cursor = conn.cursor()
             cursor.execute(query)
@@ -1500,8 +1507,6 @@ def Patient_master():
         print("Exception---->" + str(e))    
         output = {"result":"something went wrong","status":"false"}
     return output
-
-
 
 @app.route('/Patient_master_select', methods=['GET'])
 def Patient_master_select():
