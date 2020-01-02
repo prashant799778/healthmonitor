@@ -219,6 +219,15 @@ def allDoctor():
             data2= cursor.fetchall()
             print(data2)
             i["totalHospitals"]=data2
+            
+            
+            for j in data2:
+                query3="select hospital_name from Hospital_master where ID='"+str (j["hospitalId"])+"';"
+                cursor.execute(query3)
+                data3= cursor.fetchall()
+                print(data3)
+                j["hospitalName"]=data3[0]["hospital_name"]
+                
         
         cursor.close()    
         if data:
