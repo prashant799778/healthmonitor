@@ -1113,7 +1113,7 @@ def updateDoctorMaster():
             query2 = query2 +" values('" + str(data["ID"])+ "','"+str('2')+"','"+str(i)+"');"
             print(query2)
             cursor.execute(query2)
-            conn.commit()
+        conn.commit()
         
         cursor.close()
         output = {"result":"Updated Successfully","status":"true"}
