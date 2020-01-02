@@ -280,7 +280,7 @@ def allNurse():
 @app.route('/allPatient', methods=['post'])
 def allPatient():
     try:
-        query3 ="select  PM.PatientId as ID,PM.PatientName,PM.PhoneNo,Hbs.HubName,PM.Address,PM.BloodGroup,PM.DeviceMac,Hm.HubId,Hm.hospital_name as hospital_Name , "
+        query3 ="select  PM.PatientId as ID,PM.PatientName,PM.heartRate,PM.spo2,PM.highPressure,PM.lowPressure,PM.pulseRate,PM.temperature,PM.PhoneNo,Hbs.HubName,PM.Address,PM.BloodGroup,PM.DeviceMac,Hm.HubId,Hm.hospital_name as hospital_Name , "
         query3=query3+" PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.age,PM.Gender,PM.roomNumber,pdm.DoctorID as DoctorID"
         query3= query3 + " from Patient_master  as PM ,patientDoctorMapping as pdm,Hospital_master as Hm,HubMaster as Hbs  where PM.hospitalId=Hm.ID and Hm.HubId=Hbs.ID and  pdm.Patient_Id=PM.PatientId  and PM.Status<>'2'   ORDER BY  ID DESC;"
         conn=Connection()
@@ -389,7 +389,7 @@ def hubloginPatient():
         
         json1=request.get_data()
         Data=json.loads(json1.decode("utf-8"))
-        query3 ="select  PM.PatientId as ID,PM.PatientName,PM.PhoneNo,Hbs.HubName,PM.Address,PM.BloodGroup,PM.DeviceMac,Hm.HubId,Hm.hospital_name as hospital_Name , "
+        query3 ="select  PM.PatientId as ID,PM.PatientName,PM.heartRate,PM.spo2,PM.highPressure,PM.lowPressure,PM.pulseRate,PM.temperature,PM.PhoneNo,Hbs.HubName,PM.Address,PM.BloodGroup,PM.DeviceMac,Hm.HubId,Hm.hospital_name as hospital_Name , "
         query3=query3+" PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.age,PM.Gender,PM.roomNumber,pdm.DoctorID as DoctorID"
         query3= query3 + " from Patient_master  as PM ,patientDoctorMapping as pdm,Hospital_master as Hm,HubMaster as Hbs  where PM.hospitalId=Hm.ID  and  Hm.HubId='"+str(Data["HubId"])+"' and  Hm.HubId=Hbs.ID and  pdm.Patient_Id=PM.PatientId  and PM.Status<>'2'   ORDER BY  ID DESC;"
         conn=Connection()
@@ -525,7 +525,7 @@ def doctorPatientDetails():
         for dat in data1:
             doctor_Id=dat["DoctorID"]
             l2=[]
-            query3 ="select  PM.PatientId as ID,PM.PatientName,PM.PhoneNo,PM.Address,PM.BloodGroup,PM.DeviceMac,Hm.HubId,Hm.hospital_name as hospital_Name , "
+            query3 ="select  PM.PatientId as ID,PM.PatientName,PM.PhoneNo,PM.heartRate,PM.spo2,PM.highPressure,PM.lowPressure,PM.pulseRate,PM.temperature,PM.Address,PM.BloodGroup,PM.DeviceMac,Hm.HubId,Hm.hospital_name as hospital_Name , "
             query3=query3+" PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.age,PM.Gender,PM.roomNumber,pdm.DoctorID as DoctorID"
             query3= query3 + " from Patient_master  as PM ,patientDoctorMapping as pdm,Hospital_master as Hm,HubMaster as Hbs  where PM.hospitalId=Hm.ID and Hm.HubId=Hbs.ID and  pdm.Patient_Id=PM.PatientId  and PM.Status<>'2'   and DoctorID='" + str(doctor_Id) + "'  ORDER BY  PatientId DESC;"
             cursor = conn.cursor()
@@ -583,7 +583,7 @@ def HospitalPatientDetails():
 
             l2=[]
             
-            query3 ="select  PM.PatientId as PatientId,PM.PatientName,PM.PhoneNo,PM.Address,PM.BloodGroup,PM.DeviceMac,Hm.HubId,Hm.hospital_name  as hospital_Name,"
+            query3 ="select  PM.PatientId as PatientId,PM.PatientName,PM.heartRate,PM.spo2,PM.highPressure,PM.lowPressure,PM.pulseRate,PM.temperature,PM.PhoneNo,PM.Address,PM.BloodGroup,PM.DeviceMac,Hm.HubId,Hm.hospital_name  as hospital_Name,"
             query3=query3+" PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.age,PM.Gender,PM.roomNumber,pdm.DoctorID as DoctorID"
             query3= query3 + " from Patient_master  as PM ,patientDoctorMapping as pdm,Hospital_master as Hm,HubMaster as Hbs " 
             query3=query3+" where PM.hospitalId=Hm.ID and Hm.HubId=Hbs.ID and  pdm.Patient_Id=PM.PatientId  and PM.Status<>'2'   and "
