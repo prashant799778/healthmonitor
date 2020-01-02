@@ -213,6 +213,12 @@ def allDoctor():
             data1= cursor.fetchall()
             print(data1)
             i["patient"]=data1[0]["count"]
+            
+            query2="select hospitalId from userHospitalMapping where userId='"+str (i["ID"])+"';"
+            cursor.execute(query2)
+            data2= cursor.fetchall()
+            print(data2)
+            #i["totalHospitals"]=data1[0]["count"]
         
         cursor.close()    
         if data:
