@@ -1092,28 +1092,25 @@ def updateDoctorMaster():
         json1=request.get_data() 
         data=json.loads(json1.decode("utf-8")) 
       
-
+        conn=Connection()
+        cursor = conn.cursor()
 
         query1 = " update userMaster set   name ='" + str(data["name"]) + "', mobile='" + str(data["mobile"]) + "' , password='" + str(data["password"]) + "' , Email='" + str(data["Email"]) + "' , Gender='" + str(data["Gender"]) + "' , Status ='1'  where Usertype_Id=2 and  ID = '" + str(data["ID"])+ "';"
         print(query1)
-        conn=Connection()
-        cursor = conn.cursor()
+        
         cursor.execute(query1)
         conn.commit()
         HospitalId = data["Hospital_Id"]
         query= "delete from userHospitalMapping where userId='" + str(data["ID"])+ "'  and Usertype_Id= 2 "
-        conn=Connection()
-        cursor = conn.cursor()
         cursor.execute(query)
         conn.commit()
         print(HospitalId)
         for i in HospitalId:
-            
             query2  = " insert into userHospitalMapping (userId,Usertype_Id,hospitalId)"
             query2 = query2 +" values('" + str(data["ID"])+ "','"+str('2')+"','"+str(i)+"');"
             print(query2)
             cursor.execute(query2)
-        conn.commit()
+            conn.commit()
         
         cursor.close()
         output = {"result":"Updated Successfully","status":"true"}
