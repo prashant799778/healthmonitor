@@ -116,7 +116,7 @@ def login88881():
                     Nur = cursor.fetchone()
                     print(Nur)
                     y2=Nur["Hospital_Id"]
-                    query2= "select hm.ID as Hospital_Id,hm.hospital_name,hm.HubId as HubId,Hbs.HubName as HubName from HubMaster as Hbs,Hospital_master as hm where hm.HubId=Hbs.ID and hm.ID= '" + str(y2) + "';"
+                    query2= "select hm.ID as hospital_Id,hm.hospital_name,hm.HubId as HubId,Hbs.HubName as HubName from HubMaster as Hbs,Hospital_master as hm where hm.HubId=Hbs.ID and hm.ID= '" + str(y2) + "';"
                     print(query2)
                     cursor = conn.cursor()
                     cursor.execute(query2)
