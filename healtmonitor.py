@@ -1158,6 +1158,7 @@ def deleteDoctorHospital():
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query1)
+        conn.commit()
         cursor.close()
         output = {"result":"Deleted Successfully","status":"true"}
         return output  
@@ -1184,6 +1185,7 @@ def deleteNurseHospital():
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query1)
+        conn.commit()
         cursor.close()
         output = {"result":"Deleted Successfully","status":"true"}
         return output  
@@ -1210,6 +1212,7 @@ def deleteHospital():
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query1)
+        conn.commit()
         cursor.close()
         output = {"result":"Deleted Successfully","status":"true"}
         return output  
