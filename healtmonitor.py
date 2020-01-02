@@ -1142,12 +1142,19 @@ def updateNurseMaster():
         cursor.execute(query1)
         conn.commit()
         HospitalId = data["Hospital_Id"]
+        query= "delete from userHospitalMapping where userId='" + str(data["ID"])+ "'  and Usertype_Id= 3 "
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        conn.commit()
+        print(HospitalId)
         for i in HospitalId:
-            query2="update userHospitalMapping set hospitalId='"+str(i)+"' where Usertype_Id=3 and userId='" + str(data["ID"])+ "' "
-            conn=Connection()
-            cursor = conn.cursor()
+            
+            query2  = " insert into userHospitalMapping (userId,Usertype_Id,hospitalId)"
+            query2 = query2 +" values('" + str(data["ID"])+ "','"+str('3')+"','"+str(i)+"');"
+            print(query2)
             cursor.execute(query2)
-            conn.commit()
+        conn.commit()
         
         cursor.close()
         output = {"result":"Updated Successfully","status":"true"}
