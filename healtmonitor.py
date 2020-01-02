@@ -133,7 +133,7 @@ def login88881():
                 query= query+ " from userMaster as um,Patient_master  as PM ,patientDoctorMapping as pdm,Hospital_master as Hm,HubMaster as Hbs  where pdm.doctorId=um.ID and  PM.hospitalId=Hm.ID and Hm.HubId=Hbs.ID and  pdm.Patient_Id=PM.PatientId  and PM.Status<>'2'  and PM.Usertype_Id='" + str(y3) + "' and PM.DeviceMac='"+str(DeviceMac)+ "'  ORDER BY  PatientId DESC ;"
                 print(query)
                 cursor = conn.cursor()
-                cursor.execute(query)
+                cursor.execute(query3)
                 PatientData= cursor.fetchone()
             else:
                 query2 = " select   * from Patient_master where Status<>'2'  and Usertype_Id ='" + str(y3) + "';" 
