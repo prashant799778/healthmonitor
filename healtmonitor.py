@@ -110,7 +110,7 @@ def login88881():
                         Nurse.append(Nurs)
 
                 if  d["Usertype"]== 'Operation':
-                    query= "select hospitalId as Hospital_Id from userHospitalMapping where  Usertype_Id=2 and userId= '" + str(y9) + "' "
+                    query= "select hospitalId as Hospital_Id from userHospitalMapping where  Usertype_Id=4 and userId= '" + str(y9) + "' "
                     cursor = conn.cursor()
                     cursor.execute(query)
                     Nur = cursor.fetchall()
