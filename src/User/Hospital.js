@@ -37,12 +37,16 @@ isValid:true,emailError:false,
          deleteid:''
         }
   }
-  deletes=(id)=>{
-    this.setState({deleteid:id})
+  deletes=(id,HubId)=>{
+    this.setState({deleteid:id,HubId:HubId})
   }
   delete=()=>{
-    let api="http://134.209.153.34:5004/deleteUser?userid="+this.state.deleteid
-    axios.get(api)
+    let api="http://159.65.146.25:5053/deleteHospital"
+    let jsn={
+      "ID":this.state.deleteid,
+       "HubId":this.state.HubId
+    }
+    axios.post(api,jsn)
   .then((response)=> {
     // handle success
   
@@ -328,7 +332,7 @@ isValid:true,emailError:false,
 
 
         }else{
-          alert("aa")
+         
           this.setState({err:response.data.result}) 
          
         }
@@ -559,7 +563,7 @@ isValid:true,emailError:false,
                                       <ul>
                                        
                                         <li onClick={()=>{this.edit(item)}}><i className="far fa-edit" /></li>
-                                        <li  onClick={()=>{this.deletes(item.userid)}} data-toggle="modal" data-target="#deleteModal">   <i className="far fa-trash-alt" /></li>
+                                        <li  onClick={()=>{this.deletes(item.ID,item.HubId)}} data-toggle="modal" data-target="#deleteModal">   <i className="far fa-trash-alt" /></li>
                                       </ul>
                                     </div>  
                                   </td>
@@ -619,7 +623,7 @@ isValid:true,emailError:false,
                     <span aria-hidden="true">×</span>
                   </button>
                 </div>
-                <div className="modal-body">Select "Delete" below if you are ready to delete BD.</div>
+                <div className="modal-body">Select "Delete" below if you are ready to delete Hospital.</div>
                 <div className="modal-footer">
                   <button className="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                   <a  style={{color:"#ffffff"}} data-dismiss="modal" className="btn btn-primary"  onClick={()=>{this.delete()}}>delete</a>

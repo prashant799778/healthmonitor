@@ -44,12 +44,16 @@ isValid:true,emailError:false,
          deleteid:''
         }
   }
-  deletes=(id)=>{
-    this.setState({deleteid:id})
+  deletes=(id,Hid)=>{
+    this.setState({deleteid:id,deleteHid:Hid})
   }
   delete=()=>{
-    let api="http://134.209.153.34:5004/deleteUser?userid="+this.state.deleteid
-    axios.get(api)
+    let api="http://159.65.146.25:5053/deleteNurseHospital"
+    let jsn={
+      "ID":this.state.deleteid,
+      "Hospital_Id":this.state.deleteHid
+    }
+    axios.post(api,jsn)
   .then((response)=> {
     // handle success
   
@@ -418,7 +422,7 @@ isValid:true,emailError:false,
      
      let api="http://159.65.146.25:5053/updateNursemaster"
      let json={"ID":this.state.userid,"name":this.state.name
-     ,"mobile":1234567890,"Usertype_Id":3,"Hospital_Id":this.state.hospital_id,"password":this.state.password,"confirm_password":this.state.password,"Email":this.state.email,"Gender":gens}     
+     ,"mobile":this.state.mobile,"Usertype_Id":3,"Hospital_Id":this.state.hospital_id,"password":this.state.password,"confirm_password":this.state.password,"Email":this.state.email,"Gender":gens}     
      
     
    
@@ -437,7 +441,7 @@ isValid:true,emailError:false,
 
 
         }else{
-          alert("aa")
+        
           this.setState({err:response.data.result}) 
          
         }
@@ -738,7 +742,7 @@ isValid:true,emailError:false,
                                       <ul>
                                        
                                         <li onClick={()=>{this.edit(item)}}><i className="far fa-edit" /></li>
-                                        <li  onClick={()=>{this.deletes(item.userid)}} data-toggle="modal" data-target="#deleteModal">   <i className="far fa-trash-alt" /></li>
+                                        <li  onClick={()=>{this.deletes(item.ID,item.Hospital_Id)}} data-toggle="modal" data-target="#deleteModal">   <i className="far fa-trash-alt" /></li>
                                       </ul>
                                     </div>  
                                   </td>

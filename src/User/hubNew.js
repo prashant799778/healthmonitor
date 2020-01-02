@@ -280,7 +280,7 @@ alert("User Created Successfully")
 
 
         }else{
-          alert("aa")
+         
           this.setState({err:response.data.result}) 
          
         }
@@ -648,7 +648,7 @@ return (
                     <span aria-hidden="true">×</span>
                   </button>
                 </div>
-                <div className="modal-body">Select "Delete" below if you are ready to delete BD.</div>
+                <div className="modal-body">Select "Delete" below if you are ready to delete HUB.</div>
                 <div className="modal-footer">
                   <button className="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                   <a  style={{color:"#ffffff"}} data-dismiss="modal" className="btn btn-primary"  onClick={()=>{this.delete()}}>delete</a>

@@ -38,8 +38,12 @@ isValid:true,emailError:false,
     this.setState({deleteid:id})
   }
   delete=()=>{
-    let api="http://134.209.153.34:5004/deleteUser?userid="+this.state.deleteid
-    axios.get(api)
+    let api="http://159.65.146.25:5053/deleteHub"
+    let jsn={
+      "ID":this.state.deleteid,
+      
+    }
+    axios.post(api,jsn)
   .then((response)=> {
     // handle success
   
@@ -280,7 +284,7 @@ alert("User Created Successfully")
 
 
         }else{
-          alert("aa")
+         
           this.setState({err:response.data.result}) 
          
         }
@@ -504,7 +508,7 @@ return (
                         <li onClick={()=>{this.edit(item)}}>
                           <button type="button" className="act-button"><img src={require("./img/edit.svg")} /></button>
                         </li>
-                        <li  onClick={()=>{this.deletes(item.userid)}}>
+                        <li  onClick={()=>{this.deletes(item.ID)}} data-toggle="modal" data-target="#deleteModal">
                           <button type="button" className="act-button"><img src={require("./img/delete.svg")} /></button>
                         </li>
                       </ul>
@@ -576,7 +580,7 @@ return (
                                       <ul>
                                        
                                         <li onClick={()=>{this.edit(item)}}><i className="far fa-edit" /></li>
-                                        <li  onClick={()=>{this.deletes(item.userid)}} data-toggle="modal" data-target="#deleteModal">   <i className="far fa-trash-alt" /></li>
+                                        <li  onClick={()=>{this.deletes(item.ID)}} data-toggle="modal" data-target="#deleteModal">   <i className="far fa-trash-alt" /></li>
                                       </ul>
                                     </div> 
                                   </div> 
@@ -649,7 +653,7 @@ return (
                     <span aria-hidden="true">×</span>
                   </button>
                 </div>
-                <div className="modal-body">Select "Delete" below if you are ready to delete BD.</div>
+                <div className="modal-body">Select "Delete" below if you are ready to delete HUB.</div>
                 <div className="modal-footer">
                   <button className="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                   <a  style={{color:"#ffffff"}} data-dismiss="modal" className="btn btn-primary"  onClick={()=>{this.delete()}}>delete</a>

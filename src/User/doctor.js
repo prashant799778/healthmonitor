@@ -45,20 +45,26 @@ isValid:true,emailError:false,
          deleteid:''
         }
   }
-  deletes=(id)=>{
-    this.setState({deleteid:id})
+  deletes=(id,hid)=>{
+    this.setState({deleteid:id,deleteHid:hid})
   }
   delete=()=>{
-    let api="http://134.209.153.34:5004/deleteUser?userid="+this.state.deleteid
-    axios.get(api)
+
+    console.log("deleteId",this.state.deleteid+","+this.state.deleteHid)
+    let api="http://159.65.146.25:5053/deleteDoctorHospital"
+    let jsn={
+      "ID":this.state.deleteid,
+      "Hospital_Id":this.state.deleteHid
+    }
+    axios.post(api,jsn)
   .then((response)=> {
     // handle success
-  
+      
    
     if(response){
     
       if(response && response.data && response.data.status==="true"){
-      
+       
          this.callapi() 
       
       }else{
@@ -147,8 +153,11 @@ isValid:true,emailError:false,
 
 
        let hls=[];
-       if(item.hospital_name){
-       hls.push( item.hospital_name ) 
+       if(Array.isArray(item.totalHospitals)){
+        item.totalHospitals.map((itm,i)=>{
+          hls.push( itm.hospitalName ) 
+        })
+       
        }
     this.setState({
       isList:false,
@@ -240,16 +249,18 @@ isValid:true,emailError:false,
   }
       
 
-  getHospitals=()=>{
-       
-   
-
-
+  getHospitals=(id)=>{
+       let hub_id= this.state.hub_id;
+       if(id){
+        hub_id=id;
+       }
+    console.log("edit hospital")
+  
 
      let api="http://159.65.146.25:5053/hospitalMaster"
 
      let json={
-      "HubId":this.state.hub_id,
+      "HubId":hub_id,
      
     }
       axios.post(api,json)
@@ -304,7 +315,7 @@ isValid:true,emailError:false,
        
     this.setState({isList:true,isEdit:false})
 
-
+   console.log("delete after")
 
      let api="http://159.65.146.25:5053/allDoctor"
       axios.post(api)
@@ -418,25 +429,26 @@ hids.push(this.state. HListId[item])
     }
 
     updatetapi=()=>{
+
+      console.log("update doctor")
       let gens = this.state.gen;
       if(gens==3){
         gens=0
       }
+      let hids=[]  
+      this.state. Shospitals.map((item,i)=>{
+hids.push(this.state. HListId[item])
+      })     
+     let api="http://159.65.146.25:5053/updateDoctorMaster"
+     let json={"ID":this.state.userid,"name":this.state.name
+     ,"mobile":this.state.mobile,"Usertype_Id":2,"Hospital_Id": hids,"password":this.state.password,"confirm_password":this.state.password,"Email":this.state.email,"Gender":gens}     
      
-     let api="http://134.209.153.34:5004/edituser"
-     let json={
-       "username":this.state.name,
-       "email":this.state.email,
-       "password":this.state.pass,
-       "usertype":this.state.type,
-       "gender":gens,
-       "userid":this.state.userid
-     }
+    
    
       axios.post(api,json)
     .then((response)=> {
       // handle success
-        
+        console.log(response)  
      
       if(response){
        
@@ -448,7 +460,7 @@ hids.push(this.state. HListId[item])
 
 
         }else{
-          alert("aa")
+        
           this.setState({err:response.data.result}) 
          
         }
@@ -760,7 +772,7 @@ hids.push(this.state. HListId[item])
                                       <ul>
                                        
                                         <li onClick={()=>{this.edit(item)}}><i className="far fa-edit" /></li>
-                                        <li  onClick={()=>{this.deletes(item.userid)}} data-toggle="modal" data-target="#deleteModal">   <i className="far fa-trash-alt" /></li>
+                                        <li  onClick={()=>{this.deletes(item.ID,item.Hospital_Id)}} data-toggle="modal" data-target="#deleteModal">   <i className="far fa-trash-alt" /></li>
                                       </ul>
                                     </div>  
                                   </td>
@@ -819,7 +831,7 @@ hids.push(this.state. HListId[item])
                     <span aria-hidden="true">×</span>
                   </button>
                 </div>
-                <div className="modal-body">Select "Delete" below if you are ready to delete BD.</div>
+                <div className="modal-body">Select "Delete" below if you are ready to delete HUB.</div>
                 <div className="modal-footer">
                   <button className="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                   <a  style={{color:"#ffffff"}} data-dismiss="modal" className="btn btn-primary"  onClick={()=>{this.delete()}}>delete</a>
