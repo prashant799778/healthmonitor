@@ -1111,6 +1111,7 @@ def updateDoctorMaster():
             conn.commit()
             query2  = " insert into userHospitalMapping (userId,Usertype_Id,hospitalId)"
             query2 = query2 +" values('" + str(data["ID"])+ "','"+str('2')+"','"+str(i)+"');"
+            print(query2)
             conn=Connection()
             cursor = conn.cursor()
             cursor.execute(query2)
