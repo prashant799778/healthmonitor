@@ -1216,7 +1216,7 @@ def deleteHospital():
         json1=request.get_data() 
         data=json.loads(json1.decode("utf-8")) 
 
-        query1 = " Delete from Hospital_master where ID = '" + str(data["ID"])+ "' ;"
+        query1 = " Delete from Hospital_master where ID = '" + str(data["ID"])+ "'  and HubId='" + str(data["HubId"])+ "' ;"
         print(query1)
         conn=Connection()
         cursor = conn.cursor()
@@ -1224,6 +1224,62 @@ def deleteHospital():
         conn.commit()
         cursor.close()
         output = {"result":"Deleted Successfully","status":"true"}
+        return output  
+    except KeyError :
+        print("Key Exception---->")   
+        output = {"result":"key error","status":"false"}
+        return output  
+
+    except Exception as e :
+        print("Exception---->" +str(e))    
+        output = {"result":"somthing went wrong","status":"false"}
+        return output
+
+
+@app.route('/deleteHub', methods=['POST'])
+def deleteHub():
+    try:
+       
+        json1=request.get_data() 
+        data=json.loads(json1.decode("utf-8")) 
+
+        query1 = " Delete from HubMaster where ID = '" + str(data["ID"])+ "' ;"
+        print(query1)
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query1)
+        conn.commit()
+        cursor.close()
+        output = {"result":"Deleted Successfully","status":"true"}
+        return output  
+    except KeyError :
+        print("Key Exception---->")   
+        output = {"result":"key error","status":"false"}
+        return output  
+
+    except Exception as e :
+        print("Exception---->" +str(e))    
+        output = {"result":"somthing went wrong","status":"false"}
+        return output
+
+
+app.route('/patientDoctorUpdate', methods=['POST'])
+def patientDoctorUpdate():
+    try:
+       
+        json1=request.get_data() 
+        data=json.loads(json1.decode("utf-8")) 
+        print("yy")
+        
+        
+        query1 = " update patientDoctorMapping   set status='1' and  doctorId  = '" + str(data["DoctorID"])+ "'  where Patient_Id = '" + str(data["PatientId"])+ "'   ;"
+        print(query1)
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query1)
+        conn.commit()
+        cursor.close()
+        output = {"result":"Updated Successfully","status":"true"}
         return output  
     except KeyError :
         print("Key Exception---->")   
