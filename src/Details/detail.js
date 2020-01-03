@@ -176,9 +176,16 @@ class Detail extends React.Component{
    testAlert=(type,value)=>{
 
 
-    if(  type &&  value!="-- -- --" &&  value!="" && type.status=="true" && (type.lower>value || type.upper<value)  )
+    if(  type &&  value!="-- -- --" &&  value!="" && type.status=="true" && (type.lower>value)  )
       { return true;}
        return false;
+}
+testAlert1=(type,value)=>{
+
+
+  if(  type &&  value!="-- -- --" &&  value!="" && type.status=="true" && (type.upper<value)  )
+    { return true;}
+     return false;
 }
 
       render(){
@@ -189,27 +196,69 @@ class Detail extends React.Component{
 
 
         let isAlert=false;
+        let text=""
+        let textTemp:""
+        let textspo2:""
+        let textpulseRate:""
+        let textlowPressure:""
+        let texthighPressure:""
+        let textheartRate:""
+         
+        console.log("testspo",currentinnerItem.spo2+"---"+ this.state.spo2)
+       
+      if(this.testAlert(currentinnerItem.spo2,this.state.spo2)){
+         isAlert=true;
+         text= "patient Spo2 is  too low  !!"
+        }
+      
+        else if(this.testAlert1(currentinnerItem.spo2,this.state.spo2)){
+         
+          isAlert=true;
+          text= "patient Spo2 is  too high  !!"
 
-        if(this.testAlert(currentinnerItem.temperature,this.state.temp)){
-         isAlert=true;
-        }
-        else if(this.testAlert(currentinnerItem.spo2,this.state.spo2)){
-         isAlert=true;
-        }
+         }
         else if(this.testAlert(currentinnerItem.pulseRate,this.state.plsRate)){
          isAlert=true;
+         text= "patient Spo2 is  too low  !!"
         }
+        else if(this.testAlert1(currentinnerItem.pulseRate,this.state.plsRate)){
+          isAlert=true;
+          text= "patient Spo2 is  too  high  !!"
+         }
         else if(this.testAlert(currentinnerItem.lowPressure,this.state.nibp_low)){
          isAlert=true;
+         text= "patient Spo2 is  too low  !!"
         }
+        else if(this.testAlert1(currentinnerItem.lowPressure,this.state.nibp_low)){
+          isAlert=true;
+          text= "patient Spo2 is  too high  !!"
+         }
         else if(this.testAlert(currentinnerItem.highPressure,this.state.nibp_high)){
          isAlert=true;
+         text= "patient Spo2 is  too low  !!"
         }
+        else if(this.testAlert1(currentinnerItem.highPressure,this.state.nibp_high)){
+          isAlert=true;
+          
+          text= "patient Spo2 is  too high !!"
+        
+         }
         else if(this.testAlert(currentinnerItem.heartRate,this.state.heartRate)){
          isAlert=true;
-        }
+         text= "patient Spo2 is  too low  !!"
+        } else if(this.testAlert1(currentinnerItem.heartRate,this.state.heartRate)){
+          isAlert=true;
+          text= "patient Spo2 is  too  high  !!"
+         }else  if(this.testAlert(currentinnerItem.temperature,this.state.temp)){
+          isAlert=true;
+          text= "patient Temparature is too low  !!"
+         }else if(this.testAlert1(currentinnerItem.temperature,this.state.temp)){
+           isAlert=true;
+           text= "patient Temparature is too high  !!"
+          }
 
-
+   let filter=[];
+  
 
 
 
@@ -239,7 +288,7 @@ return(<DetailStyled>
               <div className="back-fl">
      {isAlert  &&  <div className="alrt-bx-txt">
         <img src={alertimg} className="imgaiert"/>
-      <h2 className="txt-hd">{this.state.alertText}</h2>
+      <h2 className="txt-hd">{text}</h2>
     </div>}
     </div>
                 <div className="patient-detail">
