@@ -513,13 +513,7 @@ def doctorLoginDashboard():
                 # j["pulseRate"]=json.loads(j["pulseRate"].replace("'",'"'))
                 # j["spo2"]=json.loads(j["spo2"].replace("'",'"'))
                 # j["temperature"]=json.loads(j["temperature"].replace("'",'"'))
-            for j in data2:
-                j["heartRate"]=json.loads(j["heartRate"])
-                j["highPressure"]=json.loads(j["highPressure"])
-                j["lowPressure"]=json.loads(j["lowPressure"])
-                j["pulseRate"]=json.loads(j["pulseRate"])
-                j["spo2"]=json.loads(j["spo2"])
-                j["temperature"]=json.loads(j["temperature"])
+            
                 
             i["patient_Details"]=data2
             i["total_patient"]=len(i["patient_Details"])
@@ -533,8 +527,8 @@ def doctorLoginDashboard():
         if data1:
             # data.append({"Total_hospital":len(data)})
             # data.append({"total_patient":total_patient})
-            return {"result":data1,"Total_hospital":len(data1),"total_patient":total_patient,"status":"true"}
-            #return json.loads(json.dumps(data))
+            data= {"result":data1,"Total_hospital":len(data1),"total_patient":total_patient,"status":"true"}
+            return json.loads(json.dumps(data))
            
         else:
             return {"result":"No Record Found","status":"true"}
