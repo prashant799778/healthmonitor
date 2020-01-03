@@ -1805,7 +1805,7 @@ def Patient_master():
         
         cursor.close()
         print("qqqqqqqqqqqqqqqqqqqqqqqqqqqqq",data9[-1])
-        print("zzzzzzzzzzzzzzzzzzzzzzzzzz",data9[-1]["spo2"])
+        print("zzzzzzzzzzzzzzzzzzzzzzzzzz",type(data9[-1]["spo2"]))
         data9[-1]["spo2"]=json.loads(data9[-1]["spo2"])
         data9[-1]["pulseRate"]=json.loads(data9[-1]["pulseRate"])
         data9[-1]["PatientName"]=json.loads(data9[-1]["PatientName"])
