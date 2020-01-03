@@ -1719,7 +1719,7 @@ def Patient_master():
          
         json1=request.get_data() 
         # data=json.loads(json1.decode("utf-8")) 
-        data=(json1.decode("utf-8"))
+        data=json.loads(json1.decode("utf-8"))
         print(data)    
         print("111111")
         print(type(data))
