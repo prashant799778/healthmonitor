@@ -1670,13 +1670,21 @@ def operationDashboard():
         
         json1=request.get_data()
         Data=json.loads(json1.decode("utf-8"))
-        query3 ="select  PM.PatientId as ID,PM.PatientName,PM.PhoneNo,Hbs.HubName,PM.Address,PM.BloodGroup,PM.DeviceMac,Hm.HubId,Hm.hospital_name as hospital_Name, "
+        query3 ="select  PM.PatientId as ID,,PM.PatientName,PM.PhoneNo,PM.heartRate,PM.spo2,PM.highPressure,PM.lowPressure,PM.pulseRate,PM.temperature,Hbs.HubName,PM.Address,PM.BloodGroup,PM.DeviceMac,Hm.HubId,Hm.hospital_name as hospital_Name, "
         query3=query3+" PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.age,PM.Gender,PM.roomNumber,pdm.DoctorID as DoctorID"
         query3= query3 + " from Patient_master  as PM ,patientDoctorMapping as pdm,Hospital_master as Hm,HubMaster as Hbs  where PM.hospitalId=Hm.ID  and  Hm.ID='"+str(Data["hospital_Id"])+"' and  Hm.HubId=Hbs.ID and  pdm.Patient_Id=PM.PatientId  and PM.Status<>'2'  Limit    " + str(Data["startlimit"]) + ", " + str(Data["endlimit"]) + " ;"
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query3)
         data= cursor.fetchall()
+        for j in data:
+            print("kkkkkkkkkkkkkkkkkkkkkkkkkk",j)
+            j["heartRate"]=json.loads(j["heartRate"])
+            j["highPressure"]=json.loads(j["highPressure"])
+            j["lowPressure"]=json.loads(j["lowPressure"])
+            j["pulseRate"]=json.loads(j["pulseRate"])
+            j["spo2"]=json.loads(j["spo2"])
+            j["temperature"]=json.loads(j["temperature"])
 
         query ="select  PM.PatientId as ID,PM.PatientName,PM.PhoneNo,Hbs.HubName,PM.Address,PM.BloodGroup,PM.DeviceMac,Hm.HubId,Hm.hospital_name as hospital_Name, "
         query=query+" PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.age,PM.Gender,PM.roomNumber,pdm.DoctorID as DoctorID"
@@ -1684,6 +1692,7 @@ def operationDashboard():
         
         cursor.execute(query)
         data9= cursor.fetchall()
+        print(data9)
         cursor.close()
 
         if data:
