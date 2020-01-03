@@ -513,13 +513,7 @@ def doctorLoginDashboard():
                 # j["pulseRate"]=json.loads(j["pulseRate"].replace("'",'"'))
                 # j["spo2"]=json.loads(j["spo2"].replace("'",'"'))
                 # j["temperature"]=json.loads(j["temperature"].replace("'",'"'))
-            for j in data2:
-                j["heartRate"]=json.loads(j["heartRate"])
-                j["highPressure"]=json.loads(j["highPressure"])
-                j["lowPressure"]=json.loads(j["lowPressure"])
-                j["pulseRate"]=json.loads(j["pulseRate"])
-                j["spo2"]=json.loads(j["spo2"])
-                j["temperature"]=json.loads(j["temperature"])
+            
                 
             i["patient_Details"]=data2
             i["total_patient"]=len(i["patient_Details"])
