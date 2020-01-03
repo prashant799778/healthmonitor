@@ -1720,7 +1720,8 @@ def Patient_master():
         json1=request.get_data() 
         print(json1)
         data=(json1.decode("utf-8"))
-        print(data)        
+        print(data)    
+        print("111111")
         query2  = " insert into Patient_master(PatientName,heartRate,spo2,pulseRate,highPressure,lowPressure,temperature,roomNumber,Gender,age,BloodGroup,DeviceMac,Bed_Number,Usertype_Id,hospitalId,startdate,usercreate)"
         query2 =query2 +" values('"+str(data["PatientName"])+"','"+str(data["heartRate"])+"','"
         query2=query2+str(data["spo2"])+"','"+str(data["pulseRate"])+"','"+str(data["highPressure"])+"','"
@@ -1731,6 +1732,7 @@ def Patient_master():
         query2=query2+str(int(data["Usertype_Id"]))+"','"+str(int(data["hospitalId"]))+"','"
         query2=query2+str(data["startdate"])+"','"+str(data["usercreate"])+"');"
         print(query2)
+        print("222222222222")
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query2)
