@@ -504,7 +504,15 @@ def doctorLoginDashboard():
             query2=query2+" and pdm.doctorId='"+str(i["ID"]) +"' and pm.hospitalId='"+str(i["HospitalId"])+"';"
             cursor.execute(query2)
             data2= cursor.fetchall()
-            
+            for j in data2:
+                print(j)
+                j["heartRate"]=json.loads(j["heartRate"])
+                j["highPressure"]=json.loads(j["highPressure"])
+                j["lowPressure"]=json.loads(j["lowPressure"])
+                j["pulseRate"]=json.loads(j["pulseRate"])
+                j["spo2"]=json.loads(j["spo2"])
+                j["temperature"]=json.loads(j["temperature"])
+                
             i["patient_Details"]=data2
             i["total_patient"]=len(i["patient_Details"])
             
