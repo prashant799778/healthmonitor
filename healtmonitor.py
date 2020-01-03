@@ -1726,9 +1726,9 @@ def Patient_master():
 
                
         query2  = " insert into Patient_master(PatientName,heartRate,spo2,pulseRate,highPressure,lowPressure,temperature,roomNumber,Gender,age,BloodGroup,DeviceMac,Bed_Number,Usertype_Id,hospitalId,startdate,usercreate)"
-        query2 =query2 +" values('"+str(data["PatientName"])+"',"+str(data["heartRate"])+","
-        query2=query2+str(data["spo2"])+","+str(data["pulseRate"])+","+str(data["highPressure"])+","
-        query2=query2+str(data["lowPressure"])+","+str(data["temperature"])+",'"
+        query2 =query2 +" values('"+str(data["PatientName"])+"','"+str(data["heartRate"])+"','"
+        query2=query2+str(data["spo2"])+"','"+str(data["pulseRate"])+"','"+str(data["highPressure"])+"','"
+        query2=query2+str(data["lowPressure"])+"','"+str(data["temperature"])+"','"
         query2=query2+(int(data["roomNumber"]))+"','"+(int(data["gender"]))+"','"
         query2=query2+(int(data["age"]))+"','"+str(data["BloodGroup"])+"','"
         query2=query2+str(data["DeviceMac"])+"','"+str(data["Bed_Number"])+"','"
