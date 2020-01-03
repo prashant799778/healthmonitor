@@ -2160,7 +2160,7 @@ def update():
         
         conn=Connection()
         cursor = conn.cursor()
-        for i in range(1,70):
+        for i in range(1,90):
             query = " update Patient_master set Bed_Number='"+str(i)+ "'where PatientId='"+str(i)+"';"
             print(query)
             
