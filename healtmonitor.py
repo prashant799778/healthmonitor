@@ -1723,17 +1723,32 @@ def Patient_master():
         print(data)    
         print("111111")
         print(data)
-
-               
+        spo2=data["spo2"]
+        pulseRate=data["pulseRate"]  
+        PatientName=data["PatientName"]
+        heartRate=data["heartRate"]
+        highPressure=data["highPressure"]
+        lowPressure=data["lowPressure"]
+        temperature=data["temperature"]
+        roomNumber=data["roomNumber"]
+        gender=data["gender"]
+        age=data["age"]
+        BloogGroup=data["BloodGroup"]
+        DeviceMac=data["DeviceMac"]
+        Bed_Number=data["Bed_Number"]
+        Usertype_Id=data["Usertype_Id"]
+        hospitalId=data["hospitalId"]
+        startdate=data["startdate"]
+        usercreate=data["usercreate"]
         query2  = " insert into Patient_master(PatientName,heartRate,spo2,pulseRate,highPressure,lowPressure,temperature,roomNumber,Gender,age,BloodGroup,DeviceMac,Bed_Number,Usertype_Id,hospitalId,startdate,usercreate)"
-        query2 =query2 +" values('"+str(data["PatientName"])+"','"+str(data["heartRate"])+"','"
-        query2=query2+str(data["spo2"])+"','"+str(data["pulseRate"])+"','"+str(data["highPressure"])+"','"
-        query2=query2+str(data["lowPressure"])+"','"+str(data["temperature"])+"','"
-        query2=query2+(int(data["roomNumber"]))+"','"+(int(data["gender"]))+"','"
-        query2=query2+(int(data["age"]))+"','"+str(data["BloodGroup"])+"','"
-        query2=query2+str(data["DeviceMac"])+"','"+str(data["Bed_Number"])+"','"
-        query2=query2+(int(data["Usertype_Id"]))+"','"+(int(data["hospitalId"]))+"','"
-        query2=query2+str(data["startdate"])+"','"+str(data["usercreate"])+"');"
+        query2 =query2 +" values('"+str(PatientName)+"','"+str(heartRate)+"','"
+        query2=query2+str(spo2)+"','"+str(pulseRate)+"','"+str(highPressure)+"','"
+        query2=query2+str(lowPressure)+"','"+str(temperature)+"','"
+        query2=query2+str(roomNumber)+"','"+str(gender)+"','"
+        query2=query2+str(age)+"','"+str(BloogGroup)+"','"
+        query2=query2+str(DeviceMac)+"','"+str(Bed_Number)+"','"
+        query2=query2+str(Usertype_Id)+"','"+(hospitalId)+"','"
+        query2=query2+str(startdate)+"','"+str(usercreate)+"');"
         print(query2)
         print("222222222222")
         conn=Connection()
