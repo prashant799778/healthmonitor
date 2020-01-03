@@ -33,7 +33,7 @@ class Detail extends React.Component{
           client1 :"",
 
           isAlert:false,
-          alertText:"patient bP is low  !!"
+          alertText:"patient Temparature is low  !!"
     
       }
     
@@ -173,13 +173,46 @@ class Detail extends React.Component{
    }
 
 
- 
+   testAlert=(type,value)=>{
+
+
+    if(  type &&  value!="-- -- --" &&  value!="" && type.status=="true" && (type.lower>value || type.upper<value)  )
+      { return true;}
+       return false;
+}
 
       render(){
 
         let currentinnerItem=this.props.currentinnerItem  ;
          let currentItem = this.props.currentItem
         //console.log("detail",item)
+
+
+        let isAlert=false;
+
+        if(this.testAlert(currentinnerItem.temperature,this.state.temp)){
+         isAlert=true;
+        }
+        else if(this.testAlert(currentinnerItem.spo2,this.state.spo2)){
+         isAlert=true;
+        }
+        else if(this.testAlert(currentinnerItem.pulseRate,this.state.plsRate)){
+         isAlert=true;
+        }
+        else if(this.testAlert(currentinnerItem.lowPressure,this.state.nibp_low)){
+         isAlert=true;
+        }
+        else if(this.testAlert(currentinnerItem.highPressure,this.state.nibp_high)){
+         isAlert=true;
+        }
+        else if(this.testAlert(currentinnerItem.heartRate,this.state.heartRate)){
+         isAlert=true;
+        }
+
+
+
+
+
 return(<DetailStyled>
     
     <div className="container-box innr-card-bg-color ">
@@ -204,7 +237,7 @@ return(<DetailStyled>
       
       }} >
               <div className="back-fl">
-     {this.state.isAlert  &&  <div className="alrt-bx-txt">
+     {isAlert  &&  <div className="alrt-bx-txt">
         <img src={alertimg} className="imgaiert"/>
       <h2 className="txt-hd">{this.state.alertText}</h2>
     </div>}

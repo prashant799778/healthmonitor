@@ -30,13 +30,56 @@ currentTopic:"",
 currentinnerItem:"",
 currentItem:"" ,
   client:"",
-  isDetail:false
+  isDetail:false,
+  activePage:1,
+  paitentList:[],
+  total:0,
+
+   per_page:12,
     }}
     MessageContainer=""
     // 159.65.146.25
+
+    handlePageChange=(pageNumber) =>{
+      console.log(`active page is ${pageNumber}`);
+      this.setState({activePage: pageNumber},()=>{
+          this.callApiNew(pageNumber)
+
+      });
+    }
+
+
+    callApiNew=(page_no) => {
+      this.setState({paitentList:""})
+      let jsons={
+    "hospital_Id":1,
+      "startlimit":((this.state.per_page*page_no) -this.state.per_page)+1,
+      "endlimit":this.state.per_page
+      }
+      axios
+        .post(
+          `http://159.65.146.25:5053/operationDashboard`, jsons
+        )
+        .then(res => {
+  
+          console.log("dashboardNew",res)
+          if (res && res.data && res.data.status=="true") {
+  
+   this.setState({  paitentList:res.data.result,total:res.data.total_patient})
+   
+  
+
+        
+         
+  
+  
+          }
+        })
+        .catch(e => console.log(e));
+    }
     componentDidMount() {
      
-    
+     this.callApiNew(this.state.activePage)
 
 
     }
@@ -135,7 +178,7 @@ currentItem:"" ,
       
 
   
- <MainCard  Click={(event,item,innerItem)=>this.handleClick(event,item,innerItem)}  ></MainCard>
+ <MainCard  paitentList={this.state.paitentList} activePage={this.state.activePage}  total={this.state.total} per_page={this.state.per_page} handlePageChange={this.handlePageChange} Click={(event,item,innerItem)=>this.handleClick(event,item,innerItem)}  ></MainCard>
   
   
   

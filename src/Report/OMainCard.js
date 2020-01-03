@@ -17,7 +17,7 @@ class MainCard extends React.Component {
     total:0,
      start:0,
      end:16,
-     per_page:16,
+     per_page:12,
      activePage:1,
      client:""
  }
@@ -45,44 +45,12 @@ class MainCard extends React.Component {
     //           console.log("Omessage","Omessage on con client");
     //         })
 
-        this.callApiNew(1)
+       
     }
 
-    callApiNew=(page_no) => {
-        let jsons={
-      "hospital_Id":1,
-        "startlimit":((this.state.per_page*page_no) -this.state.per_page)+1,
-        "endlimit":this.state.per_page
-        }
-        axios
-          .post(
-            `http://159.65.146.25:5053/operationDashboard`, jsons
-          )
-          .then(res => {
-    
-            console.log("dashboardNew",res)
-            if (res && res.data && res.data.status=="true") {
-    
-     this.setState({  paitentList:res.data.result,total:res.data.total_patient})
-     
-    
   
-          
-           
-    
-    
-            }
-          })
-          .catch(e => console.log(e));
-      }
 
-    handlePageChange=(pageNumber) =>{
-        console.log(`active page is ${pageNumber}`);
-        this.setState({activePage: pageNumber},()=>{
-            this.callApiNew(pageNumber)
-
-        });
-      }
+    
 
 
 componentWillReceiveProps(){
@@ -97,9 +65,18 @@ componentWillReceiveProps(){
        
 return(
      < React.Fragment>
+        <div className="nxt-pre-btn"> 
+        <Pagination
+          activePage={this.props.activePage}
+          itemsCountPerPage={this.props.per_page}
+          totalItemsCount={this.props.total}
+          pageRangeDisplayed={5}
+          onChange={this.props.handlePageChange}
+        />
+          </div>
       <div class="new-box-add">
-    {Array.isArray(this.state. paitentList) && this.state. paitentList.map((innerItem,j)=>{
-  
+    {Array.isArray(this.props. paitentList) && this.props. paitentList.map((innerItem,j)=>{
+         
   let ids=innerItem.ID 
         return(
         
@@ -110,15 +87,7 @@ return(
         );
                 })}
                 </div>
-        <div className="nxt-pre-btn"> 
-        <Pagination
-          activePage={this.state.activePage}
-          itemsCountPerPage={this.state.per_page}
-          totalItemsCount={this.state.total}
-          pageRangeDisplayed={5}
-          onChange={this.handlePageChange}
-        />
-          </div>
+     
 
 
 </React.Fragment>

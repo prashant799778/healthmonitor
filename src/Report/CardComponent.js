@@ -35,8 +35,8 @@ class CardComponent extends React.Component {
       
       
        componentDidMount() {
-        console.log("Omessage0",this.props.ids)
-         
+        
+        console.log("Omessagep",this.props.ids)
            let  Omqtt1 = require('mqtt')
            let  Oclient1  = Omqtt1.connect('ws://139.59.78.54:9001')
          
@@ -135,21 +135,25 @@ class CardComponent extends React.Component {
 
 
            if(  type &&  value!="-- --" &&  value!="" && type.status=="true" && (type.lower>value || type.upper<value)  )
-             { return true;}
+             { 
+                 
+              return true;}
               return false;
       }
     
     render(){
-        
+      
+
         
        let item=this.props.item;
 
-      
+        let text=""
 
        let isAlert=false;
 
        if(this.testAlert(item.temperature,this.state.temp)){
         isAlert=true;
+         
        }
        else if(this.testAlert(item.spo2,this.state.spo2)){
         isAlert=true;
@@ -168,7 +172,7 @@ class CardComponent extends React.Component {
        }
      
 
-
+    console.log("item",item)
 
         return(
           
@@ -177,6 +181,7 @@ class CardComponent extends React.Component {
       
             <div class="card-hading-box border-bottomm">
               <h2 class="text-hading">{item.PatientName}</h2>
+              <h2 class="text-hading">{item.Bed_Number}</h2>
               <div className="alrt-bx">
         {isAlert &&    <img style={{cursor:'pointer'}} src={require("./img/alert.gif")}/>   }
               {/* <div className="blink-efc"></div> */}
