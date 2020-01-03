@@ -1804,6 +1804,13 @@ def Patient_master():
                 conn.commit()
         
         cursor.close()
+        data9[-1]["spo2"]=json.loads(data9[-1]["spo2"])
+        data9[-1]["pulseRate"]=json.loads(data9[-1]["pulseRate"])
+        data9[-1]["PatientName"]=json.loads(data9[-1]["PatientName"])
+        data9[-1]["heartRate"]=json.loads(data9[-1]["heartRate"])
+        data9[-1]["highPressure"]=json.loads(data9[-1]["highPressure"])
+        data9[-1]["lowPressure"]=json.loads(data9[-1]["lowPressure"])
+        data9[-1]["temperature"]=json.loads(data9[-1]["temperature"])
         print("data9999999999999999999999",data9[-1])
         output={"output": "Patient Added succesfully","Patient Details":data9[-1],"status":"true"}
         
