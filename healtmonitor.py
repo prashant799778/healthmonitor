@@ -1698,7 +1698,7 @@ def operationDashboard():
         data9= cursor.fetchall()
       
         cursor.close()
-
+        
         if data:
             return {"result":data,"status":"true","total_patient":len(data9)}
         else:
@@ -2147,6 +2147,32 @@ def doctorProfile():
         # print("Exception---->" +str(e))    
         # output = {"result":"somthing went wrong","status":"false"}
         # return output
+@app.route('/update', methods=['POST'])
+def update():
+    try:
+       
+        
+        conn=Connection()
+        cursor = conn.cursor()
+        for i in range(1,70):
+            query = " update Patient_master set Bed_Number='"+str(i)+ "'where PatientId='"+str(i)+"';"
+            print(query)
+            
+            cursor.execute(query)
+            
+            conn.commit()
+        cursor.close()
+        
+        return "ok"  
+     
+
+    except Exception as e :
+        print("Exception---->" +str(e))    
+        output = {"result":"somthing went wrong","status":"false"}
+        return output
+
+
+
  
 if __name__ == "__main__":
     CORS(app, support_credentials=True)
