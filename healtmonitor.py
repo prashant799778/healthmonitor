@@ -1904,8 +1904,9 @@ def update_Patient_type():
        
         
 
-        print("yy")
-        query1 = " update Patient_master set  PatientName ='" + str(PatientName) + "' ,spo2='" + str(spo2) + "',heartRate='" + str(heartRate) + "',highPressure='" + str(highPressure) + "',lowPressure='" + str(lowPressure) + "',pulseRate='" + str(pulseRate) + "',temperature='" + str(temperature) + "' ,DeviceMac ='" + str(DeviceMac) + "' , Bed_Number = '" + str(Bed_Number) + "', Usertype_Id = '" + str(Usertype_Id) + "' , hospitalId ='" + str(data["hospitalId"]) + "'    where PatientId = '" + str(data["PatientId"])+ "' and Status= '2' ;"
+       
+       
+        query1 = " update Patient_master set  spo2='" + str(spo2) + "',heartRate='" + str(heartRate) + "',highPressure='" + str(highPressure) + "',lowPressure='" + str(lowPressure) + "',pulseRate='" + str(pulseRate) + "',temperature='" + str(temperature) + "'   where PatientId = '" + str(data["PatientId"])+ "' and Status<>'2' ;"
         print(query1)
         conn=Connection()
         cursor = conn.cursor()
