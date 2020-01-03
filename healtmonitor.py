@@ -1804,7 +1804,7 @@ def Patient_master():
                 conn.commit()
         
         cursor.close()
-        print("data9999999999999999999999",data9)
+        print("data9999999999999999999999",data9[-1])
         output={"output": "Patient Added succesfully","Patient Details":data9[-1],"status":"true"}
         
     except Exception as e :
