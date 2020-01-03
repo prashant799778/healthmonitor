@@ -1741,14 +1741,10 @@ def Patient_master():
         startdate=data["startdate"]
         usercreate=data["usercreate"]
         query2  = " insert into Patient_master(PatientName,heartRate,spo2,pulseRate,highPressure,lowPressure,temperature,roomNumber,Gender,age,BloodGroup,DeviceMac,Bed_Number,Usertype_Id,hospitalId,startdate,usercreate)"
-        query2 =query2 +" values('"+str(PatientName)+"','"+str(heartRate)+"','"
-        query2=query2+str(spo2)+"','"+str(pulseRate)+"','"+str(highPressure)+"','"
-        query2=query2+str(lowPressure)+"','"+str(temperature)+"','"
-        query2=query2+str(roomNumber)+"','"+str(gender)+"','"
-        query2=query2+str(age)+"','"+str(BloogGroup)+"','"
-        query2=query2+str(DeviceMac)+"','"+str(Bed_Number)+"','"
-        query2=query2+str(Usertype_Id)+"','"+(hospitalId)+"','"
-        query2=query2+str(startdate)+"','"+str(usercreate)+"');"
+        query2 =query2 +" values('"+str(PatientName)+"','"+str(heartRate)+"','"+str(spo2)+"','"+str(pulseRate)+"','"+str(highPressure)+"','"+
+        query2=query2+str(lowPressure)+"','"+str(temperature)+"','"+str(roomNumber)+"','"+str(gender)+"','"+str(age)+"','"+str(BloogGroup)+"','"
+        query2=query2+str(DeviceMac)+"','"+str(Bed_Number)+"','"+str(Usertype_Id)+"','"+(hospitalId)+"','"+str(startdate)+"','"+str(usercreate)+"');"
+        
         print(query2)
         print("222222222222")
         conn=Connection()
