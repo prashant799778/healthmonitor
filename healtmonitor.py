@@ -513,6 +513,13 @@ def doctorLoginDashboard():
                 # j["pulseRate"]=json.loads(j["pulseRate"].replace("'",'"'))
                 # j["spo2"]=json.loads(j["spo2"].replace("'",'"'))
                 # j["temperature"]=json.loads(j["temperature"].replace("'",'"'))
+            for j in data2:
+                j["heartRate"]=json.loads(j["heartRate"])
+                j["highPressure"]=json.loads(j["highPressure"])
+                j["lowPressure"]=json.loads(j["lowPressure"])
+                j["pulseRate"]=json.loads(j["pulseRate"])
+                j["spo2"]=json.loads(j["spo2"])
+                j["temperature"]=json.loads(j["temperature"])
                 
             i["patient_Details"]=data2
             i["total_patient"]=len(i["patient_Details"])
@@ -528,6 +535,7 @@ def doctorLoginDashboard():
             # data.append({"total_patient":total_patient})
             return {"result":data1,"Total_hospital":len(data1),"total_patient":total_patient,"status":"true"}
             #return json.loads(json.dumps(data))
+           
         else:
             return {"result":"No Record Found","status":"true"}
     
@@ -1671,17 +1679,34 @@ def operationDashboard():
         
         json1=request.get_data()
         Data=json.loads(json1.decode("utf-8"))
-        query3 ="select  PM.PatientId as ID,PM.PatientName,PM.PhoneNo,Hbs.HubName,PM.Address,PM.BloodGroup,PM.DeviceMac,Hm.HubId,Hm.hospital_name as hospital_Name , "
+
+        query3 ="select  PM.PatientId as ID,PM.PatientName,PM.PhoneNo,PM.heartRate,PM.spo2,PM.highPressure,PM.lowPressure,PM.pulseRate,PM.temperature,Hbs.HubName,PM.Address,PM.BloodGroup,PM.DeviceMac,Hm.HubId,Hm.hospital_name as hospital_Name, "
         query3=query3+" PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.age,PM.Gender,PM.roomNumber,pdm.DoctorID as DoctorID"
         query3= query3 + " from Patient_master  as PM ,patientDoctorMapping as pdm,Hospital_master as Hm,HubMaster as Hbs  where PM.hospitalId=Hm.ID  and  Hm.ID='"+str(Data["hospital_Id"])+"' and  Hm.HubId=Hbs.ID and  pdm.Patient_Id=PM.PatientId  and PM.Status<>'2'  Limit    " + str(Data["startlimit"]) + ", " + str(Data["endlimit"]) + " ;"
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query3)
         data= cursor.fetchall()
+
+        for j in data:
+            j["heartRate"]=json.loads(j["heartRate"]).replace("'",'"')
+            j["highPressure"]=json.loads(j["highPressure"]).replace("'",'"')
+            j["lowPressure"]=json.loads(j["lowPressure"]).replace("'",'"')
+            j["pulseRate"]=json.loads(j["pulseRate"]).replace("'",'"')
+            j["spo2"]=json.loads(j["spo2"]).replace("'",'"')
+            j["temperature"]=json.loads(j["temperature"]).replace("'",'"')
+
+        query ="select  PM.PatientId as ID,PM.PatientName,PM.PhoneNo,Hbs.HubName,PM.Address,PM.BloodGroup,PM.DeviceMac,Hm.HubId,Hm.hospital_name as hospital_Name, "
+        query=query+" PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.age,PM.Gender,PM.roomNumber,pdm.DoctorID as DoctorID"
+        query= query + " from Patient_master  as PM ,patientDoctorMapping as pdm,Hospital_master as Hm,HubMaster as Hbs  where PM.hospitalId=Hm.ID  and  Hm.ID='"+str(Data["hospital_Id"])+"' and  Hm.HubId=Hbs.ID and  pdm.Patient_Id=PM.PatientId  and PM.Status<>'2' ;"
+        print(query)
+        cursor.execute(query)
+        data9= cursor.fetchall()
+      
         cursor.close()
 
         if data:
-            return {"result":data,"status":"true"}
+            return {"result":data,"status":"true","total_patient":data9}
         else:
             return {"result":"No Record Found","status":"true"}
     
