@@ -1700,7 +1700,7 @@ def operationDashboard():
         cursor.close()
 
         if data:
-            return {"result":data,"status":"true","total_patient":data9}
+            return {"result":data,"status":"true","total_patient":len(data9)}
         else:
             return {"result":"No Record Found","status":"true"}
     
