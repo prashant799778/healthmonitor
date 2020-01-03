@@ -1722,7 +1722,7 @@ def Patient_master():
         data=json.loads(json1.decode("utf-8"))
         print(data)    
         print("111111")
-        print(type(data)
+        print(type(data))
         spo2=data["spo2"]
         pulseRate=data["pulseRate"]  
         PatientName=data["PatientName"]
