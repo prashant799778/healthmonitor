@@ -1683,12 +1683,12 @@ def operationDashboard():
         data= cursor.fetchall()
 
         for j in data:
-            j["heartRate"]=json.loads(j["heartRate"]).replace("'",'"')
-            j["highPressure"]=json.loads(j["highPressure"]).replace("'",'"')
-            j["lowPressure"]=json.loads(j["lowPressure"]).replace("'",'"')
-            j["pulseRate"]=json.loads(j["pulseRate"]).replace("'",'"')
-            j["spo2"]=json.loads(j["spo2"]).replace("'",'"')
-            j["temperature"]=json.loads(j["temperature"]).replace("'",'"')
+            j["heartRate"]=json.loads(j["heartRate"].replace("'",'"'))
+            j["highPressure"]=json.loads(j["highPressure"].replace("'",'"'))
+            j["lowPressure"]=json.loads(j["lowPressure"].replace("'",'"'))
+            j["pulseRate"]=json.loads(j["pulseRate"].replace("'",'"'))
+            j["spo2"]=json.loads(j["spo2"].replace("'",'"'))
+            j["temperature"]=json.loads(j["temperature"].replace("'",'"'))
 
         query ="select  PM.PatientId as ID,PM.PatientName,PM.PhoneNo,Hbs.HubName,PM.Address,PM.BloodGroup,PM.DeviceMac,Hm.HubId,Hm.hospital_name as hospital_Name, "
         query=query+" PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.age,PM.Gender,PM.roomNumber,pdm.DoctorID as DoctorID"
