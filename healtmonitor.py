@@ -1804,6 +1804,8 @@ def Patient_master():
                 conn.commit()
         
         cursor.close()
+        print("qqqqqqqqqqqqqqqqqqqqqqqqqqqqq",data9)
+        print("zzzzzzzzzzzzzzzzzzzzzzzzzz",data9[-1]["spo2"])
         data9[-1]["spo2"]=json.loads(data9[-1]["spo2"])
         data9[-1]["pulseRate"]=json.loads(data9[-1]["pulseRate"])
         data9[-1]["PatientName"]=json.loads(data9[-1]["PatientName"])
