@@ -142,7 +142,7 @@ def login88881():
                 DeviceMac=request.args["DeviceMac"]
 
             if DeviceMac != "":
-                query3 ="select  PM.PatientId as PatientId,PM.PatientName,PM.heartRate,PM.spo2,PM.highPressure,PM.lowPressure,PM.pulseRate,PM.temperature,PM.PhoneNo,PM.Address,PM.BloodGroup,PM.DeviceMac,Hm.HubId,Hm.hospital_name  as hospital_Name,"
+                query3 ="select  PM.PatientId as PatientId,PM.PatientNamePM.PhoneNo,PM.Address,PM.hospitalId as Hospital_Id,PM.BloodGroup,PM.DeviceMac,Hm.HubId,Hm.hospital_name  as hospital_Name,"
                 query3=query3+" PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.age,PM.Gender,PM.roomNumber,pdm.DoctorID as DoctorID"
                 query3= query3+ "  from userMaster as um,Patient_master as PM,patientDoctorMapping as pdm,Hospital_master as Hm,HubMaster as Hbs  where pdm.doctorId=um.ID and  PM.hospitalId=Hm.ID and Hm.HubId=Hbs.ID and  pdm.Patient_Id=PM.PatientId  and PM.Status<>'2'  and PM.Usertype_Id='" + str(y3) + "' and PM.DeviceMac='"+str(DeviceMac)+ "'  ORDER BY  PatientId DESC ;"
                 print(query3)
@@ -1878,23 +1878,34 @@ def Patient_master_select():
 
 
 
-@app.route('/update_Patient_master', methods=['POST'])
+@app.route('/updatePatientmaster', methods=['POST'])
 def update_Patient_type():
     try:
        
         json1=request.get_data() 
         data=json.loads(json1.decode("utf-8")) 
-        query2= "select * from Patient_master where Status<>'2'  and PatientId = '" + str(data["PatientId"])+ "' "
-        conn=Connection()
-        cursor = conn.cursor()
-        cursor.execute(query2)
-        data=cursor.fetchall()
-        print("prahhhhhhhhhhhhhhhhh",type(data))
-        conn.commit()
-        cursor.close()
+        spo2=str(data["spo2"]).replace("'",'"')
+        pulseRate=str(data["pulseRate"]) .replace("'",'"')
+        PatientName=data["PatientName"]
+        heartRate=str(data["heartRate"]).replace("'",'"')
+        print(heartRate)
+        highPressure=str(data["highPressure"]).replace("'",'"')
+        lowPressure=str(data["lowPressure"]).replace("'",'"')
+        temperature=str(data["temperature"]).replace("'",'"')
+        roomNumber=data["roomNumber"]
+        gender=data["gender"]
+        age=data["age"]
+        BloogGroup=data["BloodGroup"]
+        DeviceMac=data["DeviceMac"]
+        Bed_Number=data["Bed_Number"]
+        Usertype_Id=data["Usertype_Id"]
+        hospitalId=data["hospitalId"]
+       
+       
+        
 
         print("yy")
-        query1 = " update Patient_master set  PatientName ='" + str(data["PatientName"]) + "' , DeviceMac ='" + str(data["DeviceMac"]) + "' , Bed_Number = '" + str(data["Bed_Number"]) + "', Usertype_Id = '" + str(data["Usertype_Id"]) + "' , hospital_Name ='" + str(data["hospital_Name"]) + "' , startdate='" + str(data["startdate"]) + "', enddate = '" + str(data["enddate"]) + "'  ,  UserUpdate ='" + str(data["UserUpdate"]) + "'  where PatientId = '" + str(data["PatientId"])+ "' and Status= '2' ;"
+        query1 = " update Patient_master set  PatientName ='" + str(PatientName) + "' ,spo2='" + str(spo2) + "',heartRate='" + str(heartRate) + "',highPressure='" + str(highPressure) + "',lowPressure='" + str(lowPressure) + "',pulseRate='" + str(pulseRate) + "',temperature='" + str(temperature) + "' ,DeviceMac ='" + str(DeviceMac) + "' , Bed_Number = '" + str(Bed_Number) + "', Usertype_Id = '" + str(Usertype_Id) + "' , hospitalId ='" + str(data["hospitalId"]) + "'    where PatientId = '" + str(data["PatientId"])+ "' and Status= '2' ;"
         print(query1)
         conn=Connection()
         cursor = conn.cursor()
