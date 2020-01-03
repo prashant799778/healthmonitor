@@ -504,15 +504,15 @@ def doctorLoginDashboard():
             query2=query2+" and pdm.doctorId='"+str(i["ID"]) +"' and pm.hospitalId='"+str(i["HospitalId"])+"';"
             cursor.execute(query2)
             data2= cursor.fetchall()
-            # for j in data2:
+            for j in data2:
                 
-                # j["heartRate"]=json.loads(j["heartRate"].replace("'",'"'))
-                # print('j["heartRate"]',j["heartRate"])
-                # j["highPressure"]=json.loads(j["highPressure"].replace("'",'"'))
-                # j["lowPressure"]=json.loads(j["lowPressure"].replace("'",'"'))
-                # j["pulseRate"]=json.loads(j["pulseRate"].replace("'",'"'))
-                # j["spo2"]=json.loads(j["spo2"].replace("'",'"'))
-                # j["temperature"]=json.loads(j["temperature"].replace("'",'"'))
+                j["heartRate"]=json.loads(j["heartRate"].replace("'",'"'))
+                print('j["heartRate"]',j["heartRate"])
+                j["highPressure"]=json.loads(j["highPressure"].replace("'",'"'))
+                j["lowPressure"]=json.loads(j["lowPressure"].replace("'",'"'))
+                j["pulseRate"]=json.loads(j["pulseRate"].replace("'",'"'))
+                j["spo2"]=json.loads(j["spo2"].replace("'",'"'))
+                j["temperature"]=json.loads(j["temperature"].replace("'",'"'))
             
                 
             i["patient_Details"]=data2
