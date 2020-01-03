@@ -505,7 +505,6 @@ def doctorLoginDashboard():
             cursor.execute(query2)
             data2= cursor.fetchall()
             for j in data2:
-                print("kkkkkkkkkkkkkkkkkkkkkkkkkk",j)
                 j["heartRate"]=json.loads(j["heartRate"])
                 j["highPressure"]=json.loads(j["highPressure"])
                 j["lowPressure"]=json.loads(j["lowPressure"])
@@ -526,7 +525,7 @@ def doctorLoginDashboard():
             # data.append({"Total_hospital":len(data)})
             # data.append({"total_patient":total_patient})
             return {"result":data1,"Total_hospital":len(data1),"total_patient":total_patient,"status":"true"}
-             
+           
         else:
             return {"result":"No Record Found","status":"true"}
     
@@ -1670,6 +1669,7 @@ def operationDashboard():
         
         json1=request.get_data()
         Data=json.loads(json1.decode("utf-8"))
+
         query3 ="select  PM.PatientId as ID,,PM.PatientName,PM.PhoneNo,PM.heartRate,PM.spo2,PM.highPressure,PM.lowPressure,PM.pulseRate,PM.temperature,Hbs.HubName,PM.Address,PM.BloodGroup,PM.DeviceMac,Hm.HubId,Hm.hospital_name as hospital_Name, "
         query3=query3+" PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.age,PM.Gender,PM.roomNumber,pdm.DoctorID as DoctorID"
         query3= query3 + " from Patient_master  as PM ,patientDoctorMapping as pdm,Hospital_master as Hm,HubMaster as Hbs  where PM.hospitalId=Hm.ID  and  Hm.ID='"+str(Data["hospital_Id"])+"' and  Hm.HubId=Hbs.ID and  pdm.Patient_Id=PM.PatientId  and PM.Status<>'2'  Limit    " + str(Data["startlimit"]) + ", " + str(Data["endlimit"]) + " ;"
@@ -1677,8 +1677,8 @@ def operationDashboard():
         cursor = conn.cursor()
         cursor.execute(query3)
         data= cursor.fetchall()
+
         for j in data:
-            print("kkkkkkkkkkkkkkkkkkkkkkkkkk",j)
             j["heartRate"]=json.loads(j["heartRate"])
             j["highPressure"]=json.loads(j["highPressure"])
             j["lowPressure"]=json.loads(j["lowPressure"])
@@ -1692,11 +1692,11 @@ def operationDashboard():
         
         cursor.execute(query)
         data9= cursor.fetchall()
-        print(data9)
+      
         cursor.close()
 
         if data:
-            return {"result":data,"total_patient":len(data9),"status":"true"}
+            return {"result":data,"status":"true"}
         else:
             return {"result":"No Record Found","status":"true"}
     
