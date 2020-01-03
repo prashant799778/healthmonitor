@@ -122,6 +122,20 @@ def login88881():
                     cursor.execute(query2)
                     Nurse=cursor.fetchone()
                     print("Operation",Nurse)
+
+                if  d["Usertype"]== 'HubDoctor':
+                    Nurse=[]
+                    query= "select hubId as HubId from userHubMapping where   userId= '" + str(y9) + "' "
+                    cursor = conn.cursor()
+                    cursor.execute(query)
+                    Nur = cursor.fetchall()
+                    print(Nur)
+                    for i in Nur:
+                        query2 = " select hm.ID as Hospital_Id,hm.hospital_name,hm.HubId as HubId,Hbs.HubName as HubName,um.ID as DoctorID,um.name as DoctorName,um.Email as Email,um.Gender,um.mobile from userMaster as um ,userHospitalMapping  as mpum,HubMaster as Hbs,Hospital_master as hm  where  mpum.userId=um.ID and mpum.hospitalId=hm.ID and  hm.HubId=Hbs.ID  and  um.Usertype_Id=2    and hm.HubId = '" + str(i["HubId"]) + "';"
+                        print(query2)
+                        cursor = conn.cursor()
+                        cursor.execute(query2)
+                        Nurse = cursor.fetchall()
             
             DeviceMac,y9 = " ", ""
             if 'DeviceMac' in request.args:
@@ -307,6 +321,114 @@ def allPatient():
         output = {"result":"something went wrong","status":"false"}
         return output
 
+@app.route('/hubLoginHospital', methods=['post'])
+def hubLoginHospital():
+    try:
+        json1=request.get_data()
+        Data=json.loads(json1.decode("utf-8"))
+
+        query="select Hospital_master.ID,Hospital_master.hospital_name,Hospital_master.Address,"
+        query=query+"HubMaster.HubName,HubMaster.ID as HubId  from Hospital_master inner join HubMaster on Hospital_master.HubId=HubMaster.ID where Hospital_master.HubId='"+str(Data["HubId"])+"'  order by Hospital_master.ID DESC;"
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data= cursor.fetchall()
+        
+        
+        for i in data:
+            query1="select count(*) as count from userHospitalMapping where  Usertype_Id=2 and  hospitalId='"+str(i["ID"])+"';" 
+            
+            cursor.execute(query1)
+            data1 = cursor.fetchall()
+            
+            i["total_doctor"]=data1[0]["count"]
+            query2="select um.ID as ID,mpum.hospitalId as hospitalId  from userMaster as um ,userHospitalMapping  as mpum,HubMaster as Hbs,Hospital_master as hm  where  mpum.userId=um.ID and mpum.hospitalId=hm.ID and  hm.HubId=Hbs.ID  and  um.Usertype_Id=2  and  hm.ID='"+str(i["ID"])+"';"
+            print(query2)
+            cursor.execute(query2)
+            data2 = cursor.fetchall()
+            print(data2)
+            count=0
+            for j in data2:
+                query1 = " select  count(*) as count from Patient_master  where  Status<>'2'  AND hospitalId='"+str(j["hospitalId"])+"'  and PatientId IN (select Patient_Id  from patientDoctorMapping  where  Status<>'2' AND  DoctorID= '"+str(j["ID"])+"') ;"
+                cursor.execute(query1)
+                data3 = cursor.fetchall()
+                print(data3)
+                count+=data3[0]["count"]
+            i["total_patient"]=count
+    
+        cursor.close()
+        return {"data":data,"status":"true"}
+    except Exception as e :
+        print("Exception---->" +str(e))           
+        output = {"result":"something went wrong","status":"false"}
+        return output
+
+
+#hubLoginDoctor
+
+@app.route('/hubLoginDoctor', methods=['post'])
+def hubloginDoctor():
+    try:
+        json1=request.get_data()
+        Data=json.loads(json1.decode("utf-8"))
+        conn=Connection()
+        cursor = conn.cursor()
+        query= " select um.ID,um.mobile,um.password,um.name as DoctorName,um.Email,um.Gender,hsm.ID as Hospital_Id,hsm.hospital_name,hm.ID as HubId,hsm.Address as hospital_address,hm.HubName from userMaster um,HubMaster hm,Hospital_master hsm,"
+        query=query+"userHospitalMapping uhm where um.Usertype_Id=2 and hm.ID=hsm.HubId and um.ID=uhm.userId and uhm.hospitalId=hsm.ID and hsm.HubId='"+str(Data["HubId"])+"'  ;"
+        print(query)
+        
+        cursor.execute(query)
+        data= cursor.fetchall()
+        
+        for i in data:
+            query1="select count(*) as count from patientDoctorMapping pdm,Patient_master pm where pm.Status<>'2'  and pm.PatientId=pdm.Patient_Id and  pm.hospitalId='"+ str(i["Hospital_Id"])+"'and doctorId='"+str(i["ID"])+"';"
+            cursor.execute(query1)
+            data1= cursor.fetchall()
+            print(data1)
+            i["patient"]=data1[0]["count"]
+        
+        cursor.close()    
+        if data:
+            return {"result":data,"status":"true"}
+        else:
+            return {"result":"No Record Found","status":"true"}
+    except Exception as e :
+        print("Exception---->" +str(e))           
+        output = {"result":"something went wrong","status":"false"}
+        return output
+
+
+
+#hubLoginPatient
+
+
+
+@app.route('/hubLoginPatient', methods=['post'])
+def hubloginPatient():
+    try:
+        
+        json1=request.get_data()
+        Data=json.loads(json1.decode("utf-8"))
+        query3 ="select  PM.PatientId as ID,PM.PatientName,PM.heartRate,PM.spo2,PM.highPressure,PM.lowPressure,PM.pulseRate,PM.temperature,PM.PhoneNo,Hbs.HubName,PM.Address,PM.BloodGroup,PM.DeviceMac,Hm.HubId,Hm.hospital_name as hospital_Name , "
+        query3=query3+" PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.age,PM.Gender,PM.roomNumber,pdm.DoctorID as DoctorID"
+        query3= query3 + " from Patient_master  as PM ,patientDoctorMapping as pdm,Hospital_master as Hm,HubMaster as Hbs  where PM.hospitalId=Hm.ID  and  Hm.HubId='"+str(Data["HubId"])+"' and  Hm.HubId=Hbs.ID and  pdm.Patient_Id=PM.PatientId  and PM.Status<>'2'   ORDER BY  ID DESC;"
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query3)
+        data= cursor.fetchall()
+        cursor.close()
+
+        if data:
+            return {"result":data,"status":"true"}
+        else:
+            return {"result":"No Record Found","status":"true"}
+    
+    except Exception as e :
+        print("Exception---->" +str(e))           
+        output = {"result":"something went wrong","status":"false"}
+        return output
+
+
 
 
 
@@ -416,57 +538,57 @@ def doctorLoginDashboard():
 
 
 
-@app.route('/doctorLoginDashboard22', methods=['post'])
-def doctorLoginDashboard22():
-    try:
-        json1=request.get_data()
-        data=json.loads(json1.decode("utf-8"))
-        print(data)
-        conn=Connection()
-        cursor = conn.cursor()
-        query1=" select um.ID, hsm.hospital_name,hsm.ID as HospitalId,hm.ID as HubId,hm.HubName from HubMaster hm,Hospital_master hsm,userMaster um,userHospitalMapping uhm" 
-        query1=query1+" where hm.ID=hsm.HubId and hsm.ID=uhm.hospitalId and uhm.userId=um.ID and um.Email='"+str(data["Email"])+"';"
-        cursor.execute(query1)
-        data1= cursor.fetchall()
-        print(data1)
-        total_patient=0
-        for i in data1:
+# @app.route('/doctorLoginDashboard22', methods=['post'])
+# def doctorLoginDashboard22():
+#     try:
+#         json1=request.get_data()
+#         data=json.loads(json1.decode("utf-8"))
+#         print(data)
+#         conn=Connection()
+#         cursor = conn.cursor()
+#         query1=" select um.ID, hsm.hospital_name,hsm.ID as HospitalId,hm.ID as HubId,hm.HubName from HubMaster hm,Hospital_master hsm,userMaster um,userHospitalMapping uhm" 
+#         query1=query1+" where hm.ID=hsm.HubId and hsm.ID=uhm.hospitalId and uhm.userId=um.ID and um.Email='"+str(data["Email"])+"';"
+#         cursor.execute(query1)
+#         data1= cursor.fetchall()
+#         print(data1)
+#         total_patient=0
+#         for i in data1:
             
-            query2="select PatientId,hospitalId,PatientName,heartRate,spo2,highPressure,lowPressure,pulseRate,temperature,BloodGroup,DeviceMac,Bed_Number,roomNumber,Gender,age from Patient_master pm,patientDoctorMapping pdm where pm.Status<>'2' and pdm.Patient_Id=pm.PatientId " 
-            query2=query2+" and pdm.doctorId='"+str(i["ID"]) +"' and pm.hospitalId='"+str(i["HospitalId"])+"';"
-            cursor.execute(query2)
-            data2= cursor.fetchall()
-            for d in data2:
-                data2[d]["heartRate"]=json.loads(data2[d]["heartRate"].replace("'",'"'))
-                data2[d]["lowPressure"]=json.loads(data2[d]["lowPressure"].replace("'",'"'))
-                data2[d]["pulseRate"]=json.loads(data2[d]["pulseRate"].replace("'",'"'))
-                data2[d]["temperature"]=json.loads(data2[d]["temperature"].replace("'",'"'))
-                data2[d]["highPressure"]=json.loads(data2[d]["highPressure"].replace("'",'"'))
-                data2[d]["spo2"]=json.loads(data2[d]["spo2"].replace("'",'"'))
+#             query2="select PatientId,hospitalId,PatientName,heartRate,spo2,highPressure,lowPressure,pulseRate,temperature,BloodGroup,DeviceMac,Bed_Number,roomNumber,Gender,age from Patient_master pm,patientDoctorMapping pdm where pm.Status<>'2' and pdm.Patient_Id=pm.PatientId " 
+#             query2=query2+" and pdm.doctorId='"+str(i["ID"]) +"' and pm.hospitalId='"+str(i["HospitalId"])+"';"
+#             cursor.execute(query2)
+#             data2= cursor.fetchall()
+#             for d in data2:
+#                 d[d]["heartRate"]=json.loads(d[d]["heartRate"].replace("'",'"'))
+#                 d[d]["lowPressure"]=json.loads(data2[d]["lowPressure"].replace("'",'"'))
+#                 data2[d]["pulseRate"]=json.loads(data2[d]["pulseRate"].replace("'",'"'))
+#                 data2[d]["temperature"]=json.loads(data2[d]["temperature"].replace("'",'"'))
+#                 data2[d]["highPressure"]=json.loads(data2[d]["highPressure"].replace("'",'"'))
+#                 data2[d]["spo2"]=json.loads(data2[d]["spo2"].replace("'",'"'))
 
 
             
-            i["patient_Details"]=data2
-            i["total_patient"]=len(i["patient_Details"])
+#             i["patient_Details"]=data2
+#             i["total_patient"]=len(i["patient_Details"])
             
-        for i in data1:
-            if i["patient_Details"]==():
-                data1.remove(i)
-        for i in data1:
-            total_patient+=len(i["patient_Details"])
-        cursor.close()
-        if data1:
-            # data.append({"Total_hospital":len(data)})
-            # data.append({"total_patient":total_patient})
-            data={"result":data1,"Total_hospital":len(data1),"total_patient":total_patient,"status":"true"}
-            return data
-        else:
-            return {"result":"No Record Found","status":"true"}
+#         for i in data1:
+#             if i["patient_Details"]==():
+#                 data1.remove(i)
+#         for i in data1:
+#             total_patient+=len(i["patient_Details"])
+#         cursor.close()
+#         if data1:
+#             # data.append({"Total_hospital":len(data)})
+#             # data.append({"total_patient":total_patient})
+#             data={"result":data1,"Total_hospital":len(data1),"total_patient":total_patient,"status":"true"}
+#             return data
+#         else:
+#             return {"result":"No Record Found","status":"true"}
     
-    except Exception as e :
-        print("Exception---->" +str(e))           
-        output = {"result":"something went wrong","status":"false"}
-        return output
+#     except Exception as e :
+#         print("Exception---->" +str(e))           
+#         output = {"result":"something went wrong","status":"false"}
+#         return output
 
 
 
@@ -1242,6 +1364,84 @@ def addDoctor():
         print("Exception---->" + str(e))    
         output = {"result":"something went wrong","status":"false"}
         return output
+
+@app.route('/addHubDoctor', methods=['POST'])
+def addHubDoctor():
+    try:
+        json1=request.get_data() 
+        data1=json.loads(json1.decode("utf-8"))  
+        
+        query = "select * from userMaster where  Usertype_Id=5 and Email='"+str(data1["Email"])+ "';"
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data = cursor.fetchone()
+        print(data)
+        UserId=uuid.uuid1()
+        UserID=UserId.hex
+        if data==None:
+            if data1["password"]==data1["confirm_password"]:
+                query2  = " insert into userMaster (name,mobile,Usertype_Id,UserID,password,Email,Gender)"
+                query2 = query2 +" values('"+str(data1["name"])+"','"+str(data1["mobile"])+"','"+str('5')+"','"+str(UserID)
+                query2=query2+"','"+str(data1["password"])+"','"+str(data1["Email"])+"','"+str(data1["Gender"])+"');"
+                print(query2)
+                
+                cursor.execute(query2)
+                conn.commit()
+                query = "select ID as userId,Usertype_Id from userMaster where name= '"+str(data1["name"])+ "' and  Email='"+str(data1["Email"])+ "';"
+                
+                cursor.execute(query)
+                data=cursor.fetchall()
+                yu=data[-1]
+                mainId=yu["userId"]
+                Usertype_Id=yu["Usertype_Id"]
+                HubId = data1["HubId"]
+                
+                query = "select * from userHubMapping where hubId='"+str(data1["HubId"])+"'   and userid= '"+str(mainId)+ "';"
+                cursor.execute(query)
+                userHubMappingdata = cursor.fetchall()
+                if userHubMappingdata==():
+                    query2  = " insert into userHubMapping (userId,hubId)"
+                    query2 = query2 +" values('"+str(mainId)+"','"+str(data1["HubId"])+"' );"
+                    conn=Connection()
+                    cursor = conn.cursor()
+                    cursor.execute(query2)
+                    conn.commit()
+                
+                query = "select * from userMaster where  Usertype_Id=5 and Email='"+str(data1["Email"])+ "';"
+                
+                cursor.execute(query)
+                data = cursor.fetchone()
+                if data!=None:
+                    print("data",data)
+                    mainId=data["ID"]
+                    Usertype_Id=data["Usertype_Id"]
+                    HubId = data1["HubId"]
+                    query = "select * from userHubMapping where hubId='"+str(data1["HubId"])+"'   and userid= '"+str(mainId)+ "';"
+                    cursor.execute(query)
+                    userHubMappingdata  = cursor.fetchall()
+                    if userHubMappingdata==():
+                        query2  = " insert into userHubMapping (userId,hubId)"
+                        query2 = query2 +" values('"+str(mainId)+"','"+str(data1["HubId"])+"' );"
+                        conn=Connection()
+                        cursor = conn.cursor()
+                        cursor.execute(query2)
+                        conn.commit()
+                cursor.close()                
+
+                output = {"result":"data inserted successfully","status":"true"}
+                return output
+            else:
+                output = {"result":"password mismatched","status":"false"}
+                return output
+        else:
+            output = {"result":"User Already Added Existed ","status":"true"}
+            return output 
+    except Exception as e :
+        print("Exception---->" + str(e))    
+        output = {"result":"something went wrong","status":"false"}
+        return output
+
 
 
 
