@@ -1726,7 +1726,7 @@ def Patient_master():
         spo2=data["spo2"]
         pulseRate=data["pulseRate"]  
         PatientName=data["PatientName"]
-        heartRate=data["heartRate"]
+        heartRate=data["heartRate"].replace("'",'"')
         print(heartRate)
         highPressure=data["highPressure"]
         lowPressure=data["lowPressure"]
