@@ -1729,10 +1729,10 @@ def Patient_master():
         query2 =query2 +" values('"+str(data["PatientName"])+"',"+str(data["heartRate"])+","
         query2=query2+str(data["spo2"])+","+str(data["pulseRate"])+","+str(data["highPressure"])+","
         query2=query2+str(data["lowPressure"])+","+str(data["temperature"])+",'"
-        query2=query2+str(int(data["roomNumber"]))+"','"+str(int(data["gender"]))+"','"
-        query2=query2+str(int(data["age"]))+"','"+str(data["BloodGroup"])+"','"
+        query2=query2+(int(data["roomNumber"]))+"','"+(int(data["gender"]))+"','"
+        query2=query2+(int(data["age"]))+"','"+str(data["BloodGroup"])+"','"
         query2=query2+str(data["DeviceMac"])+"','"+str(data["Bed_Number"])+"','"
-        query2=query2+str(int(data["Usertype_Id"]))+"','"+str(int(data["hospitalId"]))+"','"
+        query2=query2+(int(data["Usertype_Id"]))+"','"+(int(data["hospitalId"]))+"','"
         query2=query2+str(data["startdate"])+"','"+str(data["usercreate"])+"');"
         print(query2)
         print("222222222222")
