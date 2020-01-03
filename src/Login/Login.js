@@ -36,20 +36,26 @@ class Login extends React.Component {
         if (response) {
           if (response && response.data && response.data.status   && response.data.status === "true") {
             let res = response.data.result;
+            let resD = response.data["Nurse Details"];
 
             localStorage.setItem("login", "yes");
             localStorage.setItem("user_type", res.Usertype);
             localStorage.setItem("user_id", res.UserID);
             localStorage.setItem("user_type_id", res.Usertype_Id);
             localStorage.setItem("user", res.name);
-            localStorage.setItem("user", res.name);
             localStorage.setItem("email", res.Email);
+            localStorage.setItem("hub_id", resD.HubId);
+            localStorage.setItem("hos_id", resD.hospital_Id);
+            localStorage.setItem("hospital_name", resD.hospital_name);
+            localStorage.setItem("hub_name", resD .HubName);
             console.log("login",response)
             this.setState({ isLogin: true, err: "" }, () => {
               if (res.Usertype === "admin") {
                 this.props.history.push("/dash"); 
-              } else {
+              } else if(res.Usertype=="Doctor") {
                 this.props.history.push("/home");
+              }else if(res.Usertype_Id==4) {
+                this.props.history.push("/Odash");
               }
             });
           } else {
@@ -241,8 +247,12 @@ class Login extends React.Component {
       localStorage.getItem("usertype", "") === "admin"
     ) {
       this.props.history.push("/dash");
-    } else if (localStorage.getItem("login", "no") === "yes") {
+    } else if (localStorage.getItem("login", "no") === "yes" && 
+    localStorage.getItem("usertype", "") === "Doctor") {
       this.props.history.push("/home");
+    }else if (localStorage.getItem("login", "no") === "yes" && 
+    localStorage.getItem("user_type_id", "") == 4) {
+      this.props.history.push("/Odash");
     }
     return (
       <LoginStyled>

@@ -42,11 +42,11 @@ return(
      < React.Fragment>
       <div class="new-box-add">
     {Array.isArray(items.patient_Details) && items.patient_Details.map((innerItem,j)=>{
-  
+          let ids=innerItem.PatientId
         if(j>=this.state.start && j<this.state.end)
         return(
         
-       <CardComponent  onClick={(event)=>click(event,items,innerItem)}  id={innerItem.PatientId} client={this.props.client} item={innerItem} index={j}  topic={'/'+items.HubId+'/'+items.HospitalId+'/'+items.ID+'/'+innerItem.PatientId} ></CardComponent>
+       <CardComponent  ids={ids} onClick={(event)=>click(event,items,innerItem)}  id={innerItem.PatientId} client={this.props.client} item={innerItem} index={j}  topic={'/'+items.HubId+'/'+items.HospitalId+'/'+items.ID+'/'+innerItem.PatientId} ></CardComponent>
         
         
         

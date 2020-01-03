@@ -764,6 +764,39 @@ export const DetailStyled = styled.div`
 .remo-bord{
   border:none;
 }
+
+// alert msg
+.alrt-dt {
+  position: relative;
+}
+.alrt-bx-txt{
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+
+}
+.imgaiert {
+  width: 100px;
+}
+.txt-hd {
+  color: #fff;
+  text-transform: capitalize;
+  font-size: 1.7rem;
+  font-weight: 400;
+  margin: 0px;
+  margin-top: 13px;
+  word-spacing: 10px;
+  letter-spacing: 2px;
+}
+// .back-fl {
+//   background: #000000a6 !important;
+//   width: 100%;
+//   height: 100%;
+//   position: absolute;
+//   z-index: 1;
+// }
   @media (min-width: 320px) and (max-width: 480px) {
     .new-box-add {
       padding: 0 5px 0px 15px;

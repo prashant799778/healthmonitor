@@ -36,70 +36,24 @@ currentItem:"" ,
     // 159.65.146.25
     componentDidMount() {
      
-      var mqtt = require('mqtt')
-  var client  = mqtt.connect('ws://139.59.78.54:9001')
-  this.setState({client:client})
-  this.callApi()
+    
+
+
     }
     goBack=()=>{
       this.setState({isDetail:false})
   }
-   callApi=() => {
-    let jsons={
-      "Email":localStorage.getItem("email","")
-    }
-    axios
-      .post(
-        `http://159.65.146.25:5053/doctorLoginDashboard`, jsons
-      )
-      .then(res => {
-
-        console.log("dashboard",res)
-        if (res && res.data && res.data.status=="true") {
-
- this.setState({TotalHospitalCount:res.data.Total_hospital,TotalPatientCount:res.data.total_patient,HospitalList:res.data.result},()=>{
-
- if( Array.isArray(this.state.HospitalList)){
-
-
-    this.state.HospitalList.map((item,i)=>{
-      console.log("message",'/'+item.HubId+'/'+item.HospitalId+'/'+ localStorage.getItem("user_id", "")+'/+')
-      if(this.state.client.connected){
-        console.log("message","connect")
-      this.state.client.subscribe('/'+item.HubId+'/'+item.HospitalId+'/'+ item.ID+'/+',  (err)=> {
-        console.log("message",err)
-        if (!err) {
-          console.log("message",err)
-          // client.publish('/t1', '')
-        }
-      })}
-
-
-
-    })
-  }
-  
-  })
  
-
-//  })
-      
-       
-
-
-        }
-      })
-      .catch(e => console.log(e));
-  }
+ 
 
 
   handleClick=(e,item,innerItem)=>{
 
     console.log("click")
-    this.setState({isDetail:!this.state.isDetail,currentinnerItem:innerItem,currentTopic:'/'+item.HubId+'/'+item.HospitalId+'/'+ item.ID +"/"+innerItem.PatientId,currentItem:item})
+    this.setState({isDetail:!this.state.isDetail,currentinnerItem:innerItem,currentTopic:innerItem.ID+"",currentItem:item})
   }
 
-  render(){ if(localStorage.getItem("user_type","")!="Doctor")
+  render(){ if(localStorage.getItem("user_type_id","")!=4)
   { history.push('/')
    window.location.reload();}
 
@@ -165,21 +119,13 @@ currentItem:"" ,
         
       <div class="row">
   
-        { Array.isArray(hospitalList) && hospitalList.map((item,i)=>{
-           let  cls="col-12 col-sm-12 col-md-12"
-          let l=hospitalList.length;
-          if(l%2!=0 && i==(l-1))
-           {
-              cls="col-12 col-sm-12 col-md-12"
-
-            }
-            if(i==0)
-      return(
-        <div class={cls}  >
+       
+        
+        <div class="col-12 col-sm-12 col-md-12"  >
         <div class="new-box box-bg-color">
           <div class="up-side-box">
-      <h2 class="text-hd">{item.hospital_name}</h2>
-            <h2 class="text-hd">{'Pateints :'+item.total_patient}</h2>
+      <h2 class="text-hd">{ localStorage.getItem("hospital_name","")}</h2>
+            {/* <h2 class="text-hd">{'Pateints :'+item.total_patient}</h2> */}
           </div>
          
         
@@ -189,7 +135,7 @@ currentItem:"" ,
       
 
   
- <MainCard  detail={item.patient_Details} Click={(event,item,innerItem)=>this.handleClick(event,item,innerItem)}   client={this.state.client}   item={item} topic={'/'+item.HubId+'/'+item.HospitalId+'/'+item.ID+'/'} ></MainCard>
+ <MainCard  Click={(event,item,innerItem)=>this.handleClick(event,item,innerItem)}  ></MainCard>
   
   
   
@@ -200,9 +146,7 @@ currentItem:"" ,
         </div>
       </div>
  
-      );
-  
-        })}
+    
         
       </div>
     </div>

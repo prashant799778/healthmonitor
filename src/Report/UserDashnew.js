@@ -95,7 +95,7 @@ currentItem:"" ,
   handleClick=(e,item,innerItem)=>{
 
     console.log("click")
-    this.setState({isDetail:!this.state.isDetail,currentinnerItem:innerItem,currentTopic:'/'+item.HubId+'/'+item.HospitalId+'/'+ item.ID +"/"+innerItem.PatientId,currentItem:item})
+    this.setState({isDetail:!this.state.isDetail,currentinnerItem:innerItem,currentTopic:innerItem.PatientId+"",currentItem:item})
   }
 
   render(){ if(localStorage.getItem("user_type","")!="Doctor")

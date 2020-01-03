@@ -24,6 +24,7 @@
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/newstyle.css">
+ 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="fonts/fontawesome/css/fontawesome-all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" crossorigin="anonymous" />
@@ -56,12 +57,65 @@
         display: block !important;
         color: #9b2812;
     }
+    .alrt-bx img:first-child {
+      width: 15px;
+    vertical-align: bottom;
+    margin-right: 7px;
+}
       #wrapper {
   height: 100vh;
 }
 .navbar-nav .nav-item .nav-link.active{
 	background-color: red;
 }
+.nxt-pre-btn {
+    padding: 10px 0 20px 0;
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 20px;
+
+}
+button.nxt-btn {
+    background: #ff6a07;
+    color: #fff;
+    border-radius: 2.5px;
+    padding: 13px 20px;
+    text-transform: capitalize;
+    border: none;
+}
+button.pre-btn {
+    background: #ff6a07;
+    color: #fff;
+    border-radius: 2.5px;
+    padding: 13px 20px;
+    text-transform: capitalize;
+    border: none;
+}
+
+/* blink efect */
+.alrt-bx {
+    display: flex;
+}
+.blink-efc {
+  animation: blinker 1s linear infinite;
+  background: red;
+  width: 15px;
+  height: 15px;
+  border-radius: 50px;
+  display: inline-block;
+  margin-right: 10px;
+  border: 2px solid #969696;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* End */
+
+
     </style>
   </head>
   <body>

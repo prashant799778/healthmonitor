@@ -5,7 +5,8 @@ import Grabh from "../Report/grabh"
 import ECG from "./ecgs"
 import  RESP  from "./resp"
 import SPO from "./spo"
-import backImg from "./image/backimg.png" 
+import backImg from "./image/backimg.png"
+import alertimg from "./image/alrt.gif" 
 class Detail extends React.Component{
 
     constructor(){
@@ -29,7 +30,10 @@ class Detail extends React.Component{
           w_spo:0,
           w_resp:0,
 
-          client1 :""
+          client1 :"",
+
+          isAlert:false,
+          alertText:"patient bP is low  !!"
     
       }
     
@@ -52,7 +56,54 @@ class Detail extends React.Component{
       componentDidMount() {
 
 
+        let  Omqtt1 = require('mqtt')
+        let  Oclient1  = Omqtt1.connect('ws://139.59.78.54:9001')
+      
+          Oclient1.on('connect', ( ) =>{
+                Oclient1.subscribe(this.props.currentTopic +"",  (err)=> {
+                  console.log("Omessage1",this.props.currentTopic+"   on subscribe")
+                  if (!err) {
+                    //console.log("messageOneSpo",err)
+                    // client.publish('/t1', '')
+                  }
+                })   
+                
+                Oclient1.on('message', (topic, message) =>{
+                 console.log("Omessage1",topic+"  --- "+ message)
+                   // message is Bufferthis.props.topic
+                    if(this.props.currentTopic+""==topic)
+                    if(message){
        
+                      console.log("messageOne19", message.toString()  )
+                      let jsn=   JSON.parse(message.toString())
+                      
+                      this.setState({
+                         w_ecg:(jsn.hasOwnProperty("waveData")   && jsn.waveData.hasOwnProperty('Ecg')  &&  jsn.waveData['Ecg']!=="" &&  jsn.waveData['Ecg']!=128)?jsn.waveData['Ecg']:this.state.w_ecg,
+                         w_spo:(jsn.hasOwnProperty("waveData")   && jsn.waveData.hasOwnProperty('Spo2')  &&  jsn.waveData['Spo2']!=="" &&  jsn.waveData['Spo2']!=128)?jsn.waveData['Spo2']:this.state.w_spo,
+                         w_resp:(jsn.hasOwnProperty("waveData")   && jsn.waveData.hasOwnProperty('Resp')  &&  jsn.waveData['Resp']!=="" &&  jsn.waveData['Resp']!=128)?jsn.waveData['Resp']:this.state.w_resp,
+                          temp:(jsn.hasOwnProperty("TEMP")  && jsn.TEMP!=="" )?jsn.TEMP:this.state.temp,
+                           id:jsn.PatientId,
+                           user:jsn.usercreate,
+                           resp:jsn.RESP,
+                           spo2: (jsn.hasOwnProperty("SPO2")  && jsn.SPO2.hasOwnProperty('SPO2')  &&  jsn.SPO2['SPO2']!==""  && jsn.SPO2['SPO2']!=127)?jsn.SPO2['SPO2']:this.state.spo2,
+                           plsRate:  (jsn.hasOwnProperty("SPO2")   && jsn.SPO2.hasOwnProperty('Pulse Rate')  &&  jsn.SPO2['Pulse Rate']!=="" &&  jsn.SPO2['Pulse Rate']!=255)?jsn.SPO2['Pulse Rate']:this.state. plsRate,
+                           heartRate:  (jsn.hasOwnProperty('ECG') && jsn.ECG.hasOwnProperty("Heart Rate")  &&  jsn.ECG["Heart Rate"]!=="")?jsn.ECG["Heart Rate"]:this.state.heartRate,
+                            rsp: (jsn.hasOwnProperty('ECG')  && jsn.ECG.hasOwnProperty("Resp Rate")  &&  jsn.ECG["Resp Rate"]!=="")?jsn.ECG["Resp Rate"]:this.state.rsp,
+                             nibp_high:(jsn.hasOwnProperty('NIBP')  &&  jsn.NIBP.hasOwnProperty("High") &&  jsn.NIBP["High"]!=="")?jsn.NIBP["High"]:this.state.nibp_high,
+                            nibp_low: (jsn.hasOwnProperty('NIBP')  && jsn.NIBP.hasOwnProperty("Low")   &&  jsn.NIBP["Low"]!=="")?jsn.NIBP["Low"]:this.state.nibp_low,
+                     
+                     
+                          })
+                      
+                      
+          
+                   
+                    
+                    
+                    }
+                 })
+                console.log("Omessage","Omessage on con client");
+              })
 
 
   
@@ -78,15 +129,15 @@ class Detail extends React.Component{
         if(this.props.client!=""){
    
 
-     
+          console.log("messageOne19", this.props.currentTopic  )
       this.props.client.on('message', (topic, message) =>{
           // message is Buffer
           // //console.log("messageOne1",message.toString() )
 
           // this.setState({w_spo:message.toString()})
           //   //console.log("messageOne1",this. byteArrayToLong ( message))
-         
-          if(this.props.currentTopic===topic)
+          console.log("messageOne19", this.props.currentTopic  )
+          if(this.props.currentTopic==topic)
           if(message){
        
             console.log("messageOne19", message.toString()  )
@@ -131,20 +182,33 @@ class Detail extends React.Component{
         //console.log("detail",item)
 return(<DetailStyled>
     
-    <div className="container-box innr-card-bg-color">
+    <div className="container-box innr-card-bg-color ">
+      {/* <div className="back-fl">
+      <div className="alrt-bx-txt">
+        <img src={alertimg} className="imgaiert"/>
+        <h2 className="txt-hd">patient bP is low  !!</h2>
+    </div>
+    </div> */}
     {/* <ECG tc="#78A960"  tt="" data={this.state.heartRate!="-- -- --"?this.state.heartRate:0} id="asd"></ECG> */}
         <div className="container-fluid">
           <div className="row">
             <div className="col-sm-12 col-md-12">
+      
               <div className="uppr-box-card">
                 <h2 className="hading-up">home - <span>Patient Details</span></h2>
               </div>
-              <div className="wrap-patient" style={{backgroundImage: 'url('+backImg+')',
+              <div className="wrap-patient  alrt-dt" style={{backgroundImage: 'url('+backImg+')',
       backgroundPosition: 'center',
       backgroundRepeat: 'no-repeat',
       backgroundSize: 'cover',
       
       }} >
+              <div className="back-fl">
+     {this.state.isAlert  &&  <div className="alrt-bx-txt">
+        <img src={alertimg} className="imgaiert"/>
+      <h2 className="txt-hd">{this.state.alertText}</h2>
+    </div>}
+    </div>
                 <div className="patient-detail">
                   <div className="patient-info border-bottomm">
                   <h2 className="patient-hading" onClick={()=>{this.props.goBack()}} style={{cursor: 'pointer'}}><font color="green">Go Back</font></h2>
