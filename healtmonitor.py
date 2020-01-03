@@ -382,8 +382,7 @@ def doctorLoginDashboard():
             query2=query2+" and pdm.doctorId='"+str(i["ID"]) +"' and pm.hospitalId='"+str(i["HospitalId"])+"';"
             cursor.execute(query2)
             data2= cursor.fetchall()
-            print("data22222222222222222222222222222222222222222222",data2)
-            print("data22222222222222222222222222222222222222222222")
+            
             i["patient_Details"]=data2
             i["total_patient"]=len(i["patient_Details"])
             
@@ -397,7 +396,7 @@ def doctorLoginDashboard():
             # data.append({"Total_hospital":len(data)})
             # data.append({"total_patient":total_patient})
             data={"result":data1,"Total_hospital":len(data1),"total_patient":total_patient,"status":"true"}
-            return json.loads(json.dumps(data))
+            return json.loads((data))
         else:
             return {"result":"No Record Found","status":"true"}
     
