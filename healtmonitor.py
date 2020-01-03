@@ -1723,14 +1723,14 @@ def Patient_master():
         print(data)    
         print("111111")
         print(type(data))
-        spo2=data["spo2"]
-        pulseRate=data["pulseRate"]  
+        spo2=str(data["spo2"]).replace("'",'"')
+        pulseRate=str(data["pulseRate"]) .replace("'",'"')
         PatientName=data["PatientName"]
         heartRate=str(data["heartRate"]).replace("'",'"')
         print(heartRate)
-        highPressure=data["highPressure"]
-        lowPressure=data["lowPressure"]
-        temperature=data["temperature"]
+        highPressure=str(data["highPressure"]).replace("'",'"')
+        lowPressure=str(data["lowPressure"]).replace("'",'"')
+        temperature=str(data["temperature"]).replace("'",'"')
         roomNumber=data["roomNumber"]
         gender=data["gender"]
         age=data["age"]
