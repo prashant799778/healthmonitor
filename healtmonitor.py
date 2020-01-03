@@ -1727,10 +1727,10 @@ def Patient_master():
         query2 =query2 +" values('"+str(data["PatientName"])+"','"+str(data["heartRate"])+"','"
         query2=query2+str(data["spo2"])+"','"+str(data["pulseRate"])+"','"+str(data["highPressure"])+"','"
         query2=query2+str(data["lowPressure"])+"','"+str(data["temperature"])+"',"
-        query2=query2+str(int(data1["roomNumber"]))+"','"+str(int(data1["gender"]))+"','"
-        query2=query2+str(int(data1["age"]))+"','"+str(data["BloodGroup"])+"','"
-        query2=query2+str(data["DeviceMac"])+"','"+str(data["Bed_Number"])+"','"
-        query2=query2+str(int(data1["Usertype_Id"]))+"','"+str(int(data1["hospitalId"]))+"','"
+        query2=query2+str(data1["roomNumber"])+"','"+str(data1["gender"])+"','"
+        query2=query2+str(data1["age"])+"','"+str(data["BloodGroup"])+"','"
+        query2=query2+str(data1["DeviceMac"])+"','"+str(data["Bed_Number"])+"','"
+        query2=query2+str(data1["Usertype_Id"])+"','"+str(data1["hospitalId"])+"','"
         query2=query2+str(data["startdate"])+"','"+str(data["usercreate"])+"');"
         print(query2)
         conn=Connection()
