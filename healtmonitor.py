@@ -1720,14 +1720,14 @@ def Patient_master():
         json1=request.get_data() 
         data=json.loads(json1.decode("utf-8"))  
         query2  = " insert into Patient_master(PatientName,heartRate,spo2,pulseRate,highPressure,lowPressure,temperature,roomNumber,Gender,age,BloodGroup,DeviceMac,Bed_Number,Usertype_Id,hospitalId,startdate,usercreate)"
-        query2 =query2 +" values("+'"'+str(data["PatientName"])+'"'+','+'"'+str(data["heartRate"])+'"'+','
-        query2=query2+'"'+str(data["spo2"])+'"'+','+'"'+str(data["pulseRate"])+'"'+','+'"'+str(data["highPressure"])+'"'+','
-        query2=query2+'"'+str(data["lowPressure"])+'"'+','+'"'+str(data["temperature"])+'"'+','
-        query2=query2+'"'+str(data["roomNumber"])+'"'+','+'"'+str(data["gender"])+'"'+','
-        query2=query2+'"'+str(data["age"])+'"'+','+'"'+str(data["BloodGroup"])+'"'+','
-        query2=query2+'"'+str(data["DeviceMac"])+'"'+','+'"'+str(data["Bed_Number"])+'"'+','
-        query2=query2+'"'+str(data["Usertype_Id"])+'"'+','+'"'+str(data["hospitalId"])+'"'+','
-        query2=query2+'"'+str(data["startdate"])+'"'+','+'"'+str(data["usercreate"])+'"'+");"
+        query2 =query2 +" values('"+str(data["PatientName"])+"','"+str(data["heartRate"])+"','"
+        query2=query2+str(data["spo2"])+"','"+str(data["pulseRate"])+"','"+str(data["highPressure"])+"','"
+        query2=query2+str(data["lowPressure"])+"','"+str(data["temperature"])+"','"
+        query2=query2+str(data["roomNumber"])+"','"+str(data["gender"])+"','"
+        query2=query2+str(data["age"])+"','"+str(data["BloodGroup"])+"','"
+        query2=query2+str(data["DeviceMac"])+"','"+str(data["Bed_Number"])+"','"
+        query2=query2+str(data["Usertype_Id"])+"','"+str(data["hospitalId"])+"','"
+        query2=query2+'"'+str(data["startdate"])+"','"+str(data["usercreate"])+"');"
         print(query2)
         conn=Connection()
         cursor = conn.cursor()
