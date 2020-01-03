@@ -1729,7 +1729,7 @@ def Patient_master():
         query2=query2+str(int(data["age"]))+"','"+str(data["BloodGroup"])+"','"
         query2=query2+str(data["DeviceMac"])+"','"+str(data["Bed_Number"])+"','"
         query2=query2+str(int(data["Usertype_Id"]))+"','"+str(int(data["hospitalId"]))+"','"
-        query2=query2+'"'+str(data["startdate"])+"','"+str(data["usercreate"])+"');"
+        query2=query2+str(data["startdate"])+"','"+str(data["usercreate"])+"');"
         print(query2)
         conn=Connection()
         cursor = conn.cursor()
