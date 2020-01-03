@@ -181,7 +181,7 @@ class CardComponent extends React.Component {
       
             <div class="card-hading-box border-bottomm">
               <h2 class="text-hading">{item.PatientName}</h2>
-              <h2 class="text-hading">{item.Bed_Number}</h2>
+              <h2 class="text-hading">{'Bed No.- '+item.Bed_Number}</h2>
               <div className="alrt-bx">
         {isAlert &&    <img style={{cursor:'pointer'}} src={require("./img/alert.gif")}/>   }
               {/* <div className="blink-efc"></div> */}
