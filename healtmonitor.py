@@ -303,7 +303,7 @@ def allNurse():
 @app.route('/allPatient', methods=['post'])
 def allPatient():
     try:
-        query3 ="select  PM.PatientId as ID,PM.PatientName,PM.heartRate,PM.spo2,PM.highPressure,PM.lowPressure,PM.pulseRate,PM.temperature,PM.PhoneNo,PM.Address,PM.BloodGroup,PM.DeviceMac,Hm.HubId,Hm.hospital_name  as hospital_Name,"
+        query3 ="select  PM.PatientId as ID,PM.hospitalId as Hospital_Id,PM.PatientName,PM.heartRate,PM.spo2,PM.highPressure,PM.lowPressure,PM.pulseRate,PM.temperature,PM.PhoneNo,PM.Address,PM.BloodGroup,PM.DeviceMac,Hm.HubId,Hm.hospital_name  as hospital_Name,"
         query3=query3+" PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.age,PM.Gender,PM.roomNumber,pdm.DoctorID as DoctorID"
         query3= query3 + " from userMaster as um,Patient_master  as PM ,patientDoctorMapping as pdm,Hospital_master as Hm,HubMaster as Hbs  where  pdm.doctorId=um.ID and  PM.hospitalId=Hm.ID and Hm.HubId=Hbs.ID and  pdm.Patient_Id=PM.PatientId  and PM.Status<>'2'   ORDER BY  ID DESC;"
         conn=Connection()
@@ -409,7 +409,7 @@ def hubloginPatient():
         
         json1=request.get_data()
         Data=json.loads(json1.decode("utf-8"))
-        query3 ="select  PM.PatientId as ID,PM.PatientName,PM.heartRate,PM.spo2,PM.highPressure,PM.lowPressure,PM.pulseRate,PM.temperature,PM.PhoneNo,Hbs.HubName,PM.Address,PM.BloodGroup,PM.DeviceMac,Hm.HubId,Hm.hospital_name as hospital_Name , "
+        query3 ="select  PM.PatientId as ID,PM.hospiatlId as Hospital_Id,PM.PatientName,PM.heartRate,PM.spo2,PM.highPressure,PM.lowPressure,PM.pulseRate,PM.temperature,PM.PhoneNo,Hbs.HubName,PM.Address,PM.BloodGroup,PM.DeviceMac,Hm.HubId,Hm.hospital_name as hospital_Name , "
         query3=query3+" PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.age,PM.Gender,PM.roomNumber,pdm.DoctorID as DoctorID"
         query3= query3 + " from Patient_master  as PM ,patientDoctorMapping as pdm,Hospital_master as Hm,HubMaster as Hbs  where PM.hospitalId=Hm.ID  and  Hm.HubId='"+str(Data["HubId"])+"' and  Hm.HubId=Hbs.ID and  pdm.Patient_Id=PM.PatientId  and PM.Status<>'2'   ORDER BY  ID DESC;"
         conn=Connection()
@@ -1806,6 +1806,7 @@ def Patient_master():
         cursor.close()
         print("qqqqqqqqqqqqqqqqqqqqqqqqqqqqq",data9[-1])
         print("zzzzzzzzzzzzzzzzzzzzzzzzzz",type(data9[-1]["spo2"]))
+
         data9[-1]["spo2"]=json.loads(data9[-1]["spo2"])
         print(data9[-1]["spo2"])
         print(type(data9[-1]["spo2"]))
