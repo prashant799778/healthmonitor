@@ -1727,6 +1727,7 @@ def Patient_master():
         pulseRate=data["pulseRate"]  
         PatientName=data["PatientName"]
         heartRate=data["heartRate"]
+        print(heartRate)
         highPressure=data["highPressure"]
         lowPressure=data["lowPressure"]
         temperature=data["temperature"]
