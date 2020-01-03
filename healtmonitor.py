@@ -1677,11 +1677,17 @@ def operationDashboard():
         cursor = conn.cursor()
         cursor.execute(query3)
         data= cursor.fetchall()
-        data9=len(data)
+
+        query ="select  PM.PatientId as ID,PM.PatientName,PM.PhoneNo,Hbs.HubName,PM.Address,PM.BloodGroup,PM.DeviceMac,Hm.HubId,Hm.hospital_name as hospital_Name, "
+        query=query+" PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.age,PM.Gender,PM.roomNumber,pdm.DoctorID as DoctorID"
+        query= query + " from Patient_master  as PM ,patientDoctorMapping as pdm,Hospital_master as Hm,HubMaster as Hbs  where PM.hospitalId=Hm.ID  and  Hm.ID='"+str(Data["hospital_Id"])+"' and  Hm.HubId=Hbs.ID and  pdm.Patient_Id=PM.PatientId  and PM.Status<>'2' ;"
+        
+        cursor.execute(query)
+        data9= cursor.fetchall()
         cursor.close()
 
         if data:
-            return {"result":data,"total_patient":data9,"status":"true"}
+            return {"result":data,"total_patient":len(data9),"status":"true"}
         else:
             return {"result":"No Record Found","status":"true"}
     
