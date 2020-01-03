@@ -507,6 +507,7 @@ def doctorLoginDashboard():
             for j in data2:
                 if j["heartRate"]!=NULL:
                 j["heartRate"]=json.loads(j["heartRate"].replace("'",'"'))
+                print('j["heartRate"]',j["heartRate"])
                 j["highPressure"]=json.loads(j["highPressure"].replace("'",'"'))
                 j["lowPressure"]=json.loads(j["lowPressure"].replace("'",'"'))
                 j["pulseRate"]=json.loads(j["pulseRate"].replace("'",'"'))
