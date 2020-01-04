@@ -235,12 +235,14 @@ let totalHubCount=this.state.totalHubCount;
             {Array.isArray(this.state. hospitalList) &&  this.state. hospitalList.map((item,i)=>{
 
 return( <div className="hub-show">
-            <h3 className="innr-hub-txt">{item.HubName}</h3>
+            <h3  style={{background:'sienna' ,border: '2px solid sienna',
+  borderRadius: '5px' ,paddingTop:'5px',paddingBottom:'5px'}} className="innr-hub-txt">{item.HubName}</h3>
 <div className="wrap-wrap">
   <div className="hb-wrap-box">
  
   {Array.isArray(item.Hospitals) &&   item.Hospitals.map((itm,j)=>{return(<div onClick={()=>this.setId(itm.HospitalId,itm.hospital_name)}  style={{cursor:'pointer'}} className="hb-box">
-  <h4 style={{background:'#1E1E2F'}}>{itm.hospital_name}</h4>
+  <h4 style={{background:'#5fca6c',cursor:'pointer', border: '2px solid #5fca6c',
+  borderRadius: '5px' }}>{itm.hospital_name}</h4>
     </div>
    )})}
 

@@ -578,7 +578,7 @@ transform: rotate(180deg);
     margin: 0px;
 }
 .text-hading {
-  font-size: 1rem;
+  font-size: 1.3rem;
   font-weight: 500;
   line-height: 1.14;
   text-align: left;
