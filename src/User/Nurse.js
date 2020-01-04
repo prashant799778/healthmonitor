@@ -419,10 +419,11 @@ isValid:true,emailError:false,
       if(gens==3){
         gens=0
       }
-     
-     let api="http://159.65.146.25:5053/updateNursemaster"
+        let a=[]
+        a.push(this.state.hospital_id)
+     let api="http://159.65.146.25:5053/updateNurseMaster"
      let json={"ID":this.state.userid,"name":this.state.name
-     ,"mobile":this.state.mobile,"Usertype_Id":3,"Hospital_Id":this.state.hospital_id,"password":this.state.password,"confirm_password":this.state.password,"Email":this.state.email,"Gender":gens}     
+     ,"mobile":this.state.mobile,"Usertype_Id":3,"Hospital_Id":a,"password":this.state.password,"confirm_password":this.state.password,"Email":this.state.email,"Gender":gens}     
      
     
    
@@ -450,7 +451,7 @@ isValid:true,emailError:false,
     })
     .catch( (error)=> {
       // handle error
-      alert("aa22")
+      
       this.setState({err:"somethimg goes wrong!"}) 
      
     })

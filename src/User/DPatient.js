@@ -688,7 +688,7 @@ isValid:true,emailError:false,
                                 
                                 return(
 <tr  id={i}>
-                                  <td>{item.ID}</td>
+                                  <td>{item.PatientId}</td>
                                   <td>{item.PatientName}</td>
                                   <td> {this.getGender(item.Gender)}</td>
                                   <td>{item.DeviceMac}</td>

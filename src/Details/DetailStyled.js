@@ -790,9 +790,6 @@ export const DetailStyled = styled.div`
   word-spacing: 10px;
   letter-spacing: 2px;
 }
-canvas#def {
-    height: 86px !important;
-}
 // .back-fl {
 //   background: #000000a6 !important;
 //   width: 100%;

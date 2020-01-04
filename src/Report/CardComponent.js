@@ -134,7 +134,7 @@ class CardComponent extends React.Component {
       testAlert=(type,value)=>{
 
 
-           if(  type &&  value!="-- --" &&  value!="" && type.status=="true" && (type.lower>value || type.upper<value)  )
+           if(  type &&  value!="-- --" &&  value!="" && type.status=="true" && (Number(type.lower)>Number(value) || Number(type.upper)<Number(value))  )
              { 
                  
               return true;}
