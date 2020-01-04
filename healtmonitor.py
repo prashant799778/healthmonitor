@@ -560,11 +560,11 @@ def hubdoctorLoginDashboard():
         cursor.execute(query1)
         data1= cursor.fetchall()
         print(data1)
-        for i in data1:
-            query2= "select hm.ID as HospitalId,hm.hospital_name,hm.HubId  from Hospital_master as hm where hm.HubId='"+str(i["HubId"])+"' "
-            cursor.execute(query2)
-            data2=cursor.fetchall()
-            i["HospitalId"]=data2
+        # for i in data1:
+            # query2= "select hm.ID as HospitalId,hm.hospital_name,hm.HubId  from Hospital_master as hm where hm.HubId='"+str(i["HubId"])+"' "
+            # cursor.execute(query2)
+            # data2=cursor.fetchall()
+            # i["HospitalId"]=data2
             
         #     for i in data2:
             
