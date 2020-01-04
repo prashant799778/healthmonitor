@@ -1885,8 +1885,10 @@ def update_Patient_type():
         json1=request.get_data() 
         data=json.loads(json1.decode("utf-8")) 
         spo2=str(data["spo2"]).replace("'",'"')
+        print(spo2)
         pulseRate=str(data["pulseRate"]).replace("'",'"')
-        PatientName=data["PatientName"]
+        print(pulseRate)
+       
         heartRate=str(data["heartRate"]).replace("'",'"')
         print(heartRate)
         highPressure=str(data["highPressure"]).replace("'",'"')
