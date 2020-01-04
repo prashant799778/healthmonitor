@@ -559,6 +559,7 @@ def hubdoctorLoginDashboard():
         query1=query1+"  um.Email= '"+str(data["Email"])+"';"
         cursor.execute(query1)
         data1= cursor.fetchall()
+        count=0
         print(data1)
         for i in data1:
             query2= "select hm.ID as HospitalId,hm.hospital_name  from Hospital_master as hm where hm.HubId='"+str(i["HubId"])+"' "
@@ -592,7 +593,7 @@ def hubdoctorLoginDashboard():
         #         data1.remove(i)
         # for i in data1:
         #     total_patient+=len(i["patient_Details"])
-        count=0
+        
         for i in data1:
             count+=count+i["hospitalCount"]
         cursor.close()
