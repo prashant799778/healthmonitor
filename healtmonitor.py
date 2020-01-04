@@ -2385,7 +2385,7 @@ def novastore():
     try:
          
         json1=request.get_data()
-        print(json)
+        print(json1)
         # data=json.loads(json1.decode("utf-8")) 
         data=json.loads(json1.decode("utf-8"))
         print(data)
