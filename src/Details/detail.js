@@ -204,51 +204,52 @@ testAlert1=(type,value)=>{
         let texthighPressure=""
         let textheartRate=""
          
-        console.log("testspo",currentinnerItem.spo2+"---"+ this.state.spo2)
+ 
        
       if(this.testAlert(currentinnerItem.spo2,this.state.spo2)){
+      
          isAlert=true;
          textspo2= "patient Spo2 is  too low  !!"
         }
       
         else if(this.testAlert1(currentinnerItem.spo2,this.state.spo2)){
-         
+          
           isAlert=true;
           textspo2= "patient Spo2 is  too high  !!"
 
          }
        if(this.testAlert(currentinnerItem.pulseRate,this.state.plsRate)){
          isAlert=true;
-         textpulseRate= "patient Spo2 is  too low  !!"
+         textpulseRate= "patient PulseRate is  too low  !!"
         }
         else if(this.testAlert1(currentinnerItem.pulseRate,this.state.plsRate)){
           isAlert=true;
-          textpulseRate= "patient Spo2 is  too  high  !!"
+          textpulseRate= "patient  PulseRate is  too  high  !!"
          }
        if(this.testAlert(currentinnerItem.lowPressure,this.state.nibp_low)){
          isAlert=true;
-         textlowPressure= "patient Spo2 is  too low  !!"
+         textlowPressure= "patient Low Pressure is  too low  !!"
         }
         else if(this.testAlert1(currentinnerItem.lowPressure,this.state.nibp_low)){
           isAlert=true;
-          textlowPressure= "patient Spo2 is  too high  !!"
+          textlowPressure= "patient Low Pressure is  too high  !!"
          }
        if(this.testAlert(currentinnerItem.highPressure,this.state.nibp_high)){
          isAlert=true;
-         texthighPressure= "patient Spo2 is  too low  !!"
+         texthighPressure= "patient High Pressure is  too low  !!"
         }
         else if(this.testAlert1(currentinnerItem.highPressure,this.state.nibp_high)){
           isAlert=true;
           
-          texthighPressure= "patient Spo2 is  too high !!"
+          texthighPressure= "patient High Pressure is  too high !!"
         
          }
         if(this.testAlert(currentinnerItem.heartRate,this.state.heartRate)){
          isAlert=true;
-         textheartRate= "patient Spo2 is  too low  !!"
+         textheartRate= "patient Heart Rate is  too low  !!"
         } else if(this.testAlert1(currentinnerItem.heartRate,this.state.heartRate)){
           isAlert=true;
-          textheartRate= "patient Spo2 is  too  high  !!"
+          textheartRate= "patient Heart Rate  is  too  high  !!"
          } if(this.testAlert(currentinnerItem.temperature,this.state.temp)){
           isAlert=true;
           textTemp= "patient Temparature is too low  !!"
