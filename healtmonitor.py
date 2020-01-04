@@ -1885,28 +1885,20 @@ def update_Patient_type():
         json1=request.get_data() 
         data=json.loads(json1.decode("utf-8")) 
         spo2=str(data["spo2"]).replace("'",'"')
-        pulseRate=str(data["pulseRate"]) .replace("'",'"')
+        pulseRate=str(data["pulseRate"]).replace("'",'"')
         PatientName=data["PatientName"]
         heartRate=str(data["heartRate"]).replace("'",'"')
         print(heartRate)
         highPressure=str(data["highPressure"]).replace("'",'"')
         lowPressure=str(data["lowPressure"]).replace("'",'"')
         temperature=str(data["temperature"]).replace("'",'"')
-        roomNumber=data["roomNumber"]
-        gender=data["gender"]
-        age=data["age"]
-        BloogGroup=data["BloodGroup"]
-        DeviceMac=data["DeviceMac"]
-        Bed_Number=data["Bed_Number"]
-        Usertype_Id=data["Usertype_Id"]
-        hospitalId=data["hospitalId"]
        
        
         
 
        
-       
-        query1 = " update Patient_master set  spo2='" + str(spo2) + "',heartRate='" + str(heartRate) + "',highPressure='" + str(highPressure) + "',lowPressure='" + str(lowPressure) + "',pulseRate='" + str(pulseRate) + "',temperature='" + str(temperature) + "'   where PatientId = '" + str(data["PatientId"])+ "' and Status<>'2' ;"
+
+        query1 = " update Patient_master set  spo2='" + str(spo2) + "',heartRate='" + str(heartRate) + "',highPressure='" + str(highPressure) + "',lowPressure='" + str(lowPressure) + "',pulseRate='" + str(pulseRate) + "',temperature='" + str(temperature) + "'   where PatientId = '" + str(data["PatientId"])+ "'  ;"
         print(query1)
         conn=Connection()
         cursor = conn.cursor()
