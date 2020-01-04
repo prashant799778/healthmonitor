@@ -584,7 +584,7 @@ def hubdoctorLoginDashboard():
             
             count+=j["hospitalCount"]
             
-            for k in j["Hospitals"]
+            for k in j["Hospitals"]:
                 count2+=k["patient_count"]
         cursor.close()
         if data1:
