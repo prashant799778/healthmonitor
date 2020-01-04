@@ -556,7 +556,7 @@ def hubdoctorLoginDashboard():
         conn=Connection()
         cursor = conn.cursor()
         query1="   select um.ID,hm.ID as HubId,hm.HubName from HubMaster hm,userMaster um,userHubMapping uhm  where  hm.ID=uhm.hubId and uhm.userId=um.ID and um.Email" 
-        query1=query1+"  where  hm.ID=uhm.hubId and uhm.userId=um.ID and um.Email='"+str(data["Email"])+";"
+        query1=query1+"  where  hm.ID=uhm.hubId and uhm.userId=um.ID and um.Email='"+str(data["Email"])+"';"
         cursor.execute(query1)
         data1= cursor.fetchall()
         print(data1)
