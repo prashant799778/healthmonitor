@@ -135,7 +135,8 @@ def login88881():
                         print(query2)
                         cursor = conn.cursor()
                         cursor.execute(query2)
-                        Nurse = cursor.fetchall()
+                        Nurs = cursor.fetchone()
+                        Nurse.append(Nurs)
             
             DeviceMac,y9 = " ", ""
             if 'DeviceMac' in request.args:
