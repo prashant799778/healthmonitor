@@ -561,6 +561,7 @@ def hubdoctorLoginDashboard():
         cursor.execute(query1)
         data1= cursor.fetchall()
         count=0
+        count2=0
         print(data1)
         for i in data1:
             query2= "select hm.ID as HospitalId,hm.hospital_name  from Hospital_master as hm where hm.HubId='"+str(i["HubId"])+"' "
@@ -582,12 +583,13 @@ def hubdoctorLoginDashboard():
         for j in data1:
             
             count+=j["hospitalCount"]
+            count2+=j["patient_count"]
         cursor.close()
         if data1:
             # data.append({"Total_hospital":len(data)})
             # data.append({"total_patient":total_patient})
             #data= {"result":data1,"Total_hub":len(data1),"total_hospital":len(data2),"hospital":data2,"status":"true"}
-            return  {"result":data1,"totalHub":len(data1),"totalHospitals":count,"status":"true"}
+            return  {"result":data1,"totalHub":len(data1),"totalHospitals":count,"totalpatients":count2,"status":"true"}
            
         else:
             return {"result":"No Record Found","status":"true"}
