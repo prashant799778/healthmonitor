@@ -196,71 +196,71 @@ testAlert1=(type,value)=>{
 
 
         let isAlert=false;
-        let text=""
-        let textTemp:""
-        let textspo2:""
-        let textpulseRate:""
-        let textlowPressure:""
-        let texthighPressure:""
-        let textheartRate:""
+       
+        let textTemp=""
+        let textspo2=""
+        let textpulseRate=""
+        let textlowPressure=""
+        let texthighPressure=""
+        let textheartRate=""
          
         console.log("testspo",currentinnerItem.spo2+"---"+ this.state.spo2)
        
       if(this.testAlert(currentinnerItem.spo2,this.state.spo2)){
          isAlert=true;
-         text= "patient Spo2 is  too low  !!"
+         textspo2= "patient Spo2 is  too low  !!"
         }
       
         else if(this.testAlert1(currentinnerItem.spo2,this.state.spo2)){
          
           isAlert=true;
-          text= "patient Spo2 is  too high  !!"
+          textspo2= "patient Spo2 is  too high  !!"
 
          }
-        else if(this.testAlert(currentinnerItem.pulseRate,this.state.plsRate)){
+       if(this.testAlert(currentinnerItem.pulseRate,this.state.plsRate)){
          isAlert=true;
-         text= "patient Spo2 is  too low  !!"
+         textpulseRate= "patient Spo2 is  too low  !!"
         }
         else if(this.testAlert1(currentinnerItem.pulseRate,this.state.plsRate)){
           isAlert=true;
-          text= "patient Spo2 is  too  high  !!"
+          textpulseRate= "patient Spo2 is  too  high  !!"
          }
-        else if(this.testAlert(currentinnerItem.lowPressure,this.state.nibp_low)){
+       if(this.testAlert(currentinnerItem.lowPressure,this.state.nibp_low)){
          isAlert=true;
-         text= "patient Spo2 is  too low  !!"
+         textlowPressure= "patient Spo2 is  too low  !!"
         }
         else if(this.testAlert1(currentinnerItem.lowPressure,this.state.nibp_low)){
           isAlert=true;
-          text= "patient Spo2 is  too high  !!"
+          textlowPressure= "patient Spo2 is  too high  !!"
          }
-        else if(this.testAlert(currentinnerItem.highPressure,this.state.nibp_high)){
+       if(this.testAlert(currentinnerItem.highPressure,this.state.nibp_high)){
          isAlert=true;
-         text= "patient Spo2 is  too low  !!"
+         texthighPressure= "patient Spo2 is  too low  !!"
         }
         else if(this.testAlert1(currentinnerItem.highPressure,this.state.nibp_high)){
           isAlert=true;
           
-          text= "patient Spo2 is  too high !!"
+          texthighPressure= "patient Spo2 is  too high !!"
         
          }
-        else if(this.testAlert(currentinnerItem.heartRate,this.state.heartRate)){
+        if(this.testAlert(currentinnerItem.heartRate,this.state.heartRate)){
          isAlert=true;
-         text= "patient Spo2 is  too low  !!"
+         textheartRate= "patient Spo2 is  too low  !!"
         } else if(this.testAlert1(currentinnerItem.heartRate,this.state.heartRate)){
           isAlert=true;
-          text= "patient Spo2 is  too  high  !!"
-         }else  if(this.testAlert(currentinnerItem.temperature,this.state.temp)){
+          textheartRate= "patient Spo2 is  too  high  !!"
+         } if(this.testAlert(currentinnerItem.temperature,this.state.temp)){
           isAlert=true;
-          text= "patient Temparature is too low  !!"
+          textTemp= "patient Temparature is too low  !!"
          }else if(this.testAlert1(currentinnerItem.temperature,this.state.temp)){
            isAlert=true;
-           text= "patient Temparature is too high  !!"
+           textTemp= "patient Temparature is too high  !!"
           }
 
    let filter=[];
   
 
-
+   console.log("testtemp",textTemp)
 
 return(<DetailStyled>
     
@@ -276,8 +276,17 @@ return(<DetailStyled>
           <div className="row">
             <div className="col-sm-12 col-md-12">
       
-              <div className="uppr-box-card">
-                <h2 className="hading-up">home - <span>Patient Details</span></h2>
+              <div className="uppr-box-card flx-brk">
+                <h2 className="hading-up text-left">home - <span>Patient Details</span></h2>
+              {isAlert &&   <img src={alertimg} className="imgaiert"/>}
+                  <div className="msg-dc">
+  {textTemp!="" &&     <h3 className="erroe-mssh" style={{background:'green'}}>{textTemp}</h3>}
+  {textspo2!="" &&       <h3 className="erroe-mssh">{textspo2}</h3>}
+  {textpulseRate!="" &&    <h3 className="erroe-mssh" style={{background:'blue'}}>{textpulseRate}</h3>}
+  { textlowPressure!="" &&    <h3 className="erroe-mssh" style={{background:'red'}}>{textlowPressure}</h3>}
+               {texthighPressure!="" &&   <h3 className="erroe-mssh" style={{background:'#eb8c25'}}>{texthighPressure}</h3>}
+               { textheartRate!="" &&    <h3 className="erroe-mssh" style={{background:'#b030b0'}} >{textheartRate}</h3>}
+                </div>
               </div>
               <div className="wrap-patient  alrt-dt" style={{backgroundImage: 'url('+backImg+')',
       backgroundPosition: 'center',
@@ -287,17 +296,16 @@ return(<DetailStyled>
       }} >
               <div className="back-fl">
      {isAlert  &&  <div className="alrt-bx-txt">
-        <img src={alertimg} className="imgaiert"/>
-      <h2 className="txt-hd">{text}</h2>
+        {/* <img src={alertimg} className="imgaiert"/> */}
     </div>}
     </div>
                 <div className="patient-detail">
                   <div className="patient-info border-bottomm">
-                  <h2 className="patient-hading" onClick={()=>{this.props.goBack()}} style={{cursor: 'pointer'}}><font color="green">Go Back</font></h2>
+                    <h2 className="patient-hading" onClick={()=>{this.props.goBack()}} style={{cursor: 'pointer'}}><font color="green">Go Back</font></h2>
                     <h2 className="patient-hading">{currentinnerItem.PatientName}</h2>
-<h2 className="patient-hading">{'BloodGroup : '+ currentinnerItem.BloodGroup}</h2>
-<h2 className="patient-hading">{'Hospital Name : '+currentItem.hospital_name }</h2>
-<h2 className="patient-hading">{'Address : '+currentinnerItem.Address}</h2>
+                    <h2 className="patient-hading">{'BloodGroup : '+ currentinnerItem.BloodGroup}</h2>
+                    <h2 className="patient-hading">{'Hospital Name : '+currentItem.hospital_name }</h2>
+                    <h2 className="patient-hading">{'Address : '+currentinnerItem.Address}</h2>
                     <h2 className="patient-hading">{'Bed No : '+ currentinnerItem.Bed_Number}</h2>
                   </div>
                   <div className="patient-box-crd">
