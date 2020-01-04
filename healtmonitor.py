@@ -128,14 +128,15 @@ def login88881():
                     query= "select hubId as HubId from userHubMapping where   userId= '" + str(y9) + "' "
                     cursor = conn.cursor()
                     cursor.execute(query)
-                    Nur = cursor.fetchall()
+                    Nurse = cursor.fetchall()
                     print(Nur)
                     for i in Nur:
                         query2 = " select hm.ID as Hospital_Id,hm.hospital_name,hm.HubId as HubId,Hbs.HubName as HubName  from userMaster as um, userHubMapping  as mpum,HubMaster as Hbs,Hospital_master as hm  where  mpum.userId=um.ID and mpum.hubId=Hbs.ID and  hm.HubId=Hbs.ID     and hm.HubId = '" + str(i["HubId"]) + "';"
                         print(query2)
                         cursor = conn.cursor()
                         cursor.execute(query2)
-                        Nurse = cursor.fetchall()
+                        Nurse1 = cursor.fetchall()
+                        i["Hospital"]=Nurse1
                        
             
             DeviceMac,y9 = " ", ""
@@ -1415,6 +1416,8 @@ def addDoctor():
         output = {"result":"something went wrong","status":"false"}
         return output
 
+
+
 @app.route('/addHubDoctor', methods=['POST'])
 def addHubDoctor():
     try:
@@ -1534,6 +1537,7 @@ def updateDoctorMaster():
         print("Exception---->" +str(e))    
         output = {"result":"somthing went wrong","status":"false"}
         return output
+
 
 @app.route('/updateNurseMaster', methods=['POST'])
 def updateNurseMaster():
