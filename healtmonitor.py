@@ -1096,7 +1096,7 @@ def updatehubmaster():
         json1=request.get_data() 
         data=json.loads(json1.decode("utf-8")) 
         print("yy")
-        query1 = " update HubMaster set   HubName ='" + str(data[" HubName "]) + "'  , Status ='1'  where ID = '" + str(data["ID"])+ "';"
+        query1 = " update HubMaster set   HubName ='" + str(data[" HubName "]) + "' where ID = '" + str(data["ID"])+ "';"
         print(query1)
         conn=Connection()
         cursor = conn.cursor()
