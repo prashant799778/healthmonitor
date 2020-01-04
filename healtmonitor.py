@@ -600,7 +600,7 @@ def hubdoctorLoginDashboard():
             # data.append({"Total_hospital":len(data)})
             # data.append({"total_patient":total_patient})
             #data= {"result":data1,"Total_hub":len(data1),"total_hospital":len(data2),"hospital":data2,"status":"true"}
-            return  {"data1":data1,"totalHub":len(data1),"totalHospitals":count}
+            return  {"result":data1,"totalHub":len(data1),"totalHospitals":count}
            
         else:
             return {"result":"No Record Found","status":"true"}
