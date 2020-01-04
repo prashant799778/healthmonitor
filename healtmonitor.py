@@ -184,15 +184,15 @@ def login88881():
 
 
 @app.route('/login1', methods=['GET'])
-def login888811():
+def login():
     try:
         # userid = request.args['userid']
         password = request.args['password']
-        Email = request.args['Email']
+        name = request.args['name']
         
         print(name)       
           
-        query ="select  um.Email,um.ID,um.name as name,us.Usertype as Usertype,um.Usertype_Id as Usertype_Id from userMaster  as um,Usertype_master as us  where um.Usertype_Id=us.ID and  um.Email = '" + Email + "' and password='" + password + "' ;"   
+        query ="select  um.Email,um.ID,um.name as name,us.Usertype as Usertype,um.Usertype_Id as Usertype_Id from userMaster  as um,Usertype_master as us  where um.Usertype_Id=us.ID and  um.Email = '" + name + "' and password='" + password + "' ;"   
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
@@ -235,7 +235,7 @@ def login888811():
                     Nur = cursor.fetchall()
                     print(Nur)
                     for i in Nur:
-                        query2 = " select hm.ID as Hospital_Id,hm.hospital_name,hm.HubId as HubId,Hbs.HubName as HubName,um.ID as DoctorID,um.name as DoctorName,um.Email as Email,um.Gender,um.mobile from userMaster as um ,userHospitalMapping  as mpum,HubMaster as Hbs,Hospital_master as hm  where  mpum.userId=um.ID and mpum.hospitalId=hm.ID and  hm.HubId=Hbs.ID  and  um.Usertype_Id=2 and  um.Email='"+Email +"'    and hm.ID = '" + str(i["Hospital_Id"]) + "';"
+                        query2 = " select hm.ID as Hospital_Id,hm.hospital_name,hm.HubId as HubId,Hbs.HubName as HubName,um.ID as DoctorID,um.name as DoctorName,um.Email as Email,um.Gender,um.mobile from userMaster as um ,userHospitalMapping  as mpum,HubMaster as Hbs,Hospital_master as hm  where  mpum.userId=um.ID and mpum.hospitalId=hm.ID and  hm.HubId=Hbs.ID  and  um.Usertype_Id=2 and  um.Email='"+name +"'    and hm.ID = '" + str(i["Hospital_Id"]) + "';"
                         print(query2)
                         cursor = conn.cursor()
                         cursor.execute(query2)
