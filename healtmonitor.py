@@ -2392,7 +2392,7 @@ def novastore():
         Occupation=str(data["Occupation"])
         MobileNo=data["MobileNo"]
         EmailId=str(data["EmailId"])
-        print(heartRate)
+        
         BenefiteYouWant=str(data["BenefiteYouWant"])
         oftenPurchaseVegetables=str(data["oftenPurchaseVegetables"])
         PurchaseType=str(data["PurchaseType"])
