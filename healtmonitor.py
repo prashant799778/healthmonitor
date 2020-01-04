@@ -598,7 +598,7 @@ def hubdoctorLoginDashboard():
             print("jjjjjjjjj",j)
             print(count)
             print("qqqqqqqqqqqqq",j["hospitalCount"])
-            count+=count+j["hospitalCount"]
+            count+=j["hospitalCount"]
         cursor.close()
         if data1:
             # data.append({"Total_hospital":len(data)})
