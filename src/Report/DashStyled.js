@@ -494,7 +494,7 @@ export const DashStyled = styled.div`
     margin: 0px;
 }
 .text-hading {
-  font-size: 1.3rem;
+  font-size: 1rem;
   font-weight: 500;
   line-height: 1.14;
   text-align: left;
