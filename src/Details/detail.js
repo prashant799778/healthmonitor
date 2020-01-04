@@ -176,15 +176,19 @@ class Detail extends React.Component{
    testAlert=(type,value)=>{
 
 
-    if(  type &&  value!="-- -- --" &&  value!="" && type.status=="true" && (type.lower>value)  )
+    if(  type &&  value!="-- -- --" &&  value!="" && type.status=="true" && (Number(type.lower)>Number(value))  )
       { return true;}
        return false;
 }
 testAlert1=(type,value)=>{
-
-
-  if(  type &&  value!="-- -- --" &&  value!="" && type.status=="true" && (type.upper<value)  )
-    { return true;}
+  
+  console.log("testplsmmm",type.upper+"---"+this.state.plsRate)
+  if(  type &&  value!="-- -- --" &&  value!="" && type.status=="true" && (Number(type.upper)<Number(value))  )
+    { 
+      
+      console.log("testplsmmm",type.upper<value+"ggg" + type.lower+"--"+type.upper+"---"+this.state.plsRate)
+      
+      return true;}
      return false;
 }
 
@@ -218,13 +222,16 @@ testAlert1=(type,value)=>{
           textspo2= "patient Spo2 is  too high  !!"
 
          }
+         
        if(this.testAlert(currentinnerItem.pulseRate,this.state.plsRate)){
+        console.log("testpls0", currentinnerItem.pulseRate.lower+"--"+currentinnerItem.pulseRate.upper+"---"+this.state.plsRate)
          isAlert=true;
          textpulseRate= "patient PulseRate is  too low  !!"
         }
         else if(this.testAlert1(currentinnerItem.pulseRate,this.state.plsRate)){
+          console.log("testpls1", currentinnerItem.pulseRate.lower+"--"+currentinnerItem.pulseRate.upper+"---"+this.state.plsRate)
           isAlert=true;
-          textpulseRate= "patient  PulseRate is  too  high  !!"
+          textpulseRate= "patient  PulseRate is  too  highs  !!"
          }
        if(this.testAlert(currentinnerItem.lowPressure,this.state.nibp_low)){
          isAlert=true;
@@ -281,12 +288,12 @@ return(<DetailStyled>
                 <h2 className="hading-up text-left">home - <span>Patient Details</span></h2>
               {isAlert &&   <img src={alertimg} className="imgaiert"/>}
                   <div className="msg-dc">
-  {textTemp!="" &&     <h3 className="erroe-mssh" >{textTemp}</h3>}
+  {textTemp!="" &&     <h3 className="erroe-mssh" style={{background:'green'}}>{textTemp}</h3>}
   {textspo2!="" &&       <h3 className="erroe-mssh">{textspo2}</h3>}
-  {textpulseRate!="" &&    <h3 className="erroe-mssh" >{textpulseRate}</h3>}
-  { textlowPressure!="" &&    <h3 className="erroe-mssh" >{textlowPressure}</h3>}
-               {texthighPressure!="" &&   <h3 className="erroe-mssh" >{texthighPressure}</h3>}
-               { textheartRate!="" &&    <h3 className="erroe-mssh"  >{textheartRate}</h3>}
+  {textpulseRate!="" &&    <h3 className="erroe-mssh" style={{background:'blue'}}>{textpulseRate}</h3>}
+  { textlowPressure!="" &&    <h3 className="erroe-mssh" style={{background:'red'}}>{textlowPressure}</h3>}
+               {texthighPressure!="" &&   <h3 className="erroe-mssh" style={{background:'#eb8c25'}}>{texthighPressure}</h3>}
+               { textheartRate!="" &&    <h3 className="erroe-mssh" style={{background:'#b030b0'}} >{textheartRate}</h3>}
                 </div>
               </div>
               <div className="wrap-patient  alrt-dt" style={{backgroundImage: 'url('+backImg+')',
