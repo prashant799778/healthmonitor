@@ -593,7 +593,7 @@ def hubdoctorLoginDashboard():
         #         data1.remove(i)
         # for i in data1:
         #     total_patient+=len(i["patient_Details"])
-        
+        print(data1)
         for j in data1:
             print(count)
             print("qqqqqqqqqqqqq",i["hospitalCount"])
