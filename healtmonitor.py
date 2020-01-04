@@ -568,36 +568,9 @@ def hubdoctorLoginDashboard():
             i["Hospitals"]=data2
             i["hospitalCount"]=len(data2)
             
-        #     for i in data2:
-            
-        #     query2="select PatientId,hospitalId,PatientName,heartRate,spo2,highPressure,lowPressure,pulseRate,temperature,BloodGroup,DeviceMac,Bed_Number,roomNumber,Gender,age from Patient_master pm,patientDoctorMapping pdm where pm.Status<>'2' and pdm.Patient_Id=pm.PatientId " 
-        #     query2=query2+" and  pm.hospitalId='"+str(i["HospitalId"])+"';"
-        #     cursor.execute(query2)
-        #     data2= cursor.fetchall()
-        #     for j in data2:
-                
-        #         j["heartRate"]=json.loads(j["heartRate"].replace("'",'"'))
-        #         print('j["heartRate"]',j["heartRate"])
-        #         j["highPressure"]=json.loads(j["highPressure"].replace("'",'"'))
-        #         j["lowPressure"]=json.loads(j["lowPressure"].replace("'",'"'))
-        #         j["pulseRate"]=json.loads(j["pulseRate"].replace("'",'"'))
-        #         j["spo2"]=json.loads(j["spo2"].replace("'",'"'))
-        #         j["temperature"]=json.loads(j["temperature"].replace("'",'"'))
-            
-                
-        #     i["patient_Details"]=data2
-        #     i["total_patient"]=len(i["patient_Details"])
-            
-        # for i in data1:
-        #     if i["patient_Details"]==():
-        #         data1.remove(i)
-        # for i in data1:
-        #     total_patient+=len(i["patient_Details"])
         print(data1)
         for j in data1:
-            print("jjjjjjjjj",j)
-            print(count)
-            print("qqqqqqqqqqqqq",j["hospitalCount"])
+            
             count+=j["hospitalCount"]
         cursor.close()
         if data1:
