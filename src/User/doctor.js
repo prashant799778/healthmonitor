@@ -685,7 +685,7 @@ hids.push(this.state. HListId[item])
                                    
                                  
                                 }
-                                  }  value={this.state.password} className="fom-wd" type="password" name placeholder="password" />
+                                  }  value={this.state.password} className="fom-wd" type="text" name placeholder="password" />
                               
                               </div>
                              

@@ -61,7 +61,7 @@ class Login extends React.Component {
           } else {
             this.setState({
               isLogin: false,
-              err: "username or password is wrong!"
+              err: "email or password is wrong!"
             });
           }
         }
@@ -575,13 +575,13 @@ class Login extends React.Component {
                         <input  onChange={e => {
                                   this.setState({ name: e.target.value });
                                 }}
-                                value={this.state.name} type="text" className="form-control" placeholder="username" />
+                                value={this.state.name} required type="email" className="form-control" placeholder="email" />
                       </div>
                       <div className="form-group">
                         <input onChange={e => {
                                   this.setState({ pass: e.target.value });
                                 }}
-                                value={this.state.pass} type="password" className="form-control" placeholder="password" />
+                                value={this.state.pass} required type="password" className="form-control" placeholder="password" />
                       </div>
 
                               <font color="red">{this.state.err}</font>
