@@ -568,6 +568,15 @@ def hubdoctorLoginDashboard():
             data2=cursor.fetchall()
             i["Hospitals"]=data2
             i["hospitalCount"]=len(data2)
+            for k in data2:
+                query2="select PatientId,hospitalId,PatientName,heartRate,spo2,highPressure,lowPressure,pulseRate,temperature,BloodGroup,DeviceMac,Bed_Number,roomNumber,Gender,age from Patient_master pm where pm.Status<>'2' and " 
+                query2=query2+"  pm.hospitalId='"+str(k["HospitalId"])+"';"
+                cursor.execute(query2)
+                data6=cursor.fetchall()
+                k["patient_count"]=len(data6)
+               
+
+
             
         print(data1)
         for j in data1:
