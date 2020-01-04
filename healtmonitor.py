@@ -129,8 +129,8 @@ def login88881():
                     cursor = conn.cursor()
                     cursor.execute(query)
                     Nurse = cursor.fetchall()
-                    print(Nur)
-                    for i in Nur:
+                    
+                    for i in Nurse:
                         query2 = " select hm.ID as Hospital_Id,hm.hospital_name,hm.HubId as HubId,Hbs.HubName as HubName  from userMaster as um, userHubMapping  as mpum,HubMaster as Hbs,Hospital_master as hm  where  mpum.userId=um.ID and mpum.hubId=Hbs.ID and  hm.HubId=Hbs.ID     and hm.HubId = '" + str(i["HubId"]) + "';"
                         print(query2)
                         cursor = conn.cursor()
