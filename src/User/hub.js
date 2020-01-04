@@ -259,14 +259,10 @@ alert("User Created Successfully")
     updatetapi=()=>{
       
      
-     let api="http://159.65.146.25:5053/allPatient"
+     let api="http://159.65.146.25:5053/updatehubmaster"
      let json={
-       "username":this.state.name,
-       "email":this.state.email,
-       "password":this.state.pass,
-       "usertype":this.state.type,
-       "gender":this.state.gen,
-       "userid":this.state.userid
+      "HubName":this.state.name,
+       "ID":this.state.userid
      }
    
       axios.post(api,json)
@@ -399,8 +395,8 @@ alert("User Created Successfully")
                   </div>
                 <div className="btn-section box-bg-color spc-bottom-1-padding">
                 {!this.state.isEdit &&    <button type="reset" onClick={()=>{this.reset()}} className="add-btn spc-right">Reset</button>}
-                  <button type="button"  onClick={()=>{this.submitapi()}} className="add-btn">{this.state.isEdit ? "update" :"save" } </button>
-          
+                                {!this.state.isEdit && <button type="button"  onClick={()=>{this.submitapi()}} className="add-btn">{"save" } </button>  }
+                                {this.state.isEdit && <button type="button"  onClick={()=>{this. updatetapi()}} className="add-btn">{ "update"} </button>  }
                              
                 </div>
               </div>
@@ -629,7 +625,7 @@ return (
               <footer className="sticky-footer bg-white">
                 <div className="container my-auto">
                   <div className="copyright text-center my-auto">
-                    <span>Copyright ©fourbrick 2019</span>
+                    <span>Copyright ©Digitology Healthtech Pvt. Ltd. 2020</span>
                   </div>
                 </div>
               </footer>

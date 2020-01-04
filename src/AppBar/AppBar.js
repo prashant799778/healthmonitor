@@ -29,9 +29,10 @@ export default class AppBar extends React.Component{
     return(
         <nav className="navbar navbar-expand navbar-light topbar mb-4 new-background-color border-bt">
         {/* Sidebar Toggle (Topbar) */}
+
         <button  onClick={()=>{this.change()}} id="sidebarToggleTop" className="btn btn-link d-md-none rounded-circle mr-3 up-btn">
           <i className="fa fa-bars" />
-        </button>
+    </button>   
         {/* Topbar Search */}
         <form className="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
           {/*  <div class="input-group">
@@ -100,7 +101,7 @@ export default class AppBar extends React.Component{
                   }} >
             <a className="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               {/* <span className="mr-2 d-none d-lg-inline text-gray-600 small sp-c">Admin</span> */}
-              <img className="img-profile rounded-circle" src="img/logo.PNG" />
+              <img className="img-profile rounded-circle" src={require("./user.png")} />
             
             </a></li>         
           <li className="nav-item dropdown no-arrow log-out">

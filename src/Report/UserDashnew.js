@@ -129,7 +129,7 @@ currentItem:"" ,
     <div class="row">
           <div class="col-sm-12 col-md-12">
             <div class="page-hadding">
-              <h2>Dashborad</h2>
+              <h2>Dashboard</h2>
               <h3>Monitoring </h3>
             </div>
           </div>
@@ -211,7 +211,7 @@ currentItem:"" ,
               <footer className="sticky-footer new-background-color">
                 <div className="container my-auto">
                   <div className="copyright text-center my-auto">
-                    <span>Copyright ©fourbrick 2019</span>
+                    <span>Copyright ©Digitology Healthtech Pvt. Ltd. 2020</span>
                   </div>
                 </div>
               </footer>

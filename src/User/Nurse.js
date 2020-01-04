@@ -530,7 +530,7 @@ isValid:true,emailError:false,
                      <form onSubmit={this.uploadHandler} style={{background:'#26293B'}}  > <div className="adduser fadeInLeft animated" style={{background:'#26293B'}}  > {/* Card user */}              
                         <div className="icon-bx pd">
                           <h6 className="m-0 text-black">
-                          <font color="white">Add Doctor</font>
+                          <font color="white">Add Nurse</font>
                             
                           </h6>
                       
@@ -574,7 +574,7 @@ isValid:true,emailError:false,
                               </div>
                              
                               <div className="col-sm-12 col-md-3 innr-bx">
-                                <label className="title-fom"><font color="white">Nursename</font></label>
+                                <label className="title-fom"><font color="white">Nurse Name</font></label>
                                 <input required   onChange={(e)=>{
                                
                                 if(e.target.value.length < 25){
@@ -684,7 +684,7 @@ isValid:true,emailError:false,
                     <div className="col-sm-12 col-md-12">
                       <div   style={{background:'#26293B'}} className="card mb-4">
                         <div className="card-header py-3 d-flex justify-content-between"  style={{background:'#26293B'}}>
-                          <h6  className="m-0 text-white">NurseList</h6>
+                          <h6  className="m-0 text-white">Nurse List</h6>
                           {/* <div className="icon-bx">
                             <ul>
                               <li><i className="fas fa-chevron-down" /></li>
@@ -698,8 +698,8 @@ isValid:true,emailError:false,
                             <table style={{color:'aliceblue'}} className="table table-striped table-bordered innr-table" id="dataTable" width="100%" cellSpacing={0}>
                               <thead  style={{background:'#26293B'}}>
                                 <tr  style={{background:'#1E1E2F',color:'#FFFFFF'}}>
-                                  <th style={{textAlign:"center",color:'aliceblue'}}>NurseID</th>
-                                  <th style={{textAlign:"center",color:'aliceblue'}}>NurseName</th>
+                                  <th style={{textAlign:"center",color:'aliceblue'}}>Nurse ID</th>
+                                  <th style={{textAlign:"center",color:'aliceblue'}}>Nurse Name</th>
                                   <th style={{textAlign:"center",color:'aliceblue'}}>Hub Name</th>
                                   <th style={{textAlign:"center",color:'aliceblue'}}>Hospital Name</th>
                                   <th style={{textAlign:"center",color:'aliceblue'}}>Gender</th>
@@ -778,7 +778,7 @@ isValid:true,emailError:false,
               <footer className="sticky-footer bg-white">
                 <div className="container my-auto">
                   <div className="copyright text-center my-auto">
-                    <span>Copyright ©fourbrick 2019</span>
+                    <span>Copyright ©Digitology Healthtech Pvt. Ltd. 2020</span>
                   </div>
                 </div>
               </footer>
