@@ -395,7 +395,7 @@ isValid:true,emailError:false,
                             error1:'',err:"",emailError:false,
                           isList:this.state.isList?false:true,isEdit:this.state.isList?false:this.state.isEdit})
                           }}>
-            {this.state.isList && <span style={{color:'#ffffff'}} className="adu"><i className="fas fa-plus" />Add Paitent</span>}
+            {this.state.isList && <span style={{color:'#ffffff'}} className="adu"><i className="fas fa-plus" />Add Patient</span>}
             
             {!this.state.isList &&  <span style={{color:'#ffffff'}} className="adu">Cancel</span>}
                          
@@ -410,13 +410,13 @@ isValid:true,emailError:false,
                      <form onSubmit={this.uploadHandler} style={{background:'#26293B'}}  > <div className="adduser fadeInLeft animated" style={{background:'#26293B'}}  > {/* Card user */}              
                         <div className="icon-bx pd">
                           <h6 className="m-0 text-black">
-                          <font color="white">Add Paitent</font>
+                          <font color="white">Add Patient</font>
                             
                           </h6>
                       
                         </div>
                         <div style={{background:'#26293B'}}   className="info-headding">
-                          <h6 className="m-0 text-black"><font color="white">Paitent Information</font></h6>
+                          <h6 className="m-0 text-black"><font color="white">Patient Information</font></h6>
                           <span className="line" />
                         </div>
 
@@ -424,7 +424,7 @@ isValid:true,emailError:false,
                           <div style={{background:'#26293B'}}  className="container form-box">
                             <div className="row">
                               <div className="col-sm-12 col-md-3 innr-bx">
-                                <label className="title-fom"><font color="white">Paitent name</font></label>
+                                <label className="title-fom"><font color="white">Patient name</font></label>
                                 <input required   onChange={(e)=>{
                                
                                 if(e.target.value.length < 25){
@@ -643,7 +643,7 @@ isValid:true,emailError:false,
                     <div className="col-sm-12 col-md-12">
                       <div   style={{background:'#26293B'}} className="card mb-4">
                         <div className="card-header py-3 d-flex justify-content-between"  style={{background:'#26293B'}}>
-                          <h6  className="m-0 text-white">Paitent List</h6>
+                          <h6  className="m-0 text-white">Patient List</h6>
                           {/* <div className="icon-bx">
                             <ul>
                               <li><i className="fas fa-chevron-down" /></li>
@@ -657,8 +657,8 @@ isValid:true,emailError:false,
                             <table style={{color:'aliceblue'}} className="table table-striped table-bordered innr-table" id="dataTable" width="100%" cellSpacing={0}>
                               <thead  style={{background:'#26293B'}}>
                                 <tr  style={{background:'#1E1E2F',color:'#FFFFFF'}}>
-                                  <th style={{textAlign:"center",color:'aliceblue'}}>Paitent Id</th>
-                                  <th style={{textAlign:"center",color:'aliceblue'}}>Paitent Name</th>
+                                  <th style={{textAlign:"center",color:'aliceblue'}}>Patient Id</th>
+                                  <th style={{textAlign:"center",color:'aliceblue'}}>Patient Name</th>
                                   <th style={{textAlign:"center",color:'aliceblue'}}>Gender</th>
                                   <th style={{textAlign:"center",color:'aliceblue'}}>Device Allocated</th>
                                   <th style={{textAlign:"center",color:'aliceblue'}}>Hospital name</th>
