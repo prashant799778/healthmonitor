@@ -280,12 +280,12 @@ return(<DetailStyled>
                 <h2 className="hading-up text-left">home - <span>Patient Details</span></h2>
               {isAlert &&   <img src={alertimg} className="imgaiert"/>}
                   <div className="msg-dc">
-  {textTemp!="" &&     <h3 className="erroe-mssh" style={{background:'green'}}>{textTemp}</h3>}
+  {textTemp!="" &&     <h3 className="erroe-mssh" >{textTemp}</h3>}
   {textspo2!="" &&       <h3 className="erroe-mssh">{textspo2}</h3>}
-  {textpulseRate!="" &&    <h3 className="erroe-mssh" style={{background:'blue'}}>{textpulseRate}</h3>}
-  { textlowPressure!="" &&    <h3 className="erroe-mssh" style={{background:'red'}}>{textlowPressure}</h3>}
-               {texthighPressure!="" &&   <h3 className="erroe-mssh" style={{background:'#eb8c25'}}>{texthighPressure}</h3>}
-               { textheartRate!="" &&    <h3 className="erroe-mssh" style={{background:'#b030b0'}} >{textheartRate}</h3>}
+  {textpulseRate!="" &&    <h3 className="erroe-mssh" >{textpulseRate}</h3>}
+  { textlowPressure!="" &&    <h3 className="erroe-mssh" >{textlowPressure}</h3>}
+               {texthighPressure!="" &&   <h3 className="erroe-mssh" >{texthighPressure}</h3>}
+               { textheartRate!="" &&    <h3 className="erroe-mssh"  >{textheartRate}</h3>}
                 </div>
               </div>
               <div className="wrap-patient  alrt-dt" style={{backgroundImage: 'url('+backImg+')',
