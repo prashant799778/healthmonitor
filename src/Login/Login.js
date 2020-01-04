@@ -56,6 +56,8 @@ class Login extends React.Component {
                 this.props.history.push("/home");
               }else if(res.Usertype_Id==4) {
                 this.props.history.push("/Odash");
+              }else if(res.Usertype_Id==5) {
+                this.props.history.push("/hubdash");
               }
             });
           } else {
@@ -253,6 +255,9 @@ class Login extends React.Component {
     }else if (localStorage.getItem("login", "no") === "yes" && 
     localStorage.getItem("user_type_id", "") == 4) {
       this.props.history.push("/Odash");
+    }else if (localStorage.getItem("login", "no") === "yes" && 
+    localStorage.getItem("user_type_id", "") == 5) {
+      this.props.history.push("/hubdash");
     }
     return (
       <LoginStyled>

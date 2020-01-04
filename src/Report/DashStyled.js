@@ -2,6 +2,90 @@ import styled from 'styled-components'
 
 export const DashStyled = styled.div`
 
+.side-bg-color{
+  background: #25293b;
+}
+.hub-hading{
+font-size: 11px;
+font-weight: 500;
+line-height: 1.18;
+text-align: left;
+color: #9fadb5;
+border-bottom: 1px solid gray;
+padding: 15px;
+text-transform: capitalize;
+}
+.hub-innnr-box-wrap {
+display: grid;
+grid-template-columns: 1fr 1fr 1fr;
+margin: 0 15px;
+grid-gap: 15px;
+}
+.innr-hub-txt {
+margin: 0px;
+font-size: 1rem;
+color: #9fadb5;
+text-transform: capitalize;
+font-weight: 400;
+margin-bottom: 10px;
+}
+.hb-wrap-box {
+padding: 10px;
+display: grid;
+grid-template-columns: 1fr 1fr 1fr;
+grid-gap: 10px;
+}
+.hb-box{
+background:'#E74B4A';
+cursor:'pointer';
+}
+.hb-box h4 {
+font-size: 15px;
+text-transform: capitalize;
+line-height: 20px;
+margin: 0px;
+background: #3e6d60;
+margin-top: 10px;
+color: #fff;
+font-weight: 400;
+text-align: center;
+padding: 5px 0;
+}
+.wrap-wrap {
+border: 1px solid gray;
+}
+
+.btn-wrap-pagenation {
+text-align: center;
+margin: 10px 0 15px 0;
+}
+.btn-wrap-pagenation .next-btn {
+border-radius: 2.5px;
+border: solid 0.5px #ff6a07;
+background-color: #1e1e2f;
+padding: 5px 20px;
+color: #ff6a07;
+text-transform: capitalize;
+}
+.btn-wrap-pagenation button {
+background: transparent;
+border: none;
+border: 1px solid gray;
+}
+.btn-wrap-pagenation button img {
+width: 15px;
+height: 15px;
+object-fit: contain;
+margin-bottom: 4px;
+}
+.left{
+transform: rotate(180deg);
+}
+
+
+
+
+
 
 
 .asd{

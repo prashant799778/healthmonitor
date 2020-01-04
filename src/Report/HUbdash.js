@@ -23,6 +23,9 @@ class UserDash extends React.Component {
   constructor() {
     super();
     this.state = {
+        cHname:"",
+        cId:"",
+      isHub:true, 
       hospitalList:"",
 totalHospitalCount:"",
 totalPatientCount:"",
@@ -65,7 +68,7 @@ currentItem:"" ,
             if (res && res.data && res.data.status=="true") {
                 let data=res.data;
                 console.log("dashboardHub",data.totalHub)
-     this.setState({ totalHospitalCount:  data.totalHospitals,totalPatientCount:"",totalHubCount:data.totalHub,hospitalList:data.result})
+     this.setState({ totalHospitalCount:  data.totalHospitals,totalPatientCount:data.totalpatients,totalHubCount:data.totalHub,hospitalList:data.result})
      
     
   
@@ -80,7 +83,7 @@ currentItem:"" ,
     callApiNew=(page_no) => {
       this.setState({paitentList:""})
       let jsons={
-    "hospital_Id":1,
+    "hospital_Id":this.state.cId,
       "startlimit":((this.state.per_page*page_no) -this.state.per_page)+1,
       "endlimit":this.state.per_page
       }
@@ -108,7 +111,7 @@ currentItem:"" ,
     componentDidMount() {
         this.callApi()
 
-     this.callApiNew(this.state.activePage)
+   
 
 
     }
@@ -124,14 +127,23 @@ currentItem:"" ,
     console.log("click")
     this.setState({isDetail:!this.state.isDetail,currentinnerItem:innerItem,currentTopic:innerItem.ID+"",currentItem:item})
   }
+  setId=(id,name)=>{
+      this.setState({cId:id,isHub:false,cHname:name},()=>{
+        this.callApiNew(this.state.activePage)
+      })
+     
+  }
 
+  go=()=>{
+    this.setState({isHub:true});
+  }
   render(){
       
     
     
-//     if(localStorage.getItem("user_type_id","")!=4)
-//   { history.push('/')
-//    window.location.reload();}
+    if(localStorage.getItem("user_type_id","")!=5)
+  { history.push('/')
+   window.location.reload();}
 let totalHubCount=this.state.totalHubCount;
  let totalHospitalCount=this.state.totalHospitalCount;
  let totalPatientCount=this.state.totalPatientCount;
@@ -190,7 +202,7 @@ let totalHubCount=this.state.totalHubCount;
               </div>
             </div>
           </div>
-       
+       (
        
           <div class="col-sm-6 col-md-3 col-12">
             <div class="info-card box-bg-color">
@@ -208,16 +220,66 @@ let totalHubCount=this.state.totalHubCount;
       
       
         </div> 
+ 
+{/* start hub */}
+{ this.state.isHub && 
 
+<div className="hub-card-container">
+<div className="container">
+  <div className="row">
+    <div className="col-sm-12 col-md-12">
+      <div className="hub-card-box side-bg-color">
+        <h2 className="hub-hading">hub</h2>
+        <div className="hub-innnr-box-wrap">
+
+            {Array.isArray(this.state. hospitalList) &&  this.state. hospitalList.map((item,i)=>{
+
+return( <div className="hub-show">
+            <h3 className="innr-hub-txt">{item.HubName}</h3>
+<div className="wrap-wrap">
+  <div className="hb-wrap-box">
+ 
+  {Array.isArray(item.Hospitals) &&   item.Hospitals.map((itm,j)=>{return(<div onClick={()=>this.setId(itm.HospitalId,itm.hospital_name)}  style={{cursor:'pointer'}} className="hb-box">
+  <h4 style={{background:'#1E1E2F'}}>{itm.hospital_name}</h4>
+    </div>
+   )})}
+
+     
+  
+  
+  </div>
+  {/* <div className="btn-wrap-pagenation">
+    <button type="button"><img src="right.svg" className="left" /></button>
+    <button type="button"><img src="right.svg" /></button>
+  </div> */}
+</div>
+</div>
+)
+
+            })
+         
+            }
         
-      <div class="row">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+}
+ {/* end hub */}
+        
+{ !this.state.isHub &&   <div class="row">
   
        
         
         <div class="col-12 col-sm-12 col-md-12"  >
         <div class="new-box box-bg-color">
           <div class="up-side-box">
-      <h2 class="text-hd">{ localStorage.getItem("hospital_name","")}</h2>
+
+      <h2 class="text-hd">{this.state.cHname}</h2>
+      <h2  style={{cursor:'pointer',color:'red'}}  onClick={()=>{this.go()}} class="text-hd">Go Back</h2>
             {/* <h2 class="text-hd">{'Pateints :'+item.total_patient}</h2> */}
           </div>
          
@@ -241,7 +303,9 @@ let totalHubCount=this.state.totalHubCount;
     
         
       </div>
-    </div>
+  }
+  
+  </div> 
  
   </div>
 </div> 
