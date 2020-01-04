@@ -555,42 +555,47 @@ def hubdoctorLoginDashboard():
         print(data)
         conn=Connection()
         cursor = conn.cursor()
-        query1=" select um.ID, hsm.hospital_name,hsm.ID as HospitalId,hm.ID as HubId,hm.HubName from HubMaster hm,Hospital_master hsm,userMaster um,userHospitalMapping uhm" 
-        query1=query1+" where hm.ID=hsm.HubId and hsm.ID=uhm.hospitalId and uhm.userId=um.ID and hm.ID='"+str(data["HubId"])+"';"
+        query1="   select um.ID,hm.ID as HubId,hm.HubName from HubMaster hm,userMaster um,userHubMapping uhm  where  hm.ID=uhm.hubId and uhm.userId=um.ID and um.Email" 
+        query1=query1+"  where  hm.ID=uhm.hubId and uhm.userId=um.ID and um.Email='"+str(data["Email"])+"';"
         cursor.execute(query1)
         data1= cursor.fetchall()
         print(data1)
-        total_patient=0
         for i in data1:
-            
-            query2="select PatientId,hospitalId,PatientName,heartRate,spo2,highPressure,lowPressure,pulseRate,temperature,BloodGroup,DeviceMac,Bed_Number,roomNumber,Gender,age from Patient_master pm,patientDoctorMapping pdm where pm.Status<>'2' and pdm.Patient_Id=pm.PatientId " 
-            query2=query2+" and pdm.doctorId='"+str(i["ID"]) +"' and pm.hospitalId='"+str(i["HospitalId"])+"';"
+            query2= "select hm.ID as HospitalId,hm.hospital_name,hm.HubId  from Hospital_master as hm where hm.HubId='"+str(i["HubId"])+"' "
             cursor.execute(query2)
-            data2= cursor.fetchall()
-            for j in data2:
+            data2=cursor.fetchall()
+            i["HospitalId"]=data2
+            
+        #     for i in data2:
+            
+        #     query2="select PatientId,hospitalId,PatientName,heartRate,spo2,highPressure,lowPressure,pulseRate,temperature,BloodGroup,DeviceMac,Bed_Number,roomNumber,Gender,age from Patient_master pm,patientDoctorMapping pdm where pm.Status<>'2' and pdm.Patient_Id=pm.PatientId " 
+        #     query2=query2+" and  pm.hospitalId='"+str(i["HospitalId"])+"';"
+        #     cursor.execute(query2)
+        #     data2= cursor.fetchall()
+        #     for j in data2:
                 
-                j["heartRate"]=json.loads(j["heartRate"].replace("'",'"'))
-                print('j["heartRate"]',j["heartRate"])
-                j["highPressure"]=json.loads(j["highPressure"].replace("'",'"'))
-                j["lowPressure"]=json.loads(j["lowPressure"].replace("'",'"'))
-                j["pulseRate"]=json.loads(j["pulseRate"].replace("'",'"'))
-                j["spo2"]=json.loads(j["spo2"].replace("'",'"'))
-                j["temperature"]=json.loads(j["temperature"].replace("'",'"'))
+        #         j["heartRate"]=json.loads(j["heartRate"].replace("'",'"'))
+        #         print('j["heartRate"]',j["heartRate"])
+        #         j["highPressure"]=json.loads(j["highPressure"].replace("'",'"'))
+        #         j["lowPressure"]=json.loads(j["lowPressure"].replace("'",'"'))
+        #         j["pulseRate"]=json.loads(j["pulseRate"].replace("'",'"'))
+        #         j["spo2"]=json.loads(j["spo2"].replace("'",'"'))
+        #         j["temperature"]=json.loads(j["temperature"].replace("'",'"'))
             
                 
-            i["patient_Details"]=data2
-            i["total_patient"]=len(i["patient_Details"])
+        #     i["patient_Details"]=data2
+        #     i["total_patient"]=len(i["patient_Details"])
             
-        for i in data1:
-            if i["patient_Details"]==():
-                data1.remove(i)
-        for i in data1:
-            total_patient+=len(i["patient_Details"])
+        # for i in data1:
+        #     if i["patient_Details"]==():
+        #         data1.remove(i)
+        # for i in data1:
+        #     total_patient+=len(i["patient_Details"])
         cursor.close()
         if data1:
             # data.append({"Total_hospital":len(data)})
             # data.append({"total_patient":total_patient})
-            data= {"result":data1,"Total_hospital":len(data1),"total_patient":total_patient,"status":"true"}
+            data= {"result":data1,"Total_hub":len(data1),"total_hospital":len(data2),"hospital":data2,"status":"true"}
             return json.loads(json.dumps(data))
            
         else:
