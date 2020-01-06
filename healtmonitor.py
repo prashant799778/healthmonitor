@@ -1103,7 +1103,7 @@ def updatehubmaster():
         json1=request.get_data() 
         data=json.loads(json1.decode("utf-8")) 
         print("yy")
-        query1 = " update HubMaster set   HubName ='" + str(data[" HubName "]) + "'  , Status ='1'  where ID = '" + str(data["ID"])+ "';"
+        query1 = " update HubMaster set   HubName ='" + str(data["HubName"]) + "' where ID = '" + str(data["ID"])+ "';"
         print(query1)
         conn=Connection()
         cursor = conn.cursor()
@@ -2386,7 +2386,47 @@ def update():
         output = {"result":"somthing went wrong","status":"false"}
         return output
 
+#novastore
+@app.route('/novastore', methods=['POST'])
+def novastore():
+    try:
+         
+        json1=request.get_data()
+        
+        # data=json.loads(json1.decode("utf-8")) 
+        data=json.loads(json1.decode("utf-8"))
+        print(data)
+        Name=str(data["Name"])
+        Occupation=str(data["Occupation"])
+        MobileNo=data["MobileNo"]
+        EmailId=str(data["EmailId"])
+        
+        BenefiteYouWant=str(data["BenefiteYouWant"])
+        oftenPurchaseVegetables=str(data["oftenPurchaseVegetables"])
+        PurchaseType=str(data["PurchaseType"])
+        productsdelivered=data["productsdelivered"]
+        timetopurchase=data["timetopurchase"]
+        whatsupgroup=data["whatsupgroup"]
+        gift=data["gift"]
+      
 
+        query2  = " insert into novaFeedback(Name,Occupation,MobileNo,EmailId,BenefiteYouWant,oftenPurchaseVegetables,PurchaseType,productsdelivered,timetopurchase,whatsupgroup,gift)"
+        query2 =query2 +" values('"+str(Name)+"','"+str(Occupation)+"','"+str(MobileNo)+"','"+str(EmailId)+"','"+str(BenefiteYouWant)+"','"
+        query2=query2+str(oftenPurchaseVegetables)+"','"+str(PurchaseType)+"','"+str(productsdelivered)+"','"+str(timetopurchase)+"','"+str(whatsupgroup)+"','"+str(gift)+"');"
+        
+        
+        print(query2)
+        print("222222222222")
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query2)
+        conn.commit()
+        cursor.close()
+        return {"result":"Data inserted  successfully","status":"true"}
+    except Exception as e :
+        print("Exception---->" +str(e))    
+        output = {"result":"somthing went wrong","status":"false"}
+        return output
 
  
 if __name__ == "__main__":
