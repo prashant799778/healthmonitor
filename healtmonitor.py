@@ -298,15 +298,16 @@ def login():
                 cursor.execute(query2)
                 PatientData= cursor.fetchone()
 
-            cursor.close()
+           
             
             if PatientData !=None:
-                
+
                 Count= 1
             
             else:
-                
                 Count=0
+
+            cursor.close()
 
             data={"status":"true","result":loginuser[0],"Nurse Details":Nurse,"Patient Details":PatientData,"Count":Count}                      
             return data
