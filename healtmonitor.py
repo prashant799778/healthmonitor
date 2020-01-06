@@ -285,6 +285,8 @@ def login():
                 cursor.execute(query3)
                 PatientData= cursor.fetchone()
                 print("PatientData==============================",PatientData)
+                print(PatientData)
+
                 PatientData["heartRate"]=json.loads(PatientData["heartRate"].replace("'",'"'))
                 PatientData["highPressure"]=json.loads(PatientData["highPressure"].replace("'",'"'))
                 PatientData["lowPressure"]=json.loads(PatientData["lowPressure"].replace("'",'"'))
@@ -299,7 +301,7 @@ def login():
 
             cursor.close()
             
-            if PatientData != None:
+            if PatientData !=None:
                 
                 Count= 1
             
