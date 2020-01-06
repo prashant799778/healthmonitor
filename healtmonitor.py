@@ -284,7 +284,7 @@ def login():
                 cursor = conn.cursor()
                 cursor.execute(query3)
                 PatientData= cursor.fetchone()
-
+                print("PatientData==============================",PatientData)
                 PatientData["heartRate"]=json.loads(PatientData["heartRate"].replace("'",'"'))
                 PatientData["highPressure"]=json.loads(PatientData["highPressure"].replace("'",'"'))
                 PatientData["lowPressure"]=json.loads(PatientData["lowPressure"].replace("'",'"'))
