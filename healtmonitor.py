@@ -276,10 +276,10 @@ def login():
             if 'DeviceMac' in request.args:
                 DeviceMac=request.args["DeviceMac"]
 
-            if DeviceMac != "":
+            if DeviceMac !="":
                 query3 ="select  PM.PatientId as PatientId,PM.PatientName,PM.heartRate,PM.highPressure,PM.lowPressure,PM.pulseRate,PM.spo2,PM.temperature,um.name as Doctorname,PM.PhoneNo,PM.Address,PM.hospitalId as Hospital_Id,PM.BloodGroup,PM.DeviceMac,Hm.HubId,Hm.hospital_name  as hospital_Name,"
                 query3=query3+" PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.age,PM.Gender,PM.roomNumber,pdm.DoctorID as DoctorID"
-                query3= query3+ "  from userMaster as um,Patient_master as PM,patientDoctorMapping as pdm,Hospital_master as Hm,HubMaster as Hbs  where pdm.doctorId=um.ID and  PM.hospitalId=Hm.ID and Hm.HubId=Hbs.ID and  pdm.Patient_Id=PM.PatientId  and PM.Status<>'2'  and PM.Usertype_Id='" + str(y3) + "' and PM.DeviceMac='"+str(DeviceMac)+ "'  ORDER BY  PatientId DESC ;"
+                query3= query3+ "  from userMaster as um,Patient_master as PM,patientDoctorMapping as pdm,Hospital_master as Hm,HubMaster as Hbs  where pdm.doctorId=um.ID and  PM.hospitalId=Hm.ID and Hm.HubId=Hbs.ID and  pdm.Patient_Id=PM.PatientId  and PM.Status<>'2'  and PM.Usertype_Id='" + str(y3) + "' and PM.DeviceMac='"+str(DeviceMac)+"'   ;"
                 print(query3)
                 cursor = conn.cursor()
                 cursor.execute(query3)
