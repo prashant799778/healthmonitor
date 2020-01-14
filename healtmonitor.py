@@ -327,161 +327,162 @@ def login():
 
 
 
-@app.route('/login1', methods=['GET'])
-def login1():
-    try:
-        # userid = request.args['userid']
-        password = request.args['password']
-        name = request.args['name']
-        Name=name
+# @app.route('/login1', methods=['GET'])
+# def login1():
+#     try:
+#         # userid = request.args['userid']
+#         password = request.args['password']
+#         name = request.args['name']
+#         Name=name
         
              
           
-        query ="select  um.Email,um.ID,um.name as name,us.Usertype as Usertype,um.Usertype_Id as Usertype_Id from userMaster  as um,Usertype_master as us  where um.Usertype_Id=us.ID and  um.Email = '" + name + "' and password='" + password + "' and um.Status<>'2' ;"   
-        conn=Connection()
-        cursor = conn.cursor()
-        cursor.execute(query)
-        loginuser = cursor.fetchall()
-        print("11111111111",loginuser)
-        count=0
+#         query ="select  um.Email,um.ID,um.name as name,us.Usertype as Usertype,um.Usertype_Id as Usertype_Id from userMaster  as um,Usertype_master as us  where um.Usertype_Id=us.ID and  um.Email = '" + name + "' and password='" + password + "' and um.Status<>'2' ;"   
+#         conn=Connection()
+#         cursor = conn.cursor()
+#         cursor.execute(query)
+#         loginuser = cursor.fetchall()
+#         print("11111111111",loginuser)
+       
 
 
-        if loginuser==():
+#         if loginuser==():
+#             count=0
             
-            if (name == Name):
-                count+=count
-                if count ==3:
-                    query="update userMaster set Status='2' where Email='" + name + "' "
-                    cursor.execute(query)
-                    conn.commit()
-                    data={"status":"false","result":" Access Denied,Please Contact admin"}
-                    return data
+#             if (name == Name):
+#                 count+=count
+#                 if count ==3:
+#                     query="update userMaster set Status='2' where Email='" + name + "' "
+#                     cursor.execute(query)
+#                     conn.commit()
+#                     data={"status":"false","result":" Access Denied,Please Contact admin"}
+#                     return data
 
 
-            else:
-                data={"status":"false","result":"Login Failed"}
-                return data
+#             else:
+#                 data={"status":"false","result":"Login Failed"}
+#                 return data
 
-        else:
-            for d in loginuser:
-                y9=d["ID"]
-                y=  d["Usertype"]
-                y3= d["Usertype_Id"]
-                Nurse=""
+#         else:
+#             for d in loginuser:
+#                 y9=d["ID"]
+#                 y=  d["Usertype"]
+#                 y3= d["Usertype_Id"]
+#                 Nurse=""
 
-                if  d["Usertype"]== 'Nurse':
+#                 if  d["Usertype"]== 'Nurse':
                     
                     
-                    query= "select hospitalId as Hospital_Id from userHospitalMapping where Usertype_Id=3 and  userId= '" + str(y9) + "' "
-                    cursor = conn.cursor()
-                    cursor.execute(query)
-                    Nur = cursor.fetchone()
-                    y2=Nur["Hospital_Id"]
-                    query2 = " select hm.ID as Hospital_Id,hm.hospital_name,hm.HubId as HubId,Hbs.HubName as HubName,um.ID as DoctorID,um.name as DoctorName,um.Email as Email,um.Gender,um.mobile from userMaster as um ,userHospitalMapping  as mpum,HubMaster as Hbs,Hospital_master as hm  where  mpum.userId=um.ID and mpum.hospitalId=hm.ID and  hm.HubId=Hbs.ID  and  um.Usertype_Id=2  and hm.ID = '" + str(y2) + "';"
-                    print(query2)
-                    cursor = conn.cursor()
-                    cursor.execute(query2)
-                    Nurse = cursor.fetchall()
+#                     query= "select hospitalId as Hospital_Id from userHospitalMapping where Usertype_Id=3 and  userId= '" + str(y9) + "' "
+#                     cursor = conn.cursor()
+#                     cursor.execute(query)
+#                     Nur = cursor.fetchone()
+#                     y2=Nur["Hospital_Id"]
+#                     query2 = " select hm.ID as Hospital_Id,hm.hospital_name,hm.HubId as HubId,Hbs.HubName as HubName,um.ID as DoctorID,um.name as DoctorName,um.Email as Email,um.Gender,um.mobile from userMaster as um ,userHospitalMapping  as mpum,HubMaster as Hbs,Hospital_master as hm  where  mpum.userId=um.ID and mpum.hospitalId=hm.ID and  hm.HubId=Hbs.ID  and  um.Usertype_Id=2  and hm.ID = '" + str(y2) + "';"
+#                     print(query2)
+#                     cursor = conn.cursor()
+#                     cursor.execute(query2)
+#                     Nurse = cursor.fetchall()
 
                 
-                if  d["Usertype"]== 'Doctor':
+#                 if  d["Usertype"]== 'Doctor':
                     
-                    Nurse=[]
-                    query= "select hospitalId as Hospital_Id from userHospitalMapping where  Usertype_Id=2 and userId= '" + str(y9) + "' "
-                    cursor = conn.cursor()
-                    cursor.execute(query)
-                    Nur = cursor.fetchall()
-                    print(Nur)
-                    for i in Nur:
-                        query2 = " select hm.ID as Hospital_Id,hm.hospital_name,hm.HubId as HubId,Hbs.HubName as HubName,um.ID as DoctorID,um.name as DoctorName,um.Email as Email,um.Gender,um.mobile from userMaster as um ,userHospitalMapping  as mpum,HubMaster as Hbs,Hospital_master as hm  where  mpum.userId=um.ID and mpum.hospitalId=hm.ID and  hm.HubId=Hbs.ID  and  um.Usertype_Id=2 and  um.Email='"+name +"'    and hm.ID = '" + str(i["Hospital_Id"]) + "';"
-                        print(query2)
-                        cursor = conn.cursor()
-                        cursor.execute(query2)
-                        Nurs = cursor.fetchone()
-                        Nurse.append(Nurs)
+#                     Nurse=[]
+#                     query= "select hospitalId as Hospital_Id from userHospitalMapping where  Usertype_Id=2 and userId= '" + str(y9) + "' "
+#                     cursor = conn.cursor()
+#                     cursor.execute(query)
+#                     Nur = cursor.fetchall()
+#                     print(Nur)
+#                     for i in Nur:
+#                         query2 = " select hm.ID as Hospital_Id,hm.hospital_name,hm.HubId as HubId,Hbs.HubName as HubName,um.ID as DoctorID,um.name as DoctorName,um.Email as Email,um.Gender,um.mobile from userMaster as um ,userHospitalMapping  as mpum,HubMaster as Hbs,Hospital_master as hm  where  mpum.userId=um.ID and mpum.hospitalId=hm.ID and  hm.HubId=Hbs.ID  and  um.Usertype_Id=2 and  um.Email='"+name +"'    and hm.ID = '" + str(i["Hospital_Id"]) + "';"
+#                         print(query2)
+#                         cursor = conn.cursor()
+#                         cursor.execute(query2)
+#                         Nurs = cursor.fetchone()
+#                         Nurse.append(Nurs)
 
-                if  d["Usertype"]== 'Operation':
-                    query= "select hospitalId as Hospital_Id from userHospitalMapping where  Usertype_Id=4 and userId= '" + str(y9) + "' "
-                    cursor = conn.cursor()
-                    cursor.execute(query)
-                    Nur = cursor.fetchone()
-                    print(Nur)
-                    y2=Nur["Hospital_Id"]
-                    query2= "select hm.ID as hospital_Id,hm.hospital_name,hm.HubId as HubId,Hbs.HubName as HubName from HubMaster as Hbs,Hospital_master as hm where hm.HubId=Hbs.ID and hm.ID= '" + str(y2) + "';"
-                    print(query2)
-                    cursor = conn.cursor()
-                    cursor.execute(query2)
-                    Nurse=cursor.fetchone()
-                    print("Operation",Nurse)
+#                 if  d["Usertype"]== 'Operation':
+#                     query= "select hospitalId as Hospital_Id from userHospitalMapping where  Usertype_Id=4 and userId= '" + str(y9) + "' "
+#                     cursor = conn.cursor()
+#                     cursor.execute(query)
+#                     Nur = cursor.fetchone()
+#                     print(Nur)
+#                     y2=Nur["Hospital_Id"]
+#                     query2= "select hm.ID as hospital_Id,hm.hospital_name,hm.HubId as HubId,Hbs.HubName as HubName from HubMaster as Hbs,Hospital_master as hm where hm.HubId=Hbs.ID and hm.ID= '" + str(y2) + "';"
+#                     print(query2)
+#                     cursor = conn.cursor()
+#                     cursor.execute(query2)
+#                     Nurse=cursor.fetchone()
+#                     print("Operation",Nurse)
 
-                if  d["Usertype"]== 'HubDoctor':
-                    Nurse=[]
-                    query= "select hubId as HubId from userHubMapping where   userId= '" + str(y9) + "' "
-                    cursor = conn.cursor()
-                    cursor.execute(query)
-                    Nurse = cursor.fetchall()
+#                 if  d["Usertype"]== 'HubDoctor':
+#                     Nurse=[]
+#                     query= "select hubId as HubId from userHubMapping where   userId= '" + str(y9) + "' "
+#                     cursor = conn.cursor()
+#                     cursor.execute(query)
+#                     Nurse = cursor.fetchall()
                     
-                    for i in Nurse:
-                        query2 = " select hm.ID as Hospital_Id,hm.hospital_name,hm.HubId as HubId,Hbs.HubName as HubName  from userMaster as um, userHubMapping  as mpum,HubMaster as Hbs,Hospital_master as hm  where  mpum.userId=um.ID and mpum.hubId=Hbs.ID and  hm.HubId=Hbs.ID     and hm.HubId = '" + str(i["HubId"]) + "';"
-                        print(query2)
-                        cursor = conn.cursor()
-                        cursor.execute(query2)
-                        Nurse1 = cursor.fetchall()
-                        i["Hospital"]=Nurse1
+#                     for i in Nurse:
+#                         query2 = " select hm.ID as Hospital_Id,hm.hospital_name,hm.HubId as HubId,Hbs.HubName as HubName  from userMaster as um, userHubMapping  as mpum,HubMaster as Hbs,Hospital_master as hm  where  mpum.userId=um.ID and mpum.hubId=Hbs.ID and  hm.HubId=Hbs.ID     and hm.HubId = '" + str(i["HubId"]) + "';"
+#                         print(query2)
+#                         cursor = conn.cursor()
+#                         cursor.execute(query2)
+#                         Nurse1 = cursor.fetchall()
+#                         i["Hospital"]=Nurse1
                        
             
-            DeviceMac,y9 = " ", ""
-            if 'DeviceMac' in request.args:
-                DeviceMac=request.args["DeviceMac"]
+#             DeviceMac,y9 = " ", ""
+#             if 'DeviceMac' in request.args:
+#                 DeviceMac=request.args["DeviceMac"]
 
-            if DeviceMac !="":
-                query3 ="select  PM.PatientId as PatientId,PM.PatientName,PM.heartRate,PM.highPressure,PM.lowPressure,PM.pulseRate,PM.spo2,PM.temperature,um.name as Doctorname,PM.PhoneNo,PM.Address,PM.hospitalId as Hospital_Id,PM.BloodGroup,PM.DeviceMac,Hm.HubId,Hm.hospital_name  as hospital_Name,"
-                query3=query3+" PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.age,PM.Gender,PM.roomNumber,pdm.DoctorID as DoctorID "
-                query3= query3+ " from userMaster as um,Patient_master as PM,patientDoctorMapping as pdm,Hospital_master as Hm,HubMaster as Hbs  where pdm.doctorId=um.ID and  PM.hospitalId=Hm.ID and Hm.HubId=Hbs.ID and  pdm.Patient_Id=PM.PatientId  and PM.Status<>'2'  and PM.Usertype_Id='" + str(y3) + "' and PM.DeviceMac='"+str(DeviceMac)+"'   ;"
-                print(query3)
-                cursor = conn.cursor()
-                cursor.execute(query3)
-                PatientData= cursor.fetchone()
-                print("PatientData==============================",PatientData)
-                print(PatientData)
+#             if DeviceMac !="":
+#                 query3 ="select  PM.PatientId as PatientId,PM.PatientName,PM.heartRate,PM.highPressure,PM.lowPressure,PM.pulseRate,PM.spo2,PM.temperature,um.name as Doctorname,PM.PhoneNo,PM.Address,PM.hospitalId as Hospital_Id,PM.BloodGroup,PM.DeviceMac,Hm.HubId,Hm.hospital_name  as hospital_Name,"
+#                 query3=query3+" PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.age,PM.Gender,PM.roomNumber,pdm.DoctorID as DoctorID "
+#                 query3= query3+ " from userMaster as um,Patient_master as PM,patientDoctorMapping as pdm,Hospital_master as Hm,HubMaster as Hbs  where pdm.doctorId=um.ID and  PM.hospitalId=Hm.ID and Hm.HubId=Hbs.ID and  pdm.Patient_Id=PM.PatientId  and PM.Status<>'2'  and PM.Usertype_Id='" + str(y3) + "' and PM.DeviceMac='"+str(DeviceMac)+"'   ;"
+#                 print(query3)
+#                 cursor = conn.cursor()
+#                 cursor.execute(query3)
+#                 PatientData= cursor.fetchone()
+#                 print("PatientData==============================",PatientData)
+#                 print(PatientData)
 
                
-            else:
-                query2 = " select   * from Patient_master where Status<>'2'  and Usertype_Id ='" + str(y3) + "';" 
-                cursor = conn.cursor()
-                cursor.execute(query2)
-                PatientData= cursor.fetchone()
+#             else:
+#                 query2 = " select   * from Patient_master where Status<>'2'  and Usertype_Id ='" + str(y3) + "';" 
+#                 cursor = conn.cursor()
+#                 cursor.execute(query2)
+#                 PatientData= cursor.fetchone()
 
            
             
-            if PatientData !=None:
+#             if PatientData !=None:
 
-                Count= 1
-                PatientData["heartRate"]=json.loads(PatientData["heartRate"].replace("'",'"'))
-                PatientData["highPressure"]=json.loads(PatientData["highPressure"].replace("'",'"'))
-                PatientData["lowPressure"]=json.loads(PatientData["lowPressure"].replace("'",'"'))
-                PatientData["pulseRate"]=json.loads(PatientData["pulseRate"].replace("'",'"'))
-                PatientData["spo2"]=json.loads(PatientData["spo2"].replace("'",'"'))
-                PatientData["temperature"]=json.loads(PatientData["temperature"].replace("'",'"'))
+#                 Count= 1
+#                 PatientData["heartRate"]=json.loads(PatientData["heartRate"].replace("'",'"'))
+#                 PatientData["highPressure"]=json.loads(PatientData["highPressure"].replace("'",'"'))
+#                 PatientData["lowPressure"]=json.loads(PatientData["lowPressure"].replace("'",'"'))
+#                 PatientData["pulseRate"]=json.loads(PatientData["pulseRate"].replace("'",'"'))
+#                 PatientData["spo2"]=json.loads(PatientData["spo2"].replace("'",'"'))
+#                 PatientData["temperature"]=json.loads(PatientData["temperature"].replace("'",'"'))
             
-            else:
-                Count=0
+#             else:
+#                 Count=0
 
-            cursor.close()
+#             cursor.close()
 
-            data={"status":"true","result":loginuser[0],"Nurse Details":Nurse,"Patient Details":PatientData,"Count":Count}                      
-            return data
+#             data={"status":"true","result":loginuser[0],"Nurse Details":Nurse,"Patient Details":PatientData,"Count":Count}                      
+#             return data
 
     
-    except KeyError as e:
-        print("Exception---->" +str(e))        
-        output = {"result":"Input Keys are not Found","status":"false"}
-        return output 
+#     except KeyError as e:
+#         print("Exception---->" +str(e))        
+#         output = {"result":"Input Keys are not Found","status":"false"}
+#         return output 
     
-    except Exception as e :
-        print("Exception---->" +str(e))           
-        output = {"result":"something went wrong","status":"false"}
-        return output
+#     except Exception as e :
+#         print("Exception---->" +str(e))           
+#         output = {"result":"something went wrong","status":"false"}
+#         return output
 
 
 @app.route('/allHospital', methods=['post'])
