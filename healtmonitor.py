@@ -357,6 +357,7 @@ def login1():
             query2="select counter from userMaster where counter='1' and Email='" + name + "' and password='" + password + "'"
             cursor.execute(query2)
             data=cursor.fetchall()
+            print(data)
 
 
             if data != ():
