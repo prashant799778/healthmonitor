@@ -369,13 +369,15 @@ def login1():
 
                     p=data["counter"]
                     print(p)
-                    if (int(p) <= 3):
+                    if (int(p) >= 3):
+
                         query="update  userMaster set Status='2' where Email='" + name + "' and counter='3' ;"
                         cursor.execute(query)
                         conn.commit()
                         data={"status":"false","result":"Acess Denied,Please Contact Admin"}
                         return data
                     else: 
+                        print("1111111111")
                         data={"status":"false","result":"Login Failed"}
                         return data
 
