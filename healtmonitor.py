@@ -352,26 +352,35 @@ def login1():
             cursor = conn.cursor()
             cursor.execute(query)
             data=cursor.fetchone()
-            p=data["counter"]
-            if (int(p)<3):
-                data["counter"]=int(p)+1
-                print(data["counter"])
-                query="update  userMaster set counter='" + str(data["counter"]) + "',Status='2' where Email='" + name + "' ;"
-                cursor.execute(query)
-                conn.commit()
-                query="select  counter from userMaster where Email='" + name + "'and counter='3' and Status='2' ; "
-                cursor.execute(query)
-                data=cursor.fetchone()
-                if data != ():
-                    data={"status":"false","result":"Acess Denied,Please Contact Admin"}
+            if data != ():
+                print(1)
+                p=data["counter"]
+               
+                if (int(p)<3):
+
+                    data["counter"]=int(p)+1
+                    print(data["counter"])
+                    query="update  userMaster set counter='" + str(data["counter"]) + "',Status='2' where Email='" + name + "' ;"
+                    cursor.execute(query)
+                    conn.commit()
+                    query="select  counter from userMaster where Email='" + name + "'and counter='3' and Status='2' ; "
+                    cursor.execute(query)
+                    data=cursor.fetchone()
+                    if data != ():
+                        data={"status":"false","result":"Acess Denied,Please Contact Admin"}
+                        return data
+                        
+                    else:
+                        data={"status":"false","result":"Login Failed"}
+                        return data
                 else:
-                    data={"status":"false","result":"Login Failed"}
-                return data
+                    data={"status":"false","result":"Acess Denied,Please Contact Admin"}
+                    return data
+
+
             else:
-                data={"status":"false","result":"Acess Denied,Please Contact Admin"}
+                data={"status":"false","result":"Login Failed"}
                 return data
-
-
 
         else:
             for d in loginuser:
