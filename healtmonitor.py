@@ -347,12 +347,13 @@ def login1():
 
 
         if loginuser==():
-            query="select  counter from  where Email='" + name + "' ; "
+            query="select  counter from userMaster  where Email='" + name + "' ; "
             conn=Connection()
             cursor = conn.cursor()
             cursor.execute(query)
             data=cursor.fetchone()
             if data != ():
+                print(1)
                
                 if (data["counter"] <3):
                     data["counter"]=data["counter"]+1
