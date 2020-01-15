@@ -357,12 +357,12 @@ def login1():
             query2="select counter from userMaster where counter='1' and Email='" + name + "';"
             cursor.execute(query2)
             data=cursor.fetchone()
-            print(data)
+            print("counter1",data)
 
 
             if data != ():
                 data["counter"]+=data["counter"]
-                print(data["counter"])
+                print("counter2+,"data["counter"])
                 query= "update userMaster set counter='" + str(data["counter"]) + "' where counter='1' and  Email='" + name + "' ' and Status<>'2' ;"
                 cursor.execute(query)
                 print(query)
@@ -370,6 +370,7 @@ def login1():
                 query="select counter from userMaster where counter='2' and  and Email='" + name + "' and password='" + password + "';"
                 cursor.execute(query)
                 data=cursor.fetchone()
+                
                 
                 if  data != ():
                     data["counter"]+=data["counter"]
