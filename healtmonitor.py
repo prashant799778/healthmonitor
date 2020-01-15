@@ -368,7 +368,7 @@ def login1():
                 cursor.execute(query)
                 print(query)
                 conn.commit()
-                query="select counter from userMaster where counter='2' and  and Email='" + name + "' and password='" + password + "';"
+                query="select counter from userMaster where counter='2' and  and Email='" + name + "' ;"
                 cursor.execute(query)
                 data=cursor.fetchone()
 
