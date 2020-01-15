@@ -347,14 +347,14 @@ def login1():
 
 
         if loginuser==():
-            query="update userMaster set counter='1' where Email='" + name + "' and password='" + password + "' ; "
+            query="update userMaster set counter='1' where Email='" + name + "' ; "
             conn=Connection()
             cursor = conn.cursor()
             cursor.execute(query)
             print("1",query)
             conn.commit()
 
-            query2="select counter from userMaster where counter='1' and Email='" + name + "' and password='" + password + "';"
+            query2="select counter from userMaster where counter='1' and Email='" + name + "';"
             cursor.execute(query2)
             data=cursor.fetchall()
             print(data)
@@ -363,7 +363,7 @@ def login1():
             if data != ():
                 data["counter"]+=data["counter"]
                 print(data["counter"])
-                query= "update userMaster set counter='" + str(data["counter"]) + "' where counter='1' and  Email='" + name + "' and password='" + password + "' and Status<>'2' ;"
+                query= "update userMaster set counter='" + str(data["counter"]) + "' where counter='1' and  Email='" + name + "' ' and Status<>'2' ;"
                 cursor.execute(query)
                 print(query)
                 conn.commit()
@@ -373,10 +373,10 @@ def login1():
                 
                 if  data != ():
                     data["counter"]+=data["counter"]
-                    query= "update userMaster counter='" + str(data["counter"]) + "',Status='2' where counter=2 and  Email='" + name + "' and password='" + password + "' and Status<>'2'; "
+                    query= "update userMaster counter='" + str(data["counter"]) + "',Status='2' where counter=2 and  Email='" + name + "'  and Status<>'2'; "
                     cursor.execute(query)
                     conn.commit()
-                    query="select counter from userMaster where counter=3 and Status=2 and Email='" + name + "' and password='" + password + "'; "
+                    query="select counter from userMaster where counter=3 and Status=2 and Email='" + name + "' ; "
                     cursor.execute(query)
                     data3=cursor.fetchall()
                     if data3 != (): 
