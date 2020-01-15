@@ -374,14 +374,12 @@ def login1():
                         print(query2)
                         cursor.execute(query2)
                         conn.commit()
-                    
-                    
-                    query="select  counter from userMaster  where Email='" + name + "' and counter='3' and Status='2' ; "
-                    cursor.execute(query)
-                    data=cursor.fetchone()
-                    if data != ():
-                        data={"status":"false","result":"Acess Denied,Please Contact Admin"}
-                        return data
+                        query="select  counter from userMaster  where Email='" + name + "' and counter='3' and Status='2' ; "
+                        cursor.execute(query)
+                        data=cursor.fetchone()
+                        if data != ():
+                            data={"status":"false","result":"Acess Denied,Please Contact Admin"}
+                            return data
                         
                     else:
                         data={"status":"false","result":"Login Failed"}
