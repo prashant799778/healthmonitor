@@ -352,7 +352,7 @@ def login1():
             cursor = conn.cursor()
             cursor.execute(query)
             data=cursor.fetchone()
-            if data !=():
+            if data != ():
                
                 if (data["counter"] <3):
                     data["counter"]=data["counter"]+1
@@ -369,10 +369,7 @@ def login1():
                     else:
                         data={"status":"false","result":"Login Failed"}
                         return data
-           
-            conn.commit()
 
-            
             else:
                 data={"status":"false","result":"Login Failed"}
                 return data
