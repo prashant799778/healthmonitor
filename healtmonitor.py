@@ -347,51 +347,32 @@ def login1():
 
 
         if loginuser==():
-            query="update userMaster set counter='1' where Email='" + name + "' ; "
+            query="select  counter from  where Email='" + name + "' ; "
             conn=Connection()
             cursor = conn.cursor()
             cursor.execute(query)
-            print("1",query)
-            conn.commit()
-
-            query2="select counter from userMaster where counter='1' and Email='" + name + "';"
-            cursor.execute(query2)
             data=cursor.fetchone()
-            print("counter1",data)
-
-
-            if data != ():
+            if data !=():
                
-                data["counter"]+= data["counter"]
-                print("c",data["counter"])
-                query= "update userMaster set counter='2' where counter='1' and  Email='" + name + "'  and Status<>'2' ;"
-                cursor.execute(query)
-                print(query)
-                conn.commit()
-                query="select counter from userMaster where counter='2' and   Email='" + name + "'  and Status<>'2'  ;"
-                cursor.execute(query)
-                data=cursor.fetchone()
-
-                
-                if  data != ():
-                    data["counter"]+= data["counter"]
-                    print("c3",data["counter"])
-                    query= "update userMaster set counter='3',Status='2' where counter='2' and  Email='" + name + "' ; "
+                if (data["counter"] <3):
+                    data["counter"]=data["counter"]+1
+                    print(data["counter"])
+                    query="update  userMaster set counter='" + data["counter"] + "',Status='2' where Email='" + name + "' ;"
                     cursor.execute(query)
                     conn.commit()
-                    query="select counter from userMaster where counter='3' and Status='2' and Email='" + name + "' ; "
+                    query="select  counter from  where Email='" + name + "' and counter='3' ; "
                     cursor.execute(query)
-                    data3=cursor.fetchone()
-                    if data3 != (): 
-                        data={"status":"false","result":"Access Denied,Please Contact Admin"}
+                    data=cursor.fetchone()
+                    if data != ():
+                        data={"status":"false","result":"Acess Denied,Please Contact Admin"}
                         return data
-
                     else:
                         data={"status":"false","result":"Login Failed"}
                         return data
-                else:
-                    data={"status":"false","result":"Login Failed"}
-                    return data
+           
+            conn.commit()
+
+            
             else:
                 data={"status":"false","result":"Login Failed"}
                 return data
