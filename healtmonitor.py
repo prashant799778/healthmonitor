@@ -367,10 +367,10 @@ def login1():
                     data=cursor.fetchone()
                     if data != ():
                         data={"status":"false","result":"Acess Denied,Please Contact Admin"}
-                        return data
+                        
                     else:
                         data={"status":"false","result":"Login Failed"}
-                        return data
+                    return data
 
             else:
                 data={"status":"false","result":"Login Failed"}
