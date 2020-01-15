@@ -362,7 +362,8 @@ def login1():
 
             if data != ():
                
-                #data["counter"]+= data["counter"]
+                data["counter"]+= data["counter"]
+                print("c",data["counter"])
                 query= "update userMaster set counter='2' where counter='1' and  Email='" + name + "' ' and Status<>'2' ;"
                 cursor.execute(query)
                 print(query)
@@ -373,7 +374,8 @@ def login1():
 
                 
                 if  data != ():
-                    #data["counter"]+= data["counter"]
+                    data["counter"]+= data["counter"]
+                    print("c3",data["counter"])
                     query= "update userMaster counter='3',Status='2' where counter=2 and  Email='" + name + "'  and Status<>'2'; "
                     cursor.execute(query)
                     conn.commit()
