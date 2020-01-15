@@ -368,19 +368,31 @@ def login1():
                     data=cursor.fetchone()
 
                     p=data["counter"]
-                    if int(p) ==2:
+                    if int(p) !=3:
                         data["counter"]=int(p)+1
-                        query2="update  userMaster set counter='" + str(data["counter"]) + "' ,Status='2' where Email='" + name + "'  ; "
+                        query2="update  userMaster set counter='" + str(data["counter"]) + "'  where Email='" + name + "'  ; "
                         print(query2)
                         cursor.execute(query2)
                         conn.commit()
-                        query="select  counter from userMaster  where Email='" + name + "' and counter='3' and Status='2' ; "
+                        query="select  counter from userMaster  where Email='" + name + "' ; "
                         cursor.execute(query)
                         data=cursor.fetchone()
-                        if data != ():
-                            data={"status":"false","result":"Acess Denied,Please Contact Admin"}
+                        p=data["counter"]
+                        if int(p) ==2:
+                            data["counter"]=int(p)+1
+                            query2="update  userMaster set counter='" + str(data["counter"]) + "',Status='2'  where Email='" + name + "'  ; "
+                            print(query2)
+                            cursor.execute(query2)
+                            conn.commit()
+                            query="select  counter from userMaster  where Email='" + name + "' and counter='3' and Status='2' ; "
+                            cursor.execute(query)
+                            data=cursor.fetchone()
+                            if data != ():
+                                data={"status":"false","result":"Acess Denied,Please Contact Admin"}
+                               return data
+                        else:
+                            data={"status":"false","result":"Login Failed"}
                             return data
-                        
                     else:
                         data={"status":"false","result":"Login Failed"}
                         return data
