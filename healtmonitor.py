@@ -356,9 +356,9 @@ def login1():
                 print(1)
                 p=data["counter"]
                
-                if (p<3):
+                if (int(p)<3):
 
-                    data["counter"]=p+1
+                    data["counter"]=int(p)+1
                     print(data["counter"])
                     query="update  userMaster set counter='" + str(data["counter"]) + "',Status='2' where Email='" + name + "' ;"
                     cursor.execute(query)
