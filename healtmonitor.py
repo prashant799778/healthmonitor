@@ -1798,17 +1798,17 @@ def addHubDoctor():
                 mainId=yu["userId"]
                 Usertype_Id=yu["Usertype_Id"]
                 HubId = data1["HubId"]
-                
-                query = "select * from userHubMapping where hubId='"+str(data1["HubId"])+"'   and userid= '"+str(mainId)+ "';"
-                cursor.execute(query)
-                userHubMappingdata = cursor.fetchall()
-                if userHubMappingdata==():
-                    query2  = " insert into userHubMapping (userId,hubId)"
-                    query2 = query2 +" values('"+str(mainId)+"','"+str(data1["HubId"])+"' );"
-                    conn=Connection()
-                    cursor = conn.cursor()
-                    cursor.execute(query2)
-                    conn.commit()
+                for i in HubId:
+                    query = "select * from userHubMapping where hubId='"+str(i)+"'   and userid= '"+str(mainId)+ "';"
+                    cursor.execute(query)
+                    userHubMappingdata = cursor.fetchall()
+                    if userHubMappingdata==():
+                        query2  = " insert into userHubMapping (userId,hubId)"
+                        query2 = query2 +" values('"+str(mainId)+"','"+str(i)+"' );"
+                        conn=Connection()
+                        cursor = conn.cursor()
+                        cursor.execute(query2)
+                        conn.commit()
                 
                 query = "select * from userMaster where  Usertype_Id=5 and Email='"+str(data1["Email"])+ "';"
                 
@@ -1819,12 +1819,13 @@ def addHubDoctor():
                     mainId=data["ID"]
                     Usertype_Id=data["Usertype_Id"]
                     HubId = data1["HubId"]
-                    query = "select * from userHubMapping where hubId='"+str(data1["HubId"])+"'   and userid= '"+str(mainId)+ "';"
+                    for i in HubId:
+                    query = "select * from userHubMapping where hubId='"+str(i)+"'   and userid= '"+str(mainId)+ "';"
                     cursor.execute(query)
-                    userHubMappingdata  = cursor.fetchall()
+                    userHubMappingdata = cursor.fetchall()
                     if userHubMappingdata==():
                         query2  = " insert into userHubMapping (userId,hubId)"
-                        query2 = query2 +" values('"+str(mainId)+"','"+str(data1["HubId"])+"' );"
+                        query2 = query2 +" values('"+str(mainId)+"','"+str(i)+"' );"
                         conn=Connection()
                         cursor = conn.cursor()
                         cursor.execute(query2)
