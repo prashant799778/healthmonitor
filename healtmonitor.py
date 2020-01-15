@@ -365,6 +365,7 @@ def login1():
                     conn.commit()
                     query="update  userMaster set Status='2' where Email='" + name + "'  and counter='3' ; "
                     cursor.execute(query)
+                    conn.commit()
                     query="select  counter from userMaster  where Email='" + name + "' and counter='3' ; "
                     cursor.execute(query)
                     data=cursor.fetchone()
