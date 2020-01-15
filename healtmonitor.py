@@ -1820,16 +1820,16 @@ def addHubDoctor():
                     Usertype_Id=data["Usertype_Id"]
                     HubId = data1["HubId"]
                     for i in HubId:
-                    query = "select * from userHubMapping where hubId='"+str(i)+"'   and userid= '"+str(mainId)+ "';"
-                    cursor.execute(query)
-                    userHubMappingdata = cursor.fetchall()
-                    if userHubMappingdata==():
-                        query2  = " insert into userHubMapping (userId,hubId)"
-                        query2 = query2 +" values('"+str(mainId)+"','"+str(i)+"' );"
-                        conn=Connection()
-                        cursor = conn.cursor()
-                        cursor.execute(query2)
-                        conn.commit()
+                        query = "select * from userHubMapping where hubId='"+str(i)+"'   and userid= '"+str(mainId)+ "';"
+                        cursor.execute(query)
+                        userHubMappingdata = cursor.fetchall()
+                        if userHubMappingdata==():
+                            query2  = " insert into userHubMapping (userId,hubId)"
+                            query2 = query2 +" values('"+str(mainId)+"','"+str(i)+"' );"
+                            conn=Connection()
+                            cursor = conn.cursor()
+                            cursor.execute(query2)
+                            conn.commit()
                 cursor.close()                
 
                 output = {"result":"data inserted successfully","status":"true"}
