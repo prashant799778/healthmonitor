@@ -346,7 +346,7 @@ def login1():
        
 
 
-        if loginuser==():
+        if loginuser== ():
             query="select  counter from userMaster  where Email='" + name + "' ; "
             conn=Connection()
             cursor = conn.cursor()
