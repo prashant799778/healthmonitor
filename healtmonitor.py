@@ -356,7 +356,7 @@ def login1():
 
             query2="select counter from userMaster where counter='1' and Email='" + name + "';"
             cursor.execute(query2)
-            data=cursor.fetchall()
+            data=cursor.fetchone()
             print(data)
 
 
@@ -369,7 +369,7 @@ def login1():
                 conn.commit()
                 query="select counter from userMaster where counter='2' and  and Email='" + name + "' and password='" + password + "';"
                 cursor.execute(query)
-                data=cursor.fetchall()
+                data=cursor.fetchone()
                 
                 if  data != ():
                     data["counter"]+=data["counter"]
@@ -378,7 +378,7 @@ def login1():
                     conn.commit()
                     query="select counter from userMaster where counter=3 and Status=2 and Email='" + name + "' ; "
                     cursor.execute(query)
-                    data3=cursor.fetchall()
+                    data3=cursor.fetchone()
                     if data3 != (): 
                         data={"status":"false","result":"Access Denied,Please Contact Admin"}
                         return data
