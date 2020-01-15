@@ -354,15 +354,16 @@ def login1():
             data=cursor.fetchone()
             if data != ():
                 print(1)
+                p=data["counter"]
                
-                if (int(data["counter"]) <3):
+                if (p<3):
 
-                    data["counter"]=int(data["counter"])+1
+                    data["counter"]=p+1
                     print(data["counter"])
                     query="update  userMaster set counter='" + str(data["counter"]) + "',Status='2' where Email='" + name + "' ;"
                     cursor.execute(query)
                     conn.commit()
-                    query="select  counter from  where Email='" + name + "' and counter='3' ; "
+                    query="select  counter from  where Email='" + name + "'and counter='3' and Status='2' ; "
                     cursor.execute(query)
                     data=cursor.fetchone()
                     if data != ():
@@ -373,7 +374,7 @@ def login1():
                     return data
                 else:
                     data={"status":"false","result":"Acess Denied,Please Contact Admin"}
-                    return data
+                    return dataS
 
 
             else:
