@@ -347,15 +347,15 @@ def login1():
 
 
         if loginuser==():
-            query="update userMaster set counter='1' where Email='" + name + "' and password='" + password + "' and Status<>'2'  "
+            query="update userMaster set counter='1' where Email='" + name + "' and password='" + password + "'   "
             conn=Connection()
             cursor = conn.cursor()
             cursor.execute(query)
             print("1",query)
             conn.commit()
 
-            query="select counter from userMaster where counter='1' and Email='" + name + "' and password='" + password + "'"
-            cursor.execute(query)
+            query2="select counter from userMaster where counter='1' and Email='" + name + "' and password='" + password + "'"
+            cursor.execute(query2)
             data=cursor.fetchall()
 
 
