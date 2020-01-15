@@ -371,6 +371,10 @@ def login1():
                     else:
                         data={"status":"false","result":"Login Failed"}
                     return data
+                else:
+                    data={"status":"false","result":"Acess Denied,Please Contact Admin"}
+                    return data
+
 
             else:
                 data={"status":"false","result":"Login Failed"}
