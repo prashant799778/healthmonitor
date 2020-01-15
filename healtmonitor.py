@@ -359,7 +359,7 @@ def login1():
 
                     data["counter"]=int(data["counter"])+1
                     print(data["counter"])
-                    query="update  userMaster set counter='" + data["counter"] + "',Status='2' where Email='" + name + "' ;"
+                    query="update  userMaster set counter='" + str(data["counter"]) + "',Status='2' where Email='" + name + "' ;"
                     cursor.execute(query)
                     conn.commit()
                     query="select  counter from  where Email='" + name + "' and counter='3' ; "
