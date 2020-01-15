@@ -394,6 +394,9 @@ def login1():
                 return data
 
         else:
+            query="update userMaster set counter=0 where Email='" + name + "' and password='" + password + "';"
+            cursor.execute(query)
+            conn.commit()
             for d in loginuser:
                 y9=d["ID"]
                 y=  d["Usertype"]
