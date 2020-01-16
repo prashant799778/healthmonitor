@@ -629,19 +629,7 @@ def login1q():
                             cursor = conn.cursor()
                             cursor.execute(query)
                             conn.commit()
-                            Nurse=[]
-                            query= "select hospitalId as Hospital_Id from userHospitalMapping where  Usertype_Id=2 and userId= '" + str(y9) + "' "
-                            cursor = conn.cursor()
-                            cursor.execute(query)
-                            Nur = cursor.fetchall()
-                            print(Nur)
-                            for i in Nur:
-                                query2 = " select hm.ID as Hospital_Id,hm.hospital_name,hm.HubId as HubId,Hbs.HubName as HubName,um.ID as DoctorID,um.name as DoctorName,um.Email as Email,um.Gender,um.mobile from userMaster as um ,userHospitalMapping  as mpum,HubMaster as Hbs,Hospital_master as hm  where  mpum.userId=um.ID and mpum.hospitalId=hm.ID and  hm.HubId=Hbs.ID  and  um.Usertype_Id=2 and  um.Email='"+name +"'    and hm.ID = '" + str(i["Hospital_Id"]) + "';"
-                                print(query2)
-                                cursor = conn.cursor()
-                                cursor.execute(query2)
-                                Nurs = cursor.fetchone()
-                                Nurse.append(Nurs)
+                           
                             
 
 
@@ -652,19 +640,20 @@ def login1q():
                         cursor = conn.cursor()
                         cursor.execute(query)
                         conn.commit()
-                        Nurse=[]
-                        query= "select hospitalId as Hospital_Id from userHospitalMapping where  Usertype_Id=2 and userId= '" + str(y9) + "' "
+                    
+                    Nurse=[]
+                    query= "select hospitalId as Hospital_Id from userHospitalMapping where  Usertype_Id=2 and userId= '" + str(y9) + "' "
+                    cursor = conn.cursor()
+                    cursor.execute(query)
+                    Nur = cursor.fetchall()
+                    print(Nur)
+                    for i in Nur:
+                        query2 = " select hm.ID as Hospital_Id,hm.hospital_name,hm.HubId as HubId,Hbs.HubName as HubName,um.ID as DoctorID,um.name as DoctorName,um.Email as Email,um.Gender,um.mobile from userMaster as um ,userHospitalMapping  as mpum,HubMaster as Hbs,Hospital_master as hm  where  mpum.userId=um.ID and mpum.hospitalId=hm.ID and  hm.HubId=Hbs.ID  and  um.Usertype_Id=2 and  um.Email='"+name +"'    and hm.ID = '" + str(i["Hospital_Id"]) + "';"
+                        print(query2)
                         cursor = conn.cursor()
-                        cursor.execute(query)
-                        Nur = cursor.fetchall()
-                        print(Nur)
-                        for i in Nur:
-                            query2 = " select hm.ID as Hospital_Id,hm.hospital_name,hm.HubId as HubId,Hbs.HubName as HubName,um.ID as DoctorID,um.name as DoctorName,um.Email as Email,um.Gender,um.mobile from userMaster as um ,userHospitalMapping  as mpum,HubMaster as Hbs,Hospital_master as hm  where  mpum.userId=um.ID and mpum.hospitalId=hm.ID and  hm.HubId=Hbs.ID  and  um.Usertype_Id=2 and  um.Email='"+name +"'    and hm.ID = '" + str(i["Hospital_Id"]) + "';"
-                            print(query2)
-                            cursor = conn.cursor()
-                            cursor.execute(query2)
-                            Nurs = cursor.fetchone()
-                            Nurse.append(Nurs)
+                        cursor.execute(query2)
+                        Nurs = cursor.fetchone()
+                        Nurse.append(Nurs)
                          
 
 
