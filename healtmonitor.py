@@ -617,11 +617,13 @@ def login1q():
                     cursor = conn.cursor()
                     cursor.execute(query)
                     loginmultiple = cursor.fetchone()
+                    p= int(loginmultiple["browserId"])
+                    q= int(loginmultiple["browserStatus"])
                    
 
-                    if (loginmultiple["browserId"] == str(browserId)) :
+                    if (p == browserId) :
                       
-                        if (loginmultiple["browserStatus"] != 1):
+                        if (q!= 1):
                             data={"result":"true","status":"You Already login through another Device"}
                             return data
                         else:
