@@ -756,7 +756,7 @@ def allPatient():
 @app.route('/session', methods=['GET'])
 def session():
     try:
-        password = request.args['password']
+       
         name = request.args['name']
         browserId=request.args['browserId']
         query= "select browserStatus from userMaster where browserId='" + browserId + "' and Email='" + name + "';"
