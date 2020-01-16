@@ -625,15 +625,14 @@ def login1q():
                    
 
                     if (loginmultiple["browserId"]== browserId) :
-                        print("rr")
+                       
                       
                         if  (loginmultiple["browserStatus"]== 1):
-                            print("bnbs")
-                            print("hg")
+                           
                             data={"result":"true","status":"You Already login through another Device"}
                             return data
                         else:
-                            print("iuui")
+                           
                             query="update userMaster set browserStatus=0  where Email= '" + name + "' and password='" + password + "' "
                             cursor = conn.cursor()
                             cursor.execute(query)
@@ -924,6 +923,28 @@ def allPatient():
         cursor = conn.cursor()
         cursor.execute(query3)
         data= cursor.fetchall()
+        cursor.close()
+        if data:
+            return {"result":data,"status":"true"}
+        else:
+            return {"result":"No Record Found","status":"true"}
+    
+    except Exception as e :
+        print("Exception---->" +str(e))           
+        output = {"result":"something went wrong","status":"false"}
+        return output
+
+@app.route('/session', methods=['GET'])
+def session():
+    try:
+        password = request.args['password']
+        name = request.args['name']
+        browserId=request.args['browserId']
+        query= "select browserStatus from userMaster where browserId='" + browserId + "' and Email='" + name + "' and password='" + password + "' ;"
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query3)
+        data= cursor.fetchone()
         cursor.close()
         if data:
             return {"result":data,"status":"true"}
