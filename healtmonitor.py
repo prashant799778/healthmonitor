@@ -645,7 +645,7 @@ def login1q():
                     
                     else:
                         print("sss")
-                        query="update userMaster set browserId= '" + str(browserId) + "',browserStatus=0  where Email= '" + name + "' and password='" + password + "' "
+                        query="update userMaster set browserId= '" + str(browserId) + "',browserStatus=1  where Email= '" + name + "' and password='" + password + "' "
                         print(query)
                         cursor = conn.cursor()
                         cursor.execute(query)
