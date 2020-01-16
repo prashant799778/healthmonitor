@@ -619,13 +619,13 @@ def login1q():
                     loginmultiple = cursor.fetchone()
                    
 
-                    if (loginmultiple["browserId"] == browserId) :
+                    if (loginmultiple["browserId"] == str(browserId)) :
                       
-                        if (loginmultiple["browserStatus"] == 1):
+                        if (loginmultiple["browserStatus"] != 1):
                             data={"result":"true","status":"You Already login through another Device"}
                             return data
                         else:
-                            query="update userMaster set browserStatus=0  where Email= '" + name + "' and password='" + password + "' "
+                            query="update userMaster set browserStatus=1  where Email= '" + name + "' and password='" + password + "' "
                             cursor = conn.cursor()
                             cursor.execute(query)
                             conn.commit()
@@ -642,13 +642,13 @@ def login1q():
                                 cursor.execute(query2)
                                 Nurs = cursor.fetchone()
                                 Nurse.append(Nurs)
-                            yield Nurse
+                            
 
 
 
                     
                     else:
-                        query="update userMaster set browserId= '" + browserId + "',browserStatus=1  where Email= '" + name + "' and password='" + password + "' "
+                        query="update userMaster set browserId= '" + str(browserId) + "',browserStatus=1  where Email= '" + name + "' and password='" + password + "' "
                         cursor = conn.cursor()
                         cursor.execute(query)
                         conn.commit()
@@ -665,7 +665,7 @@ def login1q():
                             cursor.execute(query2)
                             Nurs = cursor.fetchone()
                             Nurse.append(Nurs)
-                        yield Nurse
+                         
 
 
 
