@@ -354,13 +354,13 @@ def login1q():
                     if (loginmultiple["browserId"]== browserId) :
                        
                       
-                        if  (loginmultiple["browserStatus"]== 1):
+                        if  (loginmultiple["browserStatus"]!= 1):
                            
                             data={"result":"true","status":"You Already login through another Device"}
                             return data
                         else:
                            
-                            query="update userMaster set browserStatus=0  where Email= '" + name + "' and password='" + password + "' "
+                            query="update userMaster set browserStatus=1  where Email= '" + name + "' and password='" + password + "' "
                             cursor = conn.cursor()
                             cursor.execute(query)
                             conn.commit()
@@ -421,13 +421,13 @@ def login1q():
                     if (loginmultiple["browserId"]== browserId) :
                        
                       
-                        if  (loginmultiple["browserStatus"]== 1):
+                        if  (loginmultiple["browserStatus"]!= 1):
                            
                             data={"result":"true","status":"You Already login through another Device"}
                             return data
                         else:
                            
-                            query="update userMaster set browserStatus=0  where Email= '" + name + "' and password='" + password + "' "
+                            query="update userMaster set browserStatus=1  where Email= '" + name + "' and password='" + password + "' "
                             cursor = conn.cursor()
                             cursor.execute(query)
                             conn.commit()
