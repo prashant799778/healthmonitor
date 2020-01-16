@@ -627,7 +627,7 @@ def login1q():
                     if (loginmultiple["browserId"]== browserId) :
                         print("rr")
                       
-                        if  (loginmultiple["browserStatus"]== 1):
+                        if  (loginmultiple["browserStatus"]!= 1):
                             print("bnbs")
                             data={"result":"true","status":"You Already login through another Device"}
                             return data
@@ -644,12 +644,21 @@ def login1q():
 
                     
                     else:
+                        query="select browserStatus from userMaster where Email= '" + name + "' and password='" + password + "'and Usertype_Id =2 "
                         print("sss")
-                        query="update userMaster set browserId= '" + str(browserId) + "',browserStatus=1  where Email= '" + name + "' and password='" + password + "' "
-                        print(query)
                         cursor = conn.cursor()
                         cursor.execute(query)
-                        conn.commit()
+                        data=cursor.fetchone()
+                        if (data["browserStatus"] !=1):
+                            data={"result":"true","status":"You Already login through another Device"}
+                            return data
+                        
+                        else:
+                            query="update userMaster set browserId= '" + str(browserId) + "',browserStatus=1  where Email= '" + name + "' and password='" + password + "' "
+                            print(query)
+                            cursor = conn.cursor()
+                            cursor.execute(query)
+                            conn.commit()
                     
                     Nurse=[]
                     query= "select hospitalId as Hospital_Id from userHospitalMapping where  Usertype_Id=2 and userId= '" + str(y9) + "' "
