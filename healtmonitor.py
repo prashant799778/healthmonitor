@@ -345,9 +345,9 @@ def login1q():
                     cursor.execute(query)
                     loginmultiple = cursor.fetchone()       
                     print(loginmultiple)
-                    p= int(loginmultiple["browserId"])
+                    # p= int(loginmultiple["browserId"])
 
-                    q= int(loginmultiple["browserStatus"])
+                    # q= int(loginmultiple["browserStatus"])
                     print(type(browserId))
                    
 
@@ -412,7 +412,7 @@ def login1q():
                     cursor.execute(query)
                     loginmultiple = cursor.fetchone()       
                     print(loginmultiple)
-                    p= int(loginmultiple["browserId"])
+                    # p= int(loginmultiple["browserId"])
 
                     q= int(loginmultiple["browserStatus"])
                     print(type(browserId))
@@ -438,21 +438,26 @@ def login1q():
 
                     
                     else:
+                        
                         query="select browserStatus from userMaster where Email= '" + name + "' and password='" + password + "'and Usertype_Id =2 "
                         print("sss")
                         cursor = conn.cursor()
                         cursor.execute(query)
                         data=cursor.fetchone()
+                        
                         if (data["browserStatus"] !=1):
+                            
                             data={"result":"true","status":"You Already login through another Device"}
                             return data
                         
                         else:
+                            
                             query="update userMaster set browserId= '" + str(browserId) + "',browserStatus=1  where Email= '" + name + "' and password='" + password + "' "
                             print(query)
                             cursor = conn.cursor()
                             cursor.execute(query)
                             conn.commit()
+                    
                     query= "select hospitalId as Hospital_Id from userHospitalMapping where  Usertype_Id=4 and userId= '" + str(y9) + "' "
                     cursor = conn.cursor()
                     cursor.execute(query)
@@ -472,9 +477,9 @@ def login1q():
                     cursor.execute(query)
                     loginmultiple = cursor.fetchone()       
                     print(loginmultiple)
-                    p= int(loginmultiple["browserId"])
+                    # p= int(loginmultiple["browserId"])
 
-                    q= int(loginmultiple["browserStatus"])
+                    # q= int(loginmultiple["browserStatus"])
                     print(type(browserId))
                    
 
