@@ -649,12 +649,12 @@ def login1q():
                         cursor = conn.cursor()
                         cursor.execute(query)
                         data=cursor.fetchone()
-                        if (data["browserStatus"] !=1):
+                        if (data["browserStatus"] ==1):
                             data={"result":"true","status":"You Already login through another Device"}
                             return data
                         
                         else:
-                            query="update userMaster set browserId= '" + str(browserId) + "',browserStatus=1  where Email= '" + name + "' and password='" + password + "' "
+                            query="update userMaster set browserId= '" + str(browserId) + "',browserStatus=0  where Email= '" + name + "' and password='" + password + "' "
                             print(query)
                             cursor = conn.cursor()
                             cursor.execute(query)
