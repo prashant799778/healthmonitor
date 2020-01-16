@@ -1961,6 +1961,48 @@ def updateNurseMaster():
         output = {"result":"somthing went wrong","status":"false"}
         return output
 
+
+@app.route('/updateOperator', methods=['POST'])
+def updateOperator():
+    try:
+       
+        json1=request.get_data() 
+        data=json.loads(json1.decode("utf-8")) 
+       
+        query1 = " update userMaster set   name ='" + str(data["name"]) + "', mobile='" + str(data["mobile"]) + "' , password='" + str(data["password"]) + "' , Email='" + str(data["Email"]) + "' , Gender='" + str(data["Gender"]) + "' , Status ='1'  where Usertype_Id=4 and  ID = '" + str(data["ID"])+ "';"
+        print(query1)
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query1)
+        conn.commit()
+        HospitalId = data["Hospital_Id"]
+        query= "delete from userHospitalMapping where userId='" + str(data["ID"])+ "'  and Usertype_Id= 4 "
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        conn.commit()
+        print(HospitalId)
+        for i in HospitalId:
+            
+            query2  = " insert into userHospitalMapping (userId,Usertype_Id,hospitalId)"
+            query2 = query2 +" values('" + str(data["ID"])+ "','"+str('4')+"','"+str(i)+"');"
+            print(query2)
+            cursor.execute(query2)
+        conn.commit()
+        
+        cursor.close()
+        output = {"result":"Updated Successfully","status":"true"}
+        return output  
+    except KeyError :
+        print("Key Exception---->")   
+        output = {"result":"key error","status":"false"}
+        return output  
+
+    except Exception as e :
+        print("Exception---->" +str(e))    
+        output = {"result":"somthing went wrong","status":"false"}
+        return output
+
 @app.route('/deleteDoctorHospital', methods=['POST'])
 def deleteDoctorHospital():
     try:
@@ -2015,6 +2057,33 @@ def deleteNurseHospital():
         return output
 
 
+
+@app.route('/deleteoperationHospital', methods=['POST'])
+def deleteoperationHospital():
+    try:
+       
+        json1=request.get_data() 
+        data=json.loads(json1.decode("utf-8")) 
+       
+
+        query1 = " Delete from userHospitalMapping where    Usertype_Id=4  and  userId = '" + str(data["ID"])+ "' and hospitalId='" + str(data["Hospital_Id"])+ "';"
+        print(query1)
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query1)
+        conn.commit()
+        cursor.close()
+        output = {"result":"Deleted Successfully","status":"true"}
+        return output  
+    except KeyError :
+        print("Key Exception---->")   
+        output = {"result":"key error","status":"false"}
+        return output  
+
+    except Exception as e :
+        print("Exception---->" +str(e))    
+        output = {"result":"somthing went wrong","status":"false"}
+        return output
 @app.route('/deleteHospital', methods=['POST'])
 def deleteHospital():
     try:
