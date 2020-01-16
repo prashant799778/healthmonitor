@@ -624,10 +624,10 @@ def login1q():
                     print(type(browserId))
                    
 
-                    if p == browserId :
+                    if (loginmultiple["browserId"]== browserId) :
                         print("rr")
                       
-                        if  q!= 1:
+                        if  (loginmultiple["browserStatus"]!= 1):
                             print("bnbs")
                             data={"result":"true","status":"You Already login through another Device"}
                             return data
