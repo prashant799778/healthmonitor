@@ -623,7 +623,7 @@ def login1q():
 
                     if (p == browserId) :
                       
-                        if (q!= 1):
+                        if (q== 1):
                             data={"result":"true","status":"You Already login through another Device"}
                             return data
                         else:
