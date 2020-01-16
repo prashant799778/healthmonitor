@@ -944,7 +944,7 @@ def session():
         print(query)
         conn=Connection()
         cursor = conn.cursor()
-        cursor.execute(query3)
+        cursor.execute(query)
         data= cursor.fetchone()
         cursor.close()
         if data:
