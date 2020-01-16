@@ -950,7 +950,7 @@ def session():
         if data:
             return {"result":data,"status":"true"}
         else:
-            return {"result":"No Record Found","status":"true"}
+            return {"result":"Please Log out through other Device","status":"true"}
     
     except Exception as e :
         print("Exception---->" +str(e))           
