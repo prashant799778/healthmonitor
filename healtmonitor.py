@@ -616,7 +616,7 @@ def login1q():
                     query= "select browserId,browserStatus from userMaster where Email= '" + name + "' and password='" + password + "'and Usertype_Id =2; "
                     cursor = conn.cursor()
                     cursor.execute(query)
-                    loginmultiple = cursor.fetchone()
+                    loginmultiple = cursor.fetchone()       
                     print(loginmultiple)
                     p= int(loginmultiple["browserId"])
 
@@ -650,7 +650,7 @@ def login1q():
                         cursor = conn.cursor()
                         cursor.execute(query)
                         data=cursor.fetchone()
-                        if (data["browserStatus"] ==1):
+                        if (data["browserStatus"] !=1):
                             data={"result":"true","status":"You Already login through another Device"}
                             return data
                         
