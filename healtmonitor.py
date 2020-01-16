@@ -759,7 +759,7 @@ def session():
         password = request.args['password']
         name = request.args['name']
         browserId=request.args['browserId']
-        query= "select browserStatus from userMaster where browserId='" + browserId + "' and Email='" + name + "' and password='" + password + "' ;"
+        query= "select browserStatus from userMaster where browserId='" + browserId + "' and Email='" + name + "';"
         print(query)
         conn=Connection()
         cursor = conn.cursor()
@@ -769,7 +769,7 @@ def session():
         if data:
             return {"result":data,"status":"true"}
         else:
-            return {"result":"Please Log out through other Device","status":"true"}
+            return {"result":"Please Log out through other Device","status":"false"}
     
     except Exception as e :
         print("Exception---->" +str(e))           
