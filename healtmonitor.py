@@ -345,9 +345,7 @@ def login1q():
                     cursor.execute(query)
                     loginmultiple = cursor.fetchone()       
                     print(loginmultiple)
-                    # p= int(loginmultiple["browserId"])
-
-                    # q= int(loginmultiple["browserStatus"])
+                   
                     print(type(browserId))
                    
 
@@ -412,9 +410,9 @@ def login1q():
                     cursor.execute(query)
                     loginmultiple = cursor.fetchone()       
                     print(loginmultiple)
-                    # p= int(loginmultiple["browserId"])
+                   
 
-                    q= int(loginmultiple["browserStatus"])
+                    
                     print(type(browserId))
                    
 
@@ -477,9 +475,7 @@ def login1q():
                     cursor.execute(query)
                     loginmultiple = cursor.fetchone()       
                     print(loginmultiple)
-                    # p= int(loginmultiple["browserId"])
-
-                    # q= int(loginmultiple["browserStatus"])
+                   
                     print(type(browserId))
                    
 
