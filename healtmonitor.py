@@ -941,6 +941,7 @@ def session():
         name = request.args['name']
         browserId=request.args['browserId']
         query= "select browserStatus from userMaster where browserId='" + browserId + "' and Email='" + name + "' and password='" + password + "' ;"
+        print(query)
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query3)
