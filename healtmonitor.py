@@ -629,7 +629,7 @@ def login1q():
                             return data
                         else:
                             print("iuui")
-                            query="update userMaster set browserStatus=0  where Email= '" + name + "' and password='" + password + "' "
+                            query="update userMaster set browserStatus=1  where Email= '" + name + "' and password='" + password + "' "
                             cursor = conn.cursor()
                             cursor.execute(query)
                             conn.commit()
@@ -641,7 +641,7 @@ def login1q():
                     
                     else:
                         print("sss")
-                        query="update userMaster set browserId= '" + str(browserId) + "',browserStatus=1  where Email= '" + name + "' and password='" + password + "' "
+                        query="update userMaster set browserId= '" + str(browserId) + "',browserStatus=0  where Email= '" + name + "' and password='" + password + "' "
                         cursor = conn.cursor()
                         cursor.execute(query)
                         conn.commit()
