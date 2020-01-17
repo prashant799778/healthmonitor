@@ -470,6 +470,7 @@ def login1q():
                     print("Operation",Nurse)
 
                 if  d["Usertype"]== 'HubDoctor':
+                    
                     query= "select browserId,browserStatus from userMaster where Email= '" + name + "' and password='" + password + "'and Usertype_Id =5; "
                     cursor = conn.cursor()
                     cursor.execute(query)
@@ -527,7 +528,58 @@ def login1q():
                         cursor.execute(query2)
                         Nurse1 = cursor.fetchall()
                         i["Hospital"]=Nurse1
+                
+                if  d["Usertype"]== 'admin':
+                    query= "select browserId,browserStatus from userMaster where Email= '" + name + "' and password='" + password + "'and Usertype_Id =1; "
+                    cursor = conn.cursor()
+                    cursor.execute(query)
+                    loginmultiple = cursor.fetchone()       
+                    print(loginmultiple)
+                   
+
+                    
+                    print(type(browserId))
+                   
+
+                    if (loginmultiple["browserId"]== browserId) :
                        
+                      
+                        if  (loginmultiple["browserStatus"]!= 1):
+                           
+                            data={"result":"true","status":"You Already login through another Device"}
+                            return data
+                        else:
+                           
+                            query="update userMaster set browserStatus=1  where Email= '" + name + "' and password='" + password + "' "
+                            cursor = conn.cursor()
+                            cursor.execute(query)
+                            conn.commit()
+                           
+                            
+
+
+
+                    
+                    else:
+                        
+                        query="select browserStatus from userMaster where Email= '" + name + "' and password='" + password + "'and Usertype_Id =1 "
+                        print("sss")
+                        cursor = conn.cursor()
+                        cursor.execute(query)
+                        data=cursor.fetchone()
+                        
+                        if (data["browserStatus"] !=1):
+                            
+                            data={"result":"true","status":"You Already login through another Device"}
+                            return data
+                        
+                        else:
+                            
+                            query="update userMaster set browserId= '" + str(browserId) + "',browserStatus=1  where Email= '" + name + "' and password='" + password + "' "
+                            print(query)
+                            cursor = conn.cursor()
+                            cursor.execute(query)
+                            conn.commit()       
             
             DeviceMac,y9 = " ", ""
             if 'DeviceMac' in request.args:
