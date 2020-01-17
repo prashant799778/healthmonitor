@@ -405,7 +405,7 @@ def login1q():
                     
 
                 if  d["Usertype"]== 'Operation':
-                    query= "select browserId,browserStatus from userMaster where Email= '" + name + "' and password='" + password + "'and Usertype_Id =2; "
+                    query= "select browserId,browserStatus from userMaster where Email= '" + name + "' and password='" + password + "'and Usertype_Id =4; "
                     cursor = conn.cursor()
                     cursor.execute(query)
                     loginmultiple = cursor.fetchone()       
@@ -437,7 +437,7 @@ def login1q():
                     
                     else:
                         
-                        query="select browserStatus from userMaster where Email= '" + name + "' and password='" + password + "'and Usertype_Id =2 "
+                        query="select browserStatus from userMaster where Email= '" + name + "' and password='" + password + "'and Usertype_Id =4 "
                         print("sss")
                         cursor = conn.cursor()
                         cursor.execute(query)
@@ -470,7 +470,7 @@ def login1q():
                     print("Operation",Nurse)
 
                 if  d["Usertype"]== 'HubDoctor':
-                    query= "select browserId,browserStatus from userMaster where Email= '" + name + "' and password='" + password + "'and Usertype_Id =2; "
+                    query= "select browserId,browserStatus from userMaster where Email= '" + name + "' and password='" + password + "'and Usertype_Id =5; "
                     cursor = conn.cursor()
                     cursor.execute(query)
                     loginmultiple = cursor.fetchone()       
@@ -499,7 +499,7 @@ def login1q():
 
                     
                     else:
-                        query="select browserStatus from userMaster where Email= '" + name + "' and password='" + password + "'and Usertype_Id =2 "
+                        query="select browserStatus from userMaster where Email= '" + name + "' and password='" + password + "'and Usertype_Id =5 "
                         print("sss")
                         cursor = conn.cursor()
                         cursor.execute(query)
