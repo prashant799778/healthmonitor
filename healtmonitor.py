@@ -3033,9 +3033,9 @@ def hubadminPannel():
        
         
 
-        query2 = " select  from HubMaster where ID='" + str(data["HubId"]) + "';"
+        query2 = " select  HubName from HubMaster where ID='" + str(data["HubId"]) + "';"
         print(query2)
-        
+
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query2)
