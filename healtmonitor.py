@@ -831,8 +831,8 @@ def session():
 
 #hubLoginHospital
 
-@app.route('/hubLoginHospital', methods=['post'])
-def hubLoginHospital():
+@app.route('/hubadminHospital', methods=['post'])
+def hubadminHospital():
     try:
         json1=request.get_data()
         Data=json.loads(json1.decode("utf-8"))
@@ -1973,8 +1973,8 @@ def addHubDoctor():
                     cursor.execute(query)
                     userHubMappingdata = cursor.fetchall()
                     if userHubMappingdata==():
-                        query2  = " insert into userHubMapping (userId,hubId)"
-                        query2 = query2 +" values('"+str(mainId)+"','"+str(i)+"' );"
+                        query2  = " insert into userHubMapping (userId,hubId,usertypeId)"
+                        query2 = query2 +" values('"+str(mainId)+"','"+str(i)+"','"+str('6')+"' );"
                         conn=Connection()
                         cursor = conn.cursor()
                         cursor.execute(query2)
@@ -1994,8 +1994,8 @@ def addHubDoctor():
                         cursor.execute(query)
                         userHubMappingdata = cursor.fetchall()
                         if userHubMappingdata==():
-                            query2  = " insert into userHubMapping (userId,hubId)"
-                            query2 = query2 +" values('"+str(mainId)+"','"+str(i)+"' );"
+                            query2  = " insert into userHubMapping (userId,hubId,usertypeId)"
+                            query2 = query2 +" values('"+str(mainId)+"','"+str(i)+"','"+str('6')+"' );"
                             conn=Connection()
                             cursor = conn.cursor()
                             cursor.execute(query2)
