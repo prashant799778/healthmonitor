@@ -3048,7 +3048,7 @@ def hubadminPannel():
         cursor.execute(query2)
         data2 = cursor.fetchall()
 
-        query="select Hospital_master.ID from Hospital_master inner join HubMaster on Hospital_master.HubId=HubMaster.ID where Hospital_master.HubId='"+str(Data["HubId"])+"'  order by Hospital_master.ID DESC;"
+        query="select Hospital_master.ID from Hospital_master inner join HubMaster on Hospital_master.HubId=HubMaster.ID where Hospital_master.HubId='"+str(data["HubId"])+"'  order by Hospital_master.ID DESC;"
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
