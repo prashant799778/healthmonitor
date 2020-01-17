@@ -588,8 +588,9 @@ def login1q():
                         print(query2)
                         cursor = conn.cursor()
                         cursor.execute(query2)
-                        Nurse1 = cursor.fetchall()
+                        Nurse1 = cursor.fetchone()
                         i["Hospital"]=Nurse1
+                        Nurse.append(Nurse1)
                 
                 if  d["Usertype"]== 'admin':
                     query= "select browserId,browserStatus from userMaster where Email= '" + name + "' and password='" + password + "'and Usertype_Id =1; "
