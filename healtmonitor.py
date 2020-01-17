@@ -581,9 +581,9 @@ def login1q():
                     query= "select hubId as HubId from userHubMapping where   userId= '" + str(y9) + "' "
                     cursor = conn.cursor()
                     cursor.execute(query)
-                    Nurs = cursor.fetchall()
+                    Nurse = cursor.fetchall()
                     
-                    for i in Nurs:
+                    for i in Nurse:
                         query2 = " select hm.ID as Hospital_Id,hm.hospital_name,hm.HubId as HubId,Hbs.HubName as HubName  from userMaster as um, userHubMapping  as mpum,HubMaster as Hbs,Hospital_master as hm  where  mpum.userId=um.ID and mpum.hubId=Hbs.ID and  hm.HubId=Hbs.ID     and hm.HubId = '" + str(i["HubId"]) + "';"
                         print(query2)
                         cursor = conn.cursor()
