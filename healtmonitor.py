@@ -3073,7 +3073,7 @@ def hubadminPannel():
             i["patient"]=data4[0]["count"]
 
         
-        data5={"Hub":data27,"totalHospital":data2,"totalDoctor":data17,"totalPatient":data4,"totalNurse":data}
+        data5={"Hub":data27,"totalHospital":data2,"totalDoctor":data17,"totalPatient":data4,"totalNurse":data171}
         cursor.close()
         output = {"result":data5,"status":"true"}
         return output  
