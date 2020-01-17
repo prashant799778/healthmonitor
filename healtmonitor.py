@@ -2974,6 +2974,54 @@ def adminPannel():
         output = {"result":"somthing went wrong","status":"false"}
         return output
 
+@app.route('/hubadminPannel', methods=['POST'])
+def hubadminPannel():
+    try:
+        json1=request.get_data() 
+        data=json.loads(json1.decode("utf-8")) 
+       
+        # conn=Connection()
+        # cursor = conn.cursor()
+        # query1 = " select  count(*) as count from HubMaster where ID='" + str(data["HubId"]) + "' ;"
+        # print(query1)
+        # cursor.execute(query1)
+        # data1 = cursor.fetchall()
+        
+        
+        query2 = " select  count(*) as count from Hospital_master where HubId='" + str(data["HubId"]) + "';"
+        print(query2)
+        cursor.execute(query2)
+        data2 = cursor.fetchall()
+
+        query="select ID from Hospital_master where HubId='" + str(data["HubId"]) + "' "
+        cursor.execute(query2)
+        data9 = cursor.fetchall()
+        for i in data9:
+        
+        query3 = " select  count(*) as count from userMaster where Usertype_Id=2;"
+        print(query3)
+        cursor.execute(query3)
+        data3 = cursor.fetchall()
+        
+        query4= " select  count(*) as count from Patient_master;"
+        print(query4)
+        cursor.execute(query4)
+        data4 = cursor.fetchall()
+        
+        data5={"totalHub":data1,"totalHospital":data2,"totalDoctor":data3,"totalPatient":data4}
+        cursor.close()
+        output = {"result":data5,"status":"true"}
+        return output  
+    except KeyError :
+        print("Key Exception---->")   
+        output = {"result":"key error","status":"false"}
+        return output  
+
+    except Exception as e :
+        print("Exception---->" +str(e))    
+        output = {"result":"somthing went wrong","status":"false"}
+        return output
+
 #Doctor Profile
 @app.route('/doctorProfile', methods=['POST'])
 def doctorProfile():
