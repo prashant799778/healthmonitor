@@ -781,6 +781,51 @@ def allDoctor():
         return output
 
 
+@app.route('/allHubadmin', methods=['post'])
+def allHubadmin():
+    try:
+        conn=Connection()
+        cursor = conn.cursor()
+        query= " select um.ID,um.name,um.mobile,um.password,um.Email,um.Gender,um.Usertype_Id,hsm.ID as Hospital_Id,hsm.hospital_name,hm.ID as HubId,hsm.Address as hospital_address,hm.HubName from userMaster um,HubMaster hm,Hospital_master hsm,"
+        query=query+"userHubMapping uhm where um.Usertype_Id=6 and hm.ID=hsm.HubId and um.ID=uhm.userId and uhm.hubId=hm.ID  order by um.ID desc;"
+        print(query)
+        
+        cursor.execute(query)
+        data= cursor.fetchall()
+        
+        for i in data:
+            query1="select count(*) as count from Patient_master pm where pm.Status<>'2'  and  pm.hospitalId='"+ str(i["Hospital_Id"])+"';"
+            cursor.execute(query1)
+            data1= cursor.fetchall()
+            print(data1)
+            i["patient"]=data1[0]["count"]
+            
+            query2="select hsm.ID as Hospital_Id from userMaster um,HubMaster hm,Hospital_master hsm,userHubMapping uhm where um.Usertype_Id=6 and hm.ID=hsm.HubId and um.ID=uhm.userId and uhm.hubId=hm.ID  and um.ID='"+str (i["ID"])+"';"
+            cursor.execute(query2)
+            data2= cursor.fetchall()
+            print(data2)
+            i["totalHospitals"]=data2
+            
+            
+            for j in data2:
+                query3="select hospital_name from Hospital_master where ID='"+str (j["hospitalId"])+"';"
+                cursor.execute(query3)
+                data3= cursor.fetchall()
+                print(data3)
+                j["hospitalName"]=data3[0]["hospital_name"]
+                
+        
+        cursor.close()    
+        if data:
+            return {"result":data,"status":"true"}
+        else:
+            return {"result":"No Record Found","status":"true"}
+    except Exception as e :
+        print("Exception---->" +str(e))           
+        output = {"result":"something went wrong","status":"false"}
+        return output
+
+
 @app.route('/allNurse', methods=['post'])
 def allNurse():
     try:
