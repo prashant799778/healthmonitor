@@ -1937,13 +1937,13 @@ def addDoctor():
 
 
 
-@app.route('/addHubDoctor', methods=['POST'])
+@app.route('/addHubadmin', methods=['POST'])
 def addHubDoctor():
     try:
         json1=request.get_data() 
         data1=json.loads(json1.decode("utf-8"))  
         
-        query = "select * from userMaster where  Usertype_Id=5 and Email='"+str(data1["Email"])+ "';"
+        query = "select * from userMaster where  Usertype_Id=6 and Email='"+str(data1["Email"])+ "';"
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
@@ -1980,7 +1980,7 @@ def addHubDoctor():
                         cursor.execute(query2)
                         conn.commit()
                 
-                query = "select * from userMaster where  Usertype_Id=5 and Email='"+str(data1["Email"])+ "';"
+                query = "select * from userMaster where  Usertype_Id=6 and Email='"+str(data1["Email"])+ "';"
                 
                 cursor.execute(query)
                 data = cursor.fetchone()
@@ -2023,7 +2023,7 @@ def addHubDoctor():
 #         json1=request.get_data() 
 #         data1=json.loads(json1.decode("utf-8"))  
         
-#         query = "select * from userMaster where  Usertype_Id=5 and Email='"+str(data1["Email"])+ "';"
+#         query = "select * from userMaster where  Usertype_Id=6 and Email='"+str(data1["Email"])+ "';"
 #         conn=Connection()
 #         cursor = conn.cursor()
 #         cursor.execute(query)
@@ -2137,6 +2137,48 @@ def updateDoctorMaster():
         return output
 
 
+
+@app.route('/updateHubadmin', methods=['POST'])
+def updatehubadmin():
+    try:
+       
+        json1=request.get_data() 
+        data=json.loads(json1.decode("utf-8")) 
+      
+        conn=Connection()
+        cursor = conn.cursor()
+
+        query1 = " update userMaster set   name ='" + str(data["name"]) + "', mobile='" + str(data["mobile"]) + "' , password='" + str(data["password"]) + "' , Email='" + str(data["Email"]) + "' , Gender='" + str(data["Gender"]) + "' , Status ='1'  where Usertype_Id=6 and  ID = '" + str(data["ID"])+ "';"
+        print(query1)
+        
+        cursor.execute(query1)
+        conn.commit()
+        HubId = data["HubId"]
+        query= "delete from userHubMapping where userId='" + str(data["ID"])+ "'  and Usertype_Id= 6 "
+        cursor.execute(query)
+        conn.commit()
+        print(HospitalId)
+        for i in HospitalId:
+            query2  = " insert into userHospitalMapping (userId,hubId)"
+            query2 = query2 +" values('" + str(data["ID"])+"','"+str(i)+"');"
+            print(query2)
+            cursor.execute(query2)
+            conn.commit()
+        
+        cursor.close()
+        output = {"result":"Updated Successfully","status":"true"}
+        return output  
+    except KeyError :
+        print("Key Exception---->")   
+        output = {"result":"key error","status":"false"}
+        return output  
+
+    except Exception as e :
+        print("Exception---->" +str(e))    
+        output = {"result":"somthing went wrong","status":"false"}
+        return output
+
+
 @app.route('/updateNurseMaster', methods=['POST'])
 def updateNurseMaster():
     try:
@@ -2228,6 +2270,33 @@ def deleteDoctorHospital():
         data=json.loads(json1.decode("utf-8")) 
        
         query1 = " Delete from userHospitalMapping where    Usertype_Id=2 and  userId = '" + str(data["ID"])+ "' and hospitalId='" + str(data["Hospital_Id"])+ "';"
+        print(query1)
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query1)
+        conn.commit()
+        cursor.close()
+        output = {"result":"Deleted Successfully","status":"true"}
+        return output  
+    except KeyError :
+        print("Key Exception---->")   
+        output = {"result":"key error","status":"false"}
+        return output  
+
+    except Exception as e :
+        print("Exception---->" +str(e))    
+        output = {"result":"somthing went wrong","status":"false"}
+        return output
+
+
+@app.route('/deleteHubadminhub', methods=['POST'])
+def deleteHubadminhub():
+    try:
+       
+        json1=request.get_data() 
+        data=json.loads(json1.decode("utf-8")) 
+       
+        query1 = " Delete from userHubMapping where    Usertype_Id=6 and  userId = '" + str(data["ID"])+ "' and hubId='" + str(data["HubId"])+ "';"
         print(query1)
         conn=Connection()
         cursor = conn.cursor()
