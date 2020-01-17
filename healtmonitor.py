@@ -857,38 +857,6 @@ def allNurse():
         return output
 
 
-@app.route('/hubadminNurse', methods=['post'])
-def hubadminNurse():
-    try:
-        json1=request.get_data()
-        Data=json.loads(json1.decode("utf-8"))
-        
-        conn=Connection()
-        cursor = conn.cursor()
-        query= " select um.ID,um.name,um.mobile,um.password,um.Email,um.Gender,um.Usertype_Id,hsm.ID as Hospital_Id,hsm.hospital_name,hm.ID as HubId,hsm.Address as hospital_address,hm.HubName from userMaster um,HubMaster hm,Hospital_master hsm,"
-        query=query+"userHospitalMapping uhm where um.Usertype_Id=3 and hm.ID=hsm.HubId and um.ID=uhm.userId and uhm.hospitalId=hsm.ID   and hsm.HubId='"+str(Data["HubId"])+"'  order by um.ID desc;"
-        print(query)
-        
-        cursor.execute(query)
-        data= cursor.fetchall()
-        
-        for i in data:
-            query1="select count(*) as count from patientNurseMapping pdm,Patient_master pm where pm.Status<>'2'  and pm.PatientId=pdm.Patient_Id and  pm.hospitalId='"+ str(i["Hospital_Id"])+"'and nurse_Id='"+str(i["ID"])+"';"
-            cursor.execute(query1)
-            data1= cursor.fetchall()
-            print(data1)
-            i["patient"]=data1[0]["count"]
-        
-        cursor.close()    
-        if data:
-            return {"result":data,"status":"true"}
-        else:
-            return {"result":"No Record Found","status":"true"}
-    except Exception as e :
-        print("Exception---->" +str(e))           
-        output = {"result":"something went wrong","status":"false"}
-        return output
-
 
 
 
@@ -1059,6 +1027,41 @@ def hubloginDoctor():
         print("Exception---->" +str(e))           
         output = {"result":"something went wrong","status":"false"}
         return output
+
+
+
+@app.route('/hubadminNurse', methods=['post'])
+def hubadminNurse():
+    try:
+        json1=request.get_data()
+        Data=json.loads(json1.decode("utf-8"))
+        
+        conn=Connection()
+        cursor = conn.cursor()
+        query= " select um.ID,um.name,um.mobile,um.password,um.Email,um.Gender,um.Usertype_Id,hsm.ID as Hospital_Id,hsm.hospital_name,hm.ID as HubId,hsm.Address as hospital_address,hm.HubName from userMaster um,HubMaster hm,Hospital_master hsm,"
+        query=query+"userHospitalMapping uhm where um.Usertype_Id=3 and hm.ID=hsm.HubId and um.ID=uhm.userId and uhm.hospitalId=hsm.ID   and hsm.HubId='"+str(Data["HubId"])+"'  order by um.ID desc;"
+        print(query)
+        
+        cursor.execute(query)
+        data= cursor.fetchall()
+        
+        for i in data:
+            query1="select count(*) as count from patientNurseMapping pdm,Patient_master pm where pm.Status<>'2'  and pm.PatientId=pdm.Patient_Id and  pm.hospitalId='"+ str(i["Hospital_Id"])+"'and nurse_Id='"+str(i["ID"])+"';"
+            cursor.execute(query1)
+            data1= cursor.fetchall()
+            print(data1)
+            i["patient"]=data1[0]["count"]
+        
+        cursor.close()    
+        if data:
+            return {"result":data,"status":"true"}
+        else:
+            return {"result":"No Record Found","status":"true"}
+    except Exception as e :
+        print("Exception---->" +str(e))           
+        output = {"result":"something went wrong","status":"false"}
+        return output
+
 
 
 
@@ -2301,19 +2304,19 @@ def updatehubadmin():
         conn=Connection()
         cursor = conn.cursor()
 
-        query1 = " update userMaster set   name ='" + str(data["name"]) + "', mobile='" + str(data["mobile"]) + "' , password='" + str(data["password"]) + "' , Email='" + str(data["Email"]) + "' , Gender='" + str(data["Gender"]) + "' , Status ='1'  where Usertype_Id=6 and  ID = '" + str(data["ID"])+ "';"
+        query1 = " update userMaster set   name ='" + str(data["name"]) + "', mobile='" + str(data["mobile"]) + "' , password='" + str(data["password"]) + "' , Email='" + str(data["Email"]) + "' , Gender='" + str(data["Gender"]) + "' , Status ='1'  where  usertypeId=6 and  ID = '" + str(data["ID"])+ "';"
         print(query1)
         
         cursor.execute(query1)
         conn.commit()
         HubId = data["HubId"]
-        query= "delete from userHubMapping where userId='" + str(data["ID"])+ "'  and Usertype_Id= 6 "
+        query= "delete from userHubMapping where userId='" + str(data["ID"])+ "'  and usertypeId= 6 "
         cursor.execute(query)
         conn.commit()
-        print(HospitalId)
-        for i in HospitalId:
-            query2  = " insert into userHospitalMapping (userId,hubId)"
-            query2 = query2 +" values('" + str(data["ID"])+"','"+str(i)+"');"
+        
+        for i in HubId:
+            query2  = " insert into userHospitalMapping (userId,hubId,usertypeId)"
+            query2 = query2 +" values('" + str(data["ID"])+"','"+str(i)+"','"+str('6')+"');"
             print(query2)
             cursor.execute(query2)
             conn.commit()
@@ -2449,7 +2452,7 @@ def deleteHubadminhub():
         json1=request.get_data() 
         data=json.loads(json1.decode("utf-8")) 
        
-        query1 = " Delete from userHubMapping where    Usertype_Id=6 and  userId = '" + str(data["ID"])+ "' and hubId='" + str(data["HubId"])+ "';"
+        query1 = " Delete from userHubMapping where    usertypeId=6 and  userId = '" + str(data["ID"])+ "' and hubId='" + str(data["HubId"])+ "';"
         print(query1)
         conn=Connection()
         cursor = conn.cursor()
