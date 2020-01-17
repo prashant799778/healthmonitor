@@ -2996,7 +2996,7 @@ def hubadminPannel():
         query="select ID from Hospital_master where HubId='" + str(data["HubId"]) + "' "
         cursor.execute(query2)
         data9 = cursor.fetchall()
-        for i in data9:
+        
         
         query3 = " select  count(*) as count from userMaster where Usertype_Id=2;"
         print(query3)
