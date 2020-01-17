@@ -2493,6 +2493,12 @@ def deleteHubadminhub():
         cursor = conn.cursor()
         cursor.execute(query1)
         conn.commit()
+
+        query= "Delete from userMaster where Usertype_Id=6 and ID='" + str(data["ID"])+ "'"
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        conn.commit()
         cursor.close()
         output = {"result":"Deleted Successfully","status":"true"}
         return output  
@@ -2520,6 +2526,11 @@ def deleteNurseHospital():
         cursor = conn.cursor()
         cursor.execute(query1)
         conn.commit()
+        query= "Delete from userMaster where Usertype_Id=3 and ID='" + str(data["ID"])+ "'"
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        conn.commit()
         cursor.close()
         output = {"result":"Deleted Successfully","status":"true"}
         return output  
@@ -2545,6 +2556,11 @@ def deleteoperationHospital():
 
         query1 = " Delete from userHospitalMapping where    Usertype_Id=4  and  userId = '" + str(data["ID"])+ "' and hospitalId='" + str(data["Hospital_Id"])+ "';"
         print(query1)
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query1)
+        conn.commit()
+        query= "Delete from userMaster where Usertype_Id=4 and ID='" + str(data["ID"])+ "'"
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query1)
@@ -3096,9 +3112,10 @@ def hubadminPannel():
             cursor.execute(query1)
             data17 =cursor.fetchall()
 
-            query1="select count(*) as count from userHospitalMapping where  Usertype_Id=3 and  hospitalId='"+str(i["ID"])+"';" 
+            query2="select count(*) as count from userHospitalMapping where  Usertype_Id=3 and  hospitalId='"+str(i["ID"])+"';" 
             
-            cursor.execute(query1)
+            cursor.execute(query2)
+            print(query2)
             data171 =cursor.fetchall()
 
             query4= " select  count(*) as count from Patient_master where hospitalId='"+str(i["ID"])+"' and Status<>'2';"
