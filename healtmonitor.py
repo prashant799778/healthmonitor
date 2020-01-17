@@ -471,6 +471,66 @@ def login1q():
 
                 if  d["Usertype"]== 'HubAdmin':
                     
+                    query= "select browserId,browserStatus from userMaster where Email= '" + name + "' and password='" + password + "'and Usertype_Id =6; "
+                    cursor = conn.cursor()
+                    cursor.execute(query)
+                    loginmultiple = cursor.fetchone()       
+                    print(loginmultiple)
+                   
+                    print(type(browserId))
+                   
+
+                    if (loginmultiple["browserId"]== browserId) :
+                       
+                      
+                        if  (loginmultiple["browserStatus"]!= 1):
+                           
+                            data={"result":"true","status":"You Already login through another Device"}
+                            return data
+                        else:
+                           
+                            query="update userMaster set browserStatus=1  where Email= '" + name + "' and password='" + password + "' "
+                            cursor = conn.cursor()
+                            cursor.execute(query)
+                            conn.commit()
+                           
+                            
+
+
+
+                    
+                    else:
+                        query="select browserStatus from userMaster where Email= '" + name + "' and password='" + password + "'and Usertype_Id =6 "
+                        print("sss")
+                        cursor = conn.cursor()
+                        cursor.execute(query)
+                        data=cursor.fetchone()
+                        if (data["browserStatus"] !=1):
+                            data={"result":"true","status":"You Already login through another Device"}
+                            return data
+                        
+                        else:
+                            query="update userMaster set browserId= '" + str(browserId) + "',browserStatus=1  where Email= '" + name + "' and password='" + password + "' "
+                            print(query)
+                            cursor = conn.cursor()
+                            cursor.execute(query)
+                            conn.commit()
+                    Nurse=[]
+                    query= "select hubId as HubId from userHubMapping where   userId= '" + str(y9) + "' "
+                    cursor = conn.cursor()
+                    cursor.execute(query)
+                    Nurse = cursor.fetchall()
+                    
+                    for i in Nurse:
+                        query2 = " select hm.ID as Hospital_Id,hm.hospital_name,hm.HubId as HubId,Hbs.HubName as HubName  from userMaster as um, userHubMapping  as mpum,HubMaster as Hbs,Hospital_master as hm  where  mpum.userId=um.ID and mpum.hubId=Hbs.ID and  hm.HubId=Hbs.ID     and hm.HubId = '" + str(i["HubId"]) + "';"
+                        print(query2)
+                        cursor = conn.cursor()
+                        cursor.execute(query2)
+                        Nurse1 = cursor.fetchall()
+                        i["Hospital"]=Nurse1
+
+                if  d["Usertype"]== 'HubDoctor':
+                    
                     query= "select browserId,browserStatus from userMaster where Email= '" + name + "' and password='" + password + "'and Usertype_Id =5; "
                     cursor = conn.cursor()
                     cursor.execute(query)
