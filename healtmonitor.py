@@ -3031,12 +3031,13 @@ def hubadminPannel():
         json1=request.get_data() 
         data=json.loads(json1.decode("utf-8")) 
        
-        # conn=Connection()
-        # cursor = conn.cursor()
-        # query1 = " select  count(*) as count from HubMaster where ID='" + str(data["HubId"]) + "' ;"
-        # print(query1)
-        # cursor.execute(query1)
-        # data1 = cursor.fetchall()
+        
+
+        query2 = " select  from HubMaster where ID='" + str(data["HubId"]) + "';"
+        print(query2)
+        cursor.execute(query2)
+        data27 = cursor.fetchone()
+
         
         
         query2 = " select  count(*) as count from Hospital_master where HubId='" + str(data["HubId"]) + "';"
@@ -3044,22 +3045,27 @@ def hubadminPannel():
         cursor.execute(query2)
         data2 = cursor.fetchall()
 
-        query="select ID from Hospital_master where HubId='" + str(data["HubId"]) + "' "
-        cursor.execute(query2)
-        data9 = cursor.fetchall()
+        query="select Hospital_master.ID from Hospital_master inner join HubMaster on Hospital_master.HubId=HubMaster.ID where Hospital_master.HubId='"+str(Data["HubId"])+"'  order by Hospital_master.ID DESC;"
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data99= cursor.fetchall()
+        
+        
+        for i in data99:
+            query1="select count(*) as count from userHospitalMapping where  Usertype_Id=2 and  hospitalId='"+str(i["ID"])+"';" 
+            
+            cursor.execute(query1)
+            data17 =cursor.fetchall()
+
+            query4= " select  count(*) as count from Patient_master where hospitalId='"+str(i["ID"])+"';"
+            print(query4)
+            cursor.execute(query4)
+            data4 = cursor.fetchall()
+            i["patient"]=data4[0]["count"]
 
         
-        query3 = " select  count(*) as count from userMaster where Usertype_Id=2;"
-        print(query3)
-        cursor.execute(query3)
-        data3 = cursor.fetchall()
-        
-        query4= " select  count(*) as count from Patient_master;"
-        print(query4)
-        cursor.execute(query4)
-        data4 = cursor.fetchall()
-        
-        data5={"totalHub":data1,"totalHospital":data2,"totalDoctor":data3,"totalPatient":data4}
+        data5={"Hub":data27,"totalHospital":data2,"totalDoctor":data17,"totalPatient":data4}
         cursor.close()
         output = {"result":data5,"status":"true"}
         return output  
