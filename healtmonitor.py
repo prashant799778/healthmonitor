@@ -519,17 +519,15 @@ def login1q():
                     query= "select hubId as HubId from userHubMapping where   userId= '" + str(y9) + "' "
                     cursor = conn.cursor()
                     cursor.execute(query)
-                    Nurs = cursor.fetchall()
+                    Nurse = cursor.fetchall()
                     
-                    for i in Nurs:
+                    for i in Nurse:
                         query2 = " select hm.ID as Hospital_Id,hm.hospital_name,hm.HubId as HubId,Hbs.HubName as HubName  from userMaster as um, userHubMapping  as mpum,HubMaster as Hbs,Hospital_master as hm  where  mpum.userId=um.ID and mpum.hubId=Hbs.ID and  hm.HubId=Hbs.ID     and hm.HubId = '" + str(i["HubId"]) + "';"
                         print(query2)
                         cursor = conn.cursor()
                         cursor.execute(query2)
                         Nurse1 = cursor.fetchall()
                         i["Hospital"]=Nurse1
-                        Nurse.append(Nurse1)
-                        
 
                 if  d["Usertype"]== 'HubDoctor':
                     
@@ -588,9 +586,8 @@ def login1q():
                         print(query2)
                         cursor = conn.cursor()
                         cursor.execute(query2)
-                        Nurse1 = cursor.fetchone()
+                        Nurse1 = cursor.fetchall()
                         i["Hospital"]=Nurse1
-                        Nurse.append(Nurse1)
                 
                 if  d["Usertype"]== 'admin':
                     query= "select browserId,browserStatus from userMaster where Email= '" + name + "' and password='" + password + "'and Usertype_Id =1; "
@@ -3076,7 +3073,7 @@ def hubadminPannel():
             i["patient"]=data4[0]["count"]
 
         
-        data5={"Hub":data27,"totalHospital":data2,"totalDoctor":data17,"totalPatient":data4,"totalNurse":data171}
+        data5={"Hub":data27,"totalHospital":data2,"totalDoctor":data17,"totalPatient":data4,"totalNurse":data}
         cursor.close()
         output = {"result":data5,"status":"true"}
         return output  
