@@ -1063,6 +1063,41 @@ def hubadminNurse():
         return output
 
 
+@app.route('/hubadminOperations', methods=['post'])
+def hubadminOperations():
+    try:
+        json1=request.get_data()
+        Data=json.loads(json1.decode("utf-8"))
+        
+        conn=Connection()
+        cursor = conn.cursor()
+        query= " select um.ID,um.name,um.mobile,um.password,um.Email,um.Gender,um.Usertype_Id,hsm.ID as Hospital_Id,hsm.hospital_name,hm.ID as HubId,hsm.Address as hospital_address,hm.HubName from userMaster um,HubMaster hm,Hospital_master hsm,"
+        query=query+"userHospitalMapping uhm where um.Usertype_Id=4 and hm.ID=hsm.HubId and um.ID=uhm.userId and uhm.hospitalId=hsm.ID   and hsm.HubId='"+str(Data["HubId"])+"'  order by um.ID desc;"
+        print(query)
+        
+        cursor.execute(query)
+        data= cursor.fetchall()
+        
+        for i in data:
+            query1="select count(*) as count from Patient_master pm where pm.Status<>'2' and  pm.hospitalId='"+ str(i["Hospital_Id"])+"';"
+            cursor.execute(query1)
+            data1= cursor.fetchall()
+            print(data1)
+            i["patient"]=data1[0]["count"]
+        
+        cursor.close()    
+        if data:
+            return {"result":data,"status":"true"}
+        else:
+            return {"result":"No Record Found","status":"true"}
+    except Exception as e :
+        print("Exception---->" +str(e))           
+        output = {"result":"something went wrong","status":"false"}
+        return output
+
+
+
+
 
 
 #hubLoginPatient
@@ -1075,7 +1110,7 @@ def hubloginPatient():
         
         json1=request.get_data()
         Data=json.loads(json1.decode("utf-8"))
-        query3 ="select  PM.PatientId as ID,PM.hospiatlId as Hospital_Id,PM.PatientName,PM.heartRate,PM.spo2,PM.highPressure,PM.lowPressure,PM.pulseRate,PM.temperature,PM.PhoneNo,Hbs.HubName,PM.Address,PM.BloodGroup,PM.DeviceMac,Hm.HubId,Hm.hospital_name as hospital_Name , "
+        query3 ="select  PM.PatientId as ID,PM.hospitalId as Hospital_Id,PM.PatientName,PM.heartRate,PM.spo2,PM.highPressure,PM.lowPressure,PM.pulseRate,PM.temperature,PM.PhoneNo,Hbs.HubName,PM.Address,PM.BloodGroup,PM.DeviceMac,Hm.HubId,Hm.hospital_name as hospital_Name , "
         query3=query3+" PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.age,PM.Gender,PM.roomNumber,pdm.DoctorID as DoctorID"
         query3= query3 + " from Patient_master  as PM ,patientDoctorMapping as pdm,Hospital_master as Hm,HubMaster as Hbs  where PM.hospitalId=Hm.ID  and  Hm.HubId='"+str(Data["HubId"])+"' and  Hm.HubId=Hbs.ID and  pdm.Patient_Id=PM.PatientId  and PM.Status<>'2'   ORDER BY  ID DESC;"
         conn=Connection()
