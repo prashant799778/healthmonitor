@@ -526,7 +526,7 @@ def login1q():
                         print(query2)
                         cursor = conn.cursor()
                         cursor.execute(query2)
-                        Nurse1 = cursor.fetchall()
+                        Nurse1 = cursor.fetchone()
                         Nurse.append(Nurse1)
                        
 
