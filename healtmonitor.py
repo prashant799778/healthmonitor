@@ -808,7 +808,7 @@ def allHubadmin():
             
             
             for j in data2:
-                query3="select hospital_name from Hospital_master where ID='"+str (j["hospitalId"])+"';"
+                query3="select hospital_name from Hospital_master where ID='"+str (j["Hospital_Id"])+"';"
                 cursor.execute(query3)
                 data3= cursor.fetchall()
                 print(data3)
