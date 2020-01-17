@@ -1001,6 +1001,20 @@ def hubloginDoctor():
             data1= cursor.fetchall()
             print(data1)
             i["patient"]=data1[0]["count"]
+
+            query2="select hospitalId from userHospitalMapping where userId='"+str (i["ID"])+"';"
+            cursor.execute(query2)
+            data2= cursor.fetchall()
+            print(data2)
+            i["totalHospitals"]=data2
+            
+            
+            for j in data2:
+                query3="select hospital_name from Hospital_master where ID='"+str (j["hospitalId"])+"';"
+                cursor.execute(query3)
+                data3= cursor.fetchall()
+                print(data3)
+                j["hospitalName"]=data3[0]["hospital_name"]
         
         cursor.close()    
         if data:
@@ -2996,7 +3010,7 @@ def hubadminPannel():
         query="select ID from Hospital_master where HubId='" + str(data["HubId"]) + "' "
         cursor.execute(query2)
         data9 = cursor.fetchall()
-        
+
         
         query3 = " select  count(*) as count from userMaster where Usertype_Id=2;"
         print(query3)
