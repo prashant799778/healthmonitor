@@ -526,9 +526,10 @@ def login1q():
                         print(query2)
                         cursor = conn.cursor()
                         cursor.execute(query2)
-                        Nurse1 = cursor.fetchone()
+                        Nurse1 = cursor.fetchall()
+                        i["Hospital"]=Nurse1
                         Nurse.append(Nurse1)
-                       
+                        
 
                 if  d["Usertype"]== 'HubDoctor':
                     
