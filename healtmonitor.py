@@ -3006,7 +3006,7 @@ def adminPannel():
         cursor.execute(query3)
         data3 = cursor.fetchall()
         
-        query4= " select  count(*) as count from Patient_master;"
+        query4= " select  count(*) as count from Patient_master where Status<>'2' ;"
         print(query4)
         cursor.execute(query4)
         data4 = cursor.fetchall()
@@ -3061,7 +3061,7 @@ def hubadminPannel():
             cursor.execute(query1)
             data17 =cursor.fetchall()
 
-            query4= " select  count(*) as count from Patient_master where hospitalId='"+str(i["ID"])+"';"
+            query4= " select  count(*) as count from Patient_master where hospitalId='"+str(i["ID"])+"' and Status<>'2';"
             print(query4)
             cursor.execute(query4)
             data4 = cursor.fetchall()
