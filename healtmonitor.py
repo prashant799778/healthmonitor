@@ -469,7 +469,7 @@ def login1q():
                     Nurse=cursor.fetchone()
                     print("Operation",Nurse)
 
-                if  d["Usertype"]== 'HubDoctor':
+                if  d["Usertype"]== 'HubAdmin':
                     
                     query= "select browserId,browserStatus from userMaster where Email= '" + name + "' and password='" + password + "'and Usertype_Id =5; "
                     cursor = conn.cursor()
@@ -876,7 +876,7 @@ def hubadminHospital():
 
 #hubLoginDoctor
 
-@app.route('/hubLoginDoctor', methods=['post'])
+@app.route('/hubadminDoctor', methods=['post'])
 def hubloginDoctor():
     try:
         json1=request.get_data()
@@ -913,7 +913,7 @@ def hubloginDoctor():
 
 
 
-@app.route('/hubLoginPatient', methods=['post'])
+@app.route('/hubadminPatient', methods=['post'])
 def hubloginPatient():
     try:
         
