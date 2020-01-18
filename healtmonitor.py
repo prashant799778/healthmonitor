@@ -787,7 +787,7 @@ def allHubadmin():
         conn=Connection()
         cursor = conn.cursor()
         query= " select um.ID,um.name,um.mobile,um.password,um.Email,um.Gender,um.Usertype_Id,hm.ID as HubId,hm.HubName from userMaster um,HubMaster hm, "
-        query=query+"userHubMapping uhm where um.Usertype_Id=6 and um.ID=uhm.userId and uhm.hubId=hm.ID  order by um.ID desc;"
+        query=query+" userHubMapping uhm where um.Usertype_Id=6 and um.ID=uhm.userId and uhm.hubId=hm.ID  order by um.ID desc;"
         print(query)
         
         cursor.execute(query)
