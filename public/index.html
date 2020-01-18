@@ -5,14 +5,41 @@
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="apple-touch-icon" href="logo192.png" />
     <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+   
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i&display=swap&subset=latin-ext" rel="stylesheet">
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/newstyle.css">
+ 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="fonts/fontawesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" crossorigin="anonymous" />
+    <link rel="stylesheet" type="text/css" href="css/animate.css">
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+
+
+
+ 
+  
+  <!-- <link rel="stylesheet" type="text/css" href="owl-file/docs.theme.min.css"> -->
+  <link rel="stylesheet" type="text/css" href="owl-file/owl.carousel.min.css">
+  <link rel="stylesheet" type="text/css" href="owl-file/owl.theme.default.min.css">
+
+
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -22,11 +49,78 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
+
+ 
+    <title>MONITOR TOOL</title>
+    <style>
+          .topbar #sidebarToggleTop {
+        display: block !important;
+        color: #9b2812;
+    }
+    .alrt-bx img:first-child {
+      width: 15px;
+    vertical-align: bottom;
+    margin-right: 7px;
+}
+      #wrapper {
+  height: 100vh;
+}
+.navbar-nav .nav-item .nav-link.active{
+	background-color: red;
+}
+.nxt-pre-btn {
+    padding: 10px 0 20px 0;
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 20px;
+
+}
+button.nxt-btn {
+    background: #ff6a07;
+    color: #fff;
+    border-radius: 2.5px;
+    padding: 13px 20px;
+    text-transform: capitalize;
+    border: none;
+}
+button.pre-btn {
+    background: #ff6a07;
+    color: #fff;
+    border-radius: 2.5px;
+    padding: 13px 20px;
+    text-transform: capitalize;
+    border: none;
+}
+
+/* blink efect */
+.alrt-bx {
+    display: flex;
+}
+.blink-efc {
+  animation: blinker 1s linear infinite;
+  background: red;
+  width: 15px;
+  height: 15px;
+  border-radius: 50px;
+  display: inline-block;
+  margin-right: 10px;
+  border: 2px solid #969696;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* End */
+
+
+    </style>
   </head>
-  <body style="background-color: black;">
+  <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root" style="background-color: black;"></div>
+    <div id="root"></div>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
@@ -39,13 +133,221 @@
     -->
 
 
-    <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js"></script>
 
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <!-- <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
+  
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!-- Custom scripts for all pages-->
+
+
+   
+    
+
+
+
+    <script src="js/sb-admin-2.min.js"></script>
+  
+    <!-- Page level plugins -->
+    <script src="vendor/chart.js/Chart.min.js"></script>
+    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+    <!-- <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script> -->
+    
+      <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+      <script src="js/jquery.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+<!-- Page level custom scripts -->
+<script src="js/demo/chart-area-demo.js"></script>
+<script src="js/demo/chart-pie-demo.js"></script>
+<script src="js/owl.carousel.min.js"></script>
+  <script src="js/demo/datatables-demo.js"></script>
+  <script type="text/javascript" src="js/newscript.js"></script>
+ 
+  
+  
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+ 
+<script>
+      $(function() {
+     $('.chosen-select').chosen();
+     $('.chosen-select-deselect').chosen({ allow_single_deselect: true });
+   });
+</script>
+
+      <script type="text/javascript">
+        $(document).ready(function() {
+            $('#example').DataTable(
+                
+                 {     
+        
+              "aLengthMenu": [[5, 10, 25, -1], [5, 10, 25, "All"]],
+                "iDisplayLength": 5
+               } 
+                );
+        } );
+        
+        
+        function checkAll(bx) {
+          var cbs = document.getElementsByTagName('input');
+          for(var i=0; i < cbs.length; i++) {
+            if(cbs[i].type == 'checkbox') {
+              cbs[i].checked = bx.checked;
+            }
+          }
+        }
+        </script>
+      <script>
+          $('#datepicker').datepicker({
+              uiLibrary: 'bootstrap4'
+          });
+      </script>
+      <script>
+       $(document).ready(function () {
+      $('select').selectize({
+          sortField: 'text'
+      });
+  });
+      
+      </script>
+      <script>
+        window.onpopstate=function()
+        {
+          var element = document.getElementById('closeId');
+          element.click()
+          var element1 = document.getElementById('device');
+          element1.click()
+        }
+        </script>
+
+      <script type="text/javascript">
+  $(document).ready(function() {
+    
+  } );
+  
+  
+  function checkAll(bx) {
+    var cbs = document.getElementsByTagName('input');
+    for(var i=0; i < cbs.length; i++) {
+      if(cbs[i].type == 'checkbox') {
+        cbs[i].checked = bx.checked;
+      }
+    }
+  }
+  </script>
+<script>
+  $(document).ready(function(){
+ $('.clks').click(function(){
+$('.add-clss').addClass('show').toggle();
+
+});
+});
+</script>
+<script>
+  var input = document.getElementById("mySubmit");
+  input.addEventListener("keyup", function(event) {
+    if (event.keyCode === 13) {
+     event.preventDefault();
+     document.getElementById("myBtn").click();
+    }
+  });
+
+  </script>
+<script type="text/javascript">
+  $('#exampleModalCenter').modal({
+      backdrop: 'static',
+      keyboard: false
+  });
+</script>
+
+<!-- <script>
+  var myside1 = document.getElementById("myside1");
+ 
+  function colorChange(){
+    alert('anurag')
+    document.getElementById('myside1').style.cssText = 'padding:20px; background-color:#b2b2ff;'
+  }
+  
+ 
+
+
+    $(document).ready(function(){
+     
+        $("#myside1").click(function() {
+    // alert("vijay")
+  
+    $("#myside1").css({'background' : 'blue','margin':'0'});
+});
+$("#myside0").click(function() {
+  
+  $("#myside").css({'background' : '#9b2812','margin':'0'});
+});
+
+$("#myside2").click(function() {
+   
+    $("#myside2").css({'background-color': '#9b2812','margin':'0'});
+});
+$("#myside3").click(function() {
+   
+    $("#myside3").css({'background-color': '#9b2812','margin':'0'});
+});
+$("#myside4").click(function() {
+  
+    $("#myside4").css({'background-color': '#9b2812','margin':'0'});
+});
+      
+     
+  
+
+ });
+  </script> -->
+
+  <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  
+  <script src="owl-file/owl.carousel.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('.owl-carousel').owlCarousel({
+        dots:false,
+        items:4,
+        loop: true,
+        margin: 10,
+        responsiveClass: true,
+        responsive: {
+          0: {
+            items: 1,
+            nav: true
+          },
+          600: {
+            items: 3,
+            nav: true
+          },
+          1000: {
+            items: 4,
+            nav: true,
+            loop: false,
+            margin: 20
+          }
+        }
+      })
+    })
+  </script> -->
+<script>
+$('.dwnld').click(function(){
+  $(this).toggleClass('clicked');
+});
+</script>
+  
   </body>
+
+
+  
 </html>

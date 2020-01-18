@@ -1,0 +1,20 @@
+ul.pagination li:last-child {
+    border-right: 1px solid gray;
+}
+
+ul.pagination li {
+    border: 1px solid gray;
+    padding: 10px 15px;
+    border-right: 0px;
+}
+ul.pagination li a {
+    color: #9fadb5;
+    font-size: 1rem !important;
+}
+.pagination li.active {
+    background: #ff6a07;
+    border-color:#ff6a07;
+}
+ul.pagination li.active a {
+    color:#fff;
+}
