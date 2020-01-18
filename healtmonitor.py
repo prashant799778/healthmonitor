@@ -799,7 +799,7 @@ def allHubadmin():
             cursor.execute(query2)
             data2= cursor.fetchall()
             
-            print(data2)
+            print(data2,"================================================================")
             i["totalHospitals"]=len(data2)
 
             for j in data2:
