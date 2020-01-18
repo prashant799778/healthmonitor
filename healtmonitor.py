@@ -2345,7 +2345,7 @@ def updatehubadmin():
         conn=Connection()
         cursor = conn.cursor()
 
-        query1 = " update userMaster set   name ='" + str(data["name"]) + "', mobile='" + str(data["mobile"]) + "' , password='" + str(data["password"]) + "' , Email='" + str(data["Email"]) + "' , Gender='" + str(data["Gender"]) + "' , Status ='1'  where  usertypeId=6 and  ID = '" + str(data["ID"])+ "';"
+        query1 = " update userMaster set   name ='" + str(data["name"]) + "', mobile='" + str(data["mobile"]) + "' , password='" + str(data["password"]) + "' , Email='" + str(data["Email"]) + "' , Gender='" + str(data["Gender"]) + "' , Status ='1'  where  Usertype_Id=6 and  ID = '" + str(data["ID"])+ "';"
         print(query1)
         
         cursor.execute(query1)
