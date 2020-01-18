@@ -784,6 +784,7 @@ def allDoctor():
 @app.route('/allHubadmin', methods=['post'])
 def allHubadmin():
     try:
+        totalpatient=0
         conn=Connection()
         cursor = conn.cursor()
         query= " select um.ID,um.name,um.mobile,um.password,um.Email,um.Gender,um.Usertype_Id,hm.ID as HubId,hm.HubName from userMaster um,HubMaster hm, "
@@ -805,10 +806,10 @@ def allHubadmin():
                 data1= cursor.fetchall()
                 print(data1)
                 print("data1======================",data1)
-                j["patient"]=data1[-1]["count"]
-                print(j)
+                totalpatient+=data1[0]["count"]
+               
 
-            i["patient"]=data1[0]["count"]
+            i["totalpatient"]=totalpatient
 
 
            
