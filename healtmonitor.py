@@ -804,7 +804,8 @@ def allHubadmin():
                 cursor.execute(query1)
                 data1= cursor.fetchall()
                 print(data1)
-                j["patient"]=data1[0]["count"]
+                print("data1======================",data1)
+                j["patient"]=data1[-1]["count"]
                 print(j)
 
             i["patient"]=data1[0]["count"]
