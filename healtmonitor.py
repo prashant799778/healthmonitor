@@ -2163,6 +2163,7 @@ def addHubDoctor():
                 mainId=yu["userId"]
                 Usertype_Id=yu["Usertype_Id"]
                 HubId = data1["HubId"]
+                print(HubId)
                 for i in HubId:
                     query = "select * from userHubMapping where hubId='"+str(i)+"'   and userid= '"+str(mainId)+ "';"
                     cursor.execute(query)
@@ -2184,6 +2185,7 @@ def addHubDoctor():
                     mainId=data["ID"]
                     Usertype_Id=data["Usertype_Id"]
                     HubId = data1["HubId"]
+                    print(HubId)
                     for i in HubId:
                         query = "select * from userHubMapping where hubId='"+str(i)+"'   and userid= '"+str(mainId)+ "';"
                         cursor.execute(query)
