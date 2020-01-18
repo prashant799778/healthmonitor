@@ -795,19 +795,19 @@ def allHubadmin():
         data= cursor.fetchall()
         
         for i in data:
-            query2="select hsm.ID as Hospital_Id,hm.ID as Hub_Id from userMaster um,HubMaster hm,Hospital_master hsm,userHubMapping uhm where um.Usertype_Id=6 and hm.ID=hsm.HubId and um.ID=uhm.userId and uhm.hubId=hm.ID  and um.ID='"+str (i["ID"])+"';"
+            query2="select hsm.ID as Hospital_Id,hm.ID as Hub_Id from userMaster um,HubMaster hm,Hospital_master hsm,userHubMapping uhm where um.Usertype_Id=6 and hm.ID=hsm.HubId and um.ID=uhm.userId and uhm.hubId=hm.ID and hm.HubId='"+str (i["HubId"])+"'  and um.ID='"+str (i["ID"])+"';"
             cursor.execute(query2)
             data2= cursor.fetchall()
             print(data2)
             i["totalHospitals"]=len(data2)
 
             for j in data2:
-                query1="select pm.PatientId as count from Patient_master pm,Hospital_master hm,HubMaster Hm  where pm.Status<>'2'  and  pm.hospitalId=hm.ID and hm.HubId=Hm.ID and  pm.hospitalId='"+ str(j["Hospital_Id"])+"' and Hm.ID='"+ str(j["Hub_Id"])+"' ;"
+                query1="select pm.PatientId as count from Patient_master pm,Hospital_master hm,HubMaster Hm  where pm.Status<>'2'  and  pm.hospitalId=hm.ID and hm.HubId=Hm.ID and  pm.hospitalId='"+ str(j["Hospital_Id"])+"'  ;"
                 cursor.execute(query1)
                 data1= cursor.fetchall()
                 print(data1)
                 print("data1======================",data1)
-                totalpatient+=len(data1)
+                totalpatient+=data1[0]["count"]
 
 
                
