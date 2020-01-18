@@ -809,7 +809,7 @@ def allHubadmin():
                 totalpatient+=data1[0]["count"]
                
 
-            i["totalpatient"]=totalpatient
+            i["patient"]=totalpatient
 
 
            
