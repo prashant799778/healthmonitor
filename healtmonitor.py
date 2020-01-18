@@ -811,6 +811,10 @@ def allHubadmin():
                 # print("data1======================",data1)
                 totalpatient+=data1[0]["count"]
                 j["patient"]=totalpatient
+
+
+            
+
             i["patient"]= j["patient"]
 
 
