@@ -798,15 +798,15 @@ def allHubadmin():
             query2="select hsm.ID as Hospital_Id,hm.ID as Hub_Id from userMaster um,HubMaster hm,Hospital_master hsm,userHubMapping uhm where um.Usertype_Id=6 and hm.ID=hsm.HubId and um.ID=uhm.userId and uhm.hubId=hm.ID and hm.ID='"+str (i["HubId"])+"'  and um.ID='"+str (i["ID"])+"';"
             cursor.execute(query2)
             data2= cursor.fetchall()
-            print(data2)
+            # print(data2)
             i["totalHospitals"]=len(data2)
 
             for j in data2:
                 query1="select  count(*)  as count from Patient_master pm,Hospital_master hm,HubMaster Hm  where pm.Status<>'2'  and  pm.hospitalId=hm.ID and hm.HubId=Hm.ID and   hm.HubId='"+ str(j["Hub_Id"])+"'  and  pm.hospitalId='"+ str(j["Hospital_Id"])+"'  ;"
                 cursor.execute(query1)
                 data1= cursor.fetchall()
-                print(data1)
-                print("data1======================",data1)
+                # print(data1)
+                # print("data1======================",data1)
                 totalpatient+=data1[0]["count"]
 
 
