@@ -2356,7 +2356,7 @@ def updatehubadmin():
         conn.commit()
         
         for i in HubId:
-            query2  = " insert into userHospitalMapping (userId,hubId,usertypeId)"
+            query2  = " insert into userHubMapping (userId,hubId,usertypeId)"
             query2 = query2 +" values('" + str(data["ID"])+"','"+str(i)+"','"+str('6')+"');"
             print(query2)
             cursor.execute(query2)
