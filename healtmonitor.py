@@ -798,6 +798,7 @@ def allHubadmin():
             query2="select hsm.ID as Hospital_Id from userMaster um,HubMaster hm,Hospital_master hsm,userHubMapping uhm where um.Usertype_Id=6 and hm.ID=hsm.HubId and um.ID=uhm.userId and uhm.hubId=hm.ID and hm.ID='"+str (i["HubId"])+"'  and um.ID='"+str (i["ID"])+"';"
             cursor.execute(query2)
             data2= cursor.fetchall()
+            
             print(data2)
             i["totalHospitals"]=len(data2)
 
