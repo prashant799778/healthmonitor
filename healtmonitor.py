@@ -2145,7 +2145,7 @@ def addHubDoctor():
         if data==None:
             if data1["password"]==data1["confirm_password"]:
                 query2  = " insert into userMaster (name,mobile,Usertype_Id,UserID,password,Email,Gender)"
-                query2 = query2 +" values('"+str(data1["name"])+"','"+str(data1["mobile"])+"','"+str('5')+"','"+str(UserID)
+                query2 = query2 +" values('"+str(data1["name"])+"','"+str(data1["mobile"])+"','"+str('6')+"','"+str(UserID)
                 query2=query2+"','"+str(data1["password"])+"','"+str(data1["Email"])+"','"+str(data1["Gender"])+"');"
                 print(query2)
                 
