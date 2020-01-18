@@ -804,7 +804,7 @@ def allHubadmin():
 
             
             for j in data2:
-                query1="select  count(*)  as count from Patient_master pm,Hospital_master hm,HubMaster Hm  where pm.Status<>'2'  and  pm.hospitalId=hm.ID and hm.HubId=Hm.ID  and  pm.hospitalId='"+ str(j["Hospital_Id"])+"'  ;"
+                query1="select  count(*)  as count from Patient_master pm,Hospital_master hm where pm.Status<>'2'  and  pm.hospitalId=hm.ID  and  pm.hospitalId='"+ str(j["Hospital_Id"])+"'  ;"
                 cursor.execute(query1)
                 data1= cursor.fetchall()
                 # print(data1)
