@@ -802,20 +802,21 @@ def allHubadmin():
             print(data2,"================================================================")
             i["totalHospitals"]=len(data2)
 
-            
+            totalpatient=0
             for j in data2:
-                query1="select  count(*)  as count from Patient_master pm,Hospital_master hm where pm.Status<>'2'  and  pm.hospitalId=hm.ID  and  pm.hospitalId='"+ str(j["Hospital_Id"])+"'  ;"
+                query1="select  count(*)  as count from Patient_master pm,Hospital_master hm,HubMaster Hm  where pm.Status<>'2'  and  pm.hospitalId=hm.ID and hm.HubId=Hm.ID  and  pm.hospitalId='"+ str(j["Hospital_Id"])+"'  ;"
                 cursor.execute(query1)
                 data1= cursor.fetchall()
                 # print(data1)
                 # print("data1======================",data1)
                 totalpatient+=data1[0]["count"]
-                j["patient"]=totalpatient
+
 
 
             
 
-            i["patient"]= j["patient"]
+            i["patient"]=totalpatient
+            
 
 
            
