@@ -3,7 +3,7 @@ import history from '../../History';
 import '../style.css';
 import {withRouter} from 'react-router-dom';
 import dashimg from '../../image/dashboard.svg';
-
+import axios from "axios";
 import { Link } from "react-router-dom";
 import logo from './web_icon.png';
 class SideBar extends React.Component{
@@ -21,20 +21,24 @@ class SideBar extends React.Component{
   //   }
   //   return "";
   // }
+
+
+
+  
   componentDidMount(){
-   
-   if(window.location.pathname == "/dash"){
+  
+   if(window.location.pathname == "/hubadmindash"){
    
     let element = document.getElementById('side11');
     element.classList.add("active");
    }
-   else if(window.location.pathname == "/hospital"){
+   else if(window.location.pathname == "/hhospital"){
    
     let element = document.getElementById('side22');
   
     element.classList.add("active");
   }
-  else if(window.location.pathname == "/patient"){
+  else if(window.location.pathname == "/hpatient"){
    
     let element = document.getElementById('side33');
    
@@ -46,19 +50,19 @@ class SideBar extends React.Component{
    
     element.classList.add("active");
   }
-  else if(window.location.pathname == "/doctor"){
+  else if(window.location.pathname == "/hdoctor"){
    
     let element = document.getElementById('side55');
    
     element.classList.add("active");
   }
-  else if(window.location.pathname == "/nurse"){
+  else if(window.location.pathname == "/hnurse"){
    
     let element = document.getElementById('side66');
    
     element.classList.add("active");
   }
-  else if(window.location.pathname == "/operation"){
+  else if(window.location.pathname == "/hoperation"){
    
     let element = document.getElementById('side99');
    
@@ -130,44 +134,44 @@ return(
       </div>
     </a>
     <li className="nav-item">
-    <Link to="/dash" id="side11" className="nav-link  ">
+    <Link to="/hubadmindash" id="side11" className="nav-link  ">
         <img src={dashimg}/>Home
       </Link>
     </li>
 
-    <li className="nav-item">
+    {/* <li className="nav-item">
     <Link to="/hubs" id="side44" className="nav-link  ">
         <img src=""/>Hubs
       </Link>
-    </li>
+    </li> */}
    
     <li  className="nav-item">
-      <Link to="/hospital"   id="side22" className="nav-link">
+      <Link to="/hhospital"   id="side22" className="nav-link">
         <img src=""/>Hospitals
       </Link>
     </li>
-    <li    className="nav-item">
+    {/* <li    className="nav-item">
       <Link   id="side1010"  to="/hubadmin" className="nav-link">
         <img src=""/>Hub Admin
       </Link>
-    </li>
+    </li> */}
     <li    className="nav-item">
-      <Link   id="side55"  to="/doctor" className="nav-link">
+      <Link   id="side55"  to="/hdoctor" className="nav-link">
         <img src=""/>Doctors
       </Link>
     </li>
     <li    className="nav-item">
-      <Link   id="side66"  to="/nurse" className="nav-link">
+      <Link   id="side66"  to="/hnurse" className="nav-link">
         <img src=""/>Nurses
       </Link>
     </li>
     <li    className="nav-item">
-      <Link   id="side99"  to="/operation" className="nav-link">
+      <Link   id="side99"  to="/hoperation" className="nav-link">
         <img src=""/>Operation
       </Link>
     </li>
     <li    className="nav-item">
-      <Link   id="side33"  to="/patient" className="nav-link">
+      <Link   id="side33"  to="/hpatient" className="nav-link">
         <img src=""/>Patients
       </Link>
     </li>

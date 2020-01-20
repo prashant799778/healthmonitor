@@ -29,7 +29,10 @@ class Login extends React.Component {
   loginHandler = e => {
     e.preventDefault();
     // this.callapi();
-    let api = `http://159.65.146.25:5053/login?name=${this.state.name}&password=${this.state.pass}`;
+
+    let unique_id= this.makeid(7)
+
+    let api = `http://159.65.146.25:5053/login1?name=${this.state.name}&password=${this.state.pass}&browserId=${unique_id}`;
     axios
       .get(api)
       .then(response => {
@@ -37,14 +40,18 @@ class Login extends React.Component {
           if (response && response.data && response.data.status   && response.data.status === "true") {
             let res = response.data.result;
             let resD = response.data["Nurse Details"];
-
+            let hid=""
+            if(Array.isArray(resD) && resD.length>0){
+              hid=resD[0].HubId
+            }
+            localStorage.setItem("unique_id",unique_id);
             localStorage.setItem("login", "yes");
             localStorage.setItem("user_type", res.Usertype);
             localStorage.setItem("user_id", res.UserID);
             localStorage.setItem("user_type_id", res.Usertype_Id);
             localStorage.setItem("user", res.name);
             localStorage.setItem("email", res.Email);
-            localStorage.setItem("hub_id", resD.HubId);
+            localStorage.setItem("hub_id", hid);
             localStorage.setItem("hos_id", resD.hospital_Id);
             localStorage.setItem("hospital_name", resD.hospital_name);
             localStorage.setItem("hub_name", resD .HubName);
@@ -58,6 +65,8 @@ class Login extends React.Component {
                 this.props.history.push("/Odash");
               }else if(res.Usertype_Id==5) {
                 this.props.history.push("/hubdash");
+              }else if(res.Usertype_Id==6) {
+                this.props.history.push("/hubadmindash");
               }
             });
           } else {
@@ -243,7 +252,21 @@ class Login extends React.Component {
     //   });
   };
 
+
+ makeid=(length)=>{
+    var result = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < length; i++ ) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+    }
+
   render() {
+
+
+   
     if (
       localStorage.getItem("login", "no") === "yes" &&
       localStorage.getItem("usertype", "") === "admin"
@@ -258,6 +281,9 @@ class Login extends React.Component {
     }else if (localStorage.getItem("login", "no") === "yes" && 
     localStorage.getItem("user_type_id", "") == 5) {
       this.props.history.push("/hubdash");
+    }else if (localStorage.getItem("login", "no") === "yes" && 
+    localStorage.getItem("user_type_id", "") == 6) {
+      this.props.history.push("/hubadmindash");
     }
     return (
       <LoginStyled>

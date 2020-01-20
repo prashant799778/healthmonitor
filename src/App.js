@@ -4,7 +4,12 @@ import logo from "./logo.svg";
 import "./App.css";
 import Dash from "./Dash/Dash";
 import User from "./User/User";
+import HAdminUser   from "./HubAdmin/User"
 import Nurse  from "./User/Nurse";
+import HAdminNurse    from "./HubAdmin/Nurse"
+import Operation  from "./User/Operation";
+import HAdminOperation   from "./HubAdmin/Operation"
+import HubAdmin  from "./User/HubAdmin";
 import Drf from "./Drf/Drf";
 import Mom from "./Drf/Mom";
 import Drfs from "./Drfs/Drf";
@@ -12,6 +17,7 @@ import Login from "./Login/Login";
 import Try from "./Login/Try";
 import Role from "./Role/roles";
 import Home from "./Report/home";
+import HubAdminDash from "./Report/HubAdminDash";
 import { Router, Route, Link } from "react-router-dom";
 import history from "./History";
 import Smart from "./Drf/Smart";
@@ -20,10 +26,12 @@ import spin from "../src/Drf/spinner.svg";
 import NewDetail from "./Add_new/NewDetail";
 import New2 from "./Add_new/new2";
 import Hospital from './User/Hospital'
+import HAdminHospital  from "./HubAdmin/Hospital"
 import HospitalList from "./Report/hospitalList";
 import PatientList from "./Report/patientList";
 import Hub  from "./User/hub"
 import Doctor  from "./User/doctor"
+import HAdminDoctor  from "./HubAdmin/doctor"
 import  UserDash  from "./Report/UserDashnew";
 import   Operationdash  from "./Report/Operationdash";
 import   Hubdash  from "./Report/HUbdash";
@@ -81,12 +89,21 @@ class App extends React.Component {
                 <DealStatus  isOpen={this.state.isOpen}  Open={this.open} />
               )}
               /> */}
-
+<Route
+            path="/hubadmin"
+              render={props => (
+                <HubAdmin isOpen={this.state.isOpen} Open={this.open} />
+              )}    />
 
 <Route
             path="/doctor"
               render={props => (
                 <Doctor isOpen={this.state.isOpen} Open={this.open} />
+              )}    />
+              <Route
+            path="/hdoctor"
+              render={props => (
+                <HAdminDoctor isOpen={this.state.isOpen} Open={this.open} />
               )}    />
 
 <Route
@@ -99,6 +116,22 @@ class App extends React.Component {
             path="/nurse"
               render={props => (
                 <Nurse isOpen={this.state.isOpen} Open={this.open} />
+              )}    />
+              <Route
+            path="/operation"
+              render={props => (
+                <Operation isOpen={this.state.isOpen} Open={this.open} />
+              )}    />
+
+<Route
+            path="/hnurse"
+              render={props => (
+                <HAdminNurse isOpen={this.state.isOpen} Open={this.open} />
+              )}    />
+              <Route
+            path="/hoperation"
+              render={props => (
+                <HAdminOperation isOpen={this.state.isOpen} Open={this.open} />
               )}    />
             <Route
               path="/drf"
@@ -130,6 +163,13 @@ class App extends React.Component {
               path="/home"
               render={props => (
                 <UserDash isOpen={this.state.isOpen} Open={this.open} />
+              )}
+            />
+
+<Route
+              path="/hubadmindash"
+              render={props => (
+                <HubAdminDash isOpen={this.state.isOpen} Open={this.open} />
               )}
             />
              <Route
@@ -167,6 +207,19 @@ class App extends React.Component {
               path="/patient"
               render={props => (
                 <User isOpen={this.state.isOpen} Open={this.open} />
+              )}
+            />
+              <Route
+              path="/hhospital"
+              render={props => (
+                <HAdminHospital isOpen={this.state.isOpen} Open={this.open} />
+              )}
+            />
+
+            <Route
+              path="/hpatient"
+              render={props => (
+                <HAdminUser isOpen={this.state.isOpen} Open={this.open} />
               )}
             />
 

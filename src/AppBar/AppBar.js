@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-
+import axios from "axios";
 import './style.css';
 import i from '../image/turn-off.svg';
 import history from '../History';
@@ -22,6 +22,53 @@ export default class AppBar extends React.Component{
      this.props.Open()
      
    }
+
+
+   callapi=()=>{
+       
+  
+
+
+
+    let unique_id=localStorage.getItem("unique_id","")
+     let email=localStorage.getItem("email","")
+    
+     let api = `http://159.65.146.25:5053/session?name=${email}&browserId=${unique_id}`;
+          axios.get(api)
+        .then((response)=> {
+          // handle success
+             
+          
+          console.log("unique",response.data.status)
+       
+         if(response.data.status!="true"){
+
+          localStorage.removeItem("login")
+          localStorage.clear()
+          history.push('/')
+          window.location.reload();
+
+         }
+       
+      
+    
+        
+      })
+      .catch( (error)=> {
+        // handle error
+        
+        
+      })
+    
+    
+    
+     
+        
+      }
+
+        
+  componentDidMount(){
+    this. callapi()}
    render()
 {
 
@@ -107,6 +154,7 @@ export default class AppBar extends React.Component{
           <li className="nav-item dropdown no-arrow log-out">
             <a className="nav-link dropdown-toggle"  id="userDropdown" role="button"  onClick={()=>{
                     localStorage.removeItem("login")
+                    localStorage.clear()
                     history.push('/')
                     window.location.reload();
 

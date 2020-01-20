@@ -8,8 +8,9 @@ import SPO from "./spo"
 import backImg from "./image/backimg.png"
 import alertimg from "./image/alrt.gif" 
 class Detail extends React.Component{
-
+  client=""
     constructor(){
+    
       super()
     
     
@@ -58,7 +59,7 @@ class Detail extends React.Component{
 
         let  Omqtt1 = require('mqtt')
         let  Oclient1  = Omqtt1.connect('ws://139.59.78.54:9001')
-      
+        this.client=Oclient1
           Oclient1.on('connect', ( ) =>{
                 Oclient1.subscribe(this.props.currentTopic +"",  (err)=> {
                   console.log("Omessage1",this.props.currentTopic+"   on subscribe")
@@ -191,7 +192,7 @@ testAlert1=(type,value)=>{
       return true;}
      return false;
 }
-
+  
       render(){
 
         let currentinnerItem=this.props.currentinnerItem  ;
