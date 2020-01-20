@@ -3191,6 +3191,12 @@ def hubadminPannel():
             print(query2)
             data171 =cursor.fetchall()
 
+            query2="select count(*) as count from userHospitalMapping where  Usertype_Id=4 and  hospitalId='"+str(i["ID"])+"';" 
+            
+            cursor.execute(query2)
+            print(query2)
+            data172 =cursor.fetchall()
+
             query4= " select  count(*) as count from Patient_master where hospitalId='"+str(i["ID"])+"' and Status<>'2';"
             print(query4)
             cursor.execute(query4)
@@ -3198,7 +3204,7 @@ def hubadminPannel():
             i["patient"]=data4[0]["count"]
 
         
-        data5={"Hub":data27,"totalHospital":data2,"totalDoctor":data17,"totalPatient":data4,"totalNurse":data171}
+        data5={"Hub":data27,"totalHospital":data2,"totalDoctor":data17,"totalPatient":data4,"totalNurse":data171,"totalOperation":data172}
         cursor.close()
         output = {"result":data5,"status":"true"}
         return output  
