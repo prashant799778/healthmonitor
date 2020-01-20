@@ -9,8 +9,8 @@ from flask_cors import CORS
 
 def Connection():
     connection = pymysql.connect(host='localhost',
-                                user='root',
-                                password='SmartIcu&%live',
+                                user='smarticu',
+                                password='SmartIcu&%live1',
                                 db='smarticu',
                                 charset='utf8mb4',
                                 cursorclass=pymysql.cursors.DictCursor)
