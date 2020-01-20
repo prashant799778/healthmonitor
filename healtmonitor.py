@@ -343,7 +343,11 @@ def login1q():
                     query= "select browserId,browserStatus from userMaster where Email= '" + name + "' and password='" + password + "'and Usertype_Id =2; "
                     cursor = conn.cursor()
                     cursor.execute(query)
-                    loginmultiple = cursor.fetchone()       
+                    loginmultiple = cursor.fetchone()
+                    query="update userMaster set browserStatus=1  where Email= '" + name + "' and password='" + password + "' "
+                    cursor = conn.cursor()
+                    cursor.execute(query)
+                    conn.commit()       
                     print(loginmultiple)
                    
                     print(type(browserId))
@@ -420,6 +424,10 @@ def login1q():
                     cursor.execute(query)
                     loginmultiple = cursor.fetchone()       
                     print(loginmultiple)
+                    query="update userMaster set browserStatus=1  where Email= '" + name + "' and password='" + password + "' "
+                    cursor = conn.cursor()
+                    cursor.execute(query)
+                    conn.commit()
                    
 
                     
@@ -497,7 +505,11 @@ def login1q():
                     query= "select browserId,browserStatus from userMaster where Email= '" + name + "' and password='" + password + "'and Usertype_Id =6; "
                     cursor = conn.cursor()
                     cursor.execute(query)
-                    loginmultiple = cursor.fetchone()       
+                    loginmultiple = cursor.fetchone()
+                    query="update userMaster set browserStatus=1  where Email= '" + name + "' and password='" + password + "' "
+                    cursor = conn.cursor()
+                    cursor.execute(query)
+                    conn.commit()       
                     print(loginmultiple)
                    
                     print(type(browserId))
@@ -631,6 +643,10 @@ def login1q():
                     cursor.execute(query)
                     loginmultiple = cursor.fetchone()       
                     print(loginmultiple)
+                    query="update userMaster set browserStatus=1  where Email= '" + name + "' and password='" + password + "' "
+                    cursor = conn.cursor()
+                    cursor.execute(query)
+                    conn.commit()
                    
 
                     
