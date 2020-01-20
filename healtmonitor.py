@@ -350,6 +350,10 @@ def login1q():
                    
 
                     if (loginmultiple["browserId"]== browserId) :
+                        query="update userMaster set browserStatus=1  where Email= '" + name + "' and password='" + password + "' "
+                        cursor = conn.cursor()
+                        cursor.execute(query)
+                        conn.commit()
                        
                       
                         if  (loginmultiple["browserStatus"]!= 1):
@@ -423,6 +427,10 @@ def login1q():
                    
 
                     if (loginmultiple["browserId"]== browserId) :
+                        query="update userMaster set browserStatus=1  where Email= '" + name + "' and password='" + password + "' "
+                        cursor = conn.cursor()
+                        cursor.execute(query)
+                        conn.commit()
                        
                       
                         if  (loginmultiple["browserStatus"]!= 1):
@@ -496,6 +504,10 @@ def login1q():
                    
 
                     if (loginmultiple["browserId"]== browserId) :
+                        query="update userMaster set browserStatus=1  where Email= '" + name + "' and password='" + password + "' "
+                        cursor = conn.cursor()
+                        cursor.execute(query)
+                        conn.commit()
                        
                       
                         if  (loginmultiple["browserStatus"]!= 1):
@@ -626,6 +638,10 @@ def login1q():
                    
 
                     if (loginmultiple["browserId"]== browserId) :
+                        query="update userMaster set browserStatus=1  where Email= '" + name + "' and password='" + password + "' "
+                        cursor = conn.cursor()
+                        cursor.execute(query)
+                        conn.commit()
                        
                       
                         if  (loginmultiple["browserStatus"]!= 1):
