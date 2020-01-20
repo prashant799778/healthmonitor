@@ -299,7 +299,7 @@ def login1q():
                         return data
                     else: 
                         print("1111111111")
-                        data={"status":"false","result":"Login Failed"}
+                        data={"status":"false","result":"Please Fill Your Correct Credentials"}
                         return data
 
 
@@ -311,7 +311,7 @@ def login1q():
 
 
             else:
-                data={"status":"false","result":"Login Failed"}
+                data={"status":"false","result":"Please Fill Your Correct Credentials"}
                 return data
 
         else:
@@ -1746,7 +1746,7 @@ def updatehubmaster():
         return output  
 
     except Exception as e :
-        print("Exception---->" +str(e))    
+        print("Exceptio`121QWAaUJIHUJG n---->" +str(e))    
         output = {"result":"somthing went wrong","status":"false"}
         return output
 
