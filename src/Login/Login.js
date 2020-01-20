@@ -36,6 +36,7 @@ class Login extends React.Component {
     axios
       .get(api)
       .then(response => {
+        console.log("login",response)
         if (response) {
           if (response && response.data && response.data.status   && response.data.status === "true") {
             let res = response.data.result;
@@ -72,7 +73,7 @@ class Login extends React.Component {
           } else {
             this.setState({
               isLogin: false,
-              err: "email or password is wrong!"
+              err: response.data.result
             });
           }
         }
