@@ -42,7 +42,7 @@ currentItem:"" ,
    per_page:12,
     }}
     MessageContainer=""
-    // 159.65.146.25
+    // 3.0.218.219
 
     handlePageChange=(pageNumber) =>{
       console.log(`active page is ${pageNumber}`);
@@ -60,7 +60,7 @@ currentItem:"" ,
         }
         axios
           .post(
-            `http://159.65.146.25:5053/hubdoctorLoginDashboard`, jsons
+            `http://3.0.218.219:5053/hubdoctorLoginDashboard`, jsons
           )
           .then(res => {
     
@@ -89,7 +89,7 @@ currentItem:"" ,
       }
       axios
         .post(
-          `http://159.65.146.25:5053/operationDashboard`, jsons
+          `http://3.0.218.219:5053/operationDashboard`, jsons
         )
         .then(res => {
   

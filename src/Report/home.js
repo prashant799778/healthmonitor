@@ -47,7 +47,7 @@ totalDoctorCount:"",
     }
     axios
       .post(
-        `http://159.65.146.25:5053/adminPannel`, jsons
+        `http://3.0.218.219:5053/adminPannel`, jsons
       )
       .then(res => {
 

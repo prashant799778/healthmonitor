@@ -32,10 +32,11 @@ class Login extends React.Component {
 
     let unique_id= this.makeid(7)
 
-    let api = `http://159.65.146.25:5053/login1?name=${this.state.name}&password=${this.state.pass}&browserId=${unique_id}`;
+    let api = `http://3.0.218.219:5053/login1?name=${this.state.name}&password=${this.state.pass}&browserId=${unique_id}`;
     axios
       .get(api)
       .then(response => {
+        console.log("login",response)
         if (response) {
           if (response && response.data && response.data.status   && response.data.status === "true") {
             let res = response.data.result;
@@ -72,7 +73,7 @@ class Login extends React.Component {
           } else {
             this.setState({
               isLogin: false,
-              err: "email or password is wrong!"
+              err: response.data.result
             });
           }
         }
@@ -217,11 +218,11 @@ class Login extends React.Component {
       }
     });
   };
-  // ''' http://159.65.146.25:5053/Login?name=Prashant&password=11233''
-  // http://159.65.146.25:5053/Login?name=Prashant&password=11233
+  // ''' http://3.0.218.219:5053/Login?name=Prashant&password=11233''
+  // http://3.0.218.219:5053/Login?name=Prashant&password=11233
   callapi = () => {
-    //  let api=" http://159.65.146.25:5053/Login?name="+this.state.name+"&password="+this.state.pass
-    // let api = `http://159.65.146.25:5053/Login?name=${this.state.name}&password=${this.state.pass}`;
+    //  let api=" http://3.0.218.219:5053/Login?name="+this.state.name+"&password="+this.state.pass
+    // let api = `http://3.0.218.219:5053/Login?name=${this.state.name}&password=${this.state.pass}`;
     // axios
     //   .get(api)
     //   .then(response => {

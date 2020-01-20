@@ -61,7 +61,7 @@ class User extends React.Component{
 
 
 
-     let api="http://159.65.146.25:5053/doctorProfile"
+     let api="http://3.0.218.219:5053/doctorProfile"
      let jssn={"Email": localStorage.getItem("email","") }
       axios.post(api,jssn)
     .then((response)=> {
@@ -118,7 +118,7 @@ class User extends React.Component{
     
 
       
-      let api="http://159.65.146.25:5053/patient_master"
+      let api="http://3.0.218.219:5053/patient_master"
       let json={
         "PatientName":this.state.name,
         "DeviceMac":this.state.device_allocate,

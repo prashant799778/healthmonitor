@@ -32,7 +32,7 @@ currentItem:"" ,
   isDetail:false
     }}
     MessageContainer=""
-    // 159.65.146.25
+    // 3.0.218.219
     componentDidMount() {
      
       var mqtt = require('mqtt')
@@ -49,7 +49,7 @@ currentItem:"" ,
     }
     axios
       .post(
-        `http://159.65.146.25:5053/doctorLoginDashboard`, jsons
+        `http://3.0.218.219:5053/doctorLoginDashboard`, jsons
       )
       .then(res => {
 

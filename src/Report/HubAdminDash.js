@@ -51,7 +51,7 @@ hubName:""
     }
     axios
       .post(
-        `http://159.65.146.25:5053/hubadminPannel`, jsons
+        `http://3.0.218.219:5053/hubadminPannel`, jsons
       )
       .then(res => {
 

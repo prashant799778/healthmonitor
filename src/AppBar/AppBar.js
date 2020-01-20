@@ -33,7 +33,7 @@ export default class AppBar extends React.Component{
     let unique_id=localStorage.getItem("unique_id","")
      let email=localStorage.getItem("email","")
     
-     let api = `http://159.65.146.25:5053/session?name=${email}&browserId=${unique_id}`;
+     let api = `http://3.0.218.219:5053/session?name=${email}&browserId=${unique_id}`;
           axios.get(api)
         .then((response)=> {
           // handle success
