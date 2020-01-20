@@ -375,6 +375,11 @@ def login1q():
                         cursor.execute(query)
                         data=cursor.fetchone()
                         if (data["browserStatus"] !=1):
+                            query="update userMaster set browserStatus=1  where Email= '" + name + "' and password='" + password + "' "
+                            cursor = conn.cursor()
+                            cursor.execute(query)
+                            conn.commit()
+                           
                             data={"result":"true","status":"You Already login through another Device"}
                             return data
                         
@@ -444,6 +449,11 @@ def login1q():
                         data=cursor.fetchone()
                         
                         if (data["browserStatus"] !=1):
+                            query="update userMaster set browserStatus=1  where Email= '" + name + "' and password='" + password + "' "
+                            cursor = conn.cursor()
+                            cursor.execute(query)
+                            conn.commit()
+                           
                             
                             data={"result":"true","status":"You Already login through another Device"}
                             return data
@@ -506,6 +516,11 @@ def login1q():
                         cursor.execute(query)
                         data=cursor.fetchone()
                         if (data["browserStatus"] !=1):
+                            query="update userMaster set browserStatus=1  where Email= '" + name + "' and password='" + password + "' "
+                            cursor = conn.cursor()
+                            cursor.execute(query)
+                            conn.commit()
+                           
                             data={"result":"true","status":"You Already login through another Device"}
                             return data
                         
@@ -816,7 +831,7 @@ def allHubadmin():
             
 
             i["patient"]=totalpatient
-            
+
 
 
            
