@@ -11,7 +11,7 @@ def Connection():
     connection = pymysql.connect(host='localhost',
                                 user='smarticu',
                                 password='SmartIcu&%live1',
-                                db='smarticu',
+                                db='smarticu1',
                                 charset='utf8mb4',
                                 cursorclass=pymysql.cursors.DictCursor)
 
