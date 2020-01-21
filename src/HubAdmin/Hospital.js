@@ -530,8 +530,8 @@ isValid:true,emailError:false,
                                   <th style={{textAlign:"center",color:'aliceblue'}}>Hospital Name</th>
                                   <th style={{textAlign:"center",color:'aliceblue'}}>Hub Name</th>
                                   <th style={{textAlign:"center",color:'aliceblue'}}>Address</th>
-                                  <th style={{textAlign:"center",color:'aliceblue'}}>No.of Doctor</th>
-                                  <th style={{textAlign:"center",color:'aliceblue'}}>No.of Patient</th>
+                                  <th style={{textAlign:"center",color:'aliceblue'}}>No. of Doctor</th>
+                                  <th style={{textAlign:"center",color:'aliceblue'}}>No. of Patient</th>
                                   <th style={{textAlign:"center",color:'aliceblue'}} className="dlt">Action</th>
                                 </tr>
                               </thead>

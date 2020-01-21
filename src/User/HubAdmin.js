@@ -701,7 +701,7 @@ isValid:true,emailError:false,
                                   <th style={{textAlign:"center",color:'aliceblue'}}>HubAdmin ID</th>
                                   <th style={{textAlign:"center",color:'aliceblue'}}>HubAdmin Name</th>
                                   <th style={{textAlign:"center",color:'aliceblue'}}>Hub Name</th>
-                                  <th style={{textAlign:"center",color:'aliceblue'}}>No. ofHospitals</th>
+                                  <th style={{textAlign:"center",color:'aliceblue'}}>No. of Hospitals</th>
                                   <th style={{textAlign:"center",color:'aliceblue'}}>Gender</th>
                                   <th style={{textAlign:"center",color:'aliceblue'}}>Mobile</th>
                                   <th style={{textAlign:"center",color:'aliceblue'}}>Email</th>
