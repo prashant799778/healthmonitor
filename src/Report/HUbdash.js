@@ -175,7 +175,7 @@ let totalHubCount=this.state.totalHubCount;
     <div class="row">
           <div class="col-sm-12 col-md-12">
             <div class="page-hadding">
-              {/* <h2>Dashborad</h2>
+              {/* <h2>Dashboard </h2>
               <h3>Monitoring </h3> */}
             </div>
           </div>

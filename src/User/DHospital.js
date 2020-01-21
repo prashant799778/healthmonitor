@@ -553,7 +553,7 @@ class User extends React.Component {
                                           color: "aliceblue"
                                         }}
                                       >
-                                        Paitent Id
+                                        Patient Id
                                       </th>
                                       <th
                                         style={{
@@ -561,7 +561,7 @@ class User extends React.Component {
                                           color: "aliceblue"
                                         }}
                                       >
-                                        Paitent Name
+                                        Patient Name
                                       </th>
                                       <th
                                         style={{
