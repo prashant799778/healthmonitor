@@ -706,7 +706,7 @@ isValid:true,emailError:false,
                                   <th style={{textAlign:"center",color:'aliceblue'}}>Mobile</th>
                                   <th style={{textAlign:"center",color:'aliceblue'}}>Email</th>
                                   <th style={{textAlign:"center",color:'aliceblue'}}>Password</th>
-                                  <th style={{textAlign:"center",color:'aliceblue'}}>No. ofPatient</th>
+                                  <th style={{textAlign:"center",color:'aliceblue'}}>No. of Patient</th>
                                   <th style={{textAlign:"center",color:'aliceblue'}} className="dlt">Action</th>
                                 </tr>
                               </thead>
