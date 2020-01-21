@@ -106,7 +106,7 @@ totalDoctorCount:"",
               <div className="info-card box-bg-color">
                 <div className="box-1 line-spc">
                   <img src={require("./img/lifeline.svg")}  />
-                  <h2 className="box-title">hubs</h2>
+                  <h2 className="box-title">Hubs</h2>
                 </div>
                 <div className="box-1">
     <h3 className="number-title">{this.state.totalHubsCount}</h3>
