@@ -3228,7 +3228,7 @@ def doctorProfile():
         conn=Connection()
         cursor = conn.cursor()
         
-        query = "select um.ID as doctorId,um.mobile,um.name as doctorName,um.Email,um.Gender as gender from userMaster as um where um.Email='"+str(data["Email"])+"';"
+        query = "select um.licenseNo,um.ID as doctorId,um.mobile,um.name as doctorName,um.Email,um.Gender as gender from userMaster as um where um.Email='"+str(data["Email"])+"';"
         
         cursor.execute(query)
         data = cursor.fetchall()
