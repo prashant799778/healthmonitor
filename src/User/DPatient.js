@@ -207,7 +207,7 @@ isValid:true,emailError:false,
 
 
 
-     let api="https://smarticuapi.fourbrick.in:5053/doctorPatientDetails"
+     let api="https://smarticuapi.fourbrick.in/doctorPatientDetails"
      let jssn={"Email": localStorage.getItem("email","") }
       axios.post(api,jssn)
     .then((response)=> {
@@ -252,7 +252,7 @@ isValid:true,emailError:false,
     
 
       
-      let api="https://smarticuapi.fourbrick.in:5053/patient_master"
+      let api="https://smarticuapi.fourbrick.in/patient_master"
       let json={
         "PatientName":this.state.name,
         "DeviceMac":this.state.device_allocate,

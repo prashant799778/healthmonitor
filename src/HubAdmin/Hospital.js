@@ -41,7 +41,7 @@ isValid:true,emailError:false,
     this.setState({deleteid:id,HubId:HubId})
   }
   delete=()=>{
-    let api="https://smarticuapi.fourbrick.in:5053/deleteHospital"
+    let api="https://smarticuapi.fourbrick.in/deleteHospital"
     let jsn={
       "ID":this.state.deleteid,
        "HubId":this.state.HubId
@@ -183,7 +183,7 @@ isValid:true,emailError:false,
  let jsn={
   "HubId":localStorage.getItem("hub_id","")
  }
-     let api="https://smarticuapi.fourbrick.in:5053/hubadminHospital"
+     let api="https://smarticuapi.fourbrick.in/hubadminHospital"
       axios.post(api,jsn)
     .then((response)=> {
       // handle success
@@ -224,7 +224,7 @@ isValid:true,emailError:false,
 
 
 
-     let api="https://smarticuapi.fourbrick.in:5053/hubMaster"
+     let api="https://smarticuapi.fourbrick.in/hubMaster"
       axios.get(api)
     .then((response)=> {
       // handle success
@@ -264,7 +264,7 @@ isValid:true,emailError:false,
     
 
       
-      let api="https://smarticuapi.fourbrick.in:5053/insertHospitalMaster"
+      let api="https://smarticuapi.fourbrick.in/insertHospitalMaster"
       let json={
         "hospital_name":this.state.name,
         "HubId":Number(this.state.hub_name),
@@ -307,7 +307,7 @@ isValid:true,emailError:false,
     updatetapi=()=>{
       
      
-     let api="https://smarticuapi.fourbrick.in:5053/updateHospitalmaster"
+     let api="https://smarticuapi.fourbrick.in/updateHospitalmaster"
      let json={
        "ID":this.state.userid,
       "hospital_name":this.state.name,

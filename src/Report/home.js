@@ -47,7 +47,7 @@ totalDoctorCount:"",
     }
     axios
       .post(
-        `https://smarticuapi.fourbrick.in:5053/adminPannel`, jsons
+        `https://smarticuapi.fourbrick.in/adminPannel`, jsons
       )
       .then(res => {
 
