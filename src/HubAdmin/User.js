@@ -197,7 +197,7 @@ isValid:true,emailError:false,
     let jsn={
       "HubId":localStorage.getItem("hub_id","")
      }
-     let api="https://digitologyhealthcare.com:5053/hubadminPatient"
+     let api="https://smarticuapi.fourbrick.in:5053/hubadminPatient"
       axios.post(api,jsn)
     .then((response)=> {
       // handle success
@@ -241,7 +241,7 @@ isValid:true,emailError:false,
     
 
       
-      let api="https://digitologyhealthcare.com:5053/patient_master"
+      let api="https://smarticuapi.fourbrick.in:5053/patient_master"
       let json={
         "PatientName":this.state.name,
         "DeviceMac":this.state.device_allocate,

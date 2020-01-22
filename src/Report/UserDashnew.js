@@ -49,7 +49,7 @@ currentItem:"" ,
     }
     axios
       .post(
-        `https://digitologyhealthcare.com:5053/doctorLoginDashboard`, jsons
+        `https://smarticuapi.fourbrick.in:5053/doctorLoginDashboard`, jsons
       )
       .then(res => {
 
