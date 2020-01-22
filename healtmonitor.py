@@ -3214,7 +3214,7 @@ def hubadminPannel():
             query1="select distinct(um.ID) from userMaster as um,userHospitalMapping as uhm  where um.ID=uhm.userId and um.Usertype_Id=uhm.Usertype_Id and  uhm.Usertype_Id= '2'  aND uhm.hospitalId='"+str(i["ID"])+"' ;" 
             cursor.execute(query1)
             data17 =cursor.fetchall()
-            umq.append(data17['ID'])
+            umq.append(int(i['ID']))
             print(umq,"=================================================================================")
             totalDoctor+=len(data17)
 
