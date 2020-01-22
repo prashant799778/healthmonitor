@@ -58,7 +58,7 @@ currentItem:"" ,
       }
       axios
         .post(
-          `http://smarticuapi.fourbrick.in:5053/operationDashboard`, jsons
+          `https://smarticuapi.fourbrick.in:5053/operationDashboard`, jsons
         )
         .then(res => {
   
