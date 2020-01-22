@@ -3221,11 +3221,12 @@ def hubadminPannel():
                 
                 for k in umq:
                     if k==k:
-                        pass
+                        umq.pop(k)
+                        
                     else:
-                        yu.append(k)
+                        
                         print(yu,"++++++++++++++++++++++++")
-                        totalDoctor=len(yu)
+                    totalDoctor=len(umq)
             
             
 
