@@ -13,7 +13,13 @@ export const DetailStyled = styled.div`
     color: #fff;
     background: #d45f0c;
 }
-
+.item-drap-m {
+    display: block;
+    font-size: 1.1rem;
+    padding: 0 10px;
+    color: #d45f0c;
+    line-height: 20px;
+}
   .box-bg-color{
         background: #25293b;
   }
