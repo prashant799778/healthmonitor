@@ -38,7 +38,7 @@ isValid:true,emailError:false,
     this.setState({deleteid:id})
   }
   delete=()=>{
-    let api="https://smarticuapi.fourbrick.in:5053/deleteHub"
+    let api="http://smarticuapi.fourbrick.in:5053/deleteHub"
     let jsn={
       "ID":this.state.deleteid,
       
@@ -96,7 +96,7 @@ isValid:true,emailError:false,
   }}
   getTypeapi=()=>{
 
-  let api="https://smarticuapi.fourbrick.in:5053/hubMaster"
+  let api="http://smarticuapi.fourbrick.in:5053/hubMaster"
    axios.get(api)
  .then((response)=> {
    // handle success
@@ -175,7 +175,7 @@ isValid:true,emailError:false,
 
 
 
-        let api="https://smarticuapi.fourbrick.in:5053/hubMaster"
+        let api="http://smarticuapi.fourbrick.in:5053/hubMaster"
          axios.get(api)
        .then((response)=> {
          // handle success
@@ -219,7 +219,7 @@ isValid:true,emailError:false,
     
 
       
-     let api="https://smarticuapi.fourbrick.in:5053/insertHubMaster"
+     let api="http://smarticuapi.fourbrick.in:5053/insertHubMaster"
      let json={
        "HubName":this.state.name,
      
@@ -259,7 +259,7 @@ alert("User Created Successfully")
     updatetapi=()=>{
       
      
-     let api="https://smarticuapi.fourbrick.in:5053/updatehubmaster"
+     let api="http://smarticuapi.fourbrick.in:5053/updatehubmaster"
      let json={
       "HubName":this.state.name,
        "ID":this.state.userid

@@ -32,7 +32,7 @@ class Login extends React.Component {
 
     let unique_id= this.makeid(7)
 
-    let api = `https://smarticuapi.fourbrick.in:5053/login1?name=${this.state.name}&password=${this.state.pass}&browserId=${unique_id}`;
+    let api = `http://smarticuapi.fourbrick.in:5053/login1?name=${this.state.name}&password=${this.state.pass}&browserId=${unique_id}`;
     axios
       .get(api)
       .then(response => {
@@ -218,11 +218,11 @@ class Login extends React.Component {
       }
     });
   };
-  // ''' https://smarticuapi.fourbrick.in:5053/Login?name=Prashant&password=11233''
-  // https://smarticuapi.fourbrick.in:5053/Login?name=Prashant&password=11233
+  // ''' http://smarticuapi.fourbrick.in:5053/Login?name=Prashant&password=11233''
+  // http://smarticuapi.fourbrick.in:5053/Login?name=Prashant&password=11233
   callapi = () => {
-    //  let api=" https://smarticuapi.fourbrick.in:5053/Login?name="+this.state.name+"&password="+this.state.pass
-    // let api = `https://smarticuapi.fourbrick.in:5053/Login?name=${this.state.name}&password=${this.state.pass}`;
+    //  let api=" http://smarticuapi.fourbrick.in:5053/Login?name="+this.state.name+"&password="+this.state.pass
+    // let api = `http://smarticuapi.fourbrick.in:5053/Login?name=${this.state.name}&password=${this.state.pass}`;
     // axios
     //   .get(api)
     //   .then(response => {

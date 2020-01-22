@@ -60,7 +60,7 @@ currentItem:"" ,
         }
         axios
           .post(
-            `https://smarticuapi.fourbrick.in:5053/hubdoctorLoginDashboard`, jsons
+            `http://smarticuapi.fourbrick.in:5053/hubdoctorLoginDashboard`, jsons
           )
           .then(res => {
     
@@ -89,7 +89,7 @@ currentItem:"" ,
       }
       axios
         .post(
-          `https://smarticuapi.fourbrick.in:5053/operationDashboard`, jsons
+          `http://smarticuapi.fourbrick.in:5053/operationDashboard`, jsons
         )
         .then(res => {
   

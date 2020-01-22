@@ -21,7 +21,7 @@ componentDidMount() {
 
 
 getData=()=>{
-  axios.get(`https://smarticuapi.fourbrick.in:5053/Patient_Vital_master_select`)
+  axios.get(`http://smarticuapi.fourbrick.in:5053/Patient_Vital_master_select`)
   .then(res => {
      
        console.log(res)

@@ -92,7 +92,7 @@ isValid:true,emailError:false,
   }}
   getTypeapi=()=>{
 
-  let api="https://smarticuapi.fourbrick.in:5053/hubMaster"
+  let api="http://smarticuapi.fourbrick.in:5053/hubMaster"
    axios.get(api)
  .then((response)=> {
    // handle success
@@ -171,7 +171,7 @@ isValid:true,emailError:false,
 
      let jsons={"Email":localStorage.getItem("email", "")}
 
-        let api="https://smarticuapi.fourbrick.in:5053/doctorLoginHospital"
+        let api="http://smarticuapi.fourbrick.in:5053/doctorLoginHospital"
          axios.post(api,jsons)
        .then((response)=> {
          // handle success
@@ -215,7 +215,7 @@ isValid:true,emailError:false,
     
 
       
-     let api="https://smarticuapi.fourbrick.in:5053/insertHubMaster"
+     let api="http://smarticuapi.fourbrick.in:5053/insertHubMaster"
      let json={
        "HubName":this.state.name,
      
@@ -255,7 +255,7 @@ alert("User Created Successfully")
     updatetapi=()=>{
       
      
-     let api="https://smarticuapi.fourbrick.in:5053/allPatient"
+     let api="http://smarticuapi.fourbrick.in:5053/allPatient"
      let json={
        "username":this.state.name,
        "email":this.state.email,

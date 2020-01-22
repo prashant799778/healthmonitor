@@ -48,7 +48,7 @@ isValid:true,emailError:false,
     this.setState({deleteid:id,deleteHid:Hid})
   }
   delete=()=>{
-    let api="https://smarticuapi.fourbrick.in:5053/deleteHubadminhub"
+    let api="http://smarticuapi.fourbrick.in:5053/deleteHubadminhub"
     let jsn={
       "ID":this.state.deleteid,
       "HubId":this.state.deleteHid
@@ -199,7 +199,7 @@ isValid:true,emailError:false,
 
 
 
-     let api="https://smarticuapi.fourbrick.in:5053/hubMaster"
+     let api="http://smarticuapi.fourbrick.in:5053/hubMaster"
       axios.get(api)
     .then((response)=> {
       // handle success
@@ -245,7 +245,7 @@ isValid:true,emailError:false,
     }
 
 
-     let api="https://smarticuapi.fourbrick.in:5053/hospitalMaster"
+     let api="http://smarticuapi.fourbrick.in:5053/hospitalMaster"
 
      let json={
       "HubId":hid,
@@ -305,7 +305,7 @@ isValid:true,emailError:false,
 
 
 
-     let api="https://smarticuapi.fourbrick.in:5053/allHubadmin"
+     let api="http://smarticuapi.fourbrick.in:5053/allHubadmin"
       axios.post(api)
     .then((response)=> {
       // handle success
@@ -356,7 +356,7 @@ isValid:true,emailError:false,
       let hls=[]
       hls.push(this.state.hub_id)
       
-      let api="https://smarticuapi.fourbrick.in:5053/addHubadmin"
+      let api="http://smarticuapi.fourbrick.in:5053/addHubadmin"
       let json={
         "HubId":hls,
         "name":this.state.name,
@@ -421,7 +421,7 @@ isValid:true,emailError:false,
       }
         let a=[]
         a.push(this.state.hub_id)
-     let api="https://smarticuapi.fourbrick.in:5053/updateHubadmin"
+     let api="http://smarticuapi.fourbrick.in:5053/updateHubadmin"
      let json={"ID":this.state.userid,"name":this.state.name
      ,"mobile":this.state.mobile,"Usertype_Id":3,"HubId":a,"password":this.state.password,"confirm_password":this.state.password,"Email":this.state.email,"Gender":gens}     
      
