@@ -302,7 +302,7 @@ return(<DetailStyled>
 				  <form>
 					<div class="stiky-note">
 					<textarea rows="6" cols="50" class="madical pis"></textarea>
-					<button type="submit" class="btn btn-primary">submit</button>
+					<button type="submit" class="btn btn-primary newclr-bck">submit</button>
 					</div>
 					</form>
 				  </div>

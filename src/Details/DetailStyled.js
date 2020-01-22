@@ -27,6 +27,13 @@ export const DetailStyled = styled.div`
 .men-drop.show {
     transform: translate3d(-175px, 28px, 0px);
 }
+button.newclr-bck {
+    width: 100%;
+    border-radius: 0;
+    background: #1f293a !important;
+    border-color: #1f293a !important;
+    padding: 5px 0 !important;
+}
   .box-bg-color{
         background: #25293b;
   }
