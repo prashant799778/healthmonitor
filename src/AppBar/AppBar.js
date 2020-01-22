@@ -144,6 +144,7 @@ export default class AppBar extends React.Component{
 
  <img src={require("./s-notification.svg")} />
 </button>
+<span className="dot-noti">1</span>
 <div className="dropdown-menu dropdown-menu-right sadow ">
 <div className="hadding">
 <h2>Notification</h2>
