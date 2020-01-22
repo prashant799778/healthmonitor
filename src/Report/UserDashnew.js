@@ -36,7 +36,7 @@ currentItem:"" ,
     componentDidMount() {
      
       var mqtt = require('mqtt')
-  var client  = mqtt.connect('wss://smarticumqtt.fourbrick.in8083')
+  var client  = mqtt.connect('wss://smarticumqtt.fourbrick.in:8083')
   this.setState({client:client})
   this.callApi()
     }

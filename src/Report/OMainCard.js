@@ -29,7 +29,7 @@ class MainCard extends React.Component {
 
     //      let tpk="/"+  localStorage.getItem("hub_id", "")+"/"+   localStorage.getItem("hos_id","")+"/+";
     //   let  Omqtt = require('mqtt')
-    //   let  Oclient  = Omqtt.connect('ws://139.59.78.548083')
+    //   let  Oclient  = Omqtt.connect('ws://139.59.78.54:8083')
     //   this.setState({client:Oclient})
     //     Oclient.on('connect', (
     //     ) =>{
