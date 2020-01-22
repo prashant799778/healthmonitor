@@ -20,6 +20,13 @@ export const DetailStyled = styled.div`
     color: #d45f0c;
     line-height: 20px;
 }
+.stiky-note {
+    padding: 0 16px;
+    display: block;
+}
+.men-drop.show {
+    transform: translate3d(-175px, 28px, 0px);
+}
   .box-bg-color{
         background: #25293b;
   }

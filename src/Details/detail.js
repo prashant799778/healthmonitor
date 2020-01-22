@@ -298,10 +298,10 @@ return(<DetailStyled>
                 </div>
 				<div class="dropdown">
 				  <button class="side-button-pis"  type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">prescribe medicine</button>
-				  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+				  <div class="dropdown-menu men-drop" aria-labelledby="dropdownMenuButton">
 				  <form>
 					<div class="stiky-note">
-					<textarea rows="4" cols="50" class="madical pis"></textarea>
+					<textarea rows="6" cols="50" class="madical pis"></textarea>
 					<button type="submit" class="btn btn-primary">submit</button>
 					</div>
 					</form>
