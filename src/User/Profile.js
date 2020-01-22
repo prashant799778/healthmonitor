@@ -60,7 +60,7 @@ class User extends React.Component{
 	  
 	   let api="https://smarticuapi.fourbrick.in/editDoctorProfile"
      let jssn={"Email": localStorage.getItem("email",""),
-         "licenceNo":this.state.ref_id
+         "licenseNo":this.state.ref_id
 
 	 }
 	  
@@ -108,7 +108,7 @@ class User extends React.Component{
           hub_count:rs.hospital_count,
           hospital_count:rs.hospital_count,
           patient_count:rs.patient_count,
-          ref_id:rs.licenceNo,
+          ref_id:rsA.licenceNo,
           name:rsA.doctorName,
           age:"",
           gender: this.getGender(rsA.gender),
@@ -247,7 +247,7 @@ class User extends React.Component{
       <h2 className="text-right">{this.state.email}</h2>
                                 <h2>Contact</h2>
       <h2 className="text-right">{this.state.Contact}</h2>
-								<h2>Licence No</h2>
+								<h2>License No</h2>
 								{!this.state.isEdit  && <h2  onClick={(e)=>{this.setState({isEdit:true})}} className="text-right"><i className="far fa-edit" /> {this.state.ref_id}</h2>
 								}
 						{this.state.isEdit  &&		<input required  onChange={(e)=>{
