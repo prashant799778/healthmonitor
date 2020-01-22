@@ -219,6 +219,8 @@ class User extends React.Component{
       <h2 className="text-right">{this.state.email}</h2>
                                 <h2>Contact</h2>
       <h2 className="text-right">{this.state.Contact}</h2>
+								<h2>Registration No</h2>
+      <h2 className="text-right">{this.state.Contact}</h2>
                                 {/* <h2>Address</h2>
                                 <h2 className="text-right">Address line 1 <br></br> line 2</h2> */}
                             </div>
