@@ -196,7 +196,7 @@ line-height: 20px;
 text-transform: capitalize;
 }
 .notification-bar span {
-    font-size: 12px;
+    font-size: 12px !important;
     text-align: justify;
     white-space: pre-wrap;
     text-transform: capitalize;
