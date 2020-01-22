@@ -354,7 +354,7 @@ return(<DetailStyled>
                         </div>
                       </div>
                       <div className="innr-patient">
-                        <h2 className="gray-clr">Temp(o C)</h2>
+                        <h2 className="gray-clr">Temp(<sup>o</sup>C)</h2>
                         <p className="gray-clr">{this.state.temp}</p>
                       </div>
                       <div className="innr-patient">
