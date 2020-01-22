@@ -58,7 +58,7 @@ class Detail extends React.Component{
 
 
         let  Omqtt1 = require('mqtt')
-        let  Oclient1  = Omqtt1.connect('mqtt://digitologyhealthcare.com')
+        let  Oclient1  = Omqtt1.connect('wss://digitologyhealthcare.com:9001')
         this.client=Oclient1
           Oclient1.on('connect', ( ) =>{
                 Oclient1.subscribe(this.props.currentTopic +"",  (err)=> {
