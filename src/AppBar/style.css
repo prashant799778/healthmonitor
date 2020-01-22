@@ -155,8 +155,13 @@ ul#accordionSidebar {
     margin-right: 3px;
 }
 /* Notification Bar*/
+ul.navbar-nav li:nth-child(2) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .notification-bar .btn-group button img {
-width: 17px;
+width: 2rem;
 }
 .notification-bar .btn-group .dropdown-menu {
 width: 20rem!important;
