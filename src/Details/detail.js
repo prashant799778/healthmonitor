@@ -299,8 +299,12 @@ return(<DetailStyled>
 				<div class="dropdown">
 				  <button class="side-button-pis"  type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">prescribe medicine</button>
 				  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-					<a class="item-drap-m" href="#">Action</a>
-					<a class="item-drap-m" href="#">Another action</a>
+				  <form>
+					<div class="stiky-note">
+					<textarea></textarea>
+					<buton type="submit" class="btn btn-primary">submit</div>
+					</div>
+					</form>
 				  </div>
 				</div>
 				
