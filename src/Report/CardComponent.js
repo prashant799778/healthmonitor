@@ -38,7 +38,7 @@ class CardComponent extends React.Component {
         
         console.log("Omessagep",this.props.ids)
            let  Omqtt1 = require('mqtt')
-           let  Oclient1  = Omqtt1.connect('wss://smarticumqtt.fourbrick.in:9001')
+           let  Oclient1  = Omqtt1.connect('wss://smarticumqtt.fourbrick.in8083')
          
              Oclient1.on('connect', ( ) =>{
                    Oclient1.subscribe(this.props.ids+"",  (err)=> {
