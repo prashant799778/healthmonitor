@@ -298,7 +298,44 @@ isValid:true,emailError:false,
  
     
   }
+     
+
+ statusapi=()=>{
+       
+    
+
+  let jsn={
+	  'Email':localStorage.getItem('email','');
+  }
+
+     let api="http://159.65.146.25:5053/updateStatus"
+      axios.post(api,jsn)
+    .then((response)=> {
+      // handle success
+         
       
+      this.callapi();
+   
+
+      
+
+    
+  })
+  .catch( (error)=> {
+    // handle error
+    
+    
+  })
+
+
+
+ 
+    
+  }
+   
+  
+
+	 
   callapi=()=>{
        
     this.setState({isList:true,isEdit:false})
@@ -739,7 +776,7 @@ isValid:true,emailError:false,
                                   <td>{item.password}</td>
                                   <td>{item.patient}</td>
                                  
-                                     <td style={{cursor:'pointer'}}>{item.Status==2?'deactivated':'activated'}</td>
+                                     <td  onClick={()=>{this.statusapi()}} style={{cursor:'pointer'}}>{item.Status==2?'deactivated':'activated'}</td>
                                   <td>
                                     <div className="action-bx">
                                       <ul>
