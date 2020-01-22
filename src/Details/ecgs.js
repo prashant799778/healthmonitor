@@ -51,7 +51,7 @@ this. bufferIndex = 0;
      
 ///////////////////
 var mqtt1 = require('mqtt')
-var client1  = mqtt1.connect('mqtts://digitologyhealthcare.com')
+var client1  = mqtt1.connect('mqtts://smarticumqtt.fourbrick.in:9001')
 
  this.setState({client1: client1 },()=>{
   client1.on('connect', (
