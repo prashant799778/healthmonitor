@@ -108,6 +108,7 @@ class User extends React.Component{
           hub_count:rs.hospital_count,
           hospital_count:rs.hospital_count,
           patient_count:rs.patient_count,
+          ref_id:rs.licenceNo,
           name:rsA.doctorName,
           age:"",
           gender: this.getGender(rsA.gender),
@@ -247,7 +248,7 @@ class User extends React.Component{
                                 <h2>Contact</h2>
       <h2 className="text-right">{this.state.Contact}</h2>
 								<h2>Licence No</h2>
-								{!this.state.isEdit  && <h2  onClick={(e)=>{this.setState({isEdit:true})}} className="text-right">{this.state.ref_id}<i className="far fa-edit" /></h2>
+								{!this.state.isEdit  && <h2  onClick={(e)=>{this.setState({isEdit:true})}} className="text-right"><i className="far fa-edit" /> {this.state.ref_id}</h2>
 								}
 						{this.state.isEdit  &&		<input required  onChange={(e)=>{
                                  this.setState({ref_id: e.target.value})
