@@ -299,8 +299,8 @@ return(<DetailStyled>
 				<div class="dropdown">
 				  <button class="side-button-pis"  type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">prescribe medicine</button>
 				  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-					<a class="dropdown-item" href="#">Action</a>
-					<a class="dropdown-item" href="#">Another action</a>
+					<a class="item-drap-m" href="#">Action</a>
+					<a class="item-drap-m" href="#">Another action</a>
 				  </div>
 				</div>
 				
