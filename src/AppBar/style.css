@@ -165,7 +165,7 @@ ul.navbar-nav li:nth-child(2) {
     margin: 0;
     border-radius: 0;
     background: #26293b;
-    color: #000;
+    color: #fff;
 }
 a.dropdown-item.text-center.small.text-gray-500.nav-flx-noti {
     width: 100%;
@@ -173,6 +173,12 @@ a.dropdown-item.text-center.small.text-gray-500.nav-flx-noti {
     border-radius: 0;
     background: #26293b;
     color: #fff !important;
+}
+.notification-bar .dropdown-item:focus, .dropdown-item:hover {
+    text-decoration: none;
+    border-radius: 0;
+    background: #090c10;
+    color: #fff;
 }
 .notification-bar .btn-group button img {
 width: 2rem;
@@ -184,7 +190,7 @@ border:0px;
 }
 .hadding {
 display: flex;
-background: #26293b;
+background: #26293b !important;
 padding: 10px 18px;
 justify-content: space-between;
 }
