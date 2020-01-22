@@ -747,6 +747,7 @@ isValid:true,emailError:false,
                                   <th style={{textAlign:"center",color:'aliceblue'}}>Email</th>
                                   <th style={{textAlign:"center",color:'aliceblue'}}>Password</th>
                                   <th style={{textAlign:"center",color:'aliceblue'}}>No. of Patient</th>
+								  <th style={{textAlign:"center",color:'aliceblue'}}>A/C Status</th>
                                   <th style={{textAlign:"center",color:'aliceblue'}} className="dlt">Action</th>
                                 </tr>
                               </thead>
