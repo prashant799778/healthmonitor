@@ -48,7 +48,7 @@ isValid:true,emailError:false,
     this.setState({deleteid:id,deleteHid:Hid})
   }
   delete=()=>{
-    let api="http://159.65.146.25:5053/deleteNurseHospital"
+    let api="https://smarticuapi.fourbrick.in/deleteNurseHospital"
     let jsn={
       "ID":this.state.deleteid,
       "Hospital_Id":this.state.deleteHid
@@ -199,7 +199,7 @@ isValid:true,emailError:false,
 
 
 
-     let api="http://159.65.146.25:5053/hubMaster"
+     let api="https://smarticuapi.fourbrick.in/hubMaster"
       axios.get(api)
     .then((response)=> {
       // handle success
@@ -245,7 +245,7 @@ isValid:true,emailError:false,
     }
 
 
-     let api="http://159.65.146.25:5053/hospitalMaster"
+     let api="https://smarticuapi.fourbrick.in/hospitalMaster"
 
      let json={
       "HubId":hid,
@@ -312,7 +312,7 @@ statusapi=()=>{
 	  'Email':this.state.currentEmail
   }
 
-     let api="http://159.65.146.25:5053/updateStatus"
+     let api="https://smarticuapi.fourbrick.in/updateStatus"
       axios.post(api,jsn)
     .then((response)=> {
       // handle success
@@ -351,7 +351,7 @@ statusapi=()=>{
 
 
 
-     let api="http://159.65.146.25:5053/allNurse"
+     let api="https://smarticuapi.fourbrick.in/allNurse"
       axios.post(api)
     .then((response)=> {
       // handle success
@@ -402,7 +402,7 @@ statusapi=()=>{
       let hls=[]
       hls.push(this.state.hospital_id)
       
-      let api="http://159.65.146.25:5053/addUser"
+      let api="https://smarticuapi.fourbrick.in/addUser"
       let json={
         "Hospital_Id":hls,
         "name":this.state.name,
@@ -467,7 +467,7 @@ statusapi=()=>{
       }
         let a=[]
         a.push(this.state.hospital_id)
-     let api="http://159.65.146.25:5053/updateNurseMaster"
+     let api="https://smarticuapi.fourbrick.in/updateNurseMaster"
      let json={"ID":this.state.userid,"name":this.state.name
      ,"mobile":this.state.mobile,"Usertype_Id":3,"Hospital_Id":a,"password":this.state.password,"confirm_password":this.state.password,"Email":this.state.email,"Gender":gens}     
      
