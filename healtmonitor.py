@@ -3222,8 +3222,9 @@ def hubadminPannel():
                         pass
                     else:
                         yu.append(k)
+                        print(yu)
                         totalDoctor=len(yu)
-            print(umq,"=================================================================================")
+            
             
 
             query2="select count(*) as count from userHospitalMapping where  Usertype_Id=3 and  hospitalId='"+str(i["ID"])+"';" 
