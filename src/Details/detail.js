@@ -325,7 +325,7 @@ return(<DetailStyled>
                         <ECG  level="ecg" topic={this.props.currentTopic}  client={this.state.client1} tc="#489114"  max='250' tt="" data={this.state.w_ecg} id="asd"></ECG>
                       </div>
                       <div className="innr-patient height-box">
-                        <h2 className="red-clr">SP02</h2>
+                        <h2 className="red-clr">SP0<sub>2</sub></h2>
                         
   <SPO  level="spo2"  topic={this.props.currentTopic} client={this.props.client} tc="#E4352C"    max='100'  tt="" data={this.state.w_spo} id="def"></SPO>
                       </div>
