@@ -55,6 +55,33 @@ class User extends React.Component{
     }
    
   }
+  
+  updateid=(id)=>{
+	  
+	   let api="https://smarticuapi.fourbrick.in/editDoctorProfile"
+     let jssn={"Email": localStorage.getItem("email",""),
+         "licenceNo":this.state.ref_id
+
+	 }
+	  
+	        axios.post(api,jssn)
+    .then((response)=> {
+      // handle success
+        
+        
+      console.log("doctorProfile",response) 
+   
+      this.callapi();
+  
+
+    
+  })
+  .catch( (error)=> {
+    // handle error
+    
+    
+  })
+  }
   callapi=()=>{
        
     this.setState({isList:true,isEdit:false})
@@ -220,7 +247,18 @@ class User extends React.Component{
                                 <h2>Contact</h2>
       <h2 className="text-right">{this.state.Contact}</h2>
 								<h2>Licence No</h2>
-      <h2 className="text-right">{this.state.Contact}</h2>
+								{!this.state.isEdit  && <h2  onClick={(e)=>{this.setState({isEdit:true})}} className="text-right">{this.state.ref_id}<i className="far fa-edit" /></h2>
+								}
+						{this.state.isEdit  &&		<input required  onChange={(e)=>{
+                                 this.setState({ref_id: e.target.value})
+                               
+                                   
+                                 
+                                }
+						}  value={this.state.ref_id} className="fom-wd" type="text" name placeholder="licence No" />}
+            
+            {this.state.isEdit  &&	      <input onClick={(e)=>{this.updateid(e.target.value)}} type="button" value="save"/>}
+      
                                 {/* <h2>Address</h2>
                                 <h2 className="text-right">Address line 1 <br></br> line 2</h2> */}
                             </div>
