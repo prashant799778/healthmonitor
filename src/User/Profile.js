@@ -108,7 +108,7 @@ class User extends React.Component{
           hub_count:rs.hospital_count,
           hospital_count:rs.hospital_count,
           patient_count:rs.patient_count,
-          ref_id:rsA.licenceNo,
+          ref_id:rsA.licenseNo,
           name:rsA.doctorName,
           age:"",
           gender: this.getGender(rsA.gender),
