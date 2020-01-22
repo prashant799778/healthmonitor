@@ -3211,7 +3211,7 @@ def hubadminPannel():
         
         
         for i in data99:
-            query1="select count(userId) as count from userHospitalMapping where  Usertype_Id=2 and  hospitalId='"+str(i["ID"])+"';" 
+            query1="select  count(*) as  count from userMaster  as um   where um.Usertype_Id='2'    and um.ID IN (select uhm.userId  from  userHospitalMapping  where uhm.Usertype_Id= '2'  AND hospitalId='"+str(i["HospitalId"])+"' );" 
             
             cursor.execute(query1)
             data17 =cursor.fetchall()
