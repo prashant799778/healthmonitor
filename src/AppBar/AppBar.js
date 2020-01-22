@@ -173,7 +173,7 @@ export default class AppBar extends React.Component{
 </a>
 <a className="dropdown-item d-flex align-items-center nav-flx-noti" href="#">
 <div className="mr-3">
-<div className="icon-circle .bg-primaryy">
+<div className="icon-circle bg-primaryy">
 <i className="fas fa-file-alt text-white"></i>
 </div>
 </div>
