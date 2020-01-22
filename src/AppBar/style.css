@@ -180,6 +180,12 @@ a.dropdown-item.text-center.small.text-gray-500.nav-flx-noti {
     background: #090c10;
     color: #fff;
 }
+.bg-primaryy {
+    background-color: #ff6a07!important;
+}
+.sadow.show {
+    box-shadow: 0px 3px 21px 0px rgba(0, 0, 0, 0.2);
+}
 .notification-bar .btn-group button img {
 width: 2rem;
 }
