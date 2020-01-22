@@ -149,7 +149,18 @@ export default class AppBar extends React.Component{
 <h2>Notification</h2>
 <h2>Mark as read</h2>
 </div>
-<a className="dropdown-item d-flex align-items-center" href="#">
+<a className="dropdown-item d-flex align-items-center nav-flx-noti" href="#">
+	<div className="mr-3">
+		<div className="icon-circle bg-primary">
+			<i className="fas fa-file-alt text-white"></i>
+		</div>
+		</div>
+		<div>
+	<div className="small text-gray-500">December 12, 2019</div>
+	<span>A new monthly report is ready to download!</span>
+	</div>
+</a>
+<a className="dropdown-item d-flex align-items-center nav-flx-noti" href="#">
 <div className="mr-3">
 <div className="icon-circle bg-primary">
 <i className="fas fa-file-alt text-white"></i>
@@ -160,7 +171,7 @@ export default class AppBar extends React.Component{
 <span>A new monthly report is ready to download!</span>
 </div>
 </a>
-<a className="dropdown-item d-flex align-items-center" href="#">
+<a className="dropdown-item d-flex align-items-center nav-flx-noti" href="#">
 <div className="mr-3">
 <div className="icon-circle bg-primary">
 <i className="fas fa-file-alt text-white"></i>
@@ -171,18 +182,7 @@ export default class AppBar extends React.Component{
 <span>A new monthly report is ready to download!</span>
 </div>
 </a>
-<a className="dropdown-item d-flex align-items-center" href="#">
-<div className="mr-3">
-<div className="icon-circle bg-primary">
-<i className="fas fa-file-alt text-white"></i>
-</div>
-</div>
-<div>
-<div className="small text-gray-500">December 12, 2019</div>
-<span>A new monthly report is ready to download!</span>
-</div>
-</a>
-<a className="dropdown-item text-center small text-gray-500" href="#">show all alerts</a>
+<a className="dropdown-item text-center small text-gray-500 nav-flx-noti" href="#">show all alerts</a>
 </div>
 </div>
 </div>
