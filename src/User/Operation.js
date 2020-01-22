@@ -299,7 +299,7 @@ isValid:true,emailError:false,
     
   }
   
-  this.statusapis=(email)=>{
+statusapis=(email)=>{
 	  this.setState({currentEmail:email})
   }
 
