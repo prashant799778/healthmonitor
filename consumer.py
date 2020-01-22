@@ -23,29 +23,33 @@ def on_message(client, userdata, msg):
 		data= json.loads(data)
 		print(data)
 		print(type(data))
-		# print("1111111111111")
-		# if "PatientId" in data:
-		# 	print("aaaaaaaaaaaa")
-		# 	topic=data["PatientId"]
-		# 	print("bbbbbbbbbbbb")
-		# 	client.publish(str(topic),str(data))
-		# 	print("cccccccccc")
-		# else:
-		# 	print("ddddddddddddd")
-		# 	topic=data["topic"]+'/spo2'
-		# 	client.publish(str(topic),str(data["value"]))
-		# 	print("eeeeeeeeeeee")
-		# print("2222222222222")
-		# print(data)
-                
-		# query2  = " insert into Patient_Vital_master(Patient_Id,RESP,ECG,SPO2,NIBP,TEMP,usercreate)"
-		# query2 =query2 +" values("+'"'+str(data["PatientId"])+'"'+','+'"'+str(data["RESP"])+'"'+','+'"'+str(data["ECG"])+'"'+','+'"'+str(data["SPO2"])+'"'+','+'"'+str(data["NIBP"])+'"'+','+'"'+str(data["TEMP"])+'"'+','+'"'+str(data["usercreate"])+'"'+' '+");"
-		# print(query2)
-		# conn=Connection()
-		# cursor = conn.cursor()
-		# cursor.execute(query2)
-		# conn.commit()
-		# cursor.close()
+
+		if 'text' in data:
+			query2  = " insert into preiscribeMedicine(patientId,doctorId,text)"
+			query2 =query2 +" values("+'"'+str(data["PatientId"])+'"'+','+'"'+str(data["doctorId"])+'"'+','+'"'+str(data["text"])+'"'+");"
+			conn=Connection()
+			cursor = conn.cursor()
+			cursor.execute(query2)
+			conn.commit()
+			cursor.close()
+
+
+		
+		else:
+			heartRate=str(data["heartRate"]).replace("'",'"')
+			spo2=str(data["spo2"]).replace("'",'"')
+			pulseRate=str(data["pulseRate"]) .replace("'",'"')
+			highPressure=str(data["highPressure"]).replace("'",'"')
+			lowPressure=str(data["lowPressure"]).replace("'",'"')
+			temperature=str(data["temperature"]).replace("'",'"')\
+			query2  = " insert into Patient_Vital_master(Patient_Id,spo2,pulseRate,highPressure,lowPressure,heartRate,temperature)"
+			query2 =query2 +" values("+'"'+str(data["PatientId"])+'"'+','+'"'+str(spo2)+'"'+','+'"'+str(pulseRate)+'"'+','+'"'+str(highPressure)+'"'+','+'"'+str(lowPressure)+'"'+','+'"'+str(heartRate)+'"'+','+'"'+str(temperature)+'"'+''+");"
+			print(query2)
+			conn=Connection()
+			cursor = conn.cursor()
+			cursor.execute(query2)
+			conn.commit()
+			cursor.close()
 	except Exception as e :
 		print("Exception---->" + str(e))    
 		output = {"result":"something went wrong","status":"false"}
