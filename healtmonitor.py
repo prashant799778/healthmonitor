@@ -3211,11 +3211,11 @@ def hubadminPannel():
         
         
         for i in data99:
-            query1="select  count(*) as  count from userMaster  as um   where um.Usertype_Id='2'    and um.ID IN (select uhm.userId  from  userHospitalMapping as uhm where uhm.Usertype_Id= '2'  AND hospitalId='"+str(i["ID"])+"' );" 
+            query1="select um.ID from userMaster,userHospitalMapping as uhm  where um.ID=uhm.userId and um.Usertype_Id=uhm.Usertype_Id and  uhm.Usertype_Id= '2'  AND uhm.hospitalId='"+str(i["ID"])+"' );" 
             
             cursor.execute(query1)
             data17 =cursor.fetchall()
-            totalDoctor+=data17[0]["count"]
+            totalDoctor+=len(data17)
 
             query2="select count(*) as count from userHospitalMapping where  Usertype_Id=3 and  hospitalId='"+str(i["ID"])+"';" 
             
