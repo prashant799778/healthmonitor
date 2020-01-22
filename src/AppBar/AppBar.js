@@ -137,7 +137,55 @@ export default class AppBar extends React.Component{
 
           <div className="topbar-divider d-none d-sm-block" />
           {/* Nav Item - User Information */}
-
+		<li>
+		<div class="notification-bar">
+<div class="btn-group">
+<button type="button" class="btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+<img src={require("./s-notification.svg")}/>
+</button>
+<div class="dropdown-menu dropdown-menu-right sadow ">
+<div class="hadding">
+<h2>Notification</h2>
+<h2>Mark as read</h2>
+</div>
+<a class="dropdown-item d-flex align-items-center" href="#">
+<div class="mr-3">
+<div class="icon-circle bg-primary">
+<i class="fas fa-file-alt text-white"></i>
+</div>
+</div>
+<div>
+<div class="small text-gray-500">December 12, 2019</div>
+<span>A new monthly report is ready to download!</span>
+</div>
+</a>
+<a class="dropdown-item d-flex align-items-center" href="#">
+<div class="mr-3">
+<div class="icon-circle bg-primary">
+<i class="fas fa-file-alt text-white"></i>
+</div>
+</div>
+<div>
+<div class="small text-gray-500">December 12, 2019</div>
+<span>A new monthly report is ready to download!</span>
+</div>
+</a>
+<a class="dropdown-item d-flex align-items-center" href="#">
+<div class="mr-3">
+<div class="icon-circle bg-primary">
+<i class="fas fa-file-alt text-white"></i>
+</div>
+</div>
+<div>
+<div class="small text-gray-500">December 12, 2019</div>
+<span>A new monthly report is ready to download!</span>
+</div>
+</a>
+<a class="dropdown-item text-center small text-gray-500" href="#">show all alerts</a>
+</div>
+</div>
+</div>
+		</li>
           <li className="nav-item dropdown no-arrow"   onClick={()=>{
             console.log("admin")
                    if(localStorage.getItem("user_type","")!="admin")
