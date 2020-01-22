@@ -305,7 +305,7 @@ isValid:true,emailError:false,
     
 
   let jsn={
-	  'Email':localStorage.getItem('email','');
+	  'Email':localStorage.getItem('email','')
   }
 
      let api="http://159.65.146.25:5053/updateStatus"
