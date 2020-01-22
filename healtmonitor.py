@@ -3210,7 +3210,7 @@ def hubadminPannel():
         totalOperations=0
         
         umq=[]
-        yu=[]
+
         for i in data99:
             query1="select distinct(um.ID) as ID from userMaster as um,userHospitalMapping as uhm  where um.ID=uhm.userId and um.Usertype_Id=uhm.Usertype_Id and  uhm.Usertype_Id= '2'  aND uhm.hospitalId='"+str(i["ID"])+"' ;" 
             cursor.execute(query1)
@@ -3218,15 +3218,12 @@ def hubadminPannel():
             for j in data17:
                 umq.append(int(j['ID']))
                 print(umq,"==========================================")
+                yu=[]
                 
-                for k in umq:
-                    if k==k:
-                        umq.pop(k)
-                        
-                    else:
-                        
-                        print(yu,"++++++++++++++++++++++++")
-                    totalDoctor=len(umq)
+                for x in umq:
+                    if x not in yu:
+                        yu.append(x)
+                        totalDoctor=len(yu)
             
             
 
