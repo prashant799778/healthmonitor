@@ -345,7 +345,7 @@ return(<DetailStyled>
                       </div>
                       <div className="rap-innr-patient">
                         <div className="innr-patient remo-bord">
-                          <h2 className="red-clr">SP02(%)</h2>
+                          <h2 className="red-clr">SP0<sub>2</sub>(%)</h2>
                           <p className="red-clr">{this.state.spo2}</p>
                         </div>
                         <div className="innr-patient remo-bord">
