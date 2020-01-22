@@ -92,7 +92,7 @@ isValid:true,emailError:false,
   }}
   getTypeapi=()=>{
 
-  let api="http://3.0.218.219:5053/hubMaster"
+  let api="https://digitologyhealthcare.com:5053/hubMaster"
    axios.get(api)
  .then((response)=> {
    // handle success
@@ -171,7 +171,7 @@ isValid:true,emailError:false,
 
 
 
-        let api="http://3.0.218.219:5053/hubMaster"
+        let api="https://digitologyhealthcare.com:5053/hubMaster"
          axios.get(api)
        .then((response)=> {
          // handle success
@@ -215,7 +215,7 @@ isValid:true,emailError:false,
     
 
       
-     let api="http://3.0.218.219:5053/insertHubMaster"
+     let api="https://digitologyhealthcare.com:5053/insertHubMaster"
      let json={
        "HubName":this.state.name,
      
@@ -255,7 +255,7 @@ alert("User Created Successfully")
     updatetapi=()=>{
       
      
-     let api="http://3.0.218.219:5053/allPatient"
+     let api="https://digitologyhealthcare.com:5053/allPatient"
      let json={
        "username":this.state.name,
        "email":this.state.email,

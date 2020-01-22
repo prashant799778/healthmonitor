@@ -67,7 +67,7 @@ return <li>{message}</li> })}
     }
     axios
       .post(
-        `http://3.0.218.219:5053/doctorLoginDashboard`, jsons
+        `https://digitologyhealthcare.com:5053/doctorLoginDashboard`, jsons
       )
       .then(res => {
 
@@ -92,7 +92,7 @@ console.log(deviceId)
   useEffect(() => {
     axios
       .get(
-        `http://3.0.218.219:5053/Device_master_select?hospital_Name=${hospitals}`
+        `https://digitologyhealthcare.com:5053/Device_master_select?hospital_Name=${hospitals}`
       )
       .then(res => {
         if (res.data) {
@@ -109,7 +109,7 @@ console.log(deviceId)
   // const selectType = e => {
   //   axios
   //     .get(
-  //       `http://3.0.218.219:5053/Device_master_select?hospital_Name=${e.target.value}`
+  //       `https://digitologyhealthcare.com:5053/Device_master_select?hospital_Name=${e.target.value}`
   //     )
   //     .then(res => {
   //       if (res.data) {
@@ -146,7 +146,7 @@ console.log(deviceId)
   // Api Calling
   // const patientApi = () => {
   //   axios
-  //     .get("http://3.0.218.219:5053/Patient_master_select")
+  //     .get("https://digitologyhealthcare.com:5053/Patient_master_select")
   //     .then(res => {
   //       const allData = res.data.result;
   //       allData.map(
@@ -181,7 +181,7 @@ console.log(deviceId)
   //! *****************************************fetching hospital list********************
   useEffect(() => {
     axios
-      .get("http://3.0.218.219:5053/hospital_master_list1")
+      .get("https://digitologyhealthcare.com:5053/hospital_master_list1")
       .then(res => {
         console.log(res.data.result);
         const hospitalData = res.data.result;

@@ -21,7 +21,7 @@ componentDidMount() {
 
 
 getData=()=>{
-  axios.get(`http://3.0.218.219:5053/Patient_Vital_master_select`)
+  axios.get(`https://digitologyhealthcare.com:5053/Patient_Vital_master_select`)
   .then(res => {
      
        console.log(res)

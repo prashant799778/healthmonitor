@@ -41,7 +41,7 @@ isValid:true,emailError:false,
     this.setState({deleteid:id,HubId:HubId})
   }
   delete=()=>{
-    let api="http://3.0.218.219:5053/deleteHospital"
+    let api="https://digitologyhealthcare.com:5053/deleteHospital"
     let jsn={
       "ID":this.state.deleteid,
        "HubId":this.state.HubId
@@ -181,7 +181,7 @@ isValid:true,emailError:false,
 
 
 
-     let api="http://3.0.218.219:5053/allHospital"
+     let api="https://digitologyhealthcare.com:5053/allHospital"
       axios.post(api)
     .then((response)=> {
       // handle success
@@ -222,7 +222,7 @@ isValid:true,emailError:false,
 
 
 
-     let api="http://3.0.218.219:5053/hubMaster"
+     let api="https://digitologyhealthcare.com:5053/hubMaster"
       axios.get(api)
     .then((response)=> {
       // handle success
@@ -262,7 +262,7 @@ isValid:true,emailError:false,
     
 
       
-      let api="http://3.0.218.219:5053/insertHospitalMaster"
+      let api="https://digitologyhealthcare.com:5053/insertHospitalMaster"
       let json={
         "hospital_name":this.state.name,
         "HubId":Number(this.state.hub_name),
@@ -305,7 +305,7 @@ isValid:true,emailError:false,
     updatetapi=()=>{
       
      
-     let api="http://3.0.218.219:5053/updateHospitalmaster"
+     let api="https://digitologyhealthcare.com:5053/updateHospitalmaster"
      let json={
        "ID":this.state.userid,
       "hospital_name":this.state.name,

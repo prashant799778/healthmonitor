@@ -203,7 +203,7 @@ isValid:true,emailError:false,
 
 
 
-     let api="http://3.0.218.219:5053/hubMaster"
+     let api="https://digitologyhealthcare.com:5053/hubMaster"
       axios.get(api)
     .then((response)=> {
       // handle success
@@ -245,7 +245,7 @@ isValid:true,emailError:false,
 
 
 
-     let api="http://3.0.218.219:5053/hospitalMaster"
+     let api="https://digitologyhealthcare.com:5053/hospitalMaster"
 
      let json={
       "HubId":this.state.hub_id,
@@ -305,7 +305,7 @@ isValid:true,emailError:false,
 
 
 
-     let api="http://3.0.218.219:5053/allNurse"
+     let api="https://digitologyhealthcare.com:5053/allNurse"
       axios.post(api)
     .then((response)=> {
       // handle success
@@ -355,7 +355,7 @@ isValid:true,emailError:false,
 hids.push(this.state. HListId[item])
       })     
       
-      let api="http://3.0.218.219:5053/addUser"
+      let api="https://digitologyhealthcare.com:5053/addUser"
       let json=
       
       

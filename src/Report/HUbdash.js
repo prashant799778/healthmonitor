@@ -60,7 +60,7 @@ currentItem:"" ,
         }
         axios
           .post(
-            `http://3.0.218.219:5053/hubdoctorLoginDashboard`, jsons
+            `https://digitologyhealthcare.com:5053/hubdoctorLoginDashboard`, jsons
           )
           .then(res => {
     
@@ -89,7 +89,7 @@ currentItem:"" ,
       }
       axios
         .post(
-          `http://3.0.218.219:5053/operationDashboard`, jsons
+          `https://digitologyhealthcare.com:5053/operationDashboard`, jsons
         )
         .then(res => {
   

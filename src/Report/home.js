@@ -47,7 +47,7 @@ totalDoctorCount:"",
     }
     axios
       .post(
-        `http://3.0.218.219:5053/adminPannel`, jsons
+        `https://digitologyhealthcare.com:5053/adminPannel`, jsons
       )
       .then(res => {
 
