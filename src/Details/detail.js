@@ -301,7 +301,7 @@ return(<DetailStyled>
 				  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 				  <form>
 					<div class="stiky-note">
-					<textarea></textarea>
+					<textarea rows="4" cols="50" class="madical pis"></textarea>
 					<button type="submit" class="btn btn-primary">submit</button>
 					</div>
 					</form>
