@@ -781,9 +781,10 @@ hids.push(this.state. HListId[item])
                                   <th style={{textAlign:"center",color:'aliceblue'}}>Doctor Name</th>
                                   <th style={{textAlign:"center",color:'aliceblue'}}>Gender</th>
                                   <th style={{textAlign:"center",color:'aliceblue'}}>Hub</th>
-								  <th style={{textAlign:"center",color:'aliceblue'}}>Email</th>
+								  
                                   <th style={{textAlign:"center",color:'aliceblue'}}>Hospital(s) Allocated</th>
                                   <th style={{textAlign:"center",color:'aliceblue'}}>No. of Patient</th>
+								  <th style={{textAlign:"center",color:'aliceblue'}}>Email</th>
 								  <th style={{textAlign:"center",color:'aliceblue'}}>A/C Status</th>
                                   <th style={{textAlign:"center",color:'aliceblue'}} className="dlt">Action</th>
                                 </tr>
@@ -809,9 +810,10 @@ hids.push(this.state. HListId[item])
                                   <td>{item.DoctorName}</td>
                                   <td>{this.getGender(item.Gender)}</td>
                                   <td>{item.HubName}</td>
-                                  <td>{item.Email}</td>
+                                  
                                   <td>{item.hospital_name}</td>
                                   <td>{item.patient}</td>
+								  <td>{item.Email}</td>
                                  <td onClick={()=>{this.statusapis(item.Email)}} style={{cursor:'pointer'}}>{item.Status==2?<span class="d-act" data-toggle="modal" data-target="#activateModal">deactivated</span>:<span data-toggle="modal" data-target="#deactivateModal" class="act">activated</span>}</td>
                     
                                   <td>
