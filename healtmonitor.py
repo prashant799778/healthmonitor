@@ -1881,6 +1881,35 @@ def userTypeMaster():
         return output
 
 
+@app.route('/preiscribeMedicine', methods=['GET'])
+def preiscribeMedicine():
+    try:
+    
+        # query = " select distinct userid,username,usertype from usermaster where usertype <> 'Admin';"
+        doctorId=request.args['doctorId']
+        query = "select * from preiscribeMedicine where doctorId='" + doctorId + "' limit  0,5"
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data = cursor.fetchall()
+        cursor.close()
+        print(data)
+        
+        if data:           
+            Data = {"result":data,"status":"true"}
+            return Data
+        else:
+            output = {"result":"No Data Found","status":"false"}
+            return output
+
+    except Exception as e :
+        print("Exception---->" + str(e))    
+        output = {"result":"something went wrong","status":"false"}
+        return output
+
+
+
+
 @app.route('/insertHubMaster', methods=['POST'])
 def insertHubMaster():
     try:
