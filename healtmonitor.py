@@ -3211,7 +3211,7 @@ def hubadminPannel():
         
         
         for i in data99:
-            query1="select um.ID from userMaster as um,userHospitalMapping as uhm  where um.Usertype_Id=uhm.Usertype_Id and  uhm.Usertype_Id= '2'  aND uhm.hospitalId='"+str(i["ID"])+"' ;" 
+            query1="select distinct(um.ID) from userMaster as um,userHospitalMapping as uhm  where um.ID=uhm.userId and um.Usertype_Id=uhm.Usertype_Id and  uhm.Usertype_Id= '2'  aND uhm.hospitalId='"+str(i["ID"])+"' ;" 
             
             cursor.execute(query1)
             data17 =cursor.fetchall()
