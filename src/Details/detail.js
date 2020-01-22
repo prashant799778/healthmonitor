@@ -312,7 +312,7 @@ return(<DetailStyled>
                   <div className="patient-info border-bottomm">
                     <h2 className="patient-hading" onClick={()=>{this.props.goBack()}} style={{cursor: 'pointer'}}><font color="green">Go Back</font></h2>
                     <h2 className="patient-hading">{currentinnerItem.PatientName}</h2>
-                    <h2 className="patient-hading">{'BloodGroup : '+ currentinnerItem.BloodGroup}</h2>
+                    <h2 className="patient-hading">{'Blood Group: '+ currentinnerItem.BloodGroup}</h2>
                     <h2 className="patient-hading">{'Hospital Name : '+currentItem.hospital_name }</h2>
                     <h2 className="patient-hading">{'Address : '+currentinnerItem.Address}</h2>
                     <h2 className="patient-hading">{'Bed No : '+ currentinnerItem.Bed_Number}</h2>
