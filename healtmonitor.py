@@ -299,7 +299,7 @@ def login1q():
                         return data
                     else: 
                         print("1111111111")
-                        data={"status":"false","result":"Login Failed"}
+                        data={"status":"false","result":"Please Fill Your Correct Credentials"}
                         return data
 
 
@@ -311,7 +311,7 @@ def login1q():
 
 
             else:
-                data={"status":"false","result":"Login Failed"}
+                data={"status":"false","result":"Please Fill Your Correct Credentials"}
                 return data
 
         else:
@@ -801,7 +801,7 @@ def allDoctor():
     try:
         conn=Connection()
         cursor = conn.cursor()
-        query= " select um.ID,um.mobile,um.password,um.name as DoctorName,um.Email,um.Gender,hsm.ID as Hospital_Id,hsm.hospital_name,hm.ID as HubId,hsm.Address as hospital_address,hm.HubName from userMaster um,HubMaster hm,Hospital_master hsm,"
+        query= " select um.ID,um.mobile,um.password,um.name as DoctorName,um.Status as Status,um.Email,um.Gender,hsm.ID as Hospital_Id,hsm.hospital_name,hm.ID as HubId,hsm.Address as hospital_address,hm.HubName from userMaster um,HubMaster hm,Hospital_master hsm,"
         query=query+"userHospitalMapping uhm where um.Usertype_Id=2 and hm.ID=hsm.HubId and um.ID=uhm.userId and uhm.hospitalId=hsm.ID  ORDER BY  um.ID DESC;"
         print(query)
         
@@ -847,7 +847,7 @@ def allHubadmin():
         totalpatient=0
         conn=Connection()
         cursor = conn.cursor()
-        query= " select um.ID,um.name,um.mobile,um.password,um.Email,um.Gender,um.Usertype_Id,hm.ID as HubId,hm.HubName from userMaster um,HubMaster hm, "
+        query= " select um.ID,um.name,um.mobile,um.password,um.Email,um.Status,um.Gender,um.Usertype_Id,hm.ID as HubId,hm.HubName from userMaster um,HubMaster hm, "
         query=query+" userHubMapping uhm where um.Usertype_Id=6 and um.ID=uhm.userId and uhm.hubId=hm.ID  order by um.ID desc;"
         # print(query)
         
@@ -903,7 +903,7 @@ def allNurse():
         
         conn=Connection()
         cursor = conn.cursor()
-        query= " select um.ID,um.name,um.mobile,um.password,um.Email,um.Gender,um.Usertype_Id,hsm.ID as Hospital_Id,hsm.hospital_name,hm.ID as HubId,hsm.Address as hospital_address,hm.HubName from userMaster um,HubMaster hm,Hospital_master hsm,"
+        query= " select um.ID,um.name,um.mobile,um.password,um.Email,um.Gender,um.Status,um.Usertype_Id,hsm.ID as Hospital_Id,hsm.hospital_name,hm.ID as HubId,hsm.Address as hospital_address,hm.HubName from userMaster um,HubMaster hm,Hospital_master hsm,"
         query=query+"userHospitalMapping uhm where um.Usertype_Id=3 and hm.ID=hsm.HubId and um.ID=uhm.userId and uhm.hospitalId=hsm.ID  order by um.ID desc;"
         print(query)
         
@@ -937,7 +937,7 @@ def alloperations():
         
         conn=Connection()
         cursor = conn.cursor()
-        query= " select um.ID,um.name,um.mobile,um.password,um.Email,um.Gender,um.Usertype_Id,hsm.ID as Hospital_Id,hsm.hospital_name,hm.ID as HubId,hsm.Address as hospital_address,hm.HubName from userMaster um,HubMaster hm,Hospital_master hsm,"
+        query= " select um.ID,um.name,um.mobile,um.password,um.Email,um.Gender,um.Usertype_Id,um.Status,hsm.ID as Hospital_Id,hsm.hospital_name,hm.ID as HubId,hsm.Address as hospital_address,hm.HubName from userMaster um,HubMaster hm,Hospital_master hsm,"
         query=query+"userHospitalMapping uhm where um.Usertype_Id=4 and hm.ID=hsm.HubId and um.ID=uhm.userId and uhm.hospitalId=hsm.ID  order by um.ID desc;"
         print(query)
         
@@ -1724,6 +1724,33 @@ def hospitalMaster():
 
 
 
+
+@app.route('/updateStatus', methods=['POST'])
+def updateStatus():
+    try:
+       
+        json1=request.get_data() 
+        data=json.loads(json1.decode("utf-8")) 
+       
+        query1 = " update userMaster set   counter='0',Status='0'  where Email = '" + str(data["Email"])+ "';"
+        print(query1)
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query1)
+        conn.commit()
+        cursor.close()
+        output = {"result":"Updated Successfully","status":"true"}
+        return output  
+    except KeyError :
+        print("Key Exception---->")   
+        output = {"result":"key error","status":"false"}
+        return output  
+
+    except Exception as e :
+        print("Exceptio`121QWAaUJIHUJG n---->" +str(e))    
+        output = {"result":"somthing went wrong","status":"false"}
+        return output
+
 @app.route('/updatehubmaster', methods=['POST'])
 def updatehubmaster():
     try:
@@ -1746,7 +1773,7 @@ def updatehubmaster():
         return output  
 
     except Exception as e :
-        print("Exception---->" +str(e))    
+        print("Exceptio`121QWAaUJIHUJG n---->" +str(e))    
         output = {"result":"somthing went wrong","status":"false"}
         return output
 
@@ -3228,7 +3255,7 @@ def doctorProfile():
         conn=Connection()
         cursor = conn.cursor()
         
-        query = "select um.licenseNo,um.ID as doctorId,um.mobile,um.name as doctorName,um.Email,um.Gender as gender from userMaster as um where um.Email='"+str(data["Email"])+"';"
+        query = "select um.ID as doctorId,um.mobile,um.name as doctorName,um.licenseNo,um.Email,um.Gender as gender from userMaster as um where um.Email='"+str(data["Email"])+"';"
         
         cursor.execute(query)
         data = cursor.fetchall()
