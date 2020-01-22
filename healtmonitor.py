@@ -3217,7 +3217,7 @@ def hubadminPannel():
             for j in data17:
                 umq.append(int(j['ID']))
                 yu=[]
-                for k in um:
+                for k in umq:
                     if k==k:
                         pass
                     else:
