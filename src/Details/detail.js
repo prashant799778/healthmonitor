@@ -58,7 +58,7 @@ class Detail extends React.Component{
 
 
         let  Omqtt1 = require('mqtt')
-        let  Oclient1  = Omqtt1.connect('wss://smarticumqtt.fourbrick.in:9001')
+        let  Oclient1  = Omqtt1.connect('ws://3.0.218.219:9001')
         this.client=Oclient1
           Oclient1.on('connect', ( ) =>{
                 Oclient1.subscribe(this.props.currentTopic +"",  (err)=> {
