@@ -138,50 +138,51 @@ export default class AppBar extends React.Component{
           <div className="topbar-divider d-none d-sm-block" />
           {/* Nav Item - User Information */}
 		<li>
-		<div class="notification-bar">
-<div class="btn-group">
-<button type="button" class="btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-<img src={require("./s-notification.svg")}/>
+		<div className="notification-bar">
+<div className="btn-group">
+<button type="button" className="btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+ <img src={require("./s-notification.svg")} />
 </button>
-<div class="dropdown-menu dropdown-menu-right sadow ">
-<div class="hadding">
+<div className="dropdown-menu dropdown-menu-right sadow ">
+<div className="hadding">
 <h2>Notification</h2>
 <h2>Mark as read</h2>
 </div>
-<a class="dropdown-item d-flex align-items-center" href="#">
-<div class="mr-3">
-<div class="icon-circle bg-primary">
-<i class="fas fa-file-alt text-white"></i>
+<a className="dropdown-item d-flex align-items-center" href="#">
+<div className="mr-3">
+<div className="icon-circle bg-primary">
+<i className="fas fa-file-alt text-white"></i>
 </div>
 </div>
 <div>
-<div class="small text-gray-500">December 12, 2019</div>
+<div className="small text-gray-500">December 12, 2019</div>
 <span>A new monthly report is ready to download!</span>
 </div>
 </a>
-<a class="dropdown-item d-flex align-items-center" href="#">
-<div class="mr-3">
-<div class="icon-circle bg-primary">
-<i class="fas fa-file-alt text-white"></i>
+<a className="dropdown-item d-flex align-items-center" href="#">
+<div className="mr-3">
+<div className="icon-circle bg-primary">
+<i className="fas fa-file-alt text-white"></i>
 </div>
 </div>
 <div>
-<div class="small text-gray-500">December 12, 2019</div>
+<div className="small text-gray-500">December 12, 2019</div>
 <span>A new monthly report is ready to download!</span>
 </div>
 </a>
-<a class="dropdown-item d-flex align-items-center" href="#">
-<div class="mr-3">
-<div class="icon-circle bg-primary">
-<i class="fas fa-file-alt text-white"></i>
+<a className="dropdown-item d-flex align-items-center" href="#">
+<div className="mr-3">
+<div className="icon-circle bg-primary">
+<i className="fas fa-file-alt text-white"></i>
 </div>
 </div>
 <div>
-<div class="small text-gray-500">December 12, 2019</div>
+<div className="small text-gray-500">December 12, 2019</div>
 <span>A new monthly report is ready to download!</span>
 </div>
 </a>
-<a class="dropdown-item text-center small text-gray-500" href="#">show all alerts</a>
+<a className="dropdown-item text-center small text-gray-500" href="#">show all alerts</a>
 </div>
 </div>
 </div>
