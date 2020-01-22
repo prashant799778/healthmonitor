@@ -160,12 +160,27 @@ ul.navbar-nav li:nth-child(2) {
     justify-content: center;
     align-items: center;
 }
+.nav-flx-noti {
+    width: 100%;
+    margin: 0;
+    border-radius: 0;
+    background: transparent;
+    color: #000;
+}
+a.dropdown-item.text-center.small.text-gray-500.nav-flx-noti {
+    width: 100%;
+    margin: 0;
+    border-radius: 0;
+    background: #454f63;
+    color: #fff !important;
+}
 .notification-bar .btn-group button img {
 width: 2rem;
 }
 .notification-bar .btn-group .dropdown-menu {
 width: 20rem!important;
 padding: 0px;
+border:0px;
 }
 .hadding {
 display: flex;
