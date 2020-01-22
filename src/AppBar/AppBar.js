@@ -135,7 +135,7 @@ export default class AppBar extends React.Component{
 
        
 
-          <div className="topbar-divider d-none d-sm-block" />
+         
           {/* Nav Item - User Information */}
 		<li>
 		<div className="notification-bar">
@@ -187,6 +187,7 @@ export default class AppBar extends React.Component{
 </div>
 </div>
 		</li>
+		 <div className="topbar-divider d-none d-sm-block" />
           <li className="nav-item dropdown no-arrow"   onClick={()=>{
             console.log("admin")
                    if(localStorage.getItem("user_type","")!="admin")
