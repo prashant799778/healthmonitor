@@ -220,7 +220,7 @@ console.log(deviceId)
   console.log("list111",totalPatientCount);
   return (
     <DashStyled>
-       <Connector mqttProps="ws://3.0.218.219:9001">
+       
          
       <div>
       <subscribe></subscribe>
