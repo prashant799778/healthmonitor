@@ -3216,7 +3216,7 @@ def hubadminPannel():
             data17 =cursor.fetchall()
             umq.append(int(i['ID']))
             print(umq,"=================================================================================")
-            totalDoctor+=len(umq)
+            totalDoctor=len(umq)
 
             query2="select count(*) as count from userHospitalMapping where  Usertype_Id=3 and  hospitalId='"+str(i["ID"])+"';" 
             
