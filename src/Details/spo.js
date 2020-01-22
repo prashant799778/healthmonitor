@@ -47,7 +47,7 @@ this. bufferIndex = 0;
      
   ///////////////////
 var mqtt2 = require('mqtt')
-var client2  = mqtt2.connect('ws://3.0.218.219:9001')
+var client2  = mqtt2.connect('wss://smarticumqtt.fourbrick.in:9001')
 
  this.setState({client2: client2 },()=>{
   client2.on('connect', (
