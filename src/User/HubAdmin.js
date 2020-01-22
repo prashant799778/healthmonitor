@@ -739,7 +739,7 @@ isValid:true,emailError:false,
                                   <td>{item.password}</td>
                                   <td>{item.patient}</td>
                                  
-                                     <td style={{cursor:'pointer'}}>{item.Status==0?'activated':'deactivated'}</td>
+                                     <td style={{cursor:'pointer'}}>{item.Status==2?'deactivated':'activated'}</td>
                                   <td>
                                     <div className="action-bx">
                                       <ul>
