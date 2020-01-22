@@ -505,6 +505,10 @@ span.act {
     border-radius: 20px;
 }
 
+.srt tbody tr td:nth-child(7) {
+    text-transform: unset;
+}
+
 @media (min-width: 320px) and (max-width: 480px) {
 
     .card-wrap-box {
