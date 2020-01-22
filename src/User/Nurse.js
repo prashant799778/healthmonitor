@@ -299,7 +299,47 @@ isValid:true,emailError:false,
     
   }
       
-  callapi=()=>{
+ statusapi=(email)=>{
+       
+    
+
+  let jsn={
+	  'Email':email
+  }
+
+     let api="http://159.65.146.25:5053/updateStatus"
+      axios.post(api,jsn)
+    .then((response)=> {
+      // handle success
+         
+      console.log("status",response);
+      this.callapi();
+   
+
+      
+
+    
+  })
+  .catch( (error)=> {
+    // handle error
+    
+    
+  })
+
+
+
+ 
+    
+  }
+   
+  
+
+	
+
+
+
+
+ callapi=()=>{
        
     this.setState({isList:true,isEdit:false})
 
@@ -736,7 +776,7 @@ isValid:true,emailError:false,
                                   <td>{item.Email}</td>
                                   <td>{item.password}</td>
                                   <td>{item.patient}</td>
-                                 
+                                 <td  onClick={()=>{this.statusapi(item.Email)}} style={{cursor:'pointer'}}>{item.Status==2?'deactivated':'activated'}</td>
                     
                                   <td>
                                     <div className="action-bx">

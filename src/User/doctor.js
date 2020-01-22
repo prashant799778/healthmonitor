@@ -313,6 +313,43 @@ isValid:true,emailError:false,
     
   }
       
+ statusapi=(email)=>{
+       
+    
+
+  let jsn={
+	  'Email':email
+  }
+
+     let api="http://159.65.146.25:5053/updateStatus"
+      axios.post(api,jsn)
+    .then((response)=> {
+      // handle success
+         
+      console.log("status",response);
+      this.callapi();
+   
+
+      
+
+    
+  })
+  .catch( (error)=> {
+    // handle error
+    
+    
+  })
+
+
+
+ 
+    
+  }
+   
+  
+
+
+
   callapi=()=>{
        
     this.setState({isList:true,isEdit:false})
@@ -764,10 +801,10 @@ hids.push(this.state. HListId[item])
                                   <td>{item.DoctorName}</td>
                                   <td>{this.getGender(item.Gender)}</td>
                                   <td>{item.HubName}</td>
-                                  
+                                  <td>{item.Email}</td>
                                   <td>{item.hospital_name}</td>
                                   <td>{item.patient}</td>
-                                 
+                                 <td  onClick={()=>{this.statusapi(item.Email)}} style={{cursor:'pointer'}}>{item.Status==2?'deactivated':'activated'}</td>
                     
                                   <td>
                                     <div className="action-bx">
