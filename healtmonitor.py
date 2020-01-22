@@ -3215,7 +3215,7 @@ def hubadminPannel():
             
             cursor.execute(query1)
             data17 =cursor.fetchall()
-            totalDoctor+=len(data17)
+            totalDoctor=len(data17)
 
             query2="select count(*) as count from userHospitalMapping where  Usertype_Id=3 and  hospitalId='"+str(i["ID"])+"';" 
             
