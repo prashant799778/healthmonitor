@@ -313,7 +313,7 @@ statusapi=()=>{
 	  'Email':this.state.currentEmail
   }
 
-     let api="http://159.65.146.25:5053/updateStatus"
+     let api="https://smarticuapi.fourbrick.in/updateStatus"
       axios.post(api,jsn)
     .then((response)=> {
       // handle success
