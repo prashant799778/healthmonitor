@@ -196,11 +196,11 @@ line-height: 20px;
 text-transform: capitalize;
 }
 .notification-bar span {
-font-size: 14px;
-text-align: justify;
-white-space: pre-wrap;
-text-transform: capitalize;
-font-weight: 600!important;
+    font-size: 12px;
+    text-align: justify;
+    white-space: pre-wrap;
+    text-transform: capitalize;
+    font-weight: 500!important;
 }
 .dropdown-item:last-child {
 border-bottom: none;
@@ -210,7 +210,7 @@ margin-top: -5px;
 padding: 13px 0px 8px 0px;
 }
 .dropdown-item {
-margin-top:-5px;
+
 border-bottom: 1px solid #e2dcdc;
 }
 /* End Notification Bar*/
