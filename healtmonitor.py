@@ -3216,7 +3216,13 @@ def hubadminPannel():
             data17 =cursor.fetchall()
             for j in data17:
                 umq.append(int(j['ID']))
-                totalDoctor=len(umq)
+                yu=[]
+                for k in um:
+                    if k==k:
+                        pass
+                    else:
+                        yu.append(k)
+                        totalDoctor=len(yu)
             print(umq,"=================================================================================")
             
 
