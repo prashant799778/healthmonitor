@@ -777,7 +777,7 @@ statusapi=(email)=>{
                                   <td>{item.Email}</td>
                                   <td>{item.password}</td>
                                   <td>{item.patient}</td>
-                                 <td  onClick={()=>{this.statusapi(item.Email)}} style={{cursor:'pointer'}}>{item.Status==2?'deactivated':'activated'}</td>
+                                 <td onClick={()=>{this.statusapi(item.Email)}} style={{cursor:'pointer'}}>{item.Status==2?<span class="d-act">deactivated</span>:<span class="act">activated</span>}</td>
                     
                                   <td>
                                     <div className="action-bx">
