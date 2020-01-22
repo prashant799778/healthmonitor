@@ -6,7 +6,20 @@ export const DetailStyled = styled.div`
   border-right: 3px solid #e96333;
   color: #e96333 !important;
 }
-
+.side-button-pis {
+    border: 1px solid #464854;
+    padding: 5px 10px;
+    text-transform: capitalize;
+    color: #fff;
+    background: #d45f0c;
+}
+.item-drap-m {
+    display: block;
+    font-size: 1.1rem;
+    padding: 0 10px;
+    color: #d45f0c;
+    line-height: 20px;
+}
   .box-bg-color{
         background: #25293b;
   }

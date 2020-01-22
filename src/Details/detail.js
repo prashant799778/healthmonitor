@@ -296,6 +296,18 @@ return(<DetailStyled>
                {texthighPressure!="" &&   <h3 className="erroe-mssh" style={{background:'#eb8c25'}}>{texthighPressure}</h3>}
                { textheartRate!="" &&    <h3 className="erroe-mssh" style={{background:'#b030b0'}} >{textheartRate}</h3>}
                 </div>
+				<div class="dropdown">
+				  <button class="side-button-pis"  type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">prescribe medicine</button>
+				  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+				  <form>
+					<div class="stiky-note">
+					<textarea rows="4" cols="50" class="madical pis"></textarea>
+					<button type="submit" class="btn btn-primary">submit</button>
+					</div>
+					</form>
+				  </div>
+				</div>
+				
               </div>
               <div className="wrap-patient  alrt-dt" style={{backgroundImage: 'url('+backImg+')',
       backgroundPosition: 'center',
@@ -325,7 +337,7 @@ return(<DetailStyled>
                         <ECG  level="ecg" topic={this.props.currentTopic}  client={this.state.client1} tc="#489114"  max='250' tt="" data={this.state.w_ecg} id="asd"></ECG>
                       </div>
                       <div className="innr-patient height-box">
-                        <h2 className="red-clr">SP02</h2>
+                        <h2 className="red-clr">SP0<sub>2</sub></h2>
                         
   <SPO  level="spo2"  topic={this.props.currentTopic} client={this.props.client} tc="#E4352C"    max='100'  tt="" data={this.state.w_spo} id="def"></SPO>
                       </div>
@@ -345,7 +357,7 @@ return(<DetailStyled>
                       </div>
                       <div className="rap-innr-patient">
                         <div className="innr-patient remo-bord">
-                          <h2 className="red-clr">SP02(%)</h2>
+                          <h2 className="red-clr">SP0<sub>2</sub>(%)</h2>
                           <p className="red-clr">{this.state.spo2}</p>
                         </div>
                         <div className="innr-patient remo-bord">
@@ -354,7 +366,7 @@ return(<DetailStyled>
                         </div>
                       </div>
                       <div className="innr-patient">
-                        <h2 className="gray-clr">Temp(o C)</h2>
+                        <h2 className="gray-clr">Temp(<sup>o</sup>C)</h2>
                         <p className="gray-clr">{this.state.temp}</p>
                       </div>
                       <div className="innr-patient">
