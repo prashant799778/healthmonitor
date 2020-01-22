@@ -3206,6 +3206,7 @@ def hubadminPannel():
         data99= cursor.fetchall()
         totalDoctor=0
         totalNurse=0
+        totalpatients=0
         
         totalOperations=0
         
@@ -3245,7 +3246,9 @@ def hubadminPannel():
             print(query4)
             cursor.execute(query4)
             data4 = cursor.fetchall()
-            i["patient"]=data4[0]["count"]
+            totalpatients+=data4[0]["count"]
+            print(totalpatients)
+            i["patient"]=totalpatients
 
         
         data5={"Hub":data27,"totalHospital":data2,"totalDoctor":totalDoctor,"totalPatient":data4,"totalNurse":totalNurse,"totalOperation":totalOperations}
