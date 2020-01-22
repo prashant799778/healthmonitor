@@ -300,12 +300,12 @@ isValid:true,emailError:false,
   }
      
 
- statusapi=()=>{
+ statusapi=(email)=>{
        
     
 
   let jsn={
-	  'Email':localStorage.getItem('email','')
+	  'Email':email
   }
 
      let api="http://159.65.146.25:5053/updateStatus"
@@ -776,7 +776,7 @@ isValid:true,emailError:false,
                                   <td>{item.password}</td>
                                   <td>{item.patient}</td>
                                  
-                                     <td  onClick={()=>{this.statusapi()}} style={{cursor:'pointer'}}>{item.Status==2?'deactivated':'activated'}</td>
+                                     <td  onClick={()=>{this.statusapi(item.Email)}} style={{cursor:'pointer'}}>{item.Status==2?'deactivated':'activated'}</td>
                                   <td>
                                     <div className="action-bx">
                                       <ul>
