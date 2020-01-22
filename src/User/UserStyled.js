@@ -507,6 +507,7 @@ span.act {
 
 .srt tbody tr td:nth-child(7) {
     text-transform: unset;
+	text-align:left
 }
 
 @media (min-width: 320px) and (max-width: 480px) {
