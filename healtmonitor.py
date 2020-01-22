@@ -3251,7 +3251,7 @@ def hubadminPannel():
             i["patient"]=totalpatients
 
         
-        data5={"Hub":data27,"totalHospital":data2,"totalDoctor":totalDoctor,"totalPatient":data4,"totalNurse":totalNurse,"totalOperation":totalOperations}
+        data5={"Hub":data27,"totalHospital":data2,"totalDoctor":totalDoctor,"totalPatient":totalpatients,"totalNurse":totalNurse,"totalOperation":totalOperations}
         cursor.close()
         output = {"result":data5,"status":"true"}
         return output  
