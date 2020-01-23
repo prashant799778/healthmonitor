@@ -1891,7 +1891,7 @@ def preiscribeMedicine():
         if ' patientId' in request.args:
             patientId=request.args[" patientId"]
        
-        WhereCondition=""
+        WhereCondition1=""
         
         if  patientId!="":
             WhereCondition1 =  " and  pmm.patientId    = '" + patientId + "'  "
