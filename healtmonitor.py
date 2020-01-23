@@ -1901,6 +1901,7 @@ def preiscribeMedicine():
 
         
         else:
+            print("not patient")
             WhereCondition1=""
 
             query2 = "select pmm.id,pmm.patientId,pmm.text,pmm.doctorId,pmm.dateCreate,pm.PatientName from preiscribeMedicine as pmm ,Patient_master as pm where doctorId='" + doctorId + "'and pm.PatientId=pmm.patientId  "+  WhereCondition1 +"  ORDER by pmm.id DESC limit  0,5"
