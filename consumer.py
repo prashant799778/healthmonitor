@@ -25,7 +25,7 @@ def on_message(client, userdata, msg):
 		else :
 			data=data
 
-
+		print(data)
 		if 'text' in data:
 			query2  = " insert into preiscribeMedicine(patientId,doctorId,text)"
 			query2 =query2 +" values("+'"'+str(data["PatientId"])+'"'+','+'"'+str(data["doctorId"])+'"'+','+'"'+str(data["text"])+'"'+");"
