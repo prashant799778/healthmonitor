@@ -1887,7 +1887,7 @@ def preiscribeMedicine():
     
         # query = " select distinct userid,username,usertype from usermaster where usertype <> 'Admin';"
         doctorId=request.args['doctorId']
-        query = "select pmm.patientId,pmm.text,pmm.doctorId,pmm.dateCreate,pm.PatientName from preiscribeMedicine as pmm ,Patient_master as pm where doctorId='" + doctorId + "'and pm.PatientId=pmm.patientId limit  0,5"
+        query = "select pmm.patientId,pmm.text,pmm.doctorId,pmm.dateCreate,pm.PatientName from preiscribeMedicine as pmm ,Patient_master as pm where doctorId='" + doctorId + "'and pm.PatientId=pmm.patientId limit  0,5 ORDER by pmm.patientId DESC"
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
