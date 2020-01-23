@@ -1890,7 +1890,8 @@ def preiscribeMedicine():
         doctorId=request.args['doctorId']
         if ' patientId' in request.args:
             patientId=request.args["patientId"]
-            if  (patientId!=""):
+            print(type(patientId))
+            if  (patientId!=0):
                 print("111111")
                 WhereCondition2 =  " and  pmm.patientId    = '" + patientId + "'  "
                 query = "select pmm.id,pmm.patientId,pmm.text,pmm.doctorId,pmm.dateCreate,pm.PatientName from preiscribeMedicine as pmm ,Patient_master as pm where doctorId='" + doctorId + "'and pm.PatientId=pmm.patientId  "+  WhereCondition2 +"  ORDER by pmm.id DESC limit  0,5"
