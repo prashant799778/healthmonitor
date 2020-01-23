@@ -20,6 +20,7 @@ def on_message(client, userdata, msg):
 		data = msg.payload.decode('utf-8')#client.publish("outTopic1","data111111")
 		t=time.time()
 		print(t*1000)
+		print(data)
 		if "heartRate" not in data:
 			data= json.loads(data)
 		else :
