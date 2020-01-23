@@ -22,11 +22,8 @@ def on_message(client, userdata, msg):
 		print(t*1000)
 		
 		data= json.loads(data)
-		
-
-		print("2222222222222222222222222222222222",data)
 		if 'text' in data:
-			print("333333333333333333333333")
+			
 			query2  = " insert into preiscribeMedicine(patientId,doctorId,text)"
 			query2 =query2 +" values("+'"'+str(data["PatientId"])+'"'+','+'"'+str(data["doctorId"])+'"'+','+'"'+str(data["text"])+'"'+");"
 			conn=Connection()
@@ -34,11 +31,9 @@ def on_message(client, userdata, msg):
 			cursor.execute(query2)
 			conn.commit()
 			cursor.close()
-
-
 		
 		else:
-			print("444444444444444444444444444")
+			
 			PatientId=data["PatientId"]
 			heartRate=str(data["heartRate"]).replace("'",'"')
 			spo2=str(data["spo2"]).replace("'",'"')
@@ -46,10 +41,10 @@ def on_message(client, userdata, msg):
 			highPressure=str(data["highPressure"]).replace("'",'"')
 			lowPressure=str(data["lowPressure"]).replace("'",'"')
 			temperature=str(data["temperature"]).replace("'",'"')
-			print("555555555555555555555555555555")
+			
 			query2  = " insert into Patient_Vital_master(Patient_Id,spo2,pulseRate,highPressure,lowPressure,heartRate,temperature)"
 			query2 =query2 +" values('"+str(PatientId)+"','"+str(spo2)+"','"+str(pulseRate)+"','"+str(highPressure)+"','"+str(lowPressure)+"','"+str(heartRate)+"','"+str(temperature)+"');"
-			print("66666666666666666666666666666")
+			
 			print(query2)
 			conn=Connection()
 			cursor = conn.cursor()
