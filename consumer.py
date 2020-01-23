@@ -57,7 +57,7 @@ def on_message(client, userdata, msg):
   
     
 client = mqtt.Client()
-client.connect("139.59.78.54",1883,60)#159.65.146.25
+client.connect("localhost",1883,60)#159.65.146.25
 # while True:
     # client.publish("outTopic1", "Hello worldddddd!")
 client.on_connect = on_connect
