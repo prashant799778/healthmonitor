@@ -22,7 +22,8 @@ def on_message(client, userdata, msg):
 		print(t*1000)
 		if "heartRate" not in data:
 			data= json.loads(data)
-	
+		else :
+			data=data
 
 
 		if 'text' in data:
