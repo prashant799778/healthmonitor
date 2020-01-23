@@ -40,7 +40,7 @@ def on_message(client, userdata, msg):
 		else:
 			PatientId=data["PatientId"]
 			heartRate=str(data["heartRate"]).replace("'",'"')
-            print(heartRate)
+            print("qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq",heartRate)
 			spo2=str(data["spo2"]).replace("'",'"')
 			pulseRate=str(data["pulseRate"]) .replace("'",'"')
 			highPressure=str(data["highPressure"]).replace("'",'"')
