@@ -48,8 +48,10 @@ def on_message(client, userdata, msg):
 			highPressure=str(data["highPressure"]).replace("'",'"')
 			lowPressure=str(data["lowPressure"]).replace("'",'"')
 			temperature=str(data["temperature"]).replace("'",'"')
+			print("555555555555555555555555555555")
 			query2  = " insert into Patient_Vital_master(Patient_Id,spo2,pulseRate,highPressure,lowPressure,heartRate,temperature)"
 			query2 =query2 +" values('"+str(PatientId)+"','"+str(spo2)+"','"+str(pulseRate)+"','"+str(highPressure)+"','"+str(lowPressure)+"','"+str(heartRate)+"','"+str(temperature)+"');"
+			print("66666666666666666666666666666")
 			print(query2)
 			conn=Connection()
 			cursor = conn.cursor()
