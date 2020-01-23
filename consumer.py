@@ -25,6 +25,7 @@ def on_message(client, userdata, msg):
 			data= json.loads(data)
 		else :
 			data=data
+			print(type(data))
 
 		print("2222222222222222222222222222222222",data)
 		if 'text' in data:
