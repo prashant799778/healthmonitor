@@ -28,6 +28,7 @@ def on_message(client, userdata, msg):
 
 		print("2222222222222222222222222222222222",data)
 		if 'text' in data:
+			print("333333333333333333333333")
 			query2  = " insert into preiscribeMedicine(patientId,doctorId,text)"
 			query2 =query2 +" values("+'"'+str(data["PatientId"])+'"'+','+'"'+str(data["doctorId"])+'"'+','+'"'+str(data["text"])+'"'+");"
 			conn=Connection()
@@ -39,6 +40,7 @@ def on_message(client, userdata, msg):
 
 		
 		else:
+			print("444444444444444444444444444")
 			PatientId=data["PatientId"]
 			heartRate=str(data["heartRate"]).replace("'",'"')
 			spo2=str(data["spo2"]).replace("'",'"')
