@@ -1888,8 +1888,8 @@ def preiscribeMedicine():
         # query = " select distinct userid,username,usertype from usermaster where usertype <> 'Admin';"
         patientId=""
         doctorId=request.args['doctorId']
-        if 'patientId' in request.args:
-            patientId=request.args["patientId"]
+        if 'PatientId' in request.args:
+            patientId=request.args["PatientId"]
             print(type(patientId))
             if  (patientId!=0):
                 
