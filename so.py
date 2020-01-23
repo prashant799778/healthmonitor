@@ -30,7 +30,8 @@ app.config['SECRET_KEY'] = 'secret!'
 @app.route('/allresponders', methods=['post'])
 def on_message():
 	try:
-		data = msg.payload.decode('utf-8')#client.publish("outTopic1","data111111")
+		data=str({'PatientId': '153','heartRate': {'upper': '100', 'lower': '60', 'status': 'true'}, 'spo2': {'upper': '99', 'lower': '66', 'status': 'true'}, 'pulseRate': {'upper': '100', 'lower': '70', 'status': 'true'}, 'highPressure': {'upper': '139', 'lower': '80', 'status': 'true'}, 'lowPressure': {'upper': '89', 'lower': '80', 'status': 'true'}, 'temperature': {'upper': '37', 'lower': '36', 'status': 'true'}})
+        #data = msg.payload.decode('utf-8')#client.publish("outTopic1","data111111")
 		t=time.time()
 		print(t*1000)
 		data= json.loads(data)
