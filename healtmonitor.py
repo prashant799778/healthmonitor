@@ -1181,9 +1181,9 @@ def hubloginPatient():
         
         json1=request.get_data()
         Data=json.loads(json1.decode("utf-8"))
-        query3 ="select  PM.PatientId as ID,PM.hospitalId as Hospital_Id,PM.PatientName,PM.heartRate,PM.spo2,PM.highPressure,PM.lowPressure,PM.pulseRate,PM.temperature,PM.PhoneNo,Hbs.HubName,PM.Address,PM.BloodGroup,PM.DeviceMac,Hm.HubId,Hm.hospital_name as hospital_Name , "
-        query3=query3+" PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.age,PM.Gender,PM.roomNumber,pdm.DoctorID as DoctorID"
-        query3= query3 + " from Patient_master  as PM ,patientDoctorMapping as pdm,Hospital_master as Hm,HubMaster as Hbs  where PM.hospitalId=Hm.ID  and  Hm.HubId='"+str(Data["HubId"])+"' and  Hm.HubId=Hbs.ID and  pdm.Patient_Id=PM.PatientId  and PM.Status<>'2'   ORDER BY  ID DESC;"
+        query3 ="select  PM.PatientId as ID,PM.hospitalId as Hospital_Id,PM.PatientName,PM.PhoneNo,Hbs.HubName,PM.Address,PM.BloodGroup,PM.DeviceMac,Hm.HubId,Hm.hospital_name as hospital_Name , "
+        query3=query3+" PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.age,PM.Gender,PM.roomNumber"
+        query3= query3 + " from Patient_master  as PM ,Hospital_master as Hm,HubMaster as Hbs  where PM.hospitalId=Hm.ID  and  Hbs.ID='"+str(Data["HubId"])+"'    and PM.Status<>'2'   ORDER BY  ID DESC;"
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query3)
@@ -1879,6 +1879,35 @@ def userTypeMaster():
         print("Exception---->" + str(e))    
         output = {"result":"something went wrong","status":"false"}
         return output
+
+
+@app.route('/preiscribeMedicine', methods=['GET'])
+def preiscribeMedicine():
+    try:
+    
+        # query = " select distinct userid,username,usertype from usermaster where usertype <> 'Admin';"
+        doctorId=request.args['doctorId']
+        query = "select * from preiscribeMedicine where doctorId='" + doctorId + "' limit  0,5"
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data = cursor.fetchall()
+        cursor.close()
+        print(data)
+        
+        if data:           
+            Data = {"result":data,"status":"true"}
+            return Data
+        else:
+            output = {"result":"No Data Found","status":"false"}
+            return output
+
+    except Exception as e :
+        print("Exception---->" + str(e))    
+        output = {"result":"something went wrong","status":"false"}
+        return output
+
+
 
 
 @app.route('/insertHubMaster', methods=['POST'])
@@ -3204,34 +3233,54 @@ def hubadminPannel():
         cursor = conn.cursor()
         cursor.execute(query)
         data99= cursor.fetchall()
+        totalDoctor=0
+        totalNurse=0
+        totalpatients=0
         
+        totalOperations=0
         
+        umq=[]
+
         for i in data99:
-            query1="select count(*) as count from userHospitalMapping where  Usertype_Id=2 and  hospitalId='"+str(i["ID"])+"';" 
-            
+            query1="select distinct(um.ID) as ID from userMaster as um,userHospitalMapping as uhm  where um.ID=uhm.userId and um.Usertype_Id=uhm.Usertype_Id and  uhm.Usertype_Id= '2'  aND uhm.hospitalId='"+str(i["ID"])+"' ;" 
             cursor.execute(query1)
             data17 =cursor.fetchall()
+            for j in data17:
+                umq.append(int(j['ID']))
+                print(umq,"==========================================")
+                yu=[]
+                
+                for x in umq:
+                    if x not in yu:
+                        yu.append(x)
+                        totalDoctor=len(yu)
+            
+            
 
             query2="select count(*) as count from userHospitalMapping where  Usertype_Id=3 and  hospitalId='"+str(i["ID"])+"';" 
             
             cursor.execute(query2)
             print(query2)
             data171 =cursor.fetchall()
+            totalNurse+=data171[0]["count"]
 
             query2="select count(*) as count from userHospitalMapping where  Usertype_Id=4 and  hospitalId='"+str(i["ID"])+"';" 
             
             cursor.execute(query2)
             print(query2)
             data172 =cursor.fetchall()
+            totalOperations+=data172[0]["count"]
 
             query4= " select  count(*) as count from Patient_master where hospitalId='"+str(i["ID"])+"' and Status<>'2';"
             print(query4)
             cursor.execute(query4)
             data4 = cursor.fetchall()
-            i["patient"]=data4[0]["count"]
+            totalpatients+=data4[0]["count"]
+            print(totalpatients)
+            i["patient"]=totalpatients
 
         
-        data5={"Hub":data27,"totalHospital":data2,"totalDoctor":data17,"totalPatient":data4,"totalNurse":data171,"totalOperation":data172}
+        data5={"Hub":data27,"totalHospital":data2,"totalDoctor":totalDoctor,"totalPatient":totalpatients,"totalNurse":totalNurse,"totalOperation":totalOperations}
         cursor.close()
         output = {"result":data5,"status":"true"}
         return output  
