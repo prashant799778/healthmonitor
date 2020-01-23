@@ -57,14 +57,14 @@ hubName:""
 
         console.log("dashboard",res)
         if (  res && res.data && res.data.status=="true") {
-            console.log("dashboard",res)
+            console.log("dashboard",res.data.result.totalHospital[0].count)
 
             let rs=res.data.result;
- this.setState({totalHospitalCount:rs.totalHospital[0].count,totalPatientCount:rs.totalPatient[0].count,
+ this.setState({totalHospitalCount:rs.totalHospital[0].count,totalPatientCount:rs.totalPatient,
   
-    totalDoctorCount:rs.totalDoctor[0].count,
-    totalNurseCount:rs.totalNurse[0].count,
-    totalOperationCount:rs.totalOperation[0].count,
+    totalDoctorCount:rs.totalDoctor,
+    totalNurseCount:rs.totalNurse,
+    totalOperationCount:rs.totalOperation,
     hubName:rs.Hub.HubName 
 
 });
@@ -113,7 +113,8 @@ hubName:""
             <div className="col-sm-6 col-md-3 col-12">
               <div className="info-card box-bg-color">
                 <div className="box-1 line-spc">
-                  <img src={require("./img/dropper.svg")} />
+                 
+                <img src={require("./img/dropper.svg")}/>
                   <h2 className="box-title">Patients</h2>
                 </div>
                 <div className="box-1">
@@ -146,7 +147,7 @@ hubName:""
             <div className="col-sm-6 col-md-3 col-12">
               <div className="info-card box-bg-color">
                 <div className="box-1 line-spc">
-                  <img src={require("./img/hospital_new.svg")} />
+                  <img src={require("./img/operation.png")} />
                   <h2 className="box-title">Operations</h2>
                 </div>
                 <div className="box-1">
@@ -157,7 +158,7 @@ hubName:""
             <div className="col-sm-6 col-md-3 col-12">
               <div className="info-card box-bg-color">
                 <div className="box-1 line-spc">
-                  <img src={require("./img/hospital_new.svg")} />
+                  <img src={require("./img/nurse.png")} />
                   <h2 className="box-title">Nurses</h2>
                 </div>
                 <div className="box-1">

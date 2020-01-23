@@ -1,6 +1,14 @@
 import styled from 'styled-components'
 
 export const DetailStyled = styled.div`
+.bg-colr-ch.show, textarea {
+  background: #26293b !important;
+  color: #fff !important;
+}
+.stiky-note .btn-primary {
+  background: #d45f24 !important;
+  border-color: #d45f24 !important;
+}
 
 .nav-link.active {
   border-right: 3px solid #e96333;
@@ -229,7 +237,8 @@ button.newclr-bck {
       text-align: justify;
       white-space: pre-wrap;
       text-transform: capitalize;
-      font-weight: 600!important;
+      font-weight: 400!important;
+      word-break: break-all;
   }
   .dropdown-item:last-child {
       border-bottom: none;

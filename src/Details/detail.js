@@ -26,7 +26,7 @@ class Detail extends React.Component{
           id:"",
           user:"",
          
-
+         
           w_ecg:0,
           w_spo:0,
           w_resp:0,
@@ -34,13 +34,47 @@ class Detail extends React.Component{
           client1 :"",
 
           isAlert:false,
-          alertText:"patient Temparature is low  !!"
+          alertText:"patient Temparature is low  !!",
+          currentid:"",
+          msg:'' ,
+          msgStatus:""
     
       }
     
     }
 
+ sendMessage=()=>{
+   this.setState({ msgStatus:'sending....'})
+   let msg={name:localStorage.getItem("user",""),email:localStorage.getItem("email",""),text:this.state.msg,doctorId:localStorage.getItem("ID",""),PatientId:this.state.currentid}
+   console.log("newmsg",msg)
+  let  Omqtt1 = require('mqtt')
+  // Omqtt1.connect('ws://139.59.78.54:9001')
+ 
+        let  Oclient1  = Omqtt1.connect('wss://smarticumqtt.fourbrick.in:8083')
+        console.log("newmsg",Oclient1)
+        Oclient1.on('connect',  () =>{
+          console.log("newmsg","connect"+"---"+this.state.currentid+"/Notification")
+          Oclient1.subscribe(this.state.currentid+"/Notification",  (err)=> {
+    if (!err) {
+      console.log("newmsgPublish",msg)
+     
+     
+      Oclient1.publish(this.state.currentid+"/Notification",JSON.stringify(msg),(errs)=>{
+        if (!err) {
+          this.setState({ msgStatus:'message send'})
+          setTimeout(()=>{ this.props.updatePage()},2000);
+         
+        }else{
+          this.setState({ msgStatus:'try again!'})
+        }
 
+      } )
+    }else{ this.setState({ msgStatus:'try again!'})}
+  })
+})
+
+
+ }
     byteArrayToLong =(array)=> {
       var view = new DataView(new ArrayBuffer(8));
       array.forEach(function (b, i) {
@@ -55,7 +89,10 @@ class Detail extends React.Component{
     }
   
       componentDidMount() {
+        let currentid=this.props.currentinnerItem.PatientId;
+         this.setState({currentid:currentid})
 
+         console.log("asd",this.props.currentItem)
 
         let  Omqtt1 = require('mqtt')
         let  Oclient1  = Omqtt1.connect('wss://smarticumqtt.fourbrick.in:8083')
@@ -298,11 +335,17 @@ return(<DetailStyled>
                 </div>
 				<div class="dropdown">
 				  <button class="side-button-pis"  type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">prescribe medicine</button>
-				  <div class="dropdown-menu men-drop" aria-labelledby="dropdownMenuButton">
+				  <div class="dropdown-menu men-drop sadow bg-colr-ch" aria-labelledby="dropdownMenuButton">
 				  <form>
 					<div class="stiky-note">
-					<textarea rows="6" cols="50" class="madical pis"></textarea>
-					<button type="submit" class="btn btn-primary newclr-bck">submit</button>
+					<textarea value={this.state.msg}  onChange={e => {
+                                  this.setState(
+                                    { msg: e.target.value },
+                                    () => {}
+                                  );
+                                }} rows="6" cols="50" class="madical pis"></textarea>
+					<a  style={{cursor:'pointer',paddingRight:'15px'}} onClick={()=>this.sendMessage()} class="btn btn-primary ">send</a>
+                              <span  style={{paddingLeft:'15px'}}  >{this.state.msgStatus}</span>
 					</div>
 					</form>
 				  </div>
@@ -326,7 +369,8 @@ return(<DetailStyled>
                     <h2 className="patient-hading">{currentinnerItem.PatientName}</h2>
                     <h2 className="patient-hading">{'Blood Group: '+ currentinnerItem.BloodGroup}</h2>
                     <h2 className="patient-hading">{'Hospital Name : '+currentItem.hospital_name }</h2>
-                    <h2 className="patient-hading">{'Address : '+currentinnerItem.Address}</h2>
+                    <h2 className="patient-hading">{'Age : '+currentinnerItem.age}</h2>
+                    <h2 className="patient-hading">{'Room No : '+currentinnerItem.roomNumber}</h2>
                     <h2 className="patient-hading">{'Bed No : '+ currentinnerItem.Bed_Number}</h2>
                   </div>
                   <div className="patient-box-crd">

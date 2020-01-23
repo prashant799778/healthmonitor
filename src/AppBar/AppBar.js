@@ -14,6 +14,8 @@ export default class AppBar extends React.Component{
   constructor(props){
     super(props)
         this.state={
+          msg:'',
+          count:''
         }
       }
   //  const [open,setOpen] = useState(true);
@@ -22,6 +24,40 @@ export default class AppBar extends React.Component{
      this.props.Open()
      
    }
+   msgapi=()=>{
+       
+  
+
+
+
+   
+     let d_id=localStorage.getItem("ID","")
+    
+     let api = `https://smarticuapi.fourbrick.in/preiscribeMedicine?doctorId=${d_id}`;
+          axios.get(api)
+        .then((response)=> {
+          // handle success
+             
+          console.log("notification",response)
+         
+       
+         if(response.data.status=="true"){
+    if(Array.isArray(response.data.result))
+            this.setState({msg:response.data.result,count:response.data.result.length})
+    
+        
+           }   })
+      .catch( (error)=> {
+        // handle error
+        
+        
+      })
+    
+    
+    
+     
+        
+      }
 
 
    callapi=()=>{
@@ -68,10 +104,20 @@ export default class AppBar extends React.Component{
 
         
   componentDidMount(){
+    
+    if(localStorage.getItem("user_type","")=="Doctor"){
+      this.msgapi()}
     this. callapi()}
+
+    componentWillReceiveProps(){
+      if(localStorage.getItem("user_type","")=="Doctor"){
+      this.msgapi()}
+
+      this. callapi()
+    }
    render()
 {
-
+ 
 
     return(
         <nav className="navbar navbar-expand navbar-light topbar mb-4 new-background-color border-bt">
@@ -140,52 +186,42 @@ export default class AppBar extends React.Component{
 		<li>
 		<div className="notification-bar">
 <div className="btn-group">
-<button type="button" className="btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+{localStorage.getItem("user_type")=="Doctor" && <button type="button" className="btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
  <img src={require("./s-notification.svg")} />
-</button>
-<span className="dot-noti">1</span>
+        </button> } 
+{localStorage.getItem("user_type")=="Doctor" &&        <span className="dot-noti">{this.state.count}</span>   } 
 <div className="dropdown-menu dropdown-menu-right sadow ">
 <div className="hadding">
 <h2>Notification</h2>
-<h2>Mark as read</h2>
+{/* <h2>Mark as read</h2> */}
 </div>
-<a className="dropdown-item d-flex align-items-center nav-flx-noti" href="#">
+
+{Array.isArray(this.state.msg) && this.state.msg.map((item,i)=>{
+   console.log("ddd",item)
+  return(
+
+    <a id={i} className="dropdown-item d-flex align-items-center nav-flx-noti" href="#">
 	<div className="mr-3">
 		<div className="icon-circle bg-primaryy ">
 			<i className="fas fa-file-alt text-white"></i>
 		</div>
 		</div>
 		<div>
-	<div className="small text-gray-500">December 12, 2019</div>
-	<span>A new monthly report is ready to download!</span>
+<div className="small text-gray-500">{item.dateCreate}</div>
+<div className="small text-gray-500">{item.PatientName}</div>
+<span>{item.text}</span>
 	</div>
 </a>
-<a className="dropdown-item d-flex align-items-center nav-flx-noti" href="#">
-<div className="mr-3">
-<div className="icon-circle bg-primaryy ">
-<i className="fas fa-file-alt text-white"></i>
+  )
+})}
+
+ 
+<a className="dropdown-item text-center small text-gray-500 nav-flx-noti" href="#"></a>
 </div>
 </div>
-<div>
-<div className="small text-gray-500">December 12, 2019</div>
-<span>A new monthly report is ready to download!</span>
-</div>
-</a>
-<a className="dropdown-item d-flex align-items-center nav-flx-noti" href="#">
-<div className="mr-3">
-<div className="icon-circle bg-primaryy">
-<i className="fas fa-file-alt text-white"></i>
-</div>
-</div>
-<div>
-<div className="small text-gray-500">December 12, 2019</div>
-<span>A new monthly report is ready to download!</span>
-</div>
-</a>
-<a className="dropdown-item text-center small text-gray-500 nav-flx-noti" href="#">show all alerts</a>
-</div>
-</div>
+
+
 </div>
 		</li>
 		 <div className="topbar-divider d-none d-sm-block" />

@@ -303,7 +303,7 @@ console.log(deviceId)
       <div class="new-box box-bg-color">
         <div class="up-side-box">
     <h2 class="text-hd">{item.hospital_name}</h2>
-          <h2 class="text-hd">{'Pateints :'+item.patient_count}</h2>
+          <h2 class="text-hd">{'Patients :'+item.patient_count}</h2>
         </div>
         <div class="new-box-add">
 
