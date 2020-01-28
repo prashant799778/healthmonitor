@@ -58,7 +58,7 @@ currentItem:"" ,
       }
       axios
         .post(
-          `https://smarticuapi.fourbrick.in:5053/operationDashboard`, jsons
+          `https://api.digitologyhealthcare.com:5053/operationDashboard`, jsons
         )
         .then(res => {
   

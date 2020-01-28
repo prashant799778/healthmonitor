@@ -36,7 +36,7 @@ currentItem:"" ,
     componentDidMount() {
      
       var mqtt = require('mqtt')
-  var client  = mqtt.connect('mqtts://smarticumqtt.fourbrick.in:9001')
+  var client  = mqtt.connect('mqtts://mqtt.digitologyhealthcare.com:9001')
   this.setState({client:client})
   this.callApi()
     }
@@ -49,7 +49,7 @@ currentItem:"" ,
     }
     axios
       .post(
-        `https://smarticuapi.fourbrick.in:5053/doctorLoginDashboard`, jsons
+        `https://api.digitologyhealthcare.com:5053/doctorLoginDashboard`, jsons
       )
       .then(res => {
 
