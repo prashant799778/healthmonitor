@@ -1894,7 +1894,7 @@ def preiscribeMedicine():
         if 'PatientId' in request.args:
             patientId=request.args["PatientId"]
             print(type(patientId))
-            if  (patientId!=0) and (doctorId!=0):
+            if  (patientId!=0) and (doctorId!=""):
                 
                 print("111111")
                 WhereCondition2 =  " and  pmm.patientId    = '" + patientId + "'  "
