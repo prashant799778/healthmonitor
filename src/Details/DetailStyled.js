@@ -1,12 +1,47 @@
 import styled from 'styled-components'
 
 export const DetailStyled = styled.div`
+.bg-colr-ch.show, textarea {
+  background: #26293b !important;
+  color: #fff !important;
+}
+.stiky-note .btn-primary {
+  background: #d45f24 !important;
+  border-color: #d45f24 !important;
+}
 
 .nav-link.active {
   border-right: 3px solid #e96333;
   color: #e96333 !important;
 }
-
+.side-button-pis {
+    border: 1px solid #464854;
+    padding: 5px 10px;
+    text-transform: capitalize;
+    color: #fff;
+    background: #d45f0c;
+}
+.item-drap-m {
+    display: block;
+    font-size: 1.1rem;
+    padding: 0 10px;
+    color: #d45f0c;
+    line-height: 20px;
+}
+.stiky-note {
+    padding: 0 16px;
+    display: block;
+}
+.men-drop.show {
+    transform: translate3d(-175px, 28px, 0px);
+}
+button.newclr-bck {
+    width: 100%;
+    border-radius: 0;
+    background: #1f293a !important;
+    border-color: #1f293a !important;
+    padding: 5px 0 !important;
+}
   .box-bg-color{
         background: #25293b;
   }
@@ -202,7 +237,8 @@ export const DetailStyled = styled.div`
       text-align: justify;
       white-space: pre-wrap;
       text-transform: capitalize;
-      font-weight: 600!important;
+      font-weight: 400!important;
+      word-break: break-all;
   }
   .dropdown-item:last-child {
       border-bottom: none;

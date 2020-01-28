@@ -195,7 +195,7 @@ class CardComponent extends React.Component {
             <div class="innr-new-card-wrap">
               <div class="innr-new-box-card">
         <h2 class="innr-text-hd">{this.state.spo2}</h2>
-                <h3 class="innr-info-text-hd">SPO2(%)</h3>
+                <h3 class="innr-info-text-hd">SPO<sub>2</sub>(%)</h3>
               </div>
               <div class="innr-new-box-card">
                 <h2 class="innr-text-hd">{this.state.plsRate}</h2>

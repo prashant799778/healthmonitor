@@ -98,6 +98,16 @@ currentItem:"" ,
     this.setState({isDetail:!this.state.isDetail,currentinnerItem:innerItem,currentTopic:innerItem.PatientId+"",currentItem:item})
   }
 
+
+
+ updatePage=()=>{
+
+  console.log("notification","updates")
+   this.setState({abc:"asd"})
+ }
+
+
+
   render(){ if(localStorage.getItem("user_type","")!="Doctor")
   { history.push('/')
    window.location.reload();}
@@ -106,7 +116,7 @@ currentItem:"" ,
  let totalPatientCount=this.state.TotalPatientCount;
  let  hospitalList=this.state.HospitalList
   let arr=[]
-
+  console.log("notification","render")
     return (
      
    <DashStyled>
@@ -119,7 +129,7 @@ currentItem:"" ,
             {this.props.isOpen && <SideBar></SideBar>}
             <div id="content-wrapper" className="d-flex flex-column">
               <div id="content">
-                <AppBar Open={this.props.Open}></AppBar>
+                <AppBar  Open={this.props.Open}></AppBar>
                 {/* Header */}
                 {  !this.state.isDetail &&   
                 <div className="containerr">                
@@ -171,7 +181,7 @@ currentItem:"" ,
         <div class="new-box box-bg-color">
           <div class="up-side-box">
       <h2 class="text-hd">{item.hospital_name}</h2>
-            <h2 class="text-hd">{'Pateints :'+item.total_patient}</h2>
+            <h2 class="text-hd">{'Patients :'+item.total_patient}</h2>
           </div>
          
         
@@ -202,7 +212,7 @@ currentItem:"" ,
   </div>
 </div> 
   }
-  {  this.state.isDetail &&   <Detail goBack={this.goBack} currentItem={this.state.currentItem} currentinnerItem={this.state.currentinnerItem} client={this.state.client} currentTopic={this.state.currentTopic} ></Detail>}
+  {  this.state.isDetail &&   <Detail updatePage={this.updatePage} goBack={this.goBack} currentItem={this.state.currentItem} currentinnerItem={this.state.currentinnerItem} client={this.state.client} currentTopic={this.state.currentTopic} ></Detail>}
 
 
               </div>

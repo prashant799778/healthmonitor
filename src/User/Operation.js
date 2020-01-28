@@ -298,6 +298,50 @@ isValid:true,emailError:false,
  
     
   }
+  
+statusapis=(email)=>{
+	  this.setState({currentEmail:email})
+  }
+
+statusapi=()=>{
+       
+    
+
+  let jsn={
+	  'Email':this.state.currentEmail
+  }
+
+     let api="https://smarticuapi.fourbrick.in/updateStatus"
+      axios.post(api,jsn)
+    .then((response)=> {
+      // handle success
+         
+      console.log("status",response);
+      this.callapi();
+   
+
+      
+
+    
+  })
+  .catch( (error)=> {
+    // handle error
+    
+    
+  })
+
+
+
+ 
+    
+  }
+   
+  
+
+	
+
+
+
       
   callapi=()=>{
        
@@ -707,6 +751,7 @@ isValid:true,emailError:false,
                                   <th style={{textAlign:"center",color:'aliceblue'}}>Email</th>
                                   <th style={{textAlign:"center",color:'aliceblue'}}>Password</th>
                                   <th style={{textAlign:"center",color:'aliceblue'}}>No. of Patient</th>
+								  <th style={{textAlign:"center",color:'aliceblue'}}>A/C Status</th>
                                   <th style={{textAlign:"center",color:'aliceblue'}} className="dlt">Action</th>
                                 </tr>
                               </thead>
@@ -736,7 +781,7 @@ isValid:true,emailError:false,
                                   <td>{item.Email}</td>
                                   <td>{item.password}</td>
                                   <td>{item.patient}</td>
-                                 
+                                 <td onClick={()=>{this.statusapis(item.Email)}} style={{cursor:'pointer'}}>{item.Status==2?<span class="d-act" data-toggle="modal" data-target="#activateModal">deactivated</span>:<span data-toggle="modal" data-target="#deactivateModal" class="act">activated</span>}</td>
                     
                                   <td>
                                     <div className="action-bx">
@@ -810,8 +855,48 @@ isValid:true,emailError:false,
               </div>
             </div>
           </div>
-        
+     
           {/* Logout Modal*/}
+		    {/*activate Modal*/}
+            <div className="modal fade" id="activateModal" tabIndex={-1} role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div className="modal-dialog" role="document">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5 className="modal-title" id="exampleModalLabel">Ready to  Activate?</h5>
+                  <button className="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                  </button>
+                </div>
+                <div className="modal-body">Select " Activate" below if you are ready to  Activate A/C.</div>
+                <div className="modal-footer">
+                  <button className="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                  <a  style={{color:"#ffffff"}} data-dismiss="modal" className="btn btn-primary"  onClick={()=>{this.statusapi()}}> Activate</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        
+          {/* activate Modal*/}
+		   {/*deactivate Modal*/}
+            <div className="modal fade" id="deactivateModal" tabIndex={-1} role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div className="modal-dialog" role="document">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5 className="modal-title" id="exampleModalLabel">Ready to Deactivate?</h5>
+                  <button className="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                  </button>
+                </div>
+                <div className="modal-body">Select "Deactivate" below if you are ready to Deactivate A/c.</div>
+                <div className="modal-footer">
+                  <button className="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                  <a  style={{color:"#ffffff"}} data-dismiss="modal" className="btn btn-primary"  onClick={()=>{this.statusapi()}}>Deactivate</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        
+          {/* deactivate Modal*/}
          
           <div className="modal fade" id="logoutModal" tabIndex={-1} role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div className="modal-dialog" role="document">

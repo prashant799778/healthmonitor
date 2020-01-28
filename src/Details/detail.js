@@ -26,7 +26,7 @@ class Detail extends React.Component{
           id:"",
           user:"",
          
-
+         
           w_ecg:0,
           w_spo:0,
           w_resp:0,
@@ -34,13 +34,47 @@ class Detail extends React.Component{
           client1 :"",
 
           isAlert:false,
-          alertText:"patient Temparature is low  !!"
+          alertText:"patient Temparature is low  !!",
+          currentid:"",
+          msg:'' ,
+          msgStatus:""
     
       }
     
     }
 
+ sendMessage=()=>{
+   this.setState({ msgStatus:'sending....'})
+   let msg={name:localStorage.getItem("user",""),email:localStorage.getItem("email",""),text:this.state.msg,doctorId:localStorage.getItem("ID",""),PatientId:this.state.currentid}
+   console.log("newmsg",msg)
+  let  Omqtt1 = require('mqtt')
+  // Omqtt1.connect('ws://139.59.78.54:9001')
+ 
+        let  Oclient1  = Omqtt1.connect('wss://smarticumqtt.fourbrick.in:8083')
+        console.log("newmsg",Oclient1)
+        Oclient1.on('connect',  () =>{
+          console.log("newmsg","connect"+"---"+this.state.currentid+"/Notification")
+          Oclient1.subscribe(this.state.currentid+"/Notification",  (err)=> {
+    if (!err) {
+      console.log("newmsgPublish",msg)
+     
+     
+      Oclient1.publish(this.state.currentid+"/Notification",JSON.stringify(msg),(errs)=>{
+        if (!err) {
+          this.setState({ msgStatus:'message send'})
+          setTimeout(()=>{ this.props.updatePage()},2000);
+         
+        }else{
+          this.setState({ msgStatus:'try again!'})
+        }
 
+      } )
+    }else{ this.setState({ msgStatus:'try again!'})}
+  })
+})
+
+
+ }
     byteArrayToLong =(array)=> {
       var view = new DataView(new ArrayBuffer(8));
       array.forEach(function (b, i) {
@@ -55,7 +89,10 @@ class Detail extends React.Component{
     }
   
       componentDidMount() {
+        let currentid=this.props.currentinnerItem.PatientId;
+         this.setState({currentid:currentid})
 
+         console.log("asd",this.props.currentItem)
 
         let  Omqtt1 = require('mqtt')
         let  Oclient1  = Omqtt1.connect('mqtts://mqtt.digitologyhealthcare.com:9001')
@@ -296,6 +333,24 @@ return(<DetailStyled>
                {texthighPressure!="" &&   <h3 className="erroe-mssh" style={{background:'#eb8c25'}}>{texthighPressure}</h3>}
                { textheartRate!="" &&    <h3 className="erroe-mssh" style={{background:'#b030b0'}} >{textheartRate}</h3>}
                 </div>
+				<div class="dropdown">
+				  <button class="side-button-pis"  type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">prescribe medicine</button>
+				  <div class="dropdown-menu men-drop sadow bg-colr-ch" aria-labelledby="dropdownMenuButton">
+				  <form>
+					<div class="stiky-note">
+					<textarea value={this.state.msg}  onChange={e => {
+                                  this.setState(
+                                    { msg: e.target.value },
+                                    () => {}
+                                  );
+                                }} rows="6" cols="50" class="madical pis"></textarea>
+					<a  style={{cursor:'pointer',paddingRight:'15px'}} onClick={()=>this.sendMessage()} class="btn btn-primary ">send</a>
+                              <span  style={{paddingLeft:'15px'}}  >{this.state.msgStatus}</span>
+					</div>
+					</form>
+				  </div>
+				</div>
+				
               </div>
               <div className="wrap-patient  alrt-dt" style={{backgroundImage: 'url('+backImg+')',
       backgroundPosition: 'center',
@@ -314,7 +369,8 @@ return(<DetailStyled>
                     <h2 className="patient-hading">{currentinnerItem.PatientName}</h2>
                     <h2 className="patient-hading">{'Blood Group: '+ currentinnerItem.BloodGroup}</h2>
                     <h2 className="patient-hading">{'Hospital Name : '+currentItem.hospital_name }</h2>
-                    <h2 className="patient-hading">{'Address : '+currentinnerItem.Address}</h2>
+                    <h2 className="patient-hading">{'Age : '+currentinnerItem.age}</h2>
+                    <h2 className="patient-hading">{'Room No : '+currentinnerItem.roomNumber}</h2>
                     <h2 className="patient-hading">{'Bed No : '+ currentinnerItem.Bed_Number}</h2>
                   </div>
                   <div className="patient-box-crd">
@@ -325,7 +381,7 @@ return(<DetailStyled>
                         <ECG  level="ecg" topic={this.props.currentTopic}  client={this.state.client1} tc="#489114"  max='250' tt="" data={this.state.w_ecg} id="asd"></ECG>
                       </div>
                       <div className="innr-patient height-box">
-                        <h2 className="red-clr">SP02</h2>
+                        <h2 className="red-clr">SP0<sub>2</sub></h2>
                         
   <SPO  level="spo2"  topic={this.props.currentTopic} client={this.props.client} tc="#E4352C"    max='100'  tt="" data={this.state.w_spo} id="def"></SPO>
                       </div>
@@ -345,7 +401,7 @@ return(<DetailStyled>
                       </div>
                       <div className="rap-innr-patient">
                         <div className="innr-patient remo-bord">
-                          <h2 className="red-clr">SP02(%)</h2>
+                          <h2 className="red-clr">SP0<sub>2</sub>(%)</h2>
                           <p className="red-clr">{this.state.spo2}</p>
                         </div>
                         <div className="innr-patient remo-bord">
@@ -354,7 +410,7 @@ return(<DetailStyled>
                         </div>
                       </div>
                       <div className="innr-patient">
-                        <h2 className="gray-clr">Temp(o C)</h2>
+                        <h2 className="gray-clr">Temp(<sup>o</sup>C)</h2>
                         <p className="gray-clr">{this.state.temp}</p>
                       </div>
                       <div className="innr-patient">

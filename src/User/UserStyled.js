@@ -490,8 +490,24 @@ table#dataTable thead tr {
 }
 /* End Add Hospital*/
 
+span.d-act {
+    border: 1px solid red;
+    background: red;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 20px;
+}
+span.act {
+    border: 1px solid green;
+    background: green;
+    color: #fff;
+    padding: 5px 19px;
+    border-radius: 20px;
+}
 
-
+.srt tbody tr td:nth-child(7) {
+    text-transform: unset;
+}
 
 @media (min-width: 320px) and (max-width: 480px) {
 

@@ -45,10 +45,12 @@ class Login extends React.Component {
             if(Array.isArray(resD) && resD.length>0){
               hid=resD[0].HubId
             }
+            console.log("did",res.ID)
             localStorage.setItem("unique_id",unique_id);
             localStorage.setItem("login", "yes");
             localStorage.setItem("user_type", res.Usertype);
             localStorage.setItem("user_id", res.UserID);
+            localStorage.setItem("ID", res.ID);
             localStorage.setItem("user_type_id", res.Usertype_Id);
             localStorage.setItem("user", res.name);
             localStorage.setItem("email", res.Email);
