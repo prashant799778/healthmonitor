@@ -1904,7 +1904,7 @@ def preiscribeMedicine():
                 data = cursor.fetchall()
             if doctorId=="":
                 print("111111111111")
-                query = "select pmm.id,pmm.patientId,pmm.text,pmm.doctorId,pmm.dateCreate,pm.PatientName from preiscribeMedicine as pmm ,Patient_master as pm where pmm.patientId='" + patientId + "'and pm.PatientId=pmm.patientId  "+  WhereCondition2 +"  ORDER by pmm.id DESC limit  0,5"
+                query = "select pmm.id,pmm.patientId,pmm.text,pmm.doctorId,pmm.dateCreate,pm.PatientName from preiscribeMedicine as pmm ,Patient_master as pm where pmm.patientId='" + patientId + "'and pm.PatientId=pmm.patientId   ORDER by pmm.id DESC limit  0,5"
                 conn=Connection()
                 cursor = conn.cursor()
                 cursor.execute(query)
