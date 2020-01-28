@@ -47,7 +47,7 @@ this. bufferIndex = 0;
      
   ///////////////////
 var mqtt3 = require('mqtt')
-var client3  = mqtt3.connect('mqtts://mqtt.digitologyhealthcare.com')
+var client3  = mqtt3.connect('mqtts://mqtt.digitologyhealthcare.com:8083')
 
  this.setState({client3: client3 },()=>{
   client3.on('connect', (
