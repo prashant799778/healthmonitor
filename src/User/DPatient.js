@@ -207,7 +207,7 @@ isValid:true,emailError:false,
 
 
 
-     let api="https://api.digitologyhealthcare.com:5053/doctorPatientDetails"
+     let api="https://api.digitologyhealthcare.com/doctorPatientDetails"
      let jssn={"Email": localStorage.getItem("email","") }
       axios.post(api,jssn)
     .then((response)=> {
@@ -252,7 +252,7 @@ isValid:true,emailError:false,
     
 
       
-      let api="https://api.digitologyhealthcare.com:5053/patient_master"
+      let api="https://api.digitologyhealthcare.com/patient_master"
       let json={
         "PatientName":this.state.name,
         "DeviceMac":this.state.device_allocate,

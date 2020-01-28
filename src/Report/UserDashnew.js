@@ -49,7 +49,7 @@ currentItem:"" ,
     }
     axios
       .post(
-        `https://api.digitologyhealthcare.com:5053/doctorLoginDashboard`, jsons
+        `https://api.digitologyhealthcare.com/doctorLoginDashboard`, jsons
       )
       .then(res => {
 

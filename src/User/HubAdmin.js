@@ -48,7 +48,7 @@ isValid:true,emailError:false,
     this.setState({deleteid:id,deleteHid:Hid})
   }
   delete=()=>{
-    let api="https://api.digitologyhealthcare.com:5053/deleteHubadminhub"
+    let api="https://api.digitologyhealthcare.com/deleteHubadminhub"
     let jsn={
       "ID":this.state.deleteid,
       "HubId":this.state.deleteHid
@@ -199,7 +199,7 @@ isValid:true,emailError:false,
 
 
 
-     let api="https://api.digitologyhealthcare.com:5053/hubMaster"
+     let api="https://api.digitologyhealthcare.com/hubMaster"
       axios.get(api)
     .then((response)=> {
       // handle success
@@ -245,7 +245,7 @@ isValid:true,emailError:false,
     }
 
 
-     let api="https://api.digitologyhealthcare.com:5053/hospitalMaster"
+     let api="https://api.digitologyhealthcare.com/hospitalMaster"
 
      let json={
       "HubId":hid,
@@ -350,7 +350,7 @@ statusapi=()=>{
 
 
 
-     let api="https://api.digitologyhealthcare.com:5053/allHubadmin"
+     let api="https://api.digitologyhealthcare.com/allHubadmin"
       axios.post(api)
     .then((response)=> {
       // handle success
@@ -401,7 +401,7 @@ statusapi=()=>{
       let hls=[]
       hls.push(this.state.hub_id)
       
-      let api="https://api.digitologyhealthcare.com:5053/addHubadmin"
+      let api="https://api.digitologyhealthcare.com/addHubadmin"
       let json={
         "HubId":hls,
         "name":this.state.name,
@@ -466,7 +466,7 @@ statusapi=()=>{
       }
         let a=[]
         a.push(this.state.hub_id)
-     let api="https://api.digitologyhealthcare.com:5053/updateHubadmin"
+     let api="https://api.digitologyhealthcare.com/updateHubadmin"
      let json={"ID":this.state.userid,"name":this.state.name
      ,"mobile":this.state.mobile,"Usertype_Id":3,"HubId":a,"password":this.state.password,"confirm_password":this.state.password,"Email":this.state.email,"Gender":gens}     
      

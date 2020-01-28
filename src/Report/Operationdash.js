@@ -58,7 +58,7 @@ currentItem:"" ,
       }
       axios
         .post(
-          `https://api.digitologyhealthcare.com:5053/operationDashboard`, jsons
+          `https://api.digitologyhealthcare.com/operationDashboard`, jsons
         )
         .then(res => {
   

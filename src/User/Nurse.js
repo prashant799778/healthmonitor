@@ -48,7 +48,7 @@ isValid:true,emailError:false,
     this.setState({deleteid:id,deleteHid:Hid})
   }
   delete=()=>{
-    let api="https://api.digitologyhealthcare.com:5053/deleteNurseHospital"
+    let api="https://api.digitologyhealthcare.com/deleteNurseHospital"
     let jsn={
       "ID":this.state.deleteid,
       "Hospital_Id":this.state.deleteHid
@@ -199,7 +199,7 @@ isValid:true,emailError:false,
 
 
 
-     let api="https://api.digitologyhealthcare.com:5053/hubMaster"
+     let api="https://api.digitologyhealthcare.com/hubMaster"
       axios.get(api)
     .then((response)=> {
       // handle success
@@ -245,7 +245,7 @@ isValid:true,emailError:false,
     }
 
 
-     let api="https://api.digitologyhealthcare.com:5053/hospitalMaster"
+     let api="https://api.digitologyhealthcare.com/hospitalMaster"
 
      let json={
       "HubId":hid,
@@ -351,7 +351,7 @@ statusapi=()=>{
 
 
 
-     let api="https://api.digitologyhealthcare.com:5053/allNurse"
+     let api="https://api.digitologyhealthcare.com/allNurse"
       axios.post(api)
     .then((response)=> {
       // handle success
@@ -402,7 +402,7 @@ statusapi=()=>{
       let hls=[]
       hls.push(this.state.hospital_id)
       
-      let api="https://api.digitologyhealthcare.com:5053/addUser"
+      let api="https://api.digitologyhealthcare.com/addUser"
       let json={
         "Hospital_Id":hls,
         "name":this.state.name,
@@ -467,7 +467,7 @@ statusapi=()=>{
       }
         let a=[]
         a.push(this.state.hospital_id)
-     let api="https://api.digitologyhealthcare.com:5053/updateNurseMaster"
+     let api="https://api.digitologyhealthcare.com/updateNurseMaster"
      let json={"ID":this.state.userid,"name":this.state.name
      ,"mobile":this.state.mobile,"Usertype_Id":3,"Hospital_Id":a,"password":this.state.password,"confirm_password":this.state.password,"Email":this.state.email,"Gender":gens}     
      

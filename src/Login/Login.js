@@ -32,7 +32,7 @@ class Login extends React.Component {
 
     let unique_id= this.makeid(7)
 
-    let api = `https://api.digitologyhealthcare.com:5053/login1?name=${this.state.name}&password=${this.state.pass}&browserId=${unique_id}`;
+    let api = `https://api.digitologyhealthcare.com/login1?name=${this.state.name}&password=${this.state.pass}&browserId=${unique_id}`;
     axios
       .get(api)
       .then(response => {
@@ -220,11 +220,11 @@ class Login extends React.Component {
       }
     });
   };
-  // ''' https://api.digitologyhealthcare.com:5053/Login?name=Prashant&password=11233''
-  // https://api.digitologyhealthcare.com:5053/Login?name=Prashant&password=11233
+  // ''' https://api.digitologyhealthcare.com/Login?name=Prashant&password=11233''
+  // https://api.digitologyhealthcare.com/Login?name=Prashant&password=11233
   callapi = () => {
-    //  let api=" https://api.digitologyhealthcare.com:5053/Login?name="+this.state.name+"&password="+this.state.pass
-    // let api = `https://api.digitologyhealthcare.com:5053/Login?name=${this.state.name}&password=${this.state.pass}`;
+    //  let api=" https://api.digitologyhealthcare.com/Login?name="+this.state.name+"&password="+this.state.pass
+    // let api = `https://api.digitologyhealthcare.com/Login?name=${this.state.name}&password=${this.state.pass}`;
     // axios
     //   .get(api)
     //   .then(response => {

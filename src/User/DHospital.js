@@ -77,7 +77,7 @@ class User extends React.Component {
     }
   };
   getTypeapi = () => {
-    let api = "https://api.digitologyhealthcare.com:5053/hubMaster";
+    let api = "https://api.digitologyhealthcare.com/hubMaster";
     axios
       .get(api)
       .then(response => {
@@ -145,7 +145,7 @@ class User extends React.Component {
 
     let jsons = { Email: localStorage.getItem("email", "") };
 
-    let api = "https://api.digitologyhealthcare.com:5053/doctorLoginHospital";
+    let api = "https://api.digitologyhealthcare.com/doctorLoginHospital";
     axios
       .post(api, jsons)
       .then(response => {
@@ -171,7 +171,7 @@ class User extends React.Component {
 
   // }
   submitapi = () => {
-    let api = "https://api.digitologyhealthcare.com:5053/insertHubMaster";
+    let api = "https://api.digitologyhealthcare.com/insertHubMaster";
     let json = {
       HubName: this.state.name
     };
@@ -198,7 +198,7 @@ class User extends React.Component {
   };
 
   updatetapi = () => {
-    let api = "https://api.digitologyhealthcare.com:5053/allPatient";
+    let api = "https://api.digitologyhealthcare.com/allPatient";
     let json = {
       username: this.state.name,
       email: this.state.email,
@@ -247,7 +247,7 @@ class User extends React.Component {
   };
 
   patientListApi = hospitalID => {
-    let api = "https://api.digitologyhealthcare.com:5053/HospitalPatientDetails";
+    let api = "https://api.digitologyhealthcare.com/HospitalPatientDetails";
     let json = {
       HospitalId: hospitalID,
       Email: localStorage.getItem("email", "")

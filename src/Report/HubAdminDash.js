@@ -51,7 +51,7 @@ hubName:""
     }
     axios
       .post(
-        `https://api.digitologyhealthcare.com:5053/hubadminPannel`, jsons
+        `https://api.digitologyhealthcare.com/hubadminPannel`, jsons
       )
       .then(res => {
 
