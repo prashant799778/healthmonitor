@@ -52,7 +52,7 @@ currentItem:"" ,
     callApiNew=(page_no) => {
       this.setState({paitentList:""})
       let jsons={
-    "hospital_Id":1,
+    "hospital_Id":localStorage.getItem('hos_id',''),
       "startlimit":((this.state.per_page*page_no) -this.state.per_page)+1,
       "endlimit":this.state.per_page
       }
