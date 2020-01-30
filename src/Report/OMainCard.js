@@ -92,7 +92,7 @@ return(
         );
                 })}
 				{(!Array.isArray(this.props.paitentList) || st ) && <div style={{textAlign: 'left',
-  
+       fontSize: 'xx-large',
     color: 'red',
     padding: '20px'}}> No Data Found </div>}
                
