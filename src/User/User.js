@@ -195,7 +195,7 @@ isValid:true,emailError:false,
 
 
 
-     let api="https://smarticuapi.fourbrick.in/allPatient"
+     let api="https://api.digitologyhealthcare.com/allPatient"
       axios.post(api)
     .then((response)=> {
       // handle success
@@ -239,7 +239,7 @@ isValid:true,emailError:false,
     
 
       
-      let api="https://smarticuapi.fourbrick.in/patient_master"
+      let api="https://api.digitologyhealthcare.com/patient_master"
       let json={
         "PatientName":this.state.name,
         "DeviceMac":this.state.device_allocate,

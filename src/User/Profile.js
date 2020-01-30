@@ -88,7 +88,7 @@ class User extends React.Component{
 
 
 
-     let api="https://smarticuapi.fourbrick.in/doctorProfile"
+     let api="https://api.digitologyhealthcare.com/doctorProfile"
      let jssn={"Email": localStorage.getItem("email","") }
       axios.post(api,jssn)
     .then((response)=> {
@@ -146,7 +146,7 @@ class User extends React.Component{
     
 
       
-      let api="https://smarticuapi.fourbrick.in/patient_master"
+      let api="https://api.digitologyhealthcare.com/patient_master"
       let json={
         "PatientName":this.state.name,
         "DeviceMac":this.state.device_allocate,

@@ -51,7 +51,7 @@ isValid:true,emailError:false,
   delete=()=>{
 
     console.log("deleteId",this.state.deleteid+","+this.state.deleteHid)
-    let api="https://smarticuapi.fourbrick.in/deleteDoctorHospital"
+    let api="https://api.digitologyhealthcare.com/deleteDoctorHospital"
     let jsn={
       "ID":this.state.deleteid,
       "Hospital_Id":this.state.deleteHid
@@ -213,7 +213,7 @@ isValid:true,emailError:false,
 
 
 
-     let api="https://smarticuapi.fourbrick.in/hubMaster"
+     let api="https://api.digitologyhealthcare.com/hubMaster"
       axios.get(api)
     .then((response)=> {
       // handle success
@@ -259,7 +259,7 @@ isValid:true,emailError:false,
     console.log("edit hospital")
   
 
-     let api="https://smarticuapi.fourbrick.in/hospitalMaster"
+     let api="https://api.digitologyhealthcare.com/hospitalMaster"
 
      let json={
       "HubId":hub_id,
@@ -363,7 +363,7 @@ statusapi=()=>{
 
    console.log("delete after")
 
-     let api="https://smarticuapi.fourbrick.in/allDoctor"
+     let api="https://api.digitologyhealthcare.com/allDoctor"
       axios.post(api)
     .then((response)=> {
       // handle success
@@ -425,7 +425,7 @@ statusapi=()=>{
 hids.push(this.state. HListId[item])
       })     
       
-      let api="https://smarticuapi.fourbrick.in/addDoctor"
+      let api="https://api.digitologyhealthcare.com/addDoctor"
       let json=
       
       
@@ -485,7 +485,7 @@ hids.push(this.state. HListId[item])
       this.state. Shospitals.map((item,i)=>{
 hids.push(this.state. HListId[item])
       })     
-     let api="https://smarticuapi.fourbrick.in/updateDoctorMaster"
+     let api="https://api.digitologyhealthcare.com/updateDoctorMaster"
      let json={"ID":this.state.userid,"name":this.state.name
      ,"mobile":this.state.mobile,"Usertype_Id":2,"Hospital_Id": hids,"password":this.state.password,"confirm_password":this.state.password,"Email":this.state.email,"Gender":gens}     
      

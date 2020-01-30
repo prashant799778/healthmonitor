@@ -67,7 +67,7 @@ return <li>{message}</li> })}
     }
     axios
       .post(
-        `https://smarticuapi.fourbrick.in/doctorLoginDashboard`, jsons
+        `https://api.digitologyhealthcare.com/doctorLoginDashboard`, jsons
       )
       .then(res => {
 
@@ -92,7 +92,7 @@ console.log(deviceId)
   useEffect(() => {
     axios
       .get(
-        `https://smarticuapi.fourbrick.in/Device_master_select?hospital_Name=${hospitals}`
+        `https://api.digitologyhealthcare.com/Device_master_select?hospital_Name=${hospitals}`
       )
       .then(res => {
         if (res.data) {
@@ -109,7 +109,7 @@ console.log(deviceId)
   // const selectType = e => {
   //   axios
   //     .get(
-  //       `https://smarticuapi.fourbrick.in/Device_master_select?hospital_Name=${e.target.value}`
+  //       `https://api.digitologyhealthcare.com/Device_master_select?hospital_Name=${e.target.value}`
   //     )
   //     .then(res => {
   //       if (res.data) {
@@ -146,7 +146,7 @@ console.log(deviceId)
   // Api Calling
   // const patientApi = () => {
   //   axios
-  //     .get("https://smarticuapi.fourbrick.in/Patient_master_select")
+  //     .get("https://api.digitologyhealthcare.com/Patient_master_select")
   //     .then(res => {
   //       const allData = res.data.result;
   //       allData.map(
@@ -181,7 +181,7 @@ console.log(deviceId)
   //! *****************************************fetching hospital list********************
   useEffect(() => {
     axios
-      .get("https://smarticuapi.fourbrick.in/hospital_master_list1")
+      .get("https://api.digitologyhealthcare.com/hospital_master_list1")
       .then(res => {
         console.log(res.data.result);
         const hospitalData = res.data.result;

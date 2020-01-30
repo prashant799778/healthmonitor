@@ -47,7 +47,7 @@ totalDoctorCount:"",
     }
     axios
       .post(
-        `https://smarticuapi.fourbrick.in/adminPannel`, jsons
+        `https://api.digitologyhealthcare.com/adminPannel`, jsons
       )
       .then(res => {
 

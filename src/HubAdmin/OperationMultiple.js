@@ -203,7 +203,7 @@ isValid:true,emailError:false,
 
 
 
-     let api="https://smarticuapi.fourbrick.in/hubMaster"
+     let api="https://api.digitologyhealthcare.com/hubMaster"
       axios.get(api)
     .then((response)=> {
       // handle success
@@ -245,7 +245,7 @@ isValid:true,emailError:false,
 
 
 
-     let api="https://smarticuapi.fourbrick.in/hospitalMaster"
+     let api="https://api.digitologyhealthcare.com/hospitalMaster"
 
      let json={
       "HubId":this.state.hub_id,
@@ -305,7 +305,7 @@ isValid:true,emailError:false,
 
 
 
-     let api="https://smarticuapi.fourbrick.in/allNurse"
+     let api="https://api.digitologyhealthcare.com/allNurse"
       axios.post(api)
     .then((response)=> {
       // handle success
@@ -355,7 +355,7 @@ isValid:true,emailError:false,
 hids.push(this.state. HListId[item])
       })     
       
-      let api="https://smarticuapi.fourbrick.in/addUser"
+      let api="https://api.digitologyhealthcare.com/addUser"
       let json=
       
       

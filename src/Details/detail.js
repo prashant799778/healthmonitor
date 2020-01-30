@@ -48,7 +48,7 @@ class Detail extends React.Component{
    let msg={name:localStorage.getItem("user",""),email:localStorage.getItem("email",""),text:this.state.msg,doctorId:localStorage.getItem("ID",""),PatientId:this.state.currentid}
    console.log("newmsg",msg)
   let  Omqtt1 = require('mqtt')
-  // Omqtt1.connect('ws://139.59.78.54:9001')
+  // Omqtt1.connect('ws://139.59.78.54')
  
         let  Oclient1  = Omqtt1.connect('wss://smarticumqtt.fourbrick.in:8083')
         console.log("newmsg",Oclient1)
@@ -95,7 +95,7 @@ class Detail extends React.Component{
          console.log("asd",this.props.currentItem)
 
         let  Omqtt1 = require('mqtt')
-        let  Oclient1  = Omqtt1.connect('wss://smarticumqtt.fourbrick.in:8083')
+        let  Oclient1  = Omqtt1.connect('mqtts://mqtt.digitologyhealthcare.com:8083')
         this.client=Oclient1
           Oclient1.on('connect', ( ) =>{
                 Oclient1.subscribe(this.props.currentTopic +"",  (err)=> {

@@ -92,7 +92,7 @@ isValid:true,emailError:false,
   }}
   getTypeapi=()=>{
 
-  let api="https://smarticuapi.fourbrick.in/hubMaster"
+  let api="https://api.digitologyhealthcare.com/hubMaster"
    axios.get(api)
  .then((response)=> {
    // handle success
@@ -171,7 +171,7 @@ isValid:true,emailError:false,
 
 
 
-        let api="https://smarticuapi.fourbrick.in/hubMaster"
+        let api="https://api.digitologyhealthcare.com/hubMaster"
          axios.get(api)
        .then((response)=> {
          // handle success
@@ -215,7 +215,7 @@ isValid:true,emailError:false,
     
 
       
-     let api="https://smarticuapi.fourbrick.in/insertHubMaster"
+     let api="https://api.digitologyhealthcare.com/insertHubMaster"
      let json={
        "HubName":this.state.name,
      
@@ -255,7 +255,7 @@ alert("User Created Successfully")
     updatetapi=()=>{
       
      
-     let api="https://smarticuapi.fourbrick.in/allPatient"
+     let api="https://api.digitologyhealthcare.com/allPatient"
      let json={
        "username":this.state.name,
        "email":this.state.email,

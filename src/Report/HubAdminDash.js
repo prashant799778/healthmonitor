@@ -51,7 +51,7 @@ hubName:""
     }
     axios
       .post(
-        `https://smarticuapi.fourbrick.in/hubadminPannel`, jsons
+        `https://api.digitologyhealthcare.com/hubadminPannel`, jsons
       )
       .then(res => {
 

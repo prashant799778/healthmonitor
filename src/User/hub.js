@@ -38,7 +38,7 @@ isValid:true,emailError:false,
     this.setState({deleteid:id})
   }
   delete=()=>{
-    let api="https://smarticuapi.fourbrick.in/deleteHub"
+    let api="https://api.digitologyhealthcare.com/deleteHub"
     let jsn={
       "ID":this.state.deleteid,
       
@@ -96,7 +96,7 @@ isValid:true,emailError:false,
   }}
   getTypeapi=()=>{
 
-  let api="https://smarticuapi.fourbrick.in/hubMaster"
+  let api="https://api.digitologyhealthcare.com/hubMaster"
    axios.get(api)
  .then((response)=> {
    // handle success
@@ -175,7 +175,7 @@ isValid:true,emailError:false,
 
 
 
-        let api="https://smarticuapi.fourbrick.in/hubMaster"
+        let api="https://api.digitologyhealthcare.com/hubMaster"
          axios.get(api)
        .then((response)=> {
          // handle success
@@ -219,7 +219,7 @@ isValid:true,emailError:false,
     
 
       
-     let api="https://smarticuapi.fourbrick.in/insertHubMaster"
+     let api="https://api.digitologyhealthcare.com/insertHubMaster"
      let json={
        "HubName":this.state.name,
      
@@ -259,7 +259,7 @@ alert("User Created Successfully")
     updatetapi=()=>{
       
      
-     let api="https://smarticuapi.fourbrick.in/updatehubmaster"
+     let api="https://api.digitologyhealthcare.com/updatehubmaster"
      let json={
       "HubName":this.state.name,
        "ID":this.state.userid
