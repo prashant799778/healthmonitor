@@ -50,7 +50,7 @@ class Detail extends React.Component{
   let  Omqtt1 = require('mqtt')
   // Omqtt1.connect('ws://139.59.78.54')
  
-        let  Oclient1  = Omqtt1.connect('wss://smarticumqtt.fourbrick.in:8083')
+        let  Oclient1  = Omqtt1.connect('mqtts://mqtt.digitologyhealthcare.com:8083')
         console.log("newmsg",Oclient1)
         Oclient1.on('connect',  () =>{
           console.log("newmsg","connect"+"---"+this.state.currentid+"/Notification")
