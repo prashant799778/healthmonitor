@@ -627,7 +627,9 @@ class Login extends React.Component {
                         </div>
 
                       </div>
-                     
+                      <button   onClick={this.loginHandler} type="button" className="btn btn-cust btn-lg btn-block">Log In</button>
+                      
+                      
                     </div>
                   </div>
                 </div>
