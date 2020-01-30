@@ -3223,7 +3223,7 @@ def adminPannel():
         umq=[]
         for j in data17:
             umq.append(int(j['ID']))
-            print(umq,"==========================================")
+           
             yu=[]
             for x in umq:
                 if x not in yu:
