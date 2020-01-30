@@ -1736,9 +1736,9 @@ def updateStatus():
         
         query11 = " select Status from userMaster where Email = '" + str(data["Email"])+ "';"
         cursor.execute(query11)
-        data= cursor.fetchall()
+        data1= cursor.fetchall()
         print("data=========================",data)
-        if data[0]["Status"]==0:
+        if data1[0]["Status"]==0:
             query1 = " update userMaster set   counter='0',Status=2 where Email = '" + str(data["Email"])+ "';"
         else:
             query1 = " update userMaster set   counter='0',Status=0 where Email = '" + str(data["Email"])+ "';"
