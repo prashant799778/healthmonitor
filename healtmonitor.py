@@ -1265,7 +1265,7 @@ def doctorLoginDashboard():
         conn=Connection()
         cursor = conn.cursor()
         query1=" select um.ID, hsm.hospital_name,hsm.ID as HospitalId,hm.ID as HubId,hm.HubName from HubMaster hm,Hospital_master hsm,userMaster um,userHospitalMapping uhm" 
-        query1=query1+" where hm.ID=hsm.HubId and hsm.ID=uhm.hospitalId and uhm.userId=um.ID and um.Email='"+str(data["Email"])+"';"
+        query1=query1+" where hm.ID=hsm.HubId and hsm.ID=uhm.hospitalId and uhm.userId=um.ID and um.Email='"+str(data["Email"])+"' order by um.ID desc;"
         cursor.execute(query1)
         data1= cursor.fetchall()
         print(data1)
@@ -1273,7 +1273,7 @@ def doctorLoginDashboard():
         for i in data1:
             
             query2="select PatientId,hospitalId,PatientName,heartRate,spo2,highPressure,lowPressure,pulseRate,temperature,BloodGroup,DeviceMac,Bed_Number,roomNumber,Gender,age from Patient_master pm,patientDoctorMapping pdm where pm.Status<>'2' and pdm.Patient_Id=pm.PatientId " 
-            query2=query2+" and pdm.doctorId='"+str(i["ID"]) +"' and pm.hospitalId='"+str(i["HospitalId"])+"';"
+            query2=query2+" and pdm.doctorId='"+str(i["ID"]) +"' and pm.hospitalId='"+str(i["HospitalId"])+"' order by PatientId desc;"
             cursor.execute(query2)
             data2= cursor.fetchall()
             for j in data2:
@@ -1325,7 +1325,7 @@ def hubdoctorLoginDashboard():
         conn=Connection()
         cursor = conn.cursor()
         query1="   select hm.ID as HubId,hm.HubName from HubMaster hm,userMaster um,userHubMapping uhm  where  hm.ID=uhm.hubId and uhm.userId=um.ID and" 
-        query1=query1+"  um.Email= '"+str(data["Email"])+"';"
+        query1=query1+"  um.Email= '"+str(data["Email"])+"' order by hm.ID desc ;"
         cursor.execute(query1)
         data1= cursor.fetchall()
         count=0
@@ -1339,7 +1339,7 @@ def hubdoctorLoginDashboard():
             i["hospitalCount"]=len(data2)
             for k in data2:
                 query2="select PatientId,hospitalId,PatientName,heartRate,spo2,highPressure,lowPressure,pulseRate,temperature,BloodGroup,DeviceMac,Bed_Number,roomNumber,Gender,age from Patient_master pm where pm.Status<>'2' and " 
-                query2=query2+"  pm.hospitalId='"+str(k["HospitalId"])+"';"
+                query2=query2+"  pm.hospitalId='"+str(k["HospitalId"])+"' order by PatientId desc;"
                 cursor.execute(query2)
                 data6=cursor.fetchall()
                 k["patient_count"]=len(data6)
@@ -1887,13 +1887,14 @@ def preiscribeMedicine():
     
         # query = " select distinct userid,username,usertype from usermaster where usertype <> 'Admin';"
         patientId=""
-        doctorId=request.args['doctorId']
+        if 'doctorId' in request.args:
+            doctorId=request.args['doctorId']
         
 
         if 'PatientId' in request.args:
             patientId=request.args["PatientId"]
             print(type(patientId))
-            if  (patientId!=0):
+            if  (patientId!=0) and ('doctorId' in request.args):
                 
                 print("111111")
                 WhereCondition2 =  " and  pmm.patientId    = '" + patientId + "'  "
@@ -1902,13 +1903,14 @@ def preiscribeMedicine():
                 cursor = conn.cursor()
                 cursor.execute(query)
                 data = cursor.fetchall()
-            # if 'doctorId' not in request.args:
-            #     print("111111111111")
-            #     query = "select pmm.id,pmm.patientId,pmm.text,pmm.doctorId,pmm.dateCreate,pm.PatientName from preiscribeMedicine as pmm ,Patient_master as pm where pmm.patientId='" + patientId + "'and pm.PatientId=pmm.patientId  "+  WhereCondition2 +"  ORDER by pmm.id DESC limit  0,5"
-            #     conn=Connection()
-            #     cursor = conn.cursor()
-            #     cursor.execute(query)
-            #     data = cursor.fetchall()
+            if 'doctorId' not in request.args:
+                WhereCondition2 =  " and  pmm.patientId    = '" + patientId + "'  "
+                print("111111111111")
+                query = "select pmm.id,pmm.patientId,pmm.text,pmm.doctorId,pmm.dateCreate,pm.PatientName from preiscribeMedicine as pmm ,Patient_master as pm where pmm.patientId='" + patientId + "'and pm.PatientId=pmm.patientId  "+  WhereCondition2 +"  ORDER by pmm.id DESC limit  0,5"
+                conn=Connection()
+                cursor = conn.cursor()
+                cursor.execute(query)
+                data = cursor.fetchall()
                 
 
         
@@ -2829,7 +2831,7 @@ def operationDashboard():
 
         query3 ="select  PM.PatientId as ID,PM.PatientName,PM.PhoneNo,PM.heartRate,PM.spo2,PM.highPressure,PM.lowPressure,PM.pulseRate,PM.temperature,Hbs.HubName,PM.Address,PM.BloodGroup,PM.DeviceMac,Hm.HubId,Hm.hospital_name as hospital_Name, "
         query3=query3+" PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.age,PM.Gender,PM.roomNumber"
-        query3= query3 + " from Patient_master  as PM ,Hospital_master as Hm,HubMaster as Hbs  where PM.hospitalId=Hm.ID  and  Hm.ID='"+str(Data["hospital_Id"])+"' and  Hm.HubId=Hbs.ID   and PM.Status<>'2'  Limit    " + str(Data["startlimit"]) + ", " + str(Data["endlimit"]) + " ;"
+        query3= query3 + " from Patient_master  as PM ,Hospital_master as Hm,HubMaster as Hbs  where PM.hospitalId=Hm.ID  and  Hm.ID='"+str(Data["hospital_Id"])+"' and  Hm.HubId=Hbs.ID   and PM.Status<>'2' order by ID desc Limit    " + str(Data["startlimit"]) + ", " + str(Data["endlimit"]) + " ;"
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query3)
@@ -2845,7 +2847,7 @@ def operationDashboard():
 
         query ="select  PM.PatientId as ID,PM.PatientName,PM.PhoneNo,Hbs.HubName,PM.Address,PM.BloodGroup,PM.DeviceMac,Hm.HubId,Hm.hospital_name as hospital_Name, "
         query=query+" PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.age,PM.Gender,PM.roomNumber"
-        query= query + " from Patient_master  as PM ,Hospital_master as Hm,HubMaster as Hbs  where PM.hospitalId=Hm.ID  and  Hm.ID='"+str(Data["hospital_Id"])+"' and  Hm.HubId=Hbs.ID   and PM.Status<>'2' ;"
+        query= query + " from Patient_master  as PM ,Hospital_master as Hm,HubMaster as Hbs  where PM.hospitalId=Hm.ID  and  Hm.ID='"+str(Data["hospital_Id"])+"' and  Hm.HubId=Hbs.ID   and PM.Status<>'2' order by ID desc ;"
         print(query)
         cursor.execute(query)
         data9= cursor.fetchall()
