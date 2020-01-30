@@ -627,10 +627,10 @@ class Login extends React.Component {
                         </div>
 
                       </div>
-                      <button   onClick={this.loginHandler} type="button" className="btn btn-cust btn-lg btn-block">Log In</button>
-                      <div className="forget-pass">
-                      <img src={require("./image/padlock.svg")}/><span>forgot your password ?</span>
-                      </div>
+                      // <button   onClick={this.loginHandler} type="button" className="btn btn-cust btn-lg btn-block">Log In</button>
+                      // <div className="forget-pass">
+                      // <img src={require("./image/padlock.svg")}/><span>forgot your password ?</span>
+                      // </div>
                     </div>
                   </div>
                 </div>
