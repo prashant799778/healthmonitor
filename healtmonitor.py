@@ -801,7 +801,7 @@ def allDoctor():
     try:
         conn=Connection()
         cursor = conn.cursor()
-        query= " select um.ID,um.mobile,um.password,um.name as DoctorName,um.Status as Status,um.Email,um.Gender,hsm.ID as Hospital_Id,hsm.hospital_name,hm.ID as HubId,hsm.Address as hospital_address,hm.HubName from userMaster um,HubMaster hm,Hospital_master hsm,"
+        query= " select um.ID,um.mobile,um.password,um.name as DoctorName,um.licenseNo as licenseNo,um.Status as Status,um.Email,um.Gender,hsm.ID as Hospital_Id,hsm.hospital_name,hm.ID as HubId,hsm.Address as hospital_address,hm.HubName from userMaster um,HubMaster hm,Hospital_master hsm,"
         query=query+"userHospitalMapping uhm where um.Usertype_Id=2 and hm.ID=hsm.HubId and um.ID=uhm.userId and uhm.hospitalId=hsm.ID  ORDER BY  um.ID DESC;"
         print(query)
         
@@ -1061,7 +1061,7 @@ def hubloginDoctor():
         Data=json.loads(json1.decode("utf-8"))
         conn=Connection()
         cursor = conn.cursor()
-        query= " select um.ID,um.mobile,um.password,um.name as DoctorName,um.Email,um.Gender,hsm.ID as Hospital_Id,hsm.hospital_name,hm.ID as HubId,hsm.Address as hospital_address,hm.HubName from userMaster um,HubMaster hm,Hospital_master hsm,"
+        query= " select um.ID,um.mobile,um.password,um.name as DoctorName,um.licenseNo as licenseNo,um.Email,um.Gender,hsm.ID as Hospital_Id,hsm.hospital_name,hm.ID as HubId,hsm.Address as hospital_address,hm.HubName from userMaster um,HubMaster hm,Hospital_master hsm,"
         query=query+"userHospitalMapping uhm where um.Usertype_Id=2 and hm.ID=hsm.HubId and um.ID=uhm.userId and uhm.hospitalId=hsm.ID and hsm.HubId='"+str(Data["HubId"])+"'  ;"
         print(query)
         
@@ -3214,10 +3214,22 @@ def adminPannel():
         cursor.execute(query2)
         data2 = cursor.fetchall()
         
-        query3 = " select  count(*) as count from userMaster where Usertype_Id=2;"
-        print(query3)
-        cursor.execute(query3)
-        data3 = cursor.fetchall()
+        
+
+        query1="select distinct(um.ID) as ID from userMaster as um,userHospitalMapping as uhm  where um.ID=uhm.userId and um.Usertype_Id=uhm.Usertype_Id and  uhm.Usertype_Id= '2' ;" 
+        cursor.execute(query1)
+        data17 =cursor.fetchall()
+        for j in data17:
+            umq.append(int(j['ID']))
+            print(umq,"==========================================")
+            yu=[]
+            for x in umq:
+                if x not in yu:
+                    yu.append(x)
+                    totalDoctor=len(yu)
+                    data3=[]
+                    data3.append({"count":totalDoctor})
+            
         
         query4= " select  count(*) as count from Patient_master where Status<>'2' ;"
         print(query4)
