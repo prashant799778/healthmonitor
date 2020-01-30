@@ -815,7 +815,7 @@ hids.push(this.state. HListId[item])
                                   <td>{item.hospital_name}</td>
                                   <td>{item.patient}</td>
 								  <td>{item.Email}</td>
-								  <td>{item.licenceNo}</td>
+								  <td>{item.licenseNo}</td>
                                  <td onClick={()=>{this.statusapis(item.Email)}} style={{cursor:'pointer'}}>{item.Status==2?<span class="d-act" data-toggle="modal" data-target="#activateModal">deactivated</span>:<span data-toggle="modal" data-target="#deactivateModal" class="act">activated</span>}</td>
                     
                                   <td>
