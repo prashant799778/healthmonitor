@@ -3228,7 +3228,7 @@ def adminPannel():
             for x in umq:
                 if x not in yu:
                     yu.append(x)
-                    totalDoctor=len(umq)
+                    totalDoctor=len(yu)
                     data3=[]
                     data3.append({"count":totalDoctor})
             
