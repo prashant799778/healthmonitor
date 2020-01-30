@@ -1738,7 +1738,10 @@ def updateStatus():
         cursor.execute(query11)
         data= cursor.fetchall()
         print("data=========================",data)
-        query1 = " update userMaster set   counter='0',Status='" + str(data["Status"])+ "'  where Email = '" + str(data["Email"])+ "';"
+        if data[0]["Status"]==0
+            query1 = " update userMaster set   counter='0',Status=2 where Email = '" + str(data["Email"])+ "';"
+        else:
+            query1 = " update userMaster set   counter='0',Status=0 where Email = '" + str(data["Email"])+ "';"
         print(query1)
         
         cursor.execute(query1)
