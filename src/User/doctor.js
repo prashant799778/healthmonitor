@@ -785,6 +785,7 @@ hids.push(this.state. HListId[item])
                                   <th style={{textAlign:"center",color:'aliceblue'}}>Hospital(s) Allocated</th>
                                   <th style={{textAlign:"center",color:'aliceblue'}}>No. of Patient</th>
 								  <th style={{textAlign:"center",color:'aliceblue'}}>Email</th>
+								  <th style={{textAlign:"center",color:'aliceblue'}}>Licence No</th>
 								  <th style={{textAlign:"center",color:'aliceblue'}}>A/C Status</th>
                                   <th style={{textAlign:"center",color:'aliceblue'}} className="dlt">Action</th>
                                 </tr>
