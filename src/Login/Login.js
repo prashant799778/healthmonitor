@@ -611,37 +611,4 @@ class Login extends React.Component {
                                 }}
                                 value={this.state.name} required type="email" className="form-control" placeholder="email" />
                       </div>
-                      <div className="form-group">
-                        <input onChange={e => {
-                                  this.setState({ pass: e.target.value });
-                                }}
-                                value={this.state.pass} required type="password" className="form-control" placeholder="password" />
-                      </div>
-
-                              <font color="red">{this.state.err}</font>
-                      <div className="check-info">
-                        <div className="chiller_cb">
-                          <input id="myCheckbox1" type="checkbox" />
-                          <label htmlFor="myCheckbox1">Remember me</label>
-                          <span />
-                        </div>
-
-                      </div>
-                      // <button   onClick={this.loginHandler} type="button" className="btn btn-cust btn-lg btn-block">Log In</button>
-                      // <div className="forget-pass">
-                      // <img src={require("./image/padlock.svg")}/><span>forgot your password ?</span>
-                      // </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      </LoginStyled>
-    );
-  }
-}
-
-export default Login;
+                    
