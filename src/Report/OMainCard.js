@@ -91,7 +91,10 @@ return(
         
         );
                 })}
-				{(!Array.isArray(this.props.paitentList) || st ) && <div> No Data Found </div>}
+				{(!Array.isArray(this.props.paitentList) || st ) && <div style={{textAlign: 'left',
+  
+    color: 'red',
+    padding: '20px'}}> No Data Found </div>}
                
                 </div>
      
