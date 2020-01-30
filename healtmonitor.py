@@ -1732,7 +1732,7 @@ def updateStatus():
         json1=request.get_data() 
         data=json.loads(json1.decode("utf-8")) 
        
-        query1 = " update userMaster set   counter='0',Status='0'  where Email = '" + str(data["Email"])+ "';"
+        query1 = " update userMaster set   counter='0',Status='" + str(data["Status"])+ "'  where Email = '" + str(data["Email"])+ "';"
         print(query1)
         conn=Connection()
         cursor = conn.cursor()
