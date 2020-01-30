@@ -585,12 +585,49 @@ class Login extends React.Component {
                     </div>
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        </template>
+        <div className="sign-container" style={{backgroundImage: 'url('+backImg+')',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+      backgroundSize: 'cover',
+      
+      }}>
+        <div className="container">
+          <div className="row">
+            <div className="col-md-12 col-sm-12">
+              <div className="innr-container-sign">
+                <div className="rwap-box">
+                  <div className="in-box">
+                    <h3 className="logo-title"><img src={require("./image/web_icon.png")}></img></h3>
+                    <h2 className="upper-title">sign in</h2>
+                    <div className="form-container">
+                      <div className="form-group">
+                        <input  onChange={e => {
+                                  this.setState({ name: e.target.value });
+                                }}
+                                value={this.state.name} required type="email" className="form-control" placeholder="email" />
+                      </div>
+                      <div className="form-group">
+                        <input onChange={e => {
+                                  this.setState({ pass: e.target.value });
+                                }}
+                                value={this.state.pass} required type="password" className="form-control" placeholder="password" />
+                      </div>
+
+                              <font color="red">{this.state.err}</font>
+                      <div className="check-info">
+                        <div className="chiller_cb">
+                          <input id="myCheckbox1" type="checkbox" />
+                          <label htmlFor="myCheckbox1">Remember me</label>
+                          <span />
+                        </div>
 
                       </div>
-                      // <button   onClick={this.loginHandler} type="button" className="btn btn-cust btn-lg btn-block">Log In</button>
-                      // <div className="forget-pass">
-                      // <img src={require("./image/padlock.svg")}/><span>forgot your password ?</span>
-                      // </div>
+                     
                     </div>
                   </div>
                 </div>
