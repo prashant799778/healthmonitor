@@ -1906,7 +1906,7 @@ def preiscribeMedicine():
                 
                 print("111111")
                 WhereCondition2 =  " and  pmm.patientId    = '" + patientId + "'  "
-                query = "select pmm.id,pmm.patientId,pmm.text,pmm.doctorId,pmm.dateCreate,pm.PatientName from preiscribeMedicine as pmm ,Patient_master as pm where doctorId='" + doctorId + "'and pm.PatientId=pmm.patientId  "+  WhereCondition2 +"  ORDER by pmm.id DESC limit  0,5"
+                query = "select pmm.id,pmm.patientId,pmm.text,pmm.doctorId,pmm.dateCreate,pm.PatientName,pmm.status as status from preiscribeMedicine as pmm ,Patient_master as pm where doctorId='" + doctorId + "'and pm.PatientId=pmm.patientId  "+  WhereCondition2 +"  ORDER by pmm.id DESC limit  0,5"
                 conn=Connection()
                 cursor = conn.cursor()
                 cursor.execute(query)
@@ -1923,7 +1923,7 @@ def preiscribeMedicine():
             if 'doctorId' not in request.args:
                 WhereCondition2 =  " and  pmm.patientId    = '" + patientId + "'  "
                 print("111111111111")
-                query = "select pmm.id,pmm.patientId,pmm.text,pmm.doctorId,pmm.dateCreate,pm.PatientName from preiscribeMedicine as pmm ,Patient_master as pm where pmm.patientId='" + patientId + "'and pm.PatientId=pmm.patientId  "+  WhereCondition2 +"  ORDER by pmm.id DESC limit  0,5"
+                query = "select pmm.id,pmm.patientId,pmm.text,pmm.doctorId,pmm.dateCreate,pm.PatientName,pmm.status as status from preiscribeMedicine as pmm ,Patient_master as pm where pmm.patientId='" + patientId + "'and pm.PatientId=pmm.patientId  "+  WhereCondition2 +"  ORDER by pmm.id DESC limit  0,5"
                 conn=Connection()
                 cursor = conn.cursor()
                 cursor.execute(query)
@@ -1942,7 +1942,7 @@ def preiscribeMedicine():
             print("not patient")
             WhereCondition1=""
 
-            query2 = "select pmm.id,pmm.patientId,pmm.text,pmm.doctorId,pmm.dateCreate,pm.PatientName from preiscribeMedicine as pmm ,Patient_master as pm where doctorId='" + doctorId + "'and pm.PatientId=pmm.patientId  "+  WhereCondition1 +"  ORDER by pmm.id DESC limit  0,5"
+            query2 = "select pmm.id,pmm.patientId,pmm.text,pmm.doctorId,pmm.dateCreate,pm.PatientName,pmm.status as status from preiscribeMedicine as pmm ,Patient_master as pm where doctorId='" + doctorId + "'and pm.PatientId=pmm.patientId  "+  WhereCondition1 +"  ORDER by pmm.id DESC limit  0,5"
             conn=Connection()
             cursor = conn.cursor()
             cursor.execute(query2)
