@@ -2254,6 +2254,7 @@ def addDoctor():
         
         cursor.execute(query)
         data = cursor.fetchone()
+        print("data===========================",data)
         if data!=None:
             print("data",data)
             mainId=data["ID"]
