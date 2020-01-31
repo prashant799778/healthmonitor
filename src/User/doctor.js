@@ -109,7 +109,7 @@ isValid:true,emailError:false,
   }}
   getTypeapi=()=>{
 
-  let api="http://134.209.153.34:5004/getrole"
+  let api="https://api.digitologyhealthcare.com/getrole"
    axios.get(api)
  .then((response)=> {
    // handle success
@@ -326,7 +326,7 @@ statusapi=()=>{
 	  'Email':this.state.currentEmail
   }
 
-     let api="https://smarticuapi.fourbrick.in/updateStatus"
+     let api="https://api.digitologyhealthcare.com/updateStatus"
       axios.post(api,jsn)
     .then((response)=> {
       // handle success
