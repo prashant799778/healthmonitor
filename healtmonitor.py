@@ -1915,8 +1915,10 @@ def preiscribeMedicine():
                 query22="select count(*) as count from preiscribeMedicine as pmm ,Patient_master as pm where doctorId='" + doctorId + "'and pm.PatientId=pmm.patientId and pmm.status='0' "+  WhereCondition2 +"  ORDER by pmm.id DESC limit  0,5"
                 cursor.fetchall(query22)
                 data2=cursor.fetchall()
-                count=data2["count"][0]
-                print(data2)
+                for i in data2:
+                    count=i['count']
+                    print(count)
+
 
             if 'doctorId' not in request.args:
                 WhereCondition2 =  " and  pmm.patientId    = '" + patientId + "'  "
@@ -1929,8 +1931,10 @@ def preiscribeMedicine():
                 query22="select count(*) as count from preiscribeMedicine as pmm ,Patient_master as pm where doctorId='" + doctorId + "'and pm.PatientId=pmm.patientId and pmm.status='0' "+  WhereCondition2 +"  ORDER by pmm.id DESC limit  0,5"
                 cursor.fetchall(query22)
                 data2=cursor.fetchall()
-                count=data2["count"][0]
-                print(data2)
+                for i in data2:
+                    count=i['count']
+                    print(count)
+
                 
 
         
