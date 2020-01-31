@@ -1895,6 +1895,7 @@ def preiscribeMedicine():
             patientId=request.args["PatientId"]
             print(type(patientId))
             if  (patientId!=0) and ('doctorId' in request.args):
+
                 
                 print("111111")
                 WhereCondition2 =  " and  pmm.patientId    = '" + patientId + "'  "
@@ -1903,6 +1904,13 @@ def preiscribeMedicine():
                 cursor = conn.cursor()
                 cursor.execute(query)
                 data = cursor.fetchall()
+
+                query22="select count(*) as count from preiscribeMedicine as pmm ,Patient_master as pm where doctorId='" + doctorId + "'and pm.PatientId=pmm.patientId and pmm.status='0' "+  WhereCondition2 +"  ORDER by pmm.id DESC limit  0,5"
+                cursor.fetchall(query22)
+                data2=cursor.fetchall()
+                count=data2["count"][0]
+                print(data2)
+
             if 'doctorId' not in request.args:
                 WhereCondition2 =  " and  pmm.patientId    = '" + patientId + "'  "
                 print("111111111111")
@@ -1911,6 +1919,11 @@ def preiscribeMedicine():
                 cursor = conn.cursor()
                 cursor.execute(query)
                 data = cursor.fetchall()
+                query22="select count(*) as count from preiscribeMedicine as pmm ,Patient_master as pm where doctorId='" + doctorId + "'and pm.PatientId=pmm.patientId and pmm.status='0' "+  WhereCondition2 +"  ORDER by pmm.id DESC limit  0,5"
+                cursor.fetchall(query22)
+                data2=cursor.fetchall()
+                count=data2["count"][0]
+                print(data2)
                 
 
         
@@ -1923,13 +1936,18 @@ def preiscribeMedicine():
             cursor = conn.cursor()
             cursor.execute(query2)
             data = cursor.fetchall()
-        
+
+            query1=  "select count(*) from preiscribeMedicine as pmm ,Patient_master as pm where doctorId='" + doctorId + "'and pm.PatientId=pmm.patientId and pmm.status='0' "+  WhereCondition1 +"  ORDER by pmm.id DESC limit  0,5"
+            cursor.execute(query1)
+            data2=cursor.fetchall()
+            count=data2["count"][0]
+
         
         cursor.close()
         
         
         if data:           
-            Data = {"result":data,"status":"true"}
+            Data = {"result":data,"Unread messages":count,"status":"true"}
             return Data
         else:
             output = {"result":"No Data Found","status":"false"}
