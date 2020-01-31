@@ -1949,7 +1949,8 @@ def preiscribeMedicine():
             data2=cursor.fetchall()
             print(data2)
 
-            count=data2["count"]
+            count=data2['count'][0]
+            print(count)
 
         
         cursor.close()
