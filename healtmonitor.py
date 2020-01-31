@@ -2255,6 +2255,10 @@ def addDoctor():
         cursor.execute(query)
         data = cursor.fetchone()
         print("data===========================",data)
+        if data["Email"]==data1["Email"]:
+            if data["name"]!=data1["name"]:
+                output={"result":"name mismatched at this mailid","status":"true"}
+                return output
         if data!=None:
             print("data",data)
             mainId=data["ID"]
