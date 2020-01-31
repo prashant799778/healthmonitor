@@ -2260,6 +2260,8 @@ def addDoctor():
             if data["name"]!=data1["name"]:
                 output={"result":"name mismatched at this mailid","status":"true"}
                 return output
+            else:
+                pass
         if data!=None:
             print("data",data)
             mainId=data["ID"]
