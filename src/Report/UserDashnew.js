@@ -36,7 +36,7 @@ currentItem:"" ,
     componentDidMount() {
      
       var mqtt = require('mqtt')
-  var client  = mqtt.connect('mqtts://mqtt.digitologyhealthcare.com:8083')
+  var client  = mqtt.connect('mqtts://mqtt.digitologyhealthcare.com')
   this.setState({client:client})
   this.callApi()
     }

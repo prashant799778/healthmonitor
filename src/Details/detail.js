@@ -50,7 +50,7 @@ class Detail extends React.Component{
   let  Omqtt1 = require('mqtt')
   // Omqtt1.connect('ws://139.59.78.54')
  
-        let  Oclient1  = Omqtt1.connect('mqtts://mqtt.digitologyhealthcare.com:8083')
+        let  Oclient1  = Omqtt1.connect('mqtts://mqtt.digitologyhealthcare.com')
         console.log("newmsg",Oclient1)
         Oclient1.on('connect',  () =>{
           console.log("newmsg","connect"+"---"+this.state.currentid+"/Notification")
@@ -95,7 +95,7 @@ class Detail extends React.Component{
          console.log("asd",this.props.currentItem)
 
         let  Omqtt1 = require('mqtt')
-        let  Oclient1  = Omqtt1.connect('mqtts://mqtt.digitologyhealthcare.com:8083')
+        let  Oclient1  = Omqtt1.connect('mqtts://mqtt.digitologyhealthcare.com')
         this.client=Oclient1
           Oclient1.on('connect', ( ) =>{
                 Oclient1.subscribe(this.props.currentTopic +"",  (err)=> {
