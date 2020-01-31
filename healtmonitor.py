@@ -1947,8 +1947,9 @@ def preiscribeMedicine():
             query1=  "select count(*) as count from preiscribeMedicine as pmm ,Patient_master as pm where doctorId='" + doctorId + "'and pm.PatientId=pmm.patientId and pmm.status='0' "+  WhereCondition1 +"  ORDER by pmm.id DESC limit  0,5"
             cursor.execute(query1)
             data2=cursor.fetchall()
+            print(data2)
 
-            count=data2["count"][0]
+            count=data2["count"]
 
         
         cursor.close()
