@@ -1731,7 +1731,8 @@ def updateStatus():
        
         json1=request.get_data() 
         data=json.loads(json1.decode("utf-8")) 
-
+        conn=Connection()
+        cursor = conn.cursor()
         
         query11 = " select Status from userMaster where Email = '" + str(data["Email"])+ "';"
         cursor.execute(query11)
