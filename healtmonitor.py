@@ -1758,6 +1758,32 @@ def updateStatus():
         output = {"result":"somthing went wrong","status":"false"}
         return output
 
+
+
+@app.route('/updateMessageStatus', methods=['POST'])
+def updateMessageStatus():
+    try:
+       
+        json1=request.get_data() 
+        data=json.loads(json1.decode("utf-8")) 
+        query1 = " update preiscribeMedicine set   status=1 where  id= '" + str(data["id"])+ "' and doctorId= '" + str(data["doctorId"])+ "' and patientId='" + str(data["patientId"])+ "';"
+       
+        
+        cursor.execute(query1)
+        conn.commit()
+        cursor.close()
+        output = {"result":"Updated Successfully","status":"true"}
+        return output  
+    except KeyError :
+        print("Key Exception---->")   
+        output = {"result":"key error","status":"false"}
+        return output  
+
+    except Exception as e :
+        print("Exceptio`121QWAaUJIHUJG n---->" +str(e))    
+        output = {"result":"somthing went wrong","status":"false"}
+        return output        
+
 @app.route('/updatehubmaster', methods=['POST'])
 def updatehubmaster():
     try:
