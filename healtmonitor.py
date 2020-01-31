@@ -2346,7 +2346,7 @@ def addDoctor():
 
 
 @app.route('/addHubadmin', methods=['POST'])
-def addHubDoctor():
+def addHubadmin():
     try:
         json1=request.get_data() 
         data1=json.loads(json1.decode("utf-8"))  
@@ -2424,6 +2424,88 @@ def addHubDoctor():
         print("Exception---->" + str(e))    
         output = {"result":"something went wrong","status":"false"}
         return output
+
+
+@app.route('/addHubDoctor', methods=['POST'])
+def addHubDoctor1():
+    try:
+        json1=request.get_data() 
+        data1=json.loads(json1.decode("utf-8"))  
+        
+        query = "select * from userMaster where  Usertype_Id=5 and Email='"+str(data1["Email"])+ "';"
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data = cursor.fetchone()
+        print(data)
+        UserId=uuid.uuid1()
+        UserID=UserId.hex
+        if data==None:
+            if data1["password"]==data1["confirm_password"]:
+                query2  = " insert into userMaster (name,mobile,Usertype_Id,UserID,password,Email,Gender)"
+                query2 = query2 +" values('"+str(data1["name"])+"','"+str(data1["mobile"])+"','"+str('6')+"','"+str(UserID)
+                query2=query2+"','"+str(data1["password"])+"','"+str(data1["Email"])+"','"+str(data1["Gender"])+"');"
+                print(query2)
+                
+                cursor.execute(query2)
+                conn.commit()
+                query = "select ID as userId,Usertype_Id from userMaster where name= '"+str(data1["name"])+ "' and  Email='"+str(data1["Email"])+ "';"
+                
+                cursor.execute(query)
+                data=cursor.fetchall()
+                yu=data[-1]
+                mainId=yu["userId"]
+                Usertype_Id=yu["Usertype_Id"]
+                HubId = data1["HubId"]
+                print(HubId)
+                for i in HubId:
+                    query = "select * from userHubMapping where hubId='"+str(i)+"'   and userid= '"+str(mainId)+ "';"
+                    cursor.execute(query)
+                    userHubMappingdata = cursor.fetchall()
+                    if userHubMappingdata==():
+                        query2  = " insert into userHubMapping (userId,hubId,usertypeId)"
+                        query2 = query2 +" values('"+str(mainId)+"','"+str(i)+"','"+str('5')+"' );"
+                        conn=Connection()
+                        cursor = conn.cursor()
+                        cursor.execute(query2)
+                        conn.commit()
+                
+                query = "select * from userMaster where  Usertype_Id=5 and Email='"+str(data1["Email"])+ "';"
+                
+                cursor.execute(query)
+                data = cursor.fetchone()
+                if data!=None:
+                    print("data",data)
+                    mainId=data["ID"]
+                    Usertype_Id=data["Usertype_Id"]
+                    HubId = data1["HubId"]
+                    print(HubId)
+                    for i in HubId:
+                        query = "select * from userHubMapping where hubId='"+str(i)+"'   and userid= '"+str(mainId)+ "';"
+                        cursor.execute(query)
+                        userHubMappingdata = cursor.fetchall()
+                        if userHubMappingdata==():
+                            query2  = " insert into userHubMapping (userId,hubId,usertypeId)"
+                            query2 = query2 +" values('"+str(mainId)+"','"+str(i)+"','"+str('5')+"' );"
+                            conn=Connection()
+                            cursor = conn.cursor()
+                            cursor.execute(query2)
+                            conn.commit()
+                cursor.close()                
+
+                output = {"result":"data inserted successfully","status":"true"}
+                return output
+            else:
+                output = {"result":"password mismatched","status":"false"}
+                return output
+        else:
+            output = {"result":"User Already Added Existed ","status":"true"}
+            return output 
+    except Exception as e :
+        print("Exception---->" + str(e))    
+        output = {"result":"something went wrong","status":"false"}
+        return output
+
 
 
 
