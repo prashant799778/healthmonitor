@@ -1731,11 +1731,19 @@ def updateStatus():
        
         json1=request.get_data() 
         data=json.loads(json1.decode("utf-8")) 
-       
-        query1 = " update userMaster set   counter='0',Status='" + str(data["Status"])+ "'  where Email = '" + str(data["Email"])+ "';"
-        print(query1)
         conn=Connection()
         cursor = conn.cursor()
+        
+        query11 = " select Status from userMaster where Email = '" + str(data["Email"])+ "';"
+        cursor.execute(query11)
+        data1= cursor.fetchall()
+        print("data=========================",data)
+        if data1[0]["Status"]==0:
+            query1 = " update userMaster set   counter='0',Status=2 where Email = '" + str(data["Email"])+ "';"
+        else:
+            query1 = " update userMaster set   counter='0',Status=0 where Email = '" + str(data["Email"])+ "';"
+        print(query1)
+        
         cursor.execute(query1)
         conn.commit()
         cursor.close()
