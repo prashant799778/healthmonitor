@@ -1947,17 +1947,16 @@ def preiscribeMedicine():
             query1=  "select count(*) as count from preiscribeMedicine as pmm ,Patient_master as pm where doctorId='" + doctorId + "'and pm.PatientId=pmm.patientId and pmm.status='0' "+  WhereCondition1 +"  ORDER by pmm.id DESC limit  0,5"
             cursor.execute(query1)
             data2=cursor.fetchall()
-            print(data2)
-
-            count=data2['count'][0]
-            print(count)
+            for i in data2:
+                count=i['count']
+                print(count)
 
         
         cursor.close()
         
         
         if data:           
-            Data = {"result":data,"Unread messages":count,"status":"true"}
+            Data = {"result":data,"status":"true"}
             return Data
         else:
             output = {"result":"No Data Found","status":"false"}
