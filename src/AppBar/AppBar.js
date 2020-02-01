@@ -33,7 +33,7 @@ export default class AppBar extends React.Component{
    
      let d_id=localStorage.getItem("ID","")
     
-     let api = `https://smarticuapi.fourbrick.in/preiscribeMedicine?doctorId=${d_id}`;
+     let api = `https://api.digitologyhealthcare.com/preiscribeMedicine?doctorId=${d_id}`;
           axios.get(api)
         .then((response)=> {
           // handle success
