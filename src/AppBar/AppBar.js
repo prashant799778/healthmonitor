@@ -190,7 +190,7 @@ export default class AppBar extends React.Component{
 
  <img src={require("./s-notification.svg")} />
         </button> } 
-{localStorage.getItem("user_type")=="Doctor" &&        <span className="dot-noti">{this.state.count}</span>   } 
+
 <div className="dropdown-menu dropdown-menu-right sadow ">
 <div className="hadding">
 <h2>Notification</h2>
