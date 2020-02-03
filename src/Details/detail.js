@@ -341,16 +341,16 @@ return(<DetailStyled>
                {texthighPressure!="" &&   <h3 className="erroe-mssh" style={{background:'#eb8c25'}}>{texthighPressure}</h3>}
                { textheartRate!="" &&    <h3 className="erroe-mssh" style={{background:'#b030b0'}} >{textheartRate}</h3>}
                 </div>
-				 <OutsideClickHandler
-      onOutsideClick={() => {
-      this.setState({isopen:false});
-      }}
-    >
+				
 				<div class="dropdown">
 				{localStorage.getItem("user_type","Operation")!="Operation" &&  
 				
 				<button class="side-button-pis" onClick={()=>{this.changemsgState()}} type="button">prescribe medicine</button>}
-					{this.state. isopen &&	  <div class="dropdown-menu men-drop sadow bg-colr-ch show-pre-medi">
+					{this.state. isopen &&	 <OutsideClickHandler
+      onOutsideClick={() => {
+      this.setState({isopen:false});
+      }}
+    >  <div class="dropdown-menu men-drop sadow bg-colr-ch show-pre-medi">
 				  <form>
 					<div class="stiky-note">
 					<textarea value={this.state.msg}  onChange={e => {
@@ -363,9 +363,9 @@ return(<DetailStyled>
                               <span  style={{paddingLeft:'15px'}} className="clr-white" >{this.state.msgStatus}</span>
 					</div>
 					</form>
-					</div>}
+					</div></OutsideClickHandler>}
 				</div>
-				</OutsideClickHandler>
+				
               </div>
               <div className="wrap-patient  alrt-dt" style={{backgroundImage: 'url('+backImg+')',
       backgroundPosition: 'center',
