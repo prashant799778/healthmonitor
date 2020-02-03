@@ -10,8 +10,9 @@ export const DetailStyled = styled.div`
     transform: translate3d(-183px, 28px, 0px);
     background: #26293b;
 }
-.clr-white{
-	color#fff;
+.clr-white {
+    color: #fff !important;
+    text-transform: capitalize;
 }
 .bg-colr-ch.show, textarea {
   background: #26293b !important;
