@@ -61,7 +61,7 @@ class Detail extends React.Component{
      
       Oclient1.publish(this.state.currentid+"/Notification",JSON.stringify(msg),(errs)=>{
         if (!err) {
-          this.setState({ msgStatus:'message sent'})
+          this.setState({ msgStatus:'	'})
           setTimeout(()=>{ this.props.updatePage()},2000);
          
         }else{
@@ -341,7 +341,7 @@ return(<DetailStyled>
                 </div>
 				<div class="dropdown">
 				{localStorage.getItem("user_type","Operation")!="Operation" && <button class="side-button-pis" onClick={()=>{this.changemsgState()}} type="button">prescribe medicine</button>}
-				  <div class="dropdown-menu men-drop sadow bg-colr-ch">
+				  <div class="dropdown-menu men-drop sadow bg-colr-ch show-pre-medi">
 				  <form>
 					<div class="stiky-note">
 					<textarea value={this.state.msg}  onChange={e => {
