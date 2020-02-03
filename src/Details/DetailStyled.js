@@ -14,6 +14,10 @@ export const DetailStyled = styled.div`
     color: #fff !important;
     text-transform: capitalize;
 }
+.side-button-pis:focus {
+    box-shadow: none;
+    outline: 0;
+}
 .bg-colr-ch.show, textarea {
   background: #26293b !important;
   color: #fff !important;
