@@ -341,7 +341,7 @@ return(<DetailStyled>
                 </div>
 				<div class="dropdown">
 				{localStorage.getItem("user_type","Operation")!="Operation" && <button class="side-button-pis" onClick={()=>{this.changemsgState()}} type="button">prescribe medicine</button>}
-					{this.state. isopen &&&	  <div class="dropdown-menu men-drop sadow bg-colr-ch show-pre-medi">
+					{this.state. isopen &&	  <div class="dropdown-menu men-drop sadow bg-colr-ch show-pre-medi">
 				  <form>
 					<div class="stiky-note">
 					<textarea value={this.state.msg}  onChange={e => {
