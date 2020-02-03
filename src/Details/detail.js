@@ -341,14 +341,15 @@ return(<DetailStyled>
                {texthighPressure!="" &&   <h3 className="erroe-mssh" style={{background:'#eb8c25'}}>{texthighPressure}</h3>}
                { textheartRate!="" &&    <h3 className="erroe-mssh" style={{background:'#b030b0'}} >{textheartRate}</h3>}
                 </div>
-				<div class="dropdown">
-				{localStorage.getItem("user_type","Operation")!="Operation" &&  
 				 <OutsideClickHandler
       onOutsideClick={() => {
       this.setState({isopen:false});
       }}
     >
-				<button class="side-button-pis" onClick={()=>{this.changemsgState()}} type="button">prescribe medicine</button></OutsideClickHandler>}
+				<div class="dropdown">
+				{localStorage.getItem("user_type","Operation")!="Operation" &&  
+				
+				<button class="side-button-pis" onClick={()=>{this.changemsgState()}} type="button">prescribe medicine</button>}
 					{this.state. isopen &&	  <div class="dropdown-menu men-drop sadow bg-colr-ch show-pre-medi">
 				  <form>
 					<div class="stiky-note">
@@ -364,7 +365,7 @@ return(<DetailStyled>
 					</form>
 					</div>}
 				</div>
-				
+				</OutsideClickHandler>
               </div>
               <div className="wrap-patient  alrt-dt" style={{backgroundImage: 'url('+backImg+')',
       backgroundPosition: 'center',
