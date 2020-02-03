@@ -24,6 +24,7 @@
                 android:layout_width="wrap_content"
                 android:text="Logout"
                 android:id="@+id/bck1"
+                android:visibility="gone"
                 android:layout_gravity="center_vertical"
                 android:textColor="@color/textcolor"
                 android:layout_height="wrap_content">
@@ -34,7 +35,7 @@
             android:layout_height="52dp"
             android:layout_marginRight="10dp"
             android:padding="13dp"
-            android:visibility="visible"
+            android:visibility="gone"
             android:scaleType="fitCenter"
             android:background="@color/toolbarcolor"
             android:src="@drawable/logout"></ImageButton>
@@ -117,7 +118,7 @@
                         android:id="@+id/t1"
                         android:textColor="@color/textcolor"
                         android:textSize="30dp"
-                        android:text="02"
+                        android:text="00"
                         android:textAlignment="center"
                         android:gravity="center_vertical"
                         android:layout_height="match_parent">
@@ -172,7 +173,7 @@
                         android:id="@+id/t2"
                         android:textColor="@color/textcolor"
                         android:textSize="30dp"
-                        android:text="10"
+                        android:text="00"
                         android:textAlignment="center"
                         android:gravity="center_vertical"
                         android:layout_height="match_parent">
@@ -203,7 +204,7 @@
             app:stl_dividerColor="@color/white"
             app:stl_dividerThickness="0dp"
             app:stl_defaultTabTextAllCaps="false"
-            app:stl_defaultTabTextSize="12sp"
+            app:stl_defaultTabTextSize="14sp"
             app:stl_defaultTabTextHorizontalPadding="16dp"
             app:stl_defaultTabTextMinWidth="0dp"
             app:stl_distributeEvenly="false"
@@ -211,11 +212,18 @@
             app:stl_titleOffset="24dp"
             app:stl_drawDecorationAfterTab="false"
             />
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/pb"
+            app:theme="@style/AAA_ProgressBar"
+            android:layout_gravity="center_horizontal">
+        </ProgressBar>
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewpager"
             android:layout_width="match_parent"
             android:background="@color/bg1"
-            android:visibility="gone"
+            android:visibility="visible"
             android:layout_height="match_parent"
             android:layout_below="@id/viewpagertab"
             />
@@ -223,6 +231,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/reclycle"
+            android:background="@color/bg1"
+            android:visibility="gone"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp">
         </androidx.recyclerview.widget.RecyclerView>

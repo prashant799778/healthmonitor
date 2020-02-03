@@ -28,14 +28,21 @@
         android:roundIcon="@mipmap/app_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.Main2Activity"
-            android:screenOrientation="landscape"></activity>
+        <activity android:name=".activities.EditProfileActivity"></activity>
+        <activity
+            android:name=".activities.AlarmActivity"
+            android:screenOrientation="landscape" />
+        <activity android:name=".activities.ShowPatientsActivity" />
+        <activity
+            android:name=".activities.Main2Activity"
+            android:screenOrientation="landscape" />
         <activity android:name=".activities.UserDashboard" />
         <activity
             android:name=".activities.UserDisplayActivity"
             android:screenOrientation="landscape" />
 
-        <service android:name="org.eclipse.paho.android.service.MqttService"></service>
+        <service android:name="org.eclipse.paho.android.service.MqttService" />
+        <service android:name=".services.MyService" />
 
         <uses-library
             android:name="org.apache.http.legacy"

@@ -66,6 +66,9 @@ public class MySharedPrefrence {
     public String getUserType() {
         return sharedPreferences.getString("usertype", "");
     }
+
+
+
     public void setCount(String id) {
         prefEditor.putString("count", id);
         prefEditor.commit();
@@ -74,6 +77,175 @@ public class MySharedPrefrence {
     public String getCount() {
         return sharedPreferences.getString("count", "");
     }
+
+
+
+
+
+    public void setHighHeartLimit(String id) {
+        prefEditor.putString("setHighHeartLimit", id);
+        prefEditor.commit();
+    }
+
+    public String getHighHeartLimit() {
+        return sharedPreferences.getString("setHighHeartLimit", "100");
+    }
+
+    public void setLowHeartLimit(String id) {
+        prefEditor.putString("setLowHeartLimit", id);
+        prefEditor.commit();
+    }
+
+    public String getLowHeartLimit() {
+        return sharedPreferences.getString("setLowHeartLimit", "60");
+    }
+
+
+
+
+
+    public void setHighSpo2(String id) {
+        prefEditor.putString("setHighSpo2", id);
+        prefEditor.commit();
+    }
+
+    public String getHighSpo2() {
+        return sharedPreferences.getString("setHighSpo2", "99");
+    }
+    public void setLowSpo2(String id) {
+        prefEditor.putString("setLowSpo2", id);
+        prefEditor.commit();
+    }
+
+    public String getLowSpo2() {
+        return sharedPreferences.getString("setLowSpo2", "66");
+    }
+
+
+
+    public void setHighPulseRate(String id) {
+        prefEditor.putString("setHighPulse", id);
+        prefEditor.commit();
+    }
+
+    public String getHighPulseRate() {
+        return sharedPreferences.getString("setHighPulse", "100");
+    }
+
+
+    public void setLowPulseRate(String id) {
+        prefEditor.putString("setLowPulseRate", id);
+        prefEditor.commit();
+    }
+
+    public String getLowPulseRate() {
+        return sharedPreferences.getString("setLowPulseRate", "70");
+    }
+
+
+
+
+
+
+
+
+    public void setHighPressureUpper(String id) {
+        prefEditor.putString("setHighPressure", id);
+        prefEditor.commit();
+    }
+
+    public String getHighPressureUpper() {
+        return sharedPreferences.getString("setHighPressure", "139");
+    }
+
+
+
+    public void setHighPressureLower(String id) {
+        prefEditor.putString("getHighPressureLoewer", id);
+        prefEditor.commit();
+    }
+
+    public String getHighPressureLower() {
+        return sharedPreferences.getString("getHighPressureLoewer", "120");
+    }
+
+
+
+
+
+
+
+
+    public void setLowPressureUpper(String id) {
+        prefEditor.putString("setLowPressure", id);
+        prefEditor.commit();
+    }
+
+    public String getLowPressureUpper() {
+        return sharedPreferences.getString("setLowPressure", "89");
+    }
+
+
+    public void setLowPressureLower(String id) {
+        prefEditor.putString("setLowPressureLower", id);
+        prefEditor.commit();
+    }
+
+    public String getLowPressureLower() {
+        return sharedPreferences.getString("setLowPressureLower", "80");
+    }
+
+
+
+    public void setTempLower(String id) {
+        prefEditor.putString("setTempLower", id);
+        prefEditor.commit();
+    }
+
+    public String getTempLower() {
+        return sharedPreferences.getString("setTempLower", "36");
+    }
+
+    public void setTempUpper(String id) {
+        prefEditor.putString("setTempUpper", id);
+        prefEditor.commit();
+    }
+
+    public String getTempUpper() {
+        return sharedPreferences.getString("setTempUpper", "37");
+    }
+
+
+    public void setAlarmValue(String id) {
+        prefEditor.putString("setAlarmValue", id);
+        prefEditor.commit();
+    }
+
+    public String getAlarmValue() {
+        return sharedPreferences.getString("setAlarmValue", "0");
+    }
+
+    public void setPulseValue(String id) {
+        prefEditor.putString("setpulseValue", id);
+        prefEditor.commit();
+    }
+
+    public String getPulseValue() {
+        return sharedPreferences.getString("setpulseValue", "0");
+    }
+    public void setBrightValue(String id) {
+        prefEditor.putString("getBrightValue", id);
+        prefEditor.commit();
+    }
+
+    public String getBrightValue() {
+        return sharedPreferences.getString("getBrightValue", "0");
+    }
+
+
+
+
+
 
 
 
@@ -106,6 +278,48 @@ public class MySharedPrefrence {
 
     public String getDoctorEmail() {
         return sharedPreferences.getString("email", "");
+    }
+
+
+
+    public void setSUerSessionId(String sessionId) {
+        prefEditor.putString("sessionId", sessionId);
+        prefEditor.commit();
+    }
+
+    public String getUserSessionId() {
+        return sharedPreferences.getString("sessionId", "");
+    }
+
+
+    public void setDoctorLicenceNo(String licence) {
+        prefEditor.putString("licence", licence);
+        prefEditor.commit();
+    }
+
+    public String getDoctorLicenceNo() {
+        return sharedPreferences.getString("licence", "");
+    }
+
+
+
+
+
+    public void setTotalPatients(String id) {
+        prefEditor.putString("pp", id);
+        prefEditor.commit();
+    }
+
+    public String getTotalPatients() {
+        return sharedPreferences.getString("pp", "");
+    }
+    public void setTotalHospital(String id) {
+        prefEditor.putString("ppp", id);
+        prefEditor.commit();
+    }
+
+    public String getTotalHospital() {
+        return sharedPreferences.getString("ppp", "");
     }
 
 
@@ -198,6 +412,44 @@ public class MySharedPrefrence {
 
     public String getDoctorId() {
         return sharedPreferences.getString("D", "");
+    }
+
+
+    public void setNurseId(String id) {
+        prefEditor.putString("N_ID", id);
+        prefEditor.commit();
+    }
+
+    public String getNurseId() {
+        return sharedPreferences.getString("N_ID", "");
+    }
+
+
+
+
+    public void setDoctorId1(String id) {
+        prefEditor.putString("D1", id);
+        prefEditor.commit();
+    }
+
+    public String getDoctorId1() {
+        return sharedPreferences.getString("D1", "");
+    }
+
+
+
+
+
+
+
+
+    public void setDoctorName(String id) {
+        prefEditor.putString("Dname", id);
+        prefEditor.commit();
+    }
+
+    public String getDoctorName() {
+        return sharedPreferences.getString("Dname", "");
     }
 
 

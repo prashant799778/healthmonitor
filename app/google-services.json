@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "412896468250",
+    "firebase_url": "https://smarticu-9f995.firebaseio.com",
+    "project_id": "smarticu-9f995",
+    "storage_bucket": "smarticu-9f995.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:412896468250:android:fa5dfef6692623303e60a3",
+        "android_client_info": {
+          "package_name": "com.monitor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "412896468250-i0rvrq458nehu28bt42sptpp9o6t74rp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.monitor",
+            "certificate_hash": "8eece2ac4ebe52190c7963b0c60fef9c5f0914ea"
+          }
+        },
+        {
+          "client_id": "412896468250-ritde1s75fpmv1abi40ktkrttmp50dla.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJ1Sfa9js4OA9bQ9REwex6ZYUXQIRez0A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "412896468250-ritde1s75fpmv1abi40ktkrttmp50dla.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -10,9 +10,10 @@ import com.monitor.activities.UserDisplayActivity;
 import com.monitor.util.Comman;
 import com.monitor.util.Constant;
 
-import org.eclipse.paho.android.service.MqttAndroidClient;
+
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
 import org.eclipse.paho.client.mqttv3.IMqttToken;
+import org.eclipse.paho.client.mqttv3.MqttAsyncClient;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttException;
 
@@ -28,7 +29,7 @@ public class IcuApplication extends Application {
 
     /** The instance. */
     private static IcuApplication _instance = null;
-    public MqttAndroidClient client;
+    public MqttAsyncClient client;
     @Override
     public void onCreate() {
         _instance = this;
@@ -55,10 +56,7 @@ public class IcuApplication extends Application {
     public boolean isAppInBackground() {
         return _isAppInBackground;
     }
-    public MqttAndroidClient getClient()
-    {
-        return client;
-    }
+
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
@@ -72,8 +70,8 @@ public class IcuApplication extends Application {
     public void connecttoMqtt()
     {
         String clientId = MqttClient.generateClientId();
-        client = new MqttAndroidClient(this, Constant.SERVER_URL,
-                        clientId);
+//        client = new MqttAndroidClient(this, Constant.SERVER_JSON_URL,
+//                        clientId);
         Comman.log("Mqtt Client Id",":"+clientId);
 
         if (!client.isConnected())

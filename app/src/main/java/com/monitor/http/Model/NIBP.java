@@ -8,7 +8,7 @@ public class NIBP {
 
     @SerializedName("Cuff")
     @Expose
-    private Integer cuff;
+    private String cuff;
     @SerializedName("High")
     @Expose
     private String high;
@@ -19,11 +19,11 @@ public class NIBP {
     @Expose
     private String mean;
 
-    public Integer getCuff() {
+    public String getCuff() {
         return cuff;
     }
 
-    public void setCuff(Integer cuff) {
+    public void setCuff(String cuff) {
         this.cuff = cuff;
     }
 

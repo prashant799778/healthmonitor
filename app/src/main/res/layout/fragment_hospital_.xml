@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:id="@+id/v"
     android:background="@color/bg1"
@@ -30,7 +31,7 @@
             android:textColor="@color/textcolor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/Hospital"
+            android:text="@string/AllHospitall"
             android:textSize="18dp"
             ></com.monitor.widget.Lato_Regular_Font>
 
@@ -38,13 +39,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="30dp"
         android:orientation="vertical">
         <com.monitor.widget.Lato_Regular_Font
             android:textColor="@color/textcolor"
             android:text="@string/AllHospitall"
             android:layout_weight=".5"
             android:textSize="18dp"
+            android:visibility="gone"
             android:gravity="center_vertical|left"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -52,11 +54,10 @@
         <LinearLayout
             android:orientation="horizontal" android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:weightSum="2.9"
+            android:weightSum="4"
             android:background="@color/bg1">
             <com.monitor.widget.Lato_Regular_Font
-                android:layout_weight=".9"
+                android:layout_weight="1"
                 android:textColor="@color/textcolor"
                 android:text="@string/hospitalname"
                 android:textSize="@dimen/textsize"
@@ -66,7 +67,17 @@
                 android:layout_height="match_parent">
             </com.monitor.widget.Lato_Regular_Font>
             <com.monitor.widget.Lato_Regular_Font
-                android:layout_weight="1.1"
+                android:layout_weight="1"
+                android:textColor="@color/textcolor"
+                android:text="Hub"
+                android:id="@+id/hub"
+                android:textSize="@dimen/textsize"
+                android:gravity="center_vertical|center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </com.monitor.widget.Lato_Regular_Font>
+            <com.monitor.widget.Lato_Regular_Font
+                android:layout_weight="1"
                 android:textColor="@color/textcolor"
                 android:text="@string/noofpatient"
                 android:id="@+id/noofpatients"
@@ -76,12 +87,13 @@
                 android:layout_height="match_parent">
             </com.monitor.widget.Lato_Regular_Font>
             <com.monitor.widget.Lato_Regular_Font
-                android:layout_weight=".9"
+                android:layout_weight="1"
                 android:textColor="@color/textcolor"
                 android:text="@string/Location"
                 android:id="@+id/location"
                 android:textSize="@dimen/textsize"
                 android:gravity="center_vertical|right"
+                android:paddingRight="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
             </com.monitor.widget.Lato_Regular_Font>
@@ -109,4 +121,11 @@
         android:layout_height="wrap_content"
         android:id="@+id/reclycle">
     </androidx.recyclerview.widget.RecyclerView>
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:theme="@style/AAA_ProgressBar"
+        android:id="@+id/pb"
+        android:layout_gravity="center_horizontal">
+    </ProgressBar>
 </LinearLayout>

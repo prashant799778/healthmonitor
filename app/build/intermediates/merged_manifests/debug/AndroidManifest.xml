@@ -36,6 +36,11 @@
         android:roundIcon="@mipmap/app_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
+        <activity android:name="com.monitor.activities.EditProfileActivity" />
+        <activity
+            android:name="com.monitor.activities.AlarmActivity"
+            android:screenOrientation="landscape" />
+        <activity android:name="com.monitor.activities.ShowPatientsActivity" />
         <activity
             android:name="com.monitor.activities.Main2Activity"
             android:screenOrientation="landscape" />
@@ -45,6 +50,7 @@
             android:screenOrientation="landscape" />
 
         <service android:name="org.eclipse.paho.android.service.MqttService" />
+        <service android:name="com.monitor.services.MyService" />
 
         <uses-library
             android:name="org.apache.http.legacy"

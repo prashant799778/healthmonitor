@@ -2,6 +2,7 @@ package com.monitor.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +39,12 @@ public class Patients_Adapter extends RecyclerView.Adapter<Patients_Adapter.Noti
     @Override
     public void onBindViewHolder(@NonNull NotificationHolder holder, int position) {
         final All_Patients ap=list.get(position);
+        if((position%2)!=0){
+            holder.itemView.setBackgroundColor(Color.parseColor("#25293b"));
+        }
+        else {
+            holder.itemView.setBackgroundColor(Color.parseColor("#2a323c"));
+        }
         holder.p_name.setText(ap.getPatientName());
         holder.age.setText("12");
         holder.hospital.setText(ap.getHospital_Name());

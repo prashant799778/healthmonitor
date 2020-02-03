@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 import com.monitor.Adapter.Hospital_Adapter;
 import com.monitor.Adapter.Patients_Adapter;
@@ -26,6 +27,7 @@ import java.util.ArrayList;
 public class All_Patients_Fragment extends Base_Fragment {
     ArrayList<All_Patients>list;
     Patients_Adapter a;
+    ProgressBar progressBar;
     LinearLayoutManager manager;
     RecyclerView recyclerView;
     LinearLayout v;
@@ -42,11 +44,9 @@ public class All_Patients_Fragment extends Base_Fragment {
         v=view.findViewById(R.id.v);
         a=new Patients_Adapter(getContext(),list);
         recyclerView.setAdapter(a);
-        Api_calling.getAllPatients(getContext(),v,mySharedPrefrence,a,list);
-
-
-
-
+        progressBar=view.findViewById(R.id.pb);
+        Api_calling.getAllPatients(getContext(),v,mySharedPrefrence,a,list,progressBar);
+        Api_calling.checkUserSession(getActivity(),getContext());
         return view;
     }
 

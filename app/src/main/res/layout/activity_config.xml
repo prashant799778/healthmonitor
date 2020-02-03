@@ -26,6 +26,7 @@
                 android:layout_width="wrap_content"
                 android:text="Logout"
                 android:id="@+id/bck1"
+                android:visibility="gone"
                 android:layout_gravity="center_vertical"
                 android:textColor="@color/textcolor"
                 android:layout_height="wrap_content">
@@ -35,17 +36,18 @@
                 android:id="@+id/bck"
                 android:layout_height="52dp"
                 android:layout_marginRight="10dp"
-                android:padding="13dp"
+                android:padding="12dp"
                 android:visibility="visible"
-                android:scaleType="fitCenter"
+                android:scaleType="centerInside"
                 android:background="@color/toolbarcolor"
-                android:src="@drawable/logout"></ImageButton>
+                android:src="@drawable/newl"></ImageButton>
         </LinearLayout>
         <com.monitor.widget.Lato_Regular_Font
             android:textColor="@color/white"
             android:textStyle="bold"
             android:layout_width="wrap_content"
             android:gravity="center_vertical"
+            android:paddingLeft="23.5dp"
             android:layout_height="match_parent"
             android:text="@string/addpatient"
             android:textSize="22dp"
@@ -65,6 +67,7 @@
         android:layout_height="wrap_content"
         android:text="@string/addpatient"
         android:textSize="15dp"
+        android:visibility="gone"
         android:textColor="@color/headingcolor"
         android:layout_marginLeft="23.3dp"
         android:layout_marginTop="18.1dp"/>
@@ -85,6 +88,7 @@
         android:layout_marginTop="8.7dp"
         android:textColor="@color/white"
         android:layout_marginRight="22.4dp"
+        android:textCursorDrawable="@drawable/curcor_color"
         android:background="@color/textfieldcolor"
         android:inputType="text"
         android:paddingLeft="10dp"
@@ -206,6 +210,7 @@
             android:inputType="number"
             android:textSize="14dp"
             android:textColor="@color/white"
+            android:textCursorDrawable="@drawable/curcor_color"
             android:maxLength="9"
             android:layout_marginRight="12dp"
             android:layout_weight="1"
@@ -221,6 +226,8 @@
             android:layout_marginRight="22.4dp"
             android:layout_marginLeft="12dp"
             android:inputType="number"
+            android:textCursorDrawable="@drawable/curcor_color"
+
             android:textSize="14dp"
             android:textColor="@color/white"
             android:maxLength="9"
@@ -249,6 +256,8 @@
         android:layout_marginRight="22.4dp"
         android:background="@color/textfieldcolor"
         android:inputType="numberDecimal"
+        android:textCursorDrawable="@drawable/curcor_color"
+
         android:textColor="@color/white"
         android:paddingLeft="10dp"
         android:textSize="14dp" />
@@ -272,6 +281,7 @@
         android:enabled="false"
         android:background="@color/textfieldcolor"
         android:textColor="@color/white"
+        android:textCursorDrawable="@drawable/curcor_color"
         android:inputType="numberDecimal"
         android:paddingLeft="10dp"
         android:textSize="14dp" />
@@ -306,12 +316,20 @@
         android:textSize="14dp"
         android:textColor="@color/textcolor"
         />
+
+
+
+
+
+
+
     <com.jaredrummler.materialspinner.MaterialSpinner
         android:id="@+id/doctorList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="23.3dp"
         android:layout_marginTop="8.7dp"
+        android:visibility="gone"
         android:layout_marginRight="22.4dp"
         android:theme="@style/Animation.Design.BottomSheetDialog"
         android:background="@color/white"
@@ -327,12 +345,40 @@
 
 
 
+            <com.monitor.widget.Lato_Regular_Font
+                android:id="@+id/doctorlist"
+                android:layout_width="match_parent"
+                android:layout_height="32.9dp"
+                android:layout_marginLeft="23.3dp"
+                android:layout_marginTop="8.7dp"
+                android:layout_marginRight="22.4dp"
+                android:background="@color/textfieldcolor"
+                android:textColor="@color/white"
+                android:textAlignment="gravity"
+                android:gravity="center_vertical"
+                android:hint="Select Doctor"
+                android:textColorHint="@color/textcolor"
+                android:textCursorDrawable="@drawable/curcor_color"
+                android:paddingLeft="10dp"
+                android:spinnerMode="dialog"
+                android:textSize="14dp" >
+            </com.monitor.widget.Lato_Regular_Font>
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="32.9dp"
+                android:layout_gravity="right"
+                android:layout_marginTop="-33dp"
+                android:layout_marginRight="36.4dp"
+                android:padding="5dp"
+                android:src="@drawable/down" />
 
 
 
 
 
-<!--            <com.monitor.widget.GothamBookFontForLable-->
+
+
+            <!--            <com.monitor.widget.GothamBookFontForLable-->
 <!--                android:layout_marginTop="10dp"-->
 <!--                android:layout_width="match_parent"-->
 <!--                android:layout_height="wrap_content"-->

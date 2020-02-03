@@ -1,6 +1,8 @@
 package com.monitor.util;
 
 
+import android.widget.Toast;
+
 import java.util.concurrent.LinkedBlockingQueue;
 
 /**
@@ -39,6 +41,7 @@ public class DataParser {
     public interface onPackageReceivedListener
     {
         void onSpO2WaveReceived(int dat);
+        void onRespReceived(int dat);
         void onSpO2Received(SpO2 spo2);
 
         void onECGWaveReceived(int dat);
@@ -83,10 +86,10 @@ public class DataParser {
                     if(dat == PACKAGE_HEAD[1]) {
                         int packageLen = getData();
                         packageData = new int[packageLen + PACKAGE_HEAD.length];
-
+                        if(packageData.length>=3){
                         packageData[0] = PACKAGE_HEAD[0];
                         packageData[1] = PACKAGE_HEAD[1];
-                        packageData[2] = packageLen;
+                        packageData[2] = packageLen;}
 
                         for (int i = 3; i < packageLen + PACKAGE_HEAD.length; i++) {
                             packageData[i] = getData();
@@ -106,9 +109,9 @@ public class DataParser {
         // TODO Auto-generated method stub
         int pkgType = pkgData[3];
         int[] tempBuffer = new int[5];
+//        Comman.log("PkgType",String.valueOf(pkgType));
 
 //        Log.d("asd.......",)
-
         switch (pkgType) {
             case PKG_ECG_WAVE:
                 mListener.onECGWaveReceived(pkgData[4]);

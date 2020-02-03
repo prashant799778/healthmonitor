@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="50dp"
-    android:weightSum="3"
+    android:weightSum="4"
     android:background="@color/bg1">
     <com.monitor.widget.Lato_Regular_Font
         android:layout_weight="1"
@@ -10,8 +10,18 @@
         android:text="00"
         android:textSize="@dimen/textsize"
         android:gravity="center|left"
-        android:paddingLeft="15dp"
+        android:paddingLeft="5dp"
         android:id="@+id/p_name"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </com.monitor.widget.Lato_Regular_Font>
+    <com.monitor.widget.Lato_Regular_Font
+        android:layout_weight="1"
+        android:textColor="@color/textcolor"
+        android:text="00"
+        android:id="@+id/hub"
+        android:textSize="@dimen/textsize"
+        android:gravity="center_vertical|center"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </com.monitor.widget.Lato_Regular_Font>
@@ -30,8 +40,9 @@
         android:textColor="@color/textcolor"
         android:text="00"
         android:id="@+id/hospital"
+        android:paddingRight="10dp"
         android:textSize="@dimen/textsize"
-        android:gravity="center_vertical|center"
+        android:gravity="center_vertical|right"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </com.monitor.widget.Lato_Regular_Font>

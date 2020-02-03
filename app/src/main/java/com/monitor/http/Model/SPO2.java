@@ -4,29 +4,40 @@ package com.monitor.http.Model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class SPO2 {
+public class Spo2 {
 
-    @SerializedName("SPO2")
+    @SerializedName("lower")
     @Expose
-    private Integer sPO2;
-    @SerializedName("Pulse Rate")
+    private Integer lower;
+    @SerializedName("status")
     @Expose
-    private Integer pulseRate;
+    private String status;
+    @SerializedName("upper")
+    @Expose
+    private Integer upper;
 
-    public Integer getSPO2() {
-        return sPO2;
+    public Integer getLower() {
+        return lower;
     }
 
-    public void setSPO2(Integer sPO2) {
-        this.sPO2 = sPO2;
+    public void setLower(Integer lower) {
+        this.lower = lower;
     }
 
-    public Integer getPulseRate() {
-        return pulseRate;
+    public String getStatus() {
+        return status;
     }
 
-    public void setPulseRate(Integer pulseRate) {
-        this.pulseRate = pulseRate;
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Integer getUpper() {
+        return upper;
+    }
+
+    public void setUpper(Integer upper) {
+        this.upper = upper;
     }
 
 }

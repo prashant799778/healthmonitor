@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    tools:context=".activities.EditProfileActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/top"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@color/toolbarcolor"
+            android:visibility="visible">
+
+            <ImageView
+                android:id="@+id/bck"
+                android:layout_width="50dp"
+                android:layout_height="52dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginRight="10dp"
+                android:background="@color/toolbarcolor"
+                android:padding="12dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/l_white"
+                android:visibility="visible"></ImageView>
+
+            <com.monitor.widget.Lato_Regular
+                android:id="@+id/save"
+                android:layout_width="100dp"
+                android:layout_height="52dp"
+                android:layout_alignParentRight="true"
+                android:background="@color/toolbarcolor"
+                android:gravity="center_horizontal|center_vertical"
+                android:scaleType="centerInside"
+                android:text="@string/save"
+                android:textAlignment="gravity"
+                android:textColor="@color/white"
+                android:textSize="18dp"
+                android:visibility="visible"></com.monitor.widget.Lato_Regular>
+
+            <com.monitor.widget.Lato_Regular_Font
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:gravity="center_vertical"
+                android:paddingLeft="23.5dp"
+                android:text="@string/editprofile"
+                android:textColor="@color/white"
+                android:textSize="22dp"
+                android:textStyle="bold"></com.monitor.widget.Lato_Regular_Font>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_below="@id/top"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+        <com.monitor.widget.Lato_Regular_Font
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="23.3dp"
+            android:layout_marginTop="17.6dp"
+            android:text="@string/Licence"
+            android:textSize="14dp"
+            android:textColor="@color/headingcolor"
+            />
+        <com.monitor.widget.EditTextFontGothamBook
+            android:id="@+id/licence"
+            android:layout_width="match_parent"
+            android:layout_height="32.9dp"
+            android:layout_marginLeft="23.3dp"
+            android:layout_marginTop="8.7dp"
+            android:textColor="@color/white"
+            android:layout_marginRight="22.4dp"
+            android:textCursorDrawable="@drawable/curcor_color"
+            android:background="@color/textfieldcolor"
+            android:inputType="text"
+            android:paddingLeft="10dp"
+            android:textSize="14dp" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

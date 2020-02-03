@@ -25,9 +25,9 @@
 <!--        android:layout_width="match_parent"-->
 <!--        android:layout_height="match_parent">-->
         <RelativeLayout
-            android:layout_marginTop="70dp"
+            android:layout_centerInParent="true"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
             <ImageView
                 android:visibility="visible"
@@ -58,6 +58,7 @@
                     android:layout_below="@+id/y"
                     android:layout_marginRight="28.5dp"
                     android:layout_marginLeft="28.5dp"
+                    android:textCursorDrawable="@drawable/curcor_color"
                     android:textColorHint="@color/hintcolor"
                     android:textSize="16dp"
                     android:textColor="@color/white"
@@ -83,6 +84,7 @@
                         android:layout_marginRight="28.5dp"
                         android:layout_marginLeft="28.5dp"
                         android:hint="@string/Password"
+                        android:textCursorDrawable="@drawable/curcor_color"
                         android:inputType="textPassword"
                         android:textColor="@color/white"
                         android:textColorHint="@color/hintcolor"
@@ -141,6 +143,7 @@
                 android:layout_marginBottom="50dp"
                android:layout_below="@id/overlayout"
                 android:textSize="14dp"
+                android:textAllCaps="false"
                 android:layout_marginTop="40dp"
                 android:background="@drawable/welcomrbutton"
                 android:layout_marginRight="28.5dp"

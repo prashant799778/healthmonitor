@@ -16,13 +16,19 @@ import android.content.pm.PackageManager;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.text.Html;
 import android.text.format.Formatter;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,17 +50,21 @@ import com.monitor.util.MySharedPrefrence;
 import com.monitor.util.NIBP;
 import com.monitor.util.SpO2;
 import com.monitor.util.Temp;
+import com.monitor.widget.GothamBookFontForLable;
+import com.monitor.widget.Lato_Regular;
 import com.monitor.widget.Lato_Regular_Font;
 import com.monitor.widget.WaveformView;
 
-import org.eclipse.paho.android.service.MqttAndroidClient;
+
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.IMqttToken;
+import org.eclipse.paho.client.mqttv3.MqttAsyncClient;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -84,7 +94,7 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
 
     //UI
 //    LineChartView gp;
-    Lato_Regular_Font pname,p_age,p_location,p_bed_np;
+    Lato_Regular_Font pname,p_age,p_location,p_bed_np,d_name;
     private LinearLayout btnBtCtr;
     private LinearLayout add;
     private LinearLayout bp;
@@ -93,6 +103,14 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
     private TextView tvECGinfo;
     private TextView resp;
     private TextView tvSPO2info;
+    JSONObject heartRate;
+    JSONObject jsonObject;
+    JSONObject spo2json;
+    JSONObject tempjson;
+    JSONObject highPressure;
+    GothamBookFontForLable ss,ss1;
+    JSONObject pulseRate;
+    JSONObject lowPressure;
     private TextView pr;
     private TextView tvTEMPinfo;
     private TextView tvNIBPinfo;
@@ -101,18 +119,31 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
     private TextView tvHWVersion;
     private WaveformView wfSpO2;
     private WaveformView wfECG;
+    Lato_Regular_Font alarm,lead;
+    MqttAsyncClient mqtt_Notifiaction;
     private Button cnt;
     JSONObject snd;
     JSONObject sp2;
+    LinearLayout notification;
     JSONObject e;
     JSONObject bpp;
+    JSONObject wave;
+    JSONArray array;
+
+    boolean isHeartRatHigh=false,isHeartRatLow=false,isSpo2High=false,isSpo2Low=false,isPulseRateHigh=false,isPulseRateLow=false,isTempHigh=false,isTempLow=false,isBpHighUpper=false,isBpLowUpper=false,isBpHighLower=false,isBpLowLower=false;
+    boolean tempboolean=false,ecgboolean=false,sop2boolean=false;
+
     int s2=0;
     double tp=0;
     int plus_rate=0;
     int cuff=0;
     int hr=0,rp=0;
+    int count=0;
+    int ssss=0;
     String name="",age="",hosptal="",bed="";
-    MqttAndroidClient client;
+    int data1=0,data2=0;
+    MqttAsyncClient client_Json,client_Ecg;
+    String topicId="";
 
     //    Socket socket;
 //    int SocketServerPORT=5053;
@@ -139,10 +170,7 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
         setContentView(R.layout.activity_main);
         m=MySharedPrefrence.instanceOf(MainActivity.this);
         cnt = findViewById(R.id.cnt);
-
-
-
-
+        d_name=findViewById(R.id.doctor);
         final Intent intent=getIntent();
         if(intent!=null)
         {
@@ -153,18 +181,27 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
 
         }
 //        gp=findViewById(R.id.gp);
+         heartRate=new JSONObject();
+        spo2json=new JSONObject();
+         tempjson=new JSONObject();
+         highPressure=new JSONObject();
+         lowPressure=new JSONObject();
+         pulseRate=new JSONObject();
+         jsonObject=new JSONObject();
         snd=new JSONObject();
         sp2=new JSONObject();
         e=new JSONObject();
         bpp=new JSONObject();
+        wave=new JSONObject();
+        array=new JSONArray();
         checkPermission();
-        connectMqtt();
-//        getData();
-//        try {
-//            socket=IO.socket(Constant.SERVER_URL);
-//        } catch (URISyntaxException ex) {
-//            ex.printStackTrace();
-//        }
+        if(!Comman.isNetworkConnected(MainActivity.this)){
+            Toast.makeText(MainActivity.this, ""+Constant.NO_INTERNET, Toast.LENGTH_LONG).show();
+        }else {
+        connectMqtt_JSon();
+        connectMqtt_Ecg();
+        cnnect_MQTT_Notification();}
+//        connectMqtt_Spo2();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         if (true)
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -180,8 +217,6 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
         initData();
         initView();
     }
-
-
     private void initData() {
         // enable the Bluetooth Adapter
         mBtController = BTController.getDefaultBTController(this);
@@ -195,20 +230,39 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
         //UI widgets
         add = (LinearLayout) findViewById(R.id.add);
         logout=findViewById(R.id.logout);
+        notification=findViewById(R.id.notification);
         bp=findViewById(R.id.pb);
         r=findViewById(R.id.r);
         pname=findViewById(R.id.p_name);
         p_age=findViewById(R.id.age);
         p_location=findViewById(R.id.location);
         p_bed_np=findViewById(R.id.bedNo);
+        alarm=findViewById(R.id.alarm);
+        lead=findViewById(R.id.lead);
+        ss=findViewById(R.id.ss);
+        ss1=findViewById(R.id.ss1);
         pname.setText(name);
         p_age.setText("Age "+age);
-        p_location.setText(hosptal);
+        p_location.setText(m.getHospital());
         p_bed_np.setText("Bed No."+bed);
+        d_name.setText("Doctor - "+m.getDoctorName());
+        String text = "<p>SPO<sub>2</sub></p>";
+        ss.setText(Html.fromHtml(text));
+        String text1 = "<p>SPO<sub>2</sub>(%)</p>";
+        ss1.setText(Html.fromHtml(text1));
+
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                startActivity(new Intent(MainActivity.this, ConfigActivity.class));
+//                mBtController.unregisterBroadcastReceiver(MainActivity.this);
+//                    disconnect("/1/1/1/11");
+                startActivity(new Intent(MainActivity.this, AlarmActivity.class));
+            }
+        });
+        notification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showMessageList();
             }
         });
         bp.setOnClickListener(new View.OnClickListener() {
@@ -225,7 +279,7 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
             public void onClick(View v) {
                 final SweetAlertDialog alertDialog= new SweetAlertDialog(MainActivity.this, SweetAlertDialog.WARNING_TYPE);
 //                                    alertDialog.getButton(SweetAlertDialog.BUTTON_CONFIRM).setBackgroundColor(getResources().getColor(R.color.signinbuttoncolor));
-                alertDialog.setTitleText("Do you Want Discharge this Patient")
+                alertDialog.setTitleText("Do you want to Discharge this Patient")
                         .setConfirmText("Yes").setCancelText("No").setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                     @Override
                     public void onClick(SweetAlertDialog sweetAlertDialog) {
@@ -234,7 +288,11 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
                 }).setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                     @Override
                     public void onClick(SweetAlertDialog sweetAlertDialog) {
-                        Api_calling.dischargePatient(MainActivity.this,r,setJSon());
+//                        System.exit(0); //for release "mBluetoothDevices" on key_back down
+                        Api_calling.dischargePatient(MainActivity.this,r,setJSon(),client_Ecg,client_Json,mBtController);
+//                        startActivity(new Intent(MainActivity.this,ConfigActivity.class));
+////                        System.exit(0); //for release "mBluetoothDevices" on key_back down
+//                        mBtController.unregisterBroadcastReceiver(MainActivity.this);
                         alertDialog.dismissWithAnimation();
                     }
                 });
@@ -288,6 +346,7 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
 
             @Override
             public void onClickDeviceItem(int pos) {
+                Comman.log("GETTTTTTTTTTTTT","GETTTTTTTTTTTTT");
                 BluetoothDevice device = mBluetoothDevices.get(pos);
                 Log.d("DEVICE.......", device.getAddress() + "===" + device.getName() + "=======");
                 mBtController.startScan(false);
@@ -349,23 +408,24 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        finish();
+//        finish();
 //        disConnect();
-        System.exit(0); //for release "mBluetoothDevices" on key_back down
-        mBtController.unregisterBroadcastReceiver(this);
+//        System.exit(0); //for release "mBluetoothDevices" on key_back down
+//        mBtController.unregisterBroadcastReceiver(this);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        System.exit(0); //for release "mBluetoothDevices" on key_back down
-        mBtController.unregisterBroadcastReceiver(this);
+//        System.exit(0); //for release "mBluetoothDevices" on key_back down
+//        mBtController.unregisterBroadcastReceiver(this);
     }
 
     //BTController implements
     @Override
     public void onFoundDevice(BluetoothDevice device) {
 //    Log.d("BL....",device.getName());
+        Comman.log("GGGGGGGGGGGGGGGGGGGGGgggg","GGGGGGGGGGGGGGGGGGGGGgggg");
         if (mBluetoothDevices.contains(device))
             return;
         mBluetoothDevices.add(device);
@@ -386,12 +446,6 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
     @Override
     public void onConnected() {
         mConnectingDialog.setMessage("Connected √");
-//        try {
-//            snd.put("PatientId",m.getPatientId()).put("RESP","").put("ECG",e.put("Heart Rate",random(100,45)).put("Rest Rate",random(40,25))).put("SPO2",sp2.put("SPO2",s2).put("Pulse Rate",plus_rate)).put("NIBP",bpp.put("Cuff",cuff).put("High","").put("Low","").put("Mean","")).put("TEMP",tp).put("usercreate",m.getUserType());
-////            call(snd);
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
@@ -410,19 +464,6 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
     @Override
     public void onDisconnected() {
         tvBtinfo.setText("Search Devices");
-        if(client.isConnected()) {
-            try {
-                client.disconnect();
-            } catch (MqttException ex) {
-                ex.printStackTrace();
-            }
-        }
-//        try {
-////            client.disconnect();
-////            client.close();
-//        } catch (MqttException ex) {
-//            ex.printStackTrace();
-//        }
     }
 
     @Override
@@ -434,26 +475,111 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
     //DataParser implements
     @Override
     public void onSpO2WaveReceived(int dat) {
+        data1=dat;
         wfSpO2.addAmp(dat);
+        sendSpo2(dat);
+    }
 
-//        List<DataPoint>dd=new ArrayList<>();
-//        dd.add(dat,new DataPoint(dat));
-//        gp.drawLine(dd);
+    @Override
+    public void onRespReceived(int dat) {
+
     }
 
     @Override
     public void onSpO2Received(final SpO2 spo2) {
+
+
+
+
+
+
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
+
+                final ArrayList msg=new ArrayList();
+                if(!tempboolean)
+                {
+                    msg.add("Temperature   unplugged  ");
+                }
+                if(!ecgboolean)
+                {
+                    msg.add("ECG:  unplugged ");
+                }
+                if(!sop2boolean)
+                {
+                    msg.add("Spo2  unplugged ");
+                }
+                if(msg.size()!=0){
+                for(int i=0;i<msg.size();i++) {
+                    final int j=i;
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (tempboolean) {
+                                lead.setText(msg.get(j).toString());
+                                lead.setVisibility(View.VISIBLE);
+                                Comman.log("FFF",""+msg.get(j).toString());
+                            }
+                            lead.setVisibility(View.VISIBLE);
+                        }
+                    }, 10000*j+1);
+                }}else {
+                    lead.setVisibility(View.GONE);
+                }
+                if(spo2.getSpO2()!=127 && spo2.getPulseRate()!=255 && spo2.getPulseRate()!=0 && spo2.getPulseRate()!=0) {
+                    sop2boolean=true;
+                    if ((!m.getHighSpo2().isEmpty() && spo2.getSpO2() > Integer.valueOf(m.getHighSpo2()) && spo2.getSpO2() != 127)) {
+                        isSpo2High=true;
+                        alarm.setVisibility(View.VISIBLE);
+                    } else if ((!m.getLowSpo2().isEmpty() && spo2.getSpO2() < Integer.valueOf(m.getLowSpo2()) && spo2.getSpO2() != 127)) {
+                        isSpo2High=true;
+                        alarm.setVisibility(View.VISIBLE);
+                    }else {
+                        isSpo2High=false;
+                        isSpo2Low=false;
+                    }
+                    if ((!m.getHighPulseRate().isEmpty() && spo2.getPulseRate() > Integer.valueOf(m.getHighPulseRate()) && spo2.getPulseRate() != 255)) {
+                        isPulseRateHigh=true;
+                    } else if ((!m.getLowPulseRate().isEmpty() && spo2.getPulseRate() < Integer.valueOf(m.getLowPulseRate()) && spo2.getPulseRate() != 255)) {
+                        isPulseRateLow=true;
+                    }else {
+                        isPulseRateLow=false;
+                        isPulseRateHigh=false;
+                    }
+                }
+                else {
+                    isSpo2High=false;
+                    isSpo2Low=false;
+                    isPulseRateLow=false;
+                    isPulseRateHigh=false;
+                    Comman.log("TTTTTT","Spo2 Fasle");
+                    sop2boolean=false;
+
+                }
                 if(spo2.getSpO2()==127){
                 tvSPO2info.setText("--");}else { tvSPO2info.setText(String.valueOf(spo2.getSpO2()));}
                 if(spo2.getPulseRate()==255){
                     pr.setText("--");
                 }else {pr.setText(String.valueOf(spo2.getPulseRate()));}
                 try {
-                    snd.put("PatientId",m.getPatientId()).put("RESP","").put("ECG",e.put("Heart Rate",hr).put("Resp Rate",rp)).put("SPO2",sp2.put("SPO2",spo2.getSpO2()).put("Pulse Rate",spo2.getPulseRate())).put("NIBP",bpp.put("Cuff",cuff).put("High","").put("Low","").put("Mean","")).put("TEMP",tp).put("usercreate",m.getUserType());
-                    sendData(snd);
+                    if(spo2.getSpO2()==127&&spo2.getPulseRate()==255){
+                    snd.put("PatientId",m.getPatientId()).put("RESP","").put("ECG",e.put("Heart Rate","").put("Resp Rate","")).put("SPO2",sp2.put("SPO2","")).put("Pulse Rate1","").put("NIBP",bpp.put("Cuff",cuff).put("High","").put("Low","").put("Mean","")).put("TEMP","").put("usercreate",m.getUserType()).put("heartRate",heartRate.put("upper",""+m.getHighHeartLimit()).put("lower",""+m.getLowHeartLimit()).put("status","true"))
+                            .put("spo2",spo2json.put("upper",""+m.getHighSpo2()).put("lower",""+m.getLowSpo2()).put("status","true"))
+                            .put("pulseRate",pulseRate.put("upper",""+m.getHighPulseRate()).put("lower",""+m.getLowPulseRate()).put("status","true"))
+                            .put("highPressure",highPressure.put("upper",""+m.getHighPressureUpper()).put("lower",""+m.getLowPressureLower()).put("status","true"))
+                            .put("lowPressure",lowPressure.put("upper",""+m.getLowPressureUpper()).put("lower",""+m.getLowPressureLower()).put("status","true"))
+                            .put("temperature",tempjson.put("upper",""+m.getTempUpper()).put("lower",""+m.getTempLower()).put("status","true"));
+                sendDataJson(snd);
+                    }else {
+                        snd.put("PatientId",m.getPatientId()).put("RESP","").put("ECG",e.put("Heart Rate","").put("Resp Rate","")).put("SPO2",sp2.put("SPO2",""+spo2.getSpO2()).put("Pulse Rate1",""+spo2.getPulseRate())).put("NIBP",bpp.put("Cuff",cuff).put("High","").put("Low","").put("Mean","")).put("TEMP","").put("usercreate",m.getUserType()).put("heartRate",heartRate.put("upper",""+m.getHighHeartLimit()).put("lower",""+m.getLowHeartLimit()).put("status","true"))
+                                .put("spo2",spo2json.put("upper",""+m.getHighSpo2()).put("lower",""+m.getLowSpo2()).put("status","true"))
+                                .put("pulseRate",pulseRate.put("upper",""+m.getHighPulseRate()).put("lower",""+m.getLowPulseRate()).put("status","true"))
+                                .put("highPressure",highPressure.put("upper",""+m.getHighPressureUpper()).put("lower",""+m.getLowPressureLower()).put("status","true"))
+                                .put("lowPressure",lowPressure.put("upper",""+m.getLowPressureUpper()).put("lower",""+m.getLowPressureLower()).put("status","true"))
+                                .put("temperature",tempjson.put("upper",""+m.getTempUpper()).put("lower",""+m.getTempLower()).put("status","true"));
+                        sendDataJson(snd);
+                    }
                     if(spo2.getSpO2()==127){
                     s2=0;}else {
                         s2=spo2.getSpO2();
@@ -469,8 +595,10 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
         });
     }
     @Override
-    public void onECGWaveReceived(int dat) {
+    public void onECGWaveReceived(final int dat) {
+        data2=dat;
         wfECG.addAmp(dat);
+        sendEcg(dat);
     }
 
     @Override
@@ -478,13 +606,45 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                tvECGinfo.setText(String.valueOf(ecg.getHeartRate()));
-                resp.setText(String.valueOf(ecg.getRestRate()));
+                checkVisibility();
+                if(ecg.getRestRate()!=0 && ecg.getHeartRate()!=0) {
+                         ecgboolean=true;
+                    if ((!m.getHighHeartLimit().isEmpty() && ecg.getHeartRate() > Integer.valueOf(m.getHighHeartLimit())) && ecg.getHeartRate() != 0) {
+                        isHeartRatHigh=true;
+                    } else if (!m.getLowHeartLimit().isEmpty() && ecg.getHeartRate() < Integer.valueOf(m.getLowHeartLimit()) && ecg.getHeartRate() != 0) {
+                        isHeartRatLow=true;
+                    }else {
+                        isHeartRatHigh=false;
+                        isHeartRatLow=false;
+                    }
+                }else {
+                    isHeartRatHigh=false;
+                    isHeartRatLow=false;
+                    ecgboolean=false;
+                }
+                if(ecg.getHeartRate()==0){tvECGinfo.setText("--");}else {tvECGinfo.setText(String.valueOf(ecg.getHeartRate()));}
+                if(ecg.getRestRate()==0){ resp.setText("--");}else { resp.setText(String.valueOf(ecg.getRestRate()));}
+
                 try {
-                    snd.put("PatientId",m.getPatientId()).put("RESP","").put("ECG",e.put("Heart Rate",ecg.getHeartRate()).put("Resp Rate",ecg.getRestRate()).put("SPO2",sp2.put("SPO2",s2).put("Pulse Rate",plus_rate)).put("NIBP",bpp.put("Cuff",cuff).put("High","").put("Low","").put("Mean","")).put("TEMP",tp).put("usercreate",m.getUserType()));
-                    sendData(snd);
-                    hr=ecg.getHeartRate();
-                    rp=ecg.getRestRate();
+                    if(ecg.getHeartRate()==0)
+                    {
+                        snd.put("PatientId",m.getPatientId()).put("RESP","").put("ECG",e.put("Heart Rate","").put("Resp Rate","")).put("SPO2",sp2.put("SPO2","").put("Pulse Rate1","")).put("NIBP",bpp.put("Cuff","").put("High","").put("Low","").put("Mean","")).put("TEMP","").put("usercreate",m.getUserType()).put("heartRate",heartRate.put("upper",""+m.getHighHeartLimit()).put("lower",""+m.getLowHeartLimit()).put("status","true"))
+                                .put("spo2",spo2json.put("upper",""+m.getHighSpo2()).put("lower",""+m.getLowSpo2()).put("status","true"))
+                                .put("pulseRate",pulseRate.put("upper",""+m.getHighPulseRate()).put("lower",""+m.getLowPulseRate()).put("status","true"))
+                                .put("highPressure",highPressure.put("upper",""+m.getHighPressureUpper()).put("lower",""+m.getLowPressureLower()).put("status","true"))
+                                .put("lowPressure",lowPressure.put("upper",""+m.getLowPressureUpper()).put("lower",""+m.getLowPressureLower()).put("status","true"))
+                                .put("temperature",tempjson.put("upper",""+m.getTempUpper()).put("lower",""+m.getTempLower()).put("status","true"));
+                        sendDataJson(snd);
+                    }else {
+                    snd.put("PatientId",m.getPatientId()).put("RESP","").put("ECG",e.put("Heart Rate",""+ecg.getHeartRate()).put("Resp Rate",""+ecg.getRestRate())).put("SPO2",sp2.put("SPO2","").put("Pulse Rate1","")).put("NIBP",bpp.put("Cuff","").put("High","").put("Low","").put("Mean","")).put("TEMP","").put("usercreate",m.getUserType()).put("heartRate",heartRate.put("upper",""+m.getHighHeartLimit()).put("lower",""+m.getLowHeartLimit()).put("status","true"))
+                            .put("spo2",spo2json.put("upper",""+m.getHighSpo2()).put("lower",""+m.getLowSpo2()).put("status","true"))
+                            .put("pulseRate",pulseRate.put("upper",""+m.getHighPulseRate()).put("lower",""+m.getLowPulseRate()).put("status","true"))
+                            .put("highPressure",highPressure.put("upper",""+m.getHighPressureUpper()).put("lower",""+m.getLowPressureLower()).put("status","true"))
+                            .put("lowPressure",lowPressure.put("upper",""+m.getLowPressureUpper()).put("lower",""+m.getLowPressureLower()).put("status","true"))
+                            .put("temperature",tempjson.put("upper",""+m.getTempUpper()).put("lower",""+m.getTempLower()).put("status","true"));
+                    sendDataJson(snd);
+                    }
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -496,11 +656,26 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                setAlart();
+                    tempboolean=true;
+                    if ((!m.getTempUpper().isEmpty() && temp.getTemperature() > Integer.valueOf(m.getTempUpper()))) {
+                        isTempHigh=true;
+                    } else if ((!m.getTempLower().isEmpty() && temp.getTemperature() < Integer.valueOf(m.getTempLower()))) {
+                        isTempLow=true;
+                    }else {
+                        isTempHigh=false;
+                        isTempLow=false;
+                    }
                 tvTEMPinfo.setText(temp.toString());
                 try {
-                    snd.put("PatientId",m.getPatientId()).put("RESP","").put("ECG",e.put("Heart Rate",hr)).put("Resp Rate",rp).put("SPO2",sp2.put("SPO2",s2).put("Pulse Rate",plus_rate)).put("NIBP",bpp.put("Cuff",cuff).put("High","").put("Low","").put("Mean","")).put("TEMP",temp.getTemperature()).put("usercreate",m.getUserType());
+                    snd.put("PatientId",m.getPatientId()).put("RESP","").put("ECG",e.put("Heart Rate","").put("Resp Rate","")).put("SPO2",sp2.put("SPO2","").put("Pulse Rate1","")).put("NIBP",bpp.put("Cuff","").put("High","").put("Low","").put("Mean","")).put("TEMP",""+temp.getTemperature()).put("usercreate",m.getUserType()).put("heartRate",heartRate.put("upper",""+m.getHighHeartLimit()).put("lower",""+m.getLowHeartLimit()).put("status","true"))
+                            .put("spo2",spo2json.put("upper",""+m.getHighSpo2()).put("lower",""+m.getLowSpo2()).put("status","true"))
+                            .put("pulseRate",pulseRate.put("upper",""+m.getHighPulseRate()).put("lower",""+m.getLowPulseRate()).put("status","true"))
+                            .put("highPressure",highPressure.put("upper",""+m.getHighPressureUpper()).put("lower",""+m.getLowPressureLower()).put("status","true"))
+                            .put("lowPressure",lowPressure.put("upper",""+m.getLowPressureUpper()).put("lower",""+m.getLowPressureLower()).put("status","true"))
+                            .put("temperature",tempjson.put("upper",""+m.getTempUpper()).put("lower",""+m.getTempLower()).put("status","true"));
                     tp=temp.getTemperature();
-                    sendData(snd);
+                    sendDataJson(snd);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -513,10 +688,53 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                tvNIBPinfo.setText(nibp.toString());
+//                Comman.log("BPPPPPPPPPPPPPPP","Value High"+nibp.getHighPressure()+" Low Value"+nibp.getLowPressure());
+                if(nibp.getLowPressure()!=0 && nibp.getHighPressure()!=0){
+                if((!m.getHighPressureUpper().isEmpty() && nibp.getHighPressure()>Integer.valueOf(m.getHighPressureUpper())))
+                {
+                    isBpHighUpper=true;
+//                    Comman.log("BPPPPPPPPPPPPPPP","All High true");
+                }
+                else if((!m.getHighPressureLower().isEmpty() && nibp.getHighPressure()<Integer.valueOf(m.getHighPressureLower()))){
+                    isBpHighLower=true;
+//                    Comman.log("BPPPPPPPPPPPPPPP","All High Low true");
+                }else {
+                    isBpHighUpper=false;
+                    isBpHighLower=false;
+//                    Comman.log("BPPPPPPPPPPPPPPP","All High False");
+                }
+                if((!m.getLowPressureLower().isEmpty() && nibp.getLowPressure()<Integer.valueOf(m.getLowPressureLower())))
+                {
+                    isBpLowLower=true;
+                }else if((!m.getLowPressureUpper().isEmpty() && nibp.getLowPressure()>Integer.valueOf(m.getLowPressureUpper()))){
+                    isBpLowUpper=true;
+                }else {
+//                    Comman.log("BPPPPPPPPPPPPPPP","All Low False");
+                    isBpLowUpper=false;
+                    isBpLowLower=false;
+                }
+                }else {
+//                    Comman.log("BPPPPPPPPPPPPPPP","All False");
+                    isBpLowUpper=false;
+                    isBpLowLower=false;
+                    isBpHighUpper=false;
+                    isBpHighLower=false;
+
+                }
+//                Comman.log("highValue"+nibp.getHighPressure(),"lowValue"+nibp.getLowPressure());
+                if(nibp.getHighPressure()==0 && nibp.getLowPressure()==0){
+                    tvNIBPinfo.setText("--/--");
+                }else {
+                tvNIBPinfo.setText(""+nibp.getHighPressure()+"/"+nibp.getLowPressure());
+                }
                 try {
-                    snd.put("PatientId",m.getPatientId()).put("RESP","").put("ECG",e.put("Heart Rate",hr).put("Resp Rate",rp)).put("SPO2",sp2.put("SPO2",s2).put("Pulse Rate",plus_rate)).put("NIBP",bpp.put("Cuff",nibp.getCuffPressure()).put("High",nibp.getHighPressure()).put("Low",nibp.getLowPressure()).put("Mean",nibp.getMeanPressure())).put("TEMP",tp).put("usercreate",m.getUserType());
-                    sendData(snd);
+                    snd.put("PatientId",m.getPatientId()).put("RESP","").put("ECG",e.put("Heart Rate","").put("Resp Rate","")).put("SPO2",sp2.put("SPO2","").put("Pulse Rate1","")).put("NIBP",bpp.put("Cuff",""+nibp.getCuffPressure()).put("High",""+nibp.getHighPressure()).put("Low",""+nibp.getLowPressure()).put("Mean",""+nibp.getMeanPressure())).put("TEMP","").put("usercreate",m.getUserType()).put("heartRate",heartRate.put("upper",""+m.getHighHeartLimit()).put("lower",""+m.getLowHeartLimit()).put("status","true"))
+                            .put("spo2",spo2json.put("upper",""+m.getHighSpo2()).put("lower",""+m.getLowSpo2()).put("status","true"))
+                            .put("pulseRate",pulseRate.put("upper",""+m.getHighPulseRate()).put("lower",""+m.getLowPulseRate()).put("status","true"))
+                            .put("highPressure",highPressure.put("upper",""+m.getHighPressureUpper()).put("lower",""+m.getLowPressureLower()).put("status","true"))
+                            .put("lowPressure",lowPressure.put("upper",""+m.getLowPressureUpper()).put("lower",""+m.getLowPressureLower()).put("status","true"))
+                            .put("temperature",tempjson.put("upper",""+m.getTempUpper()).put("lower",""+m.getTempLower()).put("status","true"));
+                    sendDataJson(snd);
                     cuff=nibp.getCuffPressure();
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -548,385 +766,108 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
 
 
 
-//    public Emitter.Listener onNewMessage = new Emitter.Listener() {
-//        @Override
-//        public void call(final Object... args) {
-//            MainActivity.this.runOnUiThread(new Runnable() {
-//                @Override
-//                public void run() {
-//                    Log.d(TAG, "New message 090909***");
-//                    JSONObject data = (JSONObject) args[0];
-//                    int core0 = 0;
-//                    int core1 = 0;
-//                    int cpu_usage_in = 0;
-//                    try {
-//                        core0 = data.getInt("core0_in");
-//                        core1 = data.getInt("core1_in");
-//                        cpu_usage_in = data.getInt("cpu_usage_in");
-//                    } catch (JSONException e) {
-//                        Log.e(TAG, e.getMessage());
-//                    }
-//
-////                    btnCore0.setText(getResources().getString(R.string.core0, String.valueOf(core0)));
-////                    btnCore1.setText(getResources().getString(R.string.core1, String.valueOf(core1)));
-////                    btnCPUUsage.setText(getResources().getString(R.string.cpu_usge, String.valueOf(cpu_usage_in)));
-//
-////                    updateButtonBackgroundColor(btnCore0, core0);
-////                    updateButtonBackgroundColor(btnCore1, core1);
-////                    updateButtonBackgroundColor(btnCPUUsage, cpu_usage_in);
-//
-//                    onServerDataReceived();
-//                }
-//            });
-//        }
-//    };
 
 
-//    class Mytask extends AsyncTask<JSONObject, Void, Void> {
-//        private JSONObject jsonData;
-//        private boolean success;
-//        Socket socket = null;
-//        DataInputStream dataInputStream = null;
-//        DataOutputStream dataOutputStream = null;
-//
-//        @Override
-//        protected Void doInBackground(JSONObject... params) {
-//            try {
-//                jsonData = params[0];
-//                Log.d("DATA1", "" + jsonData);
-//                // Create a new Socket instance and connect to host
-//                socket = new Socket(Constant.hostAddress, Constant.SocketServerPORT);
-////                socket=new S
-////                socket=IO.socket();
-//
-//                dataOutputStream = new DataOutputStream(
-//                        socket.getOutputStream());
-//                dataInputStream = new DataInputStream(socket.getInputStream());
-//
-//                // transfer JSONObject as String to the server
-//                dataOutputStream.writeUTF(jsonData.toString());
-//                Log.d("1", "waiting for response from host");
-//
-//                // Thread will wait till server replies
-//                String response = dataInputStream.readUTF();
-//                Log.d("Response", response);
-////                sock
-//                if (response != null && response.equals("Connection Accepted")) {
-//                    success = true;
-//                } else {
-//                    success = false;
-//                }
-//
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//                success = false;
-//            } finally {
-//
-//                // close socket
-//                if (socket != null) {
-//                    try {
-//                        Log.d("4", "closing the socket");
-//                        socket.close();
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//
-//                // close input stream
-//                if (dataInputStream != null) {
-//                    try {
-//                        dataInputStream.close();
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//
-//                // close output stream
-//                if (dataOutputStream != null) {
-//                    try {
-//                        dataOutputStream.close();
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }
-//
-//            return null;
-//        }
-//    }
-
-//    private void connectToHost() {
-//
-//        if (Constant.hostAddress == null) {
-//            Log.d("3", "Host Address is null");
-//            return;
-//        }
-//
-//        String ipAddress = getLocalIpAddress();
-//        JSONObject jsonData = new JSONObject();
-//
-//        try {
-//            jsonData.put("request", REQUEST_CONNECT_CLIENT);
-//            jsonData.put("ipAddress", ipAddress);
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//            Log.d("2", "can't put request");
-//            return;
-//        }
-//        Log.d("DATA", "" + jsonData);
-//        new Mytask().execute(jsonData);
-//    }
-//
-//    private String getLocalIpAddress() {
-//        WifiManager wm = (WifiManager) getSystemService(WIFI_SERVICE);
-//        String ip = Formatter.formatIpAddress(wm.getConnectionInfo().getIpAddress());
-//        return ip;
-//    }
-//    public void call(final JSONObject jsonObject)
-//    {
-//
-//        if(socket !=null && socket.connected())
-//        {
-//            socket.emit("new message", jsonObject);
-//            Comman.log("INSIDE_IF",jsonObject.toString());
-//        }
-//        else
-//        {
-//            Comman.log("INSIDE_ELSE","INSIDE_ELSE");
-//            connectSocketNew(jsonObject);
-//        }
-////        try {
-////            socket = IO.socket(Constant.SERVER_URL);
-////        } catch (URISyntaxException e) {
-////            e.printStackTrace();
-////        }
-////        socket.on(io.socket.client.Socket.EVENT_CONNECT, new Emitter.Listener() {
-////
-////            @Override
-////            public void call(Object... args) {
-////                socket.emit("new message", jsonObject);
-//////                socket.disconnect();
-////            }
-////
-////        }).on("new message", new Emitter.Listener() {
-////
-////            @Override
-////            public void call(Object... args) {}
-////
-////        }).on(io.socket.client.Socket.EVENT_DISCONNECT, new Emitter.Listener() {
-////
-////            @Override
-////            public void call(Object... args) {}
-////
-////        });
-////        socket.connect();
-////        JSONObject obj = new JSONObject();
-////        try {
-////            obj.put("hello", "server");
-////            obj.put("binary","VAAG");
-////        } catch (JSONException e) {
-////            e.printStackTrace();
-////        }
-////        Comman.log("Sending an object",jsonObject.toString());
-////        socket.emit("new message", jsonObject);
-////
-////// Receiving an object
-////        socket.on("new message", new Emitter.Listener() {
-////            @Override
-////            public void call(Object... args) {
-////                JSONObject obj = (JSONObject)args[0];
-////                Comman.log("Receiving an object",obj.toString());
-////            }
-////        });
-////
-////
-//    }
 
 
-//    public void connectSocket(final JSONObject jsonObject)
-//    {
-//        try {
-//            socket = IO.socket(Constant.SERVER_URL);
-//        } catch (URISyntaxException e) {
-//            e.printStackTrace();
-//        }
-//        socket.on(io.socket.client.Socket.EVENT_CONNECT, new Emitter.Listener() {
-//            @Override
-//            public void call(Object... args) {
-//                socket.emit("new message", jsonObject);
-//                Comman.log("Sent Data Inside",jsonObject.toString());
-//            }
-//
-//        }).on("new message", new Emitter.Listener() {
-//
-//            @Override
-//            public void call(Object... args) {
-//                Comman.log("Sent Data Insideee",jsonObject.toString());
-////                socket.emit("new message", jsonObject);
-//            }
-//
-//        }).on(io.socket.client.Socket.EVENT_DISCONNECT, new Emitter.Listener() {
-//
-//            @Override
-//            public void call(Object... args) {
-////                socket.emit("new message", jsonObject);
-//            }
-//
-//        });
-//        socket.connect();
-//    }
-    public int random(int start_range,int end_range)
+
+
+
+
+
+    public void connectMqtt_JSon()
     {
-        Random random = new Random();
-        int randomNumber = random.nextInt(start_range-end_range) + end_range;
-       return randomNumber;
-    }
-//    public void connectSocketNew(final JSONObject jsonObject)
-//    {
-//        socket.on(io.socket.client.Socket.EVENT_CONNECT, new Emitter.Listener() {
-//            @Override
-//            public void call(Object... args) {
-//                socket.emit("new message",jsonObject);
-//                Comman.log("INSIDE_ELSE_SEND_DATA",jsonObject.toString());
-//            }
-//        });
-//        socket.connect();
-//    }
-
-
-
-
-
-    public void connectMqtt()
-    {
-//        AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
-
-        String clientId = MqttClient.generateClientId();
-         client =
-                new MqttAndroidClient(getApplicationContext(), Constant.SERVER_URL,
-                        clientId);
-        Comman.log("Mqtt Client Id",":"+clientId);
+        String clientId=MqttAsyncClient.generateClientId();
         try {
-            IMqttToken token = client.connect();
-            token.setActionCallback(new IMqttActionListener() {
-                @Override
-                public void onSuccess(IMqttToken asyncActionToken) {
-                    Comman.log("Connection Established","SuccessFully");
-//                    getData();
-                }
-                @Override
-                public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
-                    Comman.log("Connection Established","Not");
-                    Comman.log("Connection Error",":"+exception);
+            client_Json=new MqttAsyncClient(Constant.SERVER_JSON_URL,clientId,null);
+            client_Json.connect();
+            Comman.log("Connect Successfully","JSON");
+        } catch (MqttException ex) {
+            ex.printStackTrace();
+        }
 
-                }
-            });
-        } catch (MqttException e) {
-            e.printStackTrace();
-            Comman.log("Connection Error",":"+e);
+
+    }
+    public void connectMqtt_Ecg()
+    {
+        String clientId=MqttAsyncClient.generateClientId();
+        try {
+            client_Ecg=new MqttAsyncClient(Constant.SERVER_ECG_URL,clientId,null);
+            client_Ecg.connect();
+            Comman.log("Connect Successfully","ECG");
+        } catch (MqttException ex) {
+            ex.printStackTrace();
         }
     }
-    public void sendData(JSONObject jsonObject)
+    public void sendSpo2(int a)
     {
-        Comman.log("Send Data Form My Side",":"+jsonObject);
-            MqttMessage message = new MqttMessage();
-            message.setPayload(jsonObject.toString().getBytes());
+//        topicId="/"+m.getHubId()+"/"+m.getHospitalId()+"/"+m.getDoctorId1()+"/"+m.getPatientId();
+        topicId=""+m.getPatientId();
+        MqttMessage message = new MqttMessage();
+        message.setQos(0);
+        message.setPayload(String.valueOf(a).getBytes());
         try {
-            if(client.isConnected())
+            if(client_Json!=null &&client_Json.isConnected())
             {
-                String id="";
-//                id="/"+m.getHubId()+"/"+m.getHospitalId()+"/"+m.getDoctorId()+"/"+m.getPatientId();
-                id="/"+m.getHubId()+"/"+m.getHospitalId()+"/1/"+m.getPatientId();
-                Comman.log("TopicID To Server",":"+id);
-                client.publish(id, message);
-
-//                client.publish("/h1/h1/d1/p2", message);Co
-            }
-            else
-            {
-                connectMqtt();
+                client_Json.publish(topicId+"/spo2", message);
+                Comman.log("Published Message spo2___TOPIC"+topicId,""+message);
+            }else {
+//                client_Json.reconnect();
             }
 
         } catch (MqttException ex) {
             ex.printStackTrace();
         }
     }
-    public void getData()
-        {
-            Comman.log("Inside","getDataFunction");
-            String topic = "/1/1/1/11";
-        int qos = 1;
-        try {
-            final IMqttToken subToken = client.subscribe(topic,qos);
-
-            client.setCallback(new MqttCallback() {
-                @Override
-                public void connectionLost(Throwable cause) {
-
-                }
-
-                @Override
-                public void messageArrived(String topic, MqttMessage message) throws Exception {
-
-                    Comman.log("Response1",":"+message.toString());
-                }
-
-                @Override
-                public void deliveryComplete(IMqttDeliveryToken token) {
-
-                }
-            });
-            subToken.setActionCallback(new IMqttActionListener() {
-                @Override
-                public void onSuccess(IMqttToken asyncActionToken) {
-                    // The message was published
-                    Comman.log("Response",""+subToken.toString());
-                }
-
-                @Override
-                public void onFailure(IMqttToken asyncActionToken,
-                                      Throwable exception) {
-                    Comman.log("ERROR",":"+exception);
-                    // The subscription could not be performed, maybe the user was not
-                    // authorized to subscribe on the specified topic e.g. using wildcards
-
-                }
-
-            });
-        } catch (MqttException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    public void disConnect()
+    public void sendEcg(int a)
     {
-        try {
-            IMqttToken disconToken = client.disconnect();
-            disconToken.setActionCallback(new IMqttActionListener() {
-                @Override
-                public void onSuccess(IMqttToken asyncActionToken) {
-                    // we are now successfully disconnected
-                }
 
-                @Override
-                public void onFailure(IMqttToken asyncActionToken,
-                                      Throwable exception) {
-                    // something went wrong, but probably we are disconnected anyway
-                }
-            });
-        } catch (MqttException e) {
-            e.printStackTrace();
+        MqttMessage message = new MqttMessage();
+        message.setQos(0);
+        message.setPayload(String.valueOf(a).getBytes());
+        try {
+            if(client_Ecg!=null && client_Ecg.isConnected())
+            {
+                client_Ecg.publish(topicId+"/ecg", message);
+                Comman.log("Published Message ECG___TOPIC"+topicId,""+message);
+            }
+            else
+            {
+//                client_Ecg.reconnect();
+            }
+
+        } catch (MqttException ex) {
+            ex.printStackTrace();
         }
     }
 
 
 
+
+    public void sendDataJson(JSONObject a)
+    {
+        MqttMessage message = new MqttMessage(a.toString().getBytes());
+        message.setQos(0);
+        try {
+            if(client_Json!=null &&client_Json.isConnected())
+            {
+                client_Json.publish(topicId, message);
+                Comman.log("Published Message JSON",""+message);
+            }
+            else
+            {
+                connectMqtt_JSon();
+            }
+
+        } catch (MqttException ex) {
+            ex.printStackTrace();
+        }
+    }
     public JSONObject setJSon()
     {
         JSONObject jsonObject=new JSONObject();
         try {
-            jsonObject.put("Usertype_Id",m.getId()).put("PatientId",m.getPatientId()).put("DeviceMac",m.getMakeAddress());
+            jsonObject.put("Usertype_Id",m.getId()).put("PatientId",m.getPatientId()).put("DeviceMac",m.getMakeAddress()).put("DoctorID",m.getDoctorId()).put("DoctorID",""+m.getDoctorId1());
         } catch (JSONException ex) {
             ex.printStackTrace();
         }
@@ -943,9 +884,200 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-//        disConnect();
-//        mBtController.disconnect();
+
     }
+
+
+    public void checkVisibility()
+    {
+        if(!isBpHighLower && !isBpHighUpper && !isBpLowLower && !isBpLowUpper && !isSpo2High && !isSpo2Low && !isHeartRatHigh && !isHeartRatLow && !isPulseRateHigh && !isPulseRateLow && !isTempHigh && !isTempLow)
+        {
+         alarm.setVisibility(View.GONE);
+        }
+    }
+    public void setAlart()
+    {
+        final ArrayList<String>msg=new ArrayList<>();
+        if(isBpHighLower)
+        {
+            Comman.startAlarm(MainActivity.this);
+            msg.add("High Bp at Low");
+        }
+        if(isBpHighUpper){
+            Comman.startAlarm(MainActivity.this);
+            msg.add("High Bp at High");
+        }
+        if(isBpLowLower)
+        {
+            Comman.startAlarm(MainActivity.this);
+            msg.add("Low Bp at Low");
+        }
+        if(isBpLowUpper)
+        {
+            Comman.startAlarm(MainActivity.this);
+            msg.add("Low Bp at High");
+        }
+        if(isSpo2High)
+        {
+            Comman.startAlarm(MainActivity.this);
+            msg.add("Spo2 High");
+        }
+        if(isSpo2Low)
+        {
+            msg.add("Spo2 Low");
+        }
+        if(isHeartRatHigh)
+        {
+            Comman.startAlarm(MainActivity.this);
+            msg.add("Heart Rate high");
+        }
+        if(isHeartRatLow)
+        {
+            Comman.startAlarm(MainActivity.this);
+            msg.add("Heart Rate Low");
+        }
+        if(isPulseRateHigh)
+        {
+            Comman.startAlarm(MainActivity.this);
+            msg.add("Pulse Rate High");
+        }
+        if (isPulseRateLow)
+        {
+            Comman.startAlarm(MainActivity.this);
+            msg.add("Pulse Rate Low");
+        }
+        if(isTempHigh)
+        {
+            Comman.startAlarm(MainActivity.this);
+            msg.add("Temp High");
+        }
+        if(isTempLow)
+        {
+            Comman.startAlarm(MainActivity.this);
+            msg.add("Temp Low");
+        }
+        if(msg.size()!=0){
+            for(int i=0;i<msg.size();i++) {
+                final int j=i;
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (tempboolean) {
+                            alarm.setText(msg.get(j));
+                            alarm.setVisibility(View.VISIBLE);
+                            Comman.log("FFF",""+msg.get(j));
+                        }
+                        alarm.setVisibility(View.VISIBLE);
+                    }
+                }, 20000*j+1);
+            }}else {
+            alarm.setVisibility(View.GONE);
+        }
+
+
+    }
+
+
+
+    public void getNotification()
+    {
+        String notificationTopic=m.getPatientId()+"/Notification";
+        Comman.log("Connection_Established","Connection MQTT_Notfication_    "+notificationTopic);
+        try {
+            mqtt_Notifiaction.subscribe(notificationTopic,0);
+            mqtt_Notifiaction.setCallback(new MqttCallback() {
+                @Override
+                public void connectionLost(Throwable cause) {
+                    Comman.log("Connection_Established","Connection MQTT_Notfication");
+                }
+                @Override
+                public void messageArrived(String topic, final MqttMessage message) throws Exception {
+                    Comman.log("Connection_Established","MQTT_Notfication    "+topic);
+                    runOnUiThread(new Runnable(){
+                        public void run() {
+                            Comman.log("Connection_Established",""+message);
+                            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                            LayoutInflater layoutInflater=LayoutInflater.from(MainActivity.this);
+                            View view2=layoutInflater.inflate(R.layout.nurse_notification,null);
+                            Button send=view2.findViewById(R.id.ok);
+                            Lato_Regular_Font msg=view2.findViewById(R.id.msg);
+                            Lato_Regular name=view2.findViewById(R.id.name);
+                            final AlertDialog dialog=builder.create();
+                            dialog.setView(view2);
+                            dialog.show();
+                            try {
+                                JSONObject jsonObject=new JSONObject(message.toString());
+                            msg.setText("Message :-"+jsonObject.getString("text"));
+                            name.setText(jsonObject.getString("name"));
+                            } catch (JSONException ex) {
+                                ex.printStackTrace();
+                                Comman.log("ERROR",""+ex.getMessage());
+                            }
+                            send.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.dismiss();
+                                }
+                            });
+                        }
+                    });
+                }
+                @Override
+                public void deliveryComplete(IMqttDeliveryToken token) {
+
+                    Comman.log("ERROR",""+token.toString());
+                }
+            });
+
+
+        } catch (MqttException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void cnnect_MQTT_Notification()
+    {
+        String clientId=MqttAsyncClient.generateClientId();
+        try {
+            mqtt_Notifiaction=new MqttAsyncClient(Constant.SERVER_JSON_URL,clientId,null);
+            mqtt_Notifiaction.connect();
+            while (!mqtt_Notifiaction.isConnected()){}
+            if(mqtt_Notifiaction.isConnected()){
+               getNotification();
+                Comman.log("Connection_Established","MQTT_NOTIFICATION");
+            }else {}
+        } catch (MqttException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+
+
+
+    public void showMessageList()
+    {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        LayoutInflater layoutInflater=LayoutInflater.from(MainActivity.this);
+        View view2=layoutInflater.inflate(R.layout.message_history_layout,null);
+        Button send=view2.findViewById(R.id.ok);
+        TextView textView=view2.findViewById(R.id.nodata);
+        ListView listView=view2.findViewById(R.id.list);
+        ProgressBar progressBar=view2.findViewById(R.id.pb);
+        final AlertDialog dialog=builder.create();
+        dialog.setView(view2);
+        dialog.show();
+        Api_calling.getMessageList(MainActivity.this,listView,progressBar,dialog,"",m.getPatientId(),textView);
+        send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+    }
+
+
 }
 
 

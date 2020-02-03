@@ -13,6 +13,9 @@ public class Result {
     @SerializedName("HubId")
     @Expose
     private Integer hubId;
+    @SerializedName("HubName")
+    @Expose
+    private String hubName;
     @SerializedName("ID")
     @Expose
     private Integer iD;
@@ -22,9 +25,9 @@ public class Result {
     @SerializedName("patient_Details")
     @Expose
     private List<PatientDetail> patientDetails = null;
-    @SerializedName("patient_count")
+    @SerializedName("total_patient")
     @Expose
-    private Integer patientCount;
+    private Integer totalPatient;
 
     public Integer getHospitalId() {
         return hospitalId;
@@ -40,6 +43,14 @@ public class Result {
 
     public void setHubId(Integer hubId) {
         this.hubId = hubId;
+    }
+
+    public String getHubName() {
+        return hubName;
+    }
+
+    public void setHubName(String hubName) {
+        this.hubName = hubName;
     }
 
     public Integer getID() {
@@ -66,12 +77,12 @@ public class Result {
         this.patientDetails = patientDetails;
     }
 
-    public Integer getPatientCount() {
-        return patientCount;
+    public Integer getTotalPatient() {
+        return totalPatient;
     }
 
-    public void setPatientCount(Integer patientCount) {
-        this.patientCount = patientCount;
+    public void setTotalPatient(Integer totalPatient) {
+        this.totalPatient = totalPatient;
     }
 
 }

@@ -4,11 +4,26 @@ buildscript {
     repositories {
         google()
         jcenter()
-        
+        maven {
+            url 'https://maven.fabric.io/public'
+        }
+
+        maven {
+            url "https://repo.eclipse.org/content/repositories/paho-snapshots/"
+        }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.5.1'
-        
+        classpath 'com.google.gms:google-services:4.3.2'
+
+
+        // Add the Google Services plugin (check for v3.1.2 or higher).
+        classpath 'com.google.gms:google-services:4.3.3'
+
+        // Add the Fabric Crashlytics plugin.
+        classpath 'io.fabric.tools:gradle:1.31.2'
+
+
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -18,13 +33,17 @@ allprojects {
     repositories {
         google()
         jcenter()
-        maven { url "https://jitpack.io" }
-        
+        maven { url "https://jitpack.io"
+        }
+
+        maven {
+            url "https://repo.eclipse.org/content/repositories/paho-snapshots/"
+        }
     }
 }
 repositories {
     maven {
-        url "https://repo.eclipse.org/content/repositories/paho-releases/"
+        url "https://repo.eclipse.org/content/repositories/paho-snapshots/"
     }
 }
 

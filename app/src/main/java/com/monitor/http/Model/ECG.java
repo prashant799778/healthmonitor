@@ -8,24 +8,24 @@ public class ECG {
 
     @SerializedName("Heart Rate")
     @Expose
-    private Integer heartRate;
+    private String heartRate;
     @SerializedName("Resp Rate")
     @Expose
-    private Integer respRate;
+    private String respRate;
 
-    public Integer getHeartRate() {
+    public String getHeartRate() {
         return heartRate;
     }
 
-    public void setHeartRate(Integer heartRate) {
+    public void setHeartRate(String heartRate) {
         this.heartRate = heartRate;
     }
 
-    public Integer getRespRate() {
+    public String getRespRate() {
         return respRate;
     }
 
-    public void setRespRate(Integer respRate) {
+    public void setRespRate(String respRate) {
         this.respRate = respRate;
     }
 

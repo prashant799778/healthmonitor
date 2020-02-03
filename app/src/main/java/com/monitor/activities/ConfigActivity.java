@@ -12,6 +12,7 @@ import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -23,7 +24,11 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
+//import com.anurag.multiselectionspinner.MultiSelectionSpinnerDialog;
+//import com.anurag.multiselectionspinner.MultiSpinner;
+import com.crowdfire.cfalertdialog.CFAlertDialog;
 import com.google.android.material.picker.MaterialDatePicker;
 import com.google.android.material.picker.MaterialStyledDatePickerDialog;
 import com.google.android.material.snackbar.Snackbar;
@@ -39,10 +44,14 @@ import com.monitor.widget.EditTextFontGothamBook;
 import com.monitor.widget.Lato_Regular_Font;
 import com.shagi.materialdatepicker.date.DatePickerFragmentDialog;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static android.Manifest.permission_group.CAMERA;
@@ -56,6 +65,10 @@ public class ConfigActivity extends BaseActivity {
    MaterialSpinner  gender,bloodGp,doctor;
    MySharedPrefrence mySharedPrefrence;
    ArrayList<String >gnderList,bloodList;
+   JSONArray doctorIdArray;
+   JSONArray nurseIdArray;
+   Lato_Regular_Font multi;
+   JSONObject heartRate,spo2,nibp,temp,pulseRate,lowPressure,highPressure;
 //   String bedid="";
 //    String hospital_name="";
 private static final int PERMISSION_REQUEST_CODE = 200;
@@ -75,14 +88,25 @@ private static final int PERMISSION_REQUEST_CODE = 200;
         bck1=findViewById(R.id.bck1);
         bed=findViewById(R.id.bedno);
         hospital=findViewById(R.id.hospitalname);
+        multi=findViewById(R.id.doctorlist);
         gnderList=new ArrayList<>();
         bloodList=new ArrayList<>();
+        doctorIdArray=new JSONArray();
+        nurseIdArray=new JSONArray();
+        heartRate=new JSONObject();
+        spo2=new JSONObject();
+        nibp=new JSONObject();
+        temp=new JSONObject();
+        pulseRate=new JSONObject();
+        highPressure=new JSONObject();
+        lowPressure=new JSONObject();
         mySharedPrefrence=MySharedPrefrence.instanceOf(ConfigActivity.this);
+        Api_calling.getDoctorList(ConfigActivity.this,item_top_view,mySharedPrefrence);
         gender = (MaterialSpinner) findViewById(R.id.gender);
         bloodGp = (MaterialSpinner) findViewById(R.id.bloodgp);
         doctor = (MaterialSpinner) findViewById(R.id.doctorList);
-        gnderList.add("Male");
         gnderList.add("Female");
+        gnderList.add("Male");
         gnderList.add("Other");
 
         bloodList.add("A+");
@@ -90,11 +114,26 @@ private static final int PERMISSION_REQUEST_CODE = 200;
         bloodList.add("B-");
         bloodList.add("O+");
         bloodList.add("AB+");
+
+
+
+
+
         hospital.setText(mySharedPrefrence.getHospital());
+        multi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setMultiChoice();
+            }
+        });
         SpinnerHandler.SpinnerHandler(ConfigActivity.this,gender,gnderList,"b");
         SpinnerHandler.SpinnerHandler(ConfigActivity.this,bloodGp,bloodList,"H");
-        SpinnerHandler.SpinnerHandler(ConfigActivity.this,doctor,Api_calling.arrayhospital,"H");
-        Api_calling.getDoctorList(ConfigActivity.this,item_top_view,mySharedPrefrence);
+//        if(Api_calling.arrayhospital.size()>=0)
+//        {
+            SpinnerHandler.SpinnerHandler(ConfigActivity.this,doctor,Api_calling.arrayhospital,"H");
+//        }
+        Comman.log("Size  of Array is that" ,":"+Api_calling.arrayhospital.size());
+
 
 
 
@@ -199,25 +238,50 @@ private static final int PERMISSION_REQUEST_CODE = 200;
 
 
 
+//        lgout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                mySharedPrefrence.clearData();
+//                startActivity(new Intent(ConfigActivity.this, LoginActivity.class));
+//            }
+//        });
         lgout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mySharedPrefrence.clearData();
+                final SweetAlertDialog alertDialog= new SweetAlertDialog(ConfigActivity.this, SweetAlertDialog.WARNING_TYPE);
+//                                    alertDialog.getButton(SweetAlertDialog.BUTTON_CONFIRM).setBackgroundColor(getResources().getColor(R.color.signinbuttoncolor));
+                alertDialog.setTitleText("Do you Want Logout")
+                        .setConfirmText("Yes").setCancelText("No").setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        mySharedPrefrence.clearData();
                 startActivity(new Intent(ConfigActivity.this, LoginActivity.class));
+                        alertDialog.dismissWithAnimation();
+                        finish();
+                    }
+                }).setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+//                        System.exit(0); //for release "mBluetoothDevices" on key_back down
+//                        mBtController.unregisterBroadcastReceiver(MainActivity.this);
+                        alertDialog.dismissWithAnimation();
+                    }
+                });
+                alertDialog.show();
             }
         });
-        bck1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mySharedPrefrence.clearData();
-                startActivity(new Intent(ConfigActivity.this, LoginActivity.class));
-            }
-        });
+//        bck1.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                mySharedPrefrence.clearData();
+//                startActivity(new Intent(ConfigActivity.this, LoginActivity.class));
+//            }
+//        });
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Comman.log("1",""+name);
-                if(Validation.isFilled(name)&&Validation.isFilled(age)&&Validation.isFilled(room)&&Validation.isFilled(bed)){
+                if(Validation.isFilled(name)&&Validation.isFilled(age)&&Validation.isFilled(room)&&Validation.isFilled(bed)&&Validation.isFilled(hospital)&&(!gender.getText().toString().equalsIgnoreCase("Select")) && !multi.getText().toString().equalsIgnoreCase("")){
                     Comman.log("INSIDE","INSIDE");
                     Api_calling.addPatient(ConfigActivity.this,item_top_view,jsonObject(mySharedPrefrence.getId()));
                 }else {Comman.show_Real_Message(ConfigActivity.this,item_top_view, Constant.PLEASE_FILL_ALL_FIELD);}
@@ -227,14 +291,29 @@ private static final int PERMISSION_REQUEST_CODE = 200;
 }
 public JSONObject jsonObject(String usertype)
 {
+    Comman.log("Nurse Id",mySharedPrefrence.getNurseId());
     JSONObject jsonObject=new JSONObject();
-    try {mySharedPrefrence.setDoctorId(Api_calling.macHash.get(doctor.getText().toString().trim()));
+    try {
+//        doctorIdArray=new JSONArray();
+        nurseIdArray=new JSONArray();
+        mySharedPrefrence.setDoctorId1(Api_calling.macHash.get(doctor.getText().toString().trim()));
         mySharedPrefrence.setPatientAge(age.getText().toString());
         mySharedPrefrence.setPatientBed(bed.getText().toString());
-        mySharedPrefrence.setPatientHospital(Api_calling.arrayhospital.get(0));
-        jsonObject.put("Usertype_Id",usertype).put("PatientName",name.getText().toString()).put("DeviceMac",getIP()).put("Bed_Number",bed.getText().toString()).put("usercreate",mySharedPrefrence.getUserType()).put("DoctorID",Api_calling.macHash.get(doctor.getText().toString().trim())).put("hospital_Name",mySharedPrefrence.getHospital()).put("startdate","2019-12-12 11:11:03").put("BloodGroup",bloodGp.getText().toString());
+//        mySharedPrefrence.setPatientHospital(Api_calling.arrayhospital.get(0));
+        mySharedPrefrence.setDoctorId1(Api_calling.macHash.get(doctor.getText().toString().trim()));
+        mySharedPrefrence.setDoctorName(multi.getText().toString().trim());
+        jsonObject.put("Usertype_Id",usertype).put("age",age.getText().toString()).put("PatientName",name.getText().toString())
+                .put("DeviceMac",getIP()).put("Bed_Number",bed.getText().toString()).put("roomNumber",room.getText().toString())
+                .put("usercreate",mySharedPrefrence.getUserType()).put("DoctorId",doctorIdArray)
+                .put("hospitalId",mySharedPrefrence.getHospitalId()).put("startdate","2019-12-12 11:11:03").put("gender",gender.getSelectedIndex()).put("BloodGroup",bloodGp.getText().toString())
+                .put("heartRate",heartRate.put("upper","120").put("lower","80").put("status","true")).put("spo2",spo2.put("upper","120").put("lower","80").put("status","true")
+        ).put("pulseRate",pulseRate.put("upper","120").put("lower","80").put("status","true")).
+                put("highPressure",highPressure.put("upper","120").put("lower","80").put("status","true"))
+                .put("lowPressure",lowPressure.put("upper","120").put("lower","80").put("status","true")).put("temperature",temp.put("upper","120").put("lower","80").put("status","true")).put("nurseId",
+                nurseIdArray.put(Integer.valueOf(mySharedPrefrence.getNurseId())));
 
     }catch (Exception e){
+        Comman.log("Add Patient Json Error",e.getMessage());
     }
     Comman.log("Add Patient Json",jsonObject.toString());
     return jsonObject;
@@ -257,5 +336,53 @@ public JSONObject jsonObject(String usertype)
                 wm.getConnectionInfo().getIpAddress());
 
         return ipAddress;
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Api_calling.getDoctorList(ConfigActivity.this,item_top_view,mySharedPrefrence);
+    }
+
+
+    public void setMultiChoice()
+    {
+        multi.setText("");
+        doctorIdArray=new JSONArray();
+        final ArrayList<String>value=new ArrayList<>();
+        final String []str=new String[Api_calling.arrayhospital.size()];
+        boolean []barray=new boolean[Api_calling.arrayhospital.size()];
+        for (int i=0;i<Api_calling.arrayhospital.size();i++)
+        {
+            str[i]=Api_calling.arrayhospital.get(i);
+            barray[i]=false;
+        }
+        CFAlertDialog.Builder builder = new CFAlertDialog.Builder(this);
+        builder.setDialogStyle(CFAlertDialog.CFAlertStyle.ALERT);
+        builder.setMessage("Select Doctor").setTextColor(Color.WHITE);
+        builder.setMultiChoiceItems(str,barray, new DialogInterface.OnMultiChoiceClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int index, boolean b) {
+                Comman.log("Selected",""+str[index]+" Status"+b);
+                if(b)
+                {
+                 value.add(str[index]);
+                 Comman.log("DoctorId",""+Api_calling.macHash.get(str[index]));
+                 doctorIdArray.put(Integer.valueOf(Api_calling.macHash.get(str[index])));
+                }else {
+                    doctorIdArray.remove(index);
+                    value.remove(str[index]);
+                }
+            }
+        });
+        builder.addButton("  Ok   ", Color.parseColor("#ffffff"), Color.parseColor("#1e1e2f"), CFAlertDialog.CFAlertActionStyle.POSITIVE, CFAlertDialog.CFAlertActionAlignment.END, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+                Comman.log("DoctorId Final Arrya",""+doctorIdArray.toString());
+                multi.setText(value.toString().replace("[","").replace("]","").trim());
+            }
+        });
+        builder.show();
     }
 }

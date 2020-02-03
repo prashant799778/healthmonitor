@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@color/bg1"
     android:id="@+id/v"
@@ -29,7 +30,7 @@
             android:textColor="@color/textcolor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/Patients"
+            android:text="@string/AllPatients"
             android:textSize="18dp"
             ></com.monitor.widget.Lato_Regular_Font>
 
@@ -37,13 +38,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="30dp"
         android:orientation="vertical">
         <com.monitor.widget.Lato_Regular_Font
             android:textColor="@color/textcolor"
             android:text="@string/AllPatients"
             android:layout_weight=".5"
             android:textSize="18dp"
+            android:visibility="gone"
             android:gravity="center_vertical|left"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -51,16 +53,16 @@
         <LinearLayout
             android:orientation="horizontal" android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
             android:weightSum="5"
             android:background="@color/bg1">
             <com.monitor.widget.Lato_Regular_Font
                 android:layout_weight=".9"
                 android:textColor="@color/textcolor"
-                android:text="@string/patientname"
+                android:text="P_Name"
                 android:textSize="@dimen/textsize"
                 android:gravity="center_vertical|left"
                 android:id="@+id/p_name"
+                android:paddingLeft="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
             </com.monitor.widget.Lato_Regular_Font>
@@ -70,7 +72,7 @@
                 android:text="@string/Age"
                 android:id="@+id/age"
                 android:textSize="@dimen/textsize"
-                android:gravity="center_vertical|center"
+                android:gravity="center_vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
             </com.monitor.widget.Lato_Regular_Font>
@@ -90,7 +92,7 @@
                 android:text="@string/Room"
                 android:id="@+id/roomNo"
                 android:textSize="@dimen/textsize"
-                android:gravity="center_vertical|center"
+                android:gravity="center_vertical|left"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
             </com.monitor.widget.Lato_Regular_Font>
@@ -99,6 +101,7 @@
                 android:textColor="@color/textcolor"
                 android:text="@string/BedN"
                 android:textSize="@dimen/textsize"
+                android:paddingRight="10dp"
                 android:gravity="center_vertical|center"
                 android:id="@+id/bedNo"
                 android:layout_width="match_parent"
@@ -127,4 +130,11 @@
         android:layout_height="wrap_content"
         android:id="@+id/reclycle">
     </androidx.recyclerview.widget.RecyclerView>
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:theme="@style/AAA_ProgressBar"
+        android:id="@+id/pb"
+        android:layout_gravity="center_horizontal">
+    </ProgressBar>
 </LinearLayout>

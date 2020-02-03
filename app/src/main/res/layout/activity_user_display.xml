@@ -45,7 +45,7 @@
                     android:layout_height="match_parent">
                 </com.monitor.widget.Lato_Regular_Font>
                 <com.monitor.widget.Lato_Regular_Font
-                    android:layout_weight="1.1"
+                    android:layout_weight="1"
                     android:textColor="@color/textcolor"
                     android:text="@string/Age"
                     android:id="@+id/age"
@@ -74,6 +74,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
                 </com.monitor.widget.Lato_Regular_Font>
+                <com.monitor.widget.Lato_Regular_Font
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text=""
+                    android:layout_weight=".950"
+                    android:id="@+id/alarm"
+                    android:textAlignment="gravity"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:visibility="gone"
+                    android:background="@color/red"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    >
+                </com.monitor.widget.Lato_Regular_Font>
             </LinearLayout>
             <View
                 android:background="@color/white"
@@ -83,7 +97,7 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:weightSum="3"
-                android:layout_weight="1"
+                android:layout_weight=".8"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <LinearLayout
@@ -92,90 +106,239 @@
                     android:weightSum="3"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
-                    <com.monitor.widget.GothamBookFontForLable
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="ECG"
-                        android:paddingLeft="15dp"
-                        android:textColor="@color/Green"
-                        android:textSize="12sp"
-                        >
-                    </com.monitor.widget.GothamBookFontForLable>
+
+
+
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/wave_height">
-                        <com.monitor.widget.WaveformView
-                            android:id="@+id/wfECG"
-                            app:maxValue="250"
-                            app:pointStep="12dp"
-                            app:waveColor="@color/Green"
-                            app:backgroundColor="@color/black"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:weightSum="3"
+                        android:orientation="vertical">
+                        <com.monitor.widget.GothamBookFontForLable
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
+                            android:layout_height="match_parent"
+                            android:text="ECG"
+                            android:layout_weight="2.5"
+                            android:paddingLeft="15dp"
+                            android:gravity="center_vertical"
+                            android:textColor="@color/Green"
+                            android:textSize="12sp"
+                            >
+                        </com.monitor.widget.GothamBookFontForLable>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight=".5">
+                            <com.monitor.widget.WaveformView
+                                android:id="@+id/wfECG"
+                                app:maxValue="250"
+                                app:pointStep="1dp"
+                                app:waveColor="@color/Green"
+                                android:layout_gravity="center_vertical"
+                                app:backgroundColor="@color/black"
+                                android:layout_width="match_parent"
+                                android:layout_height="80dp"
+                                android:layout_marginBottom="1dp"/>
+                        </LinearLayout>
+                        <View
+                            android:background="@color/white"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/lineWidth">
+                        </View>
+
                     </LinearLayout>
-                    <View
-                        android:layout_marginVertical="5dp"
-                        android:background="@color/white"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/lineWidth">
 
-                    </View>
-
-
-
-                    <com.monitor.widget.GothamBookFontForLable
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="SP02"
-                        android:paddingLeft="15dp"
-                        android:textColor="@color/red"
-                        android:textSize="12sp"
-                        >
-                    </com.monitor.widget.GothamBookFontForLable>
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/wave_height">
-                        <com.monitor.widget.WaveformView
-                            android:id="@+id/wfSp02"
-                            app:maxValue="250"
-                            app:pointStep="12dp"
-
-                            app:waveColor="@color/red"
-                            app:backgroundColor="@color/black"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:weightSum="3"
+                        android:orientation="vertical">
+                        <com.monitor.widget.GothamBookFontForLable
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
+                            android:layout_height="match_parent"
+                            android:text="@string/spo2"
+                            android:layout_weight="2.5"
+                            android:id="@+id/ss"
+                            android:paddingLeft="15dp"
+                            android:gravity="center_vertical"
+                            android:textColor="@color/red"
+                            android:textSize="12sp"
+                            >
+                        </com.monitor.widget.GothamBookFontForLable>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight=".5">
+                            <com.monitor.widget.WaveformView
+                                android:id="@+id/wfSp02"
+                                app:maxValue="250"
+                                app:pointStep="1dp"
+                                app:waveColor="@color/red"
+                                android:layout_gravity="center_vertical"
+                                app:backgroundColor="@color/black"
+                                android:layout_width="match_parent"
+                                android:layout_height="80dp"
+                                android:layout_marginBottom="1dp"/>
+                        </LinearLayout>
+                        <View
+                            android:background="@color/white"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/lineWidth">
+                        </View>
+
                     </LinearLayout>
-                    <View
-                        android:layout_marginVertical="5dp"
-                        android:background="@color/white"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/lineWidth">
-
-                    </View>
 
 
 
-                    <com.monitor.widget.GothamBookFontForLable
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="RESP"
-                        android:paddingLeft="15dp"
-                        android:textColor="@color/yallow"
-                        android:textSize="12sp"
-                        >
-                    </com.monitor.widget.GothamBookFontForLable>
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/wave_height">
-                        <com.monitor.widget.WaveformView
-                            android:id="@+id/wfResp"
-                            app:maxValue="250"
-                            app:pointStep="12dp"
-                            app:waveColor="@color/cc"
-                            app:backgroundColor="@color/black"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:weightSum="1"
+                        android:orientation="vertical">
+
+                        <com.monitor.widget.GothamBookFontForLable
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
+                            android:layout_height="match_parent"
+                            android:text="RESP"
+                            android:layout_weight=".4"
+                            android:paddingLeft="15dp"
+                            android:gravity="center_vertical"
+                            android:textColor="@color/yallow"
+                            android:textSize="12sp"
+                            >
+                        </com.monitor.widget.GothamBookFontForLable>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight=".2">
+                            <com.monitor.widget.WaveformView
+                                android:id="@+id/wfResp"
+                                app:maxValue="250"
+                                app:pointStep=".8dp"
+                                app:waveColor="@color/cc"
+                                app:backgroundColor="@color/black"
+                                android:layout_width="match_parent"
+                                android:layout_height="70dp" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_weight=".4"
+                            android:gravity="center_horizontal"
+                            android:orientation="horizontal"
+                            android:layout_height="match_parent">
+                            <com.monitor.widget.Lato_Regular
+                                android:layout_width="150dp"
+                                android:background="@color/red"
+                                android:id="@+id/send"
+                                android:layout_height="match_parent"
+                                android:text="@string/Prescribe_medicine"
+                                android:textAlignment="gravity"
+                                android:layout_gravity="center_horizontal|center_vertical"
+                                android:gravity="center_horizontal|center_vertical"
+                                android:textColor="@color/white">
+                            </com.monitor.widget.Lato_Regular>
+                            <com.monitor.widget.Lato_Regular
+                                android:layout_width="150dp"
+                                android:background="@color/red"
+                                android:id="@+id/show"
+                                android:layout_height="match_parent"
+                                android:text="@string/Show"
+                                android:textAlignment="gravity"
+                                android:layout_marginLeft="20dp"
+                                android:layout_gravity="center_horizontal|center_vertical"
+                                android:gravity="center_horizontal|center_vertical"
+                                android:textColor="@color/white">
+                            </com.monitor.widget.Lato_Regular>
+                        </LinearLayout>
                     </LinearLayout>
+
+
+
+
+<!--                    <com.monitor.widget.GothamBookFontForLable-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="ECG"-->
+<!--                        android:layout_marginTop="5dp"-->
+<!--                        android:paddingLeft="15dp"-->
+<!--                        android:textColor="@color/Green"-->
+<!--                        android:textSize="12sp"-->
+<!--                        >-->
+<!--                    </com.monitor.widget.GothamBookFontForLable>-->
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="@dimen/wave_height">-->
+<!--                        <com.monitor.widget.WaveformView-->
+<!--                            android:id="@+id/wfECG"-->
+<!--                            app:maxValue="250"-->
+<!--                            app:pointStep="1.5dp"-->
+<!--                            app:waveColor="@color/Green"-->
+<!--                            app:backgroundColor="@color/black"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="match_parent" />-->
+<!--                    </LinearLayout>-->
+<!--                    <View-->
+<!--                        android:layout_marginVertical="5dp"-->
+<!--                        android:background="@color/white"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="@dimen/lineWidth">-->
+
+<!--                    </View>-->
+<!--                    <com.monitor.widget.GothamBookFontForLable-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="SP02"-->
+<!--                        android:paddingLeft="15dp"-->
+<!--                        android:textColor="@color/red"-->
+<!--                        android:textSize="12sp"-->
+<!--                        >-->
+<!--                    </com.monitor.widget.GothamBookFontForLable>-->
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="@dimen/wave_height">-->
+<!--                        <com.monitor.widget.WaveformView-->
+<!--                            android:id="@+id/wfSp02"-->
+<!--                            app:maxValue="250"-->
+<!--                            app:pointStep="1.5dp"-->
+<!--                            app:waveColor="@color/red"-->
+<!--                            app:backgroundColor="@color/black"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="match_parent" />-->
+<!--                    </LinearLayout>-->
+<!--                    <View-->
+<!--                        android:layout_marginVertical="5dp"-->
+<!--                        android:background="@color/white"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="@dimen/lineWidth">-->
+
+<!--                    </View>-->
+<!--                    <com.monitor.widget.GothamBookFontForLable-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="RESP"-->
+<!--                        android:paddingLeft="15dp"-->
+<!--                        android:textColor="@color/yallow"-->
+<!--                        android:textSize="12sp"-->
+<!--                        >-->
+<!--                    </com.monitor.widget.GothamBookFontForLable>-->
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="@dimen/wave_height">-->
+<!--                        <com.monitor.widget.WaveformView-->
+<!--                            android:id="@+id/wfResp"-->
+<!--                            app:maxValue="250"-->
+<!--                            app:pointStep="12dp"-->
+<!--                            app:waveColor="@color/cc"-->
+<!--                            app:backgroundColor="@color/black"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="match_parent" />-->
+<!--                    </LinearLayout>-->
 
                 </LinearLayout>
                 <View
@@ -240,7 +403,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="- - -/- -"
-                            android:textSize="12sp"
+                            android:textSize="16sp"
                             android:textColor="@color/white"
                             android:layout_margin="5dp">
                         </com.monitor.widget.GothamBookFontForLable>
@@ -270,9 +433,12 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:text="SP02(%)"
-                                    android:textSize="12sp"
+                                    android:id="@+id/ss1"
+                                    android:textSize="10dp"
+                                    android:layout_marginTop="2dp"
                                     android:textColor="@color/red"
-                                    android:layout_margin="5dp">
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_marginRight="5dp">
                                 </com.monitor.widget.GothamBookFontForLable>
 
                                 <com.monitor.widget.GothamBookFontForLable
@@ -280,9 +446,10 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="20dp"
                                     android:text="- -"
-                                    android:textSize="20sp"
+                                    android:textSize="18sp"
                                     android:textColor="@color/red"
-                                    android:layout_margin="10dp">
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_marginRight="10dp">
                                 </com.monitor.widget.GothamBookFontForLable>
                             </LinearLayout>
                             <LinearLayout
@@ -294,9 +461,11 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:text="PR(bpm)"
-                                    android:textSize="12sp"
+                                    android:textSize="10dp"
                                     android:textColor="@color/red"
-                                    android:layout_margin="5dp">
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_marginTop="2dp"
+                                    android:layout_marginRight="5dp">
                                 </com.monitor.widget.GothamBookFontForLable>
 
                                 <com.monitor.widget.GothamBookFontForLable
@@ -304,9 +473,11 @@
                                     android:layout_height="20dp"
                                     android:text="- -"
                                     android:id="@+id/pr"
-                                    android:textSize="20sp"
+                                    android:textSize="18sp"
                                     android:textColor="@color/red"
-                                    android:layout_margin="10dp">
+                                    android:layout_marginTop="20dp"
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_marginRight="10dp">
                                 </com.monitor.widget.GothamBookFontForLable>
                             </LinearLayout>
 
@@ -328,7 +499,7 @@
                         <com.monitor.widget.GothamBookFontForLable
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Temp(celcius)"
+                            android:text="Temp(Celsius)"
                             android:textSize="12sp"
                             android:textColor="@color/white"
                             android:layout_margin="5dp">
@@ -358,7 +529,6 @@
                         android:textColor="@color/yallow"
                         android:layout_margin="5dp">
                     </com.monitor.widget.GothamBookFontForLable>
-
                     <com.monitor.widget.GothamBookFontForLable
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -375,6 +545,7 @@
 
                     android:background="@color/white"
                     android:layout_width="@dimen/lineWidth"
+                    android:visibility="gone"
                     android:layout_height="match_parent"/>
                 <LinearLayout
                     android:layout_weight="1.35"

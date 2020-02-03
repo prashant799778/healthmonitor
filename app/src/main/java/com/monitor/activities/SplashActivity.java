@@ -39,37 +39,44 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        r=findViewById(R.id.r);
-        db=new DataBase(this, Constant.DB_NAME,null,Constant.DB_VERSION);
-        c=db.fetchAllData();
-        Comman.log("DATA_BASE_COUNT",c.getCount()+"");
-        mySharedPrefrence=MySharedPrefrence.instanceOf(this);
-        if(!mySharedPrefrence.getId().isEmpty()) {
-            Api_calling.getCurrentPatient(SplashActivity.this, r, mySharedPrefrence);
-        }
+//        Long time=(System.currentTimeMillis()-Long.valueOf(getResources().getString(R.string.first_date)))/86400000;
+//        if(time>=20){
+//            finish();
+//
+//        }else {
+            r = findViewById(R.id.r);
+            db = new DataBase(this, Constant.DB_NAME, null, Constant.DB_VERSION);
+            c = db.fetchAllData();
+            Comman.log("DATA_BASE_COUNT", c.getCount() + "");
+            mySharedPrefrence = MySharedPrefrence.instanceOf(this);
+            if (!mySharedPrefrence.getId().isEmpty()) {
+//            Api_calling.getCurrentPatient(SplashActivity.this, r, mySharedPrefrence);
+            }
 //        Api_calling.getDeviceList(SplashActivity.this,r);
 //        requestPermissions();
 //        if(!checkPermission()) {
 //            requestPermission();
 //        }
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Comman.log("SHARED_VALUE",""+mySharedPrefrence.getId());
-                if(mySharedPrefrence.getUserType().isEmpty()) {
-                    Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
-                    startActivity(intent);}else {
-                    callActivity(mySharedPrefrence.getUserType().trim());
-                }
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Comman.log("SHARED_VALUE", "" + mySharedPrefrence.getId());
+                    if (mySharedPrefrence.getUserType().isEmpty()) {
+                        Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                    } else {
+                        callActivity(mySharedPrefrence.getUserType().trim());
+                    }
 //                }else if(c.getCount()!=0){
 //                    Intent intent=new Intent(SplashActivity.this,MainActivity.class);
 //                    startActivity(intent);
 //                }
 //                else if(!mySharedPrefrence.getUserType().isEmpty()){
 //                }
-            }
-        },1000);
-    }
+                }
+            }, 1000);
+        }
+//    }
 
     @Override
     public void onBackPressed() {

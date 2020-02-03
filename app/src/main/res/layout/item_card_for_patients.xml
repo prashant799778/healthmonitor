@@ -14,18 +14,17 @@
         android:layout_height="95dp"
         android:layout_gravity="center"
         app:cardBackgroundColor="@color/cardcolor"
-        android:background="@color/cardcolor"
         card_view:cardCornerRadius="10dp"
         android:elevation="7dp">
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/cardcolor">
+            android:layout_height="match_parent">
    <LinearLayout
        android:layout_width="match_parent"
        android:layout_height="30dp"
        android:weightSum="2"
+       android:background="@color/cardcolor"
        android:orientation="horizontal">
        <com.monitor.widget.Lato_Regular_Font
            android:textColor="@color/textcolor"
@@ -55,11 +54,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:weightSum="2"
+                android:background="@color/cardcolor"
                 android:orientation="vertical">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_weight="1"
-                    android:weightSum="4"
+                    android:weightSum="3"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
                     <com.monitor.widget.Lato_Regular_Font
@@ -80,6 +80,7 @@
                         android:text="00"
                         android:id="@+id/t2"
                         android:textSize="18dp"
+                        android:visibility="gone"
                         android:gravity="bottom|right"
                         android:paddingBottom="3dp"
                         android:layout_width="match_parent"
@@ -91,7 +92,7 @@
                         android:text="00"
                         android:id="@+id/t3"
                         android:textSize="18dp"
-                        android:gravity="bottom|left"
+                        android:gravity="center_horizontal"
                         android:paddingBottom="3dp"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
@@ -102,6 +103,7 @@
                         android:text="00"
                         android:id="@+id/t4"
                         android:textSize="18dp"
+                        android:paddingRight="15dp"
                         android:gravity="bottom|center"
                         android:paddingBottom="3dp"
                         android:layout_width="match_parent"
@@ -114,7 +116,7 @@
                     android:layout_weight="1"
                     android:orientation="horizontal">
                     <com.monitor.widget.Lato_Regular_Font
-                        android:layout_weight="1.5"
+                        android:layout_weight="1"
                         android:textColor="@color/hrcolor"
                         android:text="@string/HR"
                         android:paddingLeft="15dp"
@@ -122,20 +124,22 @@
                         android:layout_height="match_parent">
                     </com.monitor.widget.Lato_Regular_Font>
                     <com.monitor.widget.Lato_Regular_Font
-                        android:layout_weight="1.3"
+                        android:layout_weight="1"
                         android:textColor="@color/spo2color"
                         android:text="@string/SP02"
                         android:paddingRight="10dp"
-                        android:gravity="right"
+                        android:id="@+id/ss"
+                        android:textSize="12dp"
+                        android:gravity="center_horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
                     </com.monitor.widget.Lato_Regular_Font>
                     <com.monitor.widget.Lato_Regular_Font
-                        android:layout_weight="1.3"
+                        android:layout_weight="1"
                         android:textColor="@color/respcolor"
                         android:text="@string/resp"
-                        android:gravity="right"
-                        android:paddingRight="30dp"
+                        android:gravity="center|right"
+                        android:paddingRight="15dp"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
                     </com.monitor.widget.Lato_Regular_Font>

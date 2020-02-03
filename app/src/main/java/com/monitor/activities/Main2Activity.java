@@ -256,6 +256,11 @@ public class Main2Activity  extends BaseActivity implements BTController.Listene
     }
 
     @Override
+    public void onRespReceived(int dat) {
+
+    }
+
+    @Override
     public void onSpO2Received(final SpO2 spo2) {
         runOnUiThread(new Runnable() {
             @Override

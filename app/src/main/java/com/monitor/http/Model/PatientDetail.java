@@ -6,120 +6,244 @@ import com.google.gson.annotations.SerializedName;
 
 public class PatientDetail {
 
+    @SerializedName("Bed_Number")
+    @Expose
+    private String bedNumber;
+    @SerializedName("BloodGroup")
+    @Expose
+    private String bloodGroup;
+    @SerializedName("DeviceMac")
+    @Expose
+    private String deviceMac;
+    @SerializedName("Gender")
+    @Expose
+    private Integer gender;
     @SerializedName("PatientId")
     @Expose
     private Integer patientId;
-
     @SerializedName("PatientName")
     @Expose
     private String patientName;
-
+    @SerializedName("age")
+    @Expose
+    private Integer age;
     @SerializedName("heartRate")
     @Expose
-    private String heartRate;
-
-    @SerializedName("Resp Rate")
+    private HeartRate heartRate;
+    @SerializedName("highPressure")
     @Expose
-    private Integer respRate;
-
-    public Integer getRespRate() {
-        return respRate;
-    }
-
-    public void setRespRate(Integer respRate) {
-        this.respRate = respRate;
-    }
-
-    public Integer getCuff() {
-        return cuff;
-    }
-
-    public void setCuff(Integer cuff) {
-        this.cuff = cuff;
-    }
-
-    public String getHigh() {
-        return high;
-    }
-
-    public void setHigh(String high) {
-        this.high = high;
-    }
-
-    public String getLow() {
-        return low;
-    }
-
-    public void setLow(String low) {
-        this.low = low;
-    }
-
-    public String getMean() {
-        return mean;
-    }
-
-    public void setMean(String mean) {
-        this.mean = mean;
-    }
-
-    public Integer getsPO2() {
-        return sPO2;
-    }
-
-    public void setsPO2(Integer sPO2) {
-        this.sPO2 = sPO2;
-    }
-
-    public Integer getPulseRate() {
-        return pulseRate;
-    }
-
-    public void setPulseRate(Integer pulseRate) {
-        this.pulseRate = pulseRate;
-    }
-
-    @SerializedName("Cuff")
+    private HighPressure highPressure;
+    @SerializedName("hospitalId")
     @Expose
-    private Integer cuff;
-    @SerializedName("High")
+    private Integer hospitalId;
+    @SerializedName("lowPressure")
     @Expose
-    private String high;
-    @SerializedName("Low")
+    private LowPressure lowPressure;
+    @SerializedName("pulseRate")
     @Expose
-    private String low;
-    @SerializedName("Mean")
+    private PulseRate pulseRate;
+    @SerializedName("roomNumber")
     @Expose
-    private String mean;
-
-    @SerializedName("SPO2")
+    private Integer roomNumber;
+    @SerializedName("spo2")
     @Expose
-    private Integer sPO2;
-    @SerializedName("Pulse Rate")
+    private Spo2 spo2;
+    @SerializedName("temperature")
     @Expose
-    private Integer pulseRate;
-
+    private Temperature temperature;
 
 
 
+
+
+    @SerializedName("HR")
+    @Expose
+    String HR;
+    @SerializedName("PR")
+    @Expose
+    String PR;
+    @SerializedName("Sp2")
+    @Expose
+    String Sp2;
+    @SerializedName("RESP")
+    @Expose
+    String RESP;
+
+
+    public String getSp2() {
+        return Sp2;
+    }
+
+    public void setSp2(String sp2) {
+        Sp2 = sp2;
+    }
+
+    public String getPR() {
+        return PR;
+    }
+
+    public void setPR(String PR) {
+        this.PR = PR;
+    }
+
+    public String getHR() {
+        return HR;
+    }
+
+    public void setHR(String HR) {
+        this.HR = HR;
+    }
+
+    public String getRESP() {
+        return RESP;
+    }
+
+    public void setRESP(String RESP) {
+        this.RESP = RESP;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public String getBedNumber() {
+        return bedNumber;
+    }
+
+    public void setBedNumber(String bedNumber) {
+        this.bedNumber = bedNumber;
+    }
+
+    public String getBloodGroup() {
+        return bloodGroup;
+    }
+
+    public void setBloodGroup(String bloodGroup) {
+        this.bloodGroup = bloodGroup;
+    }
+
+    public String getDeviceMac() {
+        return deviceMac;
+    }
+
+    public void setDeviceMac(String deviceMac) {
+        this.deviceMac = deviceMac;
+    }
+
+    public Integer getGender() {
+        return gender;
+    }
+
+    public void setGender(Integer gender) {
+        this.gender = gender;
+    }
 
     public Integer getPatientId() {
         return patientId;
     }
+
     public void setPatientId(Integer patientId) {
         this.patientId = patientId;
     }
+
     public String getPatientName() {
         return patientName;
     }
+
     public void setPatientName(String patientName) {
         this.patientName = patientName;
     }
 
-    public String getHeartRate() {
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public HeartRate getHeartRate() {
         return heartRate;
     }
 
-    public void setHeartRate(String heartRate) {
+    public void setHeartRate(HeartRate heartRate) {
         this.heartRate = heartRate;
     }
+
+    public HighPressure getHighPressure() {
+        return highPressure;
+    }
+
+    public void setHighPressure(HighPressure highPressure) {
+        this.highPressure = highPressure;
+    }
+
+    public Integer getHospitalId() {
+        return hospitalId;
+    }
+
+    public void setHospitalId(Integer hospitalId) {
+        this.hospitalId = hospitalId;
+    }
+
+    public LowPressure getLowPressure() {
+        return lowPressure;
+    }
+
+    public void setLowPressure(LowPressure lowPressure) {
+        this.lowPressure = lowPressure;
+    }
+
+    public PulseRate getPulseRate() {
+        return pulseRate;
+    }
+
+    public void setPulseRate(PulseRate pulseRate) {
+        this.pulseRate = pulseRate;
+    }
+
+    public Integer getRoomNumber() {
+        return roomNumber;
+    }
+
+    public void setRoomNumber(Integer roomNumber) {
+        this.roomNumber = roomNumber;
+    }
+
+    public Spo2 getSpo2() {
+        return spo2;
+    }
+
+    public void setSpo2(Spo2 spo2) {
+        this.spo2 = spo2;
+    }
+
+    public Temperature getTemperature() {
+        return temperature;
+    }
+
+    public void setTemperature(Temperature temperature) {
+        this.temperature = temperature;
+    }
+
 }

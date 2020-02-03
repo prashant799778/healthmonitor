@@ -14,8 +14,12 @@ public class Constant {
     public static final   String DATE="Date";
     public static final   String TIME="Time";
     public static int SocketServerPORT=5053;
-    public static String hostAddress="159.65.146.25";
-    public static String SERVER_URL="tcp://159.65.146.25:1883";
+    public static String hostAddress="3.0.218.219";
+//    139.59.78.54   mqtt.digitologyhealthcare.com
+    public static String SERVER_JSON_URL="tcp://mqtt.digitologyhealthcare.com:1883";
+    public static int qos=2;
+    public static String SERVER_ECG_URL="tcp://mqtt.digitologyhealthcare.com:1883";
+//    public static String SERVER_SPO2_URL="tcp://159.65.146.25:1883";
     public static final String PREFS_NAME = "sharedPreferences";
 
 }
