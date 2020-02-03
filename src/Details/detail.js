@@ -25,7 +25,7 @@ class Detail extends React.Component{
          resp:"",
           id:"",
           user:"",
-         
+         isopen:false,
          
           w_ecg:0,
           w_spo:0,
@@ -232,7 +232,7 @@ testAlert1=(type,value)=>{
   
   changemsgState=()=>{
 	   
-	  this.setState({msg:"",msgStatus:""});
+	  this.setState({msg:"",msgStatus:"",isopen:!this.state.isopen});
 	  console.log("jkl",this.state)
   }
   
@@ -341,7 +341,7 @@ return(<DetailStyled>
                 </div>
 				<div class="dropdown">
 				{localStorage.getItem("user_type","Operation")!="Operation" && <button class="side-button-pis" onClick={()=>{this.changemsgState()}} type="button">prescribe medicine</button>}
-				  <div class="dropdown-menu men-drop sadow bg-colr-ch show-pre-medi">
+					{this.state. isopen &&&	  <div class="dropdown-menu men-drop sadow bg-colr-ch show-pre-medi">
 				  <form>
 					<div class="stiky-note">
 					<textarea value={this.state.msg}  onChange={e => {
@@ -354,7 +354,7 @@ return(<DetailStyled>
                               <span  style={{paddingLeft:'15px'}}  >{this.state.msgStatus}</span>
 					</div>
 					</form>
-				  </div>
+					</div>}
 				</div>
 				
               </div>
