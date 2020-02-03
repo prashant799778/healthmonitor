@@ -61,7 +61,7 @@ class Detail extends React.Component{
      
       Oclient1.publish(this.state.currentid+"/Notification",JSON.stringify(msg),(errs)=>{
         if (!err) {
-          this.setState({ msgStatus:'	'})
+          this.setState({ msgStatus:'message sent'})
           setTimeout(()=>{ this.props.updatePage()},2000);
          
         }else{
