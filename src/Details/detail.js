@@ -230,6 +230,12 @@ testAlert1=(type,value)=>{
      return false;
 }
   
+  changemsgState=()=>{
+	   
+	  this.setState({msg:"",msgStatus:""});
+	  console.log("jkl",this.state)
+  }
+  
       render(){
 
         let currentinnerItem=this.props.currentinnerItem  ;
@@ -334,7 +340,7 @@ return(<DetailStyled>
                { textheartRate!="" &&    <h3 className="erroe-mssh" style={{background:'#b030b0'}} >{textheartRate}</h3>}
                 </div>
 				<div class="dropdown">
-				{localStorage.getItem("user_type","Operation")!="Operation" &&  <button class="side-button-pis" onClick={()=>{this.setState({msg:"",msgStatus:""},()=>{console.log("jkl",this.state))})}} type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">prescribe medicine</button>}
+				{localStorage.getItem("user_type","Operation")!="Operation" &&  <button class="side-button-pis" onClick={()=>{this.changemsgState()}} type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">prescribe medicine</button>}
 				  <div class="dropdown-menu men-drop sadow bg-colr-ch" aria-labelledby="dropdownMenuButton">
 				  <form>
 					<div class="stiky-note">
