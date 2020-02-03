@@ -7,6 +7,8 @@ import  RESP  from "./resp"
 import SPO from "./spo"
 import backImg from "./image/backimg.png"
 import alertimg from "./image/alrt.gif" 
+import OutsideClickHandler from "react-outside-click-handler"
+
 class Detail extends React.Component{
   client=""
     constructor(){
@@ -340,7 +342,13 @@ return(<DetailStyled>
                { textheartRate!="" &&    <h3 className="erroe-mssh" style={{background:'#b030b0'}} >{textheartRate}</h3>}
                 </div>
 				<div class="dropdown">
-				{localStorage.getItem("user_type","Operation")!="Operation" && <button class="side-button-pis" onClick={()=>{this.changemsgState()}} type="button">prescribe medicine</button>}
+				{localStorage.getItem("user_type","Operation")!="Operation" &&  
+				 <OutsideClickHandler
+      onOutsideClick={() => {
+      this.setState({isopen:false});
+      }}
+    >
+				<button class="side-button-pis" onClick={()=>{this.changemsgState()}} type="button">prescribe medicine</button></OutsideClickHandler>}
 					{this.state. isopen &&	  <div class="dropdown-menu men-drop sadow bg-colr-ch show-pre-medi">
 				  <form>
 					<div class="stiky-note">
