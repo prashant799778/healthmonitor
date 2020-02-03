@@ -350,8 +350,8 @@ return(<DetailStyled>
                                     () => {}
                                   );
                                 }} rows="6" cols="50" class="madical pis"></textarea>
-					<a  style={{cursor:'pointer',paddingRight:'15px'}} onClick={()=>this.sendMessage()} class="btn btn-primary ">send</a>
-                              <span  style={{paddingLeft:'15px'}}  >{this.state.msgStatus}</span>
+					<a  style={{cursor:'pointer',paddingRight:'15px'}} onClick={()=>this.sendMessage()} class="btn btn-primary clr-white">send</a>
+                              <span  style={{paddingLeft:'15px'}} className="clr-white" >{this.state.msgStatus}</span>
 					</div>
 					</form>
 					</div>}
