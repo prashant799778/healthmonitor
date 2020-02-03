@@ -341,20 +341,7 @@ return(<DetailStyled>
                 </div>
 				<div class="dropdown">
 				{localStorage.getItem("user_type","Operation")!="Operation" &&  <button class="side-button-pis" onClick={()=>{this.changemsgState()}} type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">prescribe medicine</button>}
-				  <div class="dropdown-menu men-drop sadow bg-colr-ch" >
-				  <form>
-					<div class="stiky-note">
-					<textarea value={this.state.msg}  onChange={e => {
-                                  this.setState(
-                                    { msg: e.target.value },
-                                    () => {}
-                                  );
-                                }} rows="6" cols="50" class="madical pis"></textarea>
-					<a  style={{cursor:'pointer',paddingRight:'15px'}} onClick={()=>this.sendMessage()} class="btn btn-primary ">send</a>
-                              <span  style={{paddingLeft:'15px'}}  >{this.state.msgStatus}</span>
-					</div>
-					</form>
-				  </div>
+				  
 				</div>
 				
               </div>
