@@ -266,7 +266,6 @@ public class UserDisplayActivity extends BaseActivity  {
                     Comman.log("MQTTuuuuuuuuu","Topic_Id_From_Server_Ecg_Client"+message);
                     UserDisplayActivity.this.runOnUiThread(new Runnable(){
                         public void run() {
-
                             wfECG.addAmp(Integer.valueOf(message.toString()));
 
                         }
