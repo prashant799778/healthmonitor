@@ -48,31 +48,6 @@ class JSONEncoder(json.JSONEncoder):
 
 # cursor = mysqlcon.cursor()
 
-def getDiagReportPath(filename):
-
-    path = "/var/www/HealthCare/Healthmonitor/DiagnosticReport"+filename
-    return path
-
-def InsertRtnId(table,columns,values):
-    try:
-        
-        query = " insert into " + table + " (" + columns + ") values(" + values + ");" 
-        print(query)
-        con = DBconnection()
-        cursor = con.cursor()
-        cursor.execute(query)     
-        Id = cursor.lastrowid
-        con.commit()        
-        cursor.close()   
-              
-        return Id
-
-    except Exception as e:
-        print("Error--->" + str(e))            
-        return "0" 
-
-
-
 @app.route('/login', methods=['GET'])
 def login1():
     try:
