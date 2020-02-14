@@ -3581,10 +3581,11 @@ def diagReportMaster():
                 testType = i['testType']
                 hospitalId = i['hospitalId']
                 doctorId = i['doctorId']
+                hubId = i['hubId']
                 userId = i['userId']
 
-                query  = " insert into Report_Master (HospitalId,DoctorId,PatientId,UploadedBy,TestType,ReportName)"
-                query = query +" values("+'"'+str(hospitalId)+'"'+','+'"'+str(doctorId)+'"'+','+'"'+str(patientId)+'"'+','+'"'+str(userId)+'"'+','+'"'+str(testType)+'"'+','+'"'+str(reportName)+'"'+' '+");"
+                query  = " insert into Report_Master (HubId,HospitalId,DoctorId,PatientId,UploadedBy,TestType,ReportName)"
+                query = query +" values("+'"'+str(hubId)+'"'+','+'"'+str(hospitalId)+'"'+','+'"'+str(doctorId)+'"'+','+'"'+str(patientId)+'"'+','+'"'+str(userId)+'"'+','+'"'+str(testType)+'"'+','+'"'+str(reportName)+'"'+' '+");"
                 print(query)
                 conn=Connection()
                 cursor = conn.cursor()
