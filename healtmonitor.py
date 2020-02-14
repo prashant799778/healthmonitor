@@ -3616,7 +3616,7 @@ def diagReportMaster():
                         FolderPath = str(FolderPath)+'/'                     
 
                     file.save(FolderPath)
-                    ReportPath = filepath
+                    ReportPath = str(filepath)
 
                     query="update Report_Master set ReportPath = '"+str(FolderPath)+"' where ReportId = '" + Id + "' "
                     cursor = conn.cursor()
