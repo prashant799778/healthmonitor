@@ -3622,7 +3622,7 @@ def diagReportMaster():
                     file.save(FolderPath)
                     ReportPath = str(filepath)
 
-                    query="update Report_Master set ReportPath = '"+str(FolderPath)+"' where ReportId = '" + Id + "' "
+                    query="update Report_Master set ReportPath = '"+str(FolderPath)+"' where ReportId = '" + str(Id) + "' "
                     cursor = conn.cursor()
                     cursor.execute(query)
                     conn.commit()
