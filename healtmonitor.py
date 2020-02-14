@@ -3595,8 +3595,8 @@ def diagReportMaster():
                 cursor.close()
 
 
-                if report in request.files:
-                    file = request.files.get("report")        
+                if 'reportFile' in request.files:
+                    file = request.files.get('reportFile')        
                     filename = file.filename or ''                 
                     filename = filename.replace("'","")
 
