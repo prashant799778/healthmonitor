@@ -1,10 +1,8 @@
 from flask import Flask,request,abort
 from flask_socketio import SocketIO,emit
 import uuid
-import json
 #import socketio
-
-
+import os
 import json
 import numpy as np
 import pymysql
@@ -3604,7 +3602,10 @@ def diagReportMaster():
 
                     filepath = '/'+str(patientId)+'/'+filename
 
-                    FolderPath = getDiagReportPath(filepath)  
+                    FolderPath = getDiagReportPath(filepath)
+
+                    isdir = os.path.isdir(FolderPath)  
+                    print(isdir)                      
 
                     file.save(FolderPath)
                     ReportPath = filepath
