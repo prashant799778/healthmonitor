@@ -3581,7 +3581,7 @@ def diagReportMaster():
                 testType = i['testType']
                 userId = i['userId']
 
-                query  = " insert into Report_Master (UserId,TestType,ReportName)"
+                query  = " insert into Report_Master (UploadedBy,TestType,ReportName)"
                 query = query +" values("+'"'+str(userId)+'"'+','+'"'+str(testType)+'"'+','+'"'+str(reportName)+'"'+' '+");"
                 print(query)
                 conn=Connection()
