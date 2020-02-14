@@ -3613,11 +3613,11 @@ def diagReportMaster():
                     conn.commit()
                     cursor.close()
 
-            data = {"status":"true","message":"","result":"Data Inserted Successfully"}
-            return data
-        else:
-            data = {"status":"false","message":"Somthing went wrong please contact system admin","result":""}
-            return data
+                    data = {"status":"true","message":"","result":"Data Inserted Successfully"}
+                    return data
+                else:
+                    data = {"status":"false","message":"Somthing went wrong please contact system admin","result":""}
+                    return data
 
     except Exception as e :
         print("Exception--->" + str(e))                                  
