@@ -3610,10 +3610,10 @@ def diagReportMaster():
                     if isdir == False:
                         FolderPath = os.mkdir(FolderPath)
                         print("if",FolderPath,filename)
-                        FolderPath = FolderPath+'/'+filename                     
+                        FolderPath = str(FolderPath)+'/'+str(filename)                     
                     else:
                         print("else",FolderPath,filename)                        
-                        FolderPath = FolderPath+'/'+filename                     
+                        FolderPath = str(FolderPath)+'/'+str(filename)                     
 
                     file.save(FolderPath)
                     ReportPath = filepath
