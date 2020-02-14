@@ -3600,12 +3600,17 @@ def diagReportMaster():
                     print(file)
                     print(filename) 
 
-                    filepath = '/'+str(patientId)+'/'+filename
+                    filepath = '/'+str(patientId)
 
                     FolderPath = getDiagReportPath(filepath)
 
                     isdir = os.path.isdir(FolderPath)  
-                    print(isdir)                      
+                    print(isdir)
+
+                    if isdir == False:
+                        FolderPath = str(os.path.mkdir(FolderPath))+'/'+filename 
+                    else:
+                        FolderPath = FolderPath+'/'+filename                     
 
                     file.save(FolderPath)
                     ReportPath = filepath
