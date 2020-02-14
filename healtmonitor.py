@@ -3584,7 +3584,7 @@ def diagReportMaster():
                 hubId = i['hubId']
                 userId = i['userId']
 
-                query  = " insert into Report_Master (HubId,HospitalId,DoctorId,PatientId,UploadedBy,TestType,ReportName)"
+                query  = " insert into DIAG_ReportMaster (HubId,HospitalId,DoctorId,PatientId,UploadedBy,TestType,ReportName)"
                 query = query +" values("+'"'+str(hubId)+'"'+','+'"'+str(hospitalId)+'"'+','+'"'+str(doctorId)+'"'+','+'"'+str(patientId)+'"'+','+'"'+str(userId)+'"'+','+'"'+str(testType)+'"'+','+'"'+str(reportName)+'"'+' '+");"
                 print(query)
                 conn=Connection()
@@ -3625,7 +3625,7 @@ def diagReportMaster():
                     file.save(FolderPath)
                     ReportPath = str(filepath)
 
-                    query="update Report_Master set ReportPath = '"+str(FolderPath)+"' where ReportId = '" + str(Id) + "' "
+                    query="update DIAG_ReportMaster set ReportPath = '"+str(FolderPath)+"' where ReportId = '" + str(Id) + "' "
                     cursor = conn.cursor()
                     cursor.execute(query)
                     conn.commit()
