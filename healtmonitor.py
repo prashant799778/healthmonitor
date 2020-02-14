@@ -3608,7 +3608,7 @@ def diagReportMaster():
                     print(isdir)
 
                     if isdir == False:
-                        FolderPath = os.mkdir(FolderPath)
+                        os.mkdir(FolderPath)
                         print("if",FolderPath,filename)
                         FolderPath = str(FolderPath)+'/'+str(filename)                     
                     else:
