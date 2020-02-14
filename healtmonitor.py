@@ -48,11 +48,10 @@ class JSONEncoder(json.JSONEncoder):
 
 # cursor = mysqlcon.cursor()
 
+def getDiagReportPath(filename):
 
-
-
-
-
+    path = "/var/www/HealthCare/Healthmonitor/DiagnosticReport"+filename
+    return path
 
 @app.route('/login', methods=['GET'])
 def login1():
