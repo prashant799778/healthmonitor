@@ -3598,7 +3598,10 @@ def diagReportMaster():
                 if reportName in request.files:
                     file = request.files.get(reportName)        
                     filename = file.filename or ''                 
-                    filename = filename.replace("'","") 
+                    filename = filename.replace("'","")
+
+                    print(file)
+                    print(filename) 
 
                     filepath = '/'+str(patientId)+'/'+filename
 
