@@ -48,9 +48,28 @@ class JSONEncoder(json.JSONEncoder):
 
 # cursor = mysqlcon.cursor()
 
+def getDiagReportPath(filename):
 
+    path = "/var/www/HealthCare/Healthmonitor/DiagnosticReport"+filename
+    return path
 
+def InsertRtnId(table,columns,values):
+    try:
+        
+        query = " insert into " + table + " (" + columns + ") values(" + values + ");" 
+        print(query)
+        con = DBconnection()
+        cursor = con.cursor()
+        cursor.execute(query)     
+        Id = cursor.lastrowid
+        con.commit()        
+        cursor.close()   
+              
+        return Id
 
+    except Exception as e:
+        print("Error--->" + str(e))            
+        return "0" 
 
 
 
@@ -3565,6 +3584,66 @@ def editDoctorProfile():
         output = {"result":"somthing went wrong","status":"false"}
         return output
 
+@app.route('/diagReportMaster', methods=['POST'])
+def diagReportMaster():
+
+    try:  
+        inputdata = request.form.get('reportInfo')
+        inputdata1 = request.form.get('patientId')     
+
+        inputdata = json.loads(inputdata)   
+
+        patientId = inputdata1
+
+        if inputdata1 == None :
+            data = {"status":"false","message":"Somthing went wrong please contact system admin","result":""}
+            return data
+        else:
+            for i in inputdata:
+                
+                reportName = i['reportName']
+                testType = i['testType']
+                userId = i['userId']
+
+                query  = " insert into Report_Master (UserId,TestType,ReportName)"
+                query = query +" values("+'"'+str(userId)+'"'+','+'"'+str(testType)+'"'+','+'"'+str(reportName)+'"'+' '+");"
+                print(query)
+                conn=Connection()
+                cursor = conn.cursor()
+                cursor.execute(query)
+                Id = cursor.lastrowid
+                conn.commit()
+                cursor.close()
+
+
+                if reportName in request.files:
+                    file = request.files.get(reportName)        
+                    filename = file.filename or ''                 
+                    filename = filename.replace("'","") 
+
+                    filepath = '/'+str(patientId)+'/'+filename
+
+                    FolderPath = getDiagReportPath(filepath)  
+
+                    file.save(FolderPath)
+                    ReportPath = filepath
+
+                    query="update Report_Master set ReportPath = '"+str(FolderPath)+"' where ReportId = '" + Id + "' "
+                    cursor = conn.cursor()
+                    cursor.execute(query)
+                    conn.commit()
+                    cursor.close()
+
+            data = {"status":"true","message":"","result":"Data Inserted Successfully"}
+            return data
+        else:
+            data = {"status":"false","message":"Somthing went wrong please contact system admin","result":""}
+            return data
+
+    except Exception as e :
+        print("Exception--->" + str(e))                                  
+        data = {"status":"false","message":"Somthing went wrong please contact system admin"}
+        return data
 
 
 # @app.route('/patientDoctorMapping', methods=['POST'])
