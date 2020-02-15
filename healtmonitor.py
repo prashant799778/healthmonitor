@@ -36,15 +36,7 @@ class JSONEncoder(json.JSONEncoder):
         return json.JSONEncoder.default(self, o)
 
 
-# mysqlcon = pymysql.connect(host='localhost',
-#                             user='root',                            
-#                             db='healthmonitor',
-#                             charset='utf8mb4',
-#                             cursorclass=pymysql.cursors.DictCursor)
 
-
-
-# cursor = mysqlcon.cursor()
 
 def getDiagReportPath(filename):
 
@@ -64,7 +56,17 @@ def getDicomReportPath(filename):
 def getLabReportPath(filename):
 
     path = "/var/www/HealthCare/Healthmonitor/LabReport"+filename
-    return path
+    return path        
+
+
+# mysqlcon = pymysql.connect(host='localhost',
+#                             user='root',                            
+#                             db='healthmonitor',
+#                             charset='utf8mb4',
+#                             cursorclass=pymysql.cursors.DictCursor)
+
+
+
 
 @app.route('/login', methods=['GET'])
 def login1():
