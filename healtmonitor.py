@@ -3168,8 +3168,11 @@ def Patient_masterTest():
         data1=cursor.fetchone()
         if data1 != None:
             query2  = " insert into Patient_master(PatientName,heartRate,spo2,pulseRate,highPressure,lowPressure,temperature,roomNumber,Gender,age,BloodGroup,DeviceMac,Bed_Number,Usertype_Id,hospitalId,startdate,usercreate,PhoneNo)"
+            
             query2 =query2 +" values('"+str(PatientName)+"','"+str(heartRate)+"','"+str(spo2)+"','"+str(pulseRate)+"','"+str(highPressure)+"','"
+
             query2=query2+str(lowPressure)+"','"+str(temperature)+"','"+str(roomNumber)+"','"+str(gender)+"','"+str(age)+"','"+str(BloogGroup)+"','"
+
             query2=query2+str(DeviceMac)+"','"+str(Bed_Number)+"','"+str(Usertype_Id)+"','"+str(hospitalId)+"','"+str(startdate)+"','"+str(usercreate)+"','"+str(PhoneNo)+"');"
             
             
@@ -3188,7 +3191,7 @@ def Patient_masterTest():
             cursor.close()
 
             query1= "insert into patientDetails(patientName,hospitalId,phoneNo,bloodGroup,deviceMac,bedNumber,usertypeId,startdate,enddate,Gender,age,roomNumber)"
-            query1=query1+" values('"+str(PatientName)+"','"+str(hospitalId)+"','"+str(BloogGroup)+"','"+str(DeviceMac)+"','"+str(Bed_Number)+"','"+str(Usertype_Id)+"','"+str(startdate)+"','"+str(enddate)+"','"+str(Gender)+"','"+str(age)+"','"+str(roomNumber)+"');"
+            query1=query1+" values('"+str(PatientName)+"','"+str(hospitalId)+"','"+str(PhoneNo)+"','"+str(BloogGroup)+"','"+str(DeviceMac)+"','"+str(Bed_Number)+"','"+str(Usertype_Id)+"','"+str(startdate)+"','"+str(enddate)+"','"+str(Gender)+"','"+str(age)+"','"+str(roomNumber)+"');"
             
             conn=Connection()
             cursor = conn.cursor()
@@ -3265,11 +3268,18 @@ def Patient_masterTest():
             print("++++++++++++++++++++++++")
 
         else:
-            PatientId=data1['PatientId']
 
-            query1= "insert into patientDetails(PatientId,patientName,hospitalId,phoneNo,bloodGroup,deviceMac,bedNumber,usertypeId,startdate,enddate,Gender,age,roomNumber)"
-            query1=query1+" values('"+str(patientId)+"','"+str(hospitalId)+"','"+str(BloogGroup)+"','"+str(DeviceMac)+"','"+str(Bed_Number)+"','"+str(Usertype_Id)+"','"+str(startdate)+"','"+str(enddate)+"','"+str(Gender)+"','"+str(age)+"','"+str(roomNumber)+"');"
-            
+            PatientId=data1['PatientId']
+            query22="update  Patient_master set PatientName='"+str(PatientName)+"',heartRate='"+str(heartRate)+"',spo2='"+str(spo2)+"',pulseRate='"+str(pulseRate)+"'"
+
+            query22=query22+",highPressure='"+str(highPressure)+"',lowPressure='"+str(lowPressure)+"',temperature='"+str(temperature)+"',roomNumber='"+str(roomNumber)+"' "
+            query22=query22+",Gender='"+str(Gender)+"',age='"+str(age)+"',BloodGroup='"+str(BloogGroup)+"',DeviceMac='"+str(DeviceMac)+"',Bed_Number='"+str(Bed_Number)+"',Usertype_Id='"+str(Usertype_Id)+"',hospitalId='"+str(hospitalId)+"',startdate='"+str(startdate)+"' where PhoneNo='"+str(PhoneNo)+"'"
+
+
+            query1= "insert into patientDetails(PatientId,patientName,hospitalId,phoneNo,bloodGroup,deviceMac,bedNumber,usertypeId,startdate,Gender,age,roomNumber)"
+
+            query1=query1+" values('"+str(patientId)+"','"+str(PatientName)+"','"+str(hospitalId)+"','"+str(BloogGroup)+"','"+str(DeviceMac)+"','"+str(Bed_Number)+"','"+str(Usertype_Id)+"','"+str(startdate)+"','"+str(Gender)+"','"+str(age)+"','"+str(roomNumber)+"');"
+
             conn=Connection()
             cursor = conn.cursor()
             cursor.execute(query1)
@@ -3368,43 +3378,29 @@ def Patient_masterTest():
     return output
 
 
-@app.route('/Patient_master_select', methods=['GET'])
-def Patient_master_select():
+@app.route('/getPatientdetails', methods=['GET'])
+def getPatientdetails():
     try:
-        PatientName,DeviceMac,PatientId,y,y2,y3= "","","","","",""
-        if 'PatientId' in request.args:
-            PatientId=request.args["PatientId"]
-        if 'DeviceMac' in request.args:
-            DeviceMac=request.args["DeviceMac"]
-        if 'PatientName' in request.args:
-            PatientName=request.args["PatientName"]
-        if 'ID' in request.args:
-            ID=request.args["ID"]
+        PhoneNo=""
+        if 'PhoneNo' in request.args:
+            PhoneNo=request.args["PhoneNo"]
+        
        
         WhereCondition=""
         
-        if ID !="":
+        if PhoneNo !="":
             
-            WhereCondition1 =  " and  DoctorId    = '" + ID + "'  "
-        
-        if PatientId != "":
-            WhereCondition1 =  " and  PatientId    = '" + PatientId + "'  "
+            WhereCondition1 =  " and  PhoneNo    = '" + PhoneNo + "'  "
+      
             # y = y +  WhereCondition1
-        
-        if DeviceMac != "":
-            WhereCondition1 =  " and DeviceMac   = '" + DeviceMac + "'  "
-            # y = y +  WhereCondition1
-        
-        if  PatientName != "":
-            WhereCondition1 =  "  and  PatientName   = '" + PatientName + "'  "
-            # y = y +  WhereCondition1
+       
 
        
-        query = "select * from Patient_master  where enddate is NULL " +WhereCondition1  # y 
+        query = "select PatientName,Bed_Number,roomNumber,age,BloodGroup from Patient_master  where Status=2 " +WhereCondition1  # y 
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
-        data = cursor.fetchall()
+        data = cursor.fetchone()
         cursor.close()
         if data:           
             Data = {"result":data,"status":"true"}
