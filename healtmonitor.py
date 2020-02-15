@@ -3976,6 +3976,53 @@ def diagReportMaster():
         data = {"status":"false","message":"Somthing went wrong please contact system admin"}
         return data
 
+
+
+@app.route('/getdiagReportMaster', methods=['GET'])
+def getdiagReportMaster():
+    try:
+        PatientId=""
+        DoctorId=" "
+        if 'PatientId' in request.args:
+            PatientId=request.args["PatientId"]
+        if 'DoctorId' in request.args:
+            DoctorId=request.args["DoctorId"]
+        
+       
+        WhereCondition=""
+        
+        if (DoctorId !="") and (PatientId !="") :
+            
+            WhereCondition1 =  " and  DoctorId    = '" + DoctorId + "'  "
+
+        if (PatientId !=""):
+            
+            WhereCondition1 =  " and  PatientId    = '" + PatientId + "'  "
+      
+            # y = y +  WhereCondition1
+       
+
+       
+        query = "select  * from DIAG_ReportMaster where Status= " +WhereCondition1  # y 
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data = cursor.fetchone()
+        cursor.close()
+        if data:           
+            Data = {"result":data,"status":"true"}
+            return Data
+        
+        else:
+            output = {"result":"No Data Found","status":"false"}
+            return output
+
+    except Exception as e :
+        print("Exception---->" + str(e))    
+        output = {"result":"something went wrong","status":"false"}
+        return output
+
+
 @app.route('/pacsReportMaster', methods=['POST'])
 def pacsReportMaster():
 
@@ -4057,6 +4104,53 @@ def pacsReportMaster():
         print("Exception--->" + str(e))                                  
         data = {"status":"false","message":"Somthing went wrong please contact system admin"}
         return data
+
+
+
+@app.route('/getpacsReportMaster', methods=['GET'])
+def getpacsReportMaster():
+    try:
+        PatientId=""
+        DoctorId=" "
+        if 'PatientId' in request.args:
+            PatientId=request.args["PatientId"]
+        if 'DoctorId' in request.args:
+            DoctorId=request.args["DoctorId"]
+        
+       
+        WhereCondition=""
+        
+        if (DoctorId !="") and (PatientId !="") :
+            
+            WhereCondition1 =  " and  DoctorId    = '" + DoctorId + "'  "
+
+        if (PatientId !=""):
+            
+            WhereCondition1 =  " and  PatientId    = '" + PatientId + "'  "
+      
+            # y = y +  WhereCondition1
+       
+
+       
+        query = "select  * from PACS_ReportMaster where Status= " +WhereCondition1  # y 
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data = cursor.fetchone()
+        cursor.close()
+        if data:           
+            Data = {"result":data,"status":"true"}
+            return Data
+        
+        else:
+            output = {"result":"No Data Found","status":"false"}
+            return output
+
+    except Exception as e :
+        print("Exception---->" + str(e))    
+        output = {"result":"something went wrong","status":"false"}
+        return output
+
 
 @app.route('/dicomReportMaster', methods=['POST'])
 def dicomReportMaster():
@@ -4140,6 +4234,53 @@ def dicomReportMaster():
         data = {"status":"false","message":"Somthing went wrong please contact system admin"}
         return data
 
+
+
+@app.route('/getdicomReportMaster', methods=['GET'])
+def getdicomReportMaster():
+    try:
+        PatientId=""
+        DoctorId=" "
+        if 'PatientId' in request.args:
+            PatientId=request.args["PatientId"]
+        if 'DoctorId' in request.args:
+            DoctorId=request.args["DoctorId"]
+        
+       
+        WhereCondition=""
+        
+        if (DoctorId !="") and (PatientId !="") :
+            
+            WhereCondition1 =  " and  DoctorId    = '" + DoctorId + "'  "
+
+        if (PatientId !=""):
+            
+            WhereCondition1 =  " and  PatientId    = '" + PatientId + "'  "
+      
+            # y = y +  WhereCondition1
+       
+
+       
+        query = "select  * from DICOM_ReportMaster where Status= " +WhereCondition1  # y 
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data = cursor.fetchone()
+        cursor.close()
+        if data:           
+            Data = {"result":data,"status":"true"}
+            return Data
+        
+        else:
+            output = {"result":"No Data Found","status":"false"}
+            return output
+
+    except Exception as e :
+        print("Exception---->" + str(e))    
+        output = {"result":"something went wrong","status":"false"}
+        return output
+
+
 @app.route('/labReportMaster', methods=['POST'])
 def labReportMaster():
 
@@ -4221,6 +4362,53 @@ def labReportMaster():
         print("Exception--->" + str(e))                                  
         data = {"status":"false","message":"Somthing went wrong please contact system admin"}
         return data
+
+
+
+@app.route('/getlabReportMaster', methods=['GET'])
+def getlabReportMaster():
+    try:
+        PatientId=""
+        DoctorId=" "
+        if 'PatientId' in request.args:
+            PatientId=request.args["PatientId"]
+        if 'DoctorId' in request.args:
+            DoctorId=request.args["DoctorId"]
+        
+       
+        WhereCondition=""
+        
+        if (DoctorId !="") and (PatientId !="") :
+            
+            WhereCondition1 =  " and  DoctorId    = '" + DoctorId + "'  "
+
+        if (PatientId !=""):
+            
+            WhereCondition1 =  " and  PatientId    = '" + PatientId + "'  "
+      
+            # y = y +  WhereCondition1
+       
+
+       
+        query = "select  * from LAB_ReportMaster where Status= " +WhereCondition1  # y 
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data = cursor.fetchone()
+        cursor.close()
+        if data:           
+            Data = {"result":data,"status":"true"}
+            return Data
+        
+        else:
+            output = {"result":"No Data Found","status":"false"}
+            return output
+
+    except Exception as e :
+        print("Exception---->" + str(e))    
+        output = {"result":"something went wrong","status":"false"}
+        return output
+
 
  
 if __name__ == "__main__":
