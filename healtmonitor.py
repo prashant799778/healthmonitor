@@ -3892,6 +3892,336 @@ def novastore():
         output = {"result":"somthing went wrong","status":"false"}
         return output
 
+
+
+@app.route('/diagReportMaster', methods=['POST'])
+def diagReportMaster():
+
+    try:  
+        inputdata = request.form.get('reportInfo')
+        inputdata1 = request.form.get('patientId')     
+
+        inputdata = json.loads(inputdata)   
+
+        patientId = inputdata1
+
+        if inputdata1 == None :
+            data = {"status":"false","message":"Somthing went wrong please contact system admin","result":""}
+            return data
+        else:
+            for i in inputdata:
+                
+                reportName = i['reportName']
+                testType = i['testType']
+                hospitalId = i['hospitalId']
+                doctorId = i['doctorId']
+                hubId = i['hubId']
+                userId = i['userId']
+
+                query  = " insert into DIAG_ReportMaster (HubId,HospitalId,DoctorId,PatientId,UploadedBy,TestType,ReportName)"
+                query = query +" values("+'"'+str(hubId)+'"'+','+'"'+str(hospitalId)+'"'+','+'"'+str(doctorId)+'"'+','+'"'+str(patientId)+'"'+','+'"'+str(userId)+'"'+','+'"'+str(testType)+'"'+','+'"'+str(reportName)+'"'+' '+");"
+                print(query)
+                conn=Connection()
+                cursor = conn.cursor()
+                cursor.execute(query)
+                Id = cursor.lastrowid
+                conn.commit()
+                cursor.close()
+
+
+                if 'reportFile' in request.files:
+                    file = request.files.get('reportFile')        
+                    filename = file.filename or ''                 
+                    filename = filename.replace("'","")
+
+                    print(file)
+                    print(filename) 
+
+                    filepath = '/'+str(patientId)
+
+                    FolderPath = getDiagReportPath(filepath)
+
+                    isdir = os.path.isdir(FolderPath)  
+                    print(isdir)
+
+                    if isdir == False:
+                        os.mkdir(FolderPath)
+                        print("if",FolderPath,filename)
+                        FolderPath = str(FolderPath)+'/'+str(filename)
+                        print(FolderPath)
+                        print(type(FolderPath))                   
+                    else:
+                        print("else",FolderPath,filename)                        
+                        FolderPath = str(FolderPath)+'/'+str(filename)
+                        print(FolderPath)
+                        print(type(FolderPath))                     
+
+                    file.save(FolderPath)
+                    ReportPath = str(filepath)
+
+                    query="update DIAG_ReportMaster set ReportPath = '"+str(FolderPath)+"' where ReportId = '" + str(Id) + "' "
+                    cursor = conn.cursor()
+                    cursor.execute(query)
+                    conn.commit()
+                    cursor.close()
+
+                    data = {"status":"true","message":"","result":"Data Inserted Successfully"}
+                    return data
+                else:
+                    data = {"status":"false","message":"Somthing went wrong please contact system admin","result":""}
+                    return data
+
+    except Exception as e :
+        print("Exception--->" + str(e))                                  
+        data = {"status":"false","message":"Somthing went wrong please contact system admin"}
+        return data
+
+@app.route('/pacsReportMaster', methods=['POST'])
+def pacsReportMaster():
+
+    try:  
+        inputdata = request.form.get('reportInfo')
+        inputdata1 = request.form.get('patientId')     
+
+        inputdata = json.loads(inputdata)   
+
+        patientId = inputdata1
+
+        if inputdata1 == None :
+            data = {"status":"false","message":"Somthing went wrong please contact system admin","result":""}
+            return data
+        else:
+            for i in inputdata:
+                
+                reportName = i['reportName']
+                testType = i['testType']
+                hospitalId = i['hospitalId']
+                doctorId = i['doctorId']
+                hubId = i['hubId']
+                userId = i['userId']
+
+                query  = " insert into PACS_ReportMaster (HubId,HospitalId,DoctorId,PatientId,UploadedBy,TestType,ReportName)"
+                query = query +" values("+'"'+str(hubId)+'"'+','+'"'+str(hospitalId)+'"'+','+'"'+str(doctorId)+'"'+','+'"'+str(patientId)+'"'+','+'"'+str(userId)+'"'+','+'"'+str(testType)+'"'+','+'"'+str(reportName)+'"'+' '+");"
+                print(query)
+                conn=Connection()
+                cursor = conn.cursor()
+                cursor.execute(query)
+                Id = cursor.lastrowid
+                conn.commit()
+                cursor.close()
+
+
+                if 'reportFile' in request.files:
+                    file = request.files.get('reportFile')        
+                    filename = file.filename or ''                 
+                    filename = filename.replace("'","")
+
+                    print(file)
+                    print(filename) 
+
+                    filepath = '/'+str(patientId)
+
+                    FolderPath = getPacsReportPath(filepath)
+
+                    isdir = os.path.isdir(FolderPath)  
+                    print(isdir)
+
+                    if isdir == False:
+                        os.mkdir(FolderPath)
+                        print("if",FolderPath,filename)
+                        FolderPath = str(FolderPath)+'/'+str(filename)
+                        print(FolderPath)
+                        print(type(FolderPath))                   
+                    else:
+                        print("else",FolderPath,filename)                        
+                        FolderPath = str(FolderPath)+'/'+str(filename)
+                        print(FolderPath)
+                        print(type(FolderPath))                     
+
+                    file.save(FolderPath)
+                    ReportPath = str(filepath)
+
+                    query="update PACS_ReportMaster set ReportPath = '"+str(FolderPath)+"' where ReportId = '" + str(Id) + "' "
+                    cursor = conn.cursor()
+                    cursor.execute(query)
+                    conn.commit()
+                    cursor.close()
+
+                    data = {"status":"true","message":"","result":"Data Inserted Successfully"}
+                    return data
+                else:
+                    data = {"status":"false","message":"Somthing went wrong please contact system admin","result":""}
+                    return data
+
+    except Exception as e :
+        print("Exception--->" + str(e))                                  
+        data = {"status":"false","message":"Somthing went wrong please contact system admin"}
+        return data
+
+@app.route('/dicomReportMaster', methods=['POST'])
+def dicomReportMaster():
+
+    try:  
+        inputdata = request.form.get('reportInfo')
+        inputdata1 = request.form.get('patientId')     
+
+        inputdata = json.loads(inputdata)   
+
+        patientId = inputdata1
+
+        if inputdata1 == None :
+            data = {"status":"false","message":"Somthing went wrong please contact system admin","result":""}
+            return data
+        else:
+            for i in inputdata:
+                
+                reportName = i['reportName']
+                testType = i['testType']
+                hospitalId = i['hospitalId']
+                doctorId = i['doctorId']
+                hubId = i['hubId']
+                userId = i['userId']
+
+                query  = " insert into DICOM_ReportMaster (HubId,HospitalId,DoctorId,PatientId,UploadedBy,TestType,ReportName)"
+                query = query +" values("+'"'+str(hubId)+'"'+','+'"'+str(hospitalId)+'"'+','+'"'+str(doctorId)+'"'+','+'"'+str(patientId)+'"'+','+'"'+str(userId)+'"'+','+'"'+str(testType)+'"'+','+'"'+str(reportName)+'"'+' '+");"
+                print(query)
+                conn=Connection()
+                cursor = conn.cursor()
+                cursor.execute(query)
+                Id = cursor.lastrowid
+                conn.commit()
+                cursor.close()
+
+
+                if 'reportFile' in request.files:
+                    file = request.files.get('reportFile')        
+                    filename = file.filename or ''                 
+                    filename = filename.replace("'","")
+
+                    print(file)
+                    print(filename) 
+
+                    filepath = '/'+str(patientId)
+
+                    FolderPath = getDicomReportPath(filepath)
+
+                    isdir = os.path.isdir(FolderPath)  
+                    print(isdir)
+
+                    if isdir == False:
+                        os.mkdir(FolderPath)
+                        print("if",FolderPath,filename)
+                        FolderPath = str(FolderPath)+'/'+str(filename)
+                        print(FolderPath)
+                        print(type(FolderPath))                   
+                    else:
+                        print("else",FolderPath,filename)                        
+                        FolderPath = str(FolderPath)+'/'+str(filename)
+                        print(FolderPath)
+                        print(type(FolderPath))                     
+
+                    file.save(FolderPath)
+                    ReportPath = str(filepath)
+
+                    query="update DICOM_ReportMaster set ReportPath = '"+str(FolderPath)+"' where ReportId = '" + str(Id) + "' "
+                    cursor = conn.cursor()
+                    cursor.execute(query)
+                    conn.commit()
+                    cursor.close()
+
+                    data = {"status":"true","message":"","result":"Data Inserted Successfully"}
+                    return data
+                else:
+                    data = {"status":"false","message":"Somthing went wrong please contact system admin","result":""}
+                    return data
+
+    except Exception as e :
+        print("Exception--->" + str(e))                                  
+        data = {"status":"false","message":"Somthing went wrong please contact system admin"}
+        return data
+
+@app.route('/labReportMaster', methods=['POST'])
+def labReportMaster():
+
+    try:  
+        inputdata = request.form.get('reportInfo')
+        inputdata1 = request.form.get('patientId')     
+
+        inputdata = json.loads(inputdata)   
+
+        patientId = inputdata1
+
+        if inputdata1 == None :
+            data = {"status":"false","message":"Somthing went wrong please contact system admin","result":""}
+            return data
+        else:
+            for i in inputdata:
+                
+                reportName = i['reportName']
+                testType = i['testType']
+                hospitalId = i['hospitalId']
+                doctorId = i['doctorId']
+                hubId = i['hubId']
+                userId = i['userId']
+
+                query  = " insert into LAB_ReportMaster (HubId,HospitalId,DoctorId,PatientId,UploadedBy,TestType,ReportName)"
+                query = query +" values("+'"'+str(hubId)+'"'+','+'"'+str(hospitalId)+'"'+','+'"'+str(doctorId)+'"'+','+'"'+str(patientId)+'"'+','+'"'+str(userId)+'"'+','+'"'+str(testType)+'"'+','+'"'+str(reportName)+'"'+' '+");"
+                print(query)
+                conn=Connection()
+                cursor = conn.cursor()
+                cursor.execute(query)
+                Id = cursor.lastrowid
+                conn.commit()
+                cursor.close()
+
+
+                if 'reportFile' in request.files:
+                    file = request.files.get('reportFile')        
+                    filename = file.filename or ''                 
+                    filename = filename.replace("'","")
+
+                    print(file)
+                    print(filename) 
+
+                    filepath = '/'+str(patientId)
+
+                    FolderPath = getLabReportPath(filepath)
+
+                    isdir = os.path.isdir(FolderPath)  
+                    print(isdir)
+
+                    if isdir == False:
+                        os.mkdir(FolderPath)
+                        print("if",FolderPath,filename)
+                        FolderPath = str(FolderPath)+'/'+str(filename)
+                        print(FolderPath)
+                        print(type(FolderPath))                   
+                    else:
+                        print("else",FolderPath,filename)                        
+                        FolderPath = str(FolderPath)+'/'+str(filename)
+                        print(FolderPath)
+                        print(type(FolderPath))                     
+
+                    file.save(FolderPath)
+                    ReportPath = str(filepath)
+
+                    query="update LAB_ReportMaster set ReportPath = '"+str(FolderPath)+"' where ReportId = '" + str(Id) + "' "
+                    cursor = conn.cursor()
+                    cursor.execute(query)
+                    conn.commit()
+                    cursor.close()
+
+                    data = {"status":"true","message":"","result":"Data Inserted Successfully"}
+                    return data
+                else:
+                    data = {"status":"false","message":"Somthing went wrong please contact system admin","result":""}
+                    return data
+
+    except Exception as e :
+        print("Exception--->" + str(e))                                  
+        data = {"status":"false","message":"Somthing went wrong please contact system admin"}
+        return data
+
  
 if __name__ == "__main__":
     CORS(app, support_credentials=True)
