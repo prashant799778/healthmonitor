@@ -4410,6 +4410,218 @@ def getlabReportMaster():
         return output
 
 
+
+@app.route('/MedicationIntegration', methods=['POST'])
+def MedicationIntegration():
+
+    try:  
+        inputdata = request.form.get('MedicationIntegration')
+        inputdata1 = request.form.get('patientId')     
+
+        inputdata = json.loads(inputdata)   
+
+        patientId = inputdata1
+
+        if inputdata1 == None :
+            data = {"status":"false","message":"Somthing went wrong please contact system admin","result":""}
+            return data
+        else:
+            for i in inputdata:
+                
+                Medicine = i['medicine']
+                frequency = i['frequency']
+                dosage=i['dosage']
+                duration=i['duration']
+                regime=i['regime']
+                comment=i['comment']
+                hospitalId = i['hospitalId']
+                doctorId = i['doctorId']
+                hubId = i['hubId']
+                userId = i['userId']
+                flag=i['flag']
+
+                if 'flag' in inputdata:
+                    flag=inputdata['flag']
+
+                if flag == 'i':
+
+                    query  = " insert into Medication_Integration (hubId,hospitalId,doctorId,patientId,medicine,frequency,dosage,duration,regime,comment)"
+                    query = query +" values("+'"'+str(hubId)+'"'+','+'"'+str(hospitalId)+'"'+','+'"'+str(doctorId)+'"'+','+'"'+str(patientId)+'"'+','+'"'+str(Medicine)+'"'+','+'"'+str(frequency)+'"'+','+'"'+str(dosage)+'"'+','+'"'+str(duration)+'"'+','+'"'+str(regime)+'"'+','+'"'+str(comment)+'"'+' '+");"
+                    print(query)
+                    conn=Connection()
+                    cursor = conn.cursor()
+                    cursor.execute(query)
+
+                    data = {"status":"true","message":"","result":"Data Inserted Successfully"}
+                    return data
+
+                
+                if flag =='u':
+                    if 'id' in inputdata:
+                        Id=inputdata['id']
+                    query2="update Medication_Integration set hubId='" + str(HubId)+ "',hospitalId='" + str(hospitalId)+ "',doctorId='" + str(doctorId)+ "',patientId='" + str(PatientId)+ "',medicine='" + str(Medicine)+ "',frequency='" + str(frequency)+ "',dosage='" + str(dosage)+ "',duration='" + str(duration)+ "',regime='" + str(regime)+ "',comment='" + str(regime)+ "'  Where Id= '" + str(Id)+ "'          "
+                    print(query)
+                    conn=Connection()
+                    cursor = conn.cursor()
+                    cursor.execute(query2)
+
+                    data = {"status":"true","message":"","result":"Data Updated Successfully"}
+                    return data
+
+    except Exception as e :
+        print("Exception--->" + str(e))                                  
+        data = {"status":"false","message":"Somthing went wrong please contact system admin"}
+        return data
+
+
+
+@app.route('/getMedicationIntegration', methods=['GET'])
+def getMedicationIntegration():
+    try:
+        PatientId=""
+        DoctorId=" "
+        if 'PatientId' in request.args:
+            PatientId=request.args["PatientId"]
+        if 'DoctorId' in request.args:
+            DoctorId=request.args["DoctorId"]
+        
+       
+        WhereCondition=""
+        
+        if (DoctorId !="") and (PatientId !="") :
+            
+            WhereCondition1 =  " and  DoctorId    = '" + DoctorId + "'  "
+
+        if (PatientId !=""):
+            
+            WhereCondition1 =  " and  PatientId    = '" + PatientId + "'  "
+      
+            # y = y +  WhereCondition1
+       
+
+       
+        query = "select  * from Medication_Integration where Status= " +WhereCondition1  # y 
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data = cursor.fetchone()
+        cursor.close()
+        if data:           
+            Data = {"result":data,"status":"true"}
+            return Data
+        
+        else:
+            output = {"result":"No Data Found","status":"false"}
+            return output
+
+    except Exception as e :
+        print("Exception---->" + str(e))    
+        output = {"result":"something went wrong","status":"false"}
+        return output
+
+# add allergies
+
+@app.route('/addAllergies', methods=['POST'])
+def addAllergies():
+    try:
+        json1=request.get_data() 
+        data1=json.loads(json1.decode("utf-8"))  
+        
+        query = "select * from allergiesMaster where allergies ='"+str(data1["allergies"])+"';"
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data = cursor.fetchone()
+        cursor.close()
+        print(data)
+       
+        if data==None: 
+        
+            print("1111111")
+
+            query2  = " insert into allergiesMaster(allergies)"
+            query2 = query2 +" values('"+str(data1["allergies"])+"');"
+            print(query2)
+            conn=Connection()
+            cursor = conn.cursor()
+            cursor.execute(query2)
+            conn.commit()
+            output = {"result":"data inserted successfully","status":"true"}
+            return output
+        
+        else:
+            query23="delete from allergiesMaster Where allergies='"+str(data1["allergies"])+"'"
+            conn=Connection()
+            cursor = conn.cursor()
+            cursor.execute(query23)
+
+            query2  = " insert into allergiesMaster(allergies)"
+            query2 = query2 +" values('"+str(data1["allergies"])+"');"
+            print(query2)
+            conn=Connection()
+            cursor = conn.cursor()
+            cursor.execute(query2)
+            conn.commit()
+            output = {"result":"data inserted successfully","status":"true"}
+            return output 
+    except Exception as e :
+        print("Exception---->" + str(e))    
+        output = {"result":"something went wrong","status":"false"}
+        return output
+
+
+@app.route('/addFamilyMaster', methods=['POST'])
+def addFamilyMaster():
+    try:
+        json1=request.get_data() 
+        data1=json.loads(json1.decode("utf-8"))  
+        
+        query = "select * from FamilyMaster where  relation  ='"+str(data1["relation"])+"';"
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data = cursor.fetchone()
+        cursor.close()
+        print(data)
+       
+        if data==None: 
+        
+            print("1111111")
+
+            query2  = " insert into FamilyMaster(relation)"
+            query2 = query2 +" values('"+str(data1["relation"])+"');"
+            print(query2)
+            conn=Connection()
+            cursor = conn.cursor()
+            cursor.execute(query2)
+            conn.commit()
+            output = {"result":"data inserted successfully","status":"true"}
+            return output
+        
+        else:
+            query23="delete from FamilyMaster Where  relation='"+str(data1["relation"])+"'"
+            conn=Connection()
+            cursor = conn.cursor()
+            cursor.execute(query23)
+
+            query2  = " insert into FamilyMaster(relation)"
+            query2 = query2 +" values('"+str(data1["relation"])+"');"
+            print(query2)
+            conn=Connection()
+            cursor = conn.cursor()
+            cursor.execute(query2)
+            conn.commit()
+            output = {"result":"data inserted successfully","status":"true"}
+            return output 
+    except Exception as e :
+        print("Exception---->" + str(e))    
+        output = {"result":"something went wrong","status":"false"}
+        return output
+
+
+
+
+
  
 if __name__ == "__main__":
     CORS(app, support_credentials=True)
