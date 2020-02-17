@@ -3157,6 +3157,18 @@ def Patient_masterTest():
         startdate=data["startdate"]
         usercreate=data["usercreate"]
         PhoneNo=data["PhoneNo"]
+        
+        if 'familyId' in data:
+            FamilyId=data['familyId']
+            if FamilyId=="":
+                Family=int(FamilyId)
+
+
+
+
+
+
+
 
 
 
@@ -3179,8 +3191,9 @@ def Patient_masterTest():
 
 
 
-
+            
           
+            
             
             print(query2)
             print("222222222222")
@@ -3190,6 +3203,52 @@ def Patient_masterTest():
             conn.commit()
             cursor.close()
 
+            if 'allergiesId' in data:
+                allergiesId=data['allergiesId']
+                u=[]
+                for i in allergiesId:
+                    if i == "":
+                        query2= " select id from allergiesMaster where allergies='"+str(i)+"' "
+                        conn=Connection()
+                        cursor = conn.cursor()
+                        cursor.execute(query2)
+                        data8=cursor.fetchone()
+                        if data8 == None:
+                            query2= "insert into allergiesMaster(allergies) values('"+str(i)+"')"
+                            conn=Connection()
+                            cursor = conn.cursor()
+                            cursor.execute(query2)
+                            conn.commit()
+                            Id = cursor.lastrowid
+                            conn.commit()
+                            cursor.close()
+                            u.append(Id)
+
+
+
+
+
+
+
+
+                    else:
+
+                        y=[]
+                        y.append(i)
+                        for k in y:
+                            for j in u:
+                                if j not in y:
+                                    y.append(j)
+
+
+
+            
+
+            
+ 
+
+
+
             query1= "insert into patientDetails(patientName,hospitalId,phoneNo,bloodGroup,deviceMac,bedNumber,usertypeId,startdate,enddate,Gender,age,roomNumber)"
             query1=query1+" values('"+str(PatientName)+"','"+str(hospitalId)+"','"+str(PhoneNo)+"','"+str(BloogGroup)+"','"+str(DeviceMac)+"','"+str(Bed_Number)+"','"+str(Usertype_Id)+"','"+str(startdate)+"','"+str(enddate)+"','"+str(Gender)+"','"+str(age)+"','"+str(roomNumber)+"');"
             
@@ -3198,6 +3257,7 @@ def Patient_masterTest():
             cursor.execute(query1)
             conn.commit()
             cursor.close()
+
 
             query = "select * from Patient_master  where  Status<>'2' and enddate is NULL " 
             conn=Connection()
@@ -3215,6 +3275,12 @@ def Patient_masterTest():
             final= data999[-1]
             P_Id=final["PatientId"]
             DoctorId = data["DoctorId"]
+            for m in y:
+                query2= "insert into patientAllergiesMapping(patientId,AllergiesId) values('"+str(P_Id)+"','"+str(m)+"'); "
+                conn=Connection()
+                cursor = conn.cursor()
+                cursor.execute(query2)
+
 
             for i in DoctorId:
                 
@@ -3270,12 +3336,20 @@ def Patient_masterTest():
         else:
 
             PatientId=data1['PatientId']
+
             query22="update  Patient_master set PatientName='"+str(PatientName)+"',heartRate='"+str(heartRate)+"',spo2='"+str(spo2)+"',pulseRate='"+str(pulseRate)+"'"
 
             query22=query22+",highPressure='"+str(highPressure)+"',lowPressure='"+str(lowPressure)+"',temperature='"+str(temperature)+"',roomNumber='"+str(roomNumber)+"' "
             query22=query22+",Gender='"+str(Gender)+"',age='"+str(age)+"',BloodGroup='"+str(BloogGroup)+"',DeviceMac='"+str(DeviceMac)+"',Bed_Number='"+str(Bed_Number)+"',Usertype_Id='"+str(Usertype_Id)+"',hospitalId='"+str(hospitalId)+"',startdate='"+str(startdate)+"' where PhoneNo='"+str(PhoneNo)+"'"
+            
+            conn=Connection()
+            cursor = conn.cursor()
+            cursor.execute(query22)
+            conn.commit()
+            cursor.close()
 
 
+            
             query1= "insert into patientDetails(PatientId,patientName,hospitalId,phoneNo,bloodGroup,deviceMac,bedNumber,usertypeId,startdate,Gender,age,roomNumber)"
 
             query1=query1+" values('"+str(patientId)+"','"+str(PatientName)+"','"+str(hospitalId)+"','"+str(BloogGroup)+"','"+str(DeviceMac)+"','"+str(Bed_Number)+"','"+str(Usertype_Id)+"','"+str(startdate)+"','"+str(Gender)+"','"+str(age)+"','"+str(roomNumber)+"');"
@@ -4003,7 +4077,7 @@ def getdiagReportMaster():
        
 
        
-        query = "select  * from DIAG_ReportMaster where Status= " +WhereCondition1  # y 
+        query = "select  * from DIAG_ReportMaster where status<>1 " +WhereCondition1  # y 
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
@@ -4132,7 +4206,7 @@ def getpacsReportMaster():
        
 
        
-        query = "select  * from PACS_ReportMaster where Status= " +WhereCondition1  # y 
+        query = "select  * from PACS_ReportMaster where status<>1 " +WhereCondition1  # y 
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
@@ -4261,7 +4335,7 @@ def getdicomReportMaster():
        
 
        
-        query = "select  * from DICOM_ReportMaster where Status= " +WhereCondition1  # y 
+        query = "select  * from DICOM_ReportMaster where status<>1 " +WhereCondition1  # y 
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
@@ -4390,7 +4464,7 @@ def getlabReportMaster():
        
 
        
-        query = "select  * from LAB_ReportMaster where Status= " +WhereCondition1  # y 
+        query = "select  * from LAB_ReportMaster where status<>1 " +WhereCondition1  # y 
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
@@ -4500,7 +4574,7 @@ def getMedicationIntegration():
        
 
        
-        query = "select  * from Medication_Integration where Status= " +WhereCondition1  # y 
+        query = "select  * from Medication_Integration where Status<>1 " +WhereCondition1  # y 
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
@@ -4570,6 +4644,33 @@ def addAllergies():
         return output
 
 
+@app.route('/getallAllergies', methods=['GET'])
+def getallAllergies():
+    try:
+       
+
+       
+        query = "select  * from allergiesMaster  "  
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data = cursor.fetchall()
+        cursor.close()
+        if data:           
+            Data = {"result":data,"status":"true"}
+            return Data
+        
+        else:
+            output = {"result":"No Data Found","status":"false"}
+            return output
+
+    except Exception as e :
+        print("Exception---->" + str(e))    
+        output = {"result":"something went wrong","status":"false"}
+        return output
+
+
+
 @app.route('/addFamilyMaster', methods=['POST'])
 def addFamilyMaster():
     try:
@@ -4613,6 +4714,32 @@ def addFamilyMaster():
             conn.commit()
             output = {"result":"data inserted successfully","status":"true"}
             return output 
+    except Exception as e :
+        print("Exception---->" + str(e))    
+        output = {"result":"something went wrong","status":"false"}
+        return output
+
+
+@app.route('/getallFamilyMaster', methods=['GET'])
+def getallFamilyMaster():
+    try:
+       
+
+       
+        query = "select  * from FamilyMaster  "  
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data = cursor.fetchall()
+        cursor.close()
+        if data:           
+            Data = {"result":data,"status":"true"}
+            return Data
+        
+        else:
+            output = {"result":"No Data Found","status":"false"}
+            return output
+
     except Exception as e :
         print("Exception---->" + str(e))    
         output = {"result":"something went wrong","status":"false"}
