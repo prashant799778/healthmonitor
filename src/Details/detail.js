@@ -345,7 +345,7 @@ return(<DetailStyled>
 				<div class="dropdown">
 				{localStorage.getItem("user_type","Operation")!="Operation" &&  
 				
-				<button class="side-button-pis" onClick={()=>{this.changemsgState()}} type="button">prescribe medicine</button>}
+				<button class="side-button-pis" onClick={()=>{this.changemsgState()}} type="button">Provide Opinion</button>}
 					{this.state. isopen &&	 <OutsideClickHandler
       onOutsideClick={() => {
       this.setState({isopen:false});
