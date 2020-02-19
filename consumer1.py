@@ -38,6 +38,7 @@ import json
 
 def on_connect(client, userdata, flags, rc):
   print("-------Connected-------")
+  print(client, userdata, flags, rc)
   client.subscribe("outTopic")
   #client.publish("#", "Hello world!");
 
