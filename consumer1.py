@@ -44,8 +44,9 @@ def on_connect(client, userdata, flags, rc):
 
 def on_message(client, userdata, msg):    
   data = msg.payload.decode('utf-8')
-#   data = json.loads(data)  
-  print(data)
+#   data = json.loads(data) 
+  print(msg,"===============")
+  print(data,"============",msg.topic)
     
 client = mqtt.Client()
 client.connect("159.65.146.25",1883,60)
