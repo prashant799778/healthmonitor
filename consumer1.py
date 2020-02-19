@@ -48,6 +48,7 @@ def on_message(client, userdata, msg):
   print(msg,"===============")
   print(data,"============",msg.topic)
   client.publish(str(msg.topic), "Hello world11111111111111111")
+  print("qqqqqqqqqqqqqqqqqqqqqqqqqqqq")
     
 client = mqtt.Client()
 client.connect("159.65.146.25",1883,60)
