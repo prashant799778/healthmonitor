@@ -9,5 +9,6 @@ client = mqtt.Client()
 client.connect("159.65.146.25",1883,60)
 while True:
     client.publish("outTopic", "Hello world11111111111111111")
+ 
 # if __name__ == '__main__':
-    # app.run(host='0.0.0.0', port=5054, debug=True) 
+    # app.run(host='0.0.0.0', port=5054, debug=True)
