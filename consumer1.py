@@ -39,7 +39,7 @@ import json
 def on_connect(client, userdata, flags, rc):
   print("-------Connected-------")
   print(client, userdata, flags, rc)
-  client.subscribe("outTopic")
+  client.subscribe("#")
   #client.publish("#", "Hello world!");
 
 def on_message(client, userdata, msg):    
@@ -47,6 +47,7 @@ def on_message(client, userdata, msg):
 #   data = json.loads(data) 
   print(msg,"===============")
   print(data,"============",msg.topic)
+  client.publish(str(msg.topic), "Hello world11111111111111111")
     
 client = mqtt.Client()
 client.connect("159.65.146.25",1883,60)
