@@ -3968,7 +3968,7 @@ def dataAdd():
         if name and mobile:
 
             cursorr = connection.cursor()
-            query="SELECT * FROM user WHERE Mobile = "+str(mobile)
+            query="SELECT * FROM Face_Data WHERE Mobile = "+str(mobile)
             cursorr.execute(query)
             data = cursorr.fetchall()
             print(data)
@@ -4018,7 +4018,7 @@ def dataAdd():
 
                 cursor = connection.cursor()
 
-                query="INSERT INTO user(Name,Mobile,Image,Processed) Values('"+str(name)+"','"+str(mobile)+"','"+str(input_datadir)+"','"+str(output_datadir)+"')"
+                query="INSERT INTO Face_Data(Name,Mobile,Image,Processed) Values('"+str(name)+"','"+str(mobile)+"','"+str(input_datadir)+"','"+str(output_datadir)+"')"
                 cursor.execute(query)
                 connection.commit()
                 cursor.close()
