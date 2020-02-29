@@ -1,8 +1,8 @@
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-from config import Connection
-from preprocess import preprocesses
+# from __future__ import absolute_import
+# from __future__ import division
+# from __future__ import print_function
+# from config import Connection
+# from preprocess import preprocesses
 from classifier import training
 from flask import Flask,request,abort
 from flask_socketio import SocketIO,emit
