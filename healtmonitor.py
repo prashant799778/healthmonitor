@@ -1,3 +1,6 @@
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
 from flask import Flask,request,abort
 from flask_socketio import SocketIO,emit
 import uuid
@@ -14,9 +17,6 @@ from datetime import datetime
 import pytz 
 import pytz
 from config import Connection
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 from preprocess import preprocesses
 import sys
 import tensorflow as tf
