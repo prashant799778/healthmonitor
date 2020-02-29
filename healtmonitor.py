@@ -29,9 +29,6 @@ import shutil
 import time
 import pickle
 
-
-faceCascade=cv2.CascadeClassifier('haarcascade_frontalface_default.xml');
-
 # standard Python
 sio = socketio.Client()
 
@@ -47,6 +44,7 @@ class JSONEncoder(json.JSONEncoder):
         return json.JSONEncoder.default(self, o)
 
 
+faceCascade=cv2.CascadeClassifier('haarcascade_frontalface_default.xml');
 
 
 def getDiagReportPath(filename):
