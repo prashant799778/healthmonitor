@@ -14,12 +14,28 @@ from datetime import datetime
 import pytz 
 import pytz
 from config import Connection
-
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+from preprocess import preprocesses
+import sys
+import tensorflow as tf
+from scipy import misc
+from classifier import training
+import cv2
+import facenet
+import detect_face
+import shutil
+import time
+import pickle
+from flask import Flask,request
 
 from flask import Flask, render_template
 from flask_socketio import SocketIO
 
 import socketio
+
+faceCascade=cv2.CascadeClassifier('haarcascade_frontalface_default.xml');
 
 # standard Python
 sio = socketio.Client()
