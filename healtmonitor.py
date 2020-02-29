@@ -3967,13 +3967,15 @@ def dataAdd():
 
         if name and mobile:
 
-            cursorr = connection.cursor()
             query="SELECT * FROM Face_Data WHERE Mobile = "+str(mobile)
-            cursorr.execute(query)
-            data = cursorr.fetchall()
+            print(query)
+            conn=Connection()
+            cursor = conn.cursor()
+            cursor.execute(query)
+            data = cursor.fetchall()
             print(data)
-            connection.commit()
-            cursorr.close()
+            conn.commit()
+            cursor.close()
 
             if(len(data)<=0):
                 path = str(input_datadir) + "/"+str(name)+"/"
@@ -4016,11 +4018,12 @@ def dataAdd():
 
                 video_capture.release()
 
-                cursor = connection.cursor()
-
                 query="INSERT INTO Face_Data(Name,Mobile,Image,Processed) Values('"+str(name)+"','"+str(mobile)+"','"+str(input_datadir)+"','"+str(output_datadir)+"')"
+                print(query)
+                conn=Connection()
+                cursor = conn.cursor()
                 cursor.execute(query)
-                connection.commit()
+                conn.commit()
                 cursor.close()
 
                 print("Data Added Successfully")
