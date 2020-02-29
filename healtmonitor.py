@@ -3,7 +3,7 @@
 # from __future__ import print_function
 # from config import Connection
 # from preprocess import preprocesses
-from classifier import training
+#from classifier import training
 from flask import Flask,request,abort
 from flask_socketio import SocketIO,emit
 import uuid
