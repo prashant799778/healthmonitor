@@ -752,14 +752,16 @@ def login1q():
 def allHospital():
     try:
 
-        # HospitalName,WhereCondition="",""
+        HospitalName,WhereCondition="",""
 
-        # if 'HospitalName' in request.args:
-        #     HospitalName=request.args["HospitalName"]
+        if 'HospitalName' in request.args:
+            HospitalName=request.args["HospitalName"]
+        # if 'DoctorId' in request.args:
+        #     DoctorId=request.args["DoctorId"]
 
-        # if HospitalName !="" and HospitalName != "0":
+        if HospitalName !="" and HospitalName != "0":
             
-        #     WhereCondition =  " where Hospital_master.hospital_name LIKE '" + "%" + str(HospitalName) + "%" + "' "
+            WhereCondition =  " where Hospital_master.hospital_name LIKE '" + "%" + str(HospitalName) + "%" + "' "
         
         query="select Hospital_master.ID,Hospital_master.hospital_name,Hospital_master.Address,HubMaster.HubName,HubMaster.ID as HubId  from Hospital_master inner join HubMaster on Hospital_master.HubId=HubMaster.ID"
         query = query+WhereCondition
