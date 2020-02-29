@@ -19,7 +19,7 @@ from datetime import datetime
 import pytz 
 
 import sys
-import tensorflow as tf
+#import tensorflow as tf
 from scipy import misc
 
 import cv2
