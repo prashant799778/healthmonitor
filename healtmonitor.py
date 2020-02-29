@@ -751,9 +751,22 @@ def login1q():
 @app.route('/allHospital', methods=['post'])
 def allHospital():
     try:
+
+        HospitalName,WhereCondition="",""
+
+        if 'HospitalName' in request.args:
+            HospitalName=request.args["HospitalName"]
+        # if 'DoctorId' in request.args:
+        #     DoctorId=request.args["DoctorId"]
+
+        if HospitalName !="" and HospitalName != "0":
+            
+            WhereCondition =  " where Hospital_master.hospital_name LIKE '" + "%" + str(HospitalName) + "%" + "' "
         
-        query="select Hospital_master.ID,Hospital_master.hospital_name,Hospital_master.Address,"
-        query=query+"HubMaster.HubName,HubMaster.ID as HubId  from Hospital_master inner join HubMaster on Hospital_master.HubId=HubMaster.ID order by Hospital_master.ID DESC;"
+        query="select Hospital_master.ID,Hospital_master.hospital_name,Hospital_master.Address,HubMaster.HubName,HubMaster.ID as HubId  from Hospital_master inner join HubMaster on Hospital_master.HubId=HubMaster.ID"
+        query = query+WhereCondition
+        query=query+" order by Hospital_master.ID DESC;"
+        print("AllHospital",query)
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
