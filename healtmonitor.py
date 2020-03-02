@@ -1,5 +1,5 @@
 from flask import Flask,request,abort
-from flask_socketio import SocketIO,emit
+# from flask_socketio import SocketIO,emit
 import uuid
 import os
 import json
@@ -13,7 +13,7 @@ from datetime import datetime
 import pytz 
 from config import Connection
 from flask import Flask, render_template
-import socketio
+# import socketio
 
 # standard Python
 sio = socketio.Client()
