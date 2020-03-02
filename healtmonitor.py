@@ -16,11 +16,11 @@ from flask import Flask, render_template
 # import socketio
 
 # standard Python
-sio = socketio.Client()
+# sio = socketio.Client()
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
-socketio = SocketIO(app, cors_allowed_origins="*")
+# socketio = SocketIO(app, cors_allowed_origins="*")
 # sio = socketio.Client()
 
 class JSONEncoder(json.JSONEncoder):
@@ -3994,4 +3994,4 @@ def novastore():
 if __name__ == "__main__":
     CORS(app, support_credentials=True)
     app.run(host='0.0.0.0',port=5053,debug=True)
-    socketio.run(app)
+    # socketio.run(app)
