@@ -1,7 +1,6 @@
 from flask import Flask,request,abort
 from flask_socketio import SocketIO,emit
 import uuid
-#import socketio
 import os
 import json
 import numpy as np
@@ -12,13 +11,8 @@ import pymysql
 from flask_cors import CORS
 from datetime import datetime
 import pytz 
-import pytz
 from config import Connection
-
-
 from flask import Flask, render_template
-from flask_socketio import SocketIO
-
 import socketio
 
 # standard Python
