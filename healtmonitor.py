@@ -4058,38 +4058,46 @@ def allhospital():
         return output
 
 
-@app.route('/doctor',methods=['POST'])
-def alldoctor():
+@app.route('/getpatient',methods=['POST'])
+def getpatient():
     try:
-       
-        json1=request.get_data() 
-        data=json.loads(json1.decode("utf-8"))
-        print('ddddd')
-
-        query = 'select HospitalId from DoctorMaster where HospitalId="'+str(data['HospitalId'])+'"'
-        conn = Connection()
+        
+        query="select Hospital_master.ID,Hospital_master.hospital_name,Hospital_master.Address,"
+        query=query+"HubMaster.HubName,HubMaster.ID as HubId  from Hospital_master inner join HubMaster on Hospital_master.HubId=HubMaster.ID order by Hospital_master.ID DESC;"
+        conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
-        data1 = cursor.fetchone()
-        print('11111112332434')
-        if data1:
-            query1 = 'select * from DoctorMaster where HospitalId="'+hospital_id+'"'
-            conn = Connection()
-            cursor = conn.cursor()
+        data= cursor.fetchall()
+        
+        
+        for i in data:
+            query1="select count(*) as count from userHospitalMapping where  Usertype_Id=2 and  hospitalId='"+str(i["ID"])+"';" 
+            
             cursor.execute(query1)
+            data1 = cursor.fetchall()
+            
+            i["total_doctor"]=data1[0]["count"]
+            query2="select um.ID as ID,mpum.hospitalId as hospitalId  from userMaster as um ,userHospitalMapping  as mpum,HubMaster as Hbs,Hospital_master as hm  where  mpum.userId=um.ID and mpum.hospitalId=hm.ID and  hm.HubId=Hbs.ID  and  um.Usertype_Id=2  and  hm.ID='"+str(i["ID"])+"';"
+            print(query2)
+            cursor.execute(query2)
             data2 = cursor.fetchall()
-            cursor.close()
-            print('637458564')
-            data3={"result":data2}
-            return data3
-        else:
-            output = {"result": "Doctor_data not Found!", "status": "false"}
-            return output
+            print(data2)
+            count=0
+            for j in data2:
+                query1 = " select  count(*) as count from Patient_master  where  Status<>'2'  AND hospitalId='"+str(j["hospitalId"])+"'  and PatientId IN (select Patient_Id  from patientDoctorMapping  where  Status<>'2' AND  doctorId= '"+str(j["ID"])+"') ;"
+                cursor.execute(query1)
+                data3 = cursor.fetchall()
+                print(data3)
+                count+=data3[0]["count"]
+            i["total_patient"]=count
     
-    except Exception as e:
-        print("Exception---->" +str(e))    
-        output = {"result":"somthing went wrong","status":"false"}
+        cursor.close()
+        return {"data":data,"status":"true"}
+    except Exception as e :
+        print("Exception---->" +str(e))           
+        output = {"result":"something went wrong","status":"false"}
         return output
+
 
 
     
