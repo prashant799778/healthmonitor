@@ -4061,32 +4061,30 @@ def allhospital():
 @app.route('/doctor',methods=['GET'])
 def alldoctor():
 
-    if request.method == 'GET':
-        hospital_id = request.args["HospitalId"]
+    
+    hospital_id = request.args["HospitalId"]
 
-        query = 'select HospitalId from DoctorMaster where HospitalId="'+hospital_id+'"'
+    query = 'select HospitalId from DoctorMaster where HospitalId="'+hospital_id+'"'
+    conn = Connection()
+    cursor = conn.cursor()
+    cursor.execute(query)
+    data1 = cursor.fetchone()
+    print('11111112332434')
+    if data1:
+        query1 = 'select * from DoctorMaster where HospitalId="'+hospital_id+'"'
         conn = Connection()
         cursor = conn.cursor()
-        cursor.execute(query)
-        data1 = cursor.fetchone()
-        print('11111112332434')
-        if data1:
-            query1 = 'select * from DoctorMaster where HospitalId="'+hospital_id+'"'
-            conn = Connection()
-            cursor = conn.cursor()
-            cursor.execute(query1)
-            data2 = cursor.fetchall()
-            cursor.close()
-            print('637458564')
-            data3={"result":data2}
-            return data3
-        else:
-            output = {"result": "Doctor_data not Found!", "status": "false"}
-            return output
-
+        cursor.execute(query1)
+        data2 = cursor.fetchall()
+        cursor.close()
+        print('637458564')
+        data3={"result":data2}
+        return data3
     else:
-        output = {"result": "Hospital_id not Found!", "status": "false"}
+        output = {"result": "Doctor_data not Found!", "status": "false"}
         return output
+
+    
 
 
 @app.route('/patient',methods=['GET'])
