@@ -4063,16 +4063,16 @@ def getpatient():
     try:
         
         query="select Hospital_master.ID,Hospital_master.hospital_name,Hospital_master.Address,"
-        query=query+"HubMaster.HubName,HubMaster.ID as HubId  from Hospital_master inner join HubMaster on Hospital_master.HubId=HubMaster.ID order by Hospital_master.ID DESC;"
+        query=query+"HubMaster.HubName,HubMaster.ID as HubId  from Hospital_master inner join HubMaster on Hospital_master.HubId=HubMaster.ID and Hospital_master.Id='"+str(data['ID'])+"' order by Hospital_master.ID DESC;"
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
-        data= cursor.fetchall()
+        data= cursor.fetchone()
         
         
         for i in data:
 
-            query2="select um.ID as ID,dm.hospitalId as hospitalId  from doctorMaster as dm ,HubMaster as Hbs,Hospital_master as hm  where hm.HubId=Hbs.ID  and  um.Usertype_Id=2  and  hm.ID='"+str(i["ID"])+"';"
+            query2="select dm.ID as ID,dm.hospitalId as hospitalId,dm.DoctorName from doctorMaster as dm ,HubMaster as Hbs,Hospital_master as hm  where hm.HubId=Hbs.ID  and  um.Usertype_Id=2  and  hm.ID='"+str(i["ID"])+"';"
             print(query2)
             cursor.execute(query2)
             data2 = cursor.fetchall()
