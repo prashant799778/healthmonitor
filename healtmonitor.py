@@ -3947,7 +3947,7 @@ def update():
         print("Exception---->" +str(e))    
         output = {"result":"somthing went wrong","status":"false"}
         return output
-
+###################################
 #novastore
 @app.route('/novastore', methods=['POST'])
 def novastore():
