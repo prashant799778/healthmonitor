@@ -4071,25 +4071,14 @@ def getpatient():
         
         
         for i in data:
-            query1="select count(*) as count from userHospitalMapping where  Usertype_Id=2 and  hospitalId='"+str(i["ID"])+"';" 
-            
-            cursor.execute(query1)
-            data1 = cursor.fetchall()
-            
-            i["total_doctor"]=data1[0]["count"]
-            query2="select um.ID as ID,mpum.hospitalId as hospitalId  from userMaster as um ,userHospitalMapping  as mpum,HubMaster as Hbs,Hospital_master as hm  where  mpum.userId=um.ID and mpum.hospitalId=hm.ID and  hm.HubId=Hbs.ID  and  um.Usertype_Id=2  and  hm.ID='"+str(i["ID"])+"';"
+
+            query2="select um.ID as ID,dm.hospitalId as hospitalId  from doctorMaster as dm ,HubMaster as Hbs,Hospital_master as hm  where hm.HubId=Hbs.ID  and  um.Usertype_Id=2  and  hm.ID='"+str(i["ID"])+"';"
             print(query2)
             cursor.execute(query2)
             data2 = cursor.fetchall()
             print(data2)
-            count=0
-            for j in data2:
-                query1 = " select  count(*) as count from Patient_master  where  Status<>'2'  AND hospitalId='"+str(j["hospitalId"])+"'  and PatientId IN (select Patient_Id  from patientDoctorMapping  where  Status<>'2' AND  doctorId= '"+str(j["ID"])+"') ;"
-                cursor.execute(query1)
-                data3 = cursor.fetchall()
-                print(data3)
-                count+=data3[0]["count"]
-            i["total_patient"]=count
+            
+            i['doctor'] = data2
     
         cursor.close()
         return {"data":data,"status":"true"}
