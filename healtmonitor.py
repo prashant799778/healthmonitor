@@ -17,7 +17,7 @@ import os
 import sys
 import cv2
 from flask_cors import CORS
-
+from flask import Flask, send_from_directory, abort
 import json
 import numpy as np
 import pymysql
@@ -58,6 +58,15 @@ class JSONEncoder(json.JSONEncoder):
 
 
 # cursor = mysqlcon.cursor()
+
+@app.route("/CampImages/<image_name>")
+def CampImages(image_name):
+    try:
+        return send_from_directory('CampImages', filename=image_name, as_attachment=False)
+    except FileNotFoundError:
+        abort(404)
+
+
 
 @app.route('/login', methods=['GET'])
 def login1():
