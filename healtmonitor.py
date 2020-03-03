@@ -87,7 +87,7 @@ def login1():
         imagepath=""
         print(loginuser[0]["imagepath"],"++++++++++++++")
         if int(loginuser[0]["Usertype_Id"])==2:
-            if loginuser[0]["imagepath"]!=None or loginuser[0]["imagepath"]!="":
+            if loginuser[0]["imagepath"]!=None:
                 imagepath=ConstantData.getwebBaseurl()+str(loginuser[0]["imagepath"])
         print("11111111111",loginuser)
        
