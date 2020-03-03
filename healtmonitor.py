@@ -84,11 +84,11 @@ def login1():
         cursor = conn.cursor()
         cursor.execute(query)
         loginuser = cursor.fetchall()
-        imagepath=""
-        print(loginuser[0]["imagepath"],"++++++++++++++")
-        if int(loginuser[0]["Usertype_Id"])==2:
-            if loginuser[0]["imagepath"]!=None:
-                imagepath=ConstantData.getwebBaseurl()+str(loginuser[0]["imagepath"])
+        # imagepath=""
+        # print(loginuser[0]["imagepath"],"++++++++++++++")
+        # if int(loginuser[0]["Usertype_Id"])==2:
+            # if loginuser[0]["imagepath"]!=None:
+                # imagepath=ConstantData.getwebBaseurl()+str(loginuser[0]["imagepath"])
         print("11111111111",loginuser)
        
 
@@ -250,7 +250,7 @@ def login1():
 
             cursor.close()
 
-            data={"status":"true","result":loginuser[0],"Nurse Details":Nurse,"Patient Details":PatientData,"Count":Count,"imagepath":imagepath}                      
+            data={"status":"true","result":loginuser[0],"Nurse Details":Nurse,"Patient Details":PatientData,"Count":Count}                      
             return data
 
     
