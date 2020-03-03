@@ -4061,6 +4061,10 @@ def allhospital():
 @app.route('/getpatient',methods=['POST'])
 def getpatient():
     try:
+        json1=request.get_data()
+        # data=json.loads(json1.decode("utf-8")) 
+        data=json.loads(json1.decode("utf-8"))
+        print(data)
         
         query="select Hospital_master.ID,Hospital_master.hospital_name,Hospital_master.Address,"
         query=query+"HubMaster.HubName,HubMaster.ID as HubId  from Hospital_master inner join HubMaster on Hospital_master.HubId=HubMaster.ID and Hospital_master.Id='"+str(data['ID'])+"' order by Hospital_master.ID DESC;"
