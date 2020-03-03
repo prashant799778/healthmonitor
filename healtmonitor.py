@@ -4060,38 +4060,33 @@ def allhospital():
 
 @app.route('/doctor',methods=['GET'])
 def alldoctor():
-    try:
 
-        hub_id = request.args["HubId"]
+    if request.method == 'GET':
+        hospital_id = request.args["HospitalId"]
 
-        query = 'select hm.ID,hm.hospital_name,hb.HubName,hm.HubId,hb.ID from hospital_master as hm,HubMaster as hb where hb.ID=hm.HubId and hm.HubID="'+str(data['hub_id'])+'"'
+        query = 'select HospitalId from DoctorMaster where HospitalId="'+hospital_id+'"'
         conn = Connection()
         cursor = conn.cursor()
         cursor.execute(query)
         data1 = cursor.fetchone()
         print('11111112332434')
-        return {"result":data1}
-        # if data1:
-        #     query1 = 'select * from DoctorMaster where HospitalId="'+str(data1['HospitalId'])+'"'
-        #     conn = Connection()
-        #     cursor = conn.cursor()
-        #     cursor.execute(query1)
-        #     data2 = cursor.fetchall()
-        #     cursor.close()
-        #     print('637458564')
-        #     data3={"result":data2}
-        #     return data3
-        # else:
-        #     output = {"result": "Doctor_data not Found!", "status": "false"}
-        #     return output
-    
-    except Exception as e:
-        print("Exception---->" +str(e))    
-        output = {"result":"somthing went wrong","status":"false"}
+        if data1:
+            query1 = 'select * from DoctorMaster where HospitalId="'+hospital_id+'"'
+            conn = Connection()
+            cursor = conn.cursor()
+            cursor.execute(query1)
+            data2 = cursor.fetchall()
+            cursor.close()
+            print('637458564')
+            data3={"result":data2}
+            return data3
+        else:
+            output = {"result": "Doctor_data not Found!", "status": "false"}
+            return output
+
+    else:
+        output = {"result": "Hospital_id not Found!", "status": "false"}
         return output
-
-
-    
 
 
 @app.route('/patient',methods=['GET'])
