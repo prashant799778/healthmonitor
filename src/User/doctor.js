@@ -42,7 +42,8 @@ isValid:true,emailError:false,
          typeList:'',
          userList:'',
          isEdit:false,
-         deleteid:''
+         deleteid:'',
+         selectedFile:null
         }
   }
   deletes=(id,hid)=>{
@@ -247,6 +248,14 @@ isValid:true,emailError:false,
  
     
   }
+
+
+  onChangeHandler=event=>{
+    this.setState({
+      selectedFile: event.target.files[0],
+      
+    })
+  }
       
 
   getHospitals=(id)=>{
@@ -440,10 +449,15 @@ hids.push(this.state. HListId[item])
 
 "Email":this.state.email}
       
-              
-     
-      
-       axios.post(api,json)
+const data = new FormData() 
+data.append('doctorimage', this.state.selectedFile)        
+data.append('inputdata', JSON.stringify(json))
+  
+       axios.post(api,data,{
+        headers: {
+            'content-type': 'multipart/form-data'
+        }
+    })
      .then((response)=> {
        // handle success
         console.log("addHub",response) 
@@ -489,9 +503,11 @@ hids.push(this.state. HListId[item])
      let json={"ID":this.state.userid,"name":this.state.name
      ,"mobile":this.state.mobile,"Usertype_Id":2,"Hospital_Id": hids,"password":this.state.password,"confirm_password":this.state.password,"Email":this.state.email,"Gender":gens}     
      
-    
+     const data = new FormData() 
+     data.append('doctorimage', this.state.selectedFile)        
+     data.append('inputdata', JSON.stringify(json))
    
-      axios.post(api,json)
+      axios.post(api,data)
     .then((response)=> {
       // handle success
         console.log(response)  
@@ -721,6 +737,20 @@ hids.push(this.state. HListId[item])
                                   }  value={this.state.mobile} className="fom-wd" type="text" name placeholder="password" />
                               
                               </div>
+
+                              <div className="col-sm-12 col-md-3 innr-bx">
+                                <label className="title-fom"><font color="white">Add Image</font></label>
+
+                                <input  required type="file" name="file" onChange={(e)=>this.onChangeHandler(e)}/>
+                                {/* <input required  onChange={(e)=>{
+                                 this.setState({mobile: e.target.value})
+                               
+                                   
+                                 
+                                }
+                                  }  value={this.state.mobile} className="fom-wd" type="text" name placeholder="password" /> */}
+                              
+                              </div>
                               <div className="col-sm-12 col-md-3 innr-bx">
                                 <label className="title-fom"><font color="white">Password</font></label>
                                 <input required  onChange={(e)=>{
@@ -778,6 +808,7 @@ hids.push(this.state. HListId[item])
                               <thead  style={{background:'#26293B'}}>
                                 <tr  style={{background:'#1E1E2F',color:'#FFFFFF'}}>
                                   <th style={{textAlign:"center",color:'aliceblue'}}>Doctor ID</th>
+                                  {/* <th style={{textAlign:"center",color:'aliceblue'}}>Image</th> */}
                                   <th style={{textAlign:"center",color:'aliceblue'}}>Doctor Name</th>
                                   <th style={{textAlign:"center",color:'aliceblue'}}>Gender</th>
                                   <th style={{textAlign:"center",color:'aliceblue'}}>Hub</th>
@@ -807,6 +838,7 @@ hids.push(this.state. HListId[item])
                                 return(
 <tr  id={i}>
                                   <td>{item.ID}</td>
+                                  {/* <td><img src={item.imagepath}   alt="image"></img></td> */}
                                   <td>{item.DoctorName}</td>
                                   <td>{this.getGender(item.Gender)}</td>
                                   <td>{item.HubName}</td>
