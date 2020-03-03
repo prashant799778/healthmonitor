@@ -59,10 +59,10 @@ class JSONEncoder(json.JSONEncoder):
 
 # cursor = mysqlcon.cursor()
 
-@app.route("/CampImages/<image_name>")
+@app.route("/images/<image_name>")
 def CampImages(image_name):
     try:
-        return send_from_directory('CampImages', filename=image_name, as_attachment=False)
+        return send_from_directory('images', filename=image_name, as_attachment=False)
     except FileNotFoundError:
         abort(404)
 
