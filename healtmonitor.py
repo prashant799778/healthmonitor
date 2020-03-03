@@ -2362,6 +2362,7 @@ def addDoctor():
         print(inputdata,type(inputdata))
         #inputdata1 = request.form.get('doctorimage')
         imagepath=""
+        data1=json.loads(inputdata) 
         if 'doctorimage' in request.files:      
                 file = request.files.get('doctorimage')
                 input_datadir = "./images"    
@@ -2381,7 +2382,7 @@ def addDoctor():
                 # CampImagePath = filepath
         #json1=request.get_data() 
         #print(json1)
-        data1=json.loads(inputdata) 
+        
         print("11111111111111111111")
         print(data1)
         conn=Connection()
