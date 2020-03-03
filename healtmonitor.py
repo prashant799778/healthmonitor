@@ -2394,7 +2394,7 @@ def addDoctor():
         
         cursor.execute(query)
         data = cursor.fetchone()
-        print("data===========================",data)
+        #print("data===========================",data)
         if (data!=None) and (data["Email"]==data1["Email"]) and (data["name"]!=data1["name"]):
             # if data["Email"]==data1["Email"]:
                 # if data["name"]!=data1["name"]:
