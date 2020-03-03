@@ -4076,7 +4076,7 @@ def getpatient():
         
         for i in data:
 
-            query2="select dm.ID as ID,dm.hospitalId as hospitalId,dm.DoctorName from doctorMaster as dm ,HubMaster as Hbs,Hospital_master as hm  where hm.HubId=Hbs.ID  and  um.Usertype_Id=2  and  hm.ID='"+str(i["ID"])+"';"
+            query2="select dm.ID as ID,dm.hospitalId as hospitalId,dm.DoctorName from doctorMaster as dm ,HubMaster as Hbs,Hospital_master as hm  where hm.HubId=Hbs.ID  hm.ID=dm.hospitalId and  um.Usertype_Id=2  and  dm.hospitalId='"+str(i["ID"])+"';"
             print(query2)
             cursor.execute(query2)
             data2 = cursor.fetchall()
