@@ -79,14 +79,14 @@ def login1():
         
              
           
-        query ="select  um.Email,um.ID,um.name as name,us.Usertype as Usertype,um.Usertype_Id as Usertype_Id from userMaster  as um,Usertype_master as us  where um.Usertype_Id=us.ID and  um.Email = '" + name + "' and password='" + password + "' and um.Status<>'2' ;"   
+        query ="select um.imagepath, um.Email,um.ID,um.name as name,us.Usertype as Usertype,um.Usertype_Id as Usertype_Id from userMaster  as um,Usertype_master as us  where um.Usertype_Id=us.ID and  um.Email = '" + name + "' and password='" + password + "' and um.Status<>'2' ;"   
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
         loginuser = cursor.fetchall()
         imagepath=""
         if int(loginuser[0]["Usertype_Id"])==2:
-            imagepath=ConstantData.getwebBaseurl()+str(data["imagepath"])
+            imagepath=ConstantData.getwebBaseurl()+str(loginuser[0]["imagepath"]))
         print("11111111111",loginuser)
        
 
