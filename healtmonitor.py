@@ -2359,14 +2359,15 @@ def addOperator():
 def addDoctor():
     try:
         data=request.files.get("doctorimage")
-        print(data.filename,"===========")
+        #print(data.filename,"===========")
         inputdata = request.form.get('inputdata')   
-        print(inputdata,type(inputdata))
+        #print(inputdata,type(inputdata))
         #inputdata1 = request.form.get('doctorimage')
         imagepath=""
         data1=json.loads(inputdata) 
         if 'doctorimage' in request.files:      
                 file = request.files.get('doctorimage')
+                #filename = file.filename
                 input_datadir = "./images"    
                 path = str(input_datadir)+"/" 
                 file.save(str(path)+str(data1["Email"])+".jpg")
