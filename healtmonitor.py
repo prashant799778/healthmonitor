@@ -3,7 +3,19 @@ from flask_socketio import SocketIO,emit
 import uuid
 import json
 #import socketio
-
+import dlib
+import scipy
+# import scipy.misc
+import numpy as np
+import pandas as pd 
+import seaborn as sns
+import matplotlib.pyplot as plt 
+from scipy import stats
+from matplotlib.pyplot import imread
+import os
+import sys
+import cv2
+from flask_cors import CORS
 
 import json
 import numpy as np
@@ -11,10 +23,8 @@ import pymysql
 import requests
 import json
 import pymysql
-from flask_cors import CORS
 from datetime import datetime
 import pytz 
-import pytz
 from config import Connection
 
 
@@ -3558,6 +3568,147 @@ def editDoctorProfile():
         print("Exception---->" +str(e))    
         output = {"result":"somthing went wrong","status":"false"}
         return output
+
+def get_face_encodings(path_to_image):
+    face_detector = dlib.get_frontal_face_detector() #detect faces in images
+    #detect landmark points
+    print(path_to_image)
+    print("bbbbbbbb")
+    shape_predictor = dlib.shape_predictor('./shape_predictor_68_face_landmarks.dat')   
+    #face encodings
+    print("cccccccc")
+    face_recognition_model = dlib.face_recognition_model_v1('./dlib_face_recognition_resnet_model_v1.dat')
+    e = 0.6
+    image = cv2.imread(path_to_image)
+    print("dddddddd")
+    detected_faces = face_detector(image, 1) #1 == 1F
+    print("eeeeeeee")
+
+    shapes_faces = [shape_predictor(image, face) for face in detected_faces]
+    print("ffffffff")
+
+    return [np.array(face_recognition_model.compute_face_descriptor(image, face_pose, 1)) for face_pose in shapes_faces]
+    #print([np.array(face_recognition_model.compute_face_descriptor(image, face_pose, 1)) for face_pse in shapes_faces])
+
+#get_face_encodings('/images/Manish.jpg')
+def compare_face_encodings(known_faces, face):
+    e=0.6
+    return (np.linalg.norm(known_faces - face, axis=1) <= e)
+
+def find_match(known_faces, names, face):
+    matches = compare_face_encodings(known_faces, face)
+    count = 0
+    for match in matches:
+        if match:
+            print('---> Verified Person')
+            return {"Person":names[count],"message":"Verified","status":"true"}
+        count += 1
+    print('---> UnVerified Person')
+    return {"message":"Unverified","status":"false"}
+
+
+@app.route('/dataAdd', methods=['POST'])
+def dataAdd():
+    try:
+        input_datadir = "./images"
+        output_datadir = "./test"
+
+        name = request.form['Email']
+        #mobile = request.form['Mobile']
+
+        file = request.files.get('TrainImage')
+
+        if name and file:
+
+            query="SELECT * FROM Face_Data WHERE Name = '"+str(name)+"'"
+            print(query)
+            conn=Connection()
+            cursor = conn.cursor()
+            cursor.execute(query)
+            data = cursor.fetchall()
+            print(data)
+            conn.commit()
+            cursor.close()
+
+            if(len(data)<=0):
+                print("11111")
+                path = str(input_datadir)+"/"
+                print("22222")
+                
+                file.save(str(path)+str(name.split(" ")[0])+".jpg")
+                print("3333")
+
+                query="INSERT INTO Face_Data(Name,Image,Processed) Values('"+str(name)+"','"+str(input_datadir)+"','"+str(output_datadir)+"')"
+                print(query)
+                conn=Connection()
+                cursor = conn.cursor()
+                cursor.execute(query)
+                conn.commit()
+                cursor.close()
+
+                print("Data Added Successfully")
+
+                return "Data Added Successfully"
+            
+            else:
+
+                return "Face Data Already Exits"
+
+    except Exception as e :
+        print("Exception--->" + str(e))
+        return "Please Check the Code" 
+
+@app.route('/recognizeImage', methods=['GET'])
+def recognizeImage():
+    try:
+        input_datadir = "./images"
+        output_datadir = "./test"
+
+        file1 = request.files.get('TestImage')        
+        path1 = str(output_datadir)+"/"
+        file1.save(str(path1)+"Dummy"+".jpg")
+        print("4444")
+
+        image_filenames = filter(lambda x: x.endswith('.jpg'), os.listdir(str(input_datadir)+"/"))
+        image_filenames = sorted(image_filenames)
+        paths_to_images = [str(input_datadir)+"/" + x for x in image_filenames]
+        face_encodings = []
+        print("111111111")
+        for path_to_image in paths_to_images:
+            face_encodings_in_image = get_face_encodings(path_to_image)
+            if len(face_encodings_in_image) != 1:
+                print("Please change image: " + path_to_image + " - it has " + str(len(face_encodings_in_image)) + " faces; it can only have one")
+                exit()
+            face_encodings.append(get_face_encodings(path_to_image)[0])
+        print("2222222222")
+        test_filenames = filter(lambda x: x.endswith('.jpg'), os.listdir('test/'))
+        paths_to_test_images = [str(output_datadir)+"/" + x for x in test_filenames]
+        names = [x[:-4] for x in image_filenames]
+        print("3333333333")
+        print(names)
+        for path_to_image1 in paths_to_test_images:
+            print("aaaaaa")
+            print(path_to_image1)
+            face_encodings_in_image1 = get_face_encodings(path_to_image1)
+            print("44444444")
+            print(face_encodings_in_image1)
+            print(len(face_encodings_in_image1))
+            if len(face_encodings_in_image1) != 1:
+                print("Please change image: " + path_to_image1 + " - it has " + str(len(face_encodings_in_image1)) + " faces; it can only have one")
+                exit()
+                print("55555555555")
+                print("666666666666")
+            match = find_match(face_encodings, names, face_encodings_in_image1[0])
+            print("777777777777")
+            print()
+            os.remove(path_to_image1)
+
+            return match
+
+    except Exception as e :
+        print("Exception--->" + str(e))
+        return "Please Check the Code" 
+
 
 # @app.route('/patientDoctorMapping', methods=['POST'])
 # def patientDoctorMapping():
