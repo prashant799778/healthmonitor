@@ -2373,9 +2373,9 @@ def addDoctor():
                 input_datadir = "./images"  
                 print("33333333")                
                 path = str(input_datadir)+"/" 
-                file.save(str(path)+str(data1["name"])+".jpg")
+                file.save(str(path)+str(data1["Email"])+".jpg")
                 print("4444444")
-                filename=str(data1["name"])+".jpg"
+                filename=str(data1["Email"])+".jpg"
                 print("55555555555555")
                 imagepath="/images/"+filename
                 print("6666666666",imagepath)
