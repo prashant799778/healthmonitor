@@ -3658,7 +3658,7 @@ def dataAdd():
         print("Exception--->" + str(e))
         return "Please Check the Code" 
 
-@app.route('/recognizeImage', methods=['GET'])
+@app.route('/recognizeImage', methods=['POST'])
 def recognizeImage():
     try:
         input_datadir = "./images"
