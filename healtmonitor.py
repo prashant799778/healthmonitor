@@ -2365,14 +2365,20 @@ def addDoctor():
         #inputdata1 = request.form.get('doctorimage')
         imagepath=""
         data1=json.loads(inputdata) 
-        if 'doctorimage' in request.files:      
+        if 'doctorimage' in request.files: 
+                print("111111")
                 file = request.files.get('doctorimage')
+                print("22222")
                 #filename = file.filename
-                input_datadir = "./images"    
+                input_datadir = "./images"  
+                print("33333333")                
                 path = str(input_datadir)+"/" 
                 file.save(str(path)+str(data1["Email"])+".jpg")
+                print("4444444")
                 filename=str(data1["Email"])+".jpg"
+                print("55555555555555")
                 imagepath="/images/"+filename
+                print("6666666666")
                 # filename = file.filename or ''                 
                 # filename = filename.replace("'","") 
 
