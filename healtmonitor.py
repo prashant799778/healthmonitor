@@ -4058,41 +4058,38 @@ def allhospital():
         return output
 
 
-@app.route('/getpatient',methods=['POST'])
-def getpatient():
+@app.route('/doctor',methods=['POST'])
+def alldoctor():
     try:
-        json1=request.get_data()
-        # data=json.loads(json1.decode("utf-8")) 
+       
+        json1=request.get_data() 
         data=json.loads(json1.decode("utf-8"))
-        print(data)
-        
-        query="select Hospital_master.ID,Hospital_master.hospital_name,Hospital_master.Address,"
-        query=query+"HubMaster.HubName,HubMaster.ID as HubId  from Hospital_master inner join HubMaster on Hospital_master.HubId=HubMaster.ID order by Hospital_master.ID DESC;"
-        conn=Connection()
+        print('ddddd')
+
+        query = 'select HospitalId from DoctorMaster where HospitalId="'+str(data['HospitalId'])+'"'
+        conn = Connection()
         cursor = conn.cursor()
         cursor.execute(query)
-        data= cursor.fetchone()
-        
-        
-        for i in data:
-
-            query2="select dm.ID as ID,dm.hospitalId as hospitalId,dm.DoctorName from doctorMaster as dm ,HubMaster as Hbs,Hospital_master as hm  where hm.HubId=Hbs.ID  hm.ID=dm.hospitalId and  um.Usertype_Id=2  and  dm.hospitalId='"+str(i["ID"])+"';"
-            print(query2)
-            cursor.execute(query2)
+        data1 = cursor.fetchone()
+        print('11111112332434')
+        if data1:
+            query1 = 'select * from DoctorMaster where HospitalId="'+hospital_id+'"'
+            conn = Connection()
+            cursor = conn.cursor()
+            cursor.execute(query1)
             data2 = cursor.fetchall()
-            print(data2)
-            
-            i["ID"]=data2[0]['ID']
-            i["hospitalId"]=data2[0]['hospitalId']
-            i["DoctorName"]=data2[0]['DoctorName']
+            cursor.close()
+            print('637458564')
+            data3={"result":data2}
+            return data3
+        else:
+            output = {"result": "Doctor_data not Found!", "status": "false"}
+            return output
     
-        cursor.close()
-        return {"data":data,"status":"true"}
-    except Exception as e :
-        print("Exception---->" +str(e))           
-        output = {"result":"something went wrong","status":"false"}
+    except Exception as e:
+        print("Exception---->" +str(e))    
+        output = {"result":"somthing went wrong","status":"false"}
         return output
-
 
 
     
