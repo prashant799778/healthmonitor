@@ -4078,7 +4078,9 @@ def getpatient():
             data2 = cursor.fetchall()
             print(data2)
             
-            i['doctor'] = data2
+            i["ID"]=data2[0]['ID']
+            i["hospitalId"]=data2[0]['hospitalId']
+            i["DoctorName"]=data2[0]['DoctorName']
     
         cursor.close()
         return {"data":data,"status":"true"}
