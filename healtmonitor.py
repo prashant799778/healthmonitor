@@ -2431,7 +2431,7 @@ def addDoctor():
             if data1["password"]==data1["confirm_password"]:
                 query2  = " insert into userMaster (name,mobile,Usertype_Id,UserID,password,Email,Gender,imagepath)"
                 query2 = query2 +" values('"+str(data1["name"])+"','"+str(data1["mobile"])+"','"+str('2')+"','"+str(UserID)
-                query2=query2+"','"+str(data1["password"])+"','"+str(data1["Email"])+"','"+str(data1["Gender"])+"','"+str(data1["imagepath"])+"');"
+                query2=query2+"','"+str(data1["password"])+"','"+str(data1["Email"])+"','"+str(data1["Gender"])+"','"+str(imagepath)+"');"
                 print(query2)
                 
                 cursor.execute(query2)
