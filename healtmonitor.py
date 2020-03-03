@@ -2236,12 +2236,141 @@ def addOperator():
 
 
 
+# @app.route('/addDoctor', methods=['POST'])
+# def addDoctor():
+    # try:
+        # json1=request.get_data() 
+        # print(json1)
+        # data1=json.loads(json1.decode("utf-8"))  
+        # print(data1)
+        # conn=Connection()
+        # cursor = conn.cursor()
+        # query = "select * from userMaster where  Usertype_Id=2 and Email='"+str(data1["Email"])+ "';"
+        
+        # cursor.execute(query)
+        # data = cursor.fetchone()
+        # print("data===========================",data)
+        # if (data!=None) and (data["Email"]==data1["Email"]) and (data["name"]!=data1["name"]):
+            if data["Email"]==data1["Email"]:
+                if data["name"]!=data1["name"]:
+            # output={"result":"name mismatched at this mailid","status":"true"}
+            # return output
+                
+        # if data!=None:
+            # print("data",data)
+            # mainId=data["ID"]
+            # Usertype_Id=data["Usertype_Id"]
+            # HospitalId = data1["Hospital_Id"]
+            # for i in HospitalId:
+                # query = "select * from userHospitalMapping where hospitalId='"+str(i)+"'  and Usertype_Id='"+str(Usertype_Id)+"' and userid= '"+str(mainId)+"' ;"
+                
+                # cursor.execute(query)
+                # userHospitalMappingdata = cursor.fetchall()
+                # if userHospitalMappingdata==():
+                    # query2  = " insert into userHospitalMapping (userId,Usertype_Id,hospitalId)"
+                    # query2 = query2 +" values('"+str(mainId)+"','"+str(Usertype_Id)+"','"+str(i)+"');"
+                    
+                    # cursor.execute(query2)
+                    # conn.commit()
+            # cursor.close()
+        # print(data)
+        # UserId=uuid.uuid1()
+        # UserID=UserId.hex
+        # if data==None:
+            # if data1["password"]==data1["confirm_password"]:
+                # query2  = " insert into userMaster (name,mobile,Usertype_Id,UserID,password,Email,Gender)"
+                # query2 = query2 +" values('"+str(data1["name"])+"','"+str(data1["mobile"])+"','"+str('2')+"','"+str(UserID)
+                # query2=query2+"','"+str(data1["password"])+"','"+str(data1["Email"])+"','"+str(data1["Gender"])+"');"
+                # print(query2)
+                
+                # cursor.execute(query2)
+                # conn.commit()
+                # query = "select ID as userId,Usertype_Id from userMaster where name= '"+str(data1["name"])+ "' and  Email='"+str(data1["Email"])+ "';"
+                
+                # cursor.execute(query)
+                # data=cursor.fetchall()
+                # yu=data[-1]
+                # mainId=yu["userId"]
+                # Usertype_Id=yu["Usertype_Id"]
+                # HospitalId = data1["Hospital_Id"]
+                # for i in HospitalId:
+
+                    # query = "select * from userHospitalMapping where hospitalId='"+str(i)+"'  and Usertype_Id='"+str(Usertype_Id)+"' and userid= '"+str(mainId)+"' ;"
+                    
+                    # cursor.execute(query)
+                    # userHospitalMappingdata = cursor.fetchall()
+                    # if userHospitalMappingdata==():
+                        # query2  = " insert into userHospitalMapping (userId,Usertype_Id,hospitalId)"
+                        # query2 = query2 +" values('"+str(mainId)+"','"+str(Usertype_Id)+"','"+str(i)+"');"
+                        # conn=Connection()
+                        # cursor = conn.cursor()
+                        # cursor.execute(query2)
+                        # conn.commit()
+                
+                # query = "select * from userMaster where  Usertype_Id=2 and Email='"+str(data1["Email"])+ "';"
+                
+                # cursor.execute(query)
+                # data = cursor.fetchone()
+                # if data!=None:
+                    # print("data",data)
+                    # mainId=data["ID"]
+                    # Usertype_Id=data["Usertype_Id"]
+                    # HospitalId = data1["Hospital_Id"]
+                    # for i in HospitalId:
+                        # query = "select * from userHospitalMapping where hospitalId='"+str(i)+"'  and Usertype_Id='"+str(Usertype_Id)+"' and userid= '"+str(mainId)+"' ;"
+                        # conn=Connection()
+                        # cursor = conn.cursor()
+                        # cursor.execute(query)
+                        # userHospitalMappingdata = cursor.fetchall()
+                        # if userHospitalMappingdata==():
+                            # query2  = " insert into userHospitalMapping (userId,Usertype_Id,hospitalId)"
+                            # query2 = query2 +" values('"+str(mainId)+"','"+str(Usertype_Id)+"','"+str(i)+"');"
+                            # conn=Connection()
+                            # cursor = conn.cursor()
+                            # cursor.execute(query2)
+                            # conn.commit()
+                # cursor.close()                
+                
+                
+                # output = {"result":"data inserted successfully","status":"true"}
+                # return output
+            # else:
+                # output = {"result":"password mismatched","status":"false"}
+                # return output
+        # else:
+            # output = {"result":"New Hospital Added Successfully","status":"true"}
+            # return output 
+    # except Exception as e :
+        # print("Exception---->" + str(e))    
+        # output = {"result":"something went wrong","status":"false"}
+        # return output
+
 @app.route('/addDoctor', methods=['POST'])
 def addDoctor():
     try:
-        json1=request.get_data() 
-        print(json1)
-        data1=json.loads(json1.decode("utf-8"))  
+        inputdata = request.form.get('inputdata')    
+        #inputdata1 = request.form.get('doctorimage')
+        imagepath=""
+        if 'doctorimage' in request.files:      
+                file = request.files.get('doctorimage')
+                input_datadir = "./images"    
+                path = str(input_datadir)+"/" 
+                file.save(str(path)+str(inputdata["email"])+".jpg")
+                filename=str(inputdata["email"])+".jpg")
+                imagepath="/images/"+filename
+                # filename = file.filename or ''                 
+                # filename = filename.replace("'","") 
+
+                ##folder path to save campaign image
+                # FolderPath = ConstantData.GetCampaignImagePath(filename)  
+
+                # filepath = '/images/' + filename
+
+                # file.save(FolderPath)
+                # CampImagePath = filepath
+        #json1=request.get_data() 
+        #print(json1)
+        data1=json.loads(inputdata)  
         print(data1)
         conn=Connection()
         cursor = conn.cursor()
@@ -2278,9 +2407,9 @@ def addDoctor():
         UserID=UserId.hex
         if data==None:
             if data1["password"]==data1["confirm_password"]:
-                query2  = " insert into userMaster (name,mobile,Usertype_Id,UserID,password,Email,Gender)"
+                query2  = " insert into userMaster (name,mobile,Usertype_Id,UserID,password,Email,Gender,imagepath)"
                 query2 = query2 +" values('"+str(data1["name"])+"','"+str(data1["mobile"])+"','"+str('2')+"','"+str(UserID)
-                query2=query2+"','"+str(data1["password"])+"','"+str(data1["Email"])+"','"+str(data1["Gender"])+"');"
+                query2=query2+"','"+str(data1["password"])+"','"+str(data1["Email"])+"','"+str(data1["Gender"])+"','"+str(data1["imagepath"])+"');"
                 print(query2)
                 
                 cursor.execute(query2)
@@ -2344,8 +2473,6 @@ def addDoctor():
         print("Exception---->" + str(e))    
         output = {"result":"something went wrong","status":"false"}
         return output
-
-
 
 @app.route('/addHubadmin', methods=['POST'])
 def addHubadmin():
