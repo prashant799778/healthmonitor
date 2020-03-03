@@ -84,6 +84,9 @@ def login1():
         cursor = conn.cursor()
         cursor.execute(query)
         loginuser = cursor.fetchall()
+        imagepath=""
+        if int(loginuser[0]["Usertype_Id"])==2
+            imagepath=ConstantData.getwebBaseurl()+str(data["imagepath"])
         print("11111111111",loginuser)
        
 
@@ -245,7 +248,7 @@ def login1():
 
             cursor.close()
 
-            data={"status":"true","result":loginuser[0],"Nurse Details":Nurse,"Patient Details":PatientData,"Count":Count}                      
+            data={"status":"true","result":loginuser[0],"Nurse Details":Nurse,"Patient Details":PatientData,"Count":Count,"imagepath":imagepath}                      
             return data
 
     
@@ -2495,7 +2498,7 @@ def addDoctor():
                 cursor.close()                
                 
                 
-                output = {"result":"data inserted successfully","status":"true","imagepath":ConstantData.getwebBaseurl()+str(data["imagepath"])}
+                output = {"result":"data inserted successfully","status":"true"}
                 return output
             else:
                 output = {"result":"password mismatched","status":"false"}
