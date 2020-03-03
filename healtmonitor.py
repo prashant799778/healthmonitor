@@ -3,6 +3,7 @@ from flask_socketio import SocketIO,emit
 import uuid
 import json
 #import socketio
+import ConstantData
 import dlib
 import scipy
 # import scipy.misc
@@ -2462,6 +2463,7 @@ def addDoctor():
                 
                 cursor.execute(query)
                 data = cursor.fetchone()
+                print("===============",data)
                 if data!=None:
                     print("data",data)
                     mainId=data["ID"]

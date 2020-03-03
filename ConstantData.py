@@ -6,7 +6,7 @@ def GetBaseURL():
 
 def getwebBaseurl():
  
-    path = "https://fandomlive.fourbrick.in"
+    path = "https://api.digitologyhealthcare.com"
     return path
 
 def GetdefaultNotificationImage():
