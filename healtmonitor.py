@@ -4061,12 +4061,10 @@ def allhospital():
 @app.route('/doctor',methods=['POST'])
 def alldoctor():
     try:
-       
-        json1=request.get_data() 
-        data=json.loads(json1.decode("utf-8"))
-        print('ddddd')
 
-        query = 'select hm.ID,hm.hospital_name,hb.HubName,hm.HubId,hb.ID from hospital_master as hm,HubMaster as hb where hb.ID=hm.HubId and hm.HubID="'+str(data['HubId'])+'"'
+        hub_id = request.args["HubId"]
+
+        query = 'select hm.ID,hm.hospital_name,hb.HubName,hm.HubId,hb.ID from hospital_master as hm,HubMaster as hb where hb.ID=hm.HubId and hm.HubID="'+str(data['hub_id'])+'"'
         conn = Connection()
         cursor = conn.cursor()
         cursor.execute(query)
