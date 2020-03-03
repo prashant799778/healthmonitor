@@ -2378,7 +2378,7 @@ def addDoctor():
                 filename=str(data1["Email"])+".jpg"
                 print("55555555555555")
                 imagepath="/images/"+filename
-                print("6666666666")
+                print("6666666666",imagepath)
                 # filename = file.filename or ''                 
                 # filename = filename.replace("'","") 
 
