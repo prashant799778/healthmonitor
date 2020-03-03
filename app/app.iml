@@ -164,5 +164,6 @@
     <orderEntry type="library" name="Gradle: dev.dworks.libs:volleyplus:0.1.4@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.github.f0ris.sweetalert:library:1.5.6@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.pnikosis:materialish-progress:1.7@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.mindorks:paracamera:0.2.2@aar" level="project" />
   </component>
 </module>

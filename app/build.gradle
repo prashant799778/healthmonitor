@@ -65,6 +65,8 @@ dependencies {
         // excluding org.json which is provided by Android
         exclude group: 'org.json', module: 'json'
     }
+
+    implementation 'com.mindorks:paracamera:0.2.2'
     ////////////////////////////////NetWork END////////////////////////////
 
 

@@ -60,7 +60,7 @@
     <string name="test_string">
   <![CDATA[<sup><small>2</small></sup> ]]>
 </string>
-   <string name="spo21">SPO,<sub>2</sub>!</string>
+    <string name="spo21">SPO,<sub>2</sub>!</string>
     <string name="start">Start</string>
     <string name="version">Version  0.0.5</string>
     <string name="connect">Connect</string>
@@ -90,10 +90,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-<!--    <value column="Back" null="false">H&lt;sub&gt;2&lt;/sub&gt;</value>-->
-
-
-
+    <!--    <value column="Back" null="false">H&lt;sub&gt;2&lt;/sub&gt;</value>-->
 
 
 </resources>

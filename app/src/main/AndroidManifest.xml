@@ -28,7 +28,8 @@
         android:roundIcon="@mipmap/app_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.EditProfileActivity"></activity>
+        <activity android:name=".activities.FaceDetectActivity"></activity>
+        <activity android:name=".activities.EditProfileActivity" />
         <activity
             android:name=".activities.AlarmActivity"
             android:screenOrientation="landscape" />
