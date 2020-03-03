@@ -2367,8 +2367,8 @@ def addDoctor():
                 file = request.files.get('doctorimage')
                 input_datadir = "./images"    
                 path = str(input_datadir)+"/" 
-                file.save(str(path)+str(inputdata["email"])+".jpg")
-                filename=str(inputdata["email"])+".jpg"
+                file.save(str(path)+str(data1["email"])+".jpg")
+                filename=str(data1["email"])+".jpg"
                 imagepath="/images/"+filename
                 # filename = file.filename or ''                 
                 # filename = filename.replace("'","") 
