@@ -4064,9 +4064,6 @@ def alldoctor():
    try:
        
         json1=request.get_data() 
-        data=json.loads(json1.decode("utf-8")) try:
-       
-        json1=request.get_data() 
         data=json.loads(json1.decode("utf-8")) 
 
         query = 'select HospitalId from DoctorMaster where HospitalId="'+str(data['hospital_id'])+'"'
