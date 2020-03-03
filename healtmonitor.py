@@ -4067,7 +4067,7 @@ def getpatient():
         print(data)
         
         query="select Hospital_master.ID,Hospital_master.hospital_name,Hospital_master.Address,"
-        query=query+"HubMaster.HubName,HubMaster.ID as HubId  from Hospital_master inner join HubMaster on Hospital_master.HubId=HubMaster.ID and Hospital_master.ID='"+str(data['HubId'])+"' order by Hospital_master.ID DESC;"
+        query=query+"HubMaster.HubName,HubMaster.ID as HubId  from Hospital_master inner join HubMaster on Hospital_master.HubId=HubMaster.ID order by Hospital_master.ID DESC;"
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
