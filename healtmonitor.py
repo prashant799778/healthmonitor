@@ -4066,7 +4066,7 @@ def alldoctor():
         json1=request.get_data() 
         data=json.loads(json1.decode("utf-8")) 
 
-        query = 'select HospitalId from DoctorMaster where HospitalId="'+str(data['hospital_id'])+'"'
+        query = 'select HospitalId from DoctorMaster where HospitalId="'+str(data['HospitalId'])+'"'
         conn = Connection()
         cursor = conn.cursor()
         cursor.execute(query)
