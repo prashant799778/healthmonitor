@@ -4073,7 +4073,7 @@ def alldoctor():
         data1 = cursor.fetchone()
         print('11111112332434')
         if data1:
-            query1 = 'select * from DoctorMaster where HospitalId="'+hospital_id+'"'
+            query1 = 'select * from DoctorMaster where HospitalId="'+str(data['hospital_id'])+'"'
             conn = Connection()
             cursor = conn.cursor()
             cursor.execute(query1)
