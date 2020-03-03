@@ -3990,6 +3990,138 @@ def novastore():
         output = {"result":"somthing went wrong","status":"false"}
         return output
 
+######################################################START#############################
+
+
+@app.route('/',methods=['GET'])
+def hub():
+    if request.method == 'GET':
+        hub_id = request.args["ID"]
+
+        query = 'select ID from HubMaster where ID="'+hub_id+'"'
+        conn = Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data1 = cursor.fetchone()
+        print('skjtewh')
+        if data1:
+            query1 = 'select * from HubMaster where ID="'+hub_id+'"'
+            conn = Connection()
+            cursor = conn.cursor()
+            cursor.execute(query1)
+            data2 = cursor.fetchall()
+            cursor.close()
+            print('sglfsng')
+            data3={"result":data2}
+            return data3
+        else:
+            output = {"result": "Hub_data not Found!", "status": "false"}
+            return output
+
+    else:
+        output = {"result": "Hub_id not Found!", "status": "false"}
+        return output
+
+
+        return {"result":data1,"status":"True"}
+
+
+ 
+@app.route('/hospital',methods=['GET'])
+def allhospital():
+
+    if request.method == 'GET':
+        hospital_id = request.args["HubId"]
+
+        query = 'select ID from Hospital_master where HubId="'+hospital_id+'"'
+        conn = Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data1 = cursor.fetchone()
+        print('2834680940')
+        if data1:
+            query1 = 'select * from Hospital_master where HubId="'+hospital_id+'"'
+            conn = Connection()
+            cursor = conn.cursor()
+            cursor.execute(query1)
+            data2 = cursor.fetchall()
+            cursor.close()
+            print('222220135423053')
+            data3={"result":data2}
+            return data3
+        else:
+            output = {"result": "Hospital_data not Found!", "status": "false"}
+            return output
+
+    else:
+        output = {"result": "Hub_id not Found!", "status": "false"}
+        return output
+
+
+@app.route('/doctor',methods=['GET'])
+def alldoctor():
+
+    if request.method == 'GET':
+        hospital_id = request.args["HospitalId"]
+
+        query = 'select HospitalId from DoctorMaster where HospitalId="'+hospital_id+'"'
+        conn = Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data1 = cursor.fetchone()
+        print('11111112332434')
+        if data1:
+            query1 = 'select * from DoctorMaster where HospitalId="'+hospital_id+'"'
+            conn = Connection()
+            cursor = conn.cursor()
+            cursor.execute(query1)
+            data2 = cursor.fetchall()
+            cursor.close()
+            print('637458564')
+            data3={"result":data2}
+            return data3
+        else:
+            output = {"result": "Doctor_data not Found!", "status": "false"}
+            return output
+
+    else:
+        output = {"result": "Hospital_id not Found!", "status": "false"}
+        return output
+
+
+@app.route('/patient',methods=['GET'])
+def allpatient():
+    
+    if request.method == 'GET':
+        hospital_id = request.args["hospitalId"]
+
+        query = 'select hospitalId from Patient_master where hospitalId="'+hospital_id+'"'
+        conn = Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data1 = cursor.fetchone()
+        print('11111112332434')
+        if data1:
+            query1 = 'select PatientId,hospitalId,PatientName,PhoneNo,Address from Patient_master where hospitalId="'+hospital_id+'"'
+            conn = Connection()
+            cursor = conn.cursor()
+            cursor.execute(query1)
+            data2 = cursor.fetchall()
+            cursor.close()
+            print('637458564')
+            data3={"result":data2}
+            return data3
+        else:
+            output = {"result": "Patient_data not Found!", "status": "false"}
+            return output
+
+    else:
+        output = {"result": "Hospital_id not Found!", "status": "false"}
+        return output
+
+
+####################################END################################################
+
  
 if __name__ == "__main__":
     CORS(app, support_credentials=True)
