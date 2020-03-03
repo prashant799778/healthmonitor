@@ -2485,7 +2485,7 @@ def addDoctor():
                 cursor.close()                
                 
                 
-                output = {"result":"data inserted successfully","status":"true"}
+                output = {"result":"data inserted successfully","status":"true","imagepath":ConstantData.getwebBaseurl()+str(data["imagepath"])}
                 return output
             else:
                 output = {"result":"password mismatched","status":"false"}
