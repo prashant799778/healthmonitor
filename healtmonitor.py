@@ -4093,7 +4093,7 @@ def alldoctor():
 def allpatient():
     
     if request.method == 'GET':
-        hospital_id = request.args["hospitalId"]
+        hospital_id = request.args["HospitalId"]
 
         query = 'select hospitalId from Patient_master where hospitalId="'+hospital_id+'"'
         conn = Connection()
