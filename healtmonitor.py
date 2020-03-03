@@ -2358,7 +2358,8 @@ def addOperator():
 @app.route('/addDoctor', methods=['POST'])
 def addDoctor():
     try:
-        inputdata = request.form.get('inputdata')    
+        inputdata = request.form.get('inputdata')   
+        print(inputdata)
         #inputdata1 = request.form.get('doctorimage')
         imagepath=""
         if 'doctorimage' in request.files:      
