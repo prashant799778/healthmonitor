@@ -4060,11 +4060,11 @@ def allhospital():
 
 @app.route('/doctor',methods=['GET'])
 def alldoctor():
-
-   try:
+    try:
        
         json1=request.get_data() 
-        data=json.loads(json1.decode("utf-8")) 
+        data=json.loads(json1.decode("utf-8"))
+        print('ddddd')
 
         query = 'select HospitalId from DoctorMaster where HospitalId="'+str(data['HospitalId'])+'"'
         conn = Connection()
@@ -4086,7 +4086,7 @@ def alldoctor():
             output = {"result": "Doctor_data not Found!", "status": "false"}
             return output
     
-    except Exception as e :
+    except Exception as e:
         print("Exception---->" +str(e))    
         output = {"result":"somthing went wrong","status":"false"}
         return output
