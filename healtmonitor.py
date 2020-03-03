@@ -85,7 +85,7 @@ def login1():
         cursor.execute(query)
         loginuser = cursor.fetchall()
         imagepath=""
-        if int(loginuser[0]["Usertype_Id"])==2
+        if int(loginuser[0]["Usertype_Id"])==2:
             imagepath=ConstantData.getwebBaseurl()+str(data["imagepath"])
         print("11111111111",loginuser)
        
