@@ -2359,7 +2359,7 @@ def addOperator():
 def addDoctor():
     try:
         data=request.files.get("doctorimage")
-        print(data,"===========")
+        print(data.filename,"===========")
         inputdata = request.form.get('inputdata')   
         print(inputdata,type(inputdata))
         #inputdata1 = request.form.get('doctorimage')
