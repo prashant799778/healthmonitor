@@ -2373,9 +2373,9 @@ def addDoctor():
                 input_datadir = "./images"  
                 print("33333333")                
                 path = str(input_datadir)+"/" 
-                file.save(str(path)+str(data1["Email"])+".jpg")
+                file.save(str(path)+str(data1["name"])+".jpg")
                 print("4444444")
-                filename=str(data1["Email"])+".jpg"
+                filename=str(data1["name"])+".jpg"
                 print("55555555555555")
                 imagepath="/images/"+filename
                 print("6666666666",imagepath)
@@ -2424,7 +2424,7 @@ def addDoctor():
                     cursor.execute(query2)
                     conn.commit()
             cursor.close()
-        print(data)
+        print(data,"1111111111")
         UserId=uuid.uuid1()
         UserID=UserId.hex
         if data==None:
