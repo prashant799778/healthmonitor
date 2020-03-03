@@ -110,7 +110,7 @@ isValid:true,emailError:false,
   }}
   getTypeapi=()=>{
 
-  let api="http://134.209.153.34:5004/getrole"
+  let api="https://api.digitologyhealthcare.com/getrole"
    axios.get(api)
  .then((response)=> {
    // handle success
@@ -335,7 +335,7 @@ statusapi=()=>{
 	  'Email':this.state.currentEmail
   }
 
-     let api="https://smarticuapi.fourbrick.in/updateStatus"
+     let api="https://api.digitologyhealthcare.com/updateStatus"
       axios.post(api,jsn)
     .then((response)=> {
       // handle success
@@ -466,7 +466,7 @@ data.append('inputdata', JSON.stringify(json))
          
          if(response && response.data && response.data.status==="true"){
          
- alert("User Created Successfully")
+ alert(response.data.result)
            this.callapi()
  
  
@@ -816,6 +816,7 @@ hids.push(this.state. HListId[item])
                                   <th style={{textAlign:"center",color:'aliceblue'}}>Hospital(s) Allocated</th>
                                   <th style={{textAlign:"center",color:'aliceblue'}}>No. of Patient</th>
 								  <th style={{textAlign:"center",color:'aliceblue'}}>Email</th>
+								  <th style={{textAlign:"center",color:'aliceblue'}}>Licence No</th>
 								  <th style={{textAlign:"center",color:'aliceblue'}}>A/C Status</th>
                                   <th style={{textAlign:"center",color:'aliceblue'}} className="dlt">Action</th>
                                 </tr>
@@ -846,6 +847,7 @@ hids.push(this.state. HListId[item])
                                   <td>{item.hospital_name}</td>
                                   <td>{item.patient}</td>
 								  <td>{item.Email}</td>
+								  <td>{item.licenseNo}</td>
                                  <td onClick={()=>{this.statusapis(item.Email)}} style={{cursor:'pointer'}}>{item.Status==2?<span class="d-act" data-toggle="modal" data-target="#activateModal">deactivated</span>:<span data-toggle="modal" data-target="#deactivateModal" class="act">activated</span>}</td>
                     
                                   <td>

@@ -7,6 +7,8 @@ import  RESP  from "./resp"
 import SPO from "./spo"
 import backImg from "./image/backimg.png"
 import alertimg from "./image/alrt.gif" 
+import OutsideClickHandler from "react-outside-click-handler"
+
 class Detail extends React.Component{
   client=""
     constructor(){
@@ -25,7 +27,7 @@ class Detail extends React.Component{
          resp:"",
           id:"",
           user:"",
-         
+         isopen:false,
          
           w_ecg:0,
           w_spo:0,
@@ -50,7 +52,7 @@ class Detail extends React.Component{
   let  Omqtt1 = require('mqtt')
   // Omqtt1.connect('ws://139.59.78.54')
  
-        let  Oclient1  = Omqtt1.connect('wss://smarticumqtt.fourbrick.in:8083')
+        let  Oclient1  = Omqtt1.connect('mqtts://mqtt.digitologyhealthcare.com:8083')
         console.log("newmsg",Oclient1)
         Oclient1.on('connect',  () =>{
           console.log("newmsg","connect"+"---"+this.state.currentid+"/Notification")
@@ -61,7 +63,7 @@ class Detail extends React.Component{
      
       Oclient1.publish(this.state.currentid+"/Notification",JSON.stringify(msg),(errs)=>{
         if (!err) {
-          this.setState({ msgStatus:'message send'})
+          this.setState({ msgStatus:'message sent'})
           setTimeout(()=>{ this.props.updatePage()},2000);
          
         }else{
@@ -230,6 +232,12 @@ testAlert1=(type,value)=>{
      return false;
 }
   
+  changemsgState=()=>{
+	   
+	  this.setState({msg:"",msgStatus:"",isopen:!this.state.isopen});
+	  console.log("jkl",this.state)
+  }
+  
       render(){
 
         let currentinnerItem=this.props.currentinnerItem  ;
@@ -333,9 +341,16 @@ return(<DetailStyled>
                {texthighPressure!="" &&   <h3 className="erroe-mssh" style={{background:'#eb8c25'}}>{texthighPressure}</h3>}
                { textheartRate!="" &&    <h3 className="erroe-mssh" style={{background:'#b030b0'}} >{textheartRate}</h3>}
                 </div>
+				
 				<div class="dropdown">
-				  <button class="side-button-pis"  type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">prescribe medicine</button>
-				  <div class="dropdown-menu men-drop sadow bg-colr-ch" aria-labelledby="dropdownMenuButton">
+				{localStorage.getItem("user_type","Operation")!="Operation" &&  
+				
+				<button class="side-button-pis" onClick={()=>{this.changemsgState()}} type="button">Provide Opinion</button>}
+					{this.state. isopen &&	 <OutsideClickHandler
+      onOutsideClick={() => {
+      this.setState({isopen:false});
+      }}
+    >  <div class="dropdown-menu men-drop sadow bg-colr-ch show-pre-medi">
 				  <form>
 					<div class="stiky-note">
 					<textarea value={this.state.msg}  onChange={e => {
@@ -344,11 +359,11 @@ return(<DetailStyled>
                                     () => {}
                                   );
                                 }} rows="6" cols="50" class="madical pis"></textarea>
-					<a  style={{cursor:'pointer',paddingRight:'15px'}} onClick={()=>this.sendMessage()} class="btn btn-primary ">send</a>
-                              <span  style={{paddingLeft:'15px'}}  >{this.state.msgStatus}</span>
+					<a  style={{cursor:'pointer',paddingRight:'15px'}} onClick={()=>this.sendMessage()} class="btn btn-primary clr-white">send</a>
+                              <span  style={{paddingLeft:'15px'}} className="clr-white" >{this.state.msgStatus}</span>
 					</div>
 					</form>
-				  </div>
+					</div></OutsideClickHandler>}
 				</div>
 				
               </div>

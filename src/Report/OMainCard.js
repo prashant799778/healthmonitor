@@ -61,7 +61,12 @@ componentWillReceiveProps(){
 
         console.log("state",this.state)
        let click=this.props.Click;
-   
+	   let st=false;
+         if(Array.isArray(this.props. paitentList)){
+			   if(this.props. paitentList.length==0){
+				   st=true;
+			   }
+		 }
        
 return(
      < React.Fragment>
@@ -86,6 +91,11 @@ return(
         
         );
                 })}
+				{(!Array.isArray(this.props.paitentList) || st ) && <div style={{textAlign: 'left',
+       fontSize: 'xx-large',
+    color: 'red',
+    padding: '20px'}}> No Data Found </div>}
+               
                 </div>
      
 

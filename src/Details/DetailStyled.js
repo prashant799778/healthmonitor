@@ -1,6 +1,23 @@
 import styled from 'styled-components'
 
 export const DetailStyled = styled.div`
+.show-pre-medi {
+    display: block;
+    position: absolute;
+    will-change: transform;
+    top: 0px;
+    left: 0px;
+    transform: translate3d(-183px, 28px, 0px);
+    background: #26293b;
+}
+.clr-white {
+    color: #fff !important;
+    text-transform: capitalize;
+}
+.side-button-pis:focus {
+    box-shadow: none;
+    outline: 0;
+}
 .bg-colr-ch.show, textarea {
   background: #26293b !important;
   color: #fff !important;
