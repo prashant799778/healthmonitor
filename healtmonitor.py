@@ -4087,7 +4087,7 @@ def getPatientList():
         json1=request.get_data()
         print(json1)
         data=json.loads(json1.decode("utf-8"))
-        query2 ="select ID as DoctorID,from DoctorMaster where Usertype_Id=2 and DoctorID='"+str(data["ID"])+"';"  
+        query2 ="select ID as DoctorID,from DoctorMaster where Usertype_Id=2 and doctorID='"+str(data["ID"])+"';"  
         print(query2)
         conn=Connection() 
         cursor = conn.cursor()
@@ -4100,7 +4100,7 @@ def getPatientList():
             l2=[]
             query3 ="select  PM.PatientId as ID,PM.PatientName,"
             query3=query3+"pdm.DoctorID as DoctorID"
-            query3= query3 + "from Patient_master  as PM,patientDoctorMapping as pdm,Hospital_master as Hm  where PM.hospitalId=Hm.ID and pdm.Patient_Id=PM.PatientId  and PM.Status<>'2'   and DoctorID='" + str(doctor_Id) + "'  ORDER BY  PatientId DESC;"
+            query3= query3 + "from Patient_master  as PM,patientDoctorMapping as pdm,Hospital_master as Hm  where PM.hospitalId=Hm.ID and pdm.Patient_Id=PM.PatientId  and PM.Status<>'2'   and doctorID='" + str(doctor_Id) + "'  ORDER BY  PatientId DESC;"
             cursor = conn.cursor()
             cursor.execute(query3)
             data12 = cursor.fetchall()
