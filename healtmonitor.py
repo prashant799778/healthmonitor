@@ -4058,7 +4058,7 @@ def allhospital():
         return output
 
 
-@app.route('/getdoctorList',methods=['GET'])
+@app.route('/getdoctorList',methods=['POST'])
 def getdoctorList():
 
     try:
