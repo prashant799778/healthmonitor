@@ -4063,38 +4063,6 @@ def getPatientDetail():
         output = {"result":"something went wrong","status":"false"}
         return output
 
-@app.route('/testDetail',methods=['POST'])
-def testDetail():
-    try:
-        json1=request.get_data()
-        data=json.loads(json1.decode("utf-8"))
-
-        query1 = 'select * from Patient_Vital_master as pvm,Patient_master as pm where pm.PatientID=pvm.Patient_Id and pvm.Patient_Id="'+str(data['Patient_Id'])+'"'
-        conn = Connection()
-        cursor = conn.cursor()
-        cursor.execute(query1)
-        data1 = cursor.fetchone()
-        print('11111112332434')
-        return data1
-        # if data1:
-        #     query2 = 'select pvm.Patient_Id,pvm.RESP,pvm.ECG,pvm.SPO2,pvm.NIBP,pvm.TEMP from Patient_Vital_master as pvm where pvm.Patient_Id="'+str(data1['Patient_Id'])+'"'
-        #     conn = Connection()
-        #     cursor = conn.cursor()
-        #     cursor.execute(query2)
-        #     data2 = cursor.fetchall()
-        #     cursor.close()
-        #     print('637458564')
-        #     data3={"msg":"","result":data2,"status":"True"}
-        #     return data3
-        # else:
-        #     output = {"result": "Test_Details not Found!", "status": "false"}
-        #     return output
-
-    except Exception as e :
-        print("Exception---->" +str(e))           
-        output = {"result":"something went wrong","status":"false"}
-        return output
-
 
 
 ####################################END################################################
