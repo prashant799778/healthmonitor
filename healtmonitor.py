@@ -4065,7 +4065,7 @@ def getdoctorList():
         json1=request.get_data()
         data=json.loads(json1.decode("utf-8"))
 
-        query = 'select dm.HospitalId from DoctorMaster as dm,Hospital_master as hm where hm.ID=dm.Hospital_Id and dm.hospitalId="'+HospitalId+'"'
+        query = 'select dm.HospitalId as HospitalId from DoctorMaster as dm,Hospital_master as hm where hm.ID=dm.HospitalId and dm.hospitalId="'+HospitalId+'"'
         conn = Connection()
         cursor = conn.cursor()
         cursor.execute(query)
