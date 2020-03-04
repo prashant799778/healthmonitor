@@ -4065,14 +4065,14 @@ def getdoctorList():
         json1=request.get_data()
         data=json.loads(json1.decode("utf-8"))
 
-        query = 'select HospitalId from DoctorMaster where hm.ID=dm.HospitalId and hospitalId="'+HospitalId+'"'
+        query = 'select HospitalId from DoctorMaster where hospitalId="'+str(data['HospitalId'])+'"'
         conn = Connection()
         cursor = conn.cursor()
         cursor.execute(query)
         data1 = cursor.fetchone()
         print('11111112332434')
         if data1:
-            query1 = 'select ID,DoctorName from DoctorMaster where hospitalId="'+HospitalId+'"'
+            query1 = 'select ID,DoctorName from DoctorMaster where hospitalId="'+str(data['HospitalId'])+'"'
             conn = Connection()
             cursor = conn.cursor()
             cursor.execute(query1)
