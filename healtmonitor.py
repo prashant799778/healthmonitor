@@ -4110,7 +4110,7 @@ def getPatientDetail():
             data2 = cursor.fetchall()
             cursor.close()
             print('637458564')
-            data3={"result":data2}
+            data3={"msg":"","result":data2,"status":"True"}
             return data3
         else:
             output = {"result": "Patient_data not Found!", "status": "false"}
