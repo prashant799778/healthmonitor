@@ -4076,6 +4076,7 @@ def send_mail():
         cursor.execute(query)
         data = cursor.fetchall()
         print(data)
+        return {"result":data,"status":"True"}
 
 
     # msg = Message("Vineet Tomar",sender="vineettomar056@gmail.com",recipients=["vineet.fourbrick@gmail.com"])
