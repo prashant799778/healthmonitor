@@ -4087,33 +4087,17 @@ def getPatientList():
         json1=request.get_data()
         print(json1)
         data=json.loads(json1.decode("utf-8"))
-        query1 ="select ID from DoctorMaster where doctorID='"+str(data["ID"])+"';"  
-        print(query1)
-        conn=Connection() 
+
+        query1 ="select  PM.PatientId as ID,PM.PatientName,pdm.doctorId"
+        query1= query1 + "from Patient_master as PM,patientDoctorMapping as pdm,Hospital_master as Hm  where pdm.Patient_Id=PM.PatientId and pdm.doctorId='" +str(data['doctorId'])+ "'"
         cursor = conn.cursor()
         cursor.execute(query1)
-        data1 = cursor.fetchone()
-        
-        l1=[]
-        for dat in data1:
-            doctor_Id=dat["ID"]
-            l1=[]
-            query3 ="select  PM.PatientId as ID,PM.PatientName,pdm.doctorId as DoctorID"
-            query3= query3 + "from Patient_master as PM,patientDoctorMapping as pdm,Hospital_master as Hm  where pdm.Patient_Id=PM.PatientId and doctorID='" + str(ID) + "'"
-            cursor = conn.cursor()
-            cursor.execute(query3)
-            data12 = cursor.fetchall()
-            if data12 != ():
-                uu= data12
-                l1.append(data12)
+        data1 = cursor.fetchall()
         cursor.close()
-       
-        if uu:           
-            Data = {"Patient Details":uu,"status":"true"}
-            return Data
-        else:
-            data={"status":"false","result":"Invalid Email "}
-            return data
+        print('637458564')
+        data2={"message":"Patient_List Found","result":data1,"status":"True"}
+        return data2
+           
 
     except Exception as e :
         print("Exception---->" +str(e))           
