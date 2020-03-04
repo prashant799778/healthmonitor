@@ -4114,25 +4114,15 @@ def getPatientDetail():
         json1=request.get_data()
         data=json.loads(json1.decode("utf-8"))
 
-        query = 'select PatientId from Patient_master where PatientId="'+str(data['PatientId'])+'"'
+        query1 = 'select PatientId,hospitalId,PatientName,PhoneNo,Address from Patient_master where PatientId="'+str(data['PatientId'])+'"'
         conn = Connection()
         cursor = conn.cursor()
-        cursor.execute(query)
-        data1 = cursor.fetchone()
-        print('11111112332434')
-        if data1:
-            query1 = 'select PatientId,hospitalId,PatientName,PhoneNo,Address from Patient_master where PatientId="'+str(data['PatientId'])+'"'
-            conn = Connection()
-            cursor = conn.cursor()
-            cursor.execute(query1)
-            data2 = cursor.fetchall()
-            cursor.close()
-            print('637458564')
-            data3={"message":"Patient_Data Found","result":data2,"status":"True"}
-            return data3
-        else:
-            output = {"result": "Patient_data not Found!", "status": "false"}
-            return output
+        cursor.execute(query1)
+        data2 = cursor.fetchall()
+        cursor.close()
+        print('637458564')
+        data3={"message":"Patient_Data Found","result":data2,"status":"True"}
+        return data3
 
     except Exception as e :
         print("Exception---->" +str(e))           
