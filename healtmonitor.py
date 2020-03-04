@@ -4063,8 +4063,8 @@ def getPatientDetail():
         output = {"result":"something went wrong","status":"false"}
         return output
 
-@app.route('/sendemail',methods=['POST'])
-def send_mail():
+@app.route('/sendEmail',methods=['POST'])
+def sendMail():
 
     try:
     json1=request.get_data()
