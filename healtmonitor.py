@@ -4058,20 +4058,21 @@ def allhospital():
         return output
 
 
-@app.route('/doctor',methods=['GET'])
-def alldoctor():
+@app.route('/getdoctorList',methods=['GET'])
+def getdoctor():
 
-    if request.method == 'GET':
-        hospital_id = request.args["HospitalId"]
+    try:
+        json1=request.get_data()
+        data=json.loads(json1.decode("utf-8"))
 
-        query = 'select HospitalId from DoctorMaster where HospitalId="'+hospital_id+'"'
+        query = 'select HospitalId from DoctorMaster as dm,Hospital_master as hm where hm.ID=dm.Hospital_Id and dm.hospitalId="'+HospitalId+'"'
         conn = Connection()
         cursor = conn.cursor()
         cursor.execute(query)
         data1 = cursor.fetchone()
         print('11111112332434')
         if data1:
-            query1 = 'select * from DoctorMaster where HospitalId="'+hospital_id+'"'
+            query1 = 'select dm.ID,dm.DoctorName from DoctorMaster as dm where dm.hospitalId="'+HospitalId+'"'
             conn = Connection()
             cursor = conn.cursor()
             cursor.execute(query1)
@@ -4127,25 +4128,26 @@ def testDetail():
         json1=request.get_data()
         data=json.loads(json1.decode("utf-8"))
 
-        query1 = 'select pvm.Patient_Id from Patient_Vital_master as pvm,Patient_master as pm where pm.PatientID=pvm.Patient_Id and pvm.Patient_Id="'+str(data['Patient_Id'])+'"'
+        query1 = 'select * from Patient_Vital_master as pvm,Patient_master as pm where pm.PatientID=pvm.Patient_Id and pvm.Patient_Id="'+str(data['Patient_Id'])+'"'
         conn = Connection()
         cursor = conn.cursor()
         cursor.execute(query1)
         data1 = cursor.fetchone()
         print('11111112332434')
-        if data1:
-            query2 = 'select pvm.Patient_Id,pvm.RESP,pvm.ECG,pvm.SPO2,pvm.NIBP,pvm.TEMP from Patient_Vital_master as pvm where pvm.Patient_Id="'+str(data1['Patient_Id'])+'"'
-            conn = Connection()
-            cursor = conn.cursor()
-            cursor.execute(query2)
-            data2 = cursor.fetchall()
-            cursor.close()
-            print('637458564')
-            data3={"msg":"","result":data2,"status":"True"}
-            return data3
-        else:
-            output = {"result": "Test_Details not Found!", "status": "false"}
-            return output
+        return data1
+        # if data1:
+        #     query2 = 'select pvm.Patient_Id,pvm.RESP,pvm.ECG,pvm.SPO2,pvm.NIBP,pvm.TEMP from Patient_Vital_master as pvm where pvm.Patient_Id="'+str(data1['Patient_Id'])+'"'
+        #     conn = Connection()
+        #     cursor = conn.cursor()
+        #     cursor.execute(query2)
+        #     data2 = cursor.fetchall()
+        #     cursor.close()
+        #     print('637458564')
+        #     data3={"msg":"","result":data2,"status":"True"}
+        #     return data3
+        # else:
+        #     output = {"result": "Test_Details not Found!", "status": "false"}
+        #     return output
 
     except Exception as e :
         print("Exception---->" +str(e))           
