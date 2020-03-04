@@ -4059,13 +4059,13 @@ def allhospital():
 
 
 @app.route('/getdoctorList',methods=['GET'])
-def getdoctor():
+def getdoctorList():
 
     try:
         json1=request.get_data()
         data=json.loads(json1.decode("utf-8"))
 
-        query = 'select HospitalId from DoctorMaster as dm,Hospital_master as hm where hm.ID=dm.Hospital_Id and dm.hospitalId="'+HospitalId+'"'
+        query = 'select dm.HospitalId from DoctorMaster as dm,Hospital_master as hm where hm.ID=dm.Hospital_Id and dm.hospitalId="'+HospitalId+'"'
         conn = Connection()
         cursor = conn.cursor()
         cursor.execute(query)
