@@ -4080,7 +4080,7 @@ def sendMail():
         if data:
             data1 = data['Email']
             msg = Message("This is a verification for Login",sender="admin@gmail.com",recipients=[data1])
-            msg.body = "Email Send Successfully!!!"
+            msg.body = "User Login from different Location!!!"
             mail.send(msg)
             return {'result':'Mail send !'}
     except Exception as e:
