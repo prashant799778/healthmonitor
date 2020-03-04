@@ -4070,7 +4070,7 @@ def sendMail():
         json1=request.get_data()
         data=json.loads(json1.decode("utf-8"))
 
-        query = 'select name,username,email from userMaster where Email="'+str(data['Email'])+'" and password="'+str(data['password'])+'"'
+        query = 'select name,email from userMaster where Email="'+str(data['Email'])+'" and password="'+str(data['password'])+'"'
         conn = Connection()
         cursor = conn.cursor()
         cursor.execute(query)
