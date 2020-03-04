@@ -4134,7 +4134,7 @@ def testDetail():
         data1 = cursor.fetchone()
         print('11111112332434')
         if data1:
-            query2 = 'select pvm.Patient_Id,pvm.RESP,pvm.ECG,pvm.SPO2,pvm.NIBP,pvm.TEMP from Patient_Vital_master as pvm where pvm.PatientId="'+str(data['Patient_Id'])+'"'
+            query2 = 'select pvm.Patient_Id,pvm.RESP,pvm.ECG,pvm.SPO2,pvm.NIBP,pvm.TEMP from Patient_Vital_master as pvm where pvm.PatientId="'+str(data['PatientId'])+'"'
             conn = Connection()
             cursor = conn.cursor()
             cursor.execute(query2)
