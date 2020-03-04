@@ -4089,20 +4089,21 @@ def alldoctor():
         return output
 
 
-@app.route('/patient',methods=['GET'])
-def allpatient():
+@app.route('/getpatientDetail',methods=['GET'])
+def getpatientDetail():
     
-    if request.method == 'GET':
-        hospital_id = request.args["HospitalId"]
+    try:
+        json1=request.get_data()
+        data=json.loads(json1.decode("utf-8"))
 
-        query = 'select hospitalId from Patient_master where hospitalId="'+hospital_id+'"'
+        query = 'select PatientId from Patient_master where PatientId="'+str(data['PatientId'])+'"'
         conn = Connection()
         cursor = conn.cursor()
         cursor.execute(query)
         data1 = cursor.fetchone()
         print('11111112332434')
         if data1:
-            query1 = 'select PatientId,hospitalId,PatientName,PhoneNo,Address from Patient_master where hospitalId="'+hospital_id+'"'
+            query1 = 'select PatientId,hospitalId,PatientName,PhoneNo,Address from Patient_master where patientId="'+patientId+'"'
             conn = Connection()
             cursor = conn.cursor()
             cursor.execute(query1)
@@ -4115,9 +4116,11 @@ def allpatient():
             output = {"result": "Patient_data not Found!", "status": "false"}
             return output
 
-    else:
-        output = {"result": "Hospital_id not Found!", "status": "false"}
+    except Exception as e :
+        print("Exception---->" +str(e))           
+        output = {"result":"something went wrong","status":"false"}
         return output
+
 
 
 ####################################END################################################
