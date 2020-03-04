@@ -4121,6 +4121,37 @@ def getPatientDetail():
         output = {"result":"something went wrong","status":"false"}
         return output
 
+@app.route('/testDetail',methods=['POST'])
+def testDetail():
+    try:
+        json1=request.get_data()
+        data=json.loads(json1.decode("utf-8"))
+
+        query = 'select PatientId from Patient_Vital_master where PatientId="'+str(data['PatientId'])+'"'
+        conn = Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data1 = cursor.fetchone()
+        print('11111112332434')
+        if data1:
+            query1 = 'select PatientId,RESP,ECG,SPO2,NIBP,TEMP from Patient_Vital_master where PatientId="'+str(data['PatientId'])+'"'
+            conn = Connection()
+            cursor = conn.cursor()
+            cursor.execute(query1)
+            data2 = cursor.fetchall()
+            cursor.close()
+            print('637458564')
+            data3={"msg":"","result":data2,"status":"True"}
+            return data3
+        else:
+            output = {"result": "Test_Details not Found!", "status": "false"}
+            return output
+
+    except Exception as e :
+        print("Exception---->" +str(e))           
+        output = {"result":"something went wrong","status":"false"}
+        return output
+
 
 
 ####################################END################################################
