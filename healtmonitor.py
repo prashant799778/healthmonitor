@@ -4025,7 +4025,7 @@ def getPatientList():
 
         query1 = 'select pm.hospitalId,pdm.Patient_Id,pdm.doctorId,pm.PatientName from patientDoctorMapping as pdm,Patient_master as pm where pdm.Patient_Id=pm.PatientId and pdm.doctorId="'+str(data['doctorId'])+'"'
         conn = Connection()
-        cursor = conn.cursor()3
+        cursor = conn.cursor()
         cursor.execute(query1)
         data2 = cursor.fetchall()
         cursor.close()
