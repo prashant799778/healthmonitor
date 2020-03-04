@@ -4076,9 +4076,9 @@ def sendMail():
         cursor.execute(query)
         data = cursor.fetchone()
         print(data)
-        return {"result":data,"status":"True"}
         if data:
-            msg = Message("Vineet Tomar",sender="vineettomar056@gmail.com",recipients=["vineet.fourbrick@gmail.com"])
+            data1 = data['Email']
+            msg = Message("This is a verification for '"+str(data1)+"',sender="vineettomar056@gmail.com",recipients=["vineet.fourbrick@gmail.com"])
             msg.body = "Email Send Successfully!!!"
             mail.send(msg)
             return {'result':'Mail send !'}
