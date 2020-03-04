@@ -4064,27 +4064,17 @@ def getDoctorList():
     try:
         json1=request.get_data()
         data=json.loads(json1.decode("utf-8"))
-
-        query = 'select HospitalId from DoctorMaster where hospitalId="'+str(data['HospitalId'])+'"'
+        
+        query1 = 'select ID,DoctorName from DoctorMaster where hospitalId="'+str(data['HospitalId'])+'"'
         conn = Connection()
         cursor = conn.cursor()
-        cursor.execute(query)
-        data1 = cursor.fetchone()
-        print('11111112332434')
-        if data1:
-            query1 = 'select ID,DoctorName from DoctorMaster where hospitalId="'+str(data['HospitalId'])+'"'
-            conn = Connection()
-            cursor = conn.cursor()
-            cursor.execute(query1)
-            data2 = cursor.fetchall()
-            cursor.close()
-            print('637458564')
-            data3={"message":"Doctor_List Found","result":data2,"status":"True"}
-            return data3
-        else:
-            output = {"result": "Doctor_data not Found!", "status": "false"}
-            return output
-
+        cursor.execute(query1)
+        data2 = cursor.fetchall()
+        cursor.close()
+        print('637458564')
+        data3={"message":"Doctor_List Found","result":data2,"status":"True"}
+        return data3
+    
     except Exception as e :
         print("Exception---->" +str(e))           
         output = {"result":"something went wrong","status":"false"}
@@ -4095,34 +4085,41 @@ def getPatientList():
 
     try:
         json1=request.get_data()
+        print(json1)
         data=json.loads(json1.decode("utf-8"))
-
-        query = 'select pdm.Patient_Id,pdm.doctorId from patientDoctorMapping as pdm where dm.ID=pdm.doctorId and pdm.doctorId="'+str(data['doctorId'])+'"'
-        conn = Connection()
+        query2 ="select ID as DoctorID,from DoctorMaster where Usertype_Id=2 and  ='"+str(data["ID"])+"';"  
+        print(query2)
+        conn=Connection() 
         cursor = conn.cursor()
-        cursor.execute(query)
+        cursor.execute(query2)
         data1 = cursor.fetchall()
-        print('11111112332434')
-        return data1
-        # if data1:
-        #     query1 = 'select ID,DoctorName from DoctorMaster where hospitalId="'+str(data['HospitalId'])+'"'
-        #     conn = Connection()
-        #     cursor = conn.cursor()
-        #     cursor.execute(query1)
-        #     data2 = cursor.fetchall()
-        #     cursor.close()
-        #     print('637458564')
-        #     data3={"message":"Doctor_List Found","result":data2,"status":"True"}
-        #     return data3
-        # else:
-        #     output = {"result": "Doctor_data not Found!", "status": "false"}
-        #     return output
+        
+        l1=[]
+        for dat in data1:
+            doctor_Id=dat["DoctorID"]
+            l2=[]
+            query3 ="select  PM.PatientId as ID,PM.PatientName,PM.PhoneNo,PM.Address,PM.BloodGroup,PM.DeviceMac,Hm.HubId,Hm.hospital_name as hospital_Name , "
+            query3=query3+" PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.age,PM.Gender,PM.roomNumber,pdm.DoctorID as DoctorID"
+            query3= query3 + " from Patient_master  as PM ,patientDoctorMapping as pdm,Hospital_master as Hm,HubMaster as Hbs  where PM.hospitalId=Hm.ID and Hm.HubId=Hbs.ID and  pdm.Patient_Id=PM.PatientId  and PM.Status<>'2'   and DoctorID='" + str(doctor_Id) + "'  ORDER BY  PatientId DESC;"
+            cursor = conn.cursor()
+            cursor.execute(query3)
+            data27 = cursor.fetchall()
+            if data27 != ():
+                uu= data27
+                l1.append(data27)
+        cursor.close()
+       
+        if uu:           
+            Data = {"Patient Details":uu,"status":"true"}
+            return Data
+        else:
+            data={"status":"false","result":"Invalid Email "}
+            return data
 
     except Exception as e :
         print("Exception---->" +str(e))           
         output = {"result":"something went wrong","status":"false"}
-        return output
-
+        return output 
 
     
 
