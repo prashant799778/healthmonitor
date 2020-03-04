@@ -4087,12 +4087,12 @@ def getPatientList():
         json1=request.get_data()
         print(json1)
         data=json.loads(json1.decode("utf-8"))
-        query2 ="select ID as DoctorID,from DoctorMaster where Usertype_Id=2 and doctorID='"+str(data["ID"])+"';"  
+        query2 ="select ID as DoctorID from DoctorMaster where Usertype_Id=2 and doctorID='"+str(data["ID"])+"';"  
         print(query2)
         conn=Connection() 
         cursor = conn.cursor()
         cursor.execute(query2)
-        data1 = cursor.fetchall()
+        data1 = cursor.fetchone()
         
         l1=[]
         for dat in data1:
