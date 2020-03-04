@@ -4077,12 +4077,11 @@ def sendMail():
         data = cursor.fetchone()
         print(data)
         return {"result":data,"status":"True"}
-
-
-    # msg = Message("Vineet Tomar",sender="vineettomar056@gmail.com",recipients=["vineet.fourbrick@gmail.com"])
-    # msg.body = "Email Send Successfully!!!"
-    # mail.send(msg)
-    # return {'result':'Mail send !'}
+        if data:
+            msg = Message("Vineet Tomar",sender="vineettomar056@gmail.com",recipients=["vineet.fourbrick@gmail.com"])
+            msg.body = "Email Send Successfully!!!"
+            mail.send(msg)
+            return {'result':'Mail send !'}
     except Exception as e:
         print("Exception---->" +str(e))           
         output = {"result":"something went wrong","status":"false"}
