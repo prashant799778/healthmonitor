@@ -4103,7 +4103,7 @@ def getpatientDetail():
         data1 = cursor.fetchone()
         print('11111112332434')
         if data1:
-            query1 = 'select PatientId,hospitalId,PatientName,PhoneNo,Address from Patient_master where patientId="'+patientId+'"'
+            query1 = 'select PatientId,hospitalId,PatientName,PhoneNo,Address from Patient_master where patientId="'+str(data['patientId'])+'"'
             conn = Connection()
             cursor = conn.cursor()
             cursor.execute(query1)
