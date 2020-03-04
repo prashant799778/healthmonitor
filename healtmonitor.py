@@ -4074,7 +4074,7 @@ def sendMail():
         conn = Connection()
         cursor = conn.cursor()
         cursor.execute(query)
-        data = cursor.fetchall()
+        data = cursor.fetchone()
         print(data)
         return {"result":data,"status":"True"}
 
