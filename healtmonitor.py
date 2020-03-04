@@ -1,4 +1,5 @@
 from flask import Flask,request,abort
+from flask_mail import Mail, Message
 # from flask_socketio import SocketIO,emit
 import uuid
 import os
