@@ -4101,7 +4101,7 @@ def getPatientList():
         conn = Connection()
         cursor = conn.cursor()
         cursor.execute(query)
-        data1 = cursor.fetchone()
+        data1 = cursor.fetchall()
         print('11111112332434')
         return data1
         # if data1:
