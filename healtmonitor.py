@@ -3990,7 +3990,7 @@ def novastore():
         output = {"result":"somthing went wrong","status":"false"}
         return output
 
-######################################################START#############################
+######################################################START#################################################################################
 
 
 @app.route('/getDoctorList',methods=['POST'])
@@ -4025,7 +4025,7 @@ def getPatientList():
 
         query1 = 'select pm.hospitalId,pdm.Patient_Id,pdm.doctorId,pm.PatientName from patientDoctorMapping as pdm,Patient_master as pm where pdm.Patient_Id=pm.PatientId and pdm.doctorId="'+str(data['doctorId'])+'"'
         conn = Connection()
-        cursor = conn.cursor()
+        cursor = conn.cursor()3
         cursor.execute(query1)
         data2 = cursor.fetchall()
         cursor.close()
@@ -4063,9 +4063,33 @@ def getPatientDetail():
         output = {"result":"something went wrong","status":"false"}
         return output
 
+@app.route('/sendemail',methods=['POST'])
+def send_mail():
+
+    try:
+    json1=request.get_data()
+    data=json.loads(json1.decode("utf-8"))
+
+        query = 'select name,username,email from userMaster where Email="'+str(data['Email'])+'" and password="'+str(data['password'])+'"'
+        conn = Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data = cursor.fetchall()
+        print(data)
 
 
-####################################END################################################
+    # msg = Message("Vineet Tomar",sender="vineettomar056@gmail.com",recipients=["vineet.fourbrick@gmail.com"])
+    # msg.body = "Email Send Successfully!!!"
+    # mail.send(msg)
+    # return {'result':'Mail send !'}
+    except Exception as e:
+        print("Exception---->" +str(e))           
+        output = {"result":"something went wrong","status":"false"}
+        return output
+
+
+
+####################################END#######################################################################################
 
  
 if __name__ == "__main__":
