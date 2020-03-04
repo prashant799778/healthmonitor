@@ -4084,10 +4084,13 @@ def getdoctorList():
         else:
             output = {"result": "Doctor_data not Found!", "status": "false"}
             return output
-
-    else:
-        output = {"result": "Hospital_id not Found!", "status": "false"}
+            
+    except Exception as e :
+        print("Exception---->" +str(e))           
+        output = {"result":"something went wrong","status":"false"}
         return output
+
+    
 
 
 @app.route('/getPatientDetail',methods=['POST'])
