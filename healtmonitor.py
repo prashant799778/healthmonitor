@@ -4079,12 +4079,12 @@ def getdoctorList():
             data2 = cursor.fetchall()
             cursor.close()
             print('637458564')
-            data3={"result":data2}
+            data3={"msg":"Doctor_List Found","result":data2,"status":"True"}
             return data3
         else:
             output = {"result": "Doctor_data not Found!", "status": "false"}
             return output
-            
+
     except Exception as e :
         print("Exception---->" +str(e))           
         output = {"result":"something went wrong","status":"false"}
@@ -4114,7 +4114,7 @@ def getPatientDetail():
             data2 = cursor.fetchall()
             cursor.close()
             print('637458564')
-            data3={"msg":"","result":data2,"status":"True"}
+            data3={"msg":"Patient_Data Found","result":data2,"status":"True"}
             return data3
         else:
             output = {"result": "Patient_data not Found!", "status": "false"}
