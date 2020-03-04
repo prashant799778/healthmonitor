@@ -4095,7 +4095,7 @@ def getPatientList():
         data2 = cursor.fetchall()
         cursor.close()
         print('637458564')
-        data3={"message":"Doctor_List Found","result":data2,"status":"True"}
+        data3={"message":"Patient_List Found","result":data2,"status":"True"}
         return data3
     
     except Exception as e :
