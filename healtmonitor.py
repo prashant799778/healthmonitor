@@ -4127,7 +4127,7 @@ def testDetail():
         json1=request.get_data()
         data=json.loads(json1.decode("utf-8"))
 
-        query1 = 'select Patient_Id from Patient_Vital_master where PatientId="'+str(data['Patient_Id'])+'"'
+        query1 = 'select Patient_Id from Patient_Vital_master as pvm,Patient_master as pm where pm.PatientID=pvm.Patient_id and PatientId="'+str(data['Patient_Id'])+'"'
         conn = Connection()
         cursor = conn.cursor()
         cursor.execute(query1)
