@@ -4087,18 +4087,35 @@ def getPatientList():
         json1=request.get_data()
         print(json1)
         data=json.loads(json1.decode("utf-8"))
-
-        query1 ="select pm.PatientId as ID,pm.PatientName,pdm.doctorId"
-        query1= query1 + "from Patient_master as pm,patientDoctorMapping as pdm,DoctorMaster as dm where pdm.Patient_Id=pm.PatientId and dm.ID=pdm.doctorId and doctorId='" +str(data['doctorId'])+ "'"
+        query2 ="select ID as DoctorID,Email as Email from userMaster where Usertype_Id=2 and Email ='"+str(data["Email"])+"';"  
+        print(query2)
+        conn=Connection() 
         cursor = conn.cursor()
-        cursor.execute(query1)
+        cursor.execute(query2)
         data1 = cursor.fetchall()
+        
+        l1=[]
+        for dat in data1:
+            doctor_Id=dat["DoctorID"]
+            l2=[]
+            query3 ="select  PM.PatientId as ID,PM.PatientName,PM.PhoneNo,PM.Address,PM.BloodGroup,PM.DeviceMac,Hm.HubId,Hm.hospital_name as hospital_Name , "
+            query3=query3+" PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.age,PM.Gender,PM.roomNumber,pdm.DoctorID as DoctorID"
+            query3= query3 + " from Patient_master  as PM ,patientDoctorMapping as pdm,Hospital_master as Hm,HubMaster as Hbs  where PM.hospitalId=Hm.ID and Hm.HubId=Hbs.ID and  pdm.Patient_Id=PM.PatientId  and PM.Status<>'2'   and DoctorID='" + str(doctor_Id) + "'  ORDER BY  PatientId DESC;"
+            cursor = conn.cursor()
+            cursor.execute(query3)
+            data27 = cursor.fetchall()
+            if data27 != ():
+                uu= data27
+                l1.append(data27)
         cursor.close()
-        print('637458564')
-        data2={"message":"Patient_List Found","result":data1,"status":"True"}
-        return data2
-           
-
+       
+        if uu:           
+            Data = {"Patient Details":uu,"status":"true"}
+            return Data
+        else:
+            data={"status":"false","result":"Invalid Email "}
+            return data
+    
     except Exception as e :
         print("Exception---->" +str(e))           
         output = {"result":"something went wrong","status":"false"}
