@@ -4087,20 +4087,19 @@ def getPatientList():
         json1=request.get_data()
         print(json1)
         data=json.loads(json1.decode("utf-8"))
-        query2 ="select ID from DoctorMaster where doctorID='"+str(data["ID"])+"';"  
-        print(query2)
+        query1 ="select ID from DoctorMaster where doctorID='"+str(data["ID"])+"';"  
+        print(query1)
         conn=Connection() 
         cursor = conn.cursor()
-        cursor.execute(query2)
+        cursor.execute(query1)
         data1 = cursor.fetchone()
         
         l1=[]
         for dat in data1:
             doctor_Id=dat["ID"]
-            l2=[]
-            query3 ="select  PM.PatientId as ID,PM.PatientName,"
-            query3=query3+"pdm.DoctorID as DoctorID"
-            query3= query3 + "from Patient_master  as PM,patientDoctorMapping as pdm,Hospital_master as Hm  where PM.hospitalId=Hm.ID and pdm.Patient_Id=PM.PatientId  and PM.Status<>'2'   and doctorID='" + str(doctor_Id) + "'  ORDER BY  PatientId DESC;"
+            l1=[]
+            query3 ="select  PM.PatientId as ID,PM.PatientName,pdm.doctorId as DoctorID"
+            query3= query3 + "from Patient_master as PM,patientDoctorMapping as pdm,Hospital_master as Hm  where PM.hospitalId=Hm.ID and pdm.Patient_Id=PM.PatientId  and PM.Status<>'2'   and doctorID='" + str(doctor_Id) + "'  ORDER BY  PatientId DESC;"
             cursor = conn.cursor()
             cursor.execute(query3)
             data12 = cursor.fetchall()
