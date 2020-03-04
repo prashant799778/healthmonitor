@@ -4078,7 +4078,7 @@ def sendMail():
         print(data)
         if data:
             data1 = data['Email']
-            msg = Message("This is a verification for '"+str(data1)+"',sender="vineettomar056@gmail.com",recipients=["vineet.fourbrick@gmail.com"])
+            msg = Message("This is a verification for '"+str(data1)+"'",sender="vineettomar056@gmail.com",recipients=["vineet.fourbrick@gmail.com"])
             msg.body = "Email Send Successfully!!!"
             mail.send(msg)
             return {'result':'Mail send !'}
