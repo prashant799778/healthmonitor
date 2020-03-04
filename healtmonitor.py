@@ -4088,8 +4088,8 @@ def getPatientList():
         print(json1)
         data=json.loads(json1.decode("utf-8"))
 
-        query1 ="select  PM.PatientId as ID,PM.PatientName,pdm.doctorId"
-        query1= query1 + "from Patient_master as PM,patientDoctorMapping as pdm,Hospital_master as Hm  where pdm.Patient_Id=PM.PatientId and doctorId='" +str(data['doctorId'])+ "'"
+        query1 ="select  pm.PatientId as ID,pm.PatientName,pdm.doctorId"
+        query1= query1 + "from Patient_master as pm,patientDoctorMapping as pdm where pdm.Patient_Id=PM.PatientId and pdm.doctorId='" +str(data['doctorId'])+ "'"
         cursor = conn.cursor()
         cursor.execute(query1)
         data1 = cursor.fetchall()
