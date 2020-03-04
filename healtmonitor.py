@@ -4099,7 +4099,7 @@ def getPatientList():
             doctor_Id=dat["ID"]
             l1=[]
             query3 ="select  PM.PatientId as ID,PM.PatientName,pdm.doctorId as DoctorID"
-            query3= query3 + "from Patient_master as PM,patientDoctorMapping as pdm,Hospital_master as Hm  where PM.hospitalId=Hm.ID and pdm.Patient_Id=PM.PatientId  and PM.Status<>'2'   and doctorID='" + str(doctor_Id) + "'  ORDER BY  PatientId DESC;"
+            query3= query3 + "from Patient_master as PM,patientDoctorMapping as pdm,Hospital_master as Hm  where pdm.Patient_Id=PM.PatientId and doctorID='" + str(ID) + "'"
             cursor = conn.cursor()
             cursor.execute(query3)
             data12 = cursor.fetchall()
