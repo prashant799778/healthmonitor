@@ -4067,8 +4067,8 @@ def getPatientDetail():
 def sendMail():
 
     try:
-    json1=request.get_data()
-    data=json.loads(json1.decode("utf-8"))
+        json1=request.get_data()
+        data=json.loads(json1.decode("utf-8"))
 
         query = 'select name,username,email from userMaster where Email="'+str(data['Email'])+'" and password="'+str(data['password'])+'"'
         conn = Connection()
