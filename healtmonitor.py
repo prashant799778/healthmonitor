@@ -4058,8 +4058,8 @@ def allhospital():
         return output
 
 
-@app.route('/getdoctorList',methods=['POST'])
-def getdoctorList():
+@app.route('/getDoctorList',methods=['POST'])
+def getDoctorList():
 
     try:
         json1=request.get_data()
@@ -4089,6 +4089,40 @@ def getdoctorList():
         print("Exception---->" +str(e))           
         output = {"result":"something went wrong","status":"false"}
         return output
+
+@app.route('/getPatientList',methods=['POST'])
+def getPatientList():
+
+    try:
+        json1=request.get_data()
+        data=json.loads(json1.decode("utf-8"))
+
+        query = 'select PatientId,doctorId from DoctorMaster as dm,patientDoctorMapping as pdm where dm.ID=pdm.doctorId and doctorId="'+str(data['doctorId'])+'"'
+        conn = Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data1 = cursor.fetchone()
+        print('11111112332434')
+        return data1
+        # if data1:
+        #     query1 = 'select ID,DoctorName from DoctorMaster where hospitalId="'+str(data['HospitalId'])+'"'
+        #     conn = Connection()
+        #     cursor = conn.cursor()
+        #     cursor.execute(query1)
+        #     data2 = cursor.fetchall()
+        #     cursor.close()
+        #     print('637458564')
+        #     data3={"message":"Doctor_List Found","result":data2,"status":"True"}
+        #     return data3
+        # else:
+        #     output = {"result": "Doctor_data not Found!", "status": "false"}
+        #     return output
+
+    except Exception as e :
+        print("Exception---->" +str(e))           
+        output = {"result":"something went wrong","status":"false"}
+        return output
+
 
     
 
