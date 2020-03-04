@@ -4087,16 +4087,16 @@ def getPatientList():
         json1=request.get_data()
         print(json1)
         data=json.loads(json1.decode("utf-8"))
-        query2 ="select ID as DoctorID,Email as Email from userMaster where Usertype_Id=2 and Email ='"+str(data["Email"])+"';"  
+        query2 ="select ID as DoctorID from userMaster where Usertype_Id=2 and doctorId ='"+str(data["ID"])+"';"  
         print(query2)
         conn=Connection() 
         cursor = conn.cursor()
         cursor.execute(query2)
         data1 = cursor.fetchall()
         
-        l1=[]
-        for dat in data1:
-            doctor_Id=dat["DoctorID"]
+        a=[]
+        for data in data1:
+            doctor_Id=data["DoctorID"]
             l2=[]
             query3 ="select  PM.PatientId as ID,PM.PatientName,PM.PhoneNo,PM.Address,PM.BloodGroup,PM.DeviceMac,Hm.HubId,Hm.hospital_name as hospital_Name , "
             query3=query3+" PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.age,PM.Gender,PM.roomNumber,pdm.DoctorID as DoctorID"
@@ -4106,7 +4106,7 @@ def getPatientList():
             data27 = cursor.fetchall()
             if data27 != ():
                 uu= data27
-                l1.append(data27)
+                a.append(data27)
         cursor.close()
        
         if uu:           
