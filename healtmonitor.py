@@ -3770,7 +3770,6 @@ def dataAdd():
         output_datadir = "./test"
 
         name = request.form['Email']
-        #mobile = request.form['Mobile']
 
         file = request.files.get('TrainImage')
 
@@ -3787,12 +3786,10 @@ def dataAdd():
             cursor.close()
 
             if(len(data)<=0):
-                print("11111")
+
                 path = str(input_datadir)+"/"
-                print("22222")
                 
                 file.save(str(path)+str(name.split(" ")[0])+".jpg")
-                print("3333")
 
                 query="INSERT INTO Face_Data(Name,Image,Processed) Values('"+str(name)+"','"+str(input_datadir)+"','"+str(output_datadir)+"')"
                 print(query)
@@ -3823,40 +3820,37 @@ def recognizeImage():
         file1 = request.files.get('TestImage')        
         path1 = str(output_datadir)+"/"
         file1.save(str(path1)+"Dummy"+".jpg")
-        print("4444")
 
         image_filenames = filter(lambda x: x.endswith('.jpg'), os.listdir(str(input_datadir)+"/"))
         image_filenames = sorted(image_filenames)
         paths_to_images = [str(input_datadir)+"/" + x for x in image_filenames]
         face_encodings = []
-        print("111111111")
+
         for path_to_image in paths_to_images:
             face_encodings_in_image = get_face_encodings(path_to_image)
             if len(face_encodings_in_image) != 1:
                 print("Please change image: " + path_to_image + " - it has " + str(len(face_encodings_in_image)) + " faces; it can only have one")
                 exit()
             face_encodings.append(get_face_encodings(path_to_image)[0])
-        print("2222222222")
+
         test_filenames = filter(lambda x: x.endswith('.jpg'), os.listdir('test/'))
         paths_to_test_images = [str(output_datadir)+"/" + x for x in test_filenames]
         names = [x[:-4] for x in image_filenames]
-        print("3333333333")
+
         print(names)
         for path_to_image1 in paths_to_test_images:
-            print("aaaaaa")
+
             print(path_to_image1)
             face_encodings_in_image1 = get_face_encodings(path_to_image1)
-            print("44444444")
+
             print(face_encodings_in_image1)
             print(len(face_encodings_in_image1))
             if len(face_encodings_in_image1) != 1:
                 print("Please change image: " + path_to_image1 + " - it has " + str(len(face_encodings_in_image1)) + " faces; it can only have one")
                 exit()
-                print("55555555555")
-                print("666666666666")
+
             match = find_match(face_encodings, names, face_encodings_in_image1[0])
-            print("777777777777")
-            print()
+
             os.remove(path_to_image1)
 
             return match
