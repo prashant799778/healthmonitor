@@ -4127,14 +4127,14 @@ def testDetail():
         json1=request.get_data()
         data=json.loads(json1.decode("utf-8"))
 
-        query1 = 'select pvm.PatientId from Patient_Vital_master as pvm,Patient_master as pm where pm.PatientID=pvm.Patient_Id and pvm.PatientId="'+str(data['Patient_Id'])+'"'
+        query1 = 'select pvm.Patient_Id from Patient_Vital_master as pvm,Patient_master as pm where pm.PatientID=pvm.Patient_Id and pvm.Patient_Id="'+str(data['Patient_Id'])+'"'
         conn = Connection()
         cursor = conn.cursor()
         cursor.execute(query1)
         data1 = cursor.fetchone()
         print('11111112332434')
         if data1:
-            query2 = 'select pvm.Patient_Id,pvm.RESP,pvm.ECG,pvm.SPO2,pvm.NIBP,pvm.TEMP from Patient_Vital_master as pvm where pvm.PatientId="'+str(data['Patient_Id'])+'"'
+            query2 = 'select pvm.Patient_Id,pvm.RESP,pvm.ECG,pvm.SPO2,pvm.NIBP,pvm.TEMP from Patient_Vital_master as pvm where pvm.Patient_Id="'+str(data['Patient_Id'])+'"'
             conn = Connection()
             cursor = conn.cursor()
             cursor.execute(query2)
