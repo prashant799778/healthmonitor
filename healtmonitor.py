@@ -4049,7 +4049,8 @@ def getPatientDetail():
         json1=request.get_data()
         data=json.loads(json1.decode("utf-8"))
 
-        query1 = 'select PatientId,hospitalId,PatientName,PhoneNo,Address from Patient_master where PatientId="'+str(data['PatientId'])+'"'
+        query1=" select uhm.userId,uhm.hospitalId from Hospital_master hsm,userMaster um,userHospitalMapping uhm" 
+        query1=query1+" where uhm.userhm.ID=hsm.HubId and hsm.ID=uhm.hospitalId and uhm.userId=um.ID and um.ID='"+str(data["ID"])+"';"
         conn = Connection()
         cursor = conn.cursor()
         cursor.execute(query1)
