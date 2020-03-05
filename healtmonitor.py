@@ -4065,6 +4065,7 @@ def getPatientDetail():
         # 	print('637458564')
         # 	data4={"message":"Patient_Data Found","result":data3,"status":"True"}
         # 	return data4
+        return data2
 
     except Exception as e :
         print("Exception---->" +str(e))           
