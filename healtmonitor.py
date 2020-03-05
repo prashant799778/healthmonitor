@@ -4062,7 +4062,10 @@ def getPatientDetail():
             data3= cursor.fetchall()
             print(data3)
             i["patient"]=data3
-        return {"result":data2}
+        if data2:
+        	return {"result":data2,"status":"True"}
+        else:
+        	return {"result":"No Data Found","status":"True"}
 
     except Exception as e :
         print("Exception---->" +str(e))           
