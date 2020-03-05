@@ -4087,7 +4087,7 @@ def getPatientDetail():
             cursor = conn.cursor()
             cursor.execute(query2)
             data2= cursor.fetchall()
-            print(data2)
+            # print(data2)
             i["patient"]=data2
             conn.commit
             cursor.close()
