@@ -4083,7 +4083,7 @@ def getPatientDetail():
         cursor.close()
         for i in data1:
             query2="select * from Patient_master pm,userHospitalMapping uhm where pm.hospitalId=uhm.hospitalId " 
-            query2=query2+" and pm.hospitalId='"+str(i["HospitalId"])+"';"
+            query2=query2+" and pm.hospitalId='"+str(i["hospitalId"])+"';"
             conn=Connection()
             cursor = conn.cursor()
             cursor.execute(query2)
