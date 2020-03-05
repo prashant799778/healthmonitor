@@ -4056,8 +4056,7 @@ def getPatientDetail():
         cursor.execute(query1)
         data2 = cursor.fetchone()
         for i in data2:
-        	data12 = i['hospitalId']
-        	query2 = "select from userHospitalMapping as uhm,Patient_master as pm where uhm.HospitalId=pm.hospitalId and pm.hospitalId='"str(data12)"'"
+        	query2 = "select from userHospitalMapping as uhm,Patient_master as pm where uhm.HospitalId=pm.hospitalId and pm.hospitalId='"str(data['hospitalId'])"'"
         	conn = Connection()
         	cursor = conn.cursor()
         	cursor.execute(query2)
