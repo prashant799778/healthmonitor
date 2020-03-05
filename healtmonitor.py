@@ -1765,7 +1765,7 @@ def updateStatus():
 
     except Exception as e :
         print("Exceptio`121QWAaUJIHUJG n---->" +str(e))    
-        output = {"result":"somthing went wrong","status":"false"}
+        output = {"result":"something went wrong","status":"false"}
         return output
 
 
@@ -1791,7 +1791,7 @@ def updateMessageStatus():
 
     except Exception as e :
         print("Exceptio`121QWAaUJIHUJG n---->" +str(e))    
-        output = {"result":"somthing went wrong","status":"false"}
+        output = {"result":"something went wrong","status":"false"}
         return output        
 
 @app.route('/updatehubmaster', methods=['POST'])
@@ -1817,7 +1817,7 @@ def updatehubmaster():
 
     except Exception as e :
         print("Exceptio`121QWAaUJIHUJG n---->" +str(e))    
-        output = {"result":"somthing went wrong","status":"false"}
+        output = {"result":"something went wrong","status":"false"}
         return output
 
 @app.route('/updateHospitalmaster', methods=['POST'])
@@ -1843,7 +1843,7 @@ def hpsapitalmaster():
 
     except Exception as e :
         print("Exception---->" +str(e))    
-        output = {"result":"somthing went wrong","status":"false"}
+        output = {"result":"something went wrong","status":"false"}
         return output
 
 
@@ -2640,7 +2640,7 @@ def updateDoctorMaster():
 
     except Exception as e :
         print("Exception---->" +str(e))    
-        output = {"result":"somthing went wrong","status":"false"}
+        output = {"result":"something went wrong","status":"false"}
         return output
 
 
@@ -2682,7 +2682,7 @@ def updatehubadmin():
 
     except Exception as e :
         print("Exception---->" +str(e))    
-        output = {"result":"somthing went wrong","status":"false"}
+        output = {"result":"something went wrong","status":"false"}
         return output
 
 
@@ -2724,7 +2724,7 @@ def updateNurseMaster():
 
     except Exception as e :
         print("Exception---->" +str(e))    
-        output = {"result":"somthing went wrong","status":"false"}
+        output = {"result":"something went wrong","status":"false"}
         return output
 
 
@@ -2766,7 +2766,7 @@ def updateOperator():
 
     except Exception as e :
         print("Exception---->" +str(e))    
-        output = {"result":"somthing went wrong","status":"false"}
+        output = {"result":"something went wrong","status":"false"}
         return output
 
 @app.route('/deleteDoctorHospital', methods=['POST'])
@@ -2792,7 +2792,7 @@ def deleteDoctorHospital():
 
     except Exception as e :
         print("Exception---->" +str(e))    
-        output = {"result":"somthing went wrong","status":"false"}
+        output = {"result":"something went wrong","status":"false"}
         return output
 
 
@@ -2825,7 +2825,7 @@ def deleteHubadminhub():
 
     except Exception as e :
         print("Exception---->" +str(e))    
-        output = {"result":"somthing went wrong","status":"false"}
+        output = {"result":"something went wrong","status":"false"}
         return output
 
 @app.route('/deleteNurseHospital', methods=['POST'])
@@ -2857,7 +2857,7 @@ def deleteNurseHospital():
 
     except Exception as e :
         print("Exception---->" +str(e))    
-        output = {"result":"somthing went wrong","status":"false"}
+        output = {"result":"something went wrong","status":"false"}
         return output
 
 
@@ -2891,7 +2891,7 @@ def deleteoperationHospital():
 
     except Exception as e :
         print("Exception---->" +str(e))    
-        output = {"result":"somthing went wrong","status":"false"}
+        output = {"result":"something went wrong","status":"false"}
         return output
 @app.route('/deleteHospital', methods=['POST'])
 def deleteHospital():
@@ -2916,7 +2916,7 @@ def deleteHospital():
 
     except Exception as e :
         print("Exception---->" +str(e))    
-        output = {"result":"somthing went wrong","status":"false"}
+        output = {"result":"something went wrong","status":"false"}
         return output
 
 
@@ -2943,7 +2943,7 @@ def deleteHub():
 
     except Exception as e :
         print("Exception---->" +str(e))    
-        output = {"result":"somthing went wrong","status":"false"}
+        output = {"result":"something went wrong","status":"false"}
         return output
 
 
@@ -2972,7 +2972,7 @@ def patientDoctorUpdate():
 
     except Exception as e :
         print("Exception---->" +str(e))    
-        output = {"result":"somthing went wrong","status":"false"}
+        output = {"result":"something went wrong","status":"false"}
         return output
 
 
@@ -3225,7 +3225,7 @@ def update_Patient_type():
 
     except Exception as e :
         print("Exception---->" +str(e))    
-        output = {"result":"somthing went wrong","status":"false"}
+        output = {"result":"something went wrong","status":"false"}
         return output
 
 @app.route('/Discharge', methods=['POST'])
@@ -3255,7 +3255,7 @@ def update_Patient_Discharge():
 
     except Exception as e :
         print("Exception---->" +str(e))    
-        output = {"result":"somthing went wrong","status":"false"}
+        output = {"result":"something went wrong","status":"false"}
         return output
  
 
@@ -3346,7 +3346,7 @@ def update_Patient_Vital_master():
 
     except Exception as e :
         print("Exception---->" +str(e))    
-        output = {"result":"somthing went wrong","status":"false"}
+        output = {"result":"something went wrong","status":"false"}
         return output
 
 
@@ -3403,7 +3403,7 @@ def adminPannel():
 
     except Exception as e :
         print("Exception---->" +str(e))    
-        output = {"result":"somthing went wrong","status":"false"}
+        output = {"result":"something went wrong","status":"false"}
         return output
 
 @app.route('/hubadminPannel', methods=['POST'])
@@ -3492,7 +3492,7 @@ def hubadminPannel():
 
     except Exception as e :
         print("Exception---->" +str(e))    
-        output = {"result":"somthing went wrong","status":"false"}
+        output = {"result":"something went wrong","status":"false"}
         return output
 
 #Doctor Profile
@@ -3542,7 +3542,7 @@ def doctorProfile():
 
     except Exception as e :
         print("Exception---->" +str(e))    
-        output = {"result":"somthing went wrong","status":"false"}
+        output = {"result":"something went wrong","status":"false"}
         return output
 
 
@@ -3569,7 +3569,7 @@ def editDoctorProfile():
 
     except Exception as e :
         print("Exception---->" +str(e))    
-        output = {"result":"somthing went wrong","status":"false"}
+        output = {"result":"something went wrong","status":"false"}
         return output
 
 @app.route('/diagReportMaster', methods=['POST'])
@@ -3584,7 +3584,7 @@ def diagReportMaster():
         patientId = inputdata1
 
         if inputdata1 == None :
-            data = {"status":"false","message":"Somthing went wrong please contact system admin","result":""}
+            data = {"status":"false","message":"Something went wrong please contact system admin","result":""}
             return data
         else:
             for i in inputdata:
@@ -3646,12 +3646,12 @@ def diagReportMaster():
                     data = {"status":"true","message":"","result":"Data Inserted Successfully"}
                     return data
                 else:
-                    data = {"status":"false","message":"Somthing went wrong please contact system admin","result":""}
+                    data = {"status":"false","message":"Something went wrong please contact system admin","result":""}
                     return data
 
     except Exception as e :
         print("Exception--->" + str(e))                                  
-        data = {"status":"false","message":"Somthing went wrong please contact system admin"}
+        data = {"status":"false","message":"Something went wrong please contact system admin"}
         return data
 
 @app.route('/pacsReportMaster', methods=['POST'])
@@ -3666,7 +3666,7 @@ def pacsReportMaster():
         patientId = inputdata1
 
         if inputdata1 == None :
-            data = {"status":"false","message":"Somthing went wrong please contact system admin","result":""}
+            data = {"status":"false","message":"Something went wrong please contact system admin","result":""}
             return data
         else:
             for i in inputdata:
@@ -3728,12 +3728,12 @@ def pacsReportMaster():
                     data = {"status":"true","message":"","result":"Data Inserted Successfully"}
                     return data
                 else:
-                    data = {"status":"false","message":"Somthing went wrong please contact system admin","result":""}
+                    data = {"status":"false","message":"Something went wrong please contact system admin","result":""}
                     return data
 
     except Exception as e :
         print("Exception--->" + str(e))                                  
-        data = {"status":"false","message":"Somthing went wrong please contact system admin"}
+        data = {"status":"false","message":"Something went wrong please contact system admin"}
         return data
 
 @app.route('/dicomReportMaster', methods=['POST'])
@@ -3748,7 +3748,7 @@ def dicomReportMaster():
         patientId = inputdata1
 
         if inputdata1 == None :
-            data = {"status":"false","message":"Somthing went wrong please contact system admin","result":""}
+            data = {"status":"false","message":"Something went wrong please contact system admin","result":""}
             return data
         else:
             for i in inputdata:
@@ -3810,12 +3810,12 @@ def dicomReportMaster():
                     data = {"status":"true","message":"","result":"Data Inserted Successfully"}
                     return data
                 else:
-                    data = {"status":"false","message":"Somthing went wrong please contact system admin","result":""}
+                    data = {"status":"false","message":"Something went wrong please contact system admin","result":""}
                     return data
 
     except Exception as e :
         print("Exception--->" + str(e))                                  
-        data = {"status":"false","message":"Somthing went wrong please contact system admin"}
+        data = {"status":"false","message":"Something went wrong please contact system admin"}
         return data
 
 @app.route('/labReportMaster', methods=['POST'])
@@ -3830,7 +3830,7 @@ def labReportMaster():
         patientId = inputdata1
 
         if inputdata1 == None :
-            data = {"status":"false","message":"Somthing went wrong please contact system admin","result":""}
+            data = {"status":"false","message":"Something went wrong please contact system admin","result":""}
             return data
         else:
             for i in inputdata:
@@ -3892,12 +3892,12 @@ def labReportMaster():
                     data = {"status":"true","message":"","result":"Data Inserted Successfully"}
                     return data
                 else:
-                    data = {"status":"false","message":"Somthing went wrong please contact system admin","result":""}
+                    data = {"status":"false","message":"Something went wrong please contact system admin","result":""}
                     return data
 
     except Exception as e :
         print("Exception--->" + str(e))                                  
-        data = {"status":"false","message":"Somthing went wrong please contact system admin"}
+        data = {"status":"false","message":"Something went wrong please contact system admin"}
         return data
 
 @app.route('/getTestType', methods=['GET'])
@@ -3905,9 +3905,7 @@ def getTestType():
 
     try:  
 
-
-        query  = " select ID,TestType from TestTypeMaster;"
-        
+        query  = " select ID,TestType from TestTypeMaster;"        
         print(query)
         conn=Connection()
         cursor = conn.cursor()
@@ -3921,7 +3919,7 @@ def getTestType():
 
     except Exception as e :
         print("Exception--->" + str(e))                                  
-        data = {"status":"false","message":"Somthing went wrong please contact system admin"}
+        data = {"status":"false","message":"Something went wrong please contact system admin"}
         return data
 
 
@@ -3947,7 +3945,7 @@ def getTestType():
 
     # except Exception as e :
         # print("Exception---->" +str(e))    
-        # output = {"result":"somthing went wrong","status":"false"}
+        # output = {"result":"something went wrong","status":"false"}
         # return output
 @app.route('/update', methods=['POST'])
 def update():
@@ -3970,7 +3968,7 @@ def update():
 
     except Exception as e :
         print("Exception---->" +str(e))    
-        output = {"result":"somthing went wrong","status":"false"}
+        output = {"result":"something went wrong","status":"false"}
         return output
 ###################################
 #novastore
@@ -4012,7 +4010,7 @@ def novastore():
         return {"result":"Data inserted  successfully","status":"true"}
     except Exception as e :
         print("Exception---->" +str(e))    
-        output = {"result":"somthing went wrong","status":"false"}
+        output = {"result":"something went wrong","status":"false"}
         return output
 
 ######################################################START#################################################################################
