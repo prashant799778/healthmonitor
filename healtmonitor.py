@@ -4082,8 +4082,8 @@ def getPatientDetail():
         conn.commit
         cursor.close()
         for i in data1:
-            query2="select * from Patient_master pm,patientDoctorMapping pdm where pdm.Patient_Id=pm.PatientId and pm.hospitalId=uhm.hospitalId " 
-            query2=query2+" and pdm.doctorId='"+str(i["ID"]) +"' and pm.hospitalId='"+str(i["HospitalId"])+"';"
+            query2="select * from Patient_master pm,userHospitalMapping uhm where pm.hospitalId=uhm.hospitalId " 
+            query2=query2+" and pm.hospitalId='"+str(i["HospitalId"])+"';"
             conn=Connection()
             cursor = conn.cursor()
             cursor.execute(query2)
