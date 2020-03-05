@@ -4082,14 +4082,13 @@ def getPatientDetail():
         for i in data2:
 
         	query2="select pm.PatientId from Patient_master pm,userHospitalMapping uhm where uhm.hospitalId=pm.hospitalId and pm.hospitalId='"+str(i["HospitalId"])+"';"
+        	cursor.execute(query2)
             data3= cursor.fetchall()
             print(data3)
 			i["patient"]=data3
+
         cursor.close()
-        if data2:
-        	return {"result":data2,"status":"True"}
-        else:
-        	return {"result":"No Data Found","status":"True"}
+        return {"result":data2,"status":"True"}
 
     except Exception as e :
         print("Exception---->" +str(e))           
