@@ -4072,9 +4072,9 @@ def getPatientDetail():
         json1=request.get_data()
         data=json.loads(json1.decode("utf-8"))
         print(data)
-        query1=" select uhm.userId,hsm.ID as HospitalId from Hospital_master hsm,userMaster um,userHospitalMapping uhm" 
-        query1=query1+" where hsm.ID=uhm.hospitalId and uhm.userId=um.ID and um.ID='"+str(data["ID"])+"';"
-        conn=Connection()
+        query1=" select um.ID,hsm.ID as HospitalId,hm.ID as HubId from HubMaster hm,Hospital_master hsm,userMaster um,userHospitalMapping uhm" 
+        query1=query1+" where hm.ID=hsm.HubId and hsm.ID=uhm.hospitalId and uhm.userId=um.ID and um.ID='"+str(data["ID"])+"';"
+        conn = Connection()
         cursor = conn.cursor()
         cursor.execute(query1)
         data1= cursor.fetchall()
