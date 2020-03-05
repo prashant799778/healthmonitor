@@ -4083,7 +4083,7 @@ def getPatientDetail():
         conn.commit
         cursor.close()
         for i in data1:
-            
+
             query2="select * from Patient_master pm,patientDoctorMapping pdm where pdm.Patient_Id=pm.PatientId " 
             query2=query2+" and pdm.doctorId='"+str(i["ID"]) +"' and pm.hospitalId='"+str(i["HospitalId"])+"';"
             conn=Connection()
@@ -4091,11 +4091,11 @@ def getPatientDetail():
             cursor.execute(query2)
             data2= cursor.fetchall()
             print(data2)
-            i["patient"]=data3
+            i["patient"]=data2
         	conn.commit
         	cursor.close()
 
-        return {"result":data2,"status":"True"}
+        return {"result":data1,"status":"True"}
 
     except Exception as e :
     	print("Exception---->" +str(e))
