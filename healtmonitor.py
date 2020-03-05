@@ -3900,6 +3900,30 @@ def labReportMaster():
         data = {"status":"false","message":"Somthing went wrong please contact system admin"}
         return data
 
+@app.route('/getTestType', methods=['GET'])
+def getTestType():
+
+    try:  
+
+
+        query  = " select ID,TestType from TestTypeMaster;"
+        
+        print(query)
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        result = cursor.fetchall()
+        conn.commit()
+        cursor.close()
+
+        data = {"status":"true","message":"Successfully Got Data","result":result}
+        return data
+
+    except Exception as e :
+        print("Exception--->" + str(e))                                  
+        data = {"status":"false","message":"Somthing went wrong please contact system admin"}
+        return data
+
 
 # @app.route('/patientDoctorMapping', methods=['POST'])
 # def patientDoctorMapping():
