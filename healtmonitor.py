@@ -4068,7 +4068,6 @@ def getPatientList():
 
 @app.route('/getPatientDetail',methods=['POST'])
 def getPatientDetail():
-    
     try:
         json1=request.get_data()
         data=json.loads(json1.decode("utf-8"))
@@ -4083,7 +4082,6 @@ def getPatientDetail():
         conn.commit
         cursor.close()
         for i in data1:
-
             query2="select * from Patient_master pm,patientDoctorMapping pdm where pdm.Patient_Id=pm.PatientId " 
             query2=query2+" and pdm.doctorId='"+str(i["ID"]) +"' and pm.hospitalId='"+str(i["HospitalId"])+"';"
             conn=Connection()
@@ -4092,15 +4090,15 @@ def getPatientDetail():
             data2= cursor.fetchall()
             print(data2)
             i["patient"]=data2
-        	conn.commit
-        	cursor.close()
-
+            conn.commit
+            cursor.close()
+            
         return {"result":data1,"status":"True"}
 
     except Exception as e :
-    	print("Exception---->" +str(e))
-    	output = {"result":"something went wrong","status":"false"}
-    	return output
+        print("Exception---->" +str(e))
+        output = {"result":"something went wrong","status":"false"}
+        return output
 
 @app.route('/sendEmail',methods=['POST'])
 def sendMail():
