@@ -4058,7 +4058,7 @@ def getPatientDetail():
         for i in data2:
 
             query2="select * from Patient_master pm,patientDoctorMapping pdm where pdm.Patient_Id=pm.PatientId " 
-            query2=query2+" and pdm.doctorId='"+str(i["ID"]) +"' and pm.hospitalId='"+str(i["HospitalId"])+"';"
+            query2=query2+" and pdm.doctorId='"+str(i["userId"]) +"' and pm.hospitalId='"+str(i["HospitalId"])+"';"
             cursor.execute(query2)
             data3= cursor.fetchall()
             print(data3)
