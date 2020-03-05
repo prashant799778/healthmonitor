@@ -4069,7 +4069,7 @@ def getPatientList():
 @app.route('/getPatientDetail',methods=['POST'])
 def getPatientDetail():
     
- try:
+    try:
         json1=request.get_data()
         data=json.loads(json1.decode("utf-8"))
         print(data)
