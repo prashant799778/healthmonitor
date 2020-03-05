@@ -4055,16 +4055,16 @@ def getPatientDetail():
         cursor = conn.cursor()
         cursor.execute(query1)
         data2 = cursor.fetchone()
-        for i in data2:
-        	query2 = "select pm.hospitalId,pm.PatientId from userHospitalMapping as uhm,Patient_master as pm where uhm.HospitalId=pm.hospitalId and pm.hospitalId='"str(data['hospitalId'])"'"
-        	conn = Connection()
-        	cursor = conn.cursor()
-        	cursor.execute(query2)
-        	data3 = cursor.fetchall()
-        cursor.close()
-        	print('637458564')
-        	data4={"message":"Patient_Data Found","result":data3,"status":"True"}
-        	return data4
+        # for i in data2:
+        # 	query2 = "select pm.hospitalId,pm.PatientId from userHospitalMapping as uhm,Patient_master as pm where uhm.HospitalId=pm.hospitalId and pm.hospitalId='"str(data['hospitalId'])"'"
+        # 	conn = Connection()
+        # 	cursor = conn.cursor()
+        # 	cursor.execute(query2)
+        # 	data3 = cursor.fetchall()
+        # cursor.close()
+        # 	print('637458564')
+        # 	data4={"message":"Patient_Data Found","result":data3,"status":"True"}
+        # 	return data4
 
     except Exception as e :
         print("Exception---->" +str(e))           
