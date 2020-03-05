@@ -4062,6 +4062,7 @@ def getPatientDetail():
             data3= cursor.fetchall()
             print(data3)
 			i["patient"]=data3
+			
         cursor.close()
         if data2:
         	return {"result":data2,"status":"True"}
