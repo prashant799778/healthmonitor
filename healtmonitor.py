@@ -3905,9 +3905,7 @@ def getTestType():
 
     try:  
 
-
-        query  = " select ID,TestType from TestTypeMaster;"
-        
+        query  = " select ID,TestType from TestTypeMaster;"        
         print(query)
         conn=Connection()
         cursor = conn.cursor()
