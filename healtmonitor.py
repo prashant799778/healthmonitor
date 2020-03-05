@@ -4048,23 +4048,19 @@ def getPatientDetail():
     try:
         json1=request.get_data()
         data=json.loads(json1.decode("utf-8"))
+        conn=Connection()
+        cursor = conn.cursor()
 
         query1=" select uhm.userId,uhm.hospitalId as HospitalId from Hospital_master hsm,userMaster um,userHospitalMapping uhm" 
         query1=query1+" where hsm.ID=uhm.hospitalId and uhm.userId=um.ID and um.ID='"+str(data["ID"])+"';"
-        conn = Connection()
-        cursor = conn.cursor()
         cursor.execute(query1)
         data2 = cursor.fetchone()
         for i in data2:
 
-            query2="select pm.PatientId from Patient_master pm,userHospitalMapping uhm where uhm.hospitalId=pm.hospitalId and pm.hospitalId='"+str(i["HospitalId"])+"';"
-            conn = Connection()
-            cursor = conn.cursor()
-            cursor.execute(query2)
+        	query2="select pm.PatientId from Patient_master pm,userHospitalMapping uhm where uhm.hospitalId=pm.hospitalId and pm.hospitalId='"+str(i["HospitalId"])+"';"
             data3= cursor.fetchall()
             print(data3)
-            cursor.close()
-            i["patient"]=data3
+			i["patient"]=data3
         cursor.close()
         if data2:
         	return {"result":data2,"status":"True"}
