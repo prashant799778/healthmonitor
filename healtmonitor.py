@@ -55,7 +55,7 @@ def getLabReportPath(filename):
 
 
 
-@app.route("/LabReport/<PatientId>/<image_name>")
+@app.route("/LabReport/<patientId>/<image_name>")
 def LabReport(image_name):
     try:
 
