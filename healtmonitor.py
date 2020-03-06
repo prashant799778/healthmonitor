@@ -4213,12 +4213,12 @@ def labReportMaster():
                         os.mkdir(FolderPath)
                         print("if",FolderPath,filename)
                         FolderPath = str(FolderPath)+'/'+str(filename)
-                        print(FolderPath)
+                        print(FolderPath,"+++++++++")
                         print(type(FolderPath))                   
                     else:
                         print("else",FolderPath,filename)                        
                         FolderPath = str(FolderPath)+'/'+str(filename)
-                        print(FolderPath)
+                        print(FolderPath,"_________!!!!!!!!@22121")
                         print(type(FolderPath))                     
 
                     file.save(FolderPath)
