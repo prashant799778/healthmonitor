@@ -3948,6 +3948,7 @@ def diagReportMaster():
                     print(filename) 
 
                     filepath = '/'+str(patientId)
+                    filepathactual = '/DiagnosticReport' + filepath
 
                     FolderPath = getDiagReportPath(filepath)
 
@@ -3967,9 +3968,9 @@ def diagReportMaster():
                         print(type(FolderPath))                     
 
                     file.save(FolderPath)
-                    ReportPath = str(filepath)
+                    ReportPath = str(filepathactual)+'/'+str(filename)
 
-                    query="update DIAG_ReportMaster set ReportPath = '"+str(FolderPath)+"' where ReportId = '" + str(Id) + "' "
+                    query="update DIAG_ReportMaster set ReportPath = '"+str(ReportPath)+"' where ReportId = '" + str(Id) + "' "
                     cursor = conn.cursor()
                     cursor.execute(query)
                     conn.commit()
@@ -4030,6 +4031,7 @@ def pacsReportMaster():
                     print(filename) 
 
                     filepath = '/'+str(patientId)
+                    filepathactual = '/PacsReport' + filepath
 
                     FolderPath = getPacsReportPath(filepath)
 
@@ -4049,9 +4051,9 @@ def pacsReportMaster():
                         print(type(FolderPath))                     
 
                     file.save(FolderPath)
-                    ReportPath = str(filepath)
+                    ReportPath = str(filepathactual)+'/'+str(filename)
 
-                    query="update PACS_ReportMaster set ReportPath = '"+str(FolderPath)+"' where ReportId = '" + str(Id) + "' "
+                    query="update PACS_ReportMaster set ReportPath = '"+str(ReportPath)+"' where ReportId = '" + str(Id) + "' "
                     cursor = conn.cursor()
                     cursor.execute(query)
                     conn.commit()
@@ -4112,7 +4114,7 @@ def dicomReportMaster():
                     print(filename) 
 
                     filepath = '/'+str(patientId)
-                    
+
                     filepathactual = '/DicomReport' + filepath
 
                     FolderPath = getDicomReportPath(filepath)
