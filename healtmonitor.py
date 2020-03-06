@@ -56,7 +56,7 @@ def getLabReportPath(filename):
 
 
 @app.route("/LabReport/<patientId>/<image_name>")
-def LabReport(image_name):
+def LabReport(patientId,image_name):
     try:
 
         return send_from_directory('LabReport',PatientId=patientId, filename=image_name, as_attachment=False)
