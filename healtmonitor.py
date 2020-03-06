@@ -4198,8 +4198,8 @@ def labReportMaster():
                       
                      
 
-                    filepath = '/'+str(patientId)
-                    filepathactual = '/LabReport/' + filepath 
+                    filepath = '/'+str(patientId)+str(filename)
+                    filepathactual = '/LabReport' + filepath 
 
                     FolderPath = getLabReportPath(filepath)
 
