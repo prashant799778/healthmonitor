@@ -55,11 +55,11 @@ def getLabReportPath(filename):
     return path
 
 
-@app.route("/LabReport/<patientId>/<image_name>")
-def LabReport(patientId,image_name):
+@app.route("/LabReport/patientId/<image_name>")
+def LabReport(image_name):
     try:
 
-        return send_from_directory('LabReport',PatientId=patientId, filename=image_name, as_attachment=False)
+        return send_from_directory('LabReport/patientId', filename=image_name, as_attachment=False)
     except FileNotFoundError:
         abort(404)
 
