@@ -55,7 +55,7 @@ def getLabReportPath(filename):
     return path
 
 
-@app.route("/LabReport/<int('"+i"')>/<image_name>")
+@app.route("/LabReport/<'"+int(i)+"'>/<image_name>")
 def LabReport(i,image_name):
     try:
 
