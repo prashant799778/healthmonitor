@@ -68,11 +68,6 @@ def LabReport(patientId,image_name):
 
 
 
-# mysqlcon = pymysql.connect(host='localhost',
-#                             user='root',                            
-#                             db='healthmonitor',
-#                             charset='utf8mb4',
-#                             cursorclass=pymysql.cursors.DictCursor)
 
 
 
@@ -4117,6 +4112,8 @@ def dicomReportMaster():
                     print(filename) 
 
                     filepath = '/'+str(patientId)
+                    
+                    filepathactual = '/DicomReport' + filepath
 
                     FolderPath = getDicomReportPath(filepath)
 
@@ -4136,9 +4133,9 @@ def dicomReportMaster():
                         print(type(FolderPath))                     
 
                     file.save(FolderPath)
-                    ReportPath = str(filepath)
+                    ReportPath =str(filepathactual)+'/'+str(filename)
 
-                    query="update DICOM_ReportMaster set ReportPath = '"+str(FolderPath)+"' where ReportId = '" + str(Id) + "' "
+                    query="update DICOM_ReportMaster set ReportPath = '"+str(ReportPath)+"' where ReportId = '" + str(Id) + "' "
                     cursor = conn.cursor()
                     cursor.execute(query)
                     conn.commit()
