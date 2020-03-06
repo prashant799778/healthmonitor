@@ -4209,12 +4209,12 @@ def labReportMaster():
                     if isdir == False:
                         os.mkdir(FolderPath)
                         print("if",FolderPath,filename)
-                        FolderPath = str(filepathactual)+'/'+str(filename)
+                        FolderPath = str(FolderPath)+'/'+str(filename)
                         print(FolderPath)
                         print(type(FolderPath))                   
                     else:
                         print("else",FolderPath,filename)                        
-                        FolderPath = str(filepathactual)+'/'+str(filename)
+                        FolderPath = str(FolderPath)+'/'+str(filename)
                         print(FolderPath)
                         print(type(FolderPath))                     
 
