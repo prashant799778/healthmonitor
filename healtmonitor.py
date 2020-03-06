@@ -4198,7 +4198,7 @@ def labReportMaster():
                       
                      
 
-                    filepath = '/'+str(patientId)+str(filename)
+                    filepath = '/'+str(patientId)+'/'+str(filename)
                     filepathactual = '/LabReport' + filepath 
 
                     FolderPath = getLabReportPath(filepath)
