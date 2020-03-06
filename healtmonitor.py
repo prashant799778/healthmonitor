@@ -51,7 +51,19 @@ def getDicomReportPath(filename):
 def getLabReportPath(filename):
 
     path = "/var/www/HealthCare/Healthmonitor/LabReport"+filename
-    return path        
+    return path
+
+
+
+@app.route("/LabReport/i/<image_name>")
+def LabReport(image_name):
+    try:
+        return send_from_directory('LabReport/i', filename=image_name, as_attachment=False)
+    except FileNotFoundError:
+        abort(404)
+
+
+
 
 
 # mysqlcon = pymysql.connect(host='localhost',
