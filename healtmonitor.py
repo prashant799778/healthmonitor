@@ -55,11 +55,11 @@ def getLabReportPath(filename):
 
 
 
-@app.route("/LabReport/<image_name>")
+@app.route("/LabReport/i/<image_name>")
 def LabReport(image_name):
     try:
 
-        return send_from_directory('LabReport', filename=image_name, as_attachment=False)
+        return send_from_directory('LabReport/i', filename=image_name, as_attachment=False)
     except FileNotFoundError:
         abort(404)
 
@@ -4200,6 +4200,7 @@ def labReportMaster():
                      
 
                     filepath = '/'+str(patientId)+'/'+str(filename)
+
                     filepathactual = '/LabReport' + filepath 
 
                     FolderPath = getLabReportPath(filepath)
