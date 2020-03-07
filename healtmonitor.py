@@ -4410,6 +4410,7 @@ def getlabReportMaster():
 
        
         query = "select HubId,ReportId,HospitalId,PatientId,ReportPath,ReportName,TestType,DateCreate from LAB_ReportMaster where  " +WhereCondition  # y 
+        print(query)
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
