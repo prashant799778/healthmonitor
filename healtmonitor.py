@@ -4269,14 +4269,16 @@ def getdiagReportMaster():
        
 
        
-        query = "select  * from DIAG_ReportMaster where  " +WhereCondition1  # y 
+        query = "select HubId,ReportId,HospitalId,PatientId,ReportPath,ReportName,TestType,date_format(DateCreate,'%Y-%m-%d %H:%i:%s')DateCreate from DIAG_ReportMaster where  " +WhereCondition1  # y 
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
         data = cursor.fetchone()
         cursor.close()
         if data:           
-            Data = {"result":data,"status":"true"}
+            Datta = os.listdir("/var/www/HealthCare/Healthmonitor"+str(data[0]["ReportPath"])+"/")
+            # Dataa = LabReport(data[0]["ReportPath"])           
+            Data = {"result":data,"Exact":Datta,"status":"true"}
             return Data
         
         else:
@@ -4316,14 +4318,16 @@ def getpacsReportMaster():
        
 
        
-        query = "select  * from PACS_ReportMaster where  " +WhereCondition1  # y 
+        query = "select HubId,ReportId,HospitalId,PatientId,ReportPath,ReportName,TestType,date_format(DateCreate,'%Y-%m-%d %H:%i:%s')DateCreate from PACS_ReportMaster where  " +WhereCondition1  # y 
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
         data = cursor.fetchone()
         cursor.close()
         if data:           
-            Data = {"result":data,"status":"true"}
+            Datta = os.listdir("/var/www/HealthCare/Healthmonitor"+str(data[0]["ReportPath"])+"/")
+            # Dataa = LabReport(data[0]["ReportPath"])           
+            Data = {"result":data,"Exact":Datta,"status":"true"}
             return Data
         
         else:
@@ -4362,14 +4366,17 @@ def getdicomReportMaster():
        
 
        
-        query = "select  * from DICOM_ReportMaster where  " +WhereCondition1  # y 
+        query = "select HubId,ReportId,HospitalId,PatientId,ReportPath,ReportName,TestType,date_format(DateCreate,'%Y-%m-%d %H:%i:%s')DateCreate from DICOM_ReportMaster where  " +WhereCondition1  # y 
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
         data = cursor.fetchone()
         cursor.close()
-        if data:           
-            Data = {"result":data,"status":"true"}
+        if data:
+            Datta = os.listdir("/var/www/HealthCare/Healthmonitor"+str(data[0]["ReportPath"])+"/")
+            # Dataa = LabReport(data[0]["ReportPath"])           
+            Data = {"result":data,"Exact":Datta,"status":"true"}           
+           
             return Data
         
         else:
