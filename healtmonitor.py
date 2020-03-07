@@ -4189,7 +4189,7 @@ def labReportMaster():
 
                     FolderPath = getLabReportPath(filepath)
 
-                    ReportPath = '/LabReport/' + filename 
+                    ReportPath = '/LabReport'+str(filepath)+'/'+str(filename) 
 
                     isdir = os.path.isdir(FolderPath)  
                     print(isdir)
