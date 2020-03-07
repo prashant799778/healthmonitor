@@ -4184,14 +4184,12 @@ def labReportMaster():
 
                     print(file)
                     print(filename)
-                      
-                     
-
+                    
                     filepath = '/'+str(patientId)
 
-                    filepathactual = '/LabReport' + filepath 
-
                     FolderPath = getLabReportPath(filepath)
+
+                    ReportPath = '/LabReport/' + filepath 
 
                     isdir = os.path.isdir(FolderPath)  
                     print(isdir)
@@ -4209,7 +4207,6 @@ def labReportMaster():
                         print(type(FolderPath))                     
 
                     file.save(FolderPath)
-                    ReportPath = str(filepathactual)
 
                     query="update LAB_ReportMaster set ReportPath = '"+str(ReportPath)+"' where ReportId = '" + str(Id) + "' "
                     cursor = conn.cursor()
