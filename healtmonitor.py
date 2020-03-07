@@ -4273,7 +4273,7 @@ def getdiagReportMaster():
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
-        data = cursor.fetchone()
+        data = cursor.fetchall()
         cursor.close()
         if data:           
             Datta = os.listdir("/var/www/HealthCare/Healthmonitor"+str(data[0]["ReportPath"])+"/")
@@ -4322,7 +4322,7 @@ def getpacsReportMaster():
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
-        data = cursor.fetchone()
+        data = cursor.fetchall()
         cursor.close()
         if data:           
             Datta = os.listdir("/var/www/HealthCare/Healthmonitor"+str(data[0]["ReportPath"])+"/")
@@ -4370,7 +4370,7 @@ def getdicomReportMaster():
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
-        data = cursor.fetchone()
+        data = cursor.fetchall()
         cursor.close()
         if data:
             Datta = os.listdir("/var/www/HealthCare/Healthmonitor"+str(data[0]["ReportPath"])+"/")
