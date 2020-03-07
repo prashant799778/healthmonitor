@@ -4390,7 +4390,7 @@ def getlabReportMaster():
         PatientId=""
         DoctorId=" "
         if 'PatientId' in request.args:
-            PatientId=request.args["PatientId"]
+            PatientId=int(request.args["PatientId"])
         if 'DoctorId' in request.args:
             DoctorId=request.args["DoctorId"]
         
