@@ -4397,7 +4397,7 @@ def getlabReportMaster():
             WhereCondition =  WhereCondition+" and DoctorId = '" + DoctorId + "'"                        
             WhereCondition =  WhereCondition+" and PatientId = '" + PatientId + "'"
 
-        query = "select HubId,ReportId,HospitalId,PatientId,ReportPath,ReportName,TestType,date_format(DateCreate,'%Y-%m-%d %H:%i:%s')DateCreate from LAB_ReportMaster where  " +WhereCondition+ ";"        
+        query = "select HubId,ReportId,HospitalId,PatientId,ReportPath,ReportName,TestType,date_format(DateCreate,'%Y-%m-%d %H:%i:%s')DateCreate from LAB_ReportMaster " +WhereCondition+ ";"        
         print(query)
         conn=Connection()
         cursor = conn.cursor()
@@ -4406,10 +4406,7 @@ def getlabReportMaster():
         cursor.close()
         print(data)
         if data:
-            # filepath = listLabReportPath()
-            # filepath = filepath+str(data[0]["ReportPath"])+"/"
-            # Reports = os.listdir(filepath)
-            # # Dataa = LabReport(data[0]["ReportPath"])           
+
             Data = {"result":data,"status":"true"}
             return Data
         
