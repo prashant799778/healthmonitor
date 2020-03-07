@@ -4403,7 +4403,7 @@ def getlabReportMaster():
 
         if (PatientId !=""):
             
-            WhereCondition =  " and  PatientId    = '" + PatientId + "'  "
+            WhereCondition =  " and  PatientId    = '" + str(PatientId) + "'  "
       
             # y = y +  WhereCondition1
        
