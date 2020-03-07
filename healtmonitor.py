@@ -59,7 +59,7 @@ def getLabReportPath(filename):
 def LabReport(patientId):
     try:
 
-        return send_from_directory('LabReport',PatientId=PatientId, as_attachment=False)
+        return send_from_directory('LabReport',PatientId=patientId, as_attachment=False)
     except FileNotFoundError:
         abort(404)
 
