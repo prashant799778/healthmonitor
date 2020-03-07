@@ -4434,7 +4434,7 @@ def MedicationIntegration():
         inputdata = request.get_data() 
           
 
-        inputdata = json.loads(inputdata)   
+        inputdata = json.loads(inputdata.decode("utf-8"))   
 
         patientId = inputdata['patientId']
 
