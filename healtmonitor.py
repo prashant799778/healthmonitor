@@ -4388,16 +4388,16 @@ def getlabReportMaster():
         if 'PatientId' in request.args:
             PatientId=request.args["PatientId"]
        
-        WhereCondition=""
+        WhereCondition=" where lrm.TestType = ttm.ID"
         
         if HubId !="" and HospitalId !="" and DoctorId !="" and PatientId !="":
             
-            WhereCondition =  " where HubId = '" + HubId + "'"
+            WhereCondition =  WhereCondition+" and HubId = '" + HubId + "'"
             WhereCondition =  WhereCondition+" and HospitalId = '" + HospitalId + "'"
             WhereCondition =  WhereCondition+" and DoctorId = '" + DoctorId + "'"                        
             WhereCondition =  WhereCondition+" and PatientId = '" + PatientId + "'"
 
-        query = "select HubId,ReportId,HospitalId,PatientId,ReportPath,ReportName,TestType,date_format(DateCreate,'%Y-%m-%d %H:%i:%s')DateCreate from LAB_ReportMaster " +WhereCondition+ ";"        
+        query = "select lrm.HubId,lrm.ReportId,lrm.HospitalId,lrm.PatientId,lrm.ReportPath,lrm.ReportName,ttm.TestType,date_format(lrm.DateCreate,'%Y-%m-%d %H:%i:%s')DateCreate from LAB_ReportMaster lrm, TestTypeMaster ttm " +WhereCondition+ ";"        
         print(query)
         conn=Connection()
         cursor = conn.cursor()
