@@ -1,5 +1,6 @@
 from flask import Flask,request,abort
 # from flask_mail import Mail, Message
+import os
 # from flask_socketio import SocketIO,emit
 import uuid
 import os
@@ -4418,8 +4419,9 @@ def getlabReportMaster():
         cursor.close()
         print(data)
         if data:
+            Datta = os.listdir(data[0]["ReportPath"])
             Dataa = LabReport(data[0]["ReportPath"])           
-            Data = {"result":data,"Extra":Dataa,"status":"true"}
+            Data = {"result":data,"Extra":Dataa,"Exact":Datta,"status":"true"}
             return Data
         
         else:
