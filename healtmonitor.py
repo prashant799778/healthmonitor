@@ -4377,7 +4377,7 @@ def getdicomReportMaster():
 
 
 
-@app.route('/getlabReportMaster', methods=['GET'])
+@app.route('/getlabReportMaster', methods=['POST'])
 def getlabReportMaster():
     try:
         HubId,HospitalId,DoctorId,PatientId="","","",""
