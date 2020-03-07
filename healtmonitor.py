@@ -4018,7 +4018,7 @@ def pacsReportMaster():
                     print(filename) 
 
                     filepath = '/'+str(patientId)
-                    
+
                     ReportPath = '/PacsReport'+str(filepath)+'/'+str(filename) 
                     FolderPath = getPacsReportPath(filepath)
 
@@ -4225,38 +4225,37 @@ def labReportMaster():
 @app.route('/getdiagReportMaster', methods=['GET'])
 def getdiagReportMaster():
     try:
-        PatientId=""
-        DoctorId=" "
-        if 'PatientId' in request.args:
-            PatientId=int(request.args["PatientId"])
+        HubId,HospitalId,DoctorId,PatientId="","","",""
+
+        if 'HubId' in request.args:
+            HubId=request.args["HubId"]
+        if 'HospitalId' in request.args:
+            HospitalId=request.args["HospitalId"]
         if 'DoctorId' in request.args:
             DoctorId=request.args["DoctorId"]
+        if 'PatientId' in request.args:
+            PatientId=request.args["PatientId"]
+       
+        WhereCondition=" where lrm.TestType = ttm.ID"
         
-       
-        WhereCondition=""
-        
-        if (DoctorId !="") and (PatientId !="") :
+        if HubId !="" and HospitalId !="" and DoctorId !="" and PatientId !="":
             
-            WhereCondition1 =  " and  DoctorId    = '" + DoctorId + "'  "
+            WhereCondition =  WhereCondition+" and HubId = '" + HubId + "'"
+            WhereCondition =  WhereCondition+" and HospitalId = '" + HospitalId + "'"
+            WhereCondition =  WhereCondition+" and DoctorId = '" + DoctorId + "'"                        
+            WhereCondition =  WhereCondition+" and PatientId = '" + PatientId + "'"
 
-        if (PatientId !=""):
-            
-            WhereCondition1 =  "   PatientId    = '" + PatientId + "'  "
-      
-            # y = y +  WhereCondition1
-       
-
-       
-        query = "select HubId,ReportId,HospitalId,PatientId,ReportPath,ReportName,TestType,date_format(DateCreate,'%Y-%m-%d %H:%i:%s')DateCreate from DIAG_ReportMaster where  " +WhereCondition1  # y 
+        query = "select lrm.HubId,lrm.ReportId,lrm.HospitalId,lrm.PatientId,lrm.ReportPath,lrm.ReportName,ttm.TestType,date_format(lrm.DateCreate,'%Y-%m-%d %H:%i:%s')DateCreate from DIAG_ReportMaster lrm, TestTypeMaster ttm " +WhereCondition+ ";"        
+        print(query)
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
         data = cursor.fetchall()
         cursor.close()
-        if data:           
-            Datta = os.listdir("/var/www/HealthCare/Healthmonitor"+str(data[0]["ReportPath"])+"/")
-            # Dataa = LabReport(data[0]["ReportPath"])           
-            Data = {"result":data,"Exact":Datta,"status":"true"}
+        print(data)
+        if data:
+
+            Data = {"result":data,"status":"true"}
             return Data
         
         else:
@@ -4268,44 +4267,40 @@ def getdiagReportMaster():
         output = {"result":"something went wrong","status":"false"}
         return output
 
-
-
-
 @app.route('/getpacsReportMaster', methods=['GET'])
 def getpacsReportMaster():
     try:
-        PatientId=""
-        DoctorId=" "
-        if 'PatientId' in request.args:
-            PatientId=int(request.args["PatientId"])
+        HubId,HospitalId,DoctorId,PatientId="","","",""
+
+        if 'HubId' in request.args:
+            HubId=request.args["HubId"]
+        if 'HospitalId' in request.args:
+            HospitalId=request.args["HospitalId"]
         if 'DoctorId' in request.args:
             DoctorId=request.args["DoctorId"]
+        if 'PatientId' in request.args:
+            PatientId=request.args["PatientId"]
+       
+        WhereCondition=" where lrm.TestType = ttm.ID"
         
-       
-        WhereCondition=""
-        
-        if (DoctorId !="") and (PatientId !="") :
+        if HubId !="" and HospitalId !="" and DoctorId !="" and PatientId !="":
             
-            WhereCondition1 =  " and  DoctorId    = '" + DoctorId + "'  "
+            WhereCondition =  WhereCondition+" and HubId = '" + HubId + "'"
+            WhereCondition =  WhereCondition+" and HospitalId = '" + HospitalId + "'"
+            WhereCondition =  WhereCondition+" and DoctorId = '" + DoctorId + "'"                        
+            WhereCondition =  WhereCondition+" and PatientId = '" + PatientId + "'"
 
-        if (PatientId !=""):
-            
-            WhereCondition1 =  "   PatientId    = '" + PatientId + "'  "
-      
-            # y = y +  WhereCondition1
-       
-
-       
-        query = "select HubId,ReportId,HospitalId,PatientId,ReportPath,ReportName,TestType,date_format(DateCreate,'%Y-%m-%d %H:%i:%s')DateCreate from PACS_ReportMaster where  " +WhereCondition1  # y 
+        query = "select lrm.HubId,lrm.ReportId,lrm.HospitalId,lrm.PatientId,lrm.ReportPath,lrm.ReportName,ttm.TestType,date_format(lrm.DateCreate,'%Y-%m-%d %H:%i:%s')DateCreate from PACS_ReportMaster lrm, TestTypeMaster ttm " +WhereCondition+ ";"        
+        print(query)
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
         data = cursor.fetchall()
         cursor.close()
-        if data:           
-            Datta = os.listdir("/var/www/HealthCare/Healthmonitor"+str(data[0]["ReportPath"])+"/")
-            # Dataa = LabReport(data[0]["ReportPath"])           
-            Data = {"result":data,"Exact":Datta,"status":"true"}
+        print(data)
+        if data:
+
+            Data = {"result":data,"status":"true"}
             return Data
         
         else:
@@ -4322,39 +4317,37 @@ def getpacsReportMaster():
 @app.route('/getdicomReportMaster', methods=['GET'])
 def getdicomReportMaster():
     try:
-        PatientId=""
-        DoctorId=" "
-        if 'PatientId' in request.args:
-            PatientId=int(request.args["PatientId"])
+        HubId,HospitalId,DoctorId,PatientId="","","",""
+
+        if 'HubId' in request.args:
+            HubId=request.args["HubId"]
+        if 'HospitalId' in request.args:
+            HospitalId=request.args["HospitalId"]
         if 'DoctorId' in request.args:
             DoctorId=request.args["DoctorId"]
+        if 'PatientId' in request.args:
+            PatientId=request.args["PatientId"]
+       
+        WhereCondition=" where lrm.TestType = ttm.ID"
         
-       
-        WhereCondition=""
-        
-        if (DoctorId !="") and (PatientId !="") :
+        if HubId !="" and HospitalId !="" and DoctorId !="" and PatientId !="":
             
-            WhereCondition1 =  " and  DoctorId    = '" + DoctorId + "'  "
+            WhereCondition =  WhereCondition+" and HubId = '" + HubId + "'"
+            WhereCondition =  WhereCondition+" and HospitalId = '" + HospitalId + "'"
+            WhereCondition =  WhereCondition+" and DoctorId = '" + DoctorId + "'"                        
+            WhereCondition =  WhereCondition+" and PatientId = '" + PatientId + "'"
 
-        if (PatientId !=""):
-            
-            WhereCondition1 =  "   PatientId    = '" + PatientId + "'  "
-      
-            # y = y +  WhereCondition1
-       
-
-       
-        query = "select HubId,ReportId,HospitalId,PatientId,ReportPath,ReportName,TestType,date_format(DateCreate,'%Y-%m-%d %H:%i:%s')DateCreate from DICOM_ReportMaster where  " +WhereCondition1  # y 
+        query = "select lrm.HubId,lrm.ReportId,lrm.HospitalId,lrm.PatientId,lrm.ReportPath,lrm.ReportName,ttm.TestType,date_format(lrm.DateCreate,'%Y-%m-%d %H:%i:%s')DateCreate from DICOM_ReportMaster lrm, TestTypeMaster ttm " +WhereCondition+ ";"        
+        print(query)
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
         data = cursor.fetchall()
         cursor.close()
+        print(data)
         if data:
-            Datta = os.listdir("/var/www/HealthCare/Healthmonitor"+str(data[0]["ReportPath"])+"/")
-            # Dataa = LabReport(data[0]["ReportPath"])           
-            Data = {"result":data,"Exact":Datta,"status":"true"}           
-           
+
+            Data = {"result":data,"status":"true"}
             return Data
         
         else:
