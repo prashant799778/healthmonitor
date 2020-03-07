@@ -4419,9 +4419,9 @@ def getlabReportMaster():
         cursor.close()
         print(data)
         if data:
-            Datta = os.listdir(data[0]["ReportPath"])
-            Dataa = LabReport(data[0]["ReportPath"])           
-            Data = {"result":data,"Extra":Dataa,"Exact":Datta,"status":"true"}
+            Datta = os.listdir("http://159.65.146.25:5053"+str(data[0]["ReportPath"]))
+            # Dataa = LabReport(data[0]["ReportPath"])           
+            Data = {"result":data,"Exact":Datta,"status":"true"}
             return Data
         
         else:
