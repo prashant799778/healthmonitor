@@ -4431,12 +4431,12 @@ def getlabReportMaster():
 def MedicationIntegration():
 
     try:  
-        inputdata = request.form.get('MedicationIntegration')
-        inputdata1 = request.form.get('patientId')     
+        inputdata = request.get_data() 
+          
 
         inputdata = json.loads(inputdata)   
 
-        patientId = inputdata1
+        patientId = inputdata['patientId']
 
         if inputdata1 == None :
             data = {"status":"false","message":"Somthing went wrong please contact system admin","result":""}
