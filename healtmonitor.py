@@ -4418,7 +4418,7 @@ def getlabReportMaster():
         cursor.close()
         print(data)
         if data:
-            Dataa = LabReport(data["ReportPath"])           
+            Dataa = LabReport(data[0]["ReportPath"])           
             Data = {"result":data,"Extra":Dataa,"status":"true"}
             return Data
         
