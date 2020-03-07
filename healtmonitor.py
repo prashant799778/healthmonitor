@@ -4254,14 +4254,16 @@ def getdiagReportMaster():
        
 
        
-        query = "select  * from DIAG_ReportMaster where  " +WhereCondition1  # y 
+        query = "select HubId,ReportId,HospitalId,PatientId,ReportPath,ReportName,TestType,date_format(DateCreate,'%Y-%m-%d %H:%i:%s')DateCreate from DIAG_ReportMaster where  " +WhereCondition1  # y 
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
-        data = cursor.fetchone()
+        data = cursor.fetchall()
         cursor.close()
         if data:           
-            Data = {"result":data,"status":"true"}
+            Datta = os.listdir("/var/www/HealthCare/Healthmonitor"+str(data[0]["ReportPath"])+"/")
+            # Dataa = LabReport(data[0]["ReportPath"])           
+            Data = {"result":data,"Exact":Datta,"status":"true"}
             return Data
         
         else:
@@ -4301,14 +4303,16 @@ def getpacsReportMaster():
        
 
        
-        query = "select  * from PACS_ReportMaster where  " +WhereCondition1  # y 
+        query = "select HubId,ReportId,HospitalId,PatientId,ReportPath,ReportName,TestType,date_format(DateCreate,'%Y-%m-%d %H:%i:%s')DateCreate from PACS_ReportMaster where  " +WhereCondition1  # y 
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
-        data = cursor.fetchone()
+        data = cursor.fetchall()
         cursor.close()
         if data:           
-            Data = {"result":data,"status":"true"}
+            Datta = os.listdir("/var/www/HealthCare/Healthmonitor"+str(data[0]["ReportPath"])+"/")
+            # Dataa = LabReport(data[0]["ReportPath"])           
+            Data = {"result":data,"Exact":Datta,"status":"true"}
             return Data
         
         else:
@@ -4347,14 +4351,17 @@ def getdicomReportMaster():
        
 
        
-        query = "select  * from DICOM_ReportMaster where  " +WhereCondition1  # y 
+        query = "select HubId,ReportId,HospitalId,PatientId,ReportPath,ReportName,TestType,date_format(DateCreate,'%Y-%m-%d %H:%i:%s')DateCreate from DICOM_ReportMaster where  " +WhereCondition1  # y 
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
-        data = cursor.fetchone()
+        data = cursor.fetchall()
         cursor.close()
-        if data:           
-            Data = {"result":data,"status":"true"}
+        if data:
+            Datta = os.listdir("/var/www/HealthCare/Healthmonitor"+str(data[0]["ReportPath"])+"/")
+            # Dataa = LabReport(data[0]["ReportPath"])           
+            Data = {"result":data,"Exact":Datta,"status":"true"}           
+           
             return Data
         
         else:
@@ -4395,7 +4402,7 @@ def getlabReportMaster():
        
 
        
-        query = "select HubId,ReportId,HospitalId,PatientId,ReportPath,ReportName,TestType,DateCreate from LAB_ReportMaster where  " +WhereCondition+ ";"  # y 
+        query = "select HubId,ReportId,HospitalId,PatientId,ReportPath,ReportName,TestType,date_format(DateCreate,'%Y-%m-%d %H:%i:%s')DateCreate from LAB_ReportMaster where  " +WhereCondition+ ";"  # y 
         print(query)
         conn=Connection()
         cursor = conn.cursor()
@@ -4433,7 +4440,7 @@ def MedicationIntegration():
 
         patientId = inputdata['patientId']
 
-        if inputdata1 == None :
+        if inputdata == None :
             data = {"status":"false","message":"Somthing went wrong please contact system admin","result":""}
             return data
         else:
@@ -4505,13 +4512,13 @@ def getMedicationIntegration():
 
         if (PatientId !=""):
             
-            WhereCondition1 =  " and  PatientId    = '" + PatientId + "'  "
+            WhereCondition1 =  " PatientId    = '" + PatientId + "'  "
       
             # y = y +  WhereCondition1
        
 
        
-        query = "select  * from Medication_Integration where Status<>1 " +WhereCondition1  # y 
+        query = "select  * from Medication_Integration where  " +WhereCondition1  # y 
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
