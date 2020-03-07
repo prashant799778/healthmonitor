@@ -4453,7 +4453,7 @@ def MedicationIntegration():
 
         patientId = inputdata['patientId']
 
-        if inputdata1 == None :
+        if inputdata == None :
             data = {"status":"false","message":"Somthing went wrong please contact system admin","result":""}
             return data
         else:
