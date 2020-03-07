@@ -57,7 +57,9 @@ def getLabReportPath(filename):
 
 @app.route("/LabReport/<patientId>")
 def LabReport(patientId):
+
     try:
+        print(patientId,"+++++++++++")
 
         return send_from_directory('LabReport',FolderPath=patientId, as_attachment=False)
     except FileNotFoundError:
