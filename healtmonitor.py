@@ -59,7 +59,7 @@ def getLabReportPath(filename):
 def LabReport(patientId):
     try:
 
-        return send_from_directory('LabReport',PatientId=patientId, as_attachment=False)
+        return send_from_directory('LabReport',FolderPath=patientId, as_attachment=False)
     except FileNotFoundError:
         abort(404)
 
@@ -4410,7 +4410,7 @@ def getlabReportMaster():
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
-        data = cursor.fetchone()
+        data = cursor.fetchall()
         cursor.close()
         if data:           
             Data = {"result":data,"status":"true"}
