@@ -59,6 +59,7 @@ def getLabReportPath(filename):
 def LabReport(FolderPath,patientId):
 
     try:
+        print(FolderPath,"----------------------------------------------")
         print(patientId,"+++++++++++")
 
         return send_from_directory('',filename=FolderPath,patientId=patientId, as_attachment=False)
