@@ -4873,7 +4873,7 @@ def getPatientDetail():
         conn.commit
         cursor.close()
         for i in data1:
-            query2="select pdm.doctorId,pm.PatientId,pm.PatientName,pm.Gender,pm.roomNumber,pm.Bed_Number,pm.Address,pm.BloodGroup,pm.Email from Patient_master pm,patientDoctorMapping pdm where pdm.Patient_Id=pm.PatientId" 
+            query2="select pdm.doctorId,pm.PatientId,pm.PhoneNo,pm.PatientName,pm.Gender,pm.roomNumber,pm.Bed_Number,pm.Address,pm.BloodGroup,pm.Email from Patient_master pm,patientDoctorMapping pdm where pdm.Patient_Id=pm.PatientId" 
             query2=query2+" and pm.hospitalId='"+str(i["HospitalId"])+"';"
             print(query2)
             conn=Connection()
