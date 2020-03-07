@@ -4262,13 +4262,13 @@ def getdiagReportMaster():
 
         if (PatientId !=""):
             
-            WhereCondition1 =  " and  PatientId    = '" + PatientId + "'  "
+            WhereCondition1 =  "   PatientId    = '" + PatientId + "'  "
       
             # y = y +  WhereCondition1
        
 
        
-        query = "select  * from DIAG_ReportMaster where status<>1 " +WhereCondition1  # y 
+        query = "select  * from DIAG_ReportMaster where  " +WhereCondition1  # y 
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
@@ -4309,13 +4309,13 @@ def getpacsReportMaster():
 
         if (PatientId !=""):
             
-            WhereCondition1 =  " and  PatientId    = '" + PatientId + "'  "
+            WhereCondition1 =  "   PatientId    = '" + PatientId + "'  "
       
             # y = y +  WhereCondition1
        
 
        
-        query = "select  * from PACS_ReportMaster where status<>1 " +WhereCondition1  # y 
+        query = "select  * from PACS_ReportMaster where  " +WhereCondition1  # y 
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
@@ -4355,13 +4355,13 @@ def getdicomReportMaster():
 
         if (PatientId !=""):
             
-            WhereCondition1 =  " and  PatientId    = '" + PatientId + "'  "
+            WhereCondition1 =  "   PatientId    = '" + PatientId + "'  "
       
             # y = y +  WhereCondition1
        
 
        
-        query = "select  * from DICOM_ReportMaster where status<>1 " +WhereCondition1  # y 
+        query = "select  * from DICOM_ReportMaster where  " +WhereCondition1  # y 
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
