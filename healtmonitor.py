@@ -4492,8 +4492,12 @@ def MedicationIntegration():
 @app.route('/getMedicationIntegration', methods=['GET'])
 def getMedicationIntegration():
     try:
-        PatientId=""
-        DoctorId=" "
+        HubId,HospitalId,DoctorId,PatientId="","","",""
+
+        if 'HubId' in request.args:
+            HubId=request.args["HubId"]
+        if 'HospitalId' in request.args:
+            HospitalId=request.args["HospitalId"]
         if 'PatientId' in request.args:
             PatientId=int(request.args["PatientId"])
         if 'DoctorId' in request.args:
@@ -4501,24 +4505,22 @@ def getMedicationIntegration():
         
        
         WhereCondition=""
-        
-        if (DoctorId !="") and (PatientId !="") :
-            
-            WhereCondition1 =  " and  DoctorId    = '" + DoctorId + "'  "
+        if HubId !="" and HospitalId !="" and DoctorId !="" and PatientId !="":
 
-        if (PatientId !=""):
-            
-            WhereCondition1 =  " PatientId    = '" + PatientId + "'  "
+            WhereCondition =  " where HubId = '" + HubId + "'"
+            WhereCondition =  WhereCondition+" and HospitalId = '" + HospitalId + "'"
+            WhereCondition =  WhereCondition+" and DoctorId = '" + DoctorId + "'"                        
+            WhereCondition =  WhereCondition+" and PatientId = '" + PatientId + "'"
       
             # y = y +  WhereCondition1
        
 
        
-        query = "select  * from Medication_Integration where  " +WhereCondition1  # y 
+        query = "select  * from Medication_Integration where  " +WhereCondition  # y 
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
-        data = cursor.fetchone()
+        data = cursor.fetchall()
         cursor.close()
         if data:           
             Data = {"result":data,"status":"true"}
