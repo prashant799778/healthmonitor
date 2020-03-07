@@ -3936,8 +3936,8 @@ def diagReportMaster():
                     print(filename) 
 
                     filepath = '/'+str(patientId)
-                    filepathactual = '/DiagnosticReport' + filepath
 
+                    ReportPath = '/DiagnosticReport'+str(filepath)+'/'+str(filename) 
                     FolderPath = getDiagReportPath(filepath)
 
                     isdir = os.path.isdir(FolderPath)  
@@ -3956,7 +3956,6 @@ def diagReportMaster():
                         print(type(FolderPath))                     
 
                     file.save(FolderPath)
-                    ReportPath = str(filepathactual)
 
                     query="update DIAG_ReportMaster set ReportPath = '"+str(ReportPath)+"' where ReportId = '" + str(Id) + "' "
                     cursor = conn.cursor()
@@ -4019,8 +4018,8 @@ def pacsReportMaster():
                     print(filename) 
 
                     filepath = '/'+str(patientId)
-                    filepathactual = '/PacsReport' + filepath
-
+                    
+                    ReportPath = '/PacsReport'+str(filepath)+'/'+str(filename) 
                     FolderPath = getPacsReportPath(filepath)
 
                     isdir = os.path.isdir(FolderPath)  
@@ -4039,7 +4038,6 @@ def pacsReportMaster():
                         print(type(FolderPath))                     
 
                     file.save(FolderPath)
-                    ReportPath = str(filepathactual)
 
                     query="update PACS_ReportMaster set ReportPath = '"+str(ReportPath)+"' where ReportId = '" + str(Id) + "' "
                     cursor = conn.cursor()
@@ -4103,8 +4101,7 @@ def dicomReportMaster():
 
                     filepath = '/'+str(patientId)
 
-                    filepathactual = '/DicomReport' + filepath
-
+                    ReportPath = '/DicomReport'+str(filepath)+'/'+str(filename) 
                     FolderPath = getDicomReportPath(filepath)
 
                     isdir = os.path.isdir(FolderPath)  
@@ -4123,7 +4120,6 @@ def dicomReportMaster():
                         print(type(FolderPath))                     
 
                     file.save(FolderPath)
-                    ReportPath =str(filepathactual)+'/'+str(filename)
 
                     query="update DICOM_ReportMaster set ReportPath = '"+str(ReportPath)+"' where ReportId = '" + str(Id) + "' "
                     cursor = conn.cursor()
@@ -4369,10 +4365,6 @@ def getdicomReportMaster():
         print("Exception---->" + str(e))    
         output = {"result":"something went wrong","status":"false"}
         return output
-
-
-
-
 
 @app.route('/getlabReportMaster', methods=['GET'])
 def getlabReportMaster():
