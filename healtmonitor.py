@@ -55,25 +55,10 @@ def getLabReportPath(filename):
     path = "/var/www/HealthCare/Healthmonitor/LabReport"+filename
     return path
 
+def listLabReportPath():
 
-
-def LabReport(FolderPath):
-
-    try:
-        print(FolderPath,"----------------------------------------------")
-        FolderPath = "http://159.65.146.25:5053"+str(FolderPath)
-
-        return send_from_directory(FolderPath=FolderPath, as_attachment=False)
-    except FileNotFoundError:
-        abort(404)
-
-
-
-
-
-
-
-
+    path = "/var/www/HealthCare/Healthmonitor"
+    return path
 
 @app.route('/login', methods=['GET'])
 def login1():
@@ -4419,9 +4404,11 @@ def getlabReportMaster():
         cursor.close()
         print(data)
         if data:
-            Datta = os.listdir("/var/www/HealthCare/Healthmonitor"+str(data[0]["ReportPath"])+"/")
+            filepath = listLabReportPath()
+            filepath = filepath+str(data[0]["ReportPath"])+"/"
+            Reports = os.listdir(filepath)
             # Dataa = LabReport(data[0]["ReportPath"])           
-            Data = {"result":data,"Exact":Datta,"status":"true"}
+            Data = {"result":data,"Reports":Reports,"status":"true"}
             return Data
         
         else:
