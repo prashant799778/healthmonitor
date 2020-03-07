@@ -60,7 +60,7 @@ def LabReport(FolderPath):
 
     try:
         print(FolderPath,"----------------------------------------------")
-      
+        FolderPath = "http://159.65.146.25:5053"+str(FolderPath)
 
         return send_from_directory(FolderPath=FolderPath, as_attachment=False)
     except FileNotFoundError:
@@ -4397,7 +4397,7 @@ def getlabReportMaster():
        
         WhereCondition=""
         
-        if (DoctorId !="") and (PatientId !="") :
+        if (DoctorId !="") and (PatientId !=""):
             
             WhereCondition =  " and  DoctorId    = '" + DoctorId + "'  "
 
@@ -4416,8 +4416,9 @@ def getlabReportMaster():
         cursor.execute(query)
         data = cursor.fetchall()
         cursor.close()
-        if data:           
-            Data = {"result":data,"status":"true"}
+        if data:
+            Dataa = LabReport(data["ReportPath"])           
+            Data = {"result":data,"Extra":Dataa,"status":"true"}
             return Data
         
         else:
