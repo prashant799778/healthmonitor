@@ -4383,13 +4383,13 @@ def getlabReportMaster():
         HubId,HospitalId,DoctorId,PatientId="","","",""
 
         if 'HubId' in request.args:
-            HubId=int(request.args["HubId"])
+            HubId=request.args["HubId"]
         if 'HospitalId' in request.args:
-            HospitalId=int(request.args["HospitalId"])
+            HospitalId=request.args["HospitalId"]
         if 'DoctorId' in request.args:
-            DoctorId=int(request.args["DoctorId"])
+            DoctorId=request.args["DoctorId"]
         if 'PatientId' in request.args:
-            PatientId=int(request.args["PatientId"])
+            PatientId=request.args["PatientId"]
        
         WhereCondition=""
         
