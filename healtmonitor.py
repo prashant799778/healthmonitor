@@ -61,7 +61,7 @@ def LabReport(patientId):
     try:
         print(patientId,"+++++++++++")
 
-        return send_from_directory('LabReport',FolderPath=patientId, as_attachment=False)
+        return send_from_directory('LabReport',filename=patientId, as_attachment=False)
     except FileNotFoundError:
         abort(404)
 
@@ -3969,7 +3969,7 @@ def diagReportMaster():
                         print(type(FolderPath))                     
 
                     file.save(FolderPath)
-                    ReportPath = str(filepathactual)+'/'+str(filename)
+                    ReportPath = str(filepathactual)
 
                     query="update DIAG_ReportMaster set ReportPath = '"+str(ReportPath)+"' where ReportId = '" + str(Id) + "' "
                     cursor = conn.cursor()
@@ -4052,7 +4052,7 @@ def pacsReportMaster():
                         print(type(FolderPath))                     
 
                     file.save(FolderPath)
-                    ReportPath = str(filepathactual)+'/'+str(filename)
+                    ReportPath = str(filepathactual)
 
                     query="update PACS_ReportMaster set ReportPath = '"+str(ReportPath)+"' where ReportId = '" + str(Id) + "' "
                     cursor = conn.cursor()
@@ -4131,7 +4131,7 @@ def dicomReportMaster():
                         print(type(FolderPath))                   
                     else:
                         print("else",FolderPath,filename)                        
-                        FolderPath = str(FolderPath)+'/'+str(filename)
+                        FolderPath = str(FolderPath)
                         print(FolderPath)
                         print(type(FolderPath))                     
 
@@ -4222,7 +4222,7 @@ def labReportMaster():
                         print(type(FolderPath))                     
 
                     file.save(FolderPath)
-                    ReportPath = str(filepathactual)+'/'+str(filename)
+                    ReportPath = str(filepathactual)
 
                     query="update LAB_ReportMaster set ReportPath = '"+str(ReportPath)+"' where ReportId = '" + str(Id) + "' "
                     cursor = conn.cursor()
@@ -4398,11 +4398,11 @@ def getlabReportMaster():
         
         if (DoctorId !="") and (PatientId !="") :
             
-            WhereCondition1 =  " and  DoctorId    = '" + DoctorId + "'  "
+            WhereCondition =  " and  DoctorId    = '" + DoctorId + "'  "
 
         if (PatientId !=""):
             
-            WhereCondition1 =  " and  PatientId    = '" + PatientId + "'  "
+            WhereCondition =  " and  PatientId    = '" + PatientId + "'  "
       
             # y = y +  WhereCondition1
        
