@@ -4380,7 +4380,7 @@ def getdicomReportMaster():
 @app.route('/getlabReportMaster', methods=['GET'])
 def getlabReportMaster():
     try:
-        HubId,HospitalId,DoctorId,PatientId="",""."".""
+        HubId,HospitalId,DoctorId,PatientId="","","",""
 
         if 'HubId' in request.args:
             HubId=int(request.args["HubId"])
