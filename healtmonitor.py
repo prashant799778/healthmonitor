@@ -4525,13 +4525,13 @@ def getMedicationIntegration():
 
         if (PatientId !=""):
             
-            WhereCondition1 =  " and  PatientId    = '" + PatientId + "'  "
+            WhereCondition1 =  " PatientId    = '" + PatientId + "'  "
       
             # y = y +  WhereCondition1
        
 
        
-        query = "select  * from Medication_Integration where Status<>1 " +WhereCondition1  # y 
+        query = "select  * from Medication_Integration where  " +WhereCondition1  # y 
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
