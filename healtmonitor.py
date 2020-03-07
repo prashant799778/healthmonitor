@@ -4406,7 +4406,7 @@ def getlabReportMaster():
        
 
        
-        query = "select  * from LAB_ReportMaster where status<>1 " +WhereCondition1  # y 
+        query = "select HubId,ReportId,HospitalId,PatientId,ReportPath,ReportName,TestType,DateCreate from LAB_ReportMaster where status<>1 " +WhereCondition1  # y 
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
