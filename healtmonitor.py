@@ -4380,29 +4380,28 @@ def getdicomReportMaster():
 @app.route('/getlabReportMaster', methods=['GET'])
 def getlabReportMaster():
     try:
-        PatientId=""
-        DoctorId=" "
+        HubId,HospitalId,DoctorId,PatientId="",""."".""
+
+        if 'HubId' in request.args:
+            HubId=int(request.args["HubId"])
+        if 'HospitalId' in request.args:
+            HospitalId=int(request.args["HospitalId"])
+        if 'DoctorId' in request.args:
+            DoctorId=int(request.args["DoctorId"])
         if 'PatientId' in request.args:
             PatientId=int(request.args["PatientId"])
-        if 'DoctorId' in request.args:
-            DoctorId=request.args["DoctorId"]
-        
        
         WhereCondition=""
         
-        if (DoctorId !="") and (PatientId !=""):
+        if HubId !="" and HospitalId !="" and DoctorId !="" and PatientId !="":
             
-            WhereCondition =  " and  DoctorId    = '" + DoctorId + "'  "
+            WhereCondition =  " where HubId = '" + HubId + "'"
+            WhereCondition =  WhereCondition+" and HospitalId = '" + HospitalId + "'"
+            WhereCondition =  WhereCondition+" and DoctorId = '" + DoctorId + "'"                        
+            WhereCondition =  WhereCondition+" and PatientId = '" + PatientId + "'"
 
-        if (PatientId !=""):
-            
-            WhereCondition =  " PatientId    = "+str(PatientId)+"  "
-      
-            # y = y +  WhereCondition1
-       
-
-       
-        query = "select HubId,ReportId,HospitalId,PatientId,ReportPath,ReportName,TestType,date_format(DateCreate,'%Y-%m-%d %H:%i:%s')DateCreate from LAB_ReportMaster where  " +WhereCondition+ ";"  # y 
+        # query = "select HubId,ReportId,HospitalId,PatientId,ReportPath,ReportName,TestType,date_format(DateCreate,'%Y-%m-%d %H:%i:%s')DateCreate from LAB_ReportMaster where  " +WhereCondition+ ";"  # y 
+        query = "select ReportPath from LAB_ReportMaster " +WhereCondition+ ";"  # y         
         print(query)
         conn=Connection()
         cursor = conn.cursor()
@@ -4415,7 +4414,7 @@ def getlabReportMaster():
             filepath = filepath+str(data[0]["ReportPath"])+"/"
             Reports = os.listdir(filepath)
             # Dataa = LabReport(data[0]["ReportPath"])           
-            Data = {"result":data,"Reports":Reports,"status":"true"}
+            Data = {"Reports":Reports,"status":"true"}
             return Data
         
         else:
