@@ -136,18 +136,18 @@ def login1():
                 y=  d["Usertype"]
                 y3= d["Usertype_Id"]
                 Nurse=""
-                Email1 = d['Email']
+                # Email1 = d['Email']
 
-                data2 = location.city_state_country("47.470706,-99.704723")
-                print(data2)
+                # data2 = location.city_state_country("47.470706,-99.704723")
+                # print(data2)
 
-                if data1 != data2:
-                    msg = Message("Vineet Tomar",sender="vineet.fourbrick@gmail.com",recipients=[Email1])
-                    msg.body = f"You Logged in from different location which is {data2}"
-                    mail.send(msg)
-                    return {'result':'Mail send !'}
-                else:
-                    return {"result":data2}
+                # if data1 != data2:
+                #     msg = Message("Vineet Tomar",sender="vineet.fourbrick@gmail.com",recipients=[Email1])
+                #     msg.body = f"You Logged in from different location which is {data2}"
+                #     mail.send(msg)
+                #     return {'result':'Mail send !'}
+                # else:
+                #     return {"result":data2}
 
                 if d["Usertype"]== 'Nurse':                    
                     query= "select hospitalId as Hospital_Id from userHospitalMapping where Usertype_Id=3 and  userId= '" + str(y9) + "' "
