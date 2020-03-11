@@ -17,7 +17,7 @@ from config import Connection
 from flask import Flask, render_template
 from flask import Flask, send_from_directory, abort
 from flask_mail import Mail, Message
-import location1
+import location
 # import socketio
 
 # standard Python
