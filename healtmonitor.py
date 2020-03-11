@@ -227,9 +227,7 @@ def login1q():
         name = request.args['name']
         browserId=request.args['browserId']
         Name=name
-        
-             
-          
+
         query ="select  um.Email,um.ID,um.name as name,us.Usertype as Usertype,um.Usertype_Id as Usertype_Id from userMaster  as um,Usertype_master as us  where um.Usertype_Id=us.ID and  um.Email = '" + name + "' and password='" + password + "' and um.Status<>'2' ;"   
         conn=Connection()
         cursor = conn.cursor()
@@ -237,8 +235,6 @@ def login1q():
         loginuser = cursor.fetchall()
         print("11111111111",loginuser)
        
-
-
         if loginuser==():
             query="select  counter from userMaster  where Email='" + name + "' ; "
             conn=Connection()
@@ -247,10 +243,8 @@ def login1q():
             data=cursor.fetchone()
             if data != ():
                 print(1)
-                p=data["counter"]
-               
+                p=data["counter"]               
                 if (int(p)<3):
-
                     data["counter"]=int(p)+1
                     print(data["counter"])
                     query="update  userMaster set counter='" + str(data["counter"]) + "' where Email='" + name + "' ;"
@@ -263,7 +257,6 @@ def login1q():
                     p=data["counter"]
                     print(p)
                     if (int(p) >= 3):
-
                         query="update  userMaster set Status='2' where Email='" + name + "' and counter='3' ;"
                         cursor.execute(query)
                         conn.commit()
@@ -272,16 +265,10 @@ def login1q():
                     else: 
                         print("1111111111")
                         data={"status":"false","result":"Please Fill Your Correct Credentials"}
-                        return data
-
-
-                        
-                        
+                        return data                                                
                 else:
                     data={"status":"false","result":"Acess Denied,Please Contact Admin"}
                     return data
-
-
             else:
                 data={"status":"false","result":"Please Fill Your Correct Credentials"}
                 return data
@@ -295,10 +282,7 @@ def login1q():
                 y=  d["Usertype"]
                 y3= d["Usertype_Id"]
                 Nurse=""
-
-                if  d["Usertype"]== 'Nurse':
-                    
-                    
+                if d["Usertype"]== 'Nurse':                    
                     query= "select hospitalId as Hospital_Id from userHospitalMapping where Usertype_Id=3 and  userId= '" + str(y9) + "' "
                     cursor = conn.cursor()
                     cursor.execute(query)
@@ -309,9 +293,8 @@ def login1q():
                     cursor = conn.cursor()
                     cursor.execute(query2)
                     Nurse = cursor.fetchall()
-
                 
-                if  d["Usertype"]== 'Doctor':
+                if d["Usertype"]== 'Doctor':
                     query= "select browserId,browserStatus from userMaster where Email= '" + name + "' and password='" + password + "'and Usertype_Id =2; "
                     cursor = conn.cursor()
                     cursor.execute(query)
@@ -320,34 +303,24 @@ def login1q():
                     cursor = conn.cursor()
                     cursor.execute(query)
                     conn.commit()       
-                    print(loginmultiple)
-                   
+                    print(loginmultiple)                   
                     print(type(browserId))
                    
-
                     if (loginmultiple["browserId"]== browserId) :
                         query="update userMaster set browserStatus=1  where Email= '" + name + "' and password='" + password + "' "
                         cursor = conn.cursor()
                         cursor.execute(query)
                         conn.commit()
-                       
-                      
-                        if  (loginmultiple["browserStatus"]!= 1):
-                           
+                                             
+                        if (loginmultiple["browserStatus"]!= 1):                           
                             data={"result":"true","status":"You Already login through another Device"}
                             return data
-                        else:
-                           
+                        else:                           
                             query="update userMaster set browserStatus=1  where Email= '" + name + "' and password='" + password + "' "
                             cursor = conn.cursor()
                             cursor.execute(query)
                             conn.commit()
-                           
-                            
 
-
-
-                    
                     else:
                         query="select browserStatus from userMaster where Email= '" + name + "' and password='" + password + "'and Usertype_Id =2 "
                         print("sss")
@@ -360,10 +333,8 @@ def login1q():
                         conn.commit()
                            
                         if (data["browserStatus"] !=1):
-
                             data={"result":"true","status":"You Already login through another Device"}
-                            return data
-                        
+                            return data                       
                         else:
                             query="update userMaster set browserId= '" + str(browserId) + "',browserStatus=1  where Email= '" + name + "' and password='" + password + "' "
                             print(query)
@@ -385,11 +356,6 @@ def login1q():
                         Nurs = cursor.fetchone()
                         Nurse.append(Nurs)
                          
-
-
-
-                    
-
                 if  d["Usertype"]== 'Operation':
                     query= "select browserId,browserStatus from userMaster where Email= '" + name + "' and password='" + password + "'and Usertype_Id =4; "
                     cursor = conn.cursor()
@@ -400,37 +366,25 @@ def login1q():
                     cursor = conn.cursor()
                     cursor.execute(query)
                     conn.commit()
-                   
-
-                    
+                                       
                     print(type(browserId))
                    
-
                     if (loginmultiple["browserId"]== browserId) :
                         query="update userMaster set browserStatus=1  where Email= '" + name + "' and password='" + password + "' "
                         cursor = conn.cursor()
                         cursor.execute(query)
                         conn.commit()
-                       
-                      
-                        if  (loginmultiple["browserStatus"]!= 1):
-                           
+                                             
+                        if (loginmultiple["browserStatus"]!= 1):                           
                             data={"result":"true","status":"You Already login through another Device"}
                             return data
-                        else:
-                           
+                        else:                           
                             query="update userMaster set browserStatus=1  where Email= '" + name + "' and password='" + password + "' "
                             cursor = conn.cursor()
                             cursor.execute(query)
                             conn.commit()
-                           
-                            
 
-
-
-                    
-                    else:
-                        
+                    else:                        
                         query="select browserStatus from userMaster where Email= '" + name + "' and password='" + password + "'and Usertype_Id =4 "
                         print("sss")
                         cursor = conn.cursor()
@@ -446,13 +400,11 @@ def login1q():
                             cursor = conn.cursor()
                             cursor.execute(query)
                             conn.commit()
-                           
-                            
+                                
                             data={"result":"true","status":"You Already login through another Device"}
                             return data
                         
-                        else:
-                            
+                        else:                            
                             query="update userMaster set browserId= '" + str(browserId) + "',browserStatus=1  where Email= '" + name + "' and password='" + password + "' "
                             print(query)
                             cursor = conn.cursor()
@@ -491,11 +443,9 @@ def login1q():
                         query="update userMaster set browserStatus=1  where Email= '" + name + "' and password='" + password + "' "
                         cursor = conn.cursor()
                         cursor.execute(query)
-                        conn.commit()
-                       
+                        conn.commit()                       
                       
-                        if  (loginmultiple["browserStatus"]!= 1):
-                           
+                        if (loginmultiple["browserStatus"]!= 1):                           
                             data={"result":"true","status":"You Already login through another Device"}
                             return data
                         else:
@@ -503,13 +453,7 @@ def login1q():
                             query="update userMaster set browserStatus=1  where Email= '" + name + "' and password='" + password + "' "
                             cursor = conn.cursor()
                             cursor.execute(query)
-                            conn.commit()
-                           
-                            
-
-
-
-                    
+                            conn.commit()                    
                     else:
                         query="select browserStatus from userMaster where Email= '" + name + "' and password='" + password + "'and Usertype_Id =6 "
                         print("sss")
@@ -527,8 +471,7 @@ def login1q():
                             conn.commit()
                            
                             data={"result":"true","status":"You Already login through another Device"}
-                            return data
-                        
+                            return data                        
                         else:
                             query="update userMaster set browserId= '" + str(browserId) + "',browserStatus=1  where Email= '" + name + "' and password='" + password + "' "
                             print(query)
