@@ -679,6 +679,7 @@ def allHospital():
                 WhereCondition = " where HubMaster.HubName LIKE '" + "%" + str(searchFilter) + "%" + "'"
         query="select Hospital_master.ID,Hospital_master.hospital_name,Hospital_master.Address,"
         query=query+"HubMaster.HubName,HubMaster.ID as HubId  from Hospital_master inner join HubMaster on Hospital_master.HubId=HubMaster.ID where  " + str(WhereCondition) + " order by Hospital_master.ID DESC;"
+        print(query)
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
