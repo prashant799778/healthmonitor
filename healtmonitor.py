@@ -616,7 +616,7 @@ def login1q():
                             cursor.execute(query)
                             conn.commit()       
             
-            DeviceMac,y9 = " ", ""
+            DeviceMac,y9 = "", ""
             if 'DeviceMac' in request.args:
                 DeviceMac=request.args["DeviceMac"]
 
