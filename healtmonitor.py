@@ -136,11 +136,11 @@ def login1():
                 y=  d["Usertype"]
                 y3= d["Usertype_Id"]
                 Nurse=""
-                Email1 = i['Email']
+                Email1 = d['Email']
 
                 data2 = location.city_state_country("47.470706,-99.704723")
                 print(data2)
-                
+
                 if data1 != data2:
                     msg = Message("Vineet Tomar",sender="vineet.fourbrick@gmail.com",recipients=[Email1])
                     msg.body = f"You Logged in from different location which is {data2}"
