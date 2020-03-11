@@ -4786,55 +4786,6 @@ def novastore():
 
 ######################################################START#################################################################################
 
-
-@app.route('/getDoctorList',methods=['POST'])
-def getDoctorList():
-
-    try:
-        json1=request.get_data()
-        data=json.loads(json1.decode("utf-8"))
-        
-        query1 = 'select ID,DoctorName from DoctorMaster where hospitalId="'+str(data['HospitalId'])+'"'
-        conn = Connection()
-        cursor = conn.cursor()
-        cursor.execute(query1)
-        data2 = cursor.fetchall()
-        cursor.close()
-        print('637458564')
-        data3={"message":"Doctor_List Found","result":data2,"status":"True"}
-        return data3
-    
-    except Exception as e :
-        print("Exception---->" +str(e))           
-        output = {"result":"something went wrong","status":"false"}
-        return output
-
-@app.route('/getPatientList',methods=['POST'])
-def getPatientList():
-
-    try:
-        json1=request.get_data()
-        print(json1)
-        data=json.loads(json1.decode("utf-8"))
-
-        query1 = 'select pm.hospitalId,pdm.Patient_Id,pdm.doctorId,pm.PatientName from patientDoctorMapping as pdm,Patient_master as pm where pdm.Patient_Id=pm.PatientId and pdm.doctorId="'+str(data['doctorId'])+'"'
-        conn = Connection()
-        cursor = conn.cursor()
-        cursor.execute(query1)
-        data2 = cursor.fetchall()
-        cursor.close()
-        print('637458564')
-        data3={"message":"Patient_List Found","result":data2,"status":"True"}
-        return data3
-    
-    except Exception as e :
-        print("Exception---->" +str(e))           
-        output = {"result":"something went wrong","status":"false"}
-        return output 
-
-    
-
-
 @app.route('/getPatientDetail',methods=['POST'])
 def getPatientDetail():
     try:
@@ -4870,29 +4821,6 @@ def getPatientDetail():
         output = {"result":"something went wrong","status":"false"}
         return output
 
-@app.route('/sendEmail',methods=['POST'])
-def sendMail():
-
-    try:
-        json1=request.get_data()
-        data=json.loads(json1.decode("utf-8"))
-
-        query = 'select name,Email from userMaster where Email="'+str(data['Email'])+'" and password="'+str(data['password'])+'"'
-        conn = Connection()
-        cursor = conn.cursor()
-        cursor.execute(query)
-        data = cursor.fetchone()
-        print(data)
-        if data:
-            data1 = data['Email']
-            msg = Message("This is a verification for Login",sender="admin@gmail.com",recipients=[data1])
-            msg.body = "User Login from different Location!!!"
-            mail.send(msg)
-            return {'result':'Mail send !'}
-    except Exception as e:
-        print("Exception---->" +str(e))           
-        output = {"result":"something went wrong","status":"false"}
-        return output
 
 
 
