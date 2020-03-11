@@ -16,6 +16,8 @@ import pytz
 from config import Connection
 from flask import Flask, render_template
 from flask import Flask, send_from_directory, abort
+from flask_mail import Mail, Message
+import location1
 # import socketio
 
 # standard Python
@@ -25,6 +27,18 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
 # socketio = SocketIO(app, cors_allowed_origins="*")
 # sio = socketio.Client()
+
+
+app.config.update(
+    DEBUG=True,
+    MAIL_SERVER='smtp.gmail.com',
+    MAIL_PORT=465,
+    MAIL_USE_SSL=True,
+    MAIL_USERNAME='vineet.fourbrick@gmail.com',
+    MAIL_PASSWORD='Vineet@0806'
+)
+mail = Mail(app)
+
 
 class JSONEncoder(json.JSONEncoder):
     def default(self, o):
@@ -67,7 +81,20 @@ def login1():
         loginuser = cursor.fetchall()
         print("11111111111",loginuser)
 
+        data1 = location1.city_state_country("28.535517, 77.391029")
+        print(data1)
+
         if loginuser==():
+            data2 = location1.city_state_country("47.470706,-99.704723")
+            print(data2)
+            if data1 != data2:
+                msg = Message("Vineet Tomar",sender="vineet.fourbrick@gmail.com",recipients=[Email])
+                msg.body = f"You Logged in from different location which is {data2}"
+                mail.send(msg)
+                return {'result':'Mail send !'}
+            else:
+                return {"result":data2}
+
             query="select  counter from userMaster  where Email='" + name + "' ; "
             conn=Connection()
             cursor = conn.cursor()
