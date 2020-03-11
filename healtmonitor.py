@@ -722,7 +722,8 @@ def allDoctor():
         if 'searchFilter' in request.args:
             if request.args['searchFilter'] != "":
                 searchFilter = request.args["searchFilter"]
-                WhereCondition = WhereCondition + " and um.name LIKE '" + "%" + str(searchFilter) + "%" + "' OR um.Email LIKE '" + "%" + str(searchFilter) + "%" + "' OR hsm.hospital_name LIKE '" + "%" + str(searchFilter) + "%" + "' OR um.mobile LIKE '" + "%" + str(searchFilter) + "%" + "'"
+                WhereCondition = WhereCondition + " and um.Email LIKE '" + "%" + str(searchFilter) + "%" + "
+                # WhereCondition = WhereCondition + " and um.name LIKE '" + "%" + str(searchFilter) + "%" + "' OR um.Email LIKE '" + "%" + str(searchFilter) + "%" + "' OR hsm.hospital_name LIKE '" + "%" + str(searchFilter) + "%" + "' OR um.mobile LIKE '" + "%" + str(searchFilter) + "%" + "'"
     
         conn=Connection()
         cursor = conn.cursor()
