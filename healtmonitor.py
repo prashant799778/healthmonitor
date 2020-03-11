@@ -672,11 +672,11 @@ def login1q():
 @app.route('/allHospital', methods=['post'])
 def allHospital():
     try:
-        # WhereCondition = ""
-        # if 'searchFilter' in request.args:
-        #     if request.args['searchFilter'] != "":
-        #         searchFilter = request.args["searchFilter"]
-        #         WhereCondition =  " where Hospital_master.hospital_name LIKE '" + "%" + str(searchFilter) + "%" + "' OR HubMaster.HubName LIKE '" + "%" + str(searchFilter) + "%" "'"
+        WhereCondition = " "
+        if 'searchFilter' in request.args:
+            if request.args['searchFilter'] != "":
+                searchFilter = request.args["searchFilter"]
+                WhereCondition = " where and Hospital_master.hospital_name LIKE '" + "%" + str(searchFilter) + "%" + "'"
         query="select Hospital_master.ID,Hospital_master.hospital_name,Hospital_master.Address,"
         query=query+"HubMaster.HubName,HubMaster.ID as HubId  from Hospital_master inner join HubMaster on Hospital_master.HubId=HubMaster.ID order by Hospital_master.ID DESC;"
         conn=Connection()
@@ -722,7 +722,7 @@ def allDoctor():
         if 'searchFilter' in request.args:
             if request.args['searchFilter'] != "":
                 searchFilter = request.args["searchFilter"]
-                WhereCondition = WhereCondition + " and um.Email LIKE '" + "%" + str(searchFilter) + "%" + "'"
+                WhereCondition = WhereCondition + " and um.name LIKE '" + "%" + str(searchFilter) + "%" + "'"
                 # WhereCondition = WhereCondition + " and um.name LIKE '" + "%" + str(searchFilter) + "%" + "' OR um.Email LIKE '" + "%" + str(searchFilter) + "%" + "' OR hsm.hospital_name LIKE '" + "%" + str(searchFilter) + "%" + "' OR um.mobile LIKE '" + "%" + str(searchFilter) + "%" + "'"
     
         conn=Connection()
