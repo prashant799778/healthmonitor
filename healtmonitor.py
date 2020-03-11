@@ -34,8 +34,8 @@ app.config.update(
     MAIL_SERVER='smtp.gmail.com',
     MAIL_PORT=465,
     MAIL_USE_SSL=True,
-    MAIL_USERNAME='vineettomar056@gmail.com',
-    MAIL_PASSWORD='vineettomar0608'
+    MAIL_USERNAME='vineet.fourbrick@gmail.com',
+    MAIL_PASSWORD='Vineet@0806'
 )
 mail = Mail(app)
 
@@ -127,27 +127,26 @@ def login1():
                 return data
 
         else:
-    
-            query="update userMaster set counter='0' where Email='" + name + "' and password='" + password + "';"
-            cursor.execute(query)
-            conn.commit()
-            for d in loginuser:
-                Email1 = d['Email']
-                y9=d["ID"]
-                y=  d["Usertype"]
-                y3= d["Usertype_Id"]
-                Nurse=""
-
+            for i in loginuser:
+                Email1 = i['Email']
                 data2 = location.city_state_country("47.470706,-99.704723")
                 print(data2)
-
                 if data1 != data2:
-                    msg = Message("Vineet Tomar",sender="vineettomar056@gmail.com",recipients=[Email1])
+                    msg = Message("Vineet Tomar",sender="vineet.fourbrick@gmail.com",recipients=[Email1])
                     msg.body = f"You Logged in from different location which is {data2}"
                     mail.send(msg)
                     return {'result':'Mail send !'}
                 else:
                     return {"result":data2}
+
+            query="update userMaster set counter='0' where Email='" + name + "' and password='" + password + "';"
+            cursor.execute(query)
+            conn.commit()
+            for d in loginuser:
+                y9=d["ID"]
+                y=  d["Usertype"]
+                y3= d["Usertype_Id"]
+                Nurse=""
 
                 if d["Usertype"]== 'Nurse':                    
                     query= "select hospitalId as Hospital_Id from userHospitalMapping where Usertype_Id=3 and  userId= '" + str(y9) + "' "
