@@ -16,8 +16,8 @@ import pytz
 from config import Connection
 from flask import Flask, render_template
 from flask import Flask, send_from_directory, abort
-from flask_mail import Mail, Message
-import location
+# from flask_mail import Mail, Message
+# import location
 # import socketio
 
 # standard Python
@@ -29,15 +29,15 @@ app.config['SECRET_KEY'] = 'secret!'
 # sio = socketio.Client()
 
 
-app.config.update(
-    DEBUG=True,
-    MAIL_SERVER='smtp.gmail.com',
-    MAIL_PORT=465,
-    MAIL_USE_SSL=True,
-    MAIL_USERNAME='vineet.fourbrick@gmail.com',
-    MAIL_PASSWORD='Vineet@0806'
-)
-mail = Mail(app)
+# app.config.update(
+#     DEBUG=True,
+#     MAIL_SERVER='smtp.gmail.com',
+#     MAIL_PORT=465,
+#     MAIL_USE_SSL=True,
+#     MAIL_USERNAME='vineet.fourbrick@gmail.com',
+#     MAIL_PASSWORD=''
+# )
+# mail = Mail(app)
 
 
 class JSONEncoder(json.JSONEncoder):
