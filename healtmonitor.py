@@ -927,7 +927,7 @@ def allPatient():
             return {"result":"No Record Found","status":"true"}
     
     except Exception as e :
-        print("Exception---->" +str(e))           
+        print("Exception---->" +str(e))
         output = {"result":"something went wrong","status":"false"}
         return output
 
