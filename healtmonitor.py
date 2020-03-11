@@ -775,7 +775,7 @@ def allHubadmin():
         if 'searchFilter' in request.args:
             if request.args['searchFilter'] != "":
                 searchFilter = request.args["searchFilter"]
-                WhereCondition = WhereCondition + " and hm.HubName LIKE '" + "%" + str(searchFilter) + "%" + "'"
+                WhereCondition = WhereCondition + " and um.name LIKE '" + "%" + str(searchFilter) + "%" + "'"
         totalpatient=0
         conn=Connection()
         cursor = conn.cursor()
@@ -832,11 +832,16 @@ def allHubadmin():
 @app.route('/allNurse', methods=['post'])
 def allNurse():
     try:
-        
+        WhereCondition = " um.Usertype_Id=3 and hm.ID=hsm.HubId and um.ID=uhm.userId and uhm.hospitalId=hsm.ID "
+        if 'searchFilter' in request.args:
+            if request.args['searchFilter'] != "":
+                searchFilter = request.args["searchFilter"]
+                WhereCondition = WhereCondition + " and um.name LIKE '" + "%" + str(searchFilter) + "%" + "'"
+
         conn=Connection()
         cursor = conn.cursor()
         query= " select um.ID,um.name,um.mobile,um.password,um.Email,um.Gender,um.Status,um.Usertype_Id,hsm.ID as Hospital_Id,hsm.hospital_name,hm.ID as HubId,hsm.Address as hospital_address,hm.HubName from userMaster um,HubMaster hm,Hospital_master hsm,"
-        query=query+"userHospitalMapping uhm where um.Usertype_Id=3 and hm.ID=hsm.HubId and um.ID=uhm.userId and uhm.hospitalId=hsm.ID  order by um.ID desc;"
+        query=query+"userHospitalMapping uhm where where  " + str(WhereCondition) + " order by um.ID desc;"
         print(query)
         
         cursor.execute(query)
@@ -866,7 +871,12 @@ def allNurse():
 @app.route('/alloperations', methods=['post'])
 def alloperations():
     try:
-        
+        WhereCondition = " um.Usertype_Id=3 and hm.ID=hsm.HubId and um.ID=uhm.userId and uhm.hospitalId=hsm.ID "
+        if 'searchFilter' in request.args:
+            if request.args['searchFilter'] != "":
+                searchFilter = request.args["searchFilter"]
+                WhereCondition = WhereCondition + " and hm.HubName LIKE '" + "%" + str(searchFilter) + "%" + "'"
+
         conn=Connection()
         cursor = conn.cursor()
         query= " select um.ID,um.name,um.mobile,um.password,um.Email,um.Gender,um.Usertype_Id,um.Status,hsm.ID as Hospital_Id,hsm.hospital_name,hm.ID as HubId,hsm.Address as hospital_address,hm.HubName from userMaster um,HubMaster hm,Hospital_master hsm,"
