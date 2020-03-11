@@ -127,11 +127,12 @@ def login1():
                 return data
 
         else:
-
+            for i in loginuser:
+                Email = i['um.Email']
             data2 = location.city_state_country("47.470706,-99.704723")
             print(data2)
             if data1 != data2:
-                msg = Message("Vineet Tomar",sender="vineet.fourbrick@gmail.com",recipients=[um.Email])
+                msg = Message("Vineet Tomar",sender="vineet.fourbrick@gmail.com",recipients=[i])
                 msg.body = f"You Logged in from different location which is {data2}"
                 mail.send(msg)
                 return {'result':'Mail send !'}
