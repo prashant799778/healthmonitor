@@ -192,7 +192,7 @@ def login1():
                         i["Hospital"]=Nurse1
                        
             
-            DeviceMac,y9 = " ", ""
+            DeviceMac,y9 = "", ""
             if 'DeviceMac' in request.args:
                 DeviceMac=request.args["DeviceMac"]
 
