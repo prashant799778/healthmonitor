@@ -85,15 +85,6 @@ def login1():
         print(data1)
 
         if loginuser==():
-            data2 = location.city_state_country("47.470706,-99.704723")
-            print(data2)
-            if data1 != data2:
-                msg = Message("Vineet Tomar",sender="vineet.fourbrick@gmail.com",recipients=[Email])
-                msg.body = f"You Logged in from different location which is {data2}"
-                mail.send(msg)
-                return {'result':'Mail send !'}
-            else:
-                return {"result":data2}
 
             query="select  counter from userMaster  where Email='" + name + "' ; "
             conn=Connection()
@@ -136,6 +127,17 @@ def login1():
                 return data
 
         else:
+            
+            data2 = location.city_state_country("47.470706,-99.704723")
+            print(data2)
+            if data1 != data2:
+                msg = Message("Vineet Tomar",sender="vineet.fourbrick@gmail.com",recipients=[Email])
+                msg.body = f"You Logged in from different location which is {data2}"
+                mail.send(msg)
+                return {'result':'Mail send !'}
+            else:
+                return {"result":data2}
+
             query="update userMaster set counter='0' where Email='" + name + "' and password='" + password + "';"
             cursor.execute(query)
             conn.commit()
