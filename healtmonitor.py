@@ -32,9 +32,6 @@ class JSONEncoder(json.JSONEncoder):
             return str(o)
         return json.JSONEncoder.default(self, o)
 
-
-
-
 def getDiagReportPath(filename):
 
     path = "/var/www/HealthCare/Healthmonitor/DiagnosticReport"+filename
@@ -62,17 +59,13 @@ def login1():
         password = request.args['password']
         name = request.args['name']
         Name=name
-        
-             
-          
+
         query ="select  um.Email,um.ID,um.name as name,us.Usertype as Usertype,um.Usertype_Id as Usertype_Id from userMaster  as um,Usertype_master as us  where um.Usertype_Id=us.ID and  um.Email = '" + name + "' and password='" + password + "' and um.Status<>'2' ;"   
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
         loginuser = cursor.fetchall()
         print("11111111111",loginuser)
-       
-
 
         if loginuser==():
             query="select  counter from userMaster  where Email='" + name + "' ; "
@@ -108,15 +101,9 @@ def login1():
                         print("1111111111")
                         data={"status":"false","result":"Login Failed"}
                         return data
-
-
-                        
-                        
                 else:
                     data={"status":"false","result":"Acess Denied,Please Contact Admin"}
                     return data
-
-
             else:
                 data={"status":"false","result":"Login Failed"}
                 return data
@@ -131,9 +118,7 @@ def login1():
                 y3= d["Usertype_Id"]
                 Nurse=""
 
-                if  d["Usertype"]== 'Nurse':
-                    
-                    
+                if d["Usertype"]== 'Nurse':                    
                     query= "select hospitalId as Hospital_Id from userHospitalMapping where Usertype_Id=3 and  userId= '" + str(y9) + "' "
                     cursor = conn.cursor()
                     cursor.execute(query)
@@ -144,10 +129,8 @@ def login1():
                     cursor = conn.cursor()
                     cursor.execute(query2)
                     Nurse = cursor.fetchall()
-
                 
-                if  d["Usertype"]== 'Doctor':
-                    
+                if d["Usertype"]== 'Doctor':
                     Nurse=[]
                     query= "select hospitalId as Hospital_Id from userHospitalMapping where  Usertype_Id=2 and userId= '" + str(y9) + "' "
                     cursor = conn.cursor()
@@ -162,7 +145,7 @@ def login1():
                         Nurs = cursor.fetchone()
                         Nurse.append(Nurs)
 
-                if  d["Usertype"]== 'Operation':
+                if d["Usertype"]== 'Operation':
                     query= "select hospitalId as Hospital_Id from userHospitalMapping where  Usertype_Id=4 and userId= '" + str(y9) + "' "
                     cursor = conn.cursor()
                     cursor.execute(query)
@@ -176,7 +159,7 @@ def login1():
                     Nurse=cursor.fetchone()
                     print("Operation",Nurse)
 
-                if  d["Usertype"]== 'HubDoctor':
+                if d["Usertype"]== 'HubDoctor':
                     Nurse=[]
                     query= "select hubId as HubId from userHubMapping where   userId= '" + str(y9) + "' "
                     cursor = conn.cursor()
@@ -190,8 +173,7 @@ def login1():
                         cursor.execute(query2)
                         Nurse1 = cursor.fetchall()
                         i["Hospital"]=Nurse1
-                       
-            
+
             DeviceMac,y9 = "", ""
             if 'DeviceMac' in request.args:
                 DeviceMac=request.args["DeviceMac"]
@@ -206,34 +188,26 @@ def login1():
                 PatientData= cursor.fetchone()
                 print("PatientData==============================",PatientData)
                 print(PatientData)
-
-               
             else:
                 query2 = " select   * from Patient_master where Status<>'2'  and Usertype_Id ='" + str(y3) + "';" 
                 cursor = conn.cursor()
                 cursor.execute(query2)
                 PatientData= cursor.fetchone()
-
-           
             
             if PatientData !=None:
-
                 Count= 1
                 PatientData["heartRate"]=json.loads(PatientData["heartRate"].replace("'",'"'))
                 PatientData["highPressure"]=json.loads(PatientData["highPressure"].replace("'",'"'))
                 PatientData["lowPressure"]=json.loads(PatientData["lowPressure"].replace("'",'"'))
                 PatientData["pulseRate"]=json.loads(PatientData["pulseRate"].replace("'",'"'))
                 PatientData["spo2"]=json.loads(PatientData["spo2"].replace("'",'"'))
-                PatientData["temperature"]=json.loads(PatientData["temperature"].replace("'",'"'))
-            
+                PatientData["temperature"]=json.loads(PatientData["temperature"].replace("'",'"'))            
             else:
                 Count=0
 
             cursor.close()
-
             data={"status":"true","result":loginuser[0],"Nurse Details":Nurse,"Patient Details":PatientData,"Count":Count}                      
             return data
-
     
     except KeyError as e:
         print("Exception---->" +str(e))        
@@ -244,9 +218,6 @@ def login1():
         print("Exception---->" +str(e))           
         output = {"result":"something went wrong","status":"false"}
         return output
-
-
-
 
 @app.route('/login1', methods=['GET'])
 def login1q():
@@ -1782,7 +1753,7 @@ def updateMessageStatus():
         return output  
 
     except Exception as e :
-        print("Exceptio`121QWAaUJIHUJG n---->" +str(e))    
+        print("Exception---->" +str(e))    
         output = {"result":"something went wrong","status":"false"}
         return output        
 
