@@ -714,11 +714,11 @@ def allHospital():
 @app.route('/allDoctor', methods=['post'])
 def allDoctor():
     try:
-        WhereCondition = " where "
+        WhereCondition = ""
         if 'searchFilter' in request.args:
             if request.args['searchFilter'] != "":
                 searchFilter = request.args["searchFilter"]
-                WhereCondition = WhereCondition + " um.name LIKE '" + "%" + str(searchFilter) + "%" + "' "
+                WhereCondition = " where um.name LIKE '" + "%" + str(searchFilter) + "%" + "' "
     
         conn=Connection()
         cursor = conn.cursor()
