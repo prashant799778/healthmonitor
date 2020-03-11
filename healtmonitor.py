@@ -81,19 +81,19 @@ def login1():
         loginuser = cursor.fetchall()
         print("11111111111",loginuser)
 
-        data1 = location1.city_state_country("28.535517, 77.391029")
-        print(data1)
+        # data1 = location1.city_state_country("28.535517, 77.391029")
+        # print(data1)
 
         if loginuser==():
-            data2 = location1.city_state_country("47.470706,-99.704723")
-            print(data2)
-            if data1 != data2:
-                msg = Message("Vineet Tomar",sender="vineet.fourbrick@gmail.com",recipients=[Email])
-                msg.body = f"You Logged in from different location which is {data2}"
-                mail.send(msg)
-                return {'result':'Mail send !'}
-            else:
-                return {"result":data2}
+            # data2 = location1.city_state_country("47.470706,-99.704723")
+            # print(data2)
+            # if data1 != data2:
+            #     msg = Message("Vineet Tomar",sender="vineet.fourbrick@gmail.com",recipients=[Email])
+            #     msg.body = f"You Logged in from different location which is {data2}"
+            #     mail.send(msg)
+            #     return {'result':'Mail send !'}
+            # else:
+            #     return {"result":data2}
 
             query="select  counter from userMaster  where Email='" + name + "' ; "
             conn=Connection()
