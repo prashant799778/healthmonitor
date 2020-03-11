@@ -771,11 +771,16 @@ def allDoctor():
 @app.route('/allHubadmin', methods=['post'])
 def allHubadmin():
     try:
+        WhereCondition = " um.Usertype_Id=6 and um.ID=uhm.userId and uhm.hubId=hm.ID "
+        if 'searchFilter' in request.args:
+            if request.args['searchFilter'] != "":
+                searchFilter = request.args["searchFilter"]
+                WhereCondition = WhereCondition + " and hm.HubName LIKE '" + "%" + str(searchFilter) + "%" + "'"
         totalpatient=0
         conn=Connection()
         cursor = conn.cursor()
         query= " select um.ID,um.name,um.mobile,um.password,um.Email,um.Status,um.Gender,um.Usertype_Id,hm.ID as HubId,hm.HubName from userMaster um,HubMaster hm, "
-        query=query+" userHubMapping uhm where um.Usertype_Id=6 and um.ID=uhm.userId and uhm.hubId=hm.ID  order by um.ID desc;"
+        query=query+" userHubMapping uhm where  " + str(WhereCondition) + "  order by um.ID desc;"
         # print(query)
         
         cursor.execute(query)
