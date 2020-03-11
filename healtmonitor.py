@@ -55,11 +55,6 @@ def getLabReportPath(filename):
     path = "/var/www/HealthCare/Healthmonitor/LabReport"+filename
     return path
 
-def listLabReportPath():
-
-    path = "/var/www/HealthCare/Healthmonitor"
-    return path
-
 @app.route('/login', methods=['GET'])
 def login1():
     try:
