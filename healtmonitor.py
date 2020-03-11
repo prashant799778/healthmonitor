@@ -34,8 +34,8 @@ app.config.update(
     MAIL_SERVER='smtp.gmail.com',
     MAIL_PORT=465,
     MAIL_USE_SSL=True,
-    MAIL_USERNAME='vineet.fourbrick@gmail.com',
-    MAIL_PASSWORD='Vineet@0806'
+    MAIL_USERNAME='vineettomar056@gmail.com',
+    MAIL_PASSWORD='vineettomar0608'
 )
 mail = Mail(app)
 
@@ -132,7 +132,7 @@ def login1():
                 data2 = location.city_state_country("47.470706,-99.704723")
                 print(data2)
                 if data1 != data2:
-                    msg = Message("Vineet Tomar",sender="vineet.fourbrick@gmail.com",recipients=[Email1])
+                    msg = Message("Vineet Tomar",sender="vineettomar056@gmail.com",recipients=[Email1])
                     msg.body = f"You Logged in from different location which is {data2}"
                     mail.send(msg)
                     return {'result':'Mail send !'}
