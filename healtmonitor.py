@@ -4372,7 +4372,7 @@ def getlabReportMaster():
             WhereCondition =  WhereCondition+" and DoctorId = '" + DoctorId + "'"                        
             WhereCondition =  WhereCondition+" and PatientId = '" + PatientId + "'"
 
-        query = "select lrm.HubId,lrm.ReportId,lrm.HospitalId,lrm.PatientId,concat('"+ GetBaseURL() +"',lrm.ReportPath),lrm.ReportName,ttm.TestType,date_format(lrm.DateCreate,'%Y-%m-%d %H:%i:%s')DateCreate from LAB_ReportMaster lrm, TestTypeMaster ttm " +WhereCondition+ ";"        
+        query = "select lrm.HubId,lrm.ReportId,lrm.HospitalId,lrm.PatientId,concat('"+ GetBaseURL() +"',lrm.ReportPath) as ReportPath,lrm.ReportName,ttm.TestType,date_format(lrm.DateCreate,'%Y-%m-%d %H:%i:%s')DateCreate from LAB_ReportMaster lrm, TestTypeMaster ttm " +WhereCondition+ ";"        
         print(query)
         conn=Connection()
         cursor = conn.cursor()
