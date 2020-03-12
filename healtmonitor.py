@@ -52,6 +52,13 @@ def getLabReportPath(filename):
     path = "/var/www/HealthCare/Healthmonitor/LabReport"+filename
     return path
 
+@app.route("/DicomReport/<patient_id>/<file_name>")
+def DicomReport(patient_id,file_name):
+    try:
+        return send_from_directory('DicomReport/patient_id', filename=file_name, as_attachment=False)
+    except FileNotFoundError:
+        abort(404)        
+
 @app.route('/login', methods=['GET'])
 def login1():
     try:
