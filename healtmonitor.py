@@ -69,7 +69,7 @@ def getLabReportPath(filename):
 @app.route("/DicomReport/<patient_id>/<file_name>")
 def DicomReport(patient_id,file_name):
     try:
-        return send_from_directory('DicomReport/patient_id', filename=file_name, as_attachment=False)
+        return send_from_directory('DicomReport'+'/'+patient_id, filename=file_name, as_attachment=False)
     except FileNotFoundError:
         abort(404)        
 
