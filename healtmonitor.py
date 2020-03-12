@@ -33,8 +33,8 @@ app.config.update(
     MAIL_SERVER='smtp.gmail.com',
     MAIL_PORT=465,
     MAIL_USE_SSL=True,
-    MAIL_USERNAME='vt13352@gmail.com',
-    MAIL_PASSWORD='Vineet@1208'
+    MAIL_USERNAME='Admin email Id',
+    MAIL_PASSWORD='Admin email password'
 )
 mail = Mail(app)
 
