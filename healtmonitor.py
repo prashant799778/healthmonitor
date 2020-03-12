@@ -16,6 +16,8 @@ import pytz
 from config import Connection
 from flask import Flask, render_template
 from flask import Flask, send_from_directory, abort
+# from flask_mail import Mail, Message
+# import location
 # import socketio
 
 # standard Python
@@ -25,6 +27,18 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
 # socketio = SocketIO(app, cors_allowed_origins="*")
 # sio = socketio.Client()
+
+
+# app.config.update(
+#     DEBUG=True,
+#     MAIL_SERVER='smtp.gmail.com',
+#     MAIL_PORT=465,
+#     MAIL_USE_SSL=True,
+#     MAIL_USERNAME='vineet.fourbrick@gmail.com',
+#     MAIL_PASSWORD=''
+# )
+# mail = Mail(app)
+
 
 class JSONEncoder(json.JSONEncoder):
     def default(self, o):
@@ -75,6 +89,7 @@ def login1():
         print("11111111111",loginuser)
 
         if loginuser==():
+
             query="select  counter from userMaster  where Email='" + name + "' ; "
             conn=Connection()
             cursor = conn.cursor()
@@ -116,6 +131,7 @@ def login1():
                 return data
 
         else:
+
             query="update userMaster set counter='0' where Email='" + name + "' and password='" + password + "';"
             cursor.execute(query)
             conn.commit()
@@ -683,7 +699,7 @@ def allHospital():
         if 'searchFilter' in request.args:
             if request.args['searchFilter'] != "":
                 searchFilter = request.args["searchFilter"]
-                WhereCondition = " Hospital_master.hospital_name LIKE '" + "%" + str(searchFilter) + "%" + "'"
+                WhereCondition = " Hospital_master.hospital_name LIKE '" + "%" + str(searchFilter) + "%" + "' OR HubMaster.HubName LIKE '" + "%" + str(searchFilter) + "%" + "'"
         query="select Hospital_master.ID,Hospital_master.hospital_name,Hospital_master.Address,"
         query=query+"HubMaster.HubName,HubMaster.ID as HubId  from Hospital_master inner join HubMaster on Hospital_master.HubId=HubMaster.ID where  " + str(WhereCondition) + " order by Hospital_master.ID DESC;"
         print(query)
@@ -782,7 +798,7 @@ def allHubadmin():
         if 'searchFilter' in request.args:
             if request.args['searchFilter'] != "":
                 searchFilter = request.args["searchFilter"]
-                WhereCondition = WhereCondition + " and um.name LIKE '" + "%" + str(searchFilter) + "%" + "'"
+                WhereCondition = WhereCondition + " and (um.name LIKE '" + "%" + str(searchFilter) + "%" + "' OR um.Email LIKE '" + "%" + str(searchFilter) + "%" + "' OR hm.HubName LIKE '" + "%" + str(searchFilter) + "%" + "' OR um.mobile LIKE '" + "%" + str(searchFilter) + "%" + "') "
         totalpatient=0
         conn=Connection()
         cursor = conn.cursor()
@@ -843,7 +859,7 @@ def allNurse():
         if 'searchFilter' in request.args:
             if request.args['searchFilter'] != "":
                 searchFilter = request.args["searchFilter"]
-                WhereCondition = WhereCondition + " and um.name LIKE '" + "%" + str(searchFilter) + "%" + "'"
+                WhereCondition = WhereCondition + " and (um.name LIKE '" + "%" + str(searchFilter) + "%" + "' OR um.Email LIKE '" + "%" + str(searchFilter) + "%" + "' OR hsm.hospital_name LIKE '" + "%" + str(searchFilter) + "%" + "' OR um.mobile LIKE '" + "%" + str(searchFilter) + "%" + "') "
 
         conn=Connection()
         cursor = conn.cursor()
@@ -882,7 +898,7 @@ def alloperations():
         if 'searchFilter' in request.args:
             if request.args['searchFilter'] != "":
                 searchFilter = request.args["searchFilter"]
-                WhereCondition = WhereCondition + " and um.name LIKE '" + "%" + str(searchFilter) + "%" + "'"
+                WhereCondition = WhereCondition + " and (um.name LIKE '" + "%" + str(searchFilter) + "%" + "' OR um.Email LIKE '" + "%" + str(searchFilter) + "%" + "' OR hsm.hospital_name LIKE '" + "%" + str(searchFilter) + "%" + "' OR um.mobile LIKE '" + "%" + str(searchFilter) + "%" + "') "
 
         conn=Connection()
         cursor = conn.cursor()
@@ -919,7 +935,7 @@ def allPatient():
         if 'searchFilter' in request.args:
             if request.args['searchFilter'] != "":
                 searchFilter = request.args["searchFilter"]
-                WhereCondition = WhereCondition + " and PM.PatientName LIKE '" + "%" + str(searchFilter) + "%" + "'"
+                WhereCondition = WhereCondition + " and (PM.PatientName LIKE '" + "%" + str(searchFilter) + "%" + "' OR PM.Email LIKE '" + "%" + str(searchFilter) + "%" + "' OR PM.Bed_Number LIKE '" + "%" + str(searchFilter) + "%" + "' OR Hm.hospital_name LIKE '" + "%" + str(searchFilter) + "%" + "') "
         query3 ="select  PM.PatientId as ID,PM.hospitalId as Hospital_Id,PM.PatientName,PM.heartRate,PM.spo2,PM.highPressure,PM.lowPressure,PM.pulseRate,PM.temperature,PM.PhoneNo,PM.Address,PM.BloodGroup,PM.DeviceMac,Hm.HubId,Hm.hospital_name  as hospital_Name,"
         query3=query3+" PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.age,PM.Gender,PM.roomNumber,pdm.DoctorID as DoctorID"
         query3= query3 + " from userMaster as um,Patient_master  as PM ,patientDoctorMapping as pdm,Hospital_master as Hm,HubMaster as Hbs  where " + str(WhereCondition) + " ORDER BY  ID DESC;"
