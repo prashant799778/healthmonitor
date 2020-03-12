@@ -46,6 +46,11 @@ class JSONEncoder(json.JSONEncoder):
             return str(o)
         return json.JSONEncoder.default(self, o)
 
+def GetBaseURL():
+ 
+    path = "http://159.65.146.25:5053"
+    return path
+
 def getDiagReportPath(filename):
 
     path = "/var/www/HealthCare/Healthmonitor/DiagnosticReport"+filename
@@ -66,10 +71,31 @@ def getLabReportPath(filename):
     path = "/var/www/HealthCare/Healthmonitor/LabReport"+filename
     return path
 
+@app.route("/DiagnosticReport/<patient_id>/<file_name>")
+def DiagnosticReport(patient_id,file_name):
+    try:
+        return send_from_directory('DiagnosticReport'+'/'+patient_id, filename=file_name, as_attachment=False)
+    except FileNotFoundError:
+        abort(404)
+
+@app.route("/PacsReport/<patient_id>/<file_name>")
+def PacsReport(patient_id,file_name):
+    try:
+        return send_from_directory('PacsReport'+'/'+patient_id, filename=file_name, as_attachment=False)
+    except FileNotFoundError:
+        abort(404)
+
 @app.route("/DicomReport/<patient_id>/<file_name>")
 def DicomReport(patient_id,file_name):
     try:
         return send_from_directory('DicomReport'+'/'+patient_id, filename=file_name, as_attachment=False)
+    except FileNotFoundError:
+        abort(404)        
+
+@app.route("/LabReport/<patient_id>/<file_name>")
+def LabReport(patient_id,file_name):
+    try:
+        return send_from_directory('LabReport'+'/'+patient_id, filename=file_name, as_attachment=False)
     except FileNotFoundError:
         abort(404)        
 
@@ -4346,7 +4372,7 @@ def getlabReportMaster():
             WhereCondition =  WhereCondition+" and DoctorId = '" + DoctorId + "'"                        
             WhereCondition =  WhereCondition+" and PatientId = '" + PatientId + "'"
 
-        query = "select lrm.HubId,lrm.ReportId,lrm.HospitalId,lrm.PatientId,lrm.ReportPath,lrm.ReportName,ttm.TestType,date_format(lrm.DateCreate,'%Y-%m-%d %H:%i:%s')DateCreate from LAB_ReportMaster lrm, TestTypeMaster ttm " +WhereCondition+ ";"        
+        query = "select lrm.HubId,lrm.ReportId,lrm.HospitalId,lrm.PatientId,concat('"+ GetBaseURL() +"',lrm.ReportPath),lrm.ReportName,ttm.TestType,date_format(lrm.DateCreate,'%Y-%m-%d %H:%i:%s')DateCreate from LAB_ReportMaster lrm, TestTypeMaster ttm " +WhereCondition+ ";"        
         print(query)
         conn=Connection()
         cursor = conn.cursor()
@@ -4355,7 +4381,7 @@ def getlabReportMaster():
         cursor.close()
         print(data)
         if data:
-
+            # data["ReportPath"] = GetBaseURL()+str(data["ReportPath"])
             Data = {"result":data,"status":"true"}
             return Data
         
