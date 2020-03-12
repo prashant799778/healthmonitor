@@ -1,5 +1,5 @@
 from flask import Flask,request,abort
-# from flask_mail import Mail, Message
+from flask_mail import Mail, Message
 import os
 # from flask_socketio import SocketIO,emit
 import uuid
@@ -16,8 +16,7 @@ import pytz
 from config import Connection
 from flask import Flask, render_template
 from flask import Flask, send_from_directory, abort
-# from flask_mail import Mail, Message
-# import location
+import location
 # import socketio
 
 # standard Python
@@ -29,15 +28,15 @@ app.config['SECRET_KEY'] = 'secret!'
 # sio = socketio.Client()
 
 
-# app.config.update(
-#     DEBUG=True,
-#     MAIL_SERVER='smtp.gmail.com',
-#     MAIL_PORT=465,
-#     MAIL_USE_SSL=True,
-#     MAIL_USERNAME='vineet.fourbrick@gmail.com',
-#     MAIL_PASSWORD=''
-# )
-# mail = Mail(app)
+app.config.update(
+    DEBUG=True,
+    MAIL_SERVER='smtp.gmail.com',
+    MAIL_PORT=465,
+    MAIL_USE_SSL=True,
+    MAIL_USERNAME='vt13352@gmail.com',
+    MAIL_PASSWORD='Vineet@1208'
+)
+mail = Mail(app)
 
 
 class JSONEncoder(json.JSONEncoder):
@@ -114,6 +113,9 @@ def login1():
         loginuser = cursor.fetchall()
         print("11111111111",loginuser)
 
+        data1 = location1.city_state_country("28.535517, 77.391029")
+        print(data1)
+
         if loginuser==():
 
             query="select  counter from userMaster  where Email='" + name + "' ; "
@@ -166,6 +168,18 @@ def login1():
                 y=  d["Usertype"]
                 y3= d["Usertype_Id"]
                 Nurse=""
+                Email1 = d['Email']
+
+                data2 = location1.city_state_country("47.470706,-99.704723")
+                print(data2)
+
+                if data1 != data2:
+                    msg = Message("Vineet Tomar",sender="vt13352@gmail.com",recipients=[Email1])
+                    msg.body = f"You Logged in from different location which is {data2}"
+                    mail.send(msg)
+                #     return {'result':'Mail send !'}
+                # else:
+                #     return {"result":data2}
 
                 if d["Usertype"]== 'Nurse':                    
                     query= "select hospitalId as Hospital_Id from userHospitalMapping where Usertype_Id=3 and  userId= '" + str(y9) + "' "
