@@ -113,7 +113,7 @@ def login1():
         loginuser = cursor.fetchall()
         print("11111111111",loginuser)
 
-        data1 = location1.city_state_country("28.535517, 77.391029")
+        data1 = location.city_state_country("28.535517, 77.391029")
         print(data1)
 
         if loginuser==():
@@ -170,7 +170,7 @@ def login1():
                 Nurse=""
                 Email1 = d['Email']
 
-                data2 = location1.city_state_country("47.470706,-99.704723")
+                data2 = location.city_state_country("47.470706,-99.704723")
                 print(data2)
 
                 if data1 != data2:
