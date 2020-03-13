@@ -182,7 +182,7 @@ def login1():
                     # mail.send(msg)
                     message = Mail(
                                     from_email = 'hemant.fourbrick@gmail.com',
-                                    to_emails = str(Email1),
+                                    to_emails = 'someshgusain@gmail.com',
                                     subject = "Login Alert",
                                     html_content = '<strong> Your account has been Logged in from different location i.e {data2} </strong> <br> .<br> Thanks,medParliament Team')
                     sg = SendGridAPIClient('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')
