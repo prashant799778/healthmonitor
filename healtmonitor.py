@@ -148,14 +148,14 @@ def login1():
                         query="update  userMaster set Status='2' where Email='" + name + "' and counter='3' ;"
                         cursor.execute(query)
                         conn.commit()
-                        data={"status":"false","result":"Acess Denied,Please Contact Admin"}
+                        data={"status":"false","result":"Access Denied,Please Contact Admin"}
                         return data
                     else: 
                         print("1111111111")
                         data={"status":"false","result":"Login Failed"}
                         return data
                 else:
-                    data={"status":"false","result":"Acess Denied,Please Contact Admin"}
+                    data={"status":"false","result":"Access Denied,Please Contact Admin"}
                     return data
             else:
                 data={"status":"false","result":"Login Failed"}
@@ -330,14 +330,14 @@ def login1q():
                         query="update  userMaster set Status='2' where Email='" + name + "' and counter='3' ;"
                         cursor.execute(query)
                         conn.commit()
-                        data={"status":"false","result":"Acess Denied,Please Contact Admin"}
+                        data={"status":"false","result":"Access Denied,Please Contact Admin"}
                         return data
                     else: 
                         print("1111111111")
                         data={"status":"false","result":"Please Fill Your Correct Credentials"}
                         return data                                                
                 else:
-                    data={"status":"false","result":"Acess Denied,Please Contact Admin"}
+                    data={"status":"false","result":"Access Denied,Please Contact Admin"}
                     return data
             else:
                 data={"status":"false","result":"Please Fill Your Correct Credentials"}
