@@ -183,9 +183,9 @@ def login1():
                     # mail.send(msg)
                     message = Mail(
                                     from_email = 'hemant.fourbrick@gmail.com',
-                                    to_emails = 'someshgusain@gmail.com',
+                                    to_emails = str(Email1),
                                     subject = "Login Alert",
-                                    html_content = '<strong> Your account has been Logged in from '+str(data2["city"])+'-'+str(data2["state"])+'-'+str(data2["country"])+' </strong> .<br> <br> Thank You <br> smartICU Team')
+                                    html_content = '<strong> Your account has been Logged in from '+str(data2["city"])+'-'+str(data2["state"])+'-'+str(data2["country"])+' </strong>.<br> <br> Thank You <br> smartICU Team')
                     sg = SendGridAPIClient('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')
                     response = sg.send(message)
 
