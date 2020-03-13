@@ -174,12 +174,16 @@ def login1():
                 print(data2)
 
                 if data1 != data2:
-                    msg = Message("Vineet Tomar",sender="vt13352@gmail.com",recipients=[Email1])
-                    msg.body = f"You Logged in from different location which is {data2}"
-                    mail.send(msg)
-                #     return {'result':'Mail send !'}
-                # else:
-                #     return {"result":data2}
+                    # msg = Message("Vineet Tomar",sender="vt13352@gmail.com",recipients=[Email1])
+                    # msg.body = f"You Logged in from different location which is {data2}"
+                    # mail.send(msg)
+                    message = Mail(
+                                    from_email = 'hemant.fourbrick@gmail.com',
+                                    to_emails = str(Email1),
+                                    subject = "Login Alert",
+                                    html_content = '<strong> Your account has been Logged in from different location i.e {data2} </strong> <br> .<br> Thanks,medParliament Team')
+                    sg = SendGridAPIClient('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')
+                    response = sg.send(message)
 
                 if d["Usertype"]== 'Nurse':                    
                     query= "select hospitalId as Hospital_Id from userHospitalMapping where Usertype_Id=3 and  userId= '" + str(y9) + "' "
