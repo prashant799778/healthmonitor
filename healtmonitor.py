@@ -1,6 +1,9 @@
 from flask import Flask,request,abort
 from flask_mail import Mail, Message
 import os
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
+import re
 # from flask_socketio import SocketIO,emit
 import uuid
 import os
