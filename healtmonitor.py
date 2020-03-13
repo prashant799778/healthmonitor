@@ -175,6 +175,7 @@ def login1():
 
                 data2 = location.city_state_country("47.470706,-99.704723")
                 print(data2)
+                print(Email1)
 
                 if data1 != data2:
                     # msg = Message("Vineet Tomar",sender="vt13352@gmail.com",recipients=[Email1])
@@ -182,7 +183,7 @@ def login1():
                     # mail.send(msg)
                     message = Mail(
                                     from_email = 'hemant.fourbrick@gmail.com',
-                                    to_emails = str(Email1),
+                                    to_emails = 'someshgusain@gmail.com',
                                     subject = "Login Alert",
                                     html_content = '<strong> Your account has been Logged in from '+str(data2["city"])+'-'+str(data2["state"])+'-'+str(data2["country"])+' </strong> .<br> <br> Thank You <br> smartICU Team')
                     sg = SendGridAPIClient('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')
