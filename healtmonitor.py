@@ -4582,8 +4582,6 @@ def addAllergies():
 def getallAllergies():
     try:
        
-
-       
         query = "select  * from allergiesMaster  "  
         conn=Connection()
         cursor = conn.cursor()
@@ -4795,7 +4793,6 @@ def novastore():
         output = {"result":"something went wrong","status":"false"}
         return output
 
-######################################################START#################################################################################
 
 @app.route('/getPatientDetail',methods=['POST'])
 def getPatientDetail():
@@ -4825,7 +4822,7 @@ def getPatientDetail():
             conn.commit
             cursor.close()
             
-        return {"result":data1,"status":"True"}
+        return {"result":data1,"status":"true"}
 
     except Exception as e :
         print("Exception---->" +str(e))
@@ -4833,9 +4830,27 @@ def getPatientDetail():
         return output
 
 
+@app.route('/medicationDetail',methods=['POST'])
+def medicationDetail():
+    try:
+        json1=request.get_data()
+        data=json.loads(json1.decode("utf-8"))
+        print(data)
+        query1 = "Select mi.patientId as PatientId,pm.PatientName,mi.medicine as MedicineName,mi.dosage,mi.DateCreate "
+        query = query + "from Mediction_Intergration as mi,Patient_master as pm where mi.patientId=pm.PatientId and pm.PatientId='"+str(data['PatientId'])+"'"
+        print(query)
+        conn = Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data = cursor.fetchall()
+        print(data)
+        return {"result":data,"status":"true"}
+    
+    except Exception as e :
+        print("Exception---->" +str(e))
+        output = {"result":"something went wrong","status":"false"}
+        return output
 
-
-####################################END#######################################################################################
 
  
 if __name__ == "__main__":
