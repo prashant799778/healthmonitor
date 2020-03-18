@@ -3060,7 +3060,7 @@ def Patient_masterTest():
         Weight = data['weight']
         
         
-        if data['bmi'] == "":
+        if bmi == "":
             height = data['Height']
             weight = data['weight']
             bmi = weight/(height ** 2)
@@ -3094,7 +3094,6 @@ def Patient_masterTest():
             cursor.execute(query2)
             conn.commit()
             cursor.close()
-            return {"result":"Data Inserted Successfully"}
 
             if 'allergiesId' in data:
                 allergiesId=data['allergiesId']
