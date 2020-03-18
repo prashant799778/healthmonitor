@@ -4837,7 +4837,7 @@ def medicationDetail():
         data=json.loads(json1.decode("utf-8"))
         print(data)
         query = "Select mi.patientId as PatientId,pm.PatientName,mi.medicine as MedicineName,mi.dosage,mi.DateCreate "
-        query = query + "from Mediction_Integration as mi,Patient_master as pm where mi.patientId=pm.PatientId and pm.PatientId='"+str(data['PatientId'])+"'"
+        query = query + "from Medication_Integration mi,Patient_master pm where mi.patientId=pm.PatientId and pm.PatientId='"+str(data['PatientId'])+"'"
         print(query)
         conn = Connection()
         cursor = conn.cursor()
