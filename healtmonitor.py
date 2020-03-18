@@ -3059,11 +3059,7 @@ def Patient_masterTest():
         Height = data['Height']
         Weight = data['weight']
         
-        
-        if bmi == "":
-            height = data['Height']
-            weight = data['weight']
-            bmi = weight/(height ** 2)
+        bmi = weight/(Height ** 2)
 
         
         if 'familyId' in data:
