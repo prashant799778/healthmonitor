@@ -3058,13 +3058,15 @@ def Patient_masterTest():
         PhoneNo=data["PhoneNo"]
         Height = data['Height']
         Weight = data['weight']
-        bmi = data['bmi']
+        bmi = data['Height']/data['weight']*703
 
-        if bmi == None:
-            Height1 = Height
-            Weight1 = Weight
-            bmi1 = (Weight1/Height1)*703
-            print(bmi1)
+
+        # query11 = "select pm.Height,pm.weight,pm.bmi as BMI from Patient_master pm where pm.PatientId='"+str(PatientName)+"'"
+        # conn = Connection()
+        # cur = conn.cursor()
+        # cur.execute(query11)
+        # data11 = cur.fetchall()
+        # return data11
             
         
         if 'familyId' in data:
