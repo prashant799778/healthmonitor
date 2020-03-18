@@ -3060,7 +3060,7 @@ def Patient_masterTest():
         Weight = data['weight']
         
         
-        if data['bmi'] == None:
+        if data['bmi'] == "":
             height = data['Height']
             weight = data['weight']
             bmi = weight/(height ** 2)
