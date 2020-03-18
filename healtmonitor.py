@@ -3056,6 +3056,16 @@ def Patient_masterTest():
         startdate=data["startdate"]
         usercreate=data["usercreate"]
         PhoneNo=data["PhoneNo"]
+        Height = data['Height']
+        Weight = data['weight']
+        bmi = data['bmi']
+
+        if bmi == None:
+            Height1 = Height
+            Weight1 = Weight
+            bmi1 = (Weight1/Height1)*703
+            print(bmi1)
+            
         
         if 'familyId' in data:
             FamilyId=data['familyId']
