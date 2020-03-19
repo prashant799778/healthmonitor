@@ -1019,7 +1019,6 @@ def allPatient():
         data= cursor.fetchall()
         cursor.close()
         if data:
-            if data:
             for i in data:
                 doctorId = i['doctorId']
                 query1 = "select pdm.doctorId from patientDoctorMapping as pdm where pdm.doctorId='" + \
