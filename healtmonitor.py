@@ -1005,7 +1005,7 @@ def allPatient():
 @app.route('/allPatient1', methods=['post'])
 def allPatient1():
     try:
-        WhereCondition = "PM.hospitalId=Hm.ID and Hm.HubId=Hbs.ID and  pdm.Patient_Id=PM.PatientId  and PM.Status<>'2' "
+        WhereCondition = "PM.hospitalId=Hm.ID and Hm.HubId=Hbs.ID   and PM.Status<>'2' "
         if 'searchFilter' in request.args:
             if request.args['searchFilter'] != "":
                 searchFilter = request.args["searchFilter"]
