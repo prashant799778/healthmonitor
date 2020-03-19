@@ -1029,7 +1029,7 @@ def allPatient1():
                 cursor.close()
                 a = []
                 for k in data11:
-                    if k['doctorId'] == doctorId:
+                    if k['DoctorId'] == doctorId:
                         a.append(k["DoctorId"])
                     i['doctorId'] = a
                 return {"result": data, "status": "True"}
