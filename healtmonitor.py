@@ -1027,14 +1027,14 @@ def allPatient1():
                 cursor.execute(query4)
                 data11 = cursor.fetchall()
                 cursor.close()
-                # a = []
-                # for k in data11:
-                #     if k['DoctorId'] == doctorId:
-                #         a.append(k["DoctorId"])
-                #     i['doctorId'] = a
-                # return {"result": data, "status": "True"}
-                # i['DoctorId'] = data11
-                return {"result":data11,"status":"true"}
+                a = []
+                for k in data11:
+                    if k['patientId'] == patientId:
+                        a.append(k["DoctorId"])
+                    i['doctorId'] = a
+                return {"result": data, "status": "True"}
+                i['DoctorId'] = data11
+            return {"result":data,"status":"true"}
         else:
             return {"result":"No Record Found","status":"true"}
     
