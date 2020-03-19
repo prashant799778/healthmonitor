@@ -3063,6 +3063,7 @@ def Patient_masterTest():
         PhoneNo=data["PhoneNo"]
         Height = data['Height']
         Weight = data['weight']
+        familyHistory = data['familyHistory']
         
         bmi = weight/(Height ** 2)
 
@@ -3080,13 +3081,13 @@ def Patient_masterTest():
         cursor.execute(query1)
         data1=cursor.fetchone()
         if data1 != None:
-            query2  = " insert into Patient_master(PatientName,heartRate,spo2,pulseRate,highPressure,lowPressure,temperature,roomNumber,Gender,age,BloodGroup,DeviceMac,Bed_Number,Usertype_Id,hospitalId,startdate,usercreate,PhoneNo,Height,weight,bmi)"
+            query2  = " insert into Patient_master(PatientName,heartRate,spo2,pulseRate,highPressure,lowPressure,temperature,roomNumber,Gender,age,BloodGroup,DeviceMac,Bed_Number,Usertype_Id,hospitalId,startdate,usercreate,PhoneNo,Height,weight,bmi,familyHistory)"
             
             query2 =query2 +" values('"+str(PatientName)+"','"+str(heartRate)+"','"+str(spo2)+"','"+str(pulseRate)+"','"+str(highPressure)+"','"
 
             query2=query2+str(lowPressure)+"','"+str(temperature)+"','"+str(roomNumber)+"','"+str(gender)+"','"+str(age)+"','"+str(BloogGroup)+"','"
 
-            query2=query2+str(DeviceMac)+"','"+str(Bed_Number)+"','"+str(Usertype_Id)+"','"+str(hospitalId)+"','"+str(startdate)+"','"+str(usercreate)+"','"+str(PhoneNo)+"','"+str(Height)+"','"+str(Weight)+"','"+str(bmi)+"');"
+            query2=query2+str(DeviceMac)+"','"+str(Bed_Number)+"','"+str(Usertype_Id)+"','"+str(hospitalId)+"','"+str(startdate)+"','"+str(usercreate)+"','"+str(PhoneNo)+"','"+str(Height)+"','"+str(Weight)+"','"+str(bmi)+"','"+str(familyHistory)+"');"
  
             print(query2)
             print("222222222222")
@@ -3135,8 +3136,8 @@ def Patient_masterTest():
 
 
 
-            query1= "insert into patientDetails(patientName,hospitalId,phoneNo,bloodGroup,deviceMac,bedNumber,usertypeId,startdate,enddate,Gender,age,roomNumber,Height,weight,bmi)"
-            query1=query1+" values('"+str(PatientName)+"','"+str(hospitalId)+"','"+str(PhoneNo)+"','"+str(BloogGroup)+"','"+str(DeviceMac)+"','"+str(Bed_Number)+"','"+str(Usertype_Id)+"','"+str(startdate)+"','"+str(enddate)+"','"+str(Gender)+"','"+str(age)+"','"+str(roomNumber)+"',"+str(Height)+"',"+str(Weight)+"','"+str(bmi)+"');"
+            query1= "insert into patientDetails(patientName,hospitalId,phoneNo,bloodGroup,deviceMac,bedNumber,usertypeId,startdate,enddate,Gender,age,roomNumber,Height,weight,bmi,familyHistory)"
+            query1=query1+" values('"+str(PatientName)+"','"+str(hospitalId)+"','"+str(PhoneNo)+"','"+str(BloogGroup)+"','"+str(DeviceMac)+"','"+str(Bed_Number)+"','"+str(Usertype_Id)+"','"+str(startdate)+"','"+str(enddate)+"','"+str(Gender)+"','"+str(age)+"','"+str(roomNumber)+"',"+str(Height)+"',"+str(Weight)+"','"+str(bmi)+"','"+str(familyHistory)+"');"
             
             conn=Connection()
             cursor = conn.cursor()
@@ -3226,7 +3227,7 @@ def Patient_masterTest():
             query22="update  Patient_master set PatientName='"+str(PatientName)+"',heartRate='"+str(heartRate)+"',spo2='"+str(spo2)+"',pulseRate='"+str(pulseRate)+"'"
 
             query22=query22+",highPressure='"+str(highPressure)+"',lowPressure='"+str(lowPressure)+"',temperature='"+str(temperature)+"',roomNumber='"+str(roomNumber)+"' "
-            query22=query22+",Gender='"+str(Gender)+"',age='"+str(age)+"',BloodGroup='"+str(BloogGroup)+"',DeviceMac='"+str(DeviceMac)+"',Bed_Number='"+str(Bed_Number)+"',Usertype_Id='"+str(Usertype_Id)+"',hospitalId='"+str(hospitalId)+"',startdate='"+str(startdate)+"',Height='"+str(Height)+"',weight='"+str(Weight)+"',bmi='"+str(bmi)+"' where PhoneNo='"+str(PhoneNo)+"'"
+            query22=query22+",Gender='"+str(Gender)+"',age='"+str(age)+"',BloodGroup='"+str(BloogGroup)+"',DeviceMac='"+str(DeviceMac)+"',Bed_Number='"+str(Bed_Number)+"',Usertype_Id='"+str(Usertype_Id)+"',hospitalId='"+str(hospitalId)+"',startdate='"+str(startdate)+"',Height='"+str(Height)+"',weight='"+str(Weight)+"',bmi='"+str(bmi)+"',familyHistory='"+str(familyHistory)+"' where PhoneNo='"+str(PhoneNo)+"'"
             
             conn=Connection()
             cursor = conn.cursor()
@@ -3236,9 +3237,9 @@ def Patient_masterTest():
 
 
             
-            query1= "insert into patientDetails(PatientId,patientName,hospitalId,phoneNo,bloodGroup,deviceMac,bedNumber,usertypeId,startdate,Gender,age,roomNumber,Height,weight,bmi)"
+            query1= "insert into patientDetails(PatientId,patientName,hospitalId,phoneNo,bloodGroup,deviceMac,bedNumber,usertypeId,startdate,Gender,age,roomNumber,Height,weight,bmi,familyHistory)"
 
-            query1=query1+" values('"+str(patientId)+"','"+str(PatientName)+"','"+str(hospitalId)+"','"+str(BloogGroup)+"','"+str(DeviceMac)+"','"+str(Bed_Number)+"','"+str(Usertype_Id)+"','"+str(startdate)+"','"+str(Gender)+"','"+str(age)+"','"+str(roomNumber)+"','"+str(Height)+"','"+str(Weight)+"','"+str(bmi)+"');"
+            query1=query1+" values('"+str(patientId)+"','"+str(PatientName)+"','"+str(hospitalId)+"','"+str(BloogGroup)+"','"+str(DeviceMac)+"','"+str(Bed_Number)+"','"+str(Usertype_Id)+"','"+str(startdate)+"','"+str(Gender)+"','"+str(age)+"','"+str(roomNumber)+"','"+str(Height)+"','"+str(Weight)+"','"+str(bmi)+"','"+str(familyHistory)+"');"
 
             conn=Connection()
             cursor = conn.cursor()
