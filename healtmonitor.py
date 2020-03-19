@@ -1020,8 +1020,8 @@ def allPatient1():
         cursor.close()
         if data:
             for i in data:
-                patientId = i['ID']
-                query4 = "select pdm.doctorId as DoctorId from patientDoctorMapping as pdm where pdm.Patient_Id='"+str(patientId)+"'"
+                patientId = i['PatientId']
+                query4 = "select pdm.doctorId as DoctorId from patientDoctorMapping as pdm,patientmaster as pm where pdm.Patient_Id=pm.PatientId,pdm.Patient_Id='"+str(patientId)+"'"
                 conn=Connection()
                 cursor = conn.cursor()
                 cursor.execute(query4)
