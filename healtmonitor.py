@@ -4750,7 +4750,7 @@ def addFamilyMaster():
         json1=request.get_data() 
         data1=json.loads(json1.decode("utf-8"))  
         
-        query = "select * from FamilyMaster where  relation  ='"+str(data1["relation"])+"';"
+        query = "select * from familyHistory where  allergiesId  ='"+str(data1["allergiesId"])+"';"
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
@@ -4762,8 +4762,8 @@ def addFamilyMaster():
         
             print("1111111")
 
-            query2  = " insert into FamilyMaster(relation)"
-            query2 = query2 +" values('"+str(data1["relation"])+"');"
+            query2  = " insert into familyHistory(allergiesId)"
+            query2 = query2 +" values('"+str(data1["allergiesId"])+"');"
             print(query2)
             conn=Connection()
             cursor = conn.cursor()
