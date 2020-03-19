@@ -1032,9 +1032,7 @@ def allPatient1():
                     if k['patientId'] == patientId:
                         a.append(k["DoctorId"])
                     i['doctorId'] = a
-                return {"result": data, "status": "True"}
-                i['DoctorId'] = data11
-            return {"result":data,"status":"true"}
+                return {"result":data,"status":"true"}
         else:
             return {"result":"No Record Found","status":"true"}
     
