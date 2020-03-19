@@ -1022,8 +1022,9 @@ def allPatient1():
         print(data)
         cursor.close()
         if data:
-            a = []
+           
             for i in data:
+                a = []
 
                 PatientId = i['ID']
                 print(PatientId,"=+")
@@ -1036,7 +1037,6 @@ def allPatient1():
                 
                 for k in data1:
                     if k['PatientId'] == PatientId:
-
                         a.append(k["doctorId"])
                         i['doctorId'] = a
             return {"result":data,"status":"true"}
