@@ -4744,8 +4744,8 @@ def getallAllergies():
 
 
 
-@app.route('/addFamilyMaster', methods=['POST'])
-def addFamilyMaster():
+@app.route('/addfamilyHistory', methods=['POST'])
+def addfamilyHistory():
     try:
         json1=request.get_data() 
         data1=json.loads(json1.decode("utf-8"))  
@@ -4781,11 +4781,11 @@ def addFamilyMaster():
         return output
 
 
-@app.route('/getallFamilyMaster', methods=['GET'])
-def getallFamilyMaster():
+@app.route('/getallfamilyHistory', methods=['GET'])
+def getallfamilyHistory():
     try:
        
-        query = "select  * from FamilyMaster  "  
+        query = "select * from familyHistory"  
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
