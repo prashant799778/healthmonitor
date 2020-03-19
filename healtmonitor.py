@@ -1017,6 +1017,7 @@ def allPatient1():
         cursor = conn.cursor()
         cursor.execute(query3)
         data= cursor.fetchall()
+        print(data)
         cursor.close()
         if data:
             for i in data:
