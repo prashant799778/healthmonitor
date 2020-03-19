@@ -4509,146 +4509,6 @@ def getMedicationIntegration():
         output = {"result":"something went wrong","status":"false"}
         return output
 
-# add allergies
-
-@app.route('/addAllergies', methods=['POST'])
-def addAllergies():
-    try:
-        json1=request.get_data() 
-        data1=json.loads(json1.decode("utf-8"))  
-        
-        query = "select * from allergiesMaster where allergies ='"+str(data1["allergies"])+"';"
-        conn=Connection()
-        cursor = conn.cursor()
-        cursor.execute(query)
-        data = cursor.fetchone()
-        cursor.close()
-        print(data)
-       
-        if data==None: 
-        
-            print("1111111")
-
-            query2  = " insert into allergiesMaster(allergies)"
-            query2 = query2 +" values('"+str(data1["allergies"])+"');"
-            print(query2)
-            conn=Connection()
-            cursor = conn.cursor()
-            cursor.execute(query2)
-            conn.commit()
-            output = {"result":"data inserted successfully","status":"true"}
-            return output
-        
-        else:
-            output = {"result":"data already exists","status":"true"}
-            return output 
-    except Exception as e :
-        print("Exception---->" + str(e))    
-        output = {"result":"something went wrong","status":"false"}
-        return output
-
-
-@app.route('/getallAllergies', methods=['GET'])
-def getallAllergies():
-    try:
-       
-        query = "select  * from allergiesMaster  "  
-        conn=Connection()
-        cursor = conn.cursor()
-        cursor.execute(query)
-        data = cursor.fetchall()
-        cursor.close()
-        if data:           
-            Data = {"result":data,"status":"true"}
-            return Data
-        
-        else:
-            output = {"result":"No Data Found","status":"false"}
-            return output
-
-    except Exception as e :
-        print("Exception---->" + str(e))    
-        output = {"result":"something went wrong","status":"false"}
-        return output
-
-
-
-@app.route('/addFamilyMaster', methods=['POST'])
-def addFamilyMaster():
-    try:
-        json1=request.get_data() 
-        data1=json.loads(json1.decode("utf-8"))  
-        
-        query = "select * from FamilyMaster where  relation  ='"+str(data1["relation"])+"';"
-        conn=Connection()
-        cursor = conn.cursor()
-        cursor.execute(query)
-        data = cursor.fetchone()
-        cursor.close()
-        print(data)
-       
-        if data==None: 
-        
-            print("1111111")
-
-            query2  = " insert into FamilyMaster(relation)"
-            query2 = query2 +" values('"+str(data1["relation"])+"');"
-            print(query2)
-            conn=Connection()
-            cursor = conn.cursor()
-            cursor.execute(query2)
-            conn.commit()
-            output = {"result":"data inserted successfully","status":"true"}
-            return output
-        
-        else:
-            query23="delete from FamilyMaster Where  relation='"+str(data1["relation"])+"'"
-            conn=Connection()
-            cursor = conn.cursor()
-            cursor.execute(query23)
-
-            query2  = " insert into FamilyMaster(relation)"
-            query2 = query2 +" values('"+str(data1["relation"])+"');"
-            print(query2)
-            conn=Connection()
-            cursor = conn.cursor()
-            cursor.execute(query2)
-            conn.commit()
-            output = {"result":"data inserted successfully","status":"true"}
-            return output 
-    except Exception as e :
-        print("Exception---->" + str(e))    
-        output = {"result":"something went wrong","status":"false"}
-        return output
-
-
-@app.route('/getallFamilyMaster', methods=['GET'])
-def getallFamilyMaster():
-    try:
-       
-
-       
-        query = "select  * from FamilyMaster  "  
-        conn=Connection()
-        cursor = conn.cursor()
-        cursor.execute(query)
-        data = cursor.fetchall()
-        cursor.close()
-        if data:           
-            Data = {"result":data,"status":"true"}
-            return Data
-        
-        else:
-            output = {"result":"No Data Found","status":"false"}
-            return output
-
-    except Exception as e :
-        print("Exception---->" + str(e))    
-        output = {"result":"something went wrong","status":"false"}
-        return output
-
-
-
 
 @app.route('/getTestType', methods=['GET'])
 def getTestType():
@@ -4763,6 +4623,7 @@ def novastore():
         output = {"result":"something went wrong","status":"false"}
         return output
 
+##################################################START###################################################################
 
 @app.route('/getPatientDetail',methods=['POST'])
 def getPatientDetail():
@@ -4821,7 +4682,131 @@ def medicationDetail():
         output = {"result":"something went wrong","status":"false"}
         return output
 
+@app.route('/addAllergies', methods=['POST'])
+def addAllergies():
+    try:
+        json1=request.get_data() 
+        data1=json.loads(json1.decode("utf-8"))  
+        
+        query = "select * from allergiesMaster where allergies ='"+str(data1["allergies"])+"';"
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data = cursor.fetchone()
+        cursor.close()
+        print(data)
+       
+        if data==None: 
+        
+            print("1111111")
 
+            query2  = " insert into allergiesMaster(allergies)"
+            query2 = query2 +" values('"+str(data1["allergies"])+"');"
+            print(query2)
+            conn=Connection()
+            cursor = conn.cursor()
+            cursor.execute(query2)
+            conn.commit()
+            output = {"result":"data inserted successfully","status":"true"}
+            return output
+        
+        else:
+            output = {"result":"data already exists","status":"true"}
+            return output 
+    except Exception as e :
+        print("Exception---->" + str(e))    
+        output = {"result":"something went wrong","status":"false"}
+        return output
+
+
+@app.route('/getallAllergies', methods=['GET'])
+def getallAllergies():
+    try:
+       
+        query = "select  * from allergiesMaster  "  
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data = cursor.fetchall()
+        cursor.close()
+        if data:           
+            Data = {"result":data,"status":"true"}
+            return Data
+        
+        else:
+            output = {"result":"No Data Found","status":"false"}
+            return output
+
+    except Exception as e :
+        print("Exception---->" + str(e))    
+        output = {"result":"something went wrong","status":"false"}
+        return output
+
+
+
+@app.route('/addFamilyMaster', methods=['POST'])
+def addFamilyMaster():
+    try:
+        json1=request.get_data() 
+        data1=json.loads(json1.decode("utf-8"))  
+        
+        query = "select * from FamilyMaster where  relation  ='"+str(data1["relation"])+"';"
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data = cursor.fetchone()
+        cursor.close()
+        print(data)
+       
+        if data==None: 
+        
+            print("1111111")
+
+            query2  = " insert into FamilyMaster(relation)"
+            query2 = query2 +" values('"+str(data1["relation"])+"');"
+            print(query2)
+            conn=Connection()
+            cursor = conn.cursor()
+            cursor.execute(query2)
+            conn.commit()
+            output = {"result":"data inserted successfully","status":"true"}
+            return output
+        
+        else:
+            output = {"result":"data already existed","status":"true"}
+            return output 
+    except Exception as e :
+        print("Exception---->" + str(e))    
+        output = {"result":"something went wrong","status":"false"}
+        return output
+
+
+@app.route('/getallFamilyMaster', methods=['GET'])
+def getallFamilyMaster():
+    try:
+       
+        query = "select  * from FamilyMaster  "  
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data = cursor.fetchall()
+        cursor.close()
+        if data:           
+            Data = {"result":data,"status":"true"}
+            return Data
+        
+        else:
+            output = {"result":"No Data Found","status":"false"}
+            return output
+
+    except Exception as e :
+        print("Exception---->" + str(e))    
+        output = {"result":"something went wrong","status":"false"}
+        return output
+
+
+
+#######################################################END################################################################
  
 if __name__ == "__main__":
     CORS(app, support_credentials=True)
