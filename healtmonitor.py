@@ -1021,11 +1021,7 @@ def allPatient1():
         if data:
             for i in data:
                 PatientId = i['ID']
-<<<<<<< HEAD
                 query1 = "select pdm.doctorId,pdm.Patient_Id as PatientId from patientDoctorMapping as pdm, Patient_master as pm where pdm.Patient_Id=pm.PatientId and pdm.Patient_Id='" + \
-=======
-                query1 = "select pdm.doctorId,pdm.Patient_Id as PatientId from patientDoctorMapping as pdm where pdm.Patient_Id=pm.PatientId and pdm.Patient_Id='" + \
->>>>>>> parent of 6cbaff7... Merge branch 'backend' of https://git.fourbrick.com/sharad_25/Healthmonitor into backend
                     str(PatientId)+"'"
                 cursor = conn.cursor()
                 cursor.execute(query1)
