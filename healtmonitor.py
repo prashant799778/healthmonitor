@@ -974,6 +974,52 @@ def alloperations():
         output = {"result":"something went wrong","status":"false"}
         return output
 
+@app.route('/allPatient1', methods=['post'])
+def allPatient1():
+    try:
+
+        WhereCondition = " PM.hospitalId=Hm.ID  and PM.Status<>'2' "
+
+        if 'searchFilter' in request.args:
+            if request.args['searchFilter'] != "":
+                searchFilter = request.args["searchFilter"]
+                WhereCondition = WhereCondition + " and (PM.PatientName LIKE '" + "%" + str(searchFilter) + "%" + "' OR PM.Email LIKE '" + "%" + str(searchFilter) + "%" + "' OR PM.Bed_Number LIKE '" + "%" + str(searchFilter) + "%" + "' OR Hm.hospital_name LIKE '" + "%" + str(searchFilter) + "%" + "') "
+        query3 ="select  PM.PatientId as ID,PM.hospitalId as Hospital_Id,PM.PatientName,PM.Height,PM.weight,PM.bmi,PM.familyHistory,PM.PhoneNo,PM.Address,PM.BloodGroup,PM.DeviceMac,Hm.HubId,Hm.hospital_name  as hospital_Name,"
+        query3=query3+" PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.age,PM.Gender,PM.roomNumber"
+        query3= query3 + " from Patient_master  as PM,Hospital_master as Hm where " + str(WhereCondition) + " ORDER BY  ID DESC;"
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query3)
+        data= cursor.fetchall()
+        print(data)
+        cursor.close()
+        if data:
+           
+            for i in data:
+                a = []
+
+                PatientId = i['ID']
+                print(PatientId,"=+")
+
+                query1 = "select pdm.doctorId,pdm.Patient_Id as PatientId from patientDoctorMapping as pdm,Patient_master as pm where pdm.Patient_Id=pm.PatientId and pdm.Patient_Id='" + str(i['ID'])+"'"
+                cursor = conn.cursor()
+                cursor.execute(query1)
+                data1 = cursor.fetchall()
+                print(data1)
+                
+                for k in data1:
+                    if k['PatientId'] == PatientId:
+                        a.append(k["doctorId"])
+                        i['doctorId'] = a
+            return {"result":data,"status":"true"}
+        else:
+            return {"result":"No Record Found","status":"true"}
+    
+    except Exception as e :
+        print("Exception---->" +str(e))
+        output = {"result":"something went wrong","status":"false"}
+        return output        
+
 
 #admin patients
 @app.route('/allPatient', methods=['post'])
