@@ -4461,6 +4461,10 @@ def MedicationIntegration():
                 
                 Medicine = i['medicine']
                 frequency = i['frequency']
+                startDate=i['startDate']
+                endDate=i['endDate']
+                drugCode=i['drugCode']
+                strength=i['strength']
                 dosage=i['dosage']
                 duration=i['duration']
                 regime=i['regime']
@@ -4476,8 +4480,11 @@ def MedicationIntegration():
 
                 if flag == 'i':
 
-                    query  = " insert into Medication_Integration (hubId,hospitalId,doctorId,patientId,medicine,frequency,dosage,duration,regime,comment)"
-                    query = query +" values("+'"'+str(hubId)+'"'+','+'"'+str(hospitalId)+'"'+','+'"'+str(doctorId)+'"'+','+'"'+str(patientId)+'"'+','+'"'+str(Medicine)+'"'+','+'"'+str(frequency)+'"'+','+'"'+str(dosage)+'"'+','+'"'+str(duration)+'"'+','+'"'+str(regime)+'"'+','+'"'+str(comment)+'"'+' '+");"
+
+                    query  = " insert into Medication_Integration (hubId,drugCode,startDate,endDate,strength,hospitalId,doctorId,patientId,medicine,frequency,dosage,duration,regime,comment)"
+                    query = query +" values("+'"'+str(hubId)+'"'+','+'"'+str(drugCode)+'"'+','+'"'+str(startDate)+'"'+','+'"'+str(endDate)+'"'+','+'"'+str(strength)+'"'+','+'"'+str(hospitalId)+'"'+','+'"'+str(doctorId)+'"'+','+'"'+str(patientId)+'"'+','+'"'+str(Medicine)+'"'+','+'"'+str(frequency)+'"'+','+'"'+str(dosage)+'"'+','+'"'+str(duration)+'"'+','+'"'+str(regime)+'"'+','+'"'+str(comment)+'"'+' '+");"
+
+                   
                     print(query)
                     conn=Connection()
                     cursor = conn.cursor()
@@ -4490,7 +4497,9 @@ def MedicationIntegration():
                 if flag =='u':
                     if 'id' in inputdata:
                         Id=inputdata['id']
-                    query2="update Medication_Integration set hubId='" + str(HubId)+ "',hospitalId='" + str(hospitalId)+ "',doctorId='" + str(doctorId)+ "',patientId='" + str(PatientId)+ "',medicine='" + str(Medicine)+ "',frequency='" + str(frequency)+ "',dosage='" + str(dosage)+ "',duration='" + str(duration)+ "',regime='" + str(regime)+ "',comment='" + str(regime)+ "'  Where Id= '" + str(Id)+ "'          "
+
+                    query2="update Medication_Integration set hubId='" + str(HubId)+ "',startDate='" + str(startDate)+ "',endDate='" + str(endDate)+ "',drugCode='" + str(drugCode)+ "',strength= '" + str(strength)+ "',hospitalId='" + str(hospitalId)+ "',doctorId='" + str(doctorId)+ "',patientId='" + str(PatientId)+ "',medicine='" + str(Medicine)+ "',frequency='" + str(frequency)+ "',dosage='" + str(dosage)+ "',duration='" + str(duration)+ "',regime='" + str(regime)+ "',comment='" + str(regime)+ "'  Where Id= '" + str(Id)+ "'          "
+
                     print(query)
                     conn=Connection()
                     cursor = conn.cursor()
@@ -4511,30 +4520,24 @@ def getMedicationIntegration():
     try:
         HubId,HospitalId,DoctorId,PatientId="","","",""
 
-        if 'HubId' in request.args:
-            HubId=request.args["HubId"]
-        if 'HospitalId' in request.args:
-            HospitalId=request.args["HospitalId"]
+       
         if 'PatientId' in request.args:
             PatientId=int(request.args["PatientId"])
-        if 'DoctorId' in request.args:
-            DoctorId=request.args["DoctorId"]
+        
         
        
         WhereCondition=""
-        if HubId !="" and HospitalId !="" and DoctorId !="" and PatientId !="":
-
-            WhereCondition =  " where HubId = '" + HubId + "'"
-            WhereCondition =  WhereCondition+" and HospitalId = '" + HospitalId + "'"
-            WhereCondition =  WhereCondition+" and DoctorId = '" + DoctorId + "'"                        
+        if PatientId !="":
+                     
             WhereCondition =  WhereCondition+" and PatientId = '" + PatientId + "'"
       
             # y = y +  WhereCondition1
        
 
        
-        query = "select  * from Medication_Integration where  " +WhereCondition  # y 
-        conn=Connection()
+
+        query = "select mi.hubId,mi.drugCode,mi.strength,mi.hospitalId,mi.startDate,mi.endDate,mi.doctorId,mi.patientId,mi.medicine,mi.frequency,mi.dosage,mi.duration,mi.regime,mi.comment,p.PatientName from Medication_Integration as mi,Patient_master as p  " +WhereCondition  # y 
+
         cursor = conn.cursor()
         cursor.execute(query)
         data = cursor.fetchall()
