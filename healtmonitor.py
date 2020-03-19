@@ -1030,7 +1030,7 @@ def allPatient1():
                 a = []
                 for k in data11:
                     if k['doctorId'] == doctorId:
-                        a.append(k["doctorId"])
+                        a.append(k["DoctorId"])
                     i['doctorId'] = a
                 return {"result": data, "status": "True"}
                 i['DoctorId'] = data11
