@@ -1002,8 +1002,8 @@ def allPatient():
         output = {"result":"something went wrong","status":"false"}
         return output
 
-@app.route('/allPatient', methods=['post'])
-def allPatient():
+@app.route('/allPatient1', methods=['post'])
+def allPatient1():
     try:
         WhereCondition = " pdm.doctorId=um.ID and  PM.hospitalId=Hm.ID and Hm.HubId=Hbs.ID and  pdm.Patient_Id=PM.PatientId  and PM.Status<>'2' "
         if 'searchFilter' in request.args:
