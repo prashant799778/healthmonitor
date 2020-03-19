@@ -1000,7 +1000,7 @@ def allPatient():
                 cur = conn.cursor()
                 cursor.execute(query4)
                 data11 = cursor.fetchall()
-                cursor.close()
+                cur.close()
                 conn.commit()
 
                 i['doctorID'] = data11
