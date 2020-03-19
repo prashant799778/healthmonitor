@@ -1002,6 +1002,42 @@ def allPatient():
         output = {"result":"something went wrong","status":"false"}
         return output
 
+@app.route('/allPatient1', methods=['post'])
+def allPatient1():
+    try:
+        WhereCondition = "PM.hospitalId=Hm.ID and Hm.HubId=Hbs.ID and  pdm.Patient_Id=PM.PatientId  and PM.Status<>'2' "
+        if 'searchFilter' in request.args:
+            if request.args['searchFilter'] != "":
+                searchFilter = request.args["searchFilter"]
+                WhereCondition = WhereCondition + " and (PM.PatientName LIKE '" + "%" + str(searchFilter) + "%" + "' OR PM.Email LIKE '" + "%" + str(searchFilter) + "%" + "' OR PM.Bed_Number LIKE '" + "%" + str(searchFilter) + "%" + "' OR Hm.hospital_name LIKE '" + "%" + str(searchFilter) + "%" + "') "
+        query3 ="select  PM.PatientId as ID,PM.hospitalId as Hospital_Id,PM.PatientName,PM.heartRate,PM.spo2,PM.highPressure,PM.lowPressure,PM.pulseRate,PM.temperature,PM.PhoneNo,PM.Address,PM.BloodGroup,PM.DeviceMac,Hm.HubId,Hm.hospital_name  as hospital_Name,"
+        query3=query3+" PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.age,PM.Gender,PM.roomNumber"
+        query3= query3 + " from userMaster as um,Patient_master  as PM ,patientDoctorMapping as pdm,Hospital_master as Hm,HubMaster as Hbs  where " + str(WhereCondition) + " ORDER BY  ID DESC;"
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query3)
+        data= cursor.fetchall()
+        cursor.close()
+        if data:
+            for i in data:
+                userid = i['ID']
+                query4 = "select doctorId as DoctorId from patientDoctorMapping as pdm where pdm.doctorId=um.ID and ID='"+str(userid)+"'"
+                conn = Connection()
+                cursor = conn.cursor()
+                cursor.execute(query4)
+                data11 = cursor.fetchall()
+                cursor.close()
+
+                i['doctorId'] = data11
+            return {"result":data,"status":"true"}
+        else:
+            return {"result":"No Record Found","status":"true"}
+    
+    except Exception as e :
+        print("Exception---->" +str(e))
+        output = {"result":"something went wrong","status":"false"}
+        return output
+
 @app.route('/session', methods=['GET'])
 def session():
     try:
