@@ -1020,7 +1020,20 @@ def allPatient1():
         cursor.close()
 
         if data:
-            return {"result":data,"status":"true"}
+            for i in data:
+                PatientId = i['PatientId']
+                query1 = "select pdm.doctorId,pdm.Patient_Id from patientDoctorMapping as pdm,Patient_Master as pm where pdm.Patient_Id=pm.PatientId and pdm.Patient_Id='" + \
+                    str(PatientId)+"'"
+                cursor = conn.cursor()
+                cursor.execute(query1)
+                data1 = cursor.fetchall()
+                print(data1)
+                a = []
+                for k in data1:
+                    if k['Patient_Id'] == PatientId:
+                        a.append(k["doctorId"])
+                    i['doctorId'] = a
+                return {"result":data,"status":"true"}
         else:
             return {"result":"No Record Found","status":"true"}
     
