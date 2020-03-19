@@ -1020,16 +1020,16 @@ def allPatient1():
         cursor.close()
         if data:
             for i in data:
-                PatientId = i['PatientId']
+                patientId = i['PatientId']
                 query1 = "select pdm.doctorId,pdm.Patient_Id from patientDoctorMapping as pdm,Patient_Master as pm where pdm.Patient_Id=pm.PatientId and pdm.Patient_Id='" + \
-                    str(PatientId)+"'"
+                    str(patientId)+"'"
                 cursor = conn.cursor()
                 cursor.execute(query1)
                 data1 = cursor.fetchall()
                 print(data1)
                 a = []
                 for k in data1:
-                    if k['PatientId'] == PatientId:
+                    if k['PatientId'] == patientId:
                         a.append(k["doctorId"])
                     i['doctorId'] = a
 
