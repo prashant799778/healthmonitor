@@ -1005,7 +1005,9 @@ def allPatient():
 @app.route('/allPatient1', methods=['post'])
 def allPatient1():
     try:
+
         WhereCondition = " PM.hospitalId=Hm.ID  and PM.Status<>'2' "
+
         if 'searchFilter' in request.args:
             if request.args['searchFilter'] != "":
                 searchFilter = request.args["searchFilter"]
@@ -1021,7 +1023,7 @@ def allPatient1():
         if data:
             for i in data:
                 PatientId = i['ID']
-                query1 = "select pdm.doctorId,pdm.Patient_Id as PatientId from patientDoctorMapping as pdm, Patient_master as pm where pdm.Patient_Id=pm.PatientId and pdm.Patient_Id='" + \
+                query1 = "select pdm.doctorId,pdm.Patient_Id as PatientId from patientDoctorMapping as pdm,Patient_master as pm where pdm.Patient_Id=pm.PatientId and pdm.Patient_Id='" + \
                     str(PatientId)+"'"
                 cursor = conn.cursor()
                 cursor.execute(query1)
