@@ -4540,19 +4540,7 @@ def addAllergies():
             return output
         
         else:
-            query23="delete from allergiesMaster Where allergies='"+str(data1["allergies"])+"'"
-            conn=Connection()
-            cursor = conn.cursor()
-            cursor.execute(query23)
-
-            query2  = " insert into allergiesMaster(allergies)"
-            query2 = query2 +" values('"+str(data1["allergies"])+"');"
-            print(query2)
-            conn=Connection()
-            cursor = conn.cursor()
-            cursor.execute(query2)
-            conn.commit()
-            output = {"result":"data inserted successfully","status":"true"}
+            output = {"result":"data already exists","status":"true"}
             return output 
     except Exception as e :
         print("Exception---->" + str(e))    
