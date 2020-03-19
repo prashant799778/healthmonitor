@@ -1018,18 +1018,11 @@ def allPatient1():
         cursor.execute(query3)
         data= cursor.fetchall()
         cursor.close()
-        # a = []
-        # d = ""
-        # for k in data:
-        #     if k['doctorId'] == :
-        #         a.append(k["hospitalid"])
-        #         y = len(a)
-        #         if y != 1:
-        #             d += ","+k["hospitalname"]
-        #         else:
-        #             d = k['hospitalname']
-        #     i['hospitalid'] = a
-        #     i['hospitalname'] = d
+        a = []
+        for k in data:
+            if k['doctorId'] == pdm.doctorId:
+                a.append(k["doctorId"])
+            i['doctorId'] = a
         if data:
             return {"result":data,"status":"true"}
         else:
