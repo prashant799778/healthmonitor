@@ -1011,13 +1011,25 @@ def allPatient1():
                 searchFilter = request.args["searchFilter"]
                 WhereCondition = WhereCondition + " and (PM.PatientName LIKE '" + "%" + str(searchFilter) + "%" + "' OR PM.Email LIKE '" + "%" + str(searchFilter) + "%" + "' OR PM.Bed_Number LIKE '" + "%" + str(searchFilter) + "%" + "' OR Hm.hospital_name LIKE '" + "%" + str(searchFilter) + "%" + "') "
         query3 ="select  PM.PatientId as ID,PM.hospitalId as Hospital_Id,PM.PatientName,PM.heartRate,PM.spo2,PM.highPressure,PM.lowPressure,PM.pulseRate,PM.temperature,PM.PhoneNo,PM.Address,PM.BloodGroup,PM.DeviceMac,Hm.HubId,Hm.hospital_name  as hospital_Name,"
-        query3=query3+" PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.age,PM.Gender,PM.roomNumber,pdm.DoctorID as DoctorID"
+        query3=query3+" PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.age,PM.Gender,PM.roomNumber,pdm.doctorId as DoctorID"
         query3= query3 + " from userMaster as um,Patient_master  as PM ,patientDoctorMapping as pdm,Hospital_master as Hm,HubMaster as Hbs  where " + str(WhereCondition) + " ORDER BY  ID DESC;"
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query3)
         data= cursor.fetchall()
         cursor.close()
+        # a = []
+        # d = ""
+        # for k in data:
+        #     if k['doctorId'] == :
+        #         a.append(k["hospitalid"])
+        #         y = len(a)
+        #         if y != 1:
+        #             d += ","+k["hospitalname"]
+        #         else:
+        #             d = k['hospitalname']
+        #     i['hospitalid'] = a
+        #     i['hospitalname'] = d
         if data:
             return {"result":data,"status":"true"}
         else:
