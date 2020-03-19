@@ -1019,22 +1019,27 @@ def allPatient1():
         cursor = conn.cursor()
         cursor.execute(query3)
         data= cursor.fetchall()
+        print(data)
         cursor.close()
         if data:
+            a = []
             for i in data:
-                PatientId = i['ID']
 
-                query1 = "select pdm.doctorId,pdm.Patient_Id as PatientId from patientDoctorMapping as pdm,Patient_master as pm where pdm.Patient_Id=pm.PatientId and pdm.Patient_Id='" + str(PatientId)+"'"
+                PatientId = i['ID']
+                print(PatientId,"=+")
+
+                query1 = "select pdm.doctorId,pdm.Patient_Id as PatientId from patientDoctorMapping as pdm,Patient_master as pm where pdm.Patient_Id=pm.PatientId and pdm.Patient_Id='" + str(i['ID'])+"'"
                 cursor = conn.cursor()
                 cursor.execute(query1)
                 data1 = cursor.fetchall()
                 print(data1)
-                a = []
+                
                 for k in data1:
                     if k['PatientId'] == PatientId:
+
                         a.append(k["doctorId"])
-                    i['doctorId'] = a
-                return {"result":data,"status":"true"}
+                        i['doctorId'] = a
+            return {"result":data,"status":"true"}
         else:
             return {"result":"No Record Found","status":"true"}
     
