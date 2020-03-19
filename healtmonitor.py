@@ -839,8 +839,6 @@ def allDoctor():
         return output
 
 
-
-
 @app.route('/allHubadmin', methods=['post'])
 def allHubadmin():
     try:
@@ -986,8 +984,6 @@ def allPatient():
             if request.args['searchFilter'] != "":
                 searchFilter = request.args["searchFilter"]
                 WhereCondition = WhereCondition + " and (PM.PatientName LIKE '" + "%" + str(searchFilter) + "%" + "' OR PM.Email LIKE '" + "%" + str(searchFilter) + "%" + "' OR PM.Bed_Number LIKE '" + "%" + str(searchFilter) + "%" + "' OR Hm.hospital_name LIKE '" + "%" + str(searchFilter) + "%" + "') "
-        
-
         query3 ="select  PM.PatientId as ID,PM.hospitalId as Hospital_Id,PM.PatientName,PM.heartRate,PM.spo2,PM.highPressure,PM.lowPressure,PM.pulseRate,PM.temperature,PM.PhoneNo,PM.Address,PM.BloodGroup,PM.DeviceMac,Hm.HubId,Hm.hospital_name  as hospital_Name,"
         query3=query3+" PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.age,PM.Gender,PM.roomNumber,pdm.DoctorID as DoctorID"
         query3= query3 + " from userMaster as um,Patient_master  as PM ,patientDoctorMapping as pdm,Hospital_master as Hm,HubMaster as Hbs  where " + str(WhereCondition) + " ORDER BY  ID DESC;"
@@ -996,7 +992,6 @@ def allPatient():
         cursor.execute(query3)
         data= cursor.fetchall()
         cursor.close()
-        
         if data:
             return {"result":data,"status":"true"}
         else:
@@ -1006,6 +1001,46 @@ def allPatient():
         print("Exception---->" +str(e))
         output = {"result":"something went wrong","status":"false"}
         return output
+
+@app.route('/allPatient1', methods=['post'])
+def allPatient1():
+    try:
+        WhereCondition = " pdm.doctorId=um.ID and  PM.hospitalId=Hm.ID and Hm.HubId=Hbs.ID and  pdm.Patient_Id=PM.PatientId  and PM.Status<>'2' "
+        if 'searchFilter' in request.args:
+            if request.args['searchFilter'] != "":
+                searchFilter = request.args["searchFilter"]
+                WhereCondition = WhereCondition + " and (PM.PatientName LIKE '" + "%" + str(searchFilter) + "%" + "' OR PM.Email LIKE '" + "%" + str(searchFilter) + "%" + "' OR PM.Bed_Number LIKE '" + "%" + str(searchFilter) + "%" + "' OR Hm.hospital_name LIKE '" + "%" + str(searchFilter) + "%" + "') "
+        query3 ="select  PM.PatientId as ID,PM.hospitalId as Hospital_Id,PM.PatientName,PM.heartRate,PM.spo2,PM.highPressure,PM.lowPressure,PM.pulseRate,PM.temperature,PM.PhoneNo,PM.Address,PM.BloodGroup,PM.DeviceMac,Hm.HubId,Hm.hospital_name  as hospital_Name,"
+        query3=query3+" PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.age,PM.Gender,PM.roomNumber,pdm.doctorId as DoctorID"
+        query3= query3 + " from userMaster as um,Patient_master  as PM ,patientDoctorMapping as pdm,Hospital_master as Hm,HubMaster as Hbs  where " + str(WhereCondition) + " ORDER BY  ID DESC;"
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query3)
+        data= cursor.fetchall()
+        cursor.close()
+        # a = []
+        # d = ""
+        # for k in data:
+        #     if k['doctorId'] == :
+        #         a.append(k["hospitalid"])
+        #         y = len(a)
+        #         if y != 1:
+        #             d += ","+k["hospitalname"]
+        #         else:
+        #             d = k['hospitalname']
+        #     i['hospitalid'] = a
+        #     i['hospitalname'] = d
+        if data:
+            return {"result":data,"status":"true"}
+        else:
+            return {"result":"No Record Found","status":"true"}
+    
+    except Exception as e :
+        print("Exception---->" +str(e))
+        output = {"result":"something went wrong","status":"false"}
+        return output
+
+
 
 @app.route('/session', methods=['GET'])
 def session():
@@ -4426,11 +4461,11 @@ def MedicationIntegration():
                 frequency = i['frequency']
                 startDate=i['startDate']
                 endDate=i['endDate']
+                drugCode=i['drugCode']
+                strength=i['strength']
                 dosage=i['dosage']
                 duration=i['duration']
                 regime=i['regime']
-                drugCode=i['drugCode']
-                strength=i['strength']
                 comment=i['comment']
                 hospitalId = i['hospitalId']
                 doctorId = i['doctorId']
@@ -4443,8 +4478,11 @@ def MedicationIntegration():
 
                 if flag == 'i':
 
+
                     query  = " insert into Medication_Integration (hubId,drugCode,startDate,endDate,strength,hospitalId,doctorId,patientId,medicine,frequency,dosage,duration,regime,comment)"
                     query = query +" values("+'"'+str(hubId)+'"'+','+'"'+str(drugCode)+'"'+','+'"'+str(startDate)+'"'+','+'"'+str(endDate)+'"'+','+'"'+str(strength)+'"'+','+'"'+str(hospitalId)+'"'+','+'"'+str(doctorId)+'"'+','+'"'+str(patientId)+'"'+','+'"'+str(Medicine)+'"'+','+'"'+str(frequency)+'"'+','+'"'+str(dosage)+'"'+','+'"'+str(duration)+'"'+','+'"'+str(regime)+'"'+','+'"'+str(comment)+'"'+' '+");"
+
+                   
                     print(query)
                     conn=Connection()
                     cursor = conn.cursor()
@@ -4457,7 +4495,9 @@ def MedicationIntegration():
                 if flag =='u':
                     if 'id' in inputdata:
                         Id=inputdata['id']
+
                     query2="update Medication_Integration set hubId='" + str(HubId)+ "',startDate='" + str(startDate)+ "',endDate='" + str(endDate)+ "',drugCode='" + str(drugCode)+ "',strength= '" + str(strength)+ "',hospitalId='" + str(hospitalId)+ "',doctorId='" + str(doctorId)+ "',patientId='" + str(PatientId)+ "',medicine='" + str(Medicine)+ "',frequency='" + str(frequency)+ "',dosage='" + str(dosage)+ "',duration='" + str(duration)+ "',regime='" + str(regime)+ "',comment='" + str(regime)+ "'  Where Id= '" + str(Id)+ "'          "
+
                     print(query)
                     conn=Connection()
                     cursor = conn.cursor()
@@ -4481,22 +4521,21 @@ def getMedicationIntegration():
        
         if 'PatientId' in request.args:
             PatientId=int(request.args["PatientId"])
-      
+        
         
        
         WhereCondition=""
         if PatientId !="":
-
-                                 
-            WhereCondition =  WhereCondition+" and mi.patientId = '" + PatientId + "' and mi.patientId=p.PatientId"
-
+                     
+            WhereCondition =  WhereCondition+" and PatientId = '" + PatientId + "'"
       
             # y = y +  WhereCondition1
        
 
        
+
         query = "select mi.hubId,mi.drugCode,mi.strength,mi.hospitalId,mi.startDate,mi.endDate,mi.doctorId,mi.patientId,mi.medicine,mi.frequency,mi.dosage,mi.duration,mi.regime,mi.comment,p.PatientName from Medication_Integration as mi,Patient_master as p  " +WhereCondition  # y 
-        conn=Connection()
+
         cursor = conn.cursor()
         cursor.execute(query)
         data = cursor.fetchall()
