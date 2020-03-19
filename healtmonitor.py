@@ -1004,7 +1004,7 @@ def allPatient():
                 conn.commit()
 
                 i['doctorID'] = data11
-            return {"result":data,"status":"true"}
+        return {"result":data,"status":"true"}
         else:
             return {"result":"No Record Found","status":"true"}
     
