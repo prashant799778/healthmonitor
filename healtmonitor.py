@@ -4486,14 +4486,14 @@ def getMedicationIntegration():
         if PatientId !="":
 
                                  
-            WhereCondition =  WhereCondition+" and PatientId = '" + PatientId + "'"
+            WhereCondition =  WhereCondition+" and mi.patientId = '" + PatientId + "' and mi.patientId=p.PatientId"
 
       
             # y = y +  WhereCondition1
        
 
        
-        query = "select  hubId,drugCode,strength,hospitalId,doctorId,patientId,medicine,frequency,dosage,duration,regime,comment,date_format(CONVERT_TZ(DateCreate,'+00:00','+05:30'),'%Y-%m-%d %H:%i:%s')startDate from Medication_Integration where  " +WhereCondition  # y 
+        query = "select mi.hubId,mi.drugCode,mi.strength,mi.hospitalId,mi.doctorId,mi.patientId,mi.medicine,mi.frequency,mi.dosage,mi.duration,mi.regime,mi.comment,mi.date_format(CONVERT_TZ(mi.DateCreate,'+00:00','+05:30'),'%Y-%m-%d %H:%i:%s')startDate,p.PatientName from Medication_Integration as mi,Patient_master as p  " +WhereCondition  # y 
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query)
