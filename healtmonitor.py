@@ -1026,7 +1026,7 @@ def allPatient1():
         if data:
             for i in data:
                 userid = i['ID']
-                query4 = "select doctorId as DoctorId from patientDoctorMapping as pdm where pdm.doctorId=um.ID and ID='"+str(userid)+"'"
+                query4 = "select doctorId as DoctorId from patientDoctorMapping as pdm where pdm.doctorId=um.ID and um.ID='"+str(userid)+"'"
                 conn = Connection()
                 cursor = conn.cursor()
                 cursor.execute(query4)
