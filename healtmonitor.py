@@ -1005,13 +1005,13 @@ def allPatient():
 @app.route('/allPatient1', methods=['post'])
 def allPatient1():
     try:
-        WhereCondition = " pdm.doctorId=um.ID and  PM.hospitalId=Hm.ID and Hm.HubId=Hbs.ID and  pdm.Patient_Id=PM.PatientId  and PM.Status<>'2' "
+        WhereCondition = "PM.hospitalId=Hm.ID and Hm.HubId=Hbs.ID and  pdm.Patient_Id=PM.PatientId  and PM.Status<>'2' "
         if 'searchFilter' in request.args:
             if request.args['searchFilter'] != "":
                 searchFilter = request.args["searchFilter"]
                 WhereCondition = WhereCondition + " and (PM.PatientName LIKE '" + "%" + str(searchFilter) + "%" + "' OR PM.Email LIKE '" + "%" + str(searchFilter) + "%" + "' OR PM.Bed_Number LIKE '" + "%" + str(searchFilter) + "%" + "' OR Hm.hospital_name LIKE '" + "%" + str(searchFilter) + "%" + "') "
         query3 ="select  PM.PatientId as ID,PM.hospitalId as Hospital_Id,PM.PatientName,PM.heartRate,PM.spo2,PM.highPressure,PM.lowPressure,PM.pulseRate,PM.temperature,PM.PhoneNo,PM.Address,PM.BloodGroup,PM.DeviceMac,Hm.HubId,Hm.hospital_name  as hospital_Name,"
-        query3=query3+" PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.age,PM.Gender,PM.roomNumber,pdm.DoctorID as DoctorID"
+        query3=query3+" PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.age,PM.Gender,PM.roomNumber"
         query3= query3 + " from userMaster as um,Patient_master  as PM ,patientDoctorMapping as pdm,Hospital_master as Hm,HubMaster as Hbs  where " + str(WhereCondition) + " ORDER BY  ID DESC;"
         conn=Connection()
         cursor = conn.cursor()
@@ -1020,7 +1020,7 @@ def allPatient1():
         cursor.close()
         if data:
             for i in data:
-                patientId = i['PatientId']
+                patientId = i['ID']
                 query4 = "select pdm.doctorId from patientDoctorMapping as pdm where pdm.patientId='"+str(patientId)+"'"
                 conn=Connection()
                 cursor = conn.cursor()
