@@ -4570,6 +4570,253 @@ def getTestType():
         data = {"status":"false","message":"Something went wrong please contact system admin"}
         return data
 
+@app.route('/addImmunisations', methods=['POST'])
+def addImmunisations():
+    try:
+        json1=request.get_data() 
+        data1=json.loads(json1.decode("utf-8"))  
+        
+        query = "select * from ImmunisationsMaster where immunisation ='"+str(data1["immunisation"])+"';"
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data = cursor.fetchone()
+        cursor.close()
+        print(data)
+       
+        if data==None: 
+        
+            print("1111111")
+
+            query2  = " insert into ImmunisationsMaster(immunisation,vaccines)"
+            query2 = query2 +" values('"+str(data1["immunisation"])+"','"+str(data1['vaccines'])+"');"
+            print(query2)
+            conn=Connection()
+            cursor = conn.cursor()
+            cursor.execute(query2)
+            conn.commit()
+            output = {"result":"data inserted successfully","status":"true"}
+            return output
+        
+        else:
+            output = {"result":"data already exists","status":"true"}
+            return output 
+    except Exception as e :
+        print("Exception---->" + str(e))    
+        output = {"result":"something went wrong","status":"false"}
+        return output
+
+
+@app.route('/getallImmunisations', methods=['GET'])
+def getImmunisations():
+    try:
+       
+        query = "select  vaccines,immunisation from ImmunisationsMaster  "  
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data = cursor.fetchall()
+        cursor.close()
+        if data:
+
+
+            Data = {"result":data,"status":"true"}
+            return Data
+        
+        else:
+            output = {"result":"No Data Found","status":"false"}
+            return output
+
+    except Exception as e :
+        print("Exception---->" + str(e))    
+        output = {"result":"something went wrong","status":"false"}
+        return output
+
+@app.route('/addfoodMaster', methods=['POST'])
+def addfoodMaster():
+    try:
+        json1=request.get_data() 
+        data1=json.loads(json1.decode("utf-8"))  
+        
+        query = "select * from foodMaster where allergies ='"+str(data1["allergies"])+"';"
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data = cursor.fetchone()
+        cursor.close()
+        print(data)
+       
+        if data==None: 
+        
+            print("1111111")
+
+            query2  = " insert into foodMaster(allergies)"
+            query2 = query2 +" values('"+str(data1["allergies"])+"');"
+            print(query2)
+            conn=Connection()
+            cursor = conn.cursor()
+            cursor.execute(query2)
+            conn.commit()
+            output = {"result":"data inserted successfully","status":"true"}
+            return output
+        
+        else:
+            output = {"result":"data already exists","status":"true"}
+            return output 
+    except Exception as e :
+        print("Exception---->" + str(e))    
+        output = {"result":"something went wrong","status":"false"}
+        return output
+
+
+@app.route('/getallfoodMaster', methods=['GET'])
+def getallfoodMaster():
+    try:
+       
+        query = "select  * from foodMaster  "  
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data = cursor.fetchall()
+        cursor.close()
+        if data:           
+            Data = {"result":data,"status":"true"}
+            return Data
+        
+        else:
+            output = {"result":"No Data Found","status":"false"}
+            return output
+
+    except Exception as e :
+        print("Exception---->" + str(e))    
+        output = {"result":"something went wrong","status":"false"}
+        return output
+
+
+
+@app.route('/adddrugMaster', methods=['POST'])
+def adddrugMaster():
+    try:
+        json1=request.get_data() 
+        data1=json.loads(json1.decode("utf-8"))  
+        
+        query = "select * from drugMaster where allergies ='"+str(data1["allergies"])+"';"
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data = cursor.fetchone()
+        cursor.close()
+        print(data)
+       
+        if data==None: 
+        
+            print("1111111")
+
+            query2  = " insert into drugMaster(allergies)"
+            query2 = query2 +" values('"+str(data1["allergies"])+"');"
+            print(query2)
+            conn=Connection()
+            cursor = conn.cursor()
+            cursor.execute(query2)
+            conn.commit()
+            output = {"result":"data inserted successfully","status":"true"}
+            return output
+        
+        else:
+            output = {"result":"data already exists","status":"true"}
+            return output 
+    except Exception as e :
+        print("Exception---->" + str(e))    
+        output = {"result":"something went wrong","status":"false"}
+        return output
+
+
+@app.route('/getalldrugMaster', methods=['GET'])
+def getalldrugMaster():
+    try:
+       
+        query = "select  * from drugMaster  "  
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data = cursor.fetchall()
+        cursor.close()
+        if data:           
+            Data = {"result":data,"status":"true"}
+            return Data
+        
+        else:
+            output = {"result":"No Data Found","status":"false"}
+            return output
+
+    except Exception as e :
+        print("Exception---->" + str(e))    
+        output = {"result":"something went wrong","status":"false"}
+        return output
+
+
+
+@app.route('/addenvironmentMaster', methods=['POST'])
+def addenvironmentMaster():
+    try:
+        json1=request.get_data() 
+        data1=json.loads(json1.decode("utf-8"))  
+        
+        query = "select * from environmentMaster where allergies ='"+str(data1["allergies"])+"';"
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data = cursor.fetchone()
+        cursor.close()
+        print(data)
+       
+        if data==None: 
+        
+            print("1111111")
+
+            query2  = " insert into environmentMaster(allergies)"
+            query2 = query2 +" values('"+str(data1["allergies"])+"');"
+            print(query2)
+            conn=Connection()
+            cursor = conn.cursor()
+            cursor.execute(query2)
+            conn.commit()
+            output = {"result":"data inserted successfully","status":"true"}
+            return output
+        
+        else:
+            output = {"result":"data already exists","status":"true"}
+            return output 
+    except Exception as e :
+        print("Exception---->" + str(e))    
+        output = {"result":"something went wrong","status":"false"}
+        return output
+
+
+@app.route('/getallenvironmentMaster', methods=['GET'])
+def getallenvironmentMaster():
+    try:
+       
+        query = "select  * from environmentMaster  "  
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data = cursor.fetchall()
+        cursor.close()
+        if data:           
+            Data = {"result":data,"status":"true"}
+            return Data
+        
+        else:
+            output = {"result":"No Data Found","status":"false"}
+            return output
+
+    except Exception as e :
+        print("Exception---->" + str(e))    
+        output = {"result":"something went wrong","status":"false"}
+        return output           
+
+
 
 # @app.route('/patientDoctorMapping', methods=['POST'])
 # def patientDoctorMapping():
