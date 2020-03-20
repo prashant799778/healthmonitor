@@ -974,6 +974,8 @@ def alloperations():
         output = {"result":"something went wrong","status":"false"}
         return output
 
+        
+
 
 #admin patients
 @app.route('/allPatient', methods=['post'])
@@ -3906,14 +3908,21 @@ def diagReportMaster():
             for i in inputdata:
                 
                 reportName = i['reportName']
+
+                dateofResult=i['dateofResult']
+                dateofUpload=i['dateofUpload']
+
+                
+                
+
                 testType = i['testType']
                 hospitalId = i['hospitalId']
                 doctorId = i['doctorId']
                 hubId = i['hubId']
                 userId = i['userId']
 
-                query  = " insert into DIAG_ReportMaster (HubId,HospitalId,DoctorId,PatientId,UploadedBy,TestType,ReportName)"
-                query = query +" values("+'"'+str(hubId)+'"'+','+'"'+str(hospitalId)+'"'+','+'"'+str(doctorId)+'"'+','+'"'+str(patientId)+'"'+','+'"'+str(userId)+'"'+','+'"'+str(testType)+'"'+','+'"'+str(reportName)+'"'+' '+");"
+                query  = " insert into DIAG_ReportMaster (HubId,dateofResult,dateofUpload,HospitalId,DoctorId,PatientId,UploadedBy,TestType,ReportName)"
+                query = query +" values("+'"'+str(hubId)+'"'+','+'"'+str(dateofResult)+'"'+','+'"'+str(dateofUpload)+'"'+','+'"'+str(hospitalId)+'"'+','+'"'+str(doctorId)+'"'+','+'"'+str(patientId)+'"'+','+'"'+str(userId)+'"'+','+'"'+str(testType)+'"'+','+'"'+str(reportName)+'"'+' '+");"
                 print(query)
                 conn=Connection()
                 cursor = conn.cursor()
@@ -3988,14 +3997,17 @@ def pacsReportMaster():
             for i in inputdata:
                 
                 reportName = i['reportName']
+                dateofResult=i['dateofResult']
+                dateofUpload=i['dateofUpload']
+
                 testType = i['testType']
                 hospitalId = i['hospitalId']
                 doctorId = i['doctorId']
                 hubId = i['hubId']
                 userId = i['userId']
 
-                query  = " insert into PACS_ReportMaster (HubId,HospitalId,DoctorId,PatientId,UploadedBy,TestType,ReportName)"
-                query = query +" values("+'"'+str(hubId)+'"'+','+'"'+str(hospitalId)+'"'+','+'"'+str(doctorId)+'"'+','+'"'+str(patientId)+'"'+','+'"'+str(userId)+'"'+','+'"'+str(testType)+'"'+','+'"'+str(reportName)+'"'+' '+");"
+                query  = " insert into PACS_ReportMaster (HubId,dateofResult,dateofUpload,HospitalId,DoctorId,PatientId,UploadedBy,TestType,ReportName)"
+                query = query +" values("+'"'+str(hubId)+'"'+','+'"'+str(dateofResult)+'"'+','+'"'+str(dateofUpload)+'"'+','+'"'+str(hospitalId)+'"'+','+'"'+str(doctorId)+'"'+','+'"'+str(patientId)+'"'+','+'"'+str(userId)+'"'+','+'"'+str(testType)+'"'+','+'"'+str(reportName)+'"'+' '+");"
                 print(query)
                 conn=Connection()
                 cursor = conn.cursor()
@@ -4070,14 +4082,17 @@ def dicomReportMaster():
             for i in inputdata:
                 
                 reportName = i['reportName']
+                dateofResult=i['dateofResult']
+                dateofUpload=i['dateofUpload']
+
                 testType = i['testType']
                 hospitalId = i['hospitalId']
                 doctorId = i['doctorId']
                 hubId = i['hubId']
                 userId = i['userId']
 
-                query  = " insert into DICOM_ReportMaster (HubId,HospitalId,DoctorId,PatientId,UploadedBy,TestType,ReportName)"
-                query = query +" values("+'"'+str(hubId)+'"'+','+'"'+str(hospitalId)+'"'+','+'"'+str(doctorId)+'"'+','+'"'+str(patientId)+'"'+','+'"'+str(userId)+'"'+','+'"'+str(testType)+'"'+','+'"'+str(reportName)+'"'+' '+");"
+                query  = " insert into DICOM_ReportMaster (HubId,dateofResult,dateofUpload,HospitalId,DoctorId,PatientId,UploadedBy,TestType,ReportName)"
+                query = query +" values("+'"'+str(hubId)+'"'+','+'"'+str(dateofResult)+'"'+','+'"'+str(dateofUpload)+'"'+','+'"'+str(hospitalId)+'"'+','+'"'+str(doctorId)+'"'+','+'"'+str(patientId)+'"'+','+'"'+str(userId)+'"'+','+'"'+str(testType)+'"'+','+'"'+str(reportName)+'"'+' '+");"
                 print(query)
                 conn=Connection()
                 cursor = conn.cursor()
@@ -4152,14 +4167,18 @@ def labReportMaster():
             for i in inputdata:
                 
                 reportName = i['reportName']
+
+                dateofResult=i['dateofResult']
+                dateofUpload=i['dateofUpload']
+
                 testType = i['testType']
                 hospitalId = i['hospitalId']
                 doctorId = i['doctorId']
                 hubId = i['hubId']
                 userId = i['userId']
 
-                query  = " insert into LAB_ReportMaster (HubId,HospitalId,DoctorId,PatientId,UploadedBy,TestType,ReportName)"
-                query = query +" values("+'"'+str(hubId)+'"'+','+'"'+str(hospitalId)+'"'+','+'"'+str(doctorId)+'"'+','+'"'+str(patientId)+'"'+','+'"'+str(userId)+'"'+','+'"'+str(testType)+'"'+','+'"'+str(reportName)+'"'+' '+");"
+                query  = " insert into LAB_ReportMaster (HubId,dateofResult,dateofUpload,HospitalId,DoctorId,PatientId,UploadedBy,TestType,ReportName)"
+                query = query +" values("+'"'+str(hubId)+'"'+','+'"'+str(dateofResult)+'"'+','+'"'+str(dateofUpload)+'"'+','+'"'+str(hospitalId)+'"'+','+'"'+str(doctorId)+'"'+','+'"'+str(patientId)+'"'+','+'"'+str(userId)+'"'+','+'"'+str(testType)+'"'+','+'"'+str(reportName)+'"'+' '+");"
                 print(query)
                 conn=Connection()
                 cursor = conn.cursor()
@@ -4241,7 +4260,7 @@ def getdiagReportMaster():
             WhereCondition =  WhereCondition+" and DoctorId = '" + DoctorId + "'"                        
             WhereCondition =  WhereCondition+" and PatientId = '" + PatientId + "'"
 
-        query = "select lrm.HubId,lrm.ReportId,lrm.HospitalId,lrm.PatientId,concat('"+ GetBaseURL() +"',lrm.ReportPath) as ReportPath,lrm.ReportName,ttm.TestType,date_format(lrm.DateCreate,'%Y-%m-%d %H:%i:%s')DateCreate from DIAG_ReportMaster lrm, TestTypeMaster ttm " +WhereCondition+ ";"        
+        query = "select lrm.HubId,lrm.ReportId,lrm.HospitalId,lrm.PatientId,lrm.dateofUpload,lrm.dateofResult,concat('"+ GetBaseURL() +"',lrm.ReportPath) as ReportPath,lrm.ReportName,ttm.TestType,date_format(lrm.DateCreate,'%Y-%m-%d %H:%i:%s')DateCreate from DIAG_ReportMaster lrm, TestTypeMaster ttm " +WhereCondition+ ";"        
         print(query)
         conn=Connection()
         cursor = conn.cursor()
@@ -4286,7 +4305,7 @@ def getpacsReportMaster():
             WhereCondition =  WhereCondition+" and DoctorId = '" + DoctorId + "'"                        
             WhereCondition =  WhereCondition+" and PatientId = '" + PatientId + "'"
 
-        query = "select lrm.HubId,lrm.ReportId,lrm.HospitalId,lrm.PatientId,concat('"+ GetBaseURL() +"',lrm.ReportPath) as ReportPath,lrm.ReportName,ttm.TestType,date_format(lrm.DateCreate,'%Y-%m-%d %H:%i:%s')DateCreate from PACS_ReportMaster lrm, TestTypeMaster ttm " +WhereCondition+ ";"        
+        query = "select lrm.HubId,lrm.ReportId,lrm.HospitalId,lrm.PatientId,lrm.dateofUpload,lrm.dateofResult,concat('"+ GetBaseURL() +"',lrm.ReportPath) as ReportPath,lrm.ReportName,ttm.TestType,date_format(lrm.DateCreate,'%Y-%m-%d %H:%i:%s')DateCreate from PACS_ReportMaster lrm, TestTypeMaster ttm " +WhereCondition+ ";"        
         print(query)
         conn=Connection()
         cursor = conn.cursor()
@@ -4333,7 +4352,7 @@ def getdicomReportMaster():
             WhereCondition =  WhereCondition+" and DoctorId = '" + DoctorId + "'"                        
             WhereCondition =  WhereCondition+" and PatientId = '" + PatientId + "'"
 
-        query = "select lrm.HubId,lrm.ReportId,lrm.HospitalId,lrm.PatientId,concat('"+ GetBaseURL() +"',lrm.ReportPath) as ReportPath,lrm.ReportName,ttm.TestType,date_format(lrm.DateCreate,'%Y-%m-%d %H:%i:%s')DateCreate from DICOM_ReportMaster lrm, TestTypeMaster ttm " +WhereCondition+ ";"        
+        query = "select lrm.HubId,lrm.ReportId,lrm.HospitalId,lrm.PatientId,lrm.dateofUpload,lrm.dateofResult,concat('"+ GetBaseURL() +"',lrm.ReportPath) as ReportPath,lrm.ReportName,ttm.TestType,date_format(lrm.DateCreate,'%Y-%m-%d %H:%i:%s')DateCreate from DICOM_ReportMaster lrm, TestTypeMaster ttm " +WhereCondition+ ";"        
         print(query)
         conn=Connection()
         cursor = conn.cursor()
@@ -4378,7 +4397,7 @@ def getlabReportMaster():
             WhereCondition =  WhereCondition+" and DoctorId = '" + DoctorId + "'"                        
             WhereCondition =  WhereCondition+" and PatientId = '" + PatientId + "'"
 
-        query = "select lrm.HubId,lrm.ReportId,lrm.HospitalId,lrm.PatientId,concat('"+ GetBaseURL() +"',lrm.ReportPath) as ReportPath,lrm.ReportName,ttm.TestType,date_format(lrm.DateCreate,'%Y-%m-%d %H:%i:%s')DateCreate from LAB_ReportMaster lrm, TestTypeMaster ttm " +WhereCondition+ ";"        
+        query = "select lrm.HubId,lrm.ReportId,lrm.HospitalId,lrm.PatientId,lrm.dateofUpload,lrm.dateofResult,concat('"+ GetBaseURL() +"',lrm.ReportPath) as ReportPath,lrm.ReportName,ttm.TestType,date_format(lrm.DateCreate,'%Y-%m-%d %H:%i:%s')DateCreate from LAB_ReportMaster lrm, TestTypeMaster ttm " +WhereCondition+ ";"        
         print(query)
         conn=Connection()
         cursor = conn.cursor()
