@@ -4930,8 +4930,8 @@ def PatientEmergencyContact2():
         
             print("Patient Data")
 
-            query2  = " insert into Patientemergencymapping2(PatientEmergencyContact2)"
-            query2 = query2 +" values('"+str(data1["PatientEmergencyContact2"])+"');"
+            query2  = " insert into Patientemergencymapping2(PatientId,PatientEmergencyContact2)"
+            query2 = query2 +" values('"+str(data1["PatientId,PatientEmergencyContact2"])+"');"
             print(query2)
             conn=Connection()
             cursor = conn.cursor()
