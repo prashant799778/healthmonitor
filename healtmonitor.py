@@ -974,7 +974,7 @@ def alloperations():
         output = {"result":"something went wrong","status":"false"}
         return output
 
-        
+
 
 
 #admin patients
@@ -4442,15 +4442,30 @@ def MedicationIntegration():
                 startDate=i['startDate']
                 endDate=i['endDate']
                 drugCode=i['drugCode']
+                drugName=i['drugName']
+                drugType=i['drugType']
+                drugNamePoe=i['drugNamePoe']
+                gsn=i['gsn']
+                ndc=i['ndc']
+                drugGeneric=i['drugGeneric']
+
+
+
                 strength=i['strength']
                 dosage=i['dosage']
                 duration=i['duration']
-                regime=i['regime']
+
+                dosageValue=i['dosageValue']
+                regime=i['amountValueDispened']
+                amountUnitDispened=i['amountUnitDispened']
+
+
                 comment=i['comment']
+                
                 hospitalId = i['hospitalId']
                 doctorId = i['doctorId']
                 hubId = i['hubId']
-                userId = i['userId']
+               
                 flag=i['flag']
 
                 if 'flag' in inputdata:
@@ -4476,7 +4491,7 @@ def MedicationIntegration():
                     if 'id' in inputdata:
                         Id=inputdata['id']
 
-                    query2="update Medication_Integration set hubId='" + str(HubId)+ "',startDate='" + str(startDate)+ "',endDate='" + str(endDate)+ "',drugCode='" + str(drugCode)+ "',strength= '" + str(strength)+ "',hospitalId='" + str(hospitalId)+ "',doctorId='" + str(doctorId)+ "',patientId='" + str(PatientId)+ "',medicine='" + str(Medicine)+ "',frequency='" + str(frequency)+ "',dosage='" + str(dosage)+ "',duration='" + str(duration)+ "',regime='" + str(regime)+ "',comment='" + str(regime)+ "'  Where Id= '" + str(Id)+ "'          "
+                    query2="update Medication_Integration set hubId='" + str(hubId)+ "',startDate='" + str(startDate)+ "',endDate='" + str(endDate)+ "',drugCode='" + str(drugCode)+ "',strength= '" + str(strength)+ "',hospitalId='" + str(hospitalId)+ "',doctorId='" + str(doctorId)+ "',patientId='" + str(PatientId)+ "',medicine='" + str(Medicine)+ "',frequency='" + str(frequency)+ "',dosage='" + str(dosage)+ "',duration='" + str(duration)+ "',regime='" + str(regime)+ "',comment='" + str(regime)+ "'  Where Id= '" + str(Id)+ "'          "
 
                     print(query)
                     conn=Connection()
