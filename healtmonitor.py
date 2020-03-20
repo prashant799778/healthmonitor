@@ -4893,8 +4893,8 @@ def PatientEmergencyContact1():
         
             print("Patient Data")
 
-            query2  = " insert into Patientemergencymapping1(PatientId,PatientEmergencyContact1)"
-            query2 = query2 +" values('"+str(data1["PatientId,PatientEmergencyContact1"])+"');"
+            query2  = " insert into Patientemergencymapping1(PatientId,PatientEmergencyContact1,Relation,Address)"
+            query2 = query2 +" values('"+str(data1["PatientId"])+"','"+str(data1["PatientEmergencyContact1"])+"','"+str(data1['Relation'])+"','"+str(data1['Address'])+"');"
             print(query2)
             conn=Connection()
             cursor = conn.cursor()
@@ -4928,10 +4928,10 @@ def PatientEmergencyContact2():
        
         if data==None: 
         
-            print("Patient Data")
+            print("Patient Data1")
 
-            query2  = " insert into Patientemergencymapping2(PatientId,PatientEmergencyContact2)"
-            query2 = query2 +" values('"+str(data1["PatientId,PatientEmergencyContact2"])+"');"
+            query2  = " insert into Patientemergencymapping2(PatientId,PatientEmergencyContact2,Relation,Address)"
+            query2 = query2 +" values('"+str(data1["PatientId"])+"','"+str(data1["PatientEmergencyContact2"])+"','"+str(data1['Relation'])+"','"+str(data1['Address'])+"');"
             print(query2)
             conn=Connection()
             cursor = conn.cursor()
