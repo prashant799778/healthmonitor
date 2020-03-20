@@ -4815,7 +4815,122 @@ def getallenvironmentMaster():
     except Exception as e :
         print("Exception---->" + str(e))    
         output = {"result":"something went wrong","status":"false"}
-        return output           
+        return output 
+
+@app.route('/doctorLoginDashboard1', methods=['post'])
+def doctorLoginDashboard1():
+    try:
+        json1=request.get_data()
+        data=json.loads(json1.decode("utf-8"))
+        print(data)
+        conn=Connection()
+        cursor = conn.cursor()
+        query1=" select um.ID, hsm.hospital_name,hsm.ID as HospitalId,hm.ID as HubId,hm.HubName from HubMaster hm,Hospital_master hsm,userMaster um,userHospitalMapping uhm" 
+        query1=query1+" where hm.ID=hsm.HubId and hsm.ID=uhm.hospitalId and uhm.userId=um.ID and um.Email='"+str(data["Email"])+"' order by um.ID desc;"
+        cursor.execute(query1)
+        data1= cursor.fetchall()
+        print(data1)
+        total_patient=0
+        for i in data1:
+            
+            query2="select PatientId,hospitalId,PatientName,bmi,readmissionCount,Height,weight,heartRate,spo2,highPressure,lowPressure,pulseRate,temperature,BloodGroup,DeviceMac,Bed_Number,roomNumber,Gender,age from Patient_master pm,patientDoctorMapping pdm where pm.Status<>'2' and pdm.Patient_Id=pm.PatientId " 
+            query2=query2+" and pdm.doctorId='"+str(i["ID"]) +"' and pm.hospitalId='"+str(i["HospitalId"])+"' order by PatientId desc;"
+            cursor.execute(query2)
+            data2= cursor.fetchall()
+            for j in data2:
+                PatientId=j['PatientId']
+                query="pfm.patientId,fm.allergies,pfm.foodId from foodMaster as fm,patientfoodMapping  as pfm where fm.id=pfm.foodId and pfm.patientId='"+str(j['PatientId'])+"'"
+                cursor.execute(query)
+                da1=cursor.fetchall()
+                for m in da1:
+                    a=[]
+                    b=""
+                    if m['patientId'] ==PatientId:
+                        a.append(i['foodId'])
+                        y7=len(a)
+                        if y7!=1:
+                            b+=","+m['allergies']
+                        else:
+                            b=m['allergies']
+                        i['foodAllergies']= b
+                    else:
+                        i['foodAllergies']=''
+
+                query="pfm.patientId,fm.allergies,pfm.drugId from drugMaster as fm,patientdrugMapping  as pfm where fm.id=pfm.drugId and pfm.patientId='"+str(j['PatientId'])+"'"
+                cursor.execute(query)
+                da1=cursor.fetchall()
+                for m in da1:
+                    a=[]
+                    b=""
+                    if m['patientId'] ==PatientId:
+                        a.append(i['drugId'])
+                        y7=len(a)
+                        if y7!=1:
+                            b+=","+m['allergies']
+                        else:
+                            b=m['allergies']
+                        i['drugAllergies']= b
+                    else:
+                        i['drugAllergies']=''
+
+                query="pfm.patientId,fm.allergies,pfm.environmentId from environmentMaster as fm,patientenvironmentMapping  as pfm where fm.id=pfm.environment and pfm.patientId='"+str(j['PatientId'])+"'"
+                cursor.execute(query)
+                da1=cursor.fetchall()
+                for m in da1:
+                    a=[]
+                    b=""
+                    if m['patientId'] ==PatientId:
+                        a.append(i['environmentId'])
+                        y7=len(a)
+                        if y7!=1:
+                            b+=","+m['allergies']
+                        else:
+                            b=m['allergies']
+                        i['environmentAllergies']= b
+                    else:
+                        i['environmentAllergies']=''
+
+
+
+
+
+
+
+
+
+                
+                j["heartRate"]=json.loads(j["heartRate"].replace("'",'"'))
+                print('j["heartRate"]',j["heartRate"])
+                j["highPressure"]=json.loads(j["highPressure"].replace("'",'"'))
+                j["lowPressure"]=json.loads(j["lowPressure"].replace("'",'"'))
+                j["pulseRate"]=json.loads(j["pulseRate"].replace("'",'"'))
+                j["spo2"]=json.loads(j["spo2"].replace("'",'"'))
+                j["temperature"]=json.loads(j["temperature"].replace("'",'"'))
+            
+                
+            i["patient_Details"]=data2
+            i["total_patient"]=len(i["patient_Details"])
+            
+        for i in data1:
+            if i["patient_Details"]==():
+                data1.remove(i)
+        for i in data1:
+            total_patient+=len(i["patient_Details"])
+        cursor.close()
+        if data1:
+            # data.append({"Total_hospital":len(data)})
+            # data.append({"total_patient":total_patient})
+            data= {"result":data1,"Total_hospital":len(data1),"total_patient":total_patient,"status":"true"}
+            return json.loads(json.dumps(data))
+           
+        else:
+            return {"result":"No Record Found","status":"true"}
+    
+    except Exception as e :
+        print("Exception---->" +str(e))           
+        output = {"result":"something went wrong","status":"false"}
+        return output  
+                        
 
 
 
