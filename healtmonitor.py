@@ -5037,7 +5037,7 @@ def Patient_masterTest1():
                     return output
                 
                 else:
-                    output = {"result":data2222,"status":"true"}
+                    output = {"result":data45,"status":"true"}
                     return output
 
             if 'allergiesId' in data:
