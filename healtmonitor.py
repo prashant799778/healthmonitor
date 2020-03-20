@@ -4856,6 +4856,42 @@ def allPatient1():
         return output
 
 
+@app.route('patientemergencycontact',method=['POST'])
+def patientemergencycontact():
+    try:
+        json1=request.get_data() 
+        data1=json.loads(json1.decode("utf-8"))  
+        
+        query = "select * from Patientemergencymapping1 where  PatientId  ='"+str(data1["PatientId"])+"';"
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data = cursor.fetchone()
+        cursor.close()
+        print(data)
+       
+        if data==None: 
+        
+            print("Patient Data")
+
+            query2  = " insert into Patientemergencymapping1(PatientId,PatientEmergencyContact1)"
+            query2 = query2 +" values('"+str(data1["PatientId,PatientEmergencyContact1"])+"');"
+            print(query2)
+            conn=Connection()
+            cursor = conn.cursor()
+            cursor.execute(query2)
+            conn.commit()
+            output = {"result":"data inserted successfully","status":"true"}
+            return output
+        
+        else:
+            output = {"result":data,"status":"true"}
+            return output 
+    except Exception as e :
+        print("Exception---->" + str(e))    
+        output = {"result":"something went wrong","status":"false"}
+        return output
+
 
 
 
