@@ -4875,8 +4875,8 @@ def allPatient1():
         return output
 
 
-@app.route('Patientemergencycontact',methods=['POST'])
-def patientemergencycontact():
+@app.route('/Patientemergencycontact1',methods=['POST'])
+def PatientEmergencyContact1():
     try:
         json1=request.get_data() 
         data1=json.loads(json1.decode("utf-8"))  
