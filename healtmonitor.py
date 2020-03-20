@@ -4929,7 +4929,40 @@ def doctorLoginDashboard1():
     except Exception as e :
         print("Exception---->" +str(e))           
         output = {"result":"something went wrong","status":"false"}
+        return output 
+
+@app.route('/Discharge1', methods=['POST'])
+def update_Patient_Discharge1():
+    try:
+       
+        json1=request.get_data() 
+        data=json.loads(json1.decode("utf-8")) 
+        print("yy")
+        ist = pytz.timezone('Asia/Kolkata')
+        print("======5======" )
+        ist_time = datetime.now(tz=ist)
+        ist_f_time = ist_time.strftime("%Y-%m-%d %H:%M:%S")
+        query1 = " update Patient_master set   Status ='2'  ,enddate='"+str(ist_f_time)+"'  where PatientId = '" + str(data["PatientId"])+ "' and Usertype_Id = '" + str(data["Usertype_Id"])+ "' and  DeviceMac = '" + str(data["DeviceMac"])+ "'  ;"
+        print(query1)
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query1)
+        query2 = " update patientDetails  set   status ='2'  ,enddate='"+str(ist_f_time)+"'  where patientId = '" + str(data["PatientId"])+ "' and usertypeId = '" + str(data["Usertype_Id"])+ "'"
+        cursor.execute(query2)
+        conn.commit()
+        cursor.close()
+        output = {"result":"Updated Successfully","status":"true"}
         return output  
+    except KeyError :
+        print("Key Exception---->")   
+        output = {"result":"key error","status":"false"}
+        return output  
+
+    except Exception as e :
+        print("Exception---->" +str(e))    
+        output = {"result":"something went wrong","status":"false"}
+        return output        
+         
                         
 
 
