@@ -4608,6 +4608,121 @@ def getMedicationIntegration():
         return output
 
 
+
+@app.route('/addfluidinputs', methods=['POST'])
+def addfluidinputs():
+
+    try:  
+        inputdata = request.get_data() 
+          
+
+        inputdata = json.loads(inputdata.decode("utf-8"))   
+
+        patientId = inputdata['patientId']
+
+        if inputdata == None :
+            data = {"status":"false","message":"Somthing went wrong please contact system admin","result":""}
+            return data
+        else:
+            for i in inputdata:
+
+                fluidId=i['fluidId']
+                rate=i['rate']
+                rateUom=i['rateUom']
+                startDate=i['startDate']
+                endDate=i['endDate']
+                amount=i['amount']
+                amountOm=i['amountOm']
+                icustayId=i['icustayId']
+                hospitalId = i['hospitalId']
+                doctorId = i['doctorId']
+                hubId = i['hubId']
+               
+                flag=i['flag']
+
+                if 'flag' in inputdata:
+                    flag=inputdata['flag']
+
+                if flag == 'i':
+
+
+                    query  = " insert into patientfluids (hubId,startDate,endDate,hospitalId,doctorId,patientId,rate,rateUom,amountOm,amount,fluidId,patientWeight,comment)"
+                    query = query +" values("+'"'+str(hubId)+'"'+','+'"'+str(startDate)+'"'+','+'"'+str(endDate)+'"'+','+'"'+str(hospitalId)+'"'+','+'"'+str(doctorId)+'"'+','+'"'+str(patientId)+'"'+','+'"'+str(rate)+'"'+','+'"'+str(rateUom)+'"'+','+'"'+str(amountOm)+'"'+','+'"'+str(amount)+'"'+','+'"'+str(fluidId)+'"'+','+'"'+str(patientWeight)+'"'+','+'"'+str(comment)+'"'+' '+");"
+
+                   
+                    print(query)
+                    conn=Connection()
+                    cursor = conn.cursor()
+                    cursor.execute(query)
+
+                    data = {"status":"true","message":"","result":"Data Inserted Successfully"}
+                    return data
+
+                
+                if flag =='u':
+                    if 'id' in inputdata:
+                        Id=inputdata['id']
+
+                    query2="update patientfluids set hubId='" + str(hubId)+ "',startDate='" + str(startDate)+ "',endDate='" + str(endDate)+ "'hospitalId='" + str(hospitalId)+ "',doctorId='" + str(doctorId)+ "',patientId='" + str(PatientId)+ "',rate='" + str(rate)+ "',rateUom='" + str(rateUom)+ "',amountOm='" + str(amountOm)+ "',amount='" + str(amount)+ "',fluidId='" + str(fluidId)+ "',patientWeight='" + str(patientWeight)+ "',comment='" + str(comment)+ "'  Where Id= '" + str(Id)+ "'          "
+
+                    print(query)
+                    conn=Connection()
+                    cursor = conn.cursor()
+                    cursor.execute(query2)
+
+                    data = {"status":"true","message":"","result":"Data Updated Successfully"}
+                    return data
+
+
+    except Exception as e :
+        print("Exception--->" + str(e))                                  
+        data = {"status":"false","message":"Somthing went wrong please contact system admin"}
+        return data
+
+
+
+@app.route('/getfluidinputs', methods=['GET'])
+def getfluidinputs():
+    try:
+        HubId,HospitalId,DoctorId,PatientId="","","",""
+
+       
+        if 'PatientId' in request.args:
+            PatientId=int(request.args["PatientId"])
+        
+        
+       
+        WhereCondition=""
+        if PatientId !="":
+                     
+            WhereCondition =  WhereCondition+" and patientId = '" + PatientId + "'"
+      
+            # y = y +  WhereCondition1
+       
+
+       
+
+        query = "select mi.hubId,mi.startDate,mi.endDate,mi.hospitalId,mi.doctorId,mi.patientId,mi.rate,mi.rateUom,mi.amountOm,mi.amount,mi.fluidId,mi.patientWeight,mi.comment,f.fluidName,p.PatientName from fluidMaster as f,patientfluids as mi,Patient_master as p  " +WhereCondition  # y 
+
+        cursor = conn.cursor()
+        cursor.execute(query)
+        data = cursor.fetchall()
+        cursor.close()
+        if data:           
+            Data = {"result":data,"status":"true"}
+            return Data
+        
+        else:
+            output = {"result":"No Data Found","status":"false"}
+            return output
+
+    except Exception as e :
+        print("Exception---->" + str(e))    
+        output = {"result":"something went wrong","status":"false"}
+        return output
+        
+
+
 @app.route('/getTestType', methods=['GET'])
 def getTestType():
 
@@ -5022,7 +5137,7 @@ def update_Patient_Discharge1():
         print("Exception---->" +str(e))    
         output = {"result":"something went wrong","status":"false"}
         return output        
-         
+
                         
 
 
