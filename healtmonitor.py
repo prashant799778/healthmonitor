@@ -5283,7 +5283,8 @@ def addAllergies():
         data = cursor.fetchone()
         cursor.close()
         print(data)
-       
+
+        
         if data==None: 
         
             print("1111111")
