@@ -3817,11 +3817,13 @@ def recognizeImage():
         input_datadir = "./images"
         output_datadir = "./test"
 
+        Email = request.form.get('Email')   
+
         file1 = request.files.get('TestImage')        
         path1 = str(output_datadir)+"/"
         file1.save(str(path1)+"Dummy"+".jpg")
 
-        image_filenames = filter(lambda x: x.endswith('.jpg'), os.listdir(str(input_datadir)+"/"))
+        image_filenames = filter(lambda x: x.endswith(str(Email)+'.jpg'), os.listdir(str(input_datadir)+"/"))
         image_filenames = sorted(image_filenames)
         paths_to_images = [str(input_datadir)+"/" + x for x in image_filenames]
         face_encodings = []
