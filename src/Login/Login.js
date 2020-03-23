@@ -40,7 +40,7 @@ class Login extends React.Component {
 
             localStorage.setItem("login", "yes");
             localStorage.setItem("user_type", res.Usertype);
-            localStorage.setItem("user_id", res.UserID);
+            localStorage.setItem("user_id", res.ID);
             localStorage.setItem("user_type_id", res.Usertype_Id);
             localStorage.setItem("user", res.name);
             localStorage.setItem("email", res.Email);
@@ -58,6 +58,8 @@ class Login extends React.Component {
                 this.props.history.push("/Odash");
               }else if(res.Usertype_Id==5) {
                 this.props.history.push("/hubdash");
+              }else if(res.Usertype_Id==7) {
+                this.props.history.push("/labIncharge");
               }
             });
           } else {
@@ -72,6 +74,8 @@ class Login extends React.Component {
         // handle error
         this.setState({ isLogin: false, err: "connection error!" });
       });
+
+      // this.props.history.push("/labIncharge")
   };
 
   handleChange = e => {};

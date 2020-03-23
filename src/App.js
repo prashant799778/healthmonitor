@@ -14,9 +14,11 @@ import Role from "./Role/roles";
 import Home from "./Report/home";
 import { Router, Route, Link } from "react-router-dom";
 import history from "./History";
+import PateintDetails from "./Report2/pateint-details"
 import Smart from "./Drf/Smart";
 import DealStatus from "./dealStatus/dealStatus";
 import spin from "../src/Drf/spinner.svg";
+import LabInchargeDash from "./lab-incharge/lab-dash";
 import NewDetail from "./Add_new/NewDetail";
 import New2 from "./Add_new/new2";
 import Hospital from './User/Hospital'
@@ -55,7 +57,9 @@ class App extends React.Component {
         </div>
       );
     } else {
+      console.log(this.state.isOpen)
       return (
+        
         <div className="App">
           <Router history={history}>
             <Route exact path="/" component={Login} />
@@ -63,11 +67,18 @@ class App extends React.Component {
            
 
 
- <Route
+    <Route
             path="/hubs"
               render={props => (
                 <Hub isOpen={this.state.isOpen} Open={this.open} />
               )}    />
+
+
+            <Route
+            path="/labIncharge"
+              render={props => (
+                <LabInchargeDash isOpen={this.state.isOpen} Open={this.open} />
+              )}    />  
          
 
             <Route
@@ -164,6 +175,13 @@ class App extends React.Component {
             />
 
             <Route
+              path="/patientDetails"
+              render={props => (
+                <PateintDetails isOpen={this.state.isOpen} Open={this.open} />
+              )}
+            />
+
+<Route
               path="/patient"
               render={props => (
                 <User isOpen={this.state.isOpen} Open={this.open} />

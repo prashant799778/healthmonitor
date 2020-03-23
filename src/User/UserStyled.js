@@ -25,6 +25,12 @@ export const UserStyled = styled.div`
     color:white;
 
 }
+.upload-img {
+    width: 16px;
+    fill: red;
+    object-fit: cover;
+    object-position: center;
+  }
 
 .rw-multiselect .rw-input-reset {
     height: calc(2.429em - 2px);

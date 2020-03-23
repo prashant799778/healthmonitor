@@ -6,6 +6,7 @@ import ECG from "./ecgs"
 import  RESP  from "./resp"
 import SPO from "./spo"
 import backImg from "./image/backimg.png"
+import backImg1 from "./image/backImg1.png"
 import alertimg from "./image/alrt.gif" 
 class Detail extends React.Component{
 
@@ -296,7 +297,7 @@ return(<DetailStyled>
                { textheartRate!="" &&    <h3 className="erroe-mssh" style={{background:'#b030b0'}} >{textheartRate}</h3>}
                 </div>
               </div>
-              <div className="wrap-patient  alrt-dt" style={{backgroundImage: 'url('+backImg+')',
+              <div className="wrap-patient  alrt-dt" style={{backgroundImage: 'url('+backImg1+')',
       backgroundPosition: 'center',
       backgroundRepeat: 'no-repeat',
       backgroundSize: 'cover',
