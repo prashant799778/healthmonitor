@@ -5,7 +5,7 @@ import Grabh from "../Report/grabh"
 import ECG from "./ecgs"
 import  RESP  from "./resp"
 import SPO from "./spo"
-import backImg from "./image/backimg.png"
+import backImg from "./image/backimg.jpg"
 import alertimg from "./image/alrt.gif" 
 class Detail extends React.Component{
   client=""
