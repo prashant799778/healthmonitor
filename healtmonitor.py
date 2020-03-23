@@ -5270,27 +5270,6 @@ def getPatientDetail():
         return output
 
 
-@app.route('/medicationDetail',methods=['POST'])
-def medicationDetail():
-    try:
-        json1=request.get_data()
-        data=json.loads(json1.decode("utf-8"))
-        print(data)
-        query = "Select mi.patientId as PatientId,pm.PatientName,mi.medicine as MedicineName,mi.dosage"
-        query = query + "from Medication_Integration mi,Patient_master pm where mi.patientId=pm.PatientId and pm.PatientId='"+str(data['PatientId'])+"'"
-        print(query)
-        conn = Connection()
-        cursor = conn.cursor()
-        cursor.execute(query)
-        data = cursor.fetchall()
-        print(data)
-        return {"result":data,"status":"true"}
-    
-    except Exception as e :
-        print("Exception---->" +str(e))
-        output = {"result":"something went wrong","status":"false"}
-        return output
-
 @app.route('/addAllergies', methods=['POST'])
 def addAllergies():
     try:
