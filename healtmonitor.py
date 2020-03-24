@@ -1968,7 +1968,7 @@ def preiscribeMedicine():
 
 
             if 'doctorId' not in request.args:
-                WhereCondition2 =  " and  pmm.patientId    = '" + patientId + "'  "
+                WhereCondition2 =  " and  pmm.patientId = '" + patientId + "'  "
                 print("222222222222")
                 query = "select pmm.id,pmm.patientId,pmm.text,pmm.doctorId,pmm.dateCreate,pm.PatientName,pmm.status as status from preiscribeMedicine as pmm ,Patient_master as pm where pmm.patientId='" + patientId + "'and pm.PatientId=pmm.patientId  "+  WhereCondition2 +"  ORDER by pmm.id DESC limit  0,5"
                 conn=Connection()
