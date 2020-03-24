@@ -3062,8 +3062,8 @@ def Patient_masterTest():
         Height = data['Height']
         Weight = data['weight']
         familyHistory = data['familyHistory']
-        # bmi = weight/(Height ** 2)
-        bmi = (Weight / Height / Height) x 10,000
+        bmi = weight/(Height ** 2)
+        
         LandLineNo = data['LandLineNo']
         BuisnessNo = data['BuisnessNo']
         MobileNo1 = data['MobileNo1']
