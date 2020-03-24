@@ -858,11 +858,11 @@ def hubloginDoctor1():
             a=[]
             g=""
             userId=i['ID']
-            query=" select hm.ID as Hospital_Id,hm.hospital_name,hm.HubId from Hospital_master as hm ,userHospitalMapping as uhm where uhm.userId='"+str(userId) +"'"
+            query=" select uhm.userId,hm.ID as Hospital_Id,hm.hospital_name,hm.HubId from Hospital_master as hm ,userHospitalMapping as uhm where uhm.userId='"+str(userId) +"'"
             cursor.execute(query)
             data200=cursor.fetchall()
             for m in data200:
-                if m['HubId'] ==i['HubId']:
+                if m['userId'] ==userId:
                     a.append(m['Hospital_Id'])
                     i['Hospital_Id']=a
                 y=len(a)
