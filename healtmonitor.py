@@ -872,6 +872,7 @@ def hubloginDoctor1():
                 i['Hospital_Id']=a
                 y=len(a)
                 if y >1:
+                    t=0
                     g+=","+m['hospital_name']
                     for l in a:
                         query1="select count(*) as count from patientDoctorMapping pdm,Patient_master pm where pm.Status<>'2'  and pm.PatientId=pdm.Patient_Id and  pm.hospitalId='"+ str(l)+"'and doctorId='"+str( userId)+"';"
