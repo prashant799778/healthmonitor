@@ -1969,7 +1969,7 @@ def preiscribeMedicine():
 
             if 'doctorId' not in request.args:
                 WhereCondition2 =  " and  pmm.patientId    = '" + patientId + "'  "
-                print("111111111111")
+                print("222222222222")
                 query = "select pmm.id,pmm.patientId,pmm.text,pmm.doctorId,pmm.dateCreate,pm.PatientName,pmm.status as status from preiscribeMedicine as pmm ,Patient_master as pm where pmm.patientId='" + patientId + "'and pm.PatientId=pmm.patientId  "+  WhereCondition2 +"  ORDER by pmm.id DESC limit  0,5"
                 conn=Connection()
                 cursor = conn.cursor()
@@ -1977,6 +1977,7 @@ def preiscribeMedicine():
                 data = cursor.fetchall()
                 print(data,"=================")
                 doctorId=data[0]["doctorId"]
+                print(doctorId)
                 
                 query22="select count(*) as count from preiscribeMedicine as pmm ,Patient_master as pm where doctorId='" + str(doctorId) + "'and pm.PatientId=pmm.patientId and pmm.status='0' "+  WhereCondition2 +"  ORDER by pmm.id DESC limit  0,5"
                 data2=cursor.fetchall(query22)
