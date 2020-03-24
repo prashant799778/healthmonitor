@@ -938,6 +938,8 @@ def allDoctor1():
         data= cursor.fetchall()
         
         for i in data:
+            a=[]
+            g=""
             userId=i['ID']
             t=0
             hubId=i['HubId']
