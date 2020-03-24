@@ -1985,6 +1985,7 @@ def preiscribeMedicine():
                 doctorId=tuple(doctorId)
                                 
                 query22="select count(*) as count from preiscribeMedicine as pmm ,Patient_master as pm where doctorId In" +str(doctorId)  + " and pm.PatientId=pmm.patientId and pmm.status='0' "+  WhereCondition2 +"  ORDER by pmm.id DESC limit  0,5"
+                print(query22)
                 cursor.execute(query22)
                 data2=cursor.fetchall()
                 for i in data2:
