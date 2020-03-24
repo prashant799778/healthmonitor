@@ -4573,7 +4573,7 @@ def getMedicationIntegration():
         HubId,HospitalId,DoctorId,PatientId="","","",""
 
        
-        if 'PatientId' in request.args:
+        if 'PatientId' in request.args: 
             PatientId=int(request.args["PatientId"])
         
         
@@ -5165,7 +5165,8 @@ def update_Patient_Discharge1():
     # except Exception as e :
         # print("Exception---->" +str(e))    
         # output = {"result":"something went wrong","status":"false"}
-        # return output
+        # return outputSSSSS
+        
 @app.route('/update', methods=['POST'])
 def update():
     try:
