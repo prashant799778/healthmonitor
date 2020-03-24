@@ -1983,6 +1983,8 @@ def preiscribeMedicine():
                     doctorId.append(i["patientId"])
                 doctorId=list(dict.fromkeys(doctorId)) 
                 doctorId=tuple(doctorId)
+                if len(doctorId)==1:
+                    doctorId="("+str(doctorId)+")"
                                 
                 query22="select count(*) as count from preiscribeMedicine as pmm ,Patient_master as pm where doctorId In" +str(doctorId)  + " and pm.PatientId=pmm.patientId and pmm.status='0' "+  WhereCondition2 +"  ORDER by pmm.id DESC limit  0,5"
                 print(query22)
