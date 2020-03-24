@@ -1958,6 +1958,7 @@ def preiscribeMedicine():
                 cursor = conn.cursor()
                 cursor.execute(query)
                 data = cursor.fetchall()
+                doctorId=[]
                 for i in data:
                     doctorId.append(i["patientId"])
                 doctorId=list(dict.fromkeys(doctorId)) 
