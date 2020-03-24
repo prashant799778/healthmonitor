@@ -867,8 +867,7 @@ def hubloginDoctor1():
             print(data200,"!!!!!!!!!!!!!!!!")
             for m in data200:
                 if m['userId'] ==i['ID']:
-                    if m['HubId'] ==i['HubId']:
-                        a.append(m['Hospital_Id'])
+                    a.append(m['Hospital_Id'])
                 i['Hospital_Id']=a
                 y=len(a)
                 if y >1:
