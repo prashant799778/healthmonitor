@@ -930,7 +930,7 @@ def allDoctor1():
         conn=Connection()
         cursor = conn.cursor()
         query="select distinct(um.ID),um.mobile,um.password,um.name as DoctorName,um.licenseNo as licenseNo,um.Email,um.Gender"
-        query=query+",hsm.HubId as HubId from userMaster um,HospitalMaster hsm,userHospitalMapping uhm where um.Usertype_Id=2 and um.ID=uhm.userId  and hsm.Id=uhm.hospitalId "
+        query=query+",hsm.HubId as HubId from userMaster um,Hospital_master hsm,userHospitalMapping uhm where um.Usertype_Id=2 and um.ID=uhm.userId  and hsm.Id=uhm.hospitalId "
         query=query+ str(WhereCondition) + " ORDER BY  um.ID DESC;"
         print(query)
 
@@ -992,7 +992,7 @@ def allDoctor1():
         output = {"result":"something went wrong","status":"false"}
         return output
 
-        
+
 
 @app.route('/allHubadmin', methods=['post'])
 def allHubadmin():
