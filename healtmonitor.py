@@ -853,17 +853,19 @@ def hubloginDoctor1():
         
         cursor.execute(query)
         data= cursor.fetchall()
-        a=[]
-        g=""
-        
+       
         for i in data:
+            a=[]
+            g=""
+        
            
             userId=i['ID']
             query=" select uhm.userId,hm.ID as Hospital_Id,hm.hospital_name,hm.HubId from Hospital_master as hm ,userHospitalMapping as uhm where uhm.userId='"+str(userId) +"'"
             cursor.execute(query)
             data200=cursor.fetchall()
+            print(data200)
             for m in data200:
-                if m['userId'] ==userId:
+                if m['userId'] ==i['userId']:
                     if m['HubId'] ==i['HubId']:
                         a.append(m['Hospital_Id'])
                         i['Hospital_Id']=a
@@ -874,7 +876,7 @@ def hubloginDoctor1():
                     g=m['hospital_name']
                 i['hospitalName']=g
                 for l in a:
-                    query1="select count(*) as count from patientDoctorMapping pdm,Patient_master pm where pm.Status<>'2'  and pm.PatientId=pdm.Patient_Id and  pm.hospitalId='"+ str(l)+"'and doctorId='"+str(i["ID"])+"';"
+                    query1="select count(*) as count from patientDoctorMapping pdm,Patient_master pm where pm.Status<>'2'  and pm.PatientId=pdm.Patient_Id and  pm.hospitalId='"+ str(l)+"'and doctorId='"+str(userId)+"';"
                     cursor.execute(query1)
                     data99= cursor.fetchall()
                     print(data99)
