@@ -1975,6 +1975,7 @@ def preiscribeMedicine():
                 cursor = conn.cursor()
                 cursor.execute(query)
                 data = cursor.fetchall()
+                print(data,"=================")
                 query22="select count(*) as count from preiscribeMedicine as pmm ,Patient_master as pm where doctorId='" + doctorId + "'and pm.PatientId=pmm.patientId and pmm.status='0' "+  WhereCondition2 +"  ORDER by pmm.id DESC limit  0,5"
                 cursor.fetchall(query22)
                 data2=cursor.fetchall()
@@ -3814,7 +3815,7 @@ def dataAdd():
 @app.route('/recognizeImage', methods=['POST'])
 def recognizeImage():
     try:
-        input_datadir = "./images"
+        input_datadir = "./D"
         output_datadir = "./test"
 
         file1 = request.files.get('TestImage')        
