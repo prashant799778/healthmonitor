@@ -916,6 +916,84 @@ def hubloginDoctor1():
         output = {"result":"something went wrong","status":"false"}
         return output
 
+
+@app.route('/allDoctor1', methods=['post'])
+def allDoctor1():
+    try:
+        WhereCondition = "  "
+        if 'searchFilter' in request.args:
+            if request.args['searchFilter'] != "":
+                searchFilter = request.args["searchFilter"]
+                # WhereCondition = WhereCondition + " and um.name LIKE '" + "%" + str(searchFilter) + "%" + "'"
+                WhereCondition = WhereCondition + " and (um.name LIKE '" + "%" + str(searchFilter) + "%" + "' OR um.Email LIKE '" + "%" + str(searchFilter) + "%" + "' OR hsm.hospital_name LIKE '" + "%" + str(searchFilter) + "%" + "' OR um.mobile LIKE '" + "%" + str(searchFilter) + "%" + "') "
+    
+        conn=Connection()
+        cursor = conn.cursor()
+        query="select distinct(um.ID),um.mobile,um.password,um.name as DoctorName,um.licenseNo as licenseNo,um.Email,um.Gender"
+        query=query+",hsm.HubId as HubId from userMaster um,HospitalMaster hsm,userHospitalMapping uhm where um.Usertype_Id=2 and um.ID=uhm.userId  and hsm.Id=uhm.hospitalId "
+        query=query+ str(WhereCondition) + " ORDER BY  um.ID DESC;"
+        print(query)
+
+        cursor.execute(query)
+        data= cursor.fetchall()
+        
+        for i in data:
+            userId=i['ID']
+            t=0
+            hubId=i['HubId']
+            query=" select uhm.userId,hm.ID as Hospital_Id,hm.hospital_name,hm.HubId from Hospital_master as hm ,userHospitalMapping as uhm where uhm.userId='"+str(userId) +"' and  uhm.hospitalId=hm.ID"
+            cursor.execute(query)
+            data200=cursor.fetchall()
+            print(data200,"!!!!!!!!!!!!!!!!")
+            for m in data200:
+                if m['userId'] ==i['ID']:
+                    a.append(m['Hospital_Id'])
+                i['Hospital_Id']=a
+                y=len(a)
+                if y >1:
+                    t=0
+                    g+=","+m['hospital_name']
+                    for l in a:
+                        query1="select count(*) as count from patientDoctorMapping pdm,Patient_master pm where pm.Status<>'2'  and pm.PatientId=pdm.Patient_Id and  pm.hospitalId='"+ str(l)+"'and doctorId='"+str( userId)+"';"
+                        cursor.execute(query1)
+                        data99= cursor.fetchall()
+                        print(data99)
+                        t+=data99[0]["count"]
+                        i['patient']=t
+                else:
+                    g=m['hospital_name']
+                    for l in a:
+                        query1="select count(*) as count from patientDoctorMapping pdm,Patient_master pm where pm.Status<>'2'  and pm.PatientId=pdm.Patient_Id and  pm.hospitalId='"+ str(l)+"'and doctorId='"+str( userId)+"';"
+                        cursor.execute(query1)
+                        data99= cursor.fetchall()
+                        print(data99)
+                        i['patient']=data99[0]["count"]
+                       
+
+                i['hospitalName']=g
+
+
+
+
+            
+
+            
+
+            
+            i["totalHospitals"]=len(a)
+        
+        cursor.close()    
+        if data:
+            return {"result":data,"status":"true"}
+        else:
+            return {"result":"No Record Found","status":"true"}
+    except Exception as e :
+        print("Exception---->" +str(e))           
+        output = {"result":"something went wrong","status":"false"}
+        return output
+
+        
+
 @app.route('/allHubadmin', methods=['post'])
 def allHubadmin():
     try:
