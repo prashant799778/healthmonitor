@@ -853,10 +853,11 @@ def hubloginDoctor1():
         
         cursor.execute(query)
         data= cursor.fetchall()
+        a=[]
+        g=""
         
         for i in data:
-            a=[]
-            g=""
+           
             userId=i['ID']
             query=" select uhm.userId,hm.ID as Hospital_Id,hm.hospital_name,hm.HubId from Hospital_master as hm ,userHospitalMapping as uhm where uhm.userId='"+str(userId) +"'"
             cursor.execute(query)
