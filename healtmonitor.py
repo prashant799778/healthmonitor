@@ -3815,7 +3815,7 @@ def dataAdd():
 @app.route('/recognizeImage', methods=['POST'])
 def recognizeImage():
     try:
-        input_datadir = "./D"
+        input_datadir = "./images"
         output_datadir = "./test"
 
         Email = request.form.get('Email')   
