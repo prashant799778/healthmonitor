@@ -863,8 +863,9 @@ def hubloginDoctor1():
             data200=cursor.fetchall()
             for m in data200:
                 if m['userId'] ==userId:
-                    a.append(m['Hospital_Id'])
-                    i['Hospital_Id']=a
+                    if m['HubId'] ==i['HubId']:
+                        a.append(m['Hospital_Id'])
+                        i['Hospital_Id']=a
                 y=len(a)
                 if y >1:
                     g+=","+m['hospital_name']
