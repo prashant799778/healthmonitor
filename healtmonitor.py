@@ -863,7 +863,7 @@ def hubloginDoctor1():
             query=" select uhm.userId,hm.ID as Hospital_Id,hm.hospital_name,hm.HubId from Hospital_master as hm ,userHospitalMapping as uhm where uhm.userId='"+str(userId) +"'"
             cursor.execute(query)
             data200=cursor.fetchall()
-            print(data200)
+            print(data200,"!!!!!!!!!!!!!!!!")
             for m in data200:
                 if m['userId'] ==i['ID']:
                     if m['HubId'] ==i['HubId']:
