@@ -3155,6 +3155,12 @@ def operationDashboard():
         
         json1=request.get_data()
         Data=json.loads(json1.decode("utf-8"))
+        if 'startlimit' in inputdata:
+            startlimit = inputdata["startlimit"]
+            if startlimit==1:
+                startlimit=0
+        if 'endlimit' in inputdata:
+            endlimit = inputdata["endlimit"]
 
         query3 ="select  PM.PatientId as ID,PM.PatientName,PM.PhoneNo,PM.heartRate,PM.spo2,PM.highPressure,PM.lowPressure,PM.pulseRate,PM.temperature,Hbs.HubName,PM.Address,PM.BloodGroup,PM.DeviceMac,Hm.HubId,Hm.hospital_name as hospital_Name, "
         query3=query3+" PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.age,PM.Gender,PM.roomNumber"
