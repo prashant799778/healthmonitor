@@ -839,6 +839,67 @@ def allDoctor():
         return output
 
 
+
+@app.route('/hubadminDoctor1', methods=['post'])
+def hubloginDoctor1():
+    try:
+        json1=request.get_data()
+        Data=json.loads(json1.decode("utf-8"))
+        conn=Connection()
+        cursor = conn.cursor()
+        query="select distinct(um.ID),um.mobile,um.password,um.name as DoctorName,um.licenseNo as licenseNo,um.Email,um.Gender"
+        query=query+",hsm.ID as HubId from userMaster um,HubMaster hsm,userHospitalMapping uhm where um.Usertype_Id=2 and um.ID=uhm.userId  and hsm.Id='"+str(Data["HubId"])+"'  ;"
+        print(query)
+        
+        cursor.execute(query)
+        data= cursor.fetchall()
+        
+        for i in data:
+            a=[]
+            g=""
+            userId=i['ID']
+            query=" select hm.ID as Hospital_Id,hm.hospital_name,hm.HubId from Hospital_master as hm ,userHospitalMapping as uhm where uhm.userId='"+str(userId) +"'"
+            cursor.execute(query)
+            data200=cursor.fetchall()
+            for m in data200:
+                if m['HubId'] ==i['HubId']:
+                    a.append(m['Hospital_Id'])
+                    i['Hospital_Id']=a
+                y=len(a)
+                if y >1:
+                    g+=","+m['hospital_name']
+                else:
+                    g=m['hospital_name']
+                i['hospitalName']=g
+                for i in a:
+                    query1="select count(*) as count from patientDoctorMapping pdm,Patient_master pm where pm.Status<>'2'  and pm.PatientId=pdm.Patient_Id and  pm.hospitalId='"+ str(i["Hospital_Id"])+"'and doctorId='"+str(i["ID"])+"';"
+                    cursor.execute(query1)
+                    data1= cursor.fetchall()
+                    print(data1)
+                    i["patient"]=data1[0]["count"]
+
+
+
+            
+
+            
+
+            
+            i["totalHospitals"]=len(a)
+            
+            
+           
+        
+        cursor.close()    
+        if data:
+            return {"result":data,"status":"true"}
+        else:
+            return {"result":"No Record Found","status":"true"}
+    except Exception as e :
+        print("Exception---->" +str(e))           
+        output = {"result":"something went wrong","status":"false"}
+        return output
+
 @app.route('/allHubadmin', methods=['post'])
 def allHubadmin():
     try:
