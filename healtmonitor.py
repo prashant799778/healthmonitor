@@ -1975,11 +1975,16 @@ def preiscribeMedicine():
                 cursor = conn.cursor()
                 cursor.execute(query)
                 data = cursor.fetchall()
-                print(data,"=================")
-                doctorId=data[0]["doctorId"]
-                print()
-                
-                query22="select count(*) as count from preiscribeMedicine as pmm ,Patient_master as pm where doctorId='" + str(doctorId) + "'and pm.PatientId=pmm.patientId and pmm.status='0' "+  WhereCondition2 +"  ORDER by pmm.id DESC limit  0,5"
+                # print(data,"=================")
+                # doctorId=data[0]["doctorId"]
+                # print()
+                doctorId=[]
+                for i in data:
+                    doctorId.append(i["patientId"])
+                doctorId=list(dict.fromkeys(doctorId)) 
+                doctorId=tuple(doctorId)
+                                
+                query22="select count(*) as count from preiscribeMedicine as pmm ,Patient_master as pm where doctorId In" +str(doctorId)  + " and pm.PatientId=pmm.patientId and pmm.status='0' "+  WhereCondition2 +"  ORDER by pmm.id DESC limit  0,5"
                 cursor.execute(query22)
                 data2=cursor.fetchall()
                 for i in data2:
