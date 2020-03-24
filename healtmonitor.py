@@ -860,7 +860,8 @@ def hubloginDoctor1():
         
            
             userId=i['ID']
-            query=" select uhm.userId,hm.ID as Hospital_Id,hm.hospital_name,hm.HubId from Hospital_master as hm ,userHospitalMapping as uhm where uhm.userId='"+str(userId) +"'"
+            hubId=i['HubId']
+            query=" select uhm.userId,hm.ID as Hospital_Id,hm.hospital_name,hm.HubId from Hospital_master as hm ,userHospitalMapping as uhm where uhm.userId='"+str(userId) +"' and hm.HubId='"+str(hubId)"'"
             cursor.execute(query)
             data200=cursor.fetchall()
             print(data200,"!!!!!!!!!!!!!!!!")
