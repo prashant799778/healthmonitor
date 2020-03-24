@@ -860,6 +860,7 @@ def hubloginDoctor1():
         
            
             userId=i['ID']
+            t=0
             hubId=i['HubId']
             query=" select uhm.userId,hm.ID as Hospital_Id,hm.hospital_name,hm.HubId from Hospital_master as hm ,userHospitalMapping as uhm where uhm.userId='"+str(userId) +"' and  uhm.hospitalId=hm.ID"
             cursor.execute(query)
@@ -880,7 +881,8 @@ def hubloginDoctor1():
                     cursor.execute(query1)
                     data99= cursor.fetchall()
                     print(data99)
-                    i["patient"]=data99[0]["count"]
+                    t+=data99[0]["count"]
+                    i['patient']=t
 
 
 
