@@ -3062,7 +3062,8 @@ def Patient_masterTest():
         Height = data['Height']
         Weight = data['weight']
         familyHistory = data['familyHistory']
-        bmi = weight/(Height ** 2)
+        # bmi = weight/(Height ** 2)
+        bmi = (Weight / Height / Height) x 10,000
         LandLineNo = data['LandLineNo']
         BuisnessNo = data['BuisnessNo']
         MobileNo1 = data['MobileNo1']
@@ -5271,27 +5272,6 @@ def getPatientDetail():
         return output
 
 
-@app.route('/medicationDetail',methods=['POST'])
-def medicationDetail():
-    try:
-        json1=request.get_data()
-        data=json.loads(json1.decode("utf-8"))
-        print(data)
-        query = "Select mi.patientId as PatientId,pm.PatientName,mi.medicine as MedicineName,mi.dosage"
-        query = query + "from Medication_Integration mi,Patient_master pm where mi.patientId=pm.PatientId and pm.PatientId='"+str(data['PatientId'])+"'"
-        print(query)
-        conn = Connection()
-        cursor = conn.cursor()
-        cursor.execute(query)
-        data = cursor.fetchall()
-        print(data)
-        return {"result":data,"status":"true"}
-    
-    except Exception as e :
-        print("Exception---->" +str(e))
-        output = {"result":"something went wrong","status":"false"}
-        return output
-
 @app.route('/addAllergies', methods=['POST'])
 def addAllergies():
     try:
@@ -5305,7 +5285,8 @@ def addAllergies():
         data = cursor.fetchone()
         cursor.close()
         print(data)
-       
+
+        
         if data==None: 
         
             print("1111111")
@@ -5494,7 +5475,7 @@ def Patient_masterTest1():
         Height = data['Height']
         Weight = data['weight']
         familyHistory = data['familyHistory']
-        bmi = weight/(Height ** 2)
+        bmi = (Weight / Height / Height) x 10,000
         LandLineNo = data['LandLineNo']
         BuisnessNo = data['BuisnessNo']
         MobileNo1 = data['MobileNo1']
