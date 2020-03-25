@@ -5277,13 +5277,13 @@ int[] styleable ViewStubCompat { 0x010100d0, 0x010100f2, 0x010100f3 }
 int styleable ViewStubCompat_android_id 0
 int styleable ViewStubCompat_android_layout 1
 int styleable ViewStubCompat_android_inflatedId 2
-int[] styleable WaveformView { 0x7f030036, 0x7f03005f, 0x7f0301b5, 0x7f0301e7, 0x7f030212, 0x7f0302dc }
-int styleable WaveformView_backgroundColor 0
-int styleable WaveformView_bufferSize 1
-int styleable WaveformView_lineWidth 2
-int styleable WaveformView_maxValue 3
-int styleable WaveformView_pointStep 4
-int styleable WaveformView_waveColor 5
+int[] styleable WaveformViewTest { 0x7f030036, 0x7f03005f, 0x7f0301b5, 0x7f0301e7, 0x7f030212, 0x7f0302dc }
+int styleable WaveformViewTest_backgroundColor 0
+int styleable WaveformViewTest_bufferSize 1
+int styleable WaveformViewTest_lineWidth 2
+int styleable WaveformViewTest_maxValue 3
+int styleable WaveformViewTest_pointStep 4
+int styleable WaveformViewTest_waveColor 5
 int[] styleable stl_SmartTabLayout { 0x7f030253, 0x7f030254, 0x7f030255, 0x7f030256, 0x7f030257, 0x7f030258, 0x7f030259, 0x7f03025a, 0x7f03025b, 0x7f03025c, 0x7f03025d, 0x7f03025e, 0x7f03025f, 0x7f030260, 0x7f030261, 0x7f030262, 0x7f030263, 0x7f030264, 0x7f030265, 0x7f030266, 0x7f030267, 0x7f030268, 0x7f030269, 0x7f03026a, 0x7f03026b, 0x7f03026c, 0x7f03026d, 0x7f03026e, 0x7f03026f }
 int styleable stl_SmartTabLayout_stl_clickable 0
 int styleable stl_SmartTabLayout_stl_customTabTextLayoutId 1

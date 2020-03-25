@@ -1,4 +1,4 @@
-package com.monitor.widget;
+package com.monitor.util;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -14,6 +14,7 @@ import android.util.TypedValue;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+
 import com.monitor.R;
 
 
@@ -21,7 +22,7 @@ import com.monitor.R;
  * Created by ZXX on 2017/7/8.
  */
 
-public class WaveformView extends SurfaceView implements SurfaceHolder.Callback{
+public class WaveformViewTest extends SurfaceView implements SurfaceHolder.Callback{
 
     private static final String TAG = ">>>WAVEFORM VIEW<<<";
 
@@ -47,16 +48,16 @@ public class WaveformView extends SurfaceView implements SurfaceHolder.Callback{
     private boolean isSurfaceViewAvailable;
 
 
-    public WaveformView(Context context){
+    public WaveformViewTest(Context context){
         this(context,null);
     }
 
 
-    public WaveformView(Context context, AttributeSet attrs) {
+    public WaveformViewTest(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public WaveformView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public WaveformViewTest(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
         DisplayMetrics metrics = context.getResources().getDisplayMetrics();
@@ -75,7 +76,7 @@ public class WaveformView extends SurfaceView implements SurfaceHolder.Callback{
         mWavePaint.setStrokeCap(Paint.Cap.ROUND);
         mWavePaint.setStrokeJoin(Paint.Join.ROUND);
 
-        int backgroundColor = arr.getColor(R.styleable.WaveformViewTest_backgroundColor, Color.rgb(46,148,216));
+        int backgroundColor = arr.getColor(R.styleable.WaveformViewTest_backgroundColor,Color.rgb(46,148,216));
         mBackgroundPaint = new Paint();
         mBackgroundPaint.setColor(backgroundColor);
 
@@ -108,8 +109,6 @@ public class WaveformView extends SurfaceView implements SurfaceHolder.Callback{
 
 
     public void addAmp(int amp){
-//        Log.d("test...",amp+"");
-//        Toast.makeText(getContext(), "adasfasf", Toast.LENGTH_SHORT).show();
         if(!isSurfaceViewAvailable) {
             mDataBufferIndex = 0;
             return;
@@ -160,6 +159,7 @@ public class WaveformView extends SurfaceView implements SurfaceHolder.Callback{
             }
         }
     }
+
     public void reset(){
         mDataBufferIndex = 0;
         mLastPoint = new Point(0,(int) (mHeight - mHeight/(float)mMaxValue * 128));

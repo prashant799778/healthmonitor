@@ -60,13 +60,13 @@ public class WaveformViewNew extends SurfaceView implements SurfaceHolder.Callba
         super(context, attrs, defStyleAttr);
 
         DisplayMetrics metrics = context.getResources().getDisplayMetrics();
-        TypedArray arr = context.getTheme().obtainStyledAttributes(attrs, R.styleable.WaveformView, defStyleAttr, 0);
+        TypedArray arr = context.getTheme().obtainStyledAttributes(attrs, R.styleable.WaveformViewTest, defStyleAttr, 0);
 
-        int waveColor = arr.getColor(R.styleable.WaveformView_waveColor, Color.WHITE);
-        mLineWidth = arr.getDimension(R.styleable.WaveformView_lineWidth, TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, metrics));
-        pointStep = arr.getDimension(R.styleable.WaveformView_pointStep, TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1.4f, metrics));
-        mBufferSize = arr.getInt(R.styleable.WaveformView_bufferSize, 5);
-        mMaxValue = arr.getInteger(R.styleable.WaveformView_maxValue, 100);
+        int waveColor = arr.getColor(R.styleable.WaveformViewTest_waveColor, Color.WHITE);
+        mLineWidth = arr.getDimension(R.styleable.WaveformViewTest_lineWidth, TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, metrics));
+        pointStep = arr.getDimension(R.styleable.WaveformViewTest_pointStep, TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1.4f, metrics));
+        mBufferSize = arr.getInt(R.styleable.WaveformViewTest_bufferSize, 5);
+        mMaxValue = arr.getInteger(R.styleable.WaveformViewTest_maxValue, 100);
 
         mWavePaint = new Paint();
         mWavePaint.setColor(waveColor);
@@ -75,7 +75,7 @@ public class WaveformViewNew extends SurfaceView implements SurfaceHolder.Callba
         mWavePaint.setStrokeCap(Paint.Cap.ROUND);
         mWavePaint.setStrokeJoin(Paint.Join.ROUND);
 
-        int backgroundColor = arr.getColor(R.styleable.WaveformView_backgroundColor, Color.rgb(46,148,216));
+        int backgroundColor = arr.getColor(R.styleable.WaveformViewTest_backgroundColor, Color.rgb(46,148,216));
         mBackgroundPaint = new Paint();
         mBackgroundPaint.setColor(backgroundColor);
 

@@ -27186,33 +27186,33 @@ public final class R {
      */
     public static final int ViewStubCompat_android_inflatedId=2;
     /**
-     * Attributes that can be used with a WaveformView.
+     * Attributes that can be used with a WaveformViewTest.
      * <p>Includes the following attributes:</p>
      * <table>
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #WaveformView_backgroundColor com.monitor:backgroundColor}</code></td><td></td></tr>
-     * <tr><td><code>{@link #WaveformView_bufferSize com.monitor:bufferSize}</code></td><td></td></tr>
-     * <tr><td><code>{@link #WaveformView_lineWidth com.monitor:lineWidth}</code></td><td></td></tr>
-     * <tr><td><code>{@link #WaveformView_maxValue com.monitor:maxValue}</code></td><td></td></tr>
-     * <tr><td><code>{@link #WaveformView_pointStep com.monitor:pointStep}</code></td><td></td></tr>
-     * <tr><td><code>{@link #WaveformView_waveColor com.monitor:waveColor}</code></td><td></td></tr>
+     * <tr><td><code>{@link #WaveformViewTest_backgroundColor com.monitor:backgroundColor}</code></td><td></td></tr>
+     * <tr><td><code>{@link #WaveformViewTest_bufferSize com.monitor:bufferSize}</code></td><td></td></tr>
+     * <tr><td><code>{@link #WaveformViewTest_lineWidth com.monitor:lineWidth}</code></td><td></td></tr>
+     * <tr><td><code>{@link #WaveformViewTest_maxValue com.monitor:maxValue}</code></td><td></td></tr>
+     * <tr><td><code>{@link #WaveformViewTest_pointStep com.monitor:pointStep}</code></td><td></td></tr>
+     * <tr><td><code>{@link #WaveformViewTest_waveColor com.monitor:waveColor}</code></td><td></td></tr>
      * </table>
-     * @see #WaveformView_backgroundColor
-     * @see #WaveformView_bufferSize
-     * @see #WaveformView_lineWidth
-     * @see #WaveformView_maxValue
-     * @see #WaveformView_pointStep
-     * @see #WaveformView_waveColor
+     * @see #WaveformViewTest_backgroundColor
+     * @see #WaveformViewTest_bufferSize
+     * @see #WaveformViewTest_lineWidth
+     * @see #WaveformViewTest_maxValue
+     * @see #WaveformViewTest_pointStep
+     * @see #WaveformViewTest_waveColor
      */
-    public static final int[] WaveformView={
+    public static final int[] WaveformViewTest={
       0x7f030036, 0x7f03005f, 0x7f0301b5, 0x7f0301e7, 
       0x7f030212, 0x7f0302dc
     };
     /**
      * <p>This symbol is the offset where the {@link com.monitor.R.attr#backgroundColor}
-     * attribute's value can be found in the {@link #WaveformView} array.
+     * attribute's value can be found in the {@link #WaveformViewTest} array.
      *
      * <p>May be a color value, in the form of "<code>#<i>rgb</i></code>",
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
@@ -27220,19 +27220,19 @@ public final class R {
      *
      * @attr name com.monitor:backgroundColor
      */
-    public static final int WaveformView_backgroundColor=0;
+    public static final int WaveformViewTest_backgroundColor=0;
     /**
      * <p>This symbol is the offset where the {@link com.monitor.R.attr#bufferSize}
-     * attribute's value can be found in the {@link #WaveformView} array.
+     * attribute's value can be found in the {@link #WaveformViewTest} array.
      *
      * <p>May be an integer value, such as "<code>100</code>".
      *
      * @attr name com.monitor:bufferSize
      */
-    public static final int WaveformView_bufferSize=1;
+    public static final int WaveformViewTest_bufferSize=1;
     /**
      * <p>This symbol is the offset where the {@link com.monitor.R.attr#lineWidth}
-     * attribute's value can be found in the {@link #WaveformView} array.
+     * attribute's value can be found in the {@link #WaveformViewTest} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
      * unit such as "<code>14.5sp</code>".
@@ -27242,19 +27242,19 @@ public final class R {
      *
      * @attr name com.monitor:lineWidth
      */
-    public static final int WaveformView_lineWidth=2;
+    public static final int WaveformViewTest_lineWidth=2;
     /**
      * <p>This symbol is the offset where the {@link com.monitor.R.attr#maxValue}
-     * attribute's value can be found in the {@link #WaveformView} array.
+     * attribute's value can be found in the {@link #WaveformViewTest} array.
      *
      * <p>May be an integer value, such as "<code>100</code>".
      *
      * @attr name com.monitor:maxValue
      */
-    public static final int WaveformView_maxValue=3;
+    public static final int WaveformViewTest_maxValue=3;
     /**
      * <p>This symbol is the offset where the {@link com.monitor.R.attr#pointStep}
-     * attribute's value can be found in the {@link #WaveformView} array.
+     * attribute's value can be found in the {@link #WaveformViewTest} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
      * unit such as "<code>14.5sp</code>".
@@ -27264,10 +27264,10 @@ public final class R {
      *
      * @attr name com.monitor:pointStep
      */
-    public static final int WaveformView_pointStep=4;
+    public static final int WaveformViewTest_pointStep=4;
     /**
      * <p>This symbol is the offset where the {@link com.monitor.R.attr#waveColor}
-     * attribute's value can be found in the {@link #WaveformView} array.
+     * attribute's value can be found in the {@link #WaveformViewTest} array.
      *
      * <p>May be a color value, in the form of "<code>#<i>rgb</i></code>",
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
@@ -27275,7 +27275,7 @@ public final class R {
      *
      * @attr name com.monitor:waveColor
      */
-    public static final int WaveformView_waveColor=5;
+    public static final int WaveformViewTest_waveColor=5;
     /**
      * Attributes that can be used with a stl_SmartTabLayout.
      * <p>Includes the following attributes:</p>

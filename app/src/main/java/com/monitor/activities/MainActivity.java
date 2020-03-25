@@ -53,6 +53,7 @@ import com.monitor.util.MySharedPrefrence;
 import com.monitor.util.NIBP;
 import com.monitor.util.SpO2;
 import com.monitor.util.Temp;
+import com.monitor.util.WaveformViewTest;
 import com.monitor.widget.GothamBookFontForLable;
 import com.monitor.widget.Lato_Regular;
 import com.monitor.widget.Lato_Regular_Font;
@@ -179,7 +180,7 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
         setContentView(R.layout.activity_main);
         m=MySharedPrefrence.instanceOf(MainActivity.this);
         try {
-            afd = MainActivity.this.getAssets().openFd("beep1.mp3");
+            afd = MainActivity.this.getAssets().openFd("peak.wav");
             player = new MediaPlayer();
             player.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
             player.prepare();
@@ -188,7 +189,7 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
         }
 
         try {
-            afd1 = MainActivity.this.getAssets().openFd("beep.mp3");
+            afd1 = MainActivity.this.getAssets().openFd("alarm.wav");
             player1 = new MediaPlayer();
             player1.setDataSource(afd1.getFileDescriptor(),afd1.getStartOffset(),afd1.getLength());
             player1.prepare();
@@ -257,6 +258,15 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
 //        });
         initData();
         initView();
+//        final Handler handler= new Handler();
+//        handler.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+////                Comman.log("RamdomValues","InsideMEthod");
+//                wfSpO2.addAmp(randomValue());
+//                handler.postDelayed(this,50);
+//            }
+//        },50);
     }
     private void initData() {
         Comman.log(TAG,":OnCreateMethod_INITDATA");
@@ -425,7 +435,6 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
         //SpO2 & ECG waveform
         wfSpO2 = (WaveformView) findViewById(R.id.wfSp02);
         wfECG = (WaveformView) findViewById(R.id.wfECG);
-
     }
 
     public void onClick(View v) {
@@ -1168,6 +1177,12 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
         player1.start();
     }
 
+    public int randomValue()
+    {
+        Random random = new Random();
+        Comman.log("RamdomValues","-- "+(random.nextInt(90)+10));
+         return (((random.nextInt(90)+10)));
+    }
 }
 
 

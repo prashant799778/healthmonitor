@@ -1,6 +1,6 @@
 <resources>
 
-    <declare-styleable name="WaveformView">
+    <declare-styleable name="WaveformViewTest">
         <attr name="waveColor" format="color"/>
         <attr name="backgroundColor" format="color"/>
         <attr name="lineWidth" format="dimension"/>
