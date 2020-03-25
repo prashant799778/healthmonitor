@@ -91,16 +91,15 @@ public class UserDisplayActivity extends BaseActivity  {
 
 
         try {
-            afd = UserDisplayActivity.this.getAssets().openFd("beep1.mp3");
+            afd = UserDisplayActivity.this.getAssets().openFd("peak.wav");
             player = new MediaPlayer();
             player.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
             player.prepare();
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-
         try {
-            afd1 = UserDisplayActivity.this.getAssets().openFd("beep.mp3");
+            afd1 = UserDisplayActivity.this.getAssets().openFd("alarm.wav");
             player1 = new MediaPlayer();
             player1.setDataSource(afd1.getFileDescriptor(),afd1.getStartOffset(),afd1.getLength());
             player1.prepare();

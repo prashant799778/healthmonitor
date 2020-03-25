@@ -175,7 +175,7 @@
                             android:layout_weight=".5">
                             <com.monitor.widget.WaveformView
                                 android:id="@+id/wfSp02"
-                                app:maxValue="250"
+                                app:maxValue="100"
                                 app:pointStep="1dp"
                                 app:waveColor="@color/red"
                                 android:layout_gravity="center_vertical"
