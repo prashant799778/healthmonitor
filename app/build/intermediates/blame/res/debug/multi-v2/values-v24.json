@@ -4,7 +4,7 @@
             "outputFile": "E:\\git\\Healthmonitor\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v24\\values-v24.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\fourbrick\\.gradle\\caches\\transforms-2\\files-2.1\\a51f51bc2ef8f497652697dd3df354e8\\media-1.0.0\\res\\values-v24\\values-v24.xml",
+                    "source": "C:\\Users\\fourbrick\\.gradle\\caches\\transforms-2\\files-2.1\\9f977e91e02c6bcdc88c42e69e7e024a\\media-1.0.0\\res\\values-v24\\values-v24.xml",
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",
@@ -21,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\fourbrick\\.gradle\\caches\\transforms-2\\files-2.1\\40659e27f30854abc7bfa63c318b2f6f\\appcompat-1.1.0\\res\\values-v24\\values-v24.xml",
+                    "source": "C:\\Users\\fourbrick\\.gradle\\caches\\transforms-2\\files-2.1\\4525a644a24a50917bdee74c81c0ef9d\\appcompat-1.1.0\\res\\values-v24\\values-v24.xml",
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",

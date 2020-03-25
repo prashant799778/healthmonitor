@@ -50,6 +50,21 @@ public class MySharedPrefrence {
 
 
 
+    public void setAlarm(Boolean disable) {
+        prefEditor.putBoolean("disable", disable);
+        prefEditor.commit();
+    }
+
+    public Boolean isAlarmOn() {
+        return sharedPreferences.getBoolean("disable", true);
+
+    }
+
+
+
+
+
+
     public String getHospitalNurs() {
         return sharedPreferences.getString("N", "");
     }
@@ -203,7 +218,7 @@ public class MySharedPrefrence {
     }
 
     public String getTempLower() {
-        return sharedPreferences.getString("setTempLower", "36");
+        return sharedPreferences.getString("setTempLower", "1");
     }
 
     public void setTempUpper(String id) {

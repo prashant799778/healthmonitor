@@ -99,14 +99,15 @@ public class DashBoard_Fragment extends Base_Fragment implements ResultListener 
                             clientId,null);
             client.connect();
 //            client.reconnect();
-             while (!client.isConnected()){}
-            if(client.isConnected()==true){
-//               client.subscribe(topicId,0);
+//             while (!client.isConnected()){}
+//            if(client.isConnected()==true){
+            if(client.isConnected())
+               client.subscribe(topicId,0);
                 Comman.log("Connection ","True");
 //                onResult(liveModel);
-            }else {
-                Comman.log("Connection","Null");
-            }
+//            }else {
+//                Comman.log("Connection","Null");
+//            }
         } catch (MqttException e) {
             e.printStackTrace();
         }

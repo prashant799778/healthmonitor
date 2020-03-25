@@ -1,7 +1,10 @@
 package com.monitor.activities;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.AssetFileDescriptor;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Html;
@@ -39,6 +42,7 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
@@ -65,12 +69,15 @@ public class UserDisplayActivity extends BaseActivity  {
     int old=0,old0=0;
     DataParser parser;
     GothamBookFontForLable ss1;
+    AssetFileDescriptor afd,afd1;
     String topic1d="",ecgValue="--",respValue="--";
     String spo2Text="",plus="",temp="";
 //    boolean hrboolean=false,bhHigh=false,bhLow=false,sop2=false,pulseRateBoolean=false,tempBoolean=false;
     boolean isHeartRatHigh=false,isHeartRatLow=false,isSpo2High=false,isSpo2Low=false,isPulseRateHigh=false,isPulseRateLow=false,isTempHigh=false,isTempLow=false,isBpHighUpper=false,isBpLowUpper=false,isBpHighLower=false,isBpLowLower=false;
     String name="",age="",hosptal="",bed="",id="";
     MySharedPrefrence m;
+    MediaPlayer player;
+    MediaPlayer player1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -80,6 +87,31 @@ public class UserDisplayActivity extends BaseActivity  {
         m=MySharedPrefrence.instanceOf(UserDisplayActivity.this);
         dialog= new SweetAlertDialog(UserDisplayActivity.this, SweetAlertDialog.PROGRESS_TYPE).setTitleText("Waiting for the Response...");
         dialog.show();
+
+
+
+        try {
+            afd = UserDisplayActivity.this.getAssets().openFd("beep1.mp3");
+            player = new MediaPlayer();
+            player.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
+            player.prepare();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            afd1 = UserDisplayActivity.this.getAssets().openFd("beep.mp3");
+            player1 = new MediaPlayer();
+            player1.setDataSource(afd1.getFileDescriptor(),afd1.getStartOffset(),afd1.getLength());
+            player1.prepare();
+            Comman.log("Alarm","Alarm");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+
+
         Intent intent=getIntent();
         if(intent!=null)
         {
@@ -285,6 +317,7 @@ public class UserDisplayActivity extends BaseActivity  {
     }
     public void setData(final Readings readings)
     {
+
          ////////////////////////////////////////Start Spo2////////////////////////////////////
             if(readings.getSPO2().getSPO2().equalsIgnoreCase(""))
             {
@@ -301,6 +334,15 @@ public class UserDisplayActivity extends BaseActivity  {
             pr.setText(""+readings.getSPO2().getPulseRate1());
             plus=String.valueOf(readings.getSPO2().getPulseRate1());
 
+        }
+
+
+        if(!readings.getSPO2().getPulseRate1().equalsIgnoreCase("")){
+        if(readings.getSPO2().getPulseRate1()!=null && Integer.parseInt(readings.getSPO2().getPulseRate1())>0 && Integer.parseInt(readings.getSPO2().getPulseRate1())<255)
+        {
+            if(!player.isPlaying())
+            start_HR_Alarm(UserDisplayActivity.this);
+        }
         }
 
 //        if(!readings.getSPO2().getSPO2().isEmpty() && !readings.getSPO2().getSPO2().isEmpty() && Integer.parseInt(readings.getSPO2().getSPO2())!=127 && Integer.parseInt(readings.getSPO2().getPulseRate1())!=255) {
@@ -345,9 +387,9 @@ public class UserDisplayActivity extends BaseActivity  {
 
         //////////////////////////////////////Start Temperature/////////////////////////////////////////////////////////
         if(readings.getTEMP().equalsIgnoreCase("")){
-            tvTEMPinfo.setText("Temp  "+temp+" C");
+            tvTEMPinfo.setText(""+temp);
         }else {
-            tvTEMPinfo.setText("Temp  "+readings.getTEMP()+" C");
+            tvTEMPinfo.setText(""+readings.getTEMP());
             temp=readings.getTEMP();
         }
 
@@ -380,9 +422,9 @@ public class UserDisplayActivity extends BaseActivity  {
                 /////////////////////////////////Temperature//////////////////////////////////////////////////
                 if(!readings.getTEMP().isEmpty()){
                     if(Float.parseFloat(readings.getTEMP())>readings.getTemperature().getUpper()){
-                        isTempHigh=true;
+                        isTempHigh=false;
                     }else if(Float.parseFloat(readings.getTEMP())<readings.getTemperature().getLower()){
-                        isTempLow=true;
+                        isTempLow=false;
                     }else {
                         isTempLow=false;
                         isTempHigh=false;
@@ -523,26 +565,31 @@ public class UserDisplayActivity extends BaseActivity  {
         final ArrayList<String> msg=new ArrayList<>();
         if(isBpHighLower)
         {
-            Comman.startAlarm(UserDisplayActivity.this);
+            if(!player1.isPlaying())
+            startAlarm(UserDisplayActivity.this);
             msg.add("High Bp at Low");
         }
         if(isBpHighUpper){
-            Comman.startAlarm(UserDisplayActivity.this);
+            if(!player1.isPlaying())
+                startAlarm(UserDisplayActivity.this);
             msg.add("High Bp at High");
         }
         if(isBpLowLower)
         {
-            Comman.startAlarm(UserDisplayActivity.this);
+            if(!player1.isPlaying())
+                startAlarm(UserDisplayActivity.this);
             msg.add("Low Bp at Low");
         }
         if(isBpLowUpper)
         {
-            Comman.startAlarm(UserDisplayActivity.this);
+            if(!player1.isPlaying())
+                startAlarm(UserDisplayActivity.this);
             msg.add("Low Bp at High");
         }
         if(isSpo2High)
         {
-            Comman.startAlarm(UserDisplayActivity.this);
+            if(!player1.isPlaying())
+                startAlarm(UserDisplayActivity.this);
             msg.add("Spo2 High");
         }
         if(isSpo2Low)
@@ -551,32 +598,38 @@ public class UserDisplayActivity extends BaseActivity  {
         }
         if(isHeartRatHigh)
         {
-            Comman.startAlarm(UserDisplayActivity.this);
+            if(!player1.isPlaying())
+                startAlarm(UserDisplayActivity.this);
             msg.add("Heart Rate high");
         }
         if(isHeartRatLow)
         {
-            Comman.startAlarm(UserDisplayActivity.this);
+            if(!player1.isPlaying())
+                startAlarm(UserDisplayActivity.this);
             msg.add("Heart Rate Low");
         }
         if(isPulseRateHigh)
         {
-            Comman.startAlarm(UserDisplayActivity.this);
+            if(!player1.isPlaying())
+                startAlarm(UserDisplayActivity.this);
             msg.add("Pulse Rate High");
         }
         if (isPulseRateLow)
         {
-            Comman.startAlarm(UserDisplayActivity.this);
+            if(!player1.isPlaying())
+                startAlarm(UserDisplayActivity.this);
             msg.add("Pulse Rate Low");
         }
         if(isTempHigh)
         {
-            Comman.startAlarm(UserDisplayActivity.this);
+            if(!player1.isPlaying())
+                startAlarm(UserDisplayActivity.this);
             msg.add("Temp High");
         }
         if(isTempLow)
         {
-            Comman.startAlarm(UserDisplayActivity.this);
+            if(!player1.isPlaying())
+                startAlarm(UserDisplayActivity.this);
             msg.add("Temp Low");
         }
         if(msg.size()!=0){
@@ -656,5 +709,21 @@ public class UserDisplayActivity extends BaseActivity  {
                 dialog.dismiss();
             }
         });
+    }
+    private   void start_HR_Alarm(Context context)
+    {
+        Comman.log("START","ALERM");
+//        try {
+        player.start();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+    }
+
+
+    private void startAlarm(Context context)
+    {
+        Comman.log("START","ALERM11");
+        player1.start();
     }
 }

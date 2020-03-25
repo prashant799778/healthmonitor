@@ -42,7 +42,6 @@ public class LoginActivity extends BaseActivity {
                     Comman.log("INSIDE","BUTTON");
                     Api_calling.login(LoginActivity.this,item_top_view,email.getText().toString(),passwaord.getText().toString(),getIP(),uniqueId());
                 }
-
             }
         });
 

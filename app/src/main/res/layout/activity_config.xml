@@ -91,9 +91,68 @@
         android:textCursorDrawable="@drawable/curcor_color"
         android:background="@color/textfieldcolor"
         android:inputType="text"
+        android:hint="@string/patientname"
+        android:textColorHint="@color/hintcolor"
         android:paddingLeft="10dp"
         android:textSize="14dp" />
 
+
+
+
+            <com.monitor.widget.Lato_Regular_Font
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="23.3dp"
+                android:layout_marginTop="17.6dp"
+                android:visibility="gone"
+                android:text="@string/MobileNo"
+                android:textSize="14dp"
+                android:textColor="@color/headingcolor"
+                />
+            <com.monitor.widget.EditTextFontGothamBook
+                android:id="@+id/mobileNo"
+                android:layout_width="match_parent"
+                android:layout_height="32.9dp"
+                android:layout_marginLeft="23.3dp"
+                android:visibility="gone"
+                android:layout_marginTop="8.7dp"
+                android:layout_marginRight="22.4dp"
+                android:maxLength="10"
+                android:background="@color/textfieldcolor"
+                android:inputType="numberDecimal"
+                android:textCursorDrawable="@drawable/curcor_color"
+                android:hint="@string/MobileNo"
+                android:textColorHint="@color/hintcolor"
+                android:textColor="@color/white"
+                android:paddingLeft="10dp"
+                android:textSize="14dp" />
+
+            <com.monitor.widget.Lato_Regular_Font
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="23.3dp"
+                android:layout_marginTop="17.6dp"
+                android:visibility="gone"
+                android:text="@string/Emial_ID"
+                android:textSize="14dp"
+                android:textColor="@color/headingcolor"
+                />
+            <com.monitor.widget.EditTextFontGothamBook
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="32.9dp"
+                android:layout_marginLeft="23.3dp"
+                android:layout_marginTop="8.7dp"
+                android:layout_marginRight="22.4dp"
+                android:background="@color/textfieldcolor"
+                android:visibility="gone"
+                android:inputType="textEmailAddress"
+                android:textCursorDrawable="@drawable/curcor_color"
+                android:hint="@string/Emial_ID"
+                android:textColorHint="@color/hintcolor"
+                android:textColor="@color/white"
+                android:paddingLeft="10dp"
+                android:textSize="14dp" />
 
 
     <LinearLayout
@@ -211,7 +270,9 @@
             android:textSize="14dp"
             android:textColor="@color/white"
             android:textCursorDrawable="@drawable/curcor_color"
-            android:maxLength="9"
+            android:maxLength="3"
+            android:hint="In Years"
+            android:textColorHint="@color/hintcolor"
             android:layout_marginRight="12dp"
             android:layout_weight="1"
             android:background="@color/textfieldcolor"
@@ -226,17 +287,94 @@
             android:layout_marginRight="22.4dp"
             android:layout_marginLeft="12dp"
             android:inputType="number"
+            android:hint="@string/Room"
+            android:textColorHint="@color/hintcolor"
             android:textCursorDrawable="@drawable/curcor_color"
-
             android:textSize="14dp"
             android:textColor="@color/white"
-            android:maxLength="9"
+            android:maxLength="3"
             android:layout_weight="1"
             android:background="@color/textfieldcolor"
             android:spinnerMode="dialog">
 
         </com.monitor.widget.EditTextFontGothamBook>
     </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <com.monitor.widget.Lato_Regular_Font
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="23.3dp"
+                    android:layout_marginTop="12.6dp"
+                    android:layout_weight="1"
+                    android:layout_marginRight="12dp"
+                    android:text="@string/Height"
+                    android:textColor="@color/textcolor"
+                    android:textSize="14dp" />
+
+                <com.monitor.widget.Lato_Regular_Font
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12.6dp"
+                    android:layout_marginRight="22.4dp"
+                    android:layout_weight="1.0"
+                    android:text="@string/Weight"
+                    android:layout_marginLeft="12dp"
+                    android:textColor="@color/textcolor"
+                    android:textSize="14dp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                android:weightSum="2">
+                <com.monitor.widget.EditTextFontGothamBook
+                    android:id="@+id/Height"
+                    android:layout_width="match_parent"
+                    android:paddingLeft="10dp"
+                    android:layout_height="33dp"
+                    android:layout_marginTop="8.7dp"
+                    android:layout_marginLeft="23.4dp"
+                    android:inputType="number"
+                    android:textSize="14dp"
+                    android:hint="In Cms"
+                    android:textColorHint="@color/hintcolor"
+                    android:textColor="@color/white"
+                    android:textCursorDrawable="@drawable/curcor_color"
+                    android:maxLength="3"
+                    android:layout_marginRight="12dp"
+                    android:layout_weight="1"
+                    android:background="@color/textfieldcolor"
+                    android:spinnerMode="dialog">
+                </com.monitor.widget.EditTextFontGothamBook>
+                <com.monitor.widget.EditTextFontGothamBook
+                    android:id="@+id/Weight"
+                    android:layout_width="match_parent"
+                    android:paddingLeft="10dp"
+                    android:layout_height="33dp"
+                    android:layout_marginTop="8.7dp"
+                    android:layout_marginRight="22.4dp"
+                    android:layout_marginLeft="12dp"
+                    android:hint="In KG."
+                    android:textColorHint="@color/hintcolor"
+                    android:inputType="number"
+                    android:textCursorDrawable="@drawable/curcor_color"
+                    android:textSize="14dp"
+                    android:textColor="@color/white"
+                    android:maxLength="3"
+                    android:layout_weight="1"
+                    android:background="@color/textfieldcolor"
+                    android:spinnerMode="dialog">
+
+                </com.monitor.widget.EditTextFontGothamBook>
+            </LinearLayout>
 
     <com.monitor.widget.Lato_Regular_Font
         android:layout_width="wrap_content"
@@ -258,9 +396,16 @@
         android:inputType="numberDecimal"
         android:textCursorDrawable="@drawable/curcor_color"
 
+
+
+
+        android:hint="@string/BedNo"
+        android:textColorHint="@color/hintcolor"
         android:textColor="@color/white"
         android:paddingLeft="10dp"
         android:textSize="14dp" />
+
+
 
     <com.monitor.widget.Lato_Regular_Font
         android:layout_width="wrap_content"

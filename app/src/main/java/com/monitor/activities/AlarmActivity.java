@@ -32,6 +32,7 @@ public class AlarmActivity extends AppCompatActivity {
     int h=0,l=0;
     Button disabl;
     Gotham_Bold_Font v1,v2,v3;
+    Button disableAlarm;
     MySharedPrefrence m;
     Button m1,m2,m3,p1,p2,p3;
     int cout1=0,count2=0,count3=0;
@@ -42,6 +43,7 @@ public class AlarmActivity extends AppCompatActivity {
         setContentView(R.layout.activity_alarm);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         m=MySharedPrefrence.instanceOf(AlarmActivity.this);
+        disableAlarm=findViewById(R.id.disableAlarm);
         on=findViewById(R.id.on1);
         on2=findViewById(R.id.on2);
         on3=findViewById(R.id.on3);
@@ -73,6 +75,23 @@ public class AlarmActivity extends AppCompatActivity {
         hbp.setText("High Pressure Limits              Upper:"+m.getHighPressureUpper()+"   Lower:"+m.getHighPressureLower());
         lbp.setText("Low Pressure Limits              Upper:"+m.getLowPressureUpper()+"   Lower:"+m.getLowPressureLower());
         tmp.setText("Temperature Limits              Upper:"+m.getTempUpper()+"   Lower:"+m.getTempLower());
+        if(m.isAlarmOn()){
+            disableAlarm.setText("Disable Alarms");}else { disableAlarm.setText("Enable Alarms"); }
+        disableAlarm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(m.isAlarmOn())
+                {
+                m.setAlarm(false);
+                    disableAlarm.setText("Enable Alarms");
+                    Comman.log("ALARM","Enable Alarms");
+                }else {
+                    m.setAlarm(true);
+                    Comman.log("ALARM","Disable Alarms");
+                    disableAlarm.setText("Disable Alarms");
+                }
+            }
+        });
 
         Comman.log("CountValue",""+cout1);
         p1.setOnClickListener(new View.OnClickListener() {
@@ -319,9 +338,9 @@ public class AlarmActivity extends AppCompatActivity {
                 hbp.setText("High Pressure Limits       Upper:139   Lower:120");
                 break;
             case "T":
-                m.setTempLower("36");
+                m.setTempLower("1");
                 m.setTempUpper("37");
-                tmp.setText("Temperature Limits       Upper:37   Lower:36");
+                tmp.setText("Temperature Limits       Upper:37   Lower:1");
                 break;
             case "L":
                 m.setLowPressureUpper("89");
@@ -330,6 +349,15 @@ public class AlarmActivity extends AppCompatActivity {
                 break;
         }
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Comman.log("Status","-------"+        m.isAlarmOn());
+        if(m.isAlarmOn()){
+            disableAlarm.setText("Disable Alarms");}else { disableAlarm.setText("Enable Alarms"); }
+    }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();

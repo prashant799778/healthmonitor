@@ -58,7 +58,7 @@ import static android.Manifest.permission_group.CAMERA;
 
 public class ConfigActivity extends BaseActivity {
    DatePickerDialog picker;
-    EditTextFontGothamBook name,age,room,bed,hospital;
+    EditTextFontGothamBook name,age,room,bed,hospital,height,weight,mobileno,email;
    LinearLayout item_top_view;
     ImageButton lgout;
     Lato_Regular_Font bck1;
@@ -68,17 +68,17 @@ public class ConfigActivity extends BaseActivity {
    JSONArray doctorIdArray;
    JSONArray nurseIdArray;
    Lato_Regular_Font multi;
+   String TAG="SmartICU_ConfigActivity";
    JSONObject heartRate,spo2,nibp,temp,pulseRate,lowPressure,highPressure;
 //   String bedid="";
 //    String hospital_name="";
 private static final int PERMISSION_REQUEST_CODE = 200;
-
     Button save;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_config);
+        Comman.log(TAG,":OnCreateMethod");
         item_top_view=findViewById(R.id.top_view);
         save=findViewById(R.id.LoginButton);
         name=findViewById(R.id.name);
@@ -89,6 +89,10 @@ private static final int PERMISSION_REQUEST_CODE = 200;
         bed=findViewById(R.id.bedno);
         hospital=findViewById(R.id.hospitalname);
         multi=findViewById(R.id.doctorlist);
+        email=findViewById(R.id.email);
+        mobileno=findViewById(R.id.mobileNo);
+        height=findViewById(R.id.Height);
+        weight=findViewById(R.id.Weight);
         gnderList=new ArrayList<>();
         bloodList=new ArrayList<>();
         doctorIdArray=new JSONArray();
@@ -105,18 +109,20 @@ private static final int PERMISSION_REQUEST_CODE = 200;
         gender = (MaterialSpinner) findViewById(R.id.gender);
         bloodGp = (MaterialSpinner) findViewById(R.id.bloodgp);
         doctor = (MaterialSpinner) findViewById(R.id.doctorList);
+
+
+
         gnderList.add("Female");
         gnderList.add("Male");
         gnderList.add("Other");
+
+
 
         bloodList.add("A+");
         bloodList.add("B+");
         bloodList.add("B-");
         bloodList.add("O+");
         bloodList.add("AB+");
-
-
-
 
 
         hospital.setText(mySharedPrefrence.getHospital());
@@ -318,9 +324,6 @@ public JSONObject jsonObject(String usertype)
     Comman.log("Add Patient Json",jsonObject.toString());
     return jsonObject;
 }
-
-
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();

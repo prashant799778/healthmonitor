@@ -152,9 +152,11 @@ public class SplashActivity extends AppCompatActivity {
 
     public void  callActivity(String value)
     {
+        Comman.log("StringValue","= "+value);
         switch (value)
         {
             case "Doctor":
+                Comman.log("StringValue","1= "+value);
                 Intent intent1 = new Intent(SplashActivity.this, UserDashboard.class);
                 startActivity(intent1);
                 break;
@@ -170,6 +172,7 @@ public class SplashActivity extends AppCompatActivity {
                     Intent intent=new Intent(SplashActivity.this,ConfigActivity.class);
                     startActivity(intent);
                 }
+                Comman.log("StringValue","2= "+value);
                 break;
         }
 

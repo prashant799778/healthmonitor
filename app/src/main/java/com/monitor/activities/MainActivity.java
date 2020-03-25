@@ -10,9 +10,12 @@ import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.bluetooth.BluetoothDevice;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.AssetFileDescriptor;
+import android.media.MediaPlayer;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -106,6 +109,7 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
     JSONObject heartRate;
     JSONObject jsonObject;
     JSONObject spo2json;
+    AssetFileDescriptor afd,afd1;
     JSONObject tempjson;
     JSONObject highPressure;
     GothamBookFontForLable ss,ss1;
@@ -114,6 +118,7 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
     private TextView pr;
     private TextView tvTEMPinfo;
     private TextView tvNIBPinfo;
+    String TAG="SmartICU_MainActivity";
     private LinearLayout llAbout;
     private TextView tvFWVersion;
     private TextView tvHWVersion;
@@ -123,6 +128,7 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
     MqttAsyncClient mqtt_Notifiaction;
     private Button cnt;
     JSONObject snd;
+    Boolean isBeepSound=false,isAlermSound=false;
     JSONObject sp2;
     LinearLayout notification;
     JSONObject e;
@@ -131,8 +137,10 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
     JSONArray array;
 
     boolean isHeartRatHigh=false,isHeartRatLow=false,isSpo2High=false,isSpo2Low=false,isPulseRateHigh=false,isPulseRateLow=false,isTempHigh=false,isTempLow=false,isBpHighUpper=false,isBpLowUpper=false,isBpHighLower=false,isBpLowLower=false;
+//boolean isHeartRatHigh=true,isHeartRatLow=true,isSpo2High=true,isSpo2Low=true,isPulseRateHigh=true,isPulseRateLow=true,isTempHigh=true,isTempLow=true,isBpHighUpper=true,isBpLowUpper=true,isBpHighLower=true,isBpLowLower=true;
     boolean tempboolean=false,ecgboolean=false,sop2boolean=false;
-
+    MediaPlayer player;
+    MediaPlayer player1;
     int s2=0;
     double tp=0;
     int plus_rate=0;
@@ -144,6 +152,7 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
     int data1=0,data2=0;
     MqttAsyncClient client_Json,client_Ecg;
     String topicId="";
+
 
     //    Socket socket;
 //    int SocketServerPORT=5053;
@@ -169,6 +178,28 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         m=MySharedPrefrence.instanceOf(MainActivity.this);
+        try {
+            afd = MainActivity.this.getAssets().openFd("beep1.mp3");
+            player = new MediaPlayer();
+            player.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
+            player.prepare();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            afd1 = MainActivity.this.getAssets().openFd("beep.mp3");
+            player1 = new MediaPlayer();
+            player1.setDataSource(afd1.getFileDescriptor(),afd1.getStartOffset(),afd1.getLength());
+            player1.prepare();
+            Comman.log("Alarm","Alarm");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+
+
         cnt = findViewById(R.id.cnt);
         d_name=findViewById(R.id.doctor);
         final Intent intent=getIntent();
@@ -195,12 +226,22 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
         wave=new JSONObject();
         array=new JSONArray();
         checkPermission();
+
+
+
         if(!Comman.isNetworkConnected(MainActivity.this)){
             Toast.makeText(MainActivity.this, ""+Constant.NO_INTERNET, Toast.LENGTH_LONG).show();
         }else {
         connectMqtt_JSon();
         connectMqtt_Ecg();
-        cnnect_MQTT_Notification();}
+        cnnect_MQTT_Notification();
+        }
+
+
+
+
+
+
 //        connectMqtt_Spo2();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         if (true)
@@ -218,6 +259,7 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
         initView();
     }
     private void initData() {
+        Comman.log(TAG,":OnCreateMethod_INITDATA");
         // enable the Bluetooth Adapter
         mBtController = BTController.getDefaultBTController(this);
         mBtController.registerBroadcastReceiver(this);
@@ -228,6 +270,7 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
 
     private void initView() {
         //UI widgets
+        Comman.log(TAG,":OnCreateMethod_INITVIEW");
         add = (LinearLayout) findViewById(R.id.add);
         logout=findViewById(R.id.logout);
         notification=findViewById(R.id.notification);
@@ -250,13 +293,17 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
         ss.setText(Html.fromHtml(text));
         String text1 = "<p>SPO<sub>2</sub>(%)</p>";
         ss1.setText(Html.fromHtml(text1));
-
+        Comman.log("Status","-------"+        m.isAlarmOn());
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 //                mBtController.unregisterBroadcastReceiver(MainActivity.this);
 //                    disconnect("/1/1/1/11");
+//                throw new RuntimeException("Test Crash"); // Force a crash
                 startActivity(new Intent(MainActivity.this, AlarmActivity.class));
+//                setAlart();
+//                if(!player1.isPlaying() && m.isAlarmOn())
+//                    startAlarm(MainActivity.this);
             }
         });
         notification.setOnClickListener(new View.OnClickListener() {
@@ -487,12 +534,11 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
 
     @Override
     public void onSpO2Received(final SpO2 spo2) {
-
-
-
-
-
-
+        if(spo2.getPulseRate()>0 && spo2.getPulseRate()<255)
+        {
+           if(!player.isPlaying() && m.isAlarmOn())
+               start_HR_Alarm(MainActivity.this);
+        }
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -659,14 +705,14 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
                 setAlart();
                     tempboolean=true;
                     if ((!m.getTempUpper().isEmpty() && temp.getTemperature() > Integer.valueOf(m.getTempUpper()))) {
-                        isTempHigh=true;
+//                        isTempHigh=true;
                     } else if ((!m.getTempLower().isEmpty() && temp.getTemperature() < Integer.valueOf(m.getTempLower()))) {
-                        isTempLow=true;
+//                        isTempLow=true;
                     }else {
                         isTempHigh=false;
                         isTempLow=false;
                     }
-                tvTEMPinfo.setText(temp.toString());
+                tvTEMPinfo.setText(String.valueOf(temp.getTemperature()));
                 try {
                     snd.put("PatientId",m.getPatientId()).put("RESP","").put("ECG",e.put("Heart Rate","").put("Resp Rate","")).put("SPO2",sp2.put("SPO2","").put("Pulse Rate1","")).put("NIBP",bpp.put("Cuff","").put("High","").put("Low","").put("Mean","")).put("TEMP",""+temp.getTemperature()).put("usercreate",m.getUserType()).put("heartRate",heartRate.put("upper",""+m.getHighHeartLimit()).put("lower",""+m.getLowHeartLimit()).put("status","true"))
                             .put("spo2",spo2json.put("upper",""+m.getHighSpo2()).put("lower",""+m.getLowSpo2()).put("status","true"))
@@ -795,6 +841,7 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
             client_Ecg=new MqttAsyncClient(Constant.SERVER_ECG_URL,clientId,null);
             client_Ecg.connect();
             Comman.log("Connect Successfully","ECG");
+            Comman.log("Connect Successfully","ECG_Status"+client_Ecg.isConnected());
         } catch (MqttException ex) {
             ex.printStackTrace();
         }
@@ -884,6 +931,22 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        try {
+            if(client_Ecg !=null && client_Ecg.isConnected())
+            {
+                client_Ecg.disconnect();
+            }
+            if(client_Json !=null && client_Json.isConnected())
+            {
+                client_Json.disconnect();
+            }
+             mBtController.unregisterBroadcastReceiver(MainActivity.this);
+             mBtController.disconnect();
+
+        }catch (Exception e)
+        {
+
+        }
 
     }
 
@@ -898,28 +961,27 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
     public void setAlart()
     {
         final ArrayList<String>msg=new ArrayList<>();
+        if(isBpHighLower || isBpHighUpper || isBpLowLower || isBpLowUpper || isSpo2High || isHeartRatHigh || isHeartRatLow || isPulseRateHigh || isPulseRateLow) {
+            if (!player1.isPlaying() && m.isAlarmOn())
+                startAlarm(MainActivity.this);
+        }
         if(isBpHighLower)
         {
-            Comman.startAlarm(MainActivity.this);
             msg.add("High Bp at Low");
         }
         if(isBpHighUpper){
-            Comman.startAlarm(MainActivity.this);
             msg.add("High Bp at High");
         }
         if(isBpLowLower)
         {
-            Comman.startAlarm(MainActivity.this);
             msg.add("Low Bp at Low");
         }
         if(isBpLowUpper)
         {
-            Comman.startAlarm(MainActivity.this);
             msg.add("Low Bp at High");
         }
         if(isSpo2High)
         {
-            Comman.startAlarm(MainActivity.this);
             msg.add("Spo2 High");
         }
         if(isSpo2Low)
@@ -928,32 +990,30 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
         }
         if(isHeartRatHigh)
         {
-            Comman.startAlarm(MainActivity.this);
             msg.add("Heart Rate high");
         }
         if(isHeartRatLow)
         {
-            Comman.startAlarm(MainActivity.this);
             msg.add("Heart Rate Low");
         }
         if(isPulseRateHigh)
         {
-            Comman.startAlarm(MainActivity.this);
             msg.add("Pulse Rate High");
         }
         if (isPulseRateLow)
         {
-            Comman.startAlarm(MainActivity.this);
             msg.add("Pulse Rate Low");
         }
         if(isTempHigh)
         {
-            Comman.startAlarm(MainActivity.this);
+//            if(!player1.isPlaying() && m.isAlarmOn())
+//                startAlarm(MainActivity.this);
             msg.add("Temp High");
         }
         if(isTempLow)
         {
-            Comman.startAlarm(MainActivity.this);
+//            if(!player1.isPlaying() && m.isAlarmOn())
+//                startAlarm(MainActivity.this);
             msg.add("Temp Low");
         }
         if(msg.size()!=0){
@@ -984,50 +1044,58 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
         String notificationTopic=m.getPatientId()+"/Notification";
         Comman.log("Connection_Established","Connection MQTT_Notfication_    "+notificationTopic);
         try {
-            mqtt_Notifiaction.subscribe(notificationTopic,0);
-            mqtt_Notifiaction.setCallback(new MqttCallback() {
-                @Override
-                public void connectionLost(Throwable cause) {
-                    Comman.log("Connection_Established","Connection MQTT_Notfication");
-                }
-                @Override
-                public void messageArrived(String topic, final MqttMessage message) throws Exception {
-                    Comman.log("Connection_Established","MQTT_Notfication    "+topic);
-                    runOnUiThread(new Runnable(){
-                        public void run() {
-                            Comman.log("Connection_Established",""+message);
-                            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                            LayoutInflater layoutInflater=LayoutInflater.from(MainActivity.this);
-                            View view2=layoutInflater.inflate(R.layout.nurse_notification,null);
-                            Button send=view2.findViewById(R.id.ok);
-                            Lato_Regular_Font msg=view2.findViewById(R.id.msg);
-                            Lato_Regular name=view2.findViewById(R.id.name);
-                            final AlertDialog dialog=builder.create();
-                            dialog.setView(view2);
-                            dialog.show();
-                            try {
-                                JSONObject jsonObject=new JSONObject(message.toString());
-                            msg.setText("Message :-"+jsonObject.getString("text"));
-                            name.setText(jsonObject.getString("name"));
-                            } catch (JSONException ex) {
-                                ex.printStackTrace();
-                                Comman.log("ERROR",""+ex.getMessage());
-                            }
-                            send.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    dialog.dismiss();
-                                }
-                            });
-                        }
-                    });
-                }
-                @Override
-                public void deliveryComplete(IMqttDeliveryToken token) {
+            if(mqtt_Notifiaction!=null && mqtt_Notifiaction.isConnected()) {
+                mqtt_Notifiaction.subscribe(notificationTopic, 0);
+                mqtt_Notifiaction.setCallback(new MqttCallback() {
+                    @Override
+                    public void connectionLost(Throwable cause) {
+                        Comman.log("Connection_Established", "Connection MQTT_Notfication");
+                    }
 
-                    Comman.log("ERROR",""+token.toString());
-                }
-            });
+                    @Override
+                    public void messageArrived(String topic, final MqttMessage message) throws Exception {
+                        Comman.log("Connection_Established", "MQTT_Notfication    " + topic);
+                        runOnUiThread(new Runnable() {
+                            public void run() {
+                                Comman.log("Connection_Established", "" + message);
+                                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                                LayoutInflater layoutInflater = LayoutInflater.from(MainActivity.this);
+                                View view2 = layoutInflater.inflate(R.layout.nurse_notification, null);
+                                Button send = view2.findViewById(R.id.ok);
+                                Lato_Regular_Font msg = view2.findViewById(R.id.msg);
+                                Lato_Regular name = view2.findViewById(R.id.name);
+                                final AlertDialog dialog = builder.create();
+                                dialog.setView(view2);
+                                dialog.show();
+                                try {
+                                    JSONObject jsonObject = new JSONObject(message.toString());
+                                    msg.setText("Message :-" + jsonObject.getString("text"));
+                                    name.setText(jsonObject.getString("name"));
+                                } catch (JSONException ex) {
+                                    ex.printStackTrace();
+                                    Comman.log("ERROR", "" + ex.getMessage());
+                                }
+                                send.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        dialog.dismiss();
+                                    }
+                                });
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void deliveryComplete(IMqttDeliveryToken token) {
+
+                        Comman.log("ERROR", "" + token.toString());
+                    }
+                });
+            }
+//            else {
+//                if(mqtt_Notifiaction!=null && mqtt_Notifiaction.isConnected())
+//                mqtt_Notifiaction.reconnect();
+//            }
 
 
         } catch (MqttException e) {
@@ -1038,15 +1106,20 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
 
     public void cnnect_MQTT_Notification()
     {
-        String clientId=MqttAsyncClient.generateClientId();
+
         try {
+            String clientId=MqttAsyncClient.generateClientId();
             mqtt_Notifiaction=new MqttAsyncClient(Constant.SERVER_JSON_URL,clientId,null);
             mqtt_Notifiaction.connect();
-            while (!mqtt_Notifiaction.isConnected()){}
-            if(mqtt_Notifiaction.isConnected()){
-               getNotification();
-                Comman.log("Connection_Established","MQTT_NOTIFICATION");
-            }else {}
+            Comman.log("Connect Successfully","NotificationMQtt");
+//            if(mqtt_Notifiaction.isConnected())
+         new Handler().postDelayed(new Runnable() {
+             @Override
+             public void run() {
+                 getNotification();
+             }
+         },1000);
+            Comman.log("Connect Successfully","Status"+mqtt_Notifiaction.isConnected());
         } catch (MqttException ex) {
             ex.printStackTrace();
         }
@@ -1077,6 +1150,23 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
 
     }
 
+
+    private   void start_HR_Alarm(Context context)
+    {
+        Comman.log("START","ALERM");
+//        try {
+            player.start();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+    }
+
+
+    private void startAlarm(Context context)
+    {
+        Comman.log("START","ALERM11");
+        player1.start();
+    }
 
 }
 

@@ -64,7 +64,8 @@
                 android:layout_gravity="center_vertical"
                 android:textAlignment="center"
                 android:gravity="center_vertical|top"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                tools:ignore="RtlCompat">
             </com.monitor.widget.Lato_Regular_Font>
         </LinearLayout>
     </LinearLayout>
@@ -127,7 +128,8 @@
                         android:layout_gravity="center_vertical"
                         android:gravity="center_vertical|bottom"
                         android:textAlignment="center"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        tools:ignore="RtlCompat">
                     </com.monitor.widget.Lato_Regular_Font>
             </LinearLayout>
                 <LinearLayout
@@ -157,7 +159,8 @@
                         android:layout_gravity="center_vertical"
                         android:gravity="center_vertical|bottom"
                         android:textAlignment="center"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        tools:ignore="RtlCompat">
                     </com.monitor.widget.Lato_Regular_Font>
                 </LinearLayout>
             </LinearLayout>
@@ -223,7 +226,8 @@
                         android:gravity="center_vertical|bottom"
                         android:id="@+id/on4"
                         android:textAlignment="center"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        tools:ignore="RtlCompat">
                     </com.monitor.widget.Lato_Regular_Font>
                 </LinearLayout>
                 <LinearLayout
@@ -253,7 +257,8 @@
                         android:layout_gravity="center_vertical"
                         android:gravity="center_vertical|bottom"
                         android:textAlignment="center"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        tools:ignore="RtlCompat">
                     </com.monitor.widget.Lato_Regular_Font>
                 </LinearLayout>
                 <LinearLayout
@@ -341,7 +346,8 @@
                 android:layout_gravity="center_vertical"
                 android:gravity="center_vertical"
                 android:textAlignment="center"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                tools:ignore="RtlCompat">
             </com.monitor.widget.Lato_Regular_Font>
         </LinearLayout>
     </LinearLayout>
@@ -593,7 +599,7 @@
              <LinearLayout
                  android:layout_width="match_parent"
                  android:layout_weight=".15"
-                 android:weightSum="2"
+                 android:weightSum="3"
                  android:orientation="vertical"
                  android:layout_height="match_parent">
                  <LinearLayout
@@ -653,8 +659,16 @@
                          android:layout_height="match_parent">
                      </com.monitor.widget.Lato_Regular>
                  </LinearLayout>
+                 <Button
+                     android:layout_width="match_parent"
+                     android:background="@drawable/disable_btn"
+                     android:text="@string/DisableAlarm"
+                     android:id="@+id/disableAlarm"
+                     android:textAllCaps="false"
+                     android:textColor="@color/white"
+                     android:layout_height="@dimen/_40sdp">
+                 </Button>
              </LinearLayout>
-
          </LinearLayout>
      </LinearLayout>
     </LinearLayout>

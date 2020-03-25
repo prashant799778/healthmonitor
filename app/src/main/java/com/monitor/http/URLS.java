@@ -37,6 +37,8 @@ public class URLS {
     public static final String HOSPITAL_MASTER=BASE_URL+"Hospital_master";
     public static final String PATIENT_MASTER=BASE_URL+"Patient_master";
     public static final String DISCHARGE=BASE_URL+"Discharge";
+
+    public static final String RECOGNIZEIMAGE=BASE_URL+"recognizeImage";
     ///////////////////////////////POST API END/////////////////////////////////////////
 
 }

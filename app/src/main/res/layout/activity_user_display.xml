@@ -37,7 +37,7 @@
                     android:layout_weight="1"
                     android:textColor="@color/textcolor"
                     android:text="@string/patientname"
-                    android:textSize="@dimen/textsize"
+                    android:textSize="@dimen/_12sdp"
                     android:paddingLeft="15dp"
                     android:gravity="center_vertical|left"
                     android:id="@+id/p_name"
@@ -49,7 +49,7 @@
                     android:textColor="@color/textcolor"
                     android:text="@string/Age"
                     android:id="@+id/age"
-                    android:textSize="@dimen/textsize"
+                    android:textSize="@dimen/_12sdp"
                     android:gravity="center_vertical|center"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
@@ -59,7 +59,7 @@
                     android:textColor="@color/textcolor"
                     android:text="@string/hospitalname"
                     android:id="@+id/location"
-                    android:textSize="@dimen/textsize"
+                    android:textSize="@dimen/_12sdp"
                     android:gravity="center_vertical|center"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
@@ -68,7 +68,7 @@
                     android:layout_weight="1"
                     android:textColor="@color/textcolor"
                     android:text="@string/BedN"
-                    android:textSize="@dimen/textsize"
+                    android:textSize="@dimen/_12sdp"
                     android:gravity="center_vertical|center"
                     android:id="@+id/bedNo"
                     android:layout_width="match_parent"
@@ -123,7 +123,7 @@
                             android:paddingLeft="15dp"
                             android:gravity="center_vertical"
                             android:textColor="@color/Green"
-                            android:textSize="12sp"
+                            android:textSize="@dimen/_10sdp"
                             >
                         </com.monitor.widget.GothamBookFontForLable>
 
@@ -139,7 +139,7 @@
                                 android:layout_gravity="center_vertical"
                                 app:backgroundColor="@color/black"
                                 android:layout_width="match_parent"
-                                android:layout_height="80dp"
+                                android:layout_height="@dimen/_80sdp"
                                 android:layout_marginBottom="1dp"/>
                         </LinearLayout>
                         <View
@@ -165,7 +165,7 @@
                             android:paddingLeft="15dp"
                             android:gravity="center_vertical"
                             android:textColor="@color/red"
-                            android:textSize="12sp"
+                            android:textSize="@dimen/_10sdp"
                             >
                         </com.monitor.widget.GothamBookFontForLable>
 
@@ -181,7 +181,7 @@
                                 android:layout_gravity="center_vertical"
                                 app:backgroundColor="@color/black"
                                 android:layout_width="match_parent"
-                                android:layout_height="80dp"
+                                android:layout_height="@dimen/_80sdp"
                                 android:layout_marginBottom="1dp"/>
                         </LinearLayout>
                         <View
@@ -209,7 +209,7 @@
                             android:paddingLeft="15dp"
                             android:gravity="center_vertical"
                             android:textColor="@color/yallow"
-                            android:textSize="12sp"
+                            android:textSize="@dimen/_10sdp"
                             >
                         </com.monitor.widget.GothamBookFontForLable>
 
@@ -239,6 +239,7 @@
                                 android:layout_height="match_parent"
                                 android:text="@string/Prescribe_medicine"
                                 android:textAlignment="gravity"
+                                android:textSize="@dimen/_12sdp"
                                 android:layout_gravity="center_horizontal|center_vertical"
                                 android:gravity="center_horizontal|center_vertical"
                                 android:textColor="@color/white">
@@ -249,6 +250,7 @@
                                 android:id="@+id/show"
                                 android:layout_height="match_parent"
                                 android:text="@string/Show"
+                                android:textSize="@dimen/_12sdp"
                                 android:textAlignment="gravity"
                                 android:layout_marginLeft="20dp"
                                 android:layout_gravity="center_horizontal|center_vertical"
@@ -361,20 +363,22 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="HR(bpm)"
-                            android:textSize="12sp"
+                            android:textSize="@dimen/_10sdp"
                             android:textColor="@color/Green"
-                            android:layout_margin="5dp">
+                            android:layout_marginLeft="5dp">
                         </com.monitor.widget.GothamBookFontForLable>
 
-                        <com.monitor.widget.GothamBookFontForLable
+                        <com.monitor.widget.Gotham_Bold_Font
                             android:id="@+id/tvECGinfo"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="- -"
-                            android:textSize="20sp"
+                            android:layout_height="match_parent"
+                            android:text="- - "
+                            android:textSize="@dimen/_30sdp"
+                            android:textStyle="bold"
+                            android:gravity="center_vertical"
                             android:textColor="@color/Green"
-                            android:layout_margin="10dp">
-                        </com.monitor.widget.GothamBookFontForLable>
+                            android:layout_marginLeft="10dp">
+                        </com.monitor.widget.Gotham_Bold_Font>
                     </LinearLayout>
                     <View
                         android:background="@color/white"
@@ -393,20 +397,22 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="NIBP(mmHg)"
-                            android:textSize="12sp"
+                            android:textSize="@dimen/_10sdp"
                             android:textColor="@color/white"
-                            android:layout_margin="5dp">
+                            android:layout_marginLeft="5dp">
                         </com.monitor.widget.GothamBookFontForLable>
 
-                        <com.monitor.widget.GothamBookFontForLable
+                        <com.monitor.widget.Gotham_Bold_Font
                             android:id="@+id/tvNIBPinfo"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="- - -/- -"
-                            android:textSize="16sp"
+                            android:layout_height="match_parent"
+                            android:text="- - "
+                            android:gravity="center_vertical"
+                            android:textSize="@dimen/_30sdp"
+                            android:textStyle="bold"
                             android:textColor="@color/white"
-                            android:layout_margin="5dp">
-                        </com.monitor.widget.GothamBookFontForLable>
+                            android:layout_marginLeft="5dp">
+                        </com.monitor.widget.Gotham_Bold_Font>
                     </LinearLayout>
                     <View
                         android:background="@color/white"
@@ -423,62 +429,65 @@
                             android:weightSum="2"
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="match_parent">
                             <LinearLayout
                                 android:layout_weight="1"
                                 android:orientation="vertical"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
+                                android:layout_height="match_parent">
                                 <com.monitor.widget.GothamBookFontForLable
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:text="SP02(%)"
                                     android:id="@+id/ss1"
-                                    android:textSize="10dp"
-                                    android:layout_marginTop="2dp"
+                                    android:maxLines="1"
+                                    android:textSize="@dimen/_10sdp"
                                     android:textColor="@color/red"
                                     android:layout_marginLeft="5dp"
-                                    android:layout_marginRight="5dp">
+                                    android:layout_marginRight="0dp">
                                 </com.monitor.widget.GothamBookFontForLable>
 
-                                <com.monitor.widget.GothamBookFontForLable
+                                <com.monitor.widget.Gotham_Bold_Font
                                     android:id="@+id/tvSPO2info"
                                     android:layout_width="match_parent"
-                                    android:layout_height="20dp"
+                                    android:layout_height="wrap_content"
                                     android:text="- -"
-                                    android:textSize="18sp"
+                                    android:textSize="@dimen/_30sdp"
+                                    android:textStyle="bold"
+                                    android:gravity="center_vertical"
                                     android:textColor="@color/red"
-                                    android:layout_marginLeft="10dp"
-                                    android:layout_marginRight="10dp">
-                                </com.monitor.widget.GothamBookFontForLable>
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_marginRight="0dp">
+                                </com.monitor.widget.Gotham_Bold_Font>
                             </LinearLayout>
                             <LinearLayout
                                 android:layout_weight="1"
                                 android:orientation="vertical"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
+                                android:layout_height="match_parent">
                                 <com.monitor.widget.GothamBookFontForLable
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:text="PR(bpm)"
-                                    android:textSize="10dp"
+                                    android:textSize="@dimen/_10sdp"
                                     android:textColor="@color/red"
                                     android:layout_marginLeft="5dp"
-                                    android:layout_marginTop="2dp"
                                     android:layout_marginRight="5dp">
                                 </com.monitor.widget.GothamBookFontForLable>
 
-                                <com.monitor.widget.GothamBookFontForLable
+                                <com.monitor.widget.Gotham_Bold_Font
                                     android:layout_width="match_parent"
-                                    android:layout_height="20dp"
+                                    android:layout_height="wrap_content"
                                     android:text="- -"
                                     android:id="@+id/pr"
-                                    android:textSize="18sp"
+                                    android:textStyle="bold"
+                                    android:textSize="@dimen/_30sdp"
+                                    android:gravity="center_vertical"
                                     android:textColor="@color/red"
-                                    android:layout_marginTop="20dp"
+                                    android:layout_marginTop="0dp"
                                     android:layout_marginLeft="10dp"
-                                    android:layout_marginRight="10dp">
-                                </com.monitor.widget.GothamBookFontForLable>
+                                    android:layout_marginRight="0dp">
+                                </com.monitor.widget.Gotham_Bold_Font>
                             </LinearLayout>
 
                         </LinearLayout>
@@ -500,20 +509,22 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Temp(Celsius)"
-                            android:textSize="12sp"
+                            android:textSize="@dimen/_10sdp"
                             android:textColor="@color/white"
                             android:layout_margin="5dp">
                         </com.monitor.widget.GothamBookFontForLable>
 
-                        <com.monitor.widget.GothamBookFontForLable
+                        <com.monitor.widget.Gotham_Bold_Font
                             android:id="@+id/tvTEMPinfo"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="- - , - "
-                            android:textSize="12sp"
+                            android:text="- - "
+                            android:gravity="center_vertical"
+                            android:textSize="@dimen/_30sdp"
+                            android:textStyle="bold"
                             android:textColor="@color/white"
-                            android:layout_margin="10dp">
-                        </com.monitor.widget.GothamBookFontForLable>
+                            android:layout_marginLeft="10dp">
+                        </com.monitor.widget.Gotham_Bold_Font>
                     </LinearLayout>
                     <View
                         android:background="@color/white"
@@ -525,19 +536,22 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="RESP(bpm)"
-                        android:textSize="12sp"
+                        android:textSize="@dimen/_10sdp"
                         android:textColor="@color/yallow"
                         android:layout_margin="5dp">
                     </com.monitor.widget.GothamBookFontForLable>
-                    <com.monitor.widget.GothamBookFontForLable
+                    <com.monitor.widget.Gotham_Bold_Font
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="- -"
-                        android:textSize="20sp"
+                        android:text="- - "
+                        android:textSize="@dimen/_30sdp"
                         android:id="@+id/resp"
+                        android:textStyle="bold"
+                        android:gravity="center_vertical"
                         android:textColor="@color/yallow"
-                        android:layout_margin="10dp">
-                    </com.monitor.widget.GothamBookFontForLable>
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginBottom="10dp">
+                    </com.monitor.widget.Gotham_Bold_Font>
 
 
                 </LinearLayout>

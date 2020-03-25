@@ -4,16 +4,34 @@
     android:layout_height="fill_parent"
     android:gravity="center"
     android:orientation="horizontal" >
+ <LinearLayout
+      android:id="@+id/progress_layout"
+     android:gravity="center"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:orientation="vertical"
+     >
+     <ProgressBar
+         android:id="@+id/progress"
+         android:layout_width="55dp"
+         android:layout_height="55dp">
 
+     </ProgressBar>
+     <TextView
+         android:text="Please wait while we are verifying your identity !"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"></TextView>
+
+ </LinearLayout>
 
 
     <Button
-
+          android:visibility="gone"
         android:gravity="center"
         android:id="@+id/button_capture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Capture" />
+        android:text="Try Again!" />
 
 </LinearLayout>

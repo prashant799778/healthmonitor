@@ -97,6 +97,26 @@ public class Comman {
             e.printStackTrace();
         }
     }
+
+
+
+
+
+    public static void start_HR_Alarm(Context context)
+    {
+        AssetFileDescriptor afd = null;
+        try {
+            afd = context.getAssets().openFd("beep1.mp3");
+
+            MediaPlayer player = new MediaPlayer();
+            player.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
+            player.prepare();
+            player.start();
+            Comman.log("Alarm","Alarm");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 //    public static String getCurrentTime() {
 //        String currentTime="";
 //        try {

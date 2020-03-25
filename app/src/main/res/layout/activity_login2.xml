@@ -24,6 +24,13 @@
 <!--    <ScrollView-->
 <!--        android:layout_width="match_parent"-->
 <!--        android:layout_height="match_parent">-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_centerInParent="true"
+        android:layout_height="wrap_content">
         <RelativeLayout
             android:layout_centerInParent="true"
             android:layout_width="match_parent"
@@ -49,48 +56,48 @@
                 android:textColor="@color/textcolor"
                 android:text="@string/Signnin">
             </com.monitor.widget.GothamBookFontForLable>
+            <com.monitor.widget.EditTextFontGothamBook
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="33dp"
+                android:paddingLeft="15dp"
+                android:layout_marginTop="50dp"
+                android:layout_below="@+id/y"
+                android:layout_marginRight="28.5dp"
+                android:layout_marginLeft="28.5dp"
+                android:textCursorDrawable="@drawable/curcor_color"
+                android:textColorHint="@color/hintcolor"
+                android:textSize="16dp"
+                android:textColor="@color/white"
+                android:hint="@string/Emial_ID"
+                android:drawablePadding="15dp"
+                android:background="@color/textfieldcolor">
+            </com.monitor.widget.EditTextFontGothamBook>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_below="@+id/email"
+                android:id="@+id/overlayout"
+                android:layout_marginTop="20dp"
+                android:layout_height="wrap_content"
+                app:passwordToggleEnabled="true"
+                app:hintEnabled="false"
+                >
                 <com.monitor.widget.EditTextFontGothamBook
-                    android:id="@+id/email"
+                    android:id="@+id/password"
                     android:layout_width="match_parent"
                     android:layout_height="33dp"
                     android:paddingLeft="15dp"
-                    android:layout_marginTop="50dp"
-                    android:layout_below="@+id/y"
+                    android:textSize="16dp"
                     android:layout_marginRight="28.5dp"
                     android:layout_marginLeft="28.5dp"
+                    android:hint="@string/Password"
                     android:textCursorDrawable="@drawable/curcor_color"
-                    android:textColorHint="@color/hintcolor"
-                    android:textSize="16dp"
+                    android:inputType="textPassword"
                     android:textColor="@color/white"
-                    android:hint="@string/Emial_ID"
-                    android:drawablePadding="15dp"
+                    android:textColorHint="@color/hintcolor"
                     android:background="@color/textfieldcolor">
                 </com.monitor.widget.EditTextFontGothamBook>
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_below="@+id/email"
-                    android:id="@+id/overlayout"
-                    android:layout_marginTop="20dp"
-                    android:layout_height="wrap_content"
-                    app:passwordToggleEnabled="true"
-                    app:hintEnabled="false"
-                    >
-                    <com.monitor.widget.EditTextFontGothamBook
-                        android:id="@+id/password"
-                        android:layout_width="match_parent"
-                        android:layout_height="33dp"
-                        android:paddingLeft="15dp"
-                        android:textSize="16dp"
-                        android:layout_marginRight="28.5dp"
-                        android:layout_marginLeft="28.5dp"
-                        android:hint="@string/Password"
-                        android:textCursorDrawable="@drawable/curcor_color"
-                        android:inputType="textPassword"
-                        android:textColor="@color/white"
-                        android:textColorHint="@color/hintcolor"
-                        android:background="@color/textfieldcolor">
-                    </com.monitor.widget.EditTextFontGothamBook>
-                </com.google.android.material.textfield.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
             <com.monitor.widget.GothamMediumFont
                 android:visibility="gone"
                 android:layout_width="match_parent"
@@ -115,7 +122,8 @@
                 android:gravity="center_vertical"
                 android:layout_marginRight="33.5dp"
                 android:layout_marginLeft="33.5dp"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="20dp"
+                tools:ignore="RtlCompat">
             </com.monitor.widget.GothamMediumFont>
             <com.monitor.widget.GothamMediumFont
                 android:visibility="gone"
@@ -131,7 +139,8 @@
                 android:layout_marginBottom="60dp"
                 android:layout_marginRight="28.5dp"
                 android:layout_marginLeft="28.5dp"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="20dp"
+                tools:ignore="RtlCompat">
             </com.monitor.widget.GothamMediumFont>
             <Button
                 android:layout_width="match_parent"
@@ -141,7 +150,7 @@
                 android:textAlignment="center"
                 android:id="@+id/LoginButton"
                 android:layout_marginBottom="50dp"
-               android:layout_below="@id/overlayout"
+                android:layout_below="@id/overlayout"
                 android:textSize="14dp"
                 android:textAllCaps="false"
                 android:layout_marginTop="40dp"
@@ -171,5 +180,7 @@
                 </com.monitor.widget.Lato_Regular_Font>
             </LinearLayout>
         </RelativeLayout>
+    </ScrollView>
+    </RelativeLayout>
 <!--    </ScrollView>-->
 </RelativeLayout>

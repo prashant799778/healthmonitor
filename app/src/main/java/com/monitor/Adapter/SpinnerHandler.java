@@ -2,6 +2,7 @@ package com.monitor.Adapter;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,10 +52,12 @@ public class SpinnerHandler {
 
                 View view = super.getDropDownView(position, convertView, parent);
                 GothamBookFontForLable tv = (GothamBookFontForLable) view;
+                Typeface typeface= Typeface.createFromAsset(context.getAssets(),"GothamBook.ttf");
                 tv.setTextSize(14);
+                tv.setTypeface(typeface);
                 if (position == 0) {
                     // Set the hint text color gray
-                    tv.setTextColor(Color.GRAY);
+                    tv.setTextColor(context.getResources().getColor(R.color.hintcolor));
                 } else {
                     tv.setTextColor(Color.WHITE);
                 }
@@ -69,11 +72,13 @@ public class SpinnerHandler {
                 params.height = 130;
                 view.setLayoutParams(params);
                 GothamBookFontForLable tv = (GothamBookFontForLable) view;
+                Typeface typeface=Typeface.createFromAsset(context.getAssets(),"GothamBook.ttf");
                 tv.setTextColor(Color.WHITE);
+                tv.setTypeface(typeface);
                 ((GothamBookFontForLable) view).setTextColor(Color.WHITE);
                 if (position == 0) {
                     // Set the hint text color gray
-                    tv.setTextColor(Color.GRAY);
+                    tv.setTextColor(context.getResources().getColor(R.color.hintcolor));
                 } else {
                     tv.setTextColor(Color.WHITE);
                 }
@@ -86,6 +91,8 @@ public class SpinnerHandler {
             public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
                 String temp=String.valueOf(item);
 //                context.setSpinnerValue(item,position);
+                Typeface typeface=Typeface.createFromAsset(context.getAssets(),"GothamBook.ttf");
+                view.setTypeface(typeface);
                 view.setTextColor(Color.WHITE);
                 if((item.equals("Select"))||(item.equals(""))) {
                     String temp1="";

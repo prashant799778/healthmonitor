@@ -70,6 +70,7 @@
     <string name="Overall">Overall</string>
     <string name="BedNo">Bed Number</string>
     <string name="BedN">Bed No</string>
+    <string name="DisableAlarm">Disable Alarms</string>
     <string name="Signnin">Sign In</string>
     <string name="forgot">Forgot your password ?</string>
     <string name="Docotor">Doctor</string>
@@ -80,10 +81,12 @@
     <string name="userdashboard">DashBoard</string>
     <string name="bp">Blood Pressure</string>
     <string name="addpatient">Add Patient</string>
-    <string name="patientname">Patients Name </string>
+    <string name="patientname">Patient\'s Name </string>
     <string name="Gender">Gender</string>
     <string name="bloodgp">Blood Group</string>
     <string name="Age">Age</string>
+    <string name="Height">Height</string>
+    <string name="Weight">Weight</string>
     <string name="Licence">Licence Number</string>
     <string name="PD">Patients Details</string>
     <string name="MyProofile">My Profile</string>

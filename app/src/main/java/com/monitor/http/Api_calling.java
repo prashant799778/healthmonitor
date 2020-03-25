@@ -43,6 +43,8 @@ import com.monitor.R;
 import com.monitor.activities.AlarmActivity;
 import com.monitor.activities.ConfigActivity;
 import com.monitor.activities.EditProfileActivity;
+import com.monitor.activities.FaceDetectActivity;
+import com.monitor.activities.LoginActivity;
 import com.monitor.activities.MainActivity;
 import com.monitor.activities.SplashActivity;
 import com.monitor.activities.UserDashboard;
@@ -101,17 +103,25 @@ public class Api_calling {
                          if(response.getJSONObject("result").getString("Usertype").equalsIgnoreCase("Doctor")){
                              Comman.log("Inside","Doctor");
                              JSONObject jp = response.getJSONObject("result");
+                              String user_type=jp.getString("Usertype");
                              mySharedPrefrence.setId(jp.getString("Usertype_Id"));
-                             mySharedPrefrence.setUserType(jp.getString("Usertype"));
+                            // mySharedPrefrence.setUserType(jp.getString("Usertype"));
                              mySharedPrefrence.setDoctorEmail(jp.getString("Email"));
                              mySharedPrefrence.setDoctorName(jp.getString("name"));
                              mySharedPrefrence.setDoctorId(jp.getString("ID"));
                              mySharedPrefrence.setDoctorId(response.getJSONArray("Nurse Details").getJSONObject(0).getString("DoctorID"));
                              Comman.log("AAAAAAAAA",""+jp.getString("Email"));
-                             Intent i = new Intent(context, UserDashboard.class);
+                             Intent i = new Intent(context, FaceDetectActivity.class);
+                             i.putExtra("type",user_type);
                              i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                              context.startActivity(i);
                              dialog.dismissWithAnimation();
+                             try {
+                                 ( (LoginActivity)context).finish();
+                             }catch (Exception e)
+                             {
+
+                             }
                          }else {
                              DataBase db = new DataBase(context, Constant.DB_NAME, null, Constant.DB_VERSION);
                              db.deleteDatabase();
@@ -200,6 +210,13 @@ public class Api_calling {
                                  i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                  context.startActivity(i);
                                  dialog.dismissWithAnimation();
+                                 try {
+                                     ( (LoginActivity)context).finish();
+                                     Comman.log("Finish","Finish");
+                                 }catch (Exception e)
+                                 {
+
+                                 }
                              }
                          }
                      }else {
@@ -218,7 +235,7 @@ public class Api_calling {
              @Override
              public void onErrorResponse(VolleyError error) {
                  Toast.makeText(context, Constant.SOMETHING_WENT_WRONG, Toast.LENGTH_SHORT).show();
-             Comman.log("LOGIN_ERROR",error.getMessage());
+           //  Comman.log("LOGIN_ERROR",error);
              dialog.dismissWithAnimation();
              }
          });
@@ -309,7 +326,14 @@ public class Api_calling {
                             intent.putExtra("hospital",mySharedPrefrence.getPatientHospital());
                             intent.putExtra("bed",mySharedPrefrence.getPatientBed());
                             context.startActivity(intent);
+                            try {
+                                ((ConfigActivity) context).finish();
+                            }catch (Exception e)
+                            {
+
+                            }
                             dialog.dismissWithAnimation();
+
                         }else {
                             Comman.show_Real_Message(context,view, Constant.SOMETHING_WENT_WRONG);
                             dialog.dismissWithAnimation();
@@ -462,7 +486,8 @@ public class Api_calling {
                             Intent i=new Intent(context, ConfigActivity.class);
                             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             if(json!=null && json.isConnected() && ecg!=null && ecg.isConnected() && btController!=null)
-                            { btController.unregisterBroadcastReceiver(context);
+                            {
+                                btController.unregisterBroadcastReceiver(context);
                                json.disconnect();
                                ecg.disconnect();
                                btController.disconnect();
@@ -814,7 +839,7 @@ public class Api_calling {
                 public void onErrorResponse(VolleyError error) {
                     progressBar.setVisibility(View.GONE);
                     Toast.makeText(context, Constant.SOMETHING_WENT_WRONG, Toast.LENGTH_SHORT).show();
-                    Comman.log("Get_All hospital_ERROR",error.getMessage());
+//                    Comman.log("Get_All hospital_ERROR",error.getMessage());
                 }
             });
             final RequestQueue requestQueue= Volley.newRequestQueue(context);

@@ -17,4 +17,6 @@
     <dimen name="alermsubheadingtextsize0">12dp</dimen>
     <dimen name="lineWidth">.2dp</dimen>
     <dimen name="ontextsize">16dp</dimen>
+    <dimen name="fontSize">35dp</dimen>
+    <dimen name="Size">12dp</dimen>
 </resources>

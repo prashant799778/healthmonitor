@@ -1,0 +1,98 @@
+<resources>
+    <string name="app_name">Smart ICU</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="login">Log In</string>
+    <string name="discharge">Discharge</string>
+    <string name="Send">Send</string>
+    <string name="Smrticu">Smart ICU</string>
+    <string name="Select_hospital">Select Hospital</string>
+    <string name="Hospital">Hospital</string>
+    <string name="Hospitals">Hospitals</string>
+    <string name="hubname">Hub</string>
+    <string name="text">Heart Rate      upper:120      Lower:60</string>
+    <string name="hospitalname">Hospital Name-</string>
+    <string name="AutomaticInterval">Automatic Interval</string>
+    <string name="Location">Location</string>
+    <string name="first_date">1577980271377</string>
+    <string name="noofpatient">No of Patients</string>
+    <string name="Select_bed">Select Bed</string>
+    <string name="Patients">Patients</string>
+    <string name="ecg">[ECG]</string>
+    <string name="save">Save</string>
+    <string name="editprofile">Edit Profile</string>
+    <string name="generalSettings">[General Settings]</string>
+    <string name="spo2">[SPO2]</string>
+    <string name="about">[About]</string>
+    <string name="AppVersion">App Version</string>
+    <string name="nibp">[NIBP]</string>
+    <string name="tempreture">[Temperature]</string>
+    <string name="AllPatients">All Patients</string>
+    <string name="AllHospitall">All Hospital</string>
+    <string name="r_address">Reciever Address</string>
+    <string name="Donthave_account">Don\'t have an account ?</string>
+    <string name="Sign_up">Sign up </string>
+    <string name="HR">HR (bpm)</string>
+    <string name="Home">Home</string>
+    <string name="other">Profile</string>
+    <string name="SP02">SP02/PR(bpm)</string>
+    <string name="text1"><p>SPO<sub>2</sub></p>"</string>
+    <string name="resp">RESP(bpm)</string>
+    <string name="Emial_ID">Email ID</string>
+    <string name="Password">Password</string>
+    <string name="Prescribe_medicine">Prescribe medicine</string>
+    <string name="Show">Show Message</string>
+    <string name="Prescribe_medicine_list">Prescribe medicine List</string>
+    <string name="forgot_Password">Forgot Password?</string>
+    <string name="Please_enter_a_new_password">Please enter a new password</string>
+    <string name="BacktoLogin">Back to Login </string>
+    <string name="Confirm_Password">Confirm Password</string>
+    <string name="Already_haev_an_account">Already have an account ?</string>
+    <string name="Forgot_Password">Forgot Password</string>
+    <string name="MobileNo">Mobile Number</string>
+    <string name="Continue">Sign Up</string>
+    <string name="test_string">
+  <![CDATA[<sup><small>2</small></sup> ]]>
+</string>
+    <string name="spo21">SPO,<sub>2</sub>!</string>
+    <string name="start">Start</string>
+    <string name="version">Version  0.0.5</string>
+    <string name="connect">Connect</string>
+    <string name="disconnect">Disconnect</string>
+    <string name="view">View</string>
+    <string name="name">Name</string>
+    <string name="Overall">Overall</string>
+    <string name="BedNo">Bed Number</string>
+    <string name="BedN">Bed No</string>
+    <string name="Signnin">Sign In</string>
+    <string name="forgot">Forgot your password ?</string>
+    <string name="Docotor">Doctor</string>
+    <string name="Room">Room No.</string>
+    <string name="Action">Action</string>
+    <string name="Dashboard">DashBoard</string>
+    <string name="Config">Add Patient</string>
+    <string name="userdashboard">DashBoard</string>
+    <string name="bp">Blood Pressure</string>
+    <string name="addpatient">Add Patient</string>
+    <string name="patientname">Patient\'s Name </string>
+    <string name="Gender">Gender</string>
+    <string name="bloodgp">Blood Group</string>
+    <string name="Age">Age</string>
+    <string name="Height">Height</string>
+    <string name="Weight">Weight</string>
+    <string name="Licence">Licence Number</string>
+    <string name="PD">Patients Details</string>
+    <string name="MyProofile">My Profile</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!--    <value column="Back" null="false">H&lt;sub&gt;2&lt;/sub&gt;</value>-->
+
+
+</resources>
