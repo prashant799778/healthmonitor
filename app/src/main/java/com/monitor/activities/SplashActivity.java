@@ -64,6 +64,7 @@ public class SplashActivity extends AppCompatActivity {
                     if (mySharedPrefrence.getUserType().isEmpty()) {
                         Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
                         startActivity(intent);
+                        finish();
                     } else {
                         callActivity(mySharedPrefrence.getUserType().trim());
                     }
@@ -168,9 +169,11 @@ public class SplashActivity extends AppCompatActivity {
                     intent.putExtra("hospital",mySharedPrefrence.getPatientHospital());
                     intent.putExtra("bed",mySharedPrefrence.getPatientBed());
                     startActivity(intent);
+                    finish();
                 }else {
                     Intent intent=new Intent(SplashActivity.this,ConfigActivity.class);
                     startActivity(intent);
+                    finish();
                 }
                 Comman.log("StringValue","2= "+value);
                 break;

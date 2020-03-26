@@ -2662,6 +2662,7 @@ id adjust_height
 id adjust_width
 id age
 id alarm
+id alarmtext
 id alertTitle
 id alert_body_container
 id alert_buttons_container
@@ -2834,6 +2835,7 @@ id list_item
 id llbttitle
 id loading
 id location
+id location_switch
 id login
 id logo1
 id logo2
@@ -3416,6 +3418,7 @@ string default_web_client_id
 string dialog_cancel
 string dialog_default_title
 string dialog_ok
+string disableAlarm
 string discharge
 string disconnect
 string ecg
@@ -3504,6 +3507,7 @@ string version
 string view
 string welcome
 style AAA_ProgressBar
+style AAA_Switch
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light
 style Animation_AppCompat_Dialog

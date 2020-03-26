@@ -65,6 +65,106 @@ public class MySharedPrefrence {
 
 
 
+
+
+
+
+
+
+    public void set_ECG_Alarm(Boolean disable) {
+        prefEditor.putBoolean("ecgalarm", disable);
+        prefEditor.commit();
+    }
+
+    public Boolean is_ECG_AlarmOn() {
+        return sharedPreferences.getBoolean("ecgalarm", true);
+
+    }
+
+
+
+    public void set_SPO2_Alarm(Boolean disable) {
+        prefEditor.putBoolean("spalarm", disable);
+        prefEditor.commit();
+    }
+
+    public Boolean is_SPO2_AlarmOn() {
+        return sharedPreferences.getBoolean("spalarm", true);
+
+    }
+
+
+
+
+    public void set_PR_Alarm(Boolean disable) {
+        prefEditor.putBoolean("pralarm", disable);
+        prefEditor.commit();
+    }
+
+    public Boolean is_PR_AlarmOn() {
+        return sharedPreferences.getBoolean("pralarm", true);
+
+    }
+
+
+
+    public void set_High_BP_Alarm(Boolean disable) {
+        prefEditor.putBoolean("hbpalarm", disable);
+        prefEditor.commit();
+    }
+
+    public Boolean is_High_BP_AlarmOn() {
+        return sharedPreferences.getBoolean("hbpalarm", true);
+
+    }
+
+
+
+    public void set_Low_BP_Alarm(Boolean disable) {
+        prefEditor.putBoolean("lbpalarm", disable);
+        prefEditor.commit();
+    }
+
+    public Boolean is_Low_BP_AlarmOn() {
+        return sharedPreferences.getBoolean("lbpalarm", true);
+
+    }
+
+
+
+    public void set_Temp_Alarm(Boolean disable) {
+        prefEditor.putBoolean("tempAlarm", disable);
+        prefEditor.commit();
+    }
+
+    public Boolean is_Temp__AlarmOn() {
+        return sharedPreferences.getBoolean("tempAlarm", true);
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public String getHospitalNurs() {
         return sharedPreferences.getString("N", "");
     }

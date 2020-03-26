@@ -25,42 +25,34 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:weightSum="1"
             android:orientation="vertical">
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="36dp"
-                android:layout_weight=".2"
+                android:layout_height="match_parent"
+                android:layout_weight=".950"
                 android:orientation="horizontal">
                 <com.monitor.widget.Lato_Regular_Font
                     android:layout_weight="1"
                     android:textColor="@color/textcolor"
                     android:text="@string/patientname"
-                    android:textSize="@dimen/_12sdp"
+                    android:textSize="@dimen/_10sdp"
                     android:paddingLeft="15dp"
-                    android:gravity="center_vertical|left"
+                    android:layout_gravity="top"
+                    android:gravity="top|left"
                     android:id="@+id/p_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                </com.monitor.widget.Lato_Regular_Font>
-                <com.monitor.widget.Lato_Regular_Font
-                    android:layout_weight="1.1"
-                    android:textColor="@color/textcolor"
-                    android:text="@string/Age"
-                    android:id="@+id/age"
-                    android:textSize="@dimen/_12sdp"
-                    android:gravity="center_vertical|center"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
                 </com.monitor.widget.Lato_Regular_Font>
                 <com.monitor.widget.Lato_Regular_Font
                     android:layout_weight="1"
                     android:textColor="@color/textcolor"
-                    android:text="@string/hospitalname"
-                    android:id="@+id/location"
-                    android:textSize="@dimen/_12sdp"
-                    android:gravity="center_vertical|center"
+                    android:text="@string/Age"
+                    android:id="@+id/age"
+                    android:gravity="top"
+                    android:layout_gravity="top"
+                    android:textSize="@dimen/_10sdp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
                 </com.monitor.widget.Lato_Regular_Font>
@@ -68,11 +60,26 @@
                     android:layout_weight="1"
                     android:textColor="@color/textcolor"
                     android:text="@string/BedN"
-                    android:textSize="@dimen/_12sdp"
-                    android:gravity="center_vertical|center"
+                    android:textSize="@dimen/_10sdp"
+                    android:gravity="top|left"
+                    android:layout_gravity="top"
                     android:id="@+id/bedNo"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
+                </com.monitor.widget.Lato_Regular_Font>
+
+                <com.monitor.widget.Lato_Regular_Font
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text=""
+                    android:id="@+id/lead"
+                    android:textAlignment="gravity"
+                    android:gravity="center_horizontal"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/_10sdp"
+                    android:visibility="gone"
+                    android:background="@color/yallow"
+                    android:textColor="@color/black">
                 </com.monitor.widget.Lato_Regular_Font>
 
 
@@ -99,14 +106,13 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:weightSum="3"
-                android:layout_weight=".8"
+                android:layout_weight=".050"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <LinearLayout
                     android:orientation="vertical"
                     android:layout_weight="0.55"
                     android:weightSum="3"
-                    android:paddingTop="3dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
@@ -214,7 +220,7 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_weight=".4">
+                            android:layout_weight=".5">
                         <com.monitor.widget.WaveformView
                             android:id="@+id/wfResp"
                             app:maxValue="250"
@@ -226,7 +232,7 @@
                         </LinearLayout>
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_weight="1.3"
+                            android:layout_weight="1.2"
                             android:weightSum="2"
                             android:orientation="horizontal"
                             android:layout_gravity="top"
@@ -241,21 +247,27 @@
                             android:id="@+id/doctor"
                             android:paddingLeft="15dp"
                             android:textColor="@color/textcolor"
-                            android:textSize="@dimen/_10sdp">
+                            android:textSize="@dimen/_12sdp">
                         </com.monitor.widget.Lato_Regular_Font>
+
+
+
+
+
+
                             <com.monitor.widget.Lato_Regular_Font
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:text=""
-                                android:id="@+id/lead"
-                                android:textAlignment="gravity"
-                                android:gravity="center_horizontal"
                                 android:layout_weight="1"
+                                android:textColor="@color/textcolor"
+                                android:text="@string/hospitalname"
+                                android:id="@+id/location"
                                 android:textSize="@dimen/_12sdp"
-                                android:visibility="gone"
-                                android:background="@color/yallow"
-                                android:textColor="@color/black">
+                                android:gravity="top|left"
+                                android:layout_gravity="top"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
                             </com.monitor.widget.Lato_Regular_Font>
+
+
                         </LinearLayout>
                     </LinearLayout>
 

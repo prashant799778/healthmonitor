@@ -71,6 +71,7 @@
     <string name="BedNo">Bed Number</string>
     <string name="BedN">Bed No</string>
     <string name="DisableAlarm">Disable Alarms</string>
+    <string name="disableAlarm">Disable Alarm</string>
     <string name="Signnin">Sign In</string>
     <string name="forgot">Forgot your password ?</string>
     <string name="Docotor">Doctor</string>

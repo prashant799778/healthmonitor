@@ -1,7 +1,9 @@
 package com.monitor.http;
 
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.AlertDialog;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -132,7 +134,7 @@ public class Api_calling {
                                  String mac_id = jsonObject.getString("DeviceMac");
                                  mySharedPrefrence.setPatientId(jsonObject.getString("PatientId"));
                                  mySharedPrefrence.setMacAddress(jsonObject.getString("DeviceMac"));
-                                 mySharedPrefrence.setPatientAge(jsonObject.getString("PatientId"));
+                                 mySharedPrefrence.setPatientAge(jsonObject.getString("age"));
                                  mySharedPrefrence.setPatientBed(jsonObject.getString("Bed_Number"));
                                  mySharedPrefrence.setDoctorId1(jsonObject.getString("DoctorID"));
                                  mySharedPrefrence.setHospitalId(jsonObject.getString("Hospital_Id"));
@@ -473,7 +475,7 @@ public class Api_calling {
     {
         final SweetAlertDialog dialog=Comman.sweetDialogProgress(context);
         if(!Comman.isNetworkConnected(context)){
-            Toast.makeText(context, Constant.NO_INTERNET, Toast.LENGTH_SHORT).show();
+            Toast.makeText(context,Constant.NO_INTERNET, Toast.LENGTH_SHORT).show();
         }else {
             JsonObjectRequest jsonObjectRequest=new JsonObjectRequest(Request.Method.POST, URLS.DISCHARGE, jsonObject, new Response.Listener<JSONObject>() {
                 @Override
@@ -483,20 +485,24 @@ public class Api_calling {
                         if (Boolean.parseBoolean(response.getString("status"))){
                             DataBase db=new DataBase(context,Constant.DB_NAME,null,Constant.DB_VERSION);
                             db.deleteDatabase();
-                            Intent i=new Intent(context, ConfigActivity.class);
-                            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            if(json!=null && json.isConnected() && ecg!=null && ecg.isConnected() && btController!=null)
-                            {
-                                btController.unregisterBroadcastReceiver(context);
-                               json.disconnect();
-                               ecg.disconnect();
-                               btController.disconnect();
-//                               context.finish();
-                            }
-                            context.startActivity(i);
-//                            context.finish();
-//                            context.onBackPressed();
                             dialog.dismiss();
+                            restartApp(context);
+//                            Intent i=new Intent(context, ConfigActivity.class);
+//                            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                            dialog.dismiss();
+//                            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+////                            if(btController!=null)
+////                            {
+////                                btController.unregisterBroadcastReceiver(context);
+////                                btController.disconnect();
+////                                Comman.log("Finsish","CodeRun111");
+////                            }
+//
+//                            context.startActivity(i);
+//                            context.finishAffinity();
+
+                            Comman.log("Finsish","CodeRun");
+
                         }else {
                             Comman.show_Real_Message(context,view, Constant.SOMETHING_WENT_WRONG);
                             dialog.dismissWithAnimation();
@@ -504,6 +510,7 @@ public class Api_calling {
 
                     }catch (Exception e)
                     {
+                        Comman.log("tttt",""+e.getMessage());
                         dialog.dismissWithAnimation();
                     }
                 }
@@ -1169,7 +1176,26 @@ public class Api_calling {
 
 
 
+    private static  void restartApp(Context context) {
 
+
+//        Intent intent = context.getPackageManager().getLaunchIntentForPackage(
+//                context.getPackageName() );
+//         intent.setAction(Intent.ACTION_SCREEN_ON);
+//        intent.addCategory(Intent.CATEGORY_ALTERNATIVE);
+//        intent .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//        context.startActivity(intent);
+
+
+        Intent i=new Intent(context, ConfigActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(i);
+        int mPendingIntentId = 31;
+        PendingIntent mPendingIntent = PendingIntent.getActivity(context, mPendingIntentId, i, PendingIntent.FLAG_CANCEL_CURRENT);
+        AlarmManager mgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 5, mPendingIntent);
+        System.exit(0);
+    }
 
 
 }

@@ -2,7 +2,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/rl"
     android:orientation="vertical"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/bg1"
     >
@@ -14,11 +14,39 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:textSize="20dp"
+        android:textSize="@dimen/_16sdp"
         android:textColor="@color/white"
         android:text="Title"
         />
     </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:orientation="horizontal">
+        <com.monitor.widget.Gotham_Bold_Font
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/disableAlarm"
+            android:id="@+id/alarmtext"
+            android:textSize="@dimen/_14sdp"
+            android:layout_marginLeft="20dp"
+            android:textColor="@color/white">
+        </com.monitor.widget.Gotham_Bold_Font>
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:layout_width="wrap_content"
+            android:shadowColor="@color/red"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:theme="@style/AAA_Switch"
+            android:gravity="center_vertical|center_horizontal"
+            android:id="@+id/location_switch">
+        </com.google.android.material.switchmaterial.SwitchMaterial>
+
+    </LinearLayout>
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -35,7 +63,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="title"
-                android:textSize="16dp"
+                android:textSize="@dimen/_14sdp"
                 android:textColor="@color/white"
                 android:textAlignment="center"
                 android:id="@+id/t1">
@@ -67,7 +95,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="title"
-                    android:textSize="16dp"
+                    android:textSize="@dimen/_14sdp"
                     android:textColor="@color/white"
                     android:textAlignment="center"
                     android:id="@+id/t2">
@@ -91,7 +119,7 @@
         android:layout_height="40dp"
         android:weightSum="2"
         android:layout_marginBottom="5dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal">
         <Button
             android:layout_width="match_parent"
@@ -100,6 +128,7 @@
             android:textColor="@color/white"
             android:id="@+id/defalt"
             android:text="Default"
+            android:textSize="@dimen/_14sdp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:visibility="visible"
@@ -115,6 +144,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:padding="10dp"
+            android:textSize="@dimen/_14sdp"
             android:id="@+id/ok"
             android:textAllCaps="false"
             android:background="@drawable/btn_background">

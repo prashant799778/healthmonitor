@@ -70,7 +70,13 @@
         <activity android:name="com.monitor.activities.StartActivity" />
         <activity
             android:name="com.monitor.activities.ConfigActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.ALTERNATIVE" />
+            </intent-filter>
+        </activity>
         <activity android:name="com.monitor.activities.DetailActivity" />
         <activity android:name="com.monitor.activities.SignupActivity" />
         <activity android:name="com.monitor.activities.LoginActivity" />

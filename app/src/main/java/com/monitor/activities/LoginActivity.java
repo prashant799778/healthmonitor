@@ -44,8 +44,6 @@ public class LoginActivity extends BaseActivity {
                 }
             }
         });
-
-
     }
     public String getIP()
     {

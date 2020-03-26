@@ -210,7 +210,6 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
             age=intent.getStringExtra("age");
             hosptal=intent.getStringExtra("hospital");
             bed=intent.getStringExtra("bed");
-
         }
 //        gp=findViewById(R.id.gp);
          heartRate=new JSONObject();
@@ -237,12 +236,6 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
         connectMqtt_Ecg();
         cnnect_MQTT_Notification();
         }
-
-
-
-
-
-
 //        connectMqtt_Spo2();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         if (true)
@@ -311,8 +304,7 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
 //                    disconnect("/1/1/1/11");
 //                throw new RuntimeException("Test Crash"); // Force a crash
                 startActivity(new Intent(MainActivity.this, AlarmActivity.class));
-//                setAlart();
-//                if(!player1.isPlaying() && m.isAlarmOn())
+//                if(!player1.isPlaying() && m.isAlarmOn() && m.is_ECG_AlarmOn())
 //                    startAlarm(MainActivity.this);
             }
         });
@@ -467,9 +459,9 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
 //        finish();
 //        disConnect();
 //        System.exit(0); //for release "mBluetoothDevices" on key_back down
-//        mBtController.unregisterBroadcastReceiver(this);
+        mBtController.unregisterBroadcastReceiver(this);
     }
-
+//
     @Override
     protected void onStop() {
         super.onStop();
@@ -714,9 +706,9 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
                 setAlart();
                     tempboolean=true;
                     if ((!m.getTempUpper().isEmpty() && temp.getTemperature() > Integer.valueOf(m.getTempUpper()))) {
-//                        isTempHigh=true;
+                        isTempHigh=true;
                     } else if ((!m.getTempLower().isEmpty() && temp.getTemperature() < Integer.valueOf(m.getTempLower()))) {
-//                        isTempLow=true;
+                        isTempLow=true;
                     }else {
                         isTempHigh=false;
                         isTempLow=false;
@@ -940,22 +932,24 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        try {
-            if(client_Ecg !=null && client_Ecg.isConnected())
-            {
-                client_Ecg.disconnect();
-            }
-            if(client_Json !=null && client_Json.isConnected())
-            {
-                client_Json.disconnect();
-            }
-             mBtController.unregisterBroadcastReceiver(MainActivity.this);
-             mBtController.disconnect();
-
-        }catch (Exception e)
-        {
-
-        }
+        finish();
+        Comman.log("Finish","CodeRun");
+//        try {
+//            if(client_Ecg !=null && client_Ecg.isConnected())
+//            {
+//                client_Ecg.disconnect();
+//            }
+//            if(client_Json !=null && client_Json.isConnected())
+//            {
+//                client_Json.disconnect();
+//            }
+//             mBtController.unregisterBroadcastReceiver(MainActivity.this);
+//             mBtController.disconnect();
+//
+//        }catch (Exception e)
+//        {
+//
+//        }
 
     }
 
@@ -970,59 +964,79 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
     public void setAlart()
     {
         final ArrayList<String>msg=new ArrayList<>();
-        if(isBpHighLower || isBpHighUpper || isBpLowLower || isBpLowUpper || isSpo2High || isHeartRatHigh || isHeartRatLow || isPulseRateHigh || isPulseRateLow) {
-            if (!player1.isPlaying() && m.isAlarmOn())
-                startAlarm(MainActivity.this);
-        }
+//        if(isBpHighLower || isBpHighUpper || isBpLowLower || isBpLowUpper || isSpo2High || isHeartRatHigh || isHeartRatLow || isPulseRateHigh || isPulseRateLow) {
+//            if (!player1.isPlaying() && m.isAlarmOn() && m.is_High_BP_AlarmOn())
+//                startAlarm(MainActivity.this);
+//        }
         if(isBpHighLower)
         {
+            if (!player1.isPlaying() && m.isAlarmOn() && m.is_High_BP_AlarmOn())
+                startAlarm(MainActivity.this);
             msg.add("High Bp at Low");
         }
         if(isBpHighUpper){
+            if (!player1.isPlaying() && m.isAlarmOn() && m.is_High_BP_AlarmOn())
+                startAlarm(MainActivity.this);
             msg.add("High Bp at High");
         }
         if(isBpLowLower)
         {
+            if(!player1.isPlaying() && m.isAlarmOn() && m.is_Low_BP_AlarmOn())
+                startAlarm(MainActivity.this);
             msg.add("Low Bp at Low");
         }
         if(isBpLowUpper)
         {
+            if(!player1.isPlaying() && m.isAlarmOn() && m.is_Low_BP_AlarmOn())
+                startAlarm(MainActivity.this);
             msg.add("Low Bp at High");
         }
         if(isSpo2High)
         {
+            if(!player1.isPlaying() && m.isAlarmOn() && m.is_SPO2_AlarmOn())
+                startAlarm(MainActivity.this);
             msg.add("Spo2 High");
         }
         if(isSpo2Low)
         {
+            if(!player1.isPlaying() && m.isAlarmOn() && m.is_SPO2_AlarmOn())
+                startAlarm(MainActivity.this);
             msg.add("Spo2 Low");
         }
         if(isHeartRatHigh)
         {
+            if(!player1.isPlaying() && m.isAlarmOn() && m.is_ECG_AlarmOn())
+                startAlarm(MainActivity.this);
             msg.add("Heart Rate high");
         }
         if(isHeartRatLow)
         {
+            if(!player1.isPlaying() && m.isAlarmOn() && m.is_ECG_AlarmOn())
+                startAlarm(MainActivity.this);
             msg.add("Heart Rate Low");
         }
         if(isPulseRateHigh)
         {
+            if(!player1.isPlaying() && m.isAlarmOn() && m.is_PR_AlarmOn())
+                startAlarm(MainActivity.this);
             msg.add("Pulse Rate High");
         }
         if (isPulseRateLow)
         {
+            if(!player1.isPlaying() && m.isAlarmOn() && m.is_PR_AlarmOn())
+                startAlarm(MainActivity.this);
             msg.add("Pulse Rate Low");
         }
         if(isTempHigh)
         {
-//            if(!player1.isPlaying() && m.isAlarmOn())
-//                startAlarm(MainActivity.this);
+            if(!player1.isPlaying() && m.isAlarmOn() && m.is_Temp__AlarmOn())
+                startAlarm(MainActivity.this);
             msg.add("Temp High");
         }
         if(isTempLow)
         {
-//            if(!player1.isPlaying() && m.isAlarmOn())
-//                startAlarm(MainActivity.this);
+            if(!player1.isPlaying() && m.isAlarmOn() && m.is_Temp__AlarmOn())
+                startAlarm(MainActivity.this);
             msg.add("Temp Low");
         }
         if(msg.size()!=0){

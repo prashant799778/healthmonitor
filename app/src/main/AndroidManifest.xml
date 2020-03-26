@@ -58,7 +58,16 @@
         <activity android:name=".activities.StartActivity" />
         <activity
             android:name=".activities.ConfigActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.ALTERNATIVE" />
+            </intent-filter>
+
+
+
+        </activity>
         <activity android:name=".activities.DetailActivity" />
         <activity android:name=".activities.SignupActivity" />
         <activity android:name=".activities.LoginActivity" />

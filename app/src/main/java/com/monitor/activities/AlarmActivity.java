@@ -3,6 +3,8 @@ package com.monitor.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,9 +12,11 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 
+import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.monitor.R;
 import com.monitor.http.Api_calling;
 import com.monitor.util.Comman;
@@ -33,6 +37,7 @@ public class AlarmActivity extends AppCompatActivity {
     Button disabl;
     Gotham_Bold_Font v1,v2,v3;
     Button disableAlarm;
+    Boolean alarm_Status=true;
     MySharedPrefrence m;
     Button m1,m2,m3,p1,p2,p3;
     int cout1=0,count2=0,count3=0;
@@ -63,6 +68,8 @@ public class AlarmActivity extends AppCompatActivity {
         ecg_limit=findViewById(R.id.ecg_limit);
         spo2_limit=findViewById(R.id.spo2_limit);
         pluse_limit=findViewById(R.id.pluse_limit);
+
+
         hbp=findViewById(R.id.high_bp);
         lbp=findViewById(R.id.low_bp);
         tmp=findViewById(R.id.temp_limit);
@@ -93,7 +100,7 @@ public class AlarmActivity extends AppCompatActivity {
             }
         });
 
-        Comman.log("CountValue",""+cout1);
+//        Comman.log("CountValue",""+cout1);
         p1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -164,37 +171,42 @@ public class AlarmActivity extends AppCompatActivity {
         on.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                alarm_Status=m.is_ECG_AlarmOn();
                 setLable("Heart Rate Limits","Upper","Lower",300,300,ecg_limit,"E",Integer.parseInt(m.getHighHeartLimit()),Integer.parseInt(m.getLowHeartLimit()));
             }
         });
         on2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                alarm_Status=m.is_SPO2_AlarmOn();
                 setLable("Spo2 Limits","Upper","Lower",100,100,spo2_limit,"S",Integer.parseInt(m.getHighSpo2()),Integer.parseInt(m.getLowSpo2()));
             }
         });
         on3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                alarm_Status=m.is_PR_AlarmOn();
                 setLable("Pulse Rate Limits","Upper","Lower",300,300,pluse_limit,"P",Integer.parseInt(m.getHighPulseRate()),Integer.parseInt(m.getLowPulseRate()));
             }
         });
         on4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                alarm_Status=m.is_High_BP_AlarmOn();
                 setLable("High Pressure Limits","Upper","Lower",250,250,hbp,"H",Integer.parseInt(m.getHighPressureUpper()),Integer.parseInt(m.getHighPressureLower()));
             }
         });
         on5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                alarm_Status=m.is_Low_BP_AlarmOn();
                 setLable("Low Pressure Limits","Upper","Lower",180,180,lbp,"L",Integer.parseInt(m.getLowPressureUpper()),Integer.parseInt(m.getLowPressureLower()));
             }
         });
         on6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                alarm_Status=m.is_Temp__AlarmOn();
                 setLable("Temperature Limits","Upper","Lower",45,45,tmp,"T",Integer.parseInt(m.getTempUpper()),Integer.parseInt(m.getTempLower()));
             }
         });
@@ -203,21 +215,33 @@ public class AlarmActivity extends AppCompatActivity {
     }
     public void setLable(final String titl, String t1, String t2, int max, int low, final Lato_Regular_Font label, final String check, final int npi1, final int npi2)
     {
-        LayoutInflater layoutInflater=LayoutInflater.from(AlarmActivity.this);
-        View view=layoutInflater.inflate(R.layout.custom_dialog,null);
+        final Dialog dialog;
+        dialog = new Dialog(AlarmActivity.this);
+        dialog.setContentView(R.layout.custom_dialog);
+        dialog.getWindow().addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |Intent.FLAG_ACTIVITY_NEW_TASK );
+        dialog.setCanceledOnTouchOutside(false);
         final Lato_Regular_Font title;
         GothamBookFontForLable upper,lower;
-        final NumberPicker np1=view.findViewById(R.id.number1);
-        NumberPicker np2=view.findViewById(R.id.number2);
+        final Gotham_Bold_Font alarm_status_text;
+        SwitchMaterial switch_button;
+        final NumberPicker np1=dialog.findViewById(R.id.number1);
+        NumberPicker np2=dialog.findViewById(R.id.number2);
+        switch_button=dialog.findViewById(R.id.location_switch);
+        alarm_status_text=dialog.findViewById(R.id.alarmtext);
         final Button ok,defaoult;
-        title=view.findViewById(R.id.title);
-        defaoult=view.findViewById(R.id.defalt);
-        upper=view.findViewById(R.id.t1);
-        lower=view.findViewById(R.id.t2);
-        ok=view.findViewById(R.id.ok);
-        final AlertDialog.Builder builder = new AlertDialog.Builder(AlarmActivity.this);
-        final AlertDialog alertDialog = builder.create();
-        alertDialog.setView(view);
+        title=dialog.findViewById(R.id.title);
+        defaoult=dialog.findViewById(R.id.defalt);
+        upper=dialog.findViewById(R.id.t1);
+        lower=dialog.findViewById(R.id.t2);
+        ok=dialog.findViewById(R.id.ok);
+        if(alarm_Status){
+            alarm_status_text.setText("Enable Alarm");
+            switch_button.setChecked(true);
+        }else {
+            alarm_status_text.setText("Disable Alarm");
+            switch_button.setChecked(false);
+        }
+        Comman.log("Sttttttttttt","InMethdo--"+alarm_Status);
         title.setText(titl);
         upper.setText(t1);
         lower.setText(t2);
@@ -225,9 +249,10 @@ public class AlarmActivity extends AppCompatActivity {
         np1.setMinValue(0);
         np2.setMaxValue(low);
         np2.setMinValue(0);
-        Window window=alertDialog.getWindow();
-        window.setLayout(200,200);
-        alertDialog.show();
+        int Width =(int) (getResources().getDisplayMetrics().widthPixels*0.95);
+        int Height =(int) (getResources().getDisplayMetrics().heightPixels*0.90);
+        dialog.show();
+        dialog.getWindow().setLayout(Width,Height);
         int h1=0,l1=0;
         h=h1;l=l1;
         np1.setValue(npi1);
@@ -264,22 +289,37 @@ public class AlarmActivity extends AppCompatActivity {
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                alertDialog.dismiss();
+                dialog.dismiss();
                 label.setText(titl+"      "         +"Upper:  "+h+"    Lower:  "+l);
-                setValue(check,String.valueOf(h),String.valueOf(l));
+                setValue(alarm_Status,check,String.valueOf(h),String.valueOf(l));
             }
         });
         defaoult.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-               alertDialog.dismiss();
-               setDefault(check,"","");
+               dialog.dismiss();
+               setDefault(alarm_Status,check,"","");
+            }
+        });
+        switch_button.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Comman.log("AlarmStatus","--"+isChecked);
+                if(isChecked)
+                {
+                    alarm_status_text.setText("Enable Alarm");
+                    alarm_Status=isChecked;
+                }else {
+                    alarm_status_text.setText("Disable Alarm");
+                    alarm_Status=isChecked;
+
+                }
             }
         });
 
     }
-    public void setValue(String check,String h,String l)
+    public void setValue(Boolean alarm_isEnable,String check,String h,String l)
     {
         Comman.log("setValue","adsfsadfdasdf");
         switch (check)
@@ -287,32 +327,38 @@ public class AlarmActivity extends AppCompatActivity {
             case "E":
                 m.setHighHeartLimit(h);
                 m.setLowHeartLimit(l);
+                m.set_ECG_Alarm(alarm_isEnable);
                 break;
             case "S":
                 m.setHighSpo2(h);
                 m.setLowSpo2(l);
+                m.set_SPO2_Alarm(alarm_isEnable);
                 break;
             case "P":
                 m.setHighPulseRate(h);
                 m.setLowPulseRate(l);
+                m.set_PR_Alarm(alarm_isEnable);
                 break;
             case "H":
                 m.setHighPressureUpper(h);
                 m.setHighPressureLower(l);
+                m.set_High_BP_Alarm(alarm_isEnable);
                 break;
             case "T":
                 m.setTempLower(l);
+                m.set_Temp_Alarm(alarm_isEnable);
                 m.setTempUpper(h);
                 break;
             case "L":
                 m.setLowPressureUpper(h);
+                m.set_Low_BP_Alarm(alarm_isEnable);
                 m.setLowPressureLower(l);
                 break;
         }
     }
 
 
-    public void setDefault(String check,String h,String l)
+    public void setDefault(Boolean alarm_isEnable,String check,String h,String l)
     {
         Comman.log("Default","adsfsadfdasdf");
         switch (check)
@@ -320,31 +366,37 @@ public class AlarmActivity extends AppCompatActivity {
             case "E":
                 m.setHighHeartLimit("100");
                 m.setLowHeartLimit("60");
+                m.set_ECG_Alarm(alarm_isEnable);
                 ecg_limit.setText("Heart Rate Limits         Upper:100   Lower:60");
                 break;
             case "S":
                 m.setHighSpo2("99");
                 m.setLowSpo2("66");
+                m.set_SPO2_Alarm(alarm_isEnable);
                 spo2_limit.setText("Spo2 Limits          Upper:99   Lower:66");
                 break;
             case "P":
                 m.setHighPulseRate("100");
                 m.setLowPulseRate("70");
+                m.set_PR_Alarm(alarm_isEnable);
                 pluse_limit.setText("Pulse Rate Limits      Upper:100   Lower:70");
                 break;
             case "H":
                 m.setHighPressureUpper("139");
                 m.setHighPressureLower("120");
+                m.set_High_BP_Alarm(alarm_isEnable);
                 hbp.setText("High Pressure Limits       Upper:139   Lower:120");
                 break;
             case "T":
                 m.setTempLower("1");
                 m.setTempUpper("37");
+                m.set_Temp_Alarm(alarm_isEnable);
                 tmp.setText("Temperature Limits       Upper:37   Lower:1");
                 break;
             case "L":
                 m.setLowPressureUpper("89");
                 m.setLowPressureLower("80");
+                m.set_Low_BP_Alarm(alarm_isEnable);
                 lbp.setText("Low Pressure Limits       Upper:89   Lower:80");
                 break;
         }

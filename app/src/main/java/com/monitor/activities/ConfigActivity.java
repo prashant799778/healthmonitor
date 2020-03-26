@@ -294,6 +294,7 @@ private static final int PERMISSION_REQUEST_CODE = 200;
             }
         });
 
+
 }
 public JSONObject jsonObject(String usertype)
 {
