@@ -99,7 +99,7 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:weightSum="3"
-                android:layout_weight="1"
+                android:layout_weight=".8"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <LinearLayout
@@ -126,8 +126,9 @@
                             android:gravity="center_vertical"
                             android:paddingLeft="15dp"
                             android:text="ECG"
+                            android:maxLines="1"
                             android:textColor="@color/Green"
-                            android:textSize="@dimen/_8sdp"></com.monitor.widget.GothamBookFontForLable>
+                            android:textSize="@dimen/_10sdp"></com.monitor.widget.GothamBookFontForLable>
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -161,27 +162,28 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="SP02"
-                        android:layout_weight="2.5"
                         android:paddingLeft="15dp"
                         android:id="@+id/ss"
+                        android:maxLines="1"
+                        android:layout_weight="2.5"
                         android:gravity="center_vertical"
                         android:textColor="@color/red"
-                        android:textSize="@dimen/_8sdp"
+                        android:textSize="@dimen/_10sdp"
                         >
                     </com.monitor.widget.GothamBookFontForLable>
-
                         <LinearLayout
+                            android:layout_weight=".5"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_weight=".5">
+                            android:layout_marginBottom="3dp">
                         <com.monitor.widget.WaveformView
                             android:id="@+id/wfSp02"
-                            app:maxValue="100"
+                            app:maxValue="110"
+                            app:pointStep="1.5dp"
                             app:waveColor="@color/red"
                             app:backgroundColor="@color/black"
-                            android:layout_gravity="center_vertical"
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/_80sdp"
+                            android:layout_height="@dimen/_75sdp"
                             android:layout_marginBottom="1dp"/>
                         </LinearLayout>
                     <View
@@ -192,27 +194,23 @@
 
                     </LinearLayout>
 
-
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:weightSum="3"
                         android:orientation="vertical">
-
                     <com.monitor.widget.GothamBookFontForLable
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="RESP"
                         android:layout_weight="1.3"
                         android:paddingLeft="15dp"
+                        android:maxLines="1"
                         android:gravity="center_vertical"
                         android:textColor="@color/yallow"
-                        android:textSize="@dimen/_8sdp"
-                        >
+                        android:textSize="@dimen/_10sdp">
                     </com.monitor.widget.GothamBookFontForLable>
-
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -335,7 +333,7 @@
                             android:gravity="center_vertical"
                             android:textSize="@dimen/_30sdp"
                             android:textColor="@color/white"
-                            android:layout_marginLeft="5dp">
+                            android:layout_marginLeft="10dp">
                         </com.monitor.widget.Gotham_Bold_Font>
                     </LinearLayout>
                     <View

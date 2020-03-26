@@ -15,6 +15,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import com.monitor.R;
+import com.monitor.util.Comman;
 
 
 /**
@@ -96,10 +97,16 @@ public class WaveformView extends SurfaceView implements SurfaceHolder.Callback{
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
         int width  = (MeasureSpec.getSize(widthMeasureSpec));
-        if(width > mWidth) mWidth = width;
+//        if(width > mWidth) mWidth = width;
+        mWidth=width;
         int height = (int) (MeasureSpec.getSize(heightMeasureSpec)*0.95);
         if(height > mHeight) mHeight = height;
+
+
 //
+
+
+
 //        mWidth  = (MeasureSpec.getSize(widthMeasureSpec));
 //        mHeight = (int) (MeasureSpec.getSize(heightMeasureSpec)*0.95);
 
@@ -127,19 +134,24 @@ public class WaveformView extends SurfaceView implements SurfaceHolder.Callback{
         if(mDataBufferIndex >= mBufferSize){
             mDataBufferIndex = 0;
             int points = (int) ((mWidth - mLastPoint.x) / pointStep);
-
             points = points > mBufferSize ? mBufferSize : points;
             int xRight = (int) (mLastPoint.x + pointStep*points);
             mCanvas = mSurfaceHolder.lockCanvas(new Rect(mLastPoint.x, 0, (int) (xRight + pointStep*2), (int) (mHeight + mLineWidth)));
             if(mCanvas == null) return;
 
             mCanvas.drawRect(new Rect(mLastPoint.x, 0, (int) (xRight + pointStep*2), (int) (mHeight+mLineWidth)), mBackgroundPaint);
+//            Comman.log("GGGGGGGGGGGGGGGGGGGGGGGGGGGGguuuuuuuuuu","REct__StartX---"+mLastPoint.x+"-----StartY---"+(int) (xRight + pointStep*2)+"----StopX---"+(int) (mHeight+mLineWidth)+"-----StopY----");
+
             for(int i = 0; i < points; i++){
                 Point point = new Point();
-                point.x = (int) (mLastPoint.x + pointStep);
+                point.x = (int) (mLastPoint.x + (pointStep));
                 point.y = (int) (mHeight - mHeight/(float)mMaxValue * mDataBuffer[i]);
-
-                mCanvas.drawLine(mLastPoint.x, mLastPoint.y,point.x, point.y ,mWavePaint);
+//                int newX=(point.x+10);
+////                int newY=(point.y+10);
+////                int newLastastY=(mLastPoint.y+10);
+//                int newLastX=(mLastPoint.x+10);
+//                Comman.log("GGGGGGGGGGGGGGGGGGGGGGGGGGGGg","StartX---"+newLastX+"-----StartY---"+mLastPoint.y+"----StopX---"+newX+"-----StopY----"+point.y);
+                mCanvas.drawLine(mLastPoint.x, mLastPoint.y,point.x,point.y ,mWavePaint);
                 mLastPoint = point;
             }
             mSurfaceHolder.unlockCanvasAndPost(mCanvas);

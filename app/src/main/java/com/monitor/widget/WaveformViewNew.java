@@ -96,7 +96,7 @@ public class WaveformViewNew extends SurfaceView implements SurfaceHolder.Callba
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
         int width  = (MeasureSpec.getSize(widthMeasureSpec));
-        if(width > mWidth) mWidth = width;
+//        if(width > mWidth) mWidth = width;
         int height = (int) (MeasureSpec.getSize(heightMeasureSpec)*0.95);
         if(height > mHeight) mHeight = height;
 //

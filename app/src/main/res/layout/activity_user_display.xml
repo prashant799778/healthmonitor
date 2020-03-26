@@ -119,6 +119,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:text="ECG"
+                            android:maxLines="1"
                             android:layout_weight="2.5"
                             android:paddingLeft="15dp"
                             android:gravity="center_vertical"
@@ -162,6 +163,7 @@
                             android:text="@string/spo2"
                             android:layout_weight="2.5"
                             android:id="@+id/ss"
+                            android:maxLines="1"
                             android:paddingLeft="15dp"
                             android:gravity="center_vertical"
                             android:textColor="@color/red"
@@ -176,7 +178,6 @@
                             <com.monitor.widget.WaveformView
                                 android:id="@+id/wfSp02"
                                 app:maxValue="100"
-                                app:pointStep="1dp"
                                 app:waveColor="@color/red"
                                 android:layout_gravity="center_vertical"
                                 app:backgroundColor="@color/black"
@@ -207,6 +208,7 @@
                             android:text="RESP"
                             android:layout_weight=".4"
                             android:paddingLeft="15dp"
+                            android:maxLines="1"
                             android:gravity="center_vertical"
                             android:textColor="@color/yallow"
                             android:textSize="@dimen/_10sdp"
@@ -344,7 +346,6 @@
 
                 </LinearLayout>
                 <View
-
                     android:background="@color/white"
                     android:layout_width="@dimen/lineWidth"
                     android:layout_height="match_parent"/>
