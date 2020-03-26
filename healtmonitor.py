@@ -1958,25 +1958,45 @@ def preiscribeMedicine():
                 cursor = conn.cursor()
                 cursor.execute(query)
                 data = cursor.fetchall()
-
-                query22="select count(*) as count from preiscribeMedicine as pmm ,Patient_master as pm where doctorId='" + doctorId + "'and pm.PatientId=pmm.patientId and pmm.status='0' "+  WhereCondition2 +"  ORDER by pmm.id DESC limit  0,5"
-                cursor.fetchall(query22)
+                doctorId=[]
+                for i in data:
+                    doctorId.append(i["patientId"])
+                doctorId=list(dict.fromkeys(doctorId)) 
+                doctorId=tuple(doctorId)
+                if len(doctorId)==1:
+                    doctorId=doctorId[0]
+                    doctorId="("+str(doctorId)+")"
+                query22="select count(*) as count from preiscribeMedicine as pmm ,Patient_master as pm where doctorId In" +str(doctorId) + " and pm.PatientId=pmm.patientId and pmm.status='0' "+  WhereCondition2 +"  ORDER by pmm.id DESC limit  0,5"
+                cursor.execute(query22)
                 data2=cursor.fetchall()
                 for i in data2:
                     count=i['count']
                     print(count)
-
+                
 
             if 'doctorId' not in request.args:
-                WhereCondition2 =  " and  pmm.patientId    = '" + patientId + "'  "
-                print("111111111111")
+                WhereCondition2 =  " and  pmm.patientId = '" + patientId + "'  "
+                print("222222222222")
                 query = "select pmm.id,pmm.patientId,pmm.text,pmm.doctorId,pmm.dateCreate,pm.PatientName,pmm.status as status from preiscribeMedicine as pmm ,Patient_master as pm where pmm.patientId='" + patientId + "'and pm.PatientId=pmm.patientId  "+  WhereCondition2 +"  ORDER by pmm.id DESC limit  0,5"
                 conn=Connection()
                 cursor = conn.cursor()
                 cursor.execute(query)
                 data = cursor.fetchall()
-                query22="select count(*) as count from preiscribeMedicine as pmm ,Patient_master as pm where doctorId='" + doctorId + "'and pm.PatientId=pmm.patientId and pmm.status='0' "+  WhereCondition2 +"  ORDER by pmm.id DESC limit  0,5"
-                cursor.fetchall(query22)
+                # print(data,"=================")
+                # doctorId=data[0]["doctorId"]
+                # print()
+                doctorId=[]
+                for i in data:
+                    doctorId.append(i["patientId"])
+                doctorId=list(dict.fromkeys(doctorId)) 
+                doctorId=tuple(doctorId)
+                if len(doctorId)==1:
+                    doctorId=doctorId[0]
+                    doctorId="("+str(doctorId)+")"
+                                
+                query22="select count(*) as count from preiscribeMedicine as pmm ,Patient_master as pm where doctorId In" +str(doctorId)  + " and pm.PatientId=pmm.patientId and pmm.status='0' "+  WhereCondition2 +"  ORDER by pmm.id DESC limit  0,5"
+                print(query22)
+                cursor.execute(query22)
                 data2=cursor.fetchall()
                 for i in data2:
                     count=i['count']
@@ -3135,10 +3155,16 @@ def operationDashboard():
         
         json1=request.get_data()
         Data=json.loads(json1.decode("utf-8"))
+        if 'startlimit' in Data:
+            startlimit = Data["startlimit"]
+            if startlimit==1:
+                startlimit=0
+        if 'endlimit' in Data:
+            endlimit = Data["endlimit"]
 
         query3 ="select  PM.PatientId as ID,PM.PatientName,PM.PhoneNo,PM.heartRate,PM.spo2,PM.highPressure,PM.lowPressure,PM.pulseRate,PM.temperature,Hbs.HubName,PM.Address,PM.BloodGroup,PM.DeviceMac,Hm.HubId,Hm.hospital_name as hospital_Name, "
         query3=query3+" PM.Email,PM.Bed_Number,PM.Usertype_Id,PM.age,PM.Gender,PM.roomNumber"
-        query3= query3 + " from Patient_master  as PM ,Hospital_master as Hm,HubMaster as Hbs  where PM.hospitalId=Hm.ID  and  Hm.ID='"+str(Data["hospital_Id"])+"' and  Hm.HubId=Hbs.ID   and PM.Status<>'2' order by ID desc Limit    " + str(Data["startlimit"]) + ", " + str(Data["endlimit"]) + " ;"
+        query3= query3 + " from Patient_master  as PM ,Hospital_master as Hm,HubMaster as Hbs  where PM.hospitalId=Hm.ID  and  Hm.ID='"+str(Data["hospital_Id"])+"' and  Hm.HubId=Hbs.ID   and PM.Status<>'2' order by ID desc Limit    " + str(startlimit) + ", " + str(endlimit) + " ;"
         conn=Connection()
         cursor = conn.cursor()
         cursor.execute(query3)
