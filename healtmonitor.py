@@ -1775,7 +1775,7 @@ def updateStatus():
         return output  
 
     except Exception as e :
-        print("Exceptio`121QWAaUJIHUJG n---->" +str(e))    
+        print("Exception---->" +str(e))    
         output = {"result":"somthing went wrong","status":"false"}
         return output
 
@@ -1801,7 +1801,7 @@ def updateMessageStatus():
         return output  
 
     except Exception as e :
-        print("Exceptio`121QWAaUJIHUJG n---->" +str(e))    
+        print("Exception---->" +str(e))    
         output = {"result":"somthing went wrong","status":"false"}
         return output        
 
