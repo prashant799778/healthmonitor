@@ -10,6 +10,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 
 import com.monitor.R;
+import com.monitor.util.Comman;
 
 
 /**
@@ -29,7 +30,7 @@ public abstract class SearchDevicesDialog extends Dialog {
         super(context);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.devices_dialog);
-
+        Comman.log("BLUETOOth","BOXXXXXXXXXXXXXXXXXXXXXXXxx");
         lvBluetoothDevices = (ListView) findViewById(R.id.lvBluetoothDevices);
         lvBluetoothDevices.setAdapter(adapter);
         lvBluetoothDevices.setOnItemClickListener(new AdapterView.OnItemClickListener() {

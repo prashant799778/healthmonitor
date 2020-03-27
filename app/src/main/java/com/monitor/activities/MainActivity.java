@@ -165,7 +165,8 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
     BluetoothDeviceAdapter mBluetoothDeviceAdapter;
     SearchDevicesDialog mSearchDialog;
     ProgressDialog mConnectingDialog;
-    ArrayList<BluetoothDevice> mBluetoothDevices;
+    ArrayList<BluetoothDevice> mBluetoothDevices = new ArrayList<>();
+
 
     //data
 //    io.socket.client.Socket socket;
@@ -364,10 +365,12 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
             @Override
             public void onClick(View v) {
                 if (!mBtController.isBTConnected()) {
+                    Comman.log("BLUETOOth","OnLCLICK--Inside-If");
                     mSearchDialog.show();
                     mSearchDialog.startSearch();
                     mBtController.startScan(true);
                 } else {
+                    Comman.log("BLUETOOth","OnLCLICK--Inside-ELSE");
                     mBtController.disconnect();
                     tvBtinfo.setText("");
                 }
@@ -385,17 +388,16 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
 //        tvHWVersion = (TextView) findViewById(R.id.tvHWverison);
 
         //Bluetooth Search Dialog
-        mBluetoothDevices = new ArrayList<>();
+//        if(mBluetoothDeviceAdapter==null)
         mBluetoothDeviceAdapter = new BluetoothDeviceAdapter(MainActivity.this, mBluetoothDevices);
         mSearchDialog = new SearchDevicesDialog(MainActivity.this, mBluetoothDeviceAdapter) {
             @Override
             public void onStartSearch() {
                 mBtController.startScan(true);
             }
-
             @Override
             public void onClickDeviceItem(int pos) {
-                Comman.log("GETTTTTTTTTTTTT","GETTTTTTTTTTTTT");
+                Comman.log("BLUETOOth","OnLCLICK--Inside-onClickDeviceItem"+mBluetoothDevices.size());
                 BluetoothDevice device = mBluetoothDevices.get(pos);
                 Log.d("DEVICE.......", device.getAddress() + "===" + device.getName() + "=======");
                 mBtController.startScan(false);
@@ -408,12 +410,15 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
         mSearchDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialog) {
+//                Comman.log("BLUETOOth","OnLCLICK--Inside-setOnDismissListener");
                 mBtController.startScan(false);
             }
         });
-
+        Comman.log("BLUETOOth","GETTTTTTTTTTTTT");
         mConnectingDialog = new ProgressDialog(MainActivity.this);
         mConnectingDialog.setMessage("Connecting...");
+
+        Comman.log("BLUETOOth","Object_Creation");
 
         //About Information
 //        llAbout.setOnClickListener(new View.OnClickListener() {
@@ -430,6 +435,7 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
     }
 
     public void onClick(View v) {
+        Comman.log("BLUETOOth","OnLCLICK--Inside-Switch");
         Log.d("BL.....", v.getId() + "");
         switch (v.getId()) {
             case R.id.bluetooth:
@@ -473,11 +479,20 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
     @Override
     public void onFoundDevice(BluetoothDevice device) {
 //    Log.d("BL....",device.getName());
-        Comman.log("GGGGGGGGGGGGGGGGGGGGGgggg","GGGGGGGGGGGGGGGGGGGGGgggg");
-        if (mBluetoothDevices.contains(device))
+        Comman.log("BLUETOOth","DEviceADDRESS-onFoundDevice"+device.getAddress());
+       if (mBluetoothDevices.contains(device))
             return;
+        Comman.log("BLUETOOth","BEFORE-onFoundDevice---"+mBluetoothDevices.size());
+//        mBluetoothDevices.clear();
+//        mBluetoothDevices.add(device);
         mBluetoothDevices.add(device);
-        mBluetoothDeviceAdapter.notifyDataSetChanged();
+        Comman.log("BLUETOOth","AFTER-onFoundDevice--"+mBluetoothDevices.size());
+//        mBluetoothDeviceAdapter.notifyDataSetChanged();
+//        mBluetoothDeviceAdapter = new BluetoothDeviceAdapter(MainActivity.this, mBluetoothDevices);
+//        mBluetoothDeviceAdapter.notifyDataSetInvalidated();
+        mBluetoothDeviceAdapter.update(mBluetoothDevices);
+        Comman.log("BLUETOOth","AFTER-onFoundDevice_AfterNotified--"+mBluetoothDevices.size());
+
     }
 
     @Override
@@ -487,8 +502,10 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
 
     @Override
     public void onStartScan() {
+//        Comman.log("BLUETOOth","OnLCLICK--Inside-FININIIIIIIIII"+mBluetoothDevices.size());
         mBluetoothDevices.clear();
         mBluetoothDeviceAdapter.notifyDataSetChanged();
+//        mBluetoothDeviceAdapter.update(mBluetoothDevices);
     }
 
     @Override
@@ -531,6 +548,11 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
     @Override
     public void onRespReceived(int dat) {
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
     }
 
     @Override
@@ -832,8 +854,6 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
         } catch (MqttException ex) {
             ex.printStackTrace();
         }
-
-
     }
     public void connectMqtt_Ecg()
     {
@@ -932,7 +952,8 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        finish();
+//        finishAffinity();
+        System.exit(0);
         Comman.log("Finish","CodeRun");
 //        try {
 //            if(client_Ecg !=null && client_Ecg.isConnected())
@@ -1197,6 +1218,7 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
         Comman.log("RamdomValues","-- "+(random.nextInt(90)+10));
          return (((random.nextInt(90)+10)));
     }
+
 }
 
 

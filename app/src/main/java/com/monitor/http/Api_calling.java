@@ -323,17 +323,18 @@ public class Api_calling {
 //                            Api_calling.getCurrentPatient(context,view,mySharedPrefrence);
                             Intent intent=new Intent(context, MainActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             intent.putExtra("name",mySharedPrefrence.getPatientName());
                             intent.putExtra("age",mySharedPrefrence.getPatientAge());
                             intent.putExtra("hospital",mySharedPrefrence.getPatientHospital());
                             intent.putExtra("bed",mySharedPrefrence.getPatientBed());
-                            context.startActivity(intent);
                             try {
                                 ((ConfigActivity) context).finish();
+                                Comman.log("Finish","CHAL GYA");
                             }catch (Exception e)
                             {
-
                             }
+                            context.startActivity(intent);
                             dialog.dismissWithAnimation();
 
                         }else {
@@ -1176,7 +1177,7 @@ public class Api_calling {
 
 
 
-    private static  void restartApp(Context context) {
+    public static  void restartApp(Context context) {
 
 
 //        Intent intent = context.getPackageManager().getLaunchIntentForPackage(
@@ -1194,7 +1195,7 @@ public class Api_calling {
         PendingIntent mPendingIntent = PendingIntent.getActivity(context, mPendingIntentId, i, PendingIntent.FLAG_CANCEL_CURRENT);
         AlarmManager mgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 5, mPendingIntent);
-        System.exit(0);
+        System.exit(1);
     }
 
 

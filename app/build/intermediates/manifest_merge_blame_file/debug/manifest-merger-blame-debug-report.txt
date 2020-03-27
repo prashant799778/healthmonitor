@@ -50,326 +50,329 @@
 25    <uses-permission android:name="android.permission.WAKE_LOCK" />
 25-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:19:5-68
 25-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:19:22-65
-26    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-26-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:20:5-75
-26-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:20:22-72
-27    <uses-permission android:name="android.permission.CAMERA" />
-27-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:16:5-65
-27-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:16:22-62
-28    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-28-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:8:5-81
-28-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:8:22-78
-29
-30    <uses-feature android:name="android.hardware.camera2" />
-30-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:23:5-74
-30-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:23:19-58
-31
-32    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE" /> <!-- Required by older versions of Google Play services to create IID tokens -->
-32-->[com.google.android.gms:play-services-measurement:17.2.3] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\fc6a6afd35143aaae7e5bc5760afdd2f\play-services-measurement-17.2.3\AndroidManifest.xml:26:5-110
-32-->[com.google.android.gms:play-services-measurement:17.2.3] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\fc6a6afd35143aaae7e5bc5760afdd2f\play-services-measurement-17.2.3\AndroidManifest.xml:26:22-107
-33    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
-33-->[com.google.firebase:firebase-iid:20.0.2] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\5cc072372a1bc313279df2e37009b1f1\firebase-iid-20.0.2\AndroidManifest.xml:26:5-82
-33-->[com.google.firebase:firebase-iid:20.0.2] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\5cc072372a1bc313279df2e37009b1f1\firebase-iid-20.0.2\AndroidManifest.xml:26:22-79
-34    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-35
-36    <application
-36-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:26:5-86:19
-37        android:name="com.monitor.IcuApplication"
-37-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:27:9-39
-38        android:allowBackup="true"
-38-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:28:9-35
-39        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-39-->[androidx.core:core:1.1.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\63b70d1b667ca0387b7b9171aeb1fbd4\core-1.1.0\AndroidManifest.xml:24:18-86
-40        android:debuggable="true"
-41        android:icon="@mipmap/app_icon"
-41-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:29:9-40
-42        android:label="@string/app_name"
-42-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:30:9-41
-43        android:networkSecurityConfig="@xml/network_security_config"
-43-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:31:9-69
-44        android:roundIcon="@mipmap/app_icon"
-44-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:32:9-45
-45        android:supportsRtl="true"
-45-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:33:9-35
-46        android:theme="@style/AppTheme" >
-46-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:34:9-40
-47        <activity android:name="com.monitor.activities.FaceDetectActivity" />
-47-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:35:9-76
-47-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:35:19-64
-48        <activity android:name="com.monitor.activities.EditProfileActivity" />
-48-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:36:9-68
-48-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:36:19-65
-49        <activity
-49-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:37:9-39:53
-50            android:name="com.monitor.activities.AlarmActivity"
-50-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:38:13-53
-51            android:screenOrientation="landscape" />
-51-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:39:13-50
-52        <activity android:name="com.monitor.activities.ShowPatientsActivity" />
-52-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:40:9-69
-52-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:40:19-66
-53        <activity
-53-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:41:9-43:53
-54            android:name="com.monitor.activities.Main2Activity"
-54-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:42:13-53
-55            android:screenOrientation="landscape" />
-55-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:43:13-50
-56        <activity android:name="com.monitor.activities.UserDashboard" />
-56-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:44:9-62
-56-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:44:19-59
-57        <activity
-57-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:45:9-47:53
-58            android:name="com.monitor.activities.UserDisplayActivity"
-58-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:46:13-59
-59            android:screenOrientation="landscape" />
-59-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:47:13-50
-60
-61        <service android:name="org.eclipse.paho.android.service.MqttService" />
-61-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:49:9-80
-61-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:49:18-77
-62        <service android:name="com.monitor.services.MyService" />
-62-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:50:9-55
-62-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:50:18-52
-63
-64        <uses-library
-64-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:52:9-54:40
-65            android:name="org.apache.http.legacy"
-65-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:53:13-50
-66            android:required="false" />
-66-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:54:13-37
-67
-68        <activity android:name="com.monitor.activities.BaseActivity" />
-68-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:56:9-61
-68-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:56:19-58
-69        <activity android:name="com.monitor.activities.StatusActivity" />
-69-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:57:9-63
-69-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:57:19-60
-70        <activity android:name="com.monitor.activities.StartActivity" />
-70-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:58:9-62
-70-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:58:19-59
-71        <activity
-71-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:59:9-70:20
-72            android:name="com.monitor.activities.ConfigActivity"
-72-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:60:13-54
-73            android:screenOrientation="portrait" >
-73-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:61:13-49
-74            <intent-filter>
-74-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:62:13-66:29
-75                <action android:name="android.intent.action.MAIN" />
-75-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:63:17-69
-75-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:63:25-66
-76
-77                <category android:name="android.intent.category.ALTERNATIVE" />
-77-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:65:17-80
-77-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:65:27-77
-78            </intent-filter>
-79        </activity>
-80        <activity android:name="com.monitor.activities.DetailActivity" />
-80-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:71:9-63
-80-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:71:19-60
-81        <activity android:name="com.monitor.activities.SignupActivity" />
-81-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:72:9-63
-81-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:72:19-60
-82        <activity android:name="com.monitor.activities.LoginActivity" />
-82-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:73:9-62
-82-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:73:19-59
-83        <activity
-83-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:74:9-82:20
-84            android:name="com.monitor.activities.SplashActivity"
-84-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:75:13-54
-85            android:screenOrientation="portrait" >
-85-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:76:13-49
-86            <intent-filter>
-86-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:77:13-81:29
-87                <action android:name="android.intent.action.MAIN" />
-87-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:63:17-69
-87-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:63:25-66
-88
-89                <category android:name="android.intent.category.LAUNCHER" />
-89-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:80:17-77
-89-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:80:27-74
-90            </intent-filter>
-91        </activity>
-92        <activity
-92-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:83:9-85:53
-93            android:name="com.monitor.activities.MainActivity"
-93-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:84:13-52
-94            android:screenOrientation="landscape" />
-94-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:85:13-50
-95
-96        <receiver
-96-->[com.google.android.gms:play-services-measurement:17.2.3] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\fc6a6afd35143aaae7e5bc5760afdd2f\play-services-measurement-17.2.3\AndroidManifest.xml:29:9-33:20
-97            android:name="com.google.android.gms.measurement.AppMeasurementReceiver"
-97-->[com.google.android.gms:play-services-measurement:17.2.3] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\fc6a6afd35143aaae7e5bc5760afdd2f\play-services-measurement-17.2.3\AndroidManifest.xml:30:13-85
-98            android:enabled="true"
-98-->[com.google.android.gms:play-services-measurement:17.2.3] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\fc6a6afd35143aaae7e5bc5760afdd2f\play-services-measurement-17.2.3\AndroidManifest.xml:31:13-35
-99            android:exported="false" >
-99-->[com.google.android.gms:play-services-measurement:17.2.3] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\fc6a6afd35143aaae7e5bc5760afdd2f\play-services-measurement-17.2.3\AndroidManifest.xml:32:13-37
-100        </receiver>
-101        <receiver
-101-->[com.google.android.gms:play-services-measurement:17.2.3] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\fc6a6afd35143aaae7e5bc5760afdd2f\play-services-measurement-17.2.3\AndroidManifest.xml:34:9-42:20
-102            android:name="com.google.android.gms.measurement.AppMeasurementInstallReferrerReceiver"
-102-->[com.google.android.gms:play-services-measurement:17.2.3] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\fc6a6afd35143aaae7e5bc5760afdd2f\play-services-measurement-17.2.3\AndroidManifest.xml:35:13-100
-103            android:enabled="true"
-103-->[com.google.android.gms:play-services-measurement:17.2.3] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\fc6a6afd35143aaae7e5bc5760afdd2f\play-services-measurement-17.2.3\AndroidManifest.xml:36:13-35
-104            android:exported="true"
-104-->[com.google.android.gms:play-services-measurement:17.2.3] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\fc6a6afd35143aaae7e5bc5760afdd2f\play-services-measurement-17.2.3\AndroidManifest.xml:37:13-36
-105            android:permission="android.permission.INSTALL_PACKAGES" >
-105-->[com.google.android.gms:play-services-measurement:17.2.3] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\fc6a6afd35143aaae7e5bc5760afdd2f\play-services-measurement-17.2.3\AndroidManifest.xml:38:13-69
-106            <intent-filter>
-106-->[com.google.android.gms:play-services-measurement:17.2.3] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\fc6a6afd35143aaae7e5bc5760afdd2f\play-services-measurement-17.2.3\AndroidManifest.xml:39:13-41:29
-107                <action android:name="com.android.vending.INSTALL_REFERRER" />
-107-->[com.google.android.gms:play-services-measurement:17.2.3] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\fc6a6afd35143aaae7e5bc5760afdd2f\play-services-measurement-17.2.3\AndroidManifest.xml:40:17-79
-107-->[com.google.android.gms:play-services-measurement:17.2.3] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\fc6a6afd35143aaae7e5bc5760afdd2f\play-services-measurement-17.2.3\AndroidManifest.xml:40:25-76
-108            </intent-filter>
-109        </receiver>
-110
-111        <service
-111-->[com.google.android.gms:play-services-measurement:17.2.3] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\fc6a6afd35143aaae7e5bc5760afdd2f\play-services-measurement-17.2.3\AndroidManifest.xml:44:9-47:40
-112            android:name="com.google.android.gms.measurement.AppMeasurementService"
-112-->[com.google.android.gms:play-services-measurement:17.2.3] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\fc6a6afd35143aaae7e5bc5760afdd2f\play-services-measurement-17.2.3\AndroidManifest.xml:45:13-84
-113            android:enabled="true"
-113-->[com.google.android.gms:play-services-measurement:17.2.3] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\fc6a6afd35143aaae7e5bc5760afdd2f\play-services-measurement-17.2.3\AndroidManifest.xml:46:13-35
-114            android:exported="false" />
-114-->[com.google.android.gms:play-services-measurement:17.2.3] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\fc6a6afd35143aaae7e5bc5760afdd2f\play-services-measurement-17.2.3\AndroidManifest.xml:47:13-37
-115        <service
-115-->[com.google.android.gms:play-services-measurement:17.2.3] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\fc6a6afd35143aaae7e5bc5760afdd2f\play-services-measurement-17.2.3\AndroidManifest.xml:48:9-52:72
-116            android:name="com.google.android.gms.measurement.AppMeasurementJobService"
-116-->[com.google.android.gms:play-services-measurement:17.2.3] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\fc6a6afd35143aaae7e5bc5760afdd2f\play-services-measurement-17.2.3\AndroidManifest.xml:49:13-87
-117            android:enabled="true"
-117-->[com.google.android.gms:play-services-measurement:17.2.3] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\fc6a6afd35143aaae7e5bc5760afdd2f\play-services-measurement-17.2.3\AndroidManifest.xml:50:13-35
-118            android:exported="false"
-118-->[com.google.android.gms:play-services-measurement:17.2.3] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\fc6a6afd35143aaae7e5bc5760afdd2f\play-services-measurement-17.2.3\AndroidManifest.xml:51:13-37
-119            android:permission="android.permission.BIND_JOB_SERVICE" />
-119-->[com.google.android.gms:play-services-measurement:17.2.3] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\fc6a6afd35143aaae7e5bc5760afdd2f\play-services-measurement-17.2.3\AndroidManifest.xml:52:13-69
-120        <service
-120-->[com.google.android.gms:play-services-measurement-api:17.2.3] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\a6fed57ce937003c75f74cd6d2201ff5\play-services-measurement-api-17.2.3\AndroidManifest.xml:27:9-33:19
-121            android:name="com.google.firebase.components.ComponentDiscoveryService"
-121-->[com.google.android.gms:play-services-measurement-api:17.2.3] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\a6fed57ce937003c75f74cd6d2201ff5\play-services-measurement-api-17.2.3\AndroidManifest.xml:28:13-84
-122            android:directBootAware="true"
-122-->[com.google.firebase:firebase-common:19.3.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\e9fdc8052eca1c575bad666188eeb472\jetified-firebase-common-19.3.0\AndroidManifest.xml:34:13-43
-123            android:exported="false" >
-123-->[com.google.android.gms:play-services-measurement-api:17.2.3] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\a6fed57ce937003c75f74cd6d2201ff5\play-services-measurement-api-17.2.3\AndroidManifest.xml:29:13-37
-124            <meta-data
-124-->[com.google.android.gms:play-services-measurement-api:17.2.3] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\a6fed57ce937003c75f74cd6d2201ff5\play-services-measurement-api-17.2.3\AndroidManifest.xml:30:13-32:85
-125                android:name="com.google.firebase.components:com.google.firebase.analytics.connector.internal.AnalyticsConnectorRegistrar"
-125-->[com.google.android.gms:play-services-measurement-api:17.2.3] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\a6fed57ce937003c75f74cd6d2201ff5\play-services-measurement-api-17.2.3\AndroidManifest.xml:31:17-139
-126                android:value="com.google.firebase.components.ComponentRegistrar" />
-126-->[com.google.android.gms:play-services-measurement-api:17.2.3] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\a6fed57ce937003c75f74cd6d2201ff5\play-services-measurement-api-17.2.3\AndroidManifest.xml:32:17-82
-127            <meta-data
-127-->[com.google.firebase:firebase-crashlytics:17.0.0-beta02] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\a641eb2f6f68bdd0e43c13ee25ce00ef\firebase-crashlytics-17.0.0-beta02\AndroidManifest.xml:16:13-18:85
-128                android:name="com.google.firebase.components:com.google.firebase.crashlytics.CrashlyticsRegistrar"
-128-->[com.google.firebase:firebase-crashlytics:17.0.0-beta02] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\a641eb2f6f68bdd0e43c13ee25ce00ef\firebase-crashlytics-17.0.0-beta02\AndroidManifest.xml:17:17-115
-129                android:value="com.google.firebase.components.ComponentRegistrar" />
-129-->[com.google.firebase:firebase-crashlytics:17.0.0-beta02] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\a641eb2f6f68bdd0e43c13ee25ce00ef\firebase-crashlytics-17.0.0-beta02\AndroidManifest.xml:18:17-82
-130            <meta-data
-130-->[com.google.firebase:firebase-iid:20.0.2] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\5cc072372a1bc313279df2e37009b1f1\firebase-iid-20.0.2\AndroidManifest.xml:32:13-34:85
-131                android:name="com.google.firebase.components:com.google.firebase.iid.Registrar"
-131-->[com.google.firebase:firebase-iid:20.0.2] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\5cc072372a1bc313279df2e37009b1f1\firebase-iid-20.0.2\AndroidManifest.xml:33:17-96
-132                android:value="com.google.firebase.components.ComponentRegistrar" />
-132-->[com.google.firebase:firebase-iid:20.0.2] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\5cc072372a1bc313279df2e37009b1f1\firebase-iid-20.0.2\AndroidManifest.xml:34:17-82
-133        </service>
-134
-135        <receiver
-135-->[com.google.firebase:firebase-iid:20.0.2] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\5cc072372a1bc313279df2e37009b1f1\firebase-iid-20.0.2\AndroidManifest.xml:37:9-44:20
-136            android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver"
-136-->[com.google.firebase:firebase-iid:20.0.2] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\5cc072372a1bc313279df2e37009b1f1\firebase-iid-20.0.2\AndroidManifest.xml:38:13-78
-137            android:exported="true"
-137-->[com.google.firebase:firebase-iid:20.0.2] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\5cc072372a1bc313279df2e37009b1f1\firebase-iid-20.0.2\AndroidManifest.xml:39:13-36
-138            android:permission="com.google.android.c2dm.permission.SEND" >
-138-->[com.google.firebase:firebase-iid:20.0.2] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\5cc072372a1bc313279df2e37009b1f1\firebase-iid-20.0.2\AndroidManifest.xml:40:13-73
-139            <intent-filter>
-139-->[com.google.firebase:firebase-iid:20.0.2] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\5cc072372a1bc313279df2e37009b1f1\firebase-iid-20.0.2\AndroidManifest.xml:41:13-43:29
-140                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-140-->[com.google.firebase:firebase-iid:20.0.2] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\5cc072372a1bc313279df2e37009b1f1\firebase-iid-20.0.2\AndroidManifest.xml:42:17-81
-140-->[com.google.firebase:firebase-iid:20.0.2] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\5cc072372a1bc313279df2e37009b1f1\firebase-iid-20.0.2\AndroidManifest.xml:42:25-78
-141            </intent-filter>
-142        </receiver>
-143
-144        <provider
-144-->[com.google.firebase:firebase-common:19.3.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\e9fdc8052eca1c575bad666188eeb472\jetified-firebase-common-19.3.0\AndroidManifest.xml:26:9-30:39
-145            android:name="com.google.firebase.provider.FirebaseInitProvider"
-145-->[com.google.firebase:firebase-common:19.3.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\e9fdc8052eca1c575bad666188eeb472\jetified-firebase-common-19.3.0\AndroidManifest.xml:27:13-77
-146            android:authorities="com.monitor.firebaseinitprovider"
-146-->[com.google.firebase:firebase-common:19.3.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\e9fdc8052eca1c575bad666188eeb472\jetified-firebase-common-19.3.0\AndroidManifest.xml:28:13-72
-147            android:exported="false"
-147-->[com.google.firebase:firebase-common:19.3.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\e9fdc8052eca1c575bad666188eeb472\jetified-firebase-common-19.3.0\AndroidManifest.xml:29:13-37
-148            android:initOrder="100" />
-148-->[com.google.firebase:firebase-common:19.3.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\e9fdc8052eca1c575bad666188eeb472\jetified-firebase-common-19.3.0\AndroidManifest.xml:30:13-36
-149
-150        <activity
-150-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\4dfe30cd2de47920f29dc4597f0f3818\play-services-base-17.0.0\AndroidManifest.xml:23:9-26:75
-151            android:name="com.google.android.gms.common.api.GoogleApiActivity"
-151-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\4dfe30cd2de47920f29dc4597f0f3818\play-services-base-17.0.0\AndroidManifest.xml:24:13-79
-152            android:exported="false"
-152-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\4dfe30cd2de47920f29dc4597f0f3818\play-services-base-17.0.0\AndroidManifest.xml:25:13-37
-153            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-153-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\4dfe30cd2de47920f29dc4597f0f3818\play-services-base-17.0.0\AndroidManifest.xml:26:13-72
-154
-155        <meta-data
-155-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\c522510bf9f3a1b6816a20f3e7e4f133\jetified-play-services-basement-17.0.0\AndroidManifest.xml:23:9-25:69
-156            android:name="com.google.android.gms.version"
-156-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\c522510bf9f3a1b6816a20f3e7e4f133\jetified-play-services-basement-17.0.0\AndroidManifest.xml:24:13-58
-157            android:value="@integer/google_play_services_version" />
-157-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\c522510bf9f3a1b6816a20f3e7e4f133\jetified-play-services-basement-17.0.0\AndroidManifest.xml:25:13-66
-158
-159        <service
-159-->[com.google.android.datatransport:transport-backend-cct:2.2.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\5ced446bda96e6e48e3849d33de34de5\transport-backend-cct-2.2.0\AndroidManifest.xml:29:9-35:19
-160            android:name="com.google.android.datatransport.runtime.backends.TransportBackendDiscovery"
-160-->[com.google.android.datatransport:transport-backend-cct:2.2.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\5ced446bda96e6e48e3849d33de34de5\transport-backend-cct-2.2.0\AndroidManifest.xml:30:13-103
-161            android:exported="false" >
-161-->[com.google.android.datatransport:transport-backend-cct:2.2.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\5ced446bda96e6e48e3849d33de34de5\transport-backend-cct-2.2.0\AndroidManifest.xml:31:13-37
-162            <meta-data
-162-->[com.google.android.datatransport:transport-backend-cct:2.2.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\5ced446bda96e6e48e3849d33de34de5\transport-backend-cct-2.2.0\AndroidManifest.xml:32:13-34:39
-163                android:name="backend:com.google.android.datatransport.cct.CctBackendFactory"
-163-->[com.google.android.datatransport:transport-backend-cct:2.2.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\5ced446bda96e6e48e3849d33de34de5\transport-backend-cct-2.2.0\AndroidManifest.xml:33:17-94
-164                android:value="cct" />
-164-->[com.google.android.datatransport:transport-backend-cct:2.2.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\5ced446bda96e6e48e3849d33de34de5\transport-backend-cct-2.2.0\AndroidManifest.xml:34:17-36
-165        </service>
-166        <service
-166-->[com.google.android.datatransport:transport-runtime:2.2.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\22b9352b77dd7443a8e86bd68ed3fa72\transport-runtime-2.2.0\AndroidManifest.xml:26:9-30:19
-167            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService"
-167-->[com.google.android.datatransport:transport-runtime:2.2.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\22b9352b77dd7443a8e86bd68ed3fa72\transport-runtime-2.2.0\AndroidManifest.xml:27:13-117
-168            android:exported="false"
-168-->[com.google.android.datatransport:transport-runtime:2.2.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\22b9352b77dd7443a8e86bd68ed3fa72\transport-runtime-2.2.0\AndroidManifest.xml:28:13-37
-169            android:permission="android.permission.BIND_JOB_SERVICE" >
-169-->[com.google.android.datatransport:transport-runtime:2.2.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\22b9352b77dd7443a8e86bd68ed3fa72\transport-runtime-2.2.0\AndroidManifest.xml:29:13-69
-170        </service>
-171
-172        <receiver
-172-->[com.google.android.datatransport:transport-runtime:2.2.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\22b9352b77dd7443a8e86bd68ed3fa72\transport-runtime-2.2.0\AndroidManifest.xml:32:9-34:40
-173            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver"
-173-->[com.google.android.datatransport:transport-runtime:2.2.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\22b9352b77dd7443a8e86bd68ed3fa72\transport-runtime-2.2.0\AndroidManifest.xml:33:13-132
-174            android:exported="false" />
-174-->[com.google.android.datatransport:transport-runtime:2.2.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\22b9352b77dd7443a8e86bd68ed3fa72\transport-runtime-2.2.0\AndroidManifest.xml:34:13-37
-175
-176        <provider
-176-->[androidx.lifecycle:lifecycle-process:2.0.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\911d8dca4f665ff98b59d40186ea1de4\lifecycle-process-2.0.0\AndroidManifest.xml:23:9-27:43
-177            android:name="androidx.lifecycle.ProcessLifecycleOwnerInitializer"
-177-->[androidx.lifecycle:lifecycle-process:2.0.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\911d8dca4f665ff98b59d40186ea1de4\lifecycle-process-2.0.0\AndroidManifest.xml:24:13-79
-178            android:authorities="com.monitor.lifecycle-process"
-178-->[androidx.lifecycle:lifecycle-process:2.0.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\911d8dca4f665ff98b59d40186ea1de4\lifecycle-process-2.0.0\AndroidManifest.xml:25:13-69
-179            android:exported="false"
-179-->[androidx.lifecycle:lifecycle-process:2.0.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\911d8dca4f665ff98b59d40186ea1de4\lifecycle-process-2.0.0\AndroidManifest.xml:26:13-37
-180            android:multiprocess="true" />
-180-->[androidx.lifecycle:lifecycle-process:2.0.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\911d8dca4f665ff98b59d40186ea1de4\lifecycle-process-2.0.0\AndroidManifest.xml:27:13-40
-181        <provider
-181-->[com.mindorks:paracamera:0.2.2] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\9eef98127632ceee632ba223da0bc72f\jetified-paracamera-0.2.2\AndroidManifest.xml:16:9-24:20
-182            android:name="androidx.core.content.FileProvider"
-182-->[com.mindorks:paracamera:0.2.2] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\9eef98127632ceee632ba223da0bc72f\jetified-paracamera-0.2.2\AndroidManifest.xml:17:13-62
-183            android:authorities="com.monitor.imageprovider"
-183-->[com.mindorks:paracamera:0.2.2] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\9eef98127632ceee632ba223da0bc72f\jetified-paracamera-0.2.2\AndroidManifest.xml:18:13-65
-184            android:exported="false"
-184-->[com.mindorks:paracamera:0.2.2] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\9eef98127632ceee632ba223da0bc72f\jetified-paracamera-0.2.2\AndroidManifest.xml:19:13-37
-185            android:grantUriPermissions="true" >
-185-->[com.mindorks:paracamera:0.2.2] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\9eef98127632ceee632ba223da0bc72f\jetified-paracamera-0.2.2\AndroidManifest.xml:20:13-47
-186            <meta-data
-186-->[com.mindorks:paracamera:0.2.2] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\9eef98127632ceee632ba223da0bc72f\jetified-paracamera-0.2.2\AndroidManifest.xml:21:13-23:54
-187                android:name="android.support.FILE_PROVIDER_PATHS"
-187-->[com.mindorks:paracamera:0.2.2] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\9eef98127632ceee632ba223da0bc72f\jetified-paracamera-0.2.2\AndroidManifest.xml:22:17-67
-188                android:resource="@xml/file_paths" />
-188-->[com.mindorks:paracamera:0.2.2] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\9eef98127632ceee632ba223da0bc72f\jetified-paracamera-0.2.2\AndroidManifest.xml:23:17-51
-189        </provider>
-190    </application>
-191
-192</manifest>
+26    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
+26-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:20:5-21:71
+26-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:21:9-68
+27    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+27-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:22:5-75
+27-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:22:22-72
+28    <uses-permission android:name="android.permission.CAMERA" />
+28-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:16:5-65
+28-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:16:22-62
+29    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+29-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:8:5-81
+29-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:8:22-78
+30
+31    <uses-feature android:name="android.hardware.camera2" />
+31-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:25:5-74
+31-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:25:19-58
+32
+33    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE" /> <!-- Required by older versions of Google Play services to create IID tokens -->
+33-->[com.google.android.gms:play-services-measurement:17.2.3] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\fc6a6afd35143aaae7e5bc5760afdd2f\play-services-measurement-17.2.3\AndroidManifest.xml:26:5-110
+33-->[com.google.android.gms:play-services-measurement:17.2.3] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\fc6a6afd35143aaae7e5bc5760afdd2f\play-services-measurement-17.2.3\AndroidManifest.xml:26:22-107
+34    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+34-->[com.google.firebase:firebase-iid:20.0.2] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\5cc072372a1bc313279df2e37009b1f1\firebase-iid-20.0.2\AndroidManifest.xml:26:5-82
+34-->[com.google.firebase:firebase-iid:20.0.2] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\5cc072372a1bc313279df2e37009b1f1\firebase-iid-20.0.2\AndroidManifest.xml:26:22-79
+35    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+36
+37    <application
+37-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:28:5-88:19
+38        android:name="com.monitor.IcuApplication"
+38-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:29:9-39
+39        android:allowBackup="true"
+39-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:30:9-35
+40        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+40-->[androidx.core:core:1.1.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\63b70d1b667ca0387b7b9171aeb1fbd4\core-1.1.0\AndroidManifest.xml:24:18-86
+41        android:debuggable="true"
+42        android:icon="@mipmap/app_icon"
+42-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:31:9-40
+43        android:label="@string/app_name"
+43-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:32:9-41
+44        android:networkSecurityConfig="@xml/network_security_config"
+44-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:33:9-69
+45        android:roundIcon="@mipmap/app_icon"
+45-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:34:9-45
+46        android:supportsRtl="true"
+46-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:35:9-35
+47        android:theme="@style/AppTheme" >
+47-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:36:9-40
+48        <activity android:name="com.monitor.activities.FaceDetectActivity" />
+48-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:37:9-76
+48-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:37:19-64
+49        <activity android:name="com.monitor.activities.EditProfileActivity" />
+49-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:38:9-68
+49-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:38:19-65
+50        <activity
+50-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:39:9-41:53
+51            android:name="com.monitor.activities.AlarmActivity"
+51-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:40:13-53
+52            android:screenOrientation="landscape" />
+52-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:41:13-50
+53        <activity android:name="com.monitor.activities.ShowPatientsActivity" />
+53-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:42:9-69
+53-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:42:19-66
+54        <activity
+54-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:43:9-45:53
+55            android:name="com.monitor.activities.Main2Activity"
+55-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:44:13-53
+56            android:screenOrientation="landscape" />
+56-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:45:13-50
+57        <activity android:name="com.monitor.activities.UserDashboard" />
+57-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:46:9-62
+57-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:46:19-59
+58        <activity
+58-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:47:9-49:53
+59            android:name="com.monitor.activities.UserDisplayActivity"
+59-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:48:13-59
+60            android:screenOrientation="landscape" />
+60-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:49:13-50
+61
+62        <service android:name="org.eclipse.paho.android.service.MqttService" />
+62-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:51:9-80
+62-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:51:18-77
+63        <service android:name="com.monitor.services.MyService" />
+63-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:52:9-55
+63-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:52:18-52
+64
+65        <uses-library
+65-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:54:9-56:40
+66            android:name="org.apache.http.legacy"
+66-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:55:13-50
+67            android:required="false" />
+67-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:56:13-37
+68
+69        <activity android:name="com.monitor.activities.BaseActivity" />
+69-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:58:9-61
+69-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:58:19-58
+70        <activity android:name="com.monitor.activities.StatusActivity" />
+70-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:59:9-63
+70-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:59:19-60
+71        <activity android:name="com.monitor.activities.StartActivity" />
+71-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:60:9-62
+71-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:60:19-59
+72        <activity
+72-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:61:9-72:20
+73            android:name="com.monitor.activities.ConfigActivity"
+73-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:62:13-54
+74            android:screenOrientation="portrait" >
+74-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:63:13-49
+75            <intent-filter>
+75-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:64:13-68:29
+76                <action android:name="android.intent.action.MAIN" />
+76-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:65:17-69
+76-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:65:25-66
+77
+78                <category android:name="android.intent.category.ALTERNATIVE" />
+78-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:67:17-80
+78-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:67:27-77
+79            </intent-filter>
+80        </activity>
+81        <activity android:name="com.monitor.activities.DetailActivity" />
+81-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:73:9-63
+81-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:73:19-60
+82        <activity android:name="com.monitor.activities.SignupActivity" />
+82-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:74:9-63
+82-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:74:19-60
+83        <activity android:name="com.monitor.activities.LoginActivity" />
+83-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:75:9-62
+83-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:75:19-59
+84        <activity
+84-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:76:9-84:20
+85            android:name="com.monitor.activities.SplashActivity"
+85-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:77:13-54
+86            android:screenOrientation="portrait" >
+86-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:78:13-49
+87            <intent-filter>
+87-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:79:13-83:29
+88                <action android:name="android.intent.action.MAIN" />
+88-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:65:17-69
+88-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:65:25-66
+89
+90                <category android:name="android.intent.category.LAUNCHER" />
+90-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:82:17-77
+90-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:82:27-74
+91            </intent-filter>
+92        </activity>
+93        <activity
+93-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:85:9-87:53
+94            android:name="com.monitor.activities.MainActivity"
+94-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:86:13-52
+95            android:screenOrientation="landscape" />
+95-->E:\git\Healthmonitor\app\src\main\AndroidManifest.xml:87:13-50
+96
+97        <receiver
+97-->[com.google.android.gms:play-services-measurement:17.2.3] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\fc6a6afd35143aaae7e5bc5760afdd2f\play-services-measurement-17.2.3\AndroidManifest.xml:29:9-33:20
+98            android:name="com.google.android.gms.measurement.AppMeasurementReceiver"
+98-->[com.google.android.gms:play-services-measurement:17.2.3] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\fc6a6afd35143aaae7e5bc5760afdd2f\play-services-measurement-17.2.3\AndroidManifest.xml:30:13-85
+99            android:enabled="true"
+99-->[com.google.android.gms:play-services-measurement:17.2.3] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\fc6a6afd35143aaae7e5bc5760afdd2f\play-services-measurement-17.2.3\AndroidManifest.xml:31:13-35
+100            android:exported="false" >
+100-->[com.google.android.gms:play-services-measurement:17.2.3] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\fc6a6afd35143aaae7e5bc5760afdd2f\play-services-measurement-17.2.3\AndroidManifest.xml:32:13-37
+101        </receiver>
+102        <receiver
+102-->[com.google.android.gms:play-services-measurement:17.2.3] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\fc6a6afd35143aaae7e5bc5760afdd2f\play-services-measurement-17.2.3\AndroidManifest.xml:34:9-42:20
+103            android:name="com.google.android.gms.measurement.AppMeasurementInstallReferrerReceiver"
+103-->[com.google.android.gms:play-services-measurement:17.2.3] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\fc6a6afd35143aaae7e5bc5760afdd2f\play-services-measurement-17.2.3\AndroidManifest.xml:35:13-100
+104            android:enabled="true"
+104-->[com.google.android.gms:play-services-measurement:17.2.3] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\fc6a6afd35143aaae7e5bc5760afdd2f\play-services-measurement-17.2.3\AndroidManifest.xml:36:13-35
+105            android:exported="true"
+105-->[com.google.android.gms:play-services-measurement:17.2.3] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\fc6a6afd35143aaae7e5bc5760afdd2f\play-services-measurement-17.2.3\AndroidManifest.xml:37:13-36
+106            android:permission="android.permission.INSTALL_PACKAGES" >
+106-->[com.google.android.gms:play-services-measurement:17.2.3] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\fc6a6afd35143aaae7e5bc5760afdd2f\play-services-measurement-17.2.3\AndroidManifest.xml:38:13-69
+107            <intent-filter>
+107-->[com.google.android.gms:play-services-measurement:17.2.3] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\fc6a6afd35143aaae7e5bc5760afdd2f\play-services-measurement-17.2.3\AndroidManifest.xml:39:13-41:29
+108                <action android:name="com.android.vending.INSTALL_REFERRER" />
+108-->[com.google.android.gms:play-services-measurement:17.2.3] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\fc6a6afd35143aaae7e5bc5760afdd2f\play-services-measurement-17.2.3\AndroidManifest.xml:40:17-79
+108-->[com.google.android.gms:play-services-measurement:17.2.3] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\fc6a6afd35143aaae7e5bc5760afdd2f\play-services-measurement-17.2.3\AndroidManifest.xml:40:25-76
+109            </intent-filter>
+110        </receiver>
+111
+112        <service
+112-->[com.google.android.gms:play-services-measurement:17.2.3] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\fc6a6afd35143aaae7e5bc5760afdd2f\play-services-measurement-17.2.3\AndroidManifest.xml:44:9-47:40
+113            android:name="com.google.android.gms.measurement.AppMeasurementService"
+113-->[com.google.android.gms:play-services-measurement:17.2.3] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\fc6a6afd35143aaae7e5bc5760afdd2f\play-services-measurement-17.2.3\AndroidManifest.xml:45:13-84
+114            android:enabled="true"
+114-->[com.google.android.gms:play-services-measurement:17.2.3] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\fc6a6afd35143aaae7e5bc5760afdd2f\play-services-measurement-17.2.3\AndroidManifest.xml:46:13-35
+115            android:exported="false" />
+115-->[com.google.android.gms:play-services-measurement:17.2.3] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\fc6a6afd35143aaae7e5bc5760afdd2f\play-services-measurement-17.2.3\AndroidManifest.xml:47:13-37
+116        <service
+116-->[com.google.android.gms:play-services-measurement:17.2.3] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\fc6a6afd35143aaae7e5bc5760afdd2f\play-services-measurement-17.2.3\AndroidManifest.xml:48:9-52:72
+117            android:name="com.google.android.gms.measurement.AppMeasurementJobService"
+117-->[com.google.android.gms:play-services-measurement:17.2.3] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\fc6a6afd35143aaae7e5bc5760afdd2f\play-services-measurement-17.2.3\AndroidManifest.xml:49:13-87
+118            android:enabled="true"
+118-->[com.google.android.gms:play-services-measurement:17.2.3] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\fc6a6afd35143aaae7e5bc5760afdd2f\play-services-measurement-17.2.3\AndroidManifest.xml:50:13-35
+119            android:exported="false"
+119-->[com.google.android.gms:play-services-measurement:17.2.3] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\fc6a6afd35143aaae7e5bc5760afdd2f\play-services-measurement-17.2.3\AndroidManifest.xml:51:13-37
+120            android:permission="android.permission.BIND_JOB_SERVICE" />
+120-->[com.google.android.gms:play-services-measurement:17.2.3] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\fc6a6afd35143aaae7e5bc5760afdd2f\play-services-measurement-17.2.3\AndroidManifest.xml:52:13-69
+121        <service
+121-->[com.google.android.gms:play-services-measurement-api:17.2.3] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\a6fed57ce937003c75f74cd6d2201ff5\play-services-measurement-api-17.2.3\AndroidManifest.xml:27:9-33:19
+122            android:name="com.google.firebase.components.ComponentDiscoveryService"
+122-->[com.google.android.gms:play-services-measurement-api:17.2.3] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\a6fed57ce937003c75f74cd6d2201ff5\play-services-measurement-api-17.2.3\AndroidManifest.xml:28:13-84
+123            android:directBootAware="true"
+123-->[com.google.firebase:firebase-common:19.3.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\e9fdc8052eca1c575bad666188eeb472\jetified-firebase-common-19.3.0\AndroidManifest.xml:34:13-43
+124            android:exported="false" >
+124-->[com.google.android.gms:play-services-measurement-api:17.2.3] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\a6fed57ce937003c75f74cd6d2201ff5\play-services-measurement-api-17.2.3\AndroidManifest.xml:29:13-37
+125            <meta-data
+125-->[com.google.android.gms:play-services-measurement-api:17.2.3] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\a6fed57ce937003c75f74cd6d2201ff5\play-services-measurement-api-17.2.3\AndroidManifest.xml:30:13-32:85
+126                android:name="com.google.firebase.components:com.google.firebase.analytics.connector.internal.AnalyticsConnectorRegistrar"
+126-->[com.google.android.gms:play-services-measurement-api:17.2.3] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\a6fed57ce937003c75f74cd6d2201ff5\play-services-measurement-api-17.2.3\AndroidManifest.xml:31:17-139
+127                android:value="com.google.firebase.components.ComponentRegistrar" />
+127-->[com.google.android.gms:play-services-measurement-api:17.2.3] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\a6fed57ce937003c75f74cd6d2201ff5\play-services-measurement-api-17.2.3\AndroidManifest.xml:32:17-82
+128            <meta-data
+128-->[com.google.firebase:firebase-crashlytics:17.0.0-beta02] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\a641eb2f6f68bdd0e43c13ee25ce00ef\firebase-crashlytics-17.0.0-beta02\AndroidManifest.xml:16:13-18:85
+129                android:name="com.google.firebase.components:com.google.firebase.crashlytics.CrashlyticsRegistrar"
+129-->[com.google.firebase:firebase-crashlytics:17.0.0-beta02] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\a641eb2f6f68bdd0e43c13ee25ce00ef\firebase-crashlytics-17.0.0-beta02\AndroidManifest.xml:17:17-115
+130                android:value="com.google.firebase.components.ComponentRegistrar" />
+130-->[com.google.firebase:firebase-crashlytics:17.0.0-beta02] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\a641eb2f6f68bdd0e43c13ee25ce00ef\firebase-crashlytics-17.0.0-beta02\AndroidManifest.xml:18:17-82
+131            <meta-data
+131-->[com.google.firebase:firebase-iid:20.0.2] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\5cc072372a1bc313279df2e37009b1f1\firebase-iid-20.0.2\AndroidManifest.xml:32:13-34:85
+132                android:name="com.google.firebase.components:com.google.firebase.iid.Registrar"
+132-->[com.google.firebase:firebase-iid:20.0.2] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\5cc072372a1bc313279df2e37009b1f1\firebase-iid-20.0.2\AndroidManifest.xml:33:17-96
+133                android:value="com.google.firebase.components.ComponentRegistrar" />
+133-->[com.google.firebase:firebase-iid:20.0.2] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\5cc072372a1bc313279df2e37009b1f1\firebase-iid-20.0.2\AndroidManifest.xml:34:17-82
+134        </service>
+135
+136        <receiver
+136-->[com.google.firebase:firebase-iid:20.0.2] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\5cc072372a1bc313279df2e37009b1f1\firebase-iid-20.0.2\AndroidManifest.xml:37:9-44:20
+137            android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver"
+137-->[com.google.firebase:firebase-iid:20.0.2] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\5cc072372a1bc313279df2e37009b1f1\firebase-iid-20.0.2\AndroidManifest.xml:38:13-78
+138            android:exported="true"
+138-->[com.google.firebase:firebase-iid:20.0.2] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\5cc072372a1bc313279df2e37009b1f1\firebase-iid-20.0.2\AndroidManifest.xml:39:13-36
+139            android:permission="com.google.android.c2dm.permission.SEND" >
+139-->[com.google.firebase:firebase-iid:20.0.2] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\5cc072372a1bc313279df2e37009b1f1\firebase-iid-20.0.2\AndroidManifest.xml:40:13-73
+140            <intent-filter>
+140-->[com.google.firebase:firebase-iid:20.0.2] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\5cc072372a1bc313279df2e37009b1f1\firebase-iid-20.0.2\AndroidManifest.xml:41:13-43:29
+141                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+141-->[com.google.firebase:firebase-iid:20.0.2] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\5cc072372a1bc313279df2e37009b1f1\firebase-iid-20.0.2\AndroidManifest.xml:42:17-81
+141-->[com.google.firebase:firebase-iid:20.0.2] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\5cc072372a1bc313279df2e37009b1f1\firebase-iid-20.0.2\AndroidManifest.xml:42:25-78
+142            </intent-filter>
+143        </receiver>
+144
+145        <provider
+145-->[com.google.firebase:firebase-common:19.3.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\e9fdc8052eca1c575bad666188eeb472\jetified-firebase-common-19.3.0\AndroidManifest.xml:26:9-30:39
+146            android:name="com.google.firebase.provider.FirebaseInitProvider"
+146-->[com.google.firebase:firebase-common:19.3.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\e9fdc8052eca1c575bad666188eeb472\jetified-firebase-common-19.3.0\AndroidManifest.xml:27:13-77
+147            android:authorities="com.monitor.firebaseinitprovider"
+147-->[com.google.firebase:firebase-common:19.3.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\e9fdc8052eca1c575bad666188eeb472\jetified-firebase-common-19.3.0\AndroidManifest.xml:28:13-72
+148            android:exported="false"
+148-->[com.google.firebase:firebase-common:19.3.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\e9fdc8052eca1c575bad666188eeb472\jetified-firebase-common-19.3.0\AndroidManifest.xml:29:13-37
+149            android:initOrder="100" />
+149-->[com.google.firebase:firebase-common:19.3.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\e9fdc8052eca1c575bad666188eeb472\jetified-firebase-common-19.3.0\AndroidManifest.xml:30:13-36
+150
+151        <activity
+151-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\4dfe30cd2de47920f29dc4597f0f3818\play-services-base-17.0.0\AndroidManifest.xml:23:9-26:75
+152            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+152-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\4dfe30cd2de47920f29dc4597f0f3818\play-services-base-17.0.0\AndroidManifest.xml:24:13-79
+153            android:exported="false"
+153-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\4dfe30cd2de47920f29dc4597f0f3818\play-services-base-17.0.0\AndroidManifest.xml:25:13-37
+154            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+154-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\4dfe30cd2de47920f29dc4597f0f3818\play-services-base-17.0.0\AndroidManifest.xml:26:13-72
+155
+156        <meta-data
+156-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\c522510bf9f3a1b6816a20f3e7e4f133\jetified-play-services-basement-17.0.0\AndroidManifest.xml:23:9-25:69
+157            android:name="com.google.android.gms.version"
+157-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\c522510bf9f3a1b6816a20f3e7e4f133\jetified-play-services-basement-17.0.0\AndroidManifest.xml:24:13-58
+158            android:value="@integer/google_play_services_version" />
+158-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\c522510bf9f3a1b6816a20f3e7e4f133\jetified-play-services-basement-17.0.0\AndroidManifest.xml:25:13-66
+159
+160        <service
+160-->[com.google.android.datatransport:transport-backend-cct:2.2.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\5ced446bda96e6e48e3849d33de34de5\transport-backend-cct-2.2.0\AndroidManifest.xml:29:9-35:19
+161            android:name="com.google.android.datatransport.runtime.backends.TransportBackendDiscovery"
+161-->[com.google.android.datatransport:transport-backend-cct:2.2.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\5ced446bda96e6e48e3849d33de34de5\transport-backend-cct-2.2.0\AndroidManifest.xml:30:13-103
+162            android:exported="false" >
+162-->[com.google.android.datatransport:transport-backend-cct:2.2.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\5ced446bda96e6e48e3849d33de34de5\transport-backend-cct-2.2.0\AndroidManifest.xml:31:13-37
+163            <meta-data
+163-->[com.google.android.datatransport:transport-backend-cct:2.2.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\5ced446bda96e6e48e3849d33de34de5\transport-backend-cct-2.2.0\AndroidManifest.xml:32:13-34:39
+164                android:name="backend:com.google.android.datatransport.cct.CctBackendFactory"
+164-->[com.google.android.datatransport:transport-backend-cct:2.2.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\5ced446bda96e6e48e3849d33de34de5\transport-backend-cct-2.2.0\AndroidManifest.xml:33:17-94
+165                android:value="cct" />
+165-->[com.google.android.datatransport:transport-backend-cct:2.2.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\5ced446bda96e6e48e3849d33de34de5\transport-backend-cct-2.2.0\AndroidManifest.xml:34:17-36
+166        </service>
+167        <service
+167-->[com.google.android.datatransport:transport-runtime:2.2.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\22b9352b77dd7443a8e86bd68ed3fa72\transport-runtime-2.2.0\AndroidManifest.xml:26:9-30:19
+168            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService"
+168-->[com.google.android.datatransport:transport-runtime:2.2.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\22b9352b77dd7443a8e86bd68ed3fa72\transport-runtime-2.2.0\AndroidManifest.xml:27:13-117
+169            android:exported="false"
+169-->[com.google.android.datatransport:transport-runtime:2.2.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\22b9352b77dd7443a8e86bd68ed3fa72\transport-runtime-2.2.0\AndroidManifest.xml:28:13-37
+170            android:permission="android.permission.BIND_JOB_SERVICE" >
+170-->[com.google.android.datatransport:transport-runtime:2.2.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\22b9352b77dd7443a8e86bd68ed3fa72\transport-runtime-2.2.0\AndroidManifest.xml:29:13-69
+171        </service>
+172
+173        <receiver
+173-->[com.google.android.datatransport:transport-runtime:2.2.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\22b9352b77dd7443a8e86bd68ed3fa72\transport-runtime-2.2.0\AndroidManifest.xml:32:9-34:40
+174            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver"
+174-->[com.google.android.datatransport:transport-runtime:2.2.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\22b9352b77dd7443a8e86bd68ed3fa72\transport-runtime-2.2.0\AndroidManifest.xml:33:13-132
+175            android:exported="false" />
+175-->[com.google.android.datatransport:transport-runtime:2.2.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\22b9352b77dd7443a8e86bd68ed3fa72\transport-runtime-2.2.0\AndroidManifest.xml:34:13-37
+176
+177        <provider
+177-->[androidx.lifecycle:lifecycle-process:2.0.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\911d8dca4f665ff98b59d40186ea1de4\lifecycle-process-2.0.0\AndroidManifest.xml:23:9-27:43
+178            android:name="androidx.lifecycle.ProcessLifecycleOwnerInitializer"
+178-->[androidx.lifecycle:lifecycle-process:2.0.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\911d8dca4f665ff98b59d40186ea1de4\lifecycle-process-2.0.0\AndroidManifest.xml:24:13-79
+179            android:authorities="com.monitor.lifecycle-process"
+179-->[androidx.lifecycle:lifecycle-process:2.0.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\911d8dca4f665ff98b59d40186ea1de4\lifecycle-process-2.0.0\AndroidManifest.xml:25:13-69
+180            android:exported="false"
+180-->[androidx.lifecycle:lifecycle-process:2.0.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\911d8dca4f665ff98b59d40186ea1de4\lifecycle-process-2.0.0\AndroidManifest.xml:26:13-37
+181            android:multiprocess="true" />
+181-->[androidx.lifecycle:lifecycle-process:2.0.0] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\911d8dca4f665ff98b59d40186ea1de4\lifecycle-process-2.0.0\AndroidManifest.xml:27:13-40
+182        <provider
+182-->[com.mindorks:paracamera:0.2.2] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\9eef98127632ceee632ba223da0bc72f\jetified-paracamera-0.2.2\AndroidManifest.xml:16:9-24:20
+183            android:name="androidx.core.content.FileProvider"
+183-->[com.mindorks:paracamera:0.2.2] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\9eef98127632ceee632ba223da0bc72f\jetified-paracamera-0.2.2\AndroidManifest.xml:17:13-62
+184            android:authorities="com.monitor.imageprovider"
+184-->[com.mindorks:paracamera:0.2.2] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\9eef98127632ceee632ba223da0bc72f\jetified-paracamera-0.2.2\AndroidManifest.xml:18:13-65
+185            android:exported="false"
+185-->[com.mindorks:paracamera:0.2.2] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\9eef98127632ceee632ba223da0bc72f\jetified-paracamera-0.2.2\AndroidManifest.xml:19:13-37
+186            android:grantUriPermissions="true" >
+186-->[com.mindorks:paracamera:0.2.2] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\9eef98127632ceee632ba223da0bc72f\jetified-paracamera-0.2.2\AndroidManifest.xml:20:13-47
+187            <meta-data
+187-->[com.mindorks:paracamera:0.2.2] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\9eef98127632ceee632ba223da0bc72f\jetified-paracamera-0.2.2\AndroidManifest.xml:21:13-23:54
+188                android:name="android.support.FILE_PROVIDER_PATHS"
+188-->[com.mindorks:paracamera:0.2.2] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\9eef98127632ceee632ba223da0bc72f\jetified-paracamera-0.2.2\AndroidManifest.xml:22:17-67
+189                android:resource="@xml/file_paths" />
+189-->[com.mindorks:paracamera:0.2.2] C:\Users\fourbrick\.gradle\caches\transforms-2\files-2.1\9eef98127632ceee632ba223da0bc72f\jetified-paracamera-0.2.2\AndroidManifest.xml:23:17-51
+190        </provider>
+191    </application>
+192
+193</manifest>

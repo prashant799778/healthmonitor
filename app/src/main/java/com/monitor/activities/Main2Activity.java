@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.monitor.R;
 import com.monitor.bluetooth.BTController;
+
 import com.monitor.dialogs.BluetoothDeviceAdapter;
 import com.monitor.dialogs.SearchDevicesDialog;
 import com.monitor.util.Comman;
@@ -64,7 +65,7 @@ public class Main2Activity  extends BaseActivity implements BTController.Listene
 
 
     //Bluetooth
-    BluetoothDeviceAdapter mBluetoothDeviceAdapter;
+//    BluetoothAdapter mBluetoothDeviceAdapter;
     SearchDevicesDialog mSearchDialog;
     ProgressDialog mConnectingDialog;
     ArrayList<BluetoothDevice> mBluetoothDevices;
@@ -125,33 +126,33 @@ public class Main2Activity  extends BaseActivity implements BTController.Listene
 
         //Bluetooth Search Dialog
         mBluetoothDevices = new ArrayList<>();
-        mBluetoothDeviceAdapter = new BluetoothDeviceAdapter(Main2Activity.this, mBluetoothDevices);
-        mSearchDialog = new SearchDevicesDialog(Main2Activity.this, mBluetoothDeviceAdapter) {
-            @Override
-            public void onStartSearch() {
-                mBtController.startScan(true);
-            }
-
-            @Override
-            public void onClickDeviceItem(int pos) {
-                BluetoothDevice device = mBluetoothDevices.get(pos);
-                Log.d("DEVICE.......", device.getAddress() + "===" + device.getName() + "=======");
-                mBtController.startScan(false);
-                mBtController.connect(Main2Activity.this, device);
-                tvBtinfo.setText(device.getName() + ": " + device.getAddress());
-                mConnectingDialog.show();
-                mSearchDialog.dismiss();
-            }
-        };
-        mSearchDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialog) {
-                mBtController.startScan(false);
-            }
-        });
-
-        mConnectingDialog = new ProgressDialog(Main2Activity.this);
-        mConnectingDialog.setMessage("Connecting...");
+//        mBluetoothDeviceAdapter = new BluetoothAdapter(Main2Activity.this, mBluetoothDevices);
+//        mSearchDialog = new SearchDevicesDialog(Main2Activity.this, mBluetoothDeviceAdapter) {
+//            @Override
+//            public void onStartSearch() {
+//                mBtController.startScan(true);
+//            }
+//
+//            @Override
+//            public void onClickDeviceItem(int pos) {
+//                BluetoothDevice device = mBluetoothDevices.get(pos);
+//                Log.d("DEVICE.......", device.getAddress() + "===" + device.getName() + "=======");
+//                mBtController.startScan(false);
+//                mBtController.connect(Main2Activity.this, device);
+//                tvBtinfo.setText(device.getName() + ": " + device.getAddress());
+//                mConnectingDialog.show();
+//                mSearchDialog.dismiss();
+//            }
+//        };
+//        mSearchDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+//            @Override
+//            public void onDismiss(DialogInterface dialog) {
+//                mBtController.startScan(false);
+//            }
+//        });
+//
+//        mConnectingDialog = new ProgressDialog(Main2Activity.this);
+//        mConnectingDialog.setMessage("Connecting...");
 
         //About Information
 //        llAbout.setOnClickListener(new View.OnClickListener() {
@@ -206,7 +207,7 @@ public class Main2Activity  extends BaseActivity implements BTController.Listene
         if (mBluetoothDevices.contains(device))
             return;
         mBluetoothDevices.add(device);
-        mBluetoothDeviceAdapter.notifyDataSetChanged();
+//        mBluetoothDeviceAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -217,7 +218,7 @@ public class Main2Activity  extends BaseActivity implements BTController.Listene
     @Override
     public void onStartScan() {
         mBluetoothDevices.clear();
-        mBluetoothDeviceAdapter.notifyDataSetChanged();
+//        mBluetoothDeviceAdapter.notifyDataSetChanged();
     }
 
     @Override

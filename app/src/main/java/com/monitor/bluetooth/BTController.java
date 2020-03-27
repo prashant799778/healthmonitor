@@ -10,6 +10,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
+import com.monitor.util.Comman;
+
 /**
  * Created by ZXX on 2017/4/28.
  */
@@ -70,6 +72,7 @@ public class BTController {
      * @param b
      */
     public void startScan(boolean b){
+        Comman.log("BLUETOOth","OnLCLICK--Inside-Start_Status");
         if(b){
             mBtAdapter.startDiscovery();
         }

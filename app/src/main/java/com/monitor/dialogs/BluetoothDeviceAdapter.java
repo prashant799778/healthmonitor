@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 
 import com.monitor.R;
+import com.monitor.util.Comman;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,6 +31,9 @@ public class BluetoothDeviceAdapter extends BaseAdapter
     {
         this.mInflater = LayoutInflater.from(context);
         this.mDevices  = devices;
+//        this.notifyDataSetChanged();
+        Comman.log("BLUETOOth","BluetoothDeviceAdapter666666666666666666666");
+
     }
 
     @Override
@@ -61,7 +65,7 @@ public class BluetoothDeviceAdapter extends BaseAdapter
         {
             llItem  = (LinearLayout) mInflater.inflate(R.layout.devices_dialog_bluetooth_item,null);
         }
-
+        Comman.log("BLUETOOth","BluetoothDeviceAdapter77777777777777"+dev.getAddress());
         TextView tvName = (TextView) llItem.findViewById(R.id.tvBtItemName);
         TextView tvAddr = (TextView) llItem.findViewById(R.id.tvBtItemAddr);
         tvName.setText(dev.getName());
@@ -69,5 +73,13 @@ public class BluetoothDeviceAdapter extends BaseAdapter
 //        Log.d("BL...... SearchDevicesDialog(",dev.getName());
 
         return llItem;
+    }
+    public  void update(ArrayList<BluetoothDevice> devices)
+    {
+        Comman.log("BLUETOOth",":INsideUPDATE---"+this.mDevices.size());
+//     this.mDevices.addAll(devices);
+     this.notifyDataSetChanged();
+        Comman.log("BLUETOOth",":INsideUPDATE---1--"+this.mDevices.size());
+
     }
 }
