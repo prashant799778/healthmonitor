@@ -25,6 +25,7 @@ class ECG extends React.Component{
       super()
     }
     componentDidMount() {
+
       this.convs= document.getElementById(this.props.id);
 
       this.ctx =  this.convs.getContext('2d')
@@ -79,6 +80,8 @@ var client2  = mqtt2.connect('mqtts://mqtt.digitologyhealthcare.com:8083')
  })
 
 
+    this.mock()
+
     }
 
   ///////////
@@ -88,6 +91,11 @@ var client2  = mqtt2.connect('mqtts://mqtt.digitologyhealthcare.com:8083')
 componentWillReceiveProps(){
 
    
+}
+
+mock=()=>{
+  setInterval(()=>{ this.loop(Math.random(0, 255)); }, 30);
+
 }
 
     loop=(amp) =>{
