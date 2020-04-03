@@ -793,9 +793,9 @@ button.newclr-bck {
   .innr-patient {
       border-bottom: 1px solid gray;
   }
-  .height-box{
-        height: 172px;
-  }
+  // .height-box{
+  //       height: 172px;
+  // }
   .rem-boder{
     border: 0px
   }
