@@ -79,7 +79,7 @@ var client3  = mqtt3.connect('mqtts://mqtt.digitologyhealthcare.com:8083')
  })
 
 
-
+//  this.mock()
 
   ///////////
    
@@ -89,7 +89,10 @@ componentWillReceiveProps(){
 
    
 }
+mock=()=>{
+  setInterval(()=>{ this.loop(Math.random(0, 255)); }, 30);
 
+}
     loop=(amp) =>{
         if(this.convs==""){
             this.bufferIndex=0

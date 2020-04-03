@@ -80,7 +80,7 @@ var client2  = mqtt2.connect('mqtts://mqtt.digitologyhealthcare.com:8083')
  })
 
 
-    this.mock()
+    // this.mock()
 
     }
 
