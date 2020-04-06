@@ -6,6 +6,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -32,6 +33,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,6 +48,7 @@ import com.monitor.bluetooth.BTController;
 import com.monitor.dialogs.BluetoothDeviceAdapter;
 import com.monitor.dialogs.SearchDevicesDialog;
 import com.monitor.http.Api_calling;
+import com.monitor.http.Model.Ecgwave;
 import com.monitor.util.Comman;
 import com.monitor.util.Constant;
 import com.monitor.util.DataParser;
@@ -123,8 +127,11 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
     private LinearLayout llAbout;
     private TextView tvFWVersion;
     private TextView tvHWVersion;
+
     private WaveformView wfSpO2;
     private WaveformView wfECG;
+    private WaveformView wfResp;
+
     Lato_Regular_Font alarm,lead;
     MqttAsyncClient mqtt_Notifiaction;
     private Button cnt;
@@ -136,6 +143,10 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
     JSONObject bpp;
     JSONObject wave;
     JSONArray array;
+    Boolean I=true,II=false,III=false,AVR=false,AVL=false,AVF=false,V=false;
+    RadioGroup radioGroup;
+    RadioButton r1,r2,r3,avr,avl,avf,v;
+
 
     boolean isHeartRatHigh=false,isHeartRatLow=false,isSpo2High=false,isSpo2Low=false,isPulseRateHigh=false,isPulseRateLow=false,isTempHigh=false,isTempLow=false,isBpHighUpper=false,isBpLowUpper=false,isBpHighLower=false,isBpLowLower=false;
 //boolean isHeartRatHigh=true,isHeartRatLow=true,isSpo2High=true,isSpo2Low=true,isPulseRateHigh=true,isPulseRateLow=true,isTempHigh=true,isTempLow=true,isBpHighUpper=true,isBpLowUpper=true,isBpHighLower=true,isBpLowLower=true;
@@ -288,6 +299,22 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
         lead=findViewById(R.id.lead);
         ss=findViewById(R.id.ss);
         ss1=findViewById(R.id.ss1);
+
+        radioGroup=findViewById(R.id.radioGp);
+
+        r1=findViewById(R.id.r1);
+        r2=findViewById(R.id.r2);
+        r3=findViewById(R.id.r3);
+        avr=findViewById(R.id.avr);
+        avl=findViewById(R.id.avl);
+        avf=findViewById(R.id.avf);
+        v=findViewById(R.id.v);
+
+
+
+
+
+
         pname.setText(name);
         p_age.setText("Age "+age);
         p_location.setText(m.getHospital());
@@ -324,6 +351,21 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
                 mBtController.write(DataParser.CMD_STOP_NIBP);i=0;}
             }
         });
+
+
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @SuppressLint("ResourceType")
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                Comman.log("RadioButton--",""+checkedId);
+                RadioButton rb = (RadioButton) group.findViewById(checkedId);
+                if (null != rb && checkedId >-1) {
+                    setRadioButtonValue(rb.getText().toString());
+
+                }
+            }
+        });
+
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -432,6 +474,7 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
         //SpO2 & ECG waveform
         wfSpO2 = (WaveformView) findViewById(R.id.wfSp02);
         wfECG = (WaveformView) findViewById(R.id.wfECG);
+        wfResp = (WaveformView) findViewById(R.id.wfResp);
     }
 
     public void onClick(View v) {
@@ -666,8 +709,7 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
     @Override
     public void onECGWaveReceived(final int dat) {
         data2=dat;
-        wfECG.addAmp(dat);
-        sendEcg(dat);
+//        wfECG.addAmp(dat);
     }
 
     @Override
@@ -823,6 +865,10 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
     }
 
     @Override
+    public void onRespWaveReceived(int dat) {
+       wfResp.addAmp(dat);
+    }
+    @Override
     public void onHardwareReceived(final String str) {
         runOnUiThread(new Runnable() {
             @Override
@@ -833,15 +879,29 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
 
     }
 
-
-
-
-
-
-
-
-
-
+    @Override
+    public void OnAllECGReceived(Ecgwave ecgwave) {
+        if(I){
+         wfECG.addAmp(ecgwave.getOne()); sendEcg(ecgwave.getOne());}
+        else if(II){
+         wfECG.addAmp(ecgwave.getTwo()); sendEcg(ecgwave.getTwo());}
+        else if(III){
+        wfECG.addAmp(ecgwave.getThree());
+            sendEcg(ecgwave.getThree());
+        }else if(AVL){
+            sendEcg(ecgwave.getAvl());
+        wfECG.addAmp(ecgwave.getAvl());
+        }else if (AVF){
+            sendEcg(ecgwave.getAvf());
+         wfECG.addAmp(ecgwave.getAvf());
+        }else if(AVR){
+            sendEcg(ecgwave.getAvr());
+        wfECG.addAmp(ecgwave.getAvr());
+        }else if(V){
+            sendEcg(ecgwave.getFive());
+        wfECG.addAmp(ecgwave.getFive());
+        }
+    }
 
 
     public void connectMqtt_JSon()
@@ -1217,6 +1277,87 @@ public class MainActivity  extends BaseActivity implements BTController.Listener
         Random random = new Random();
         Comman.log("RamdomValues","-- "+(random.nextInt(90)+10));
          return (((random.nextInt(90)+10)));
+    }
+
+
+
+  private void  setRadioButtonValue(String  value)
+    {
+        Comman.log("RadioButton","---Before--"+value);
+
+        switch (value)
+        {
+            case "|":
+                Comman.log("RadioButton","---I");
+                I=true;
+                II=false;
+                III=false;
+                AVR=false;
+                AVF=false;
+                AVL=false;
+                V=false;
+                break;
+            case "||":
+                Comman.log("RadioButton","---II");
+                I=false;
+                II=true;
+                III=false;
+                AVR=false;
+                AVF=false;
+                AVL=false;
+                V=false;
+                break;
+            case "|||":
+                Comman.log("RadioButton","---III");
+                I=false;
+                II=false;
+                III=true;
+                AVR=false;
+                AVF=false;
+                AVL=false;
+                V=false;
+                break;
+            case "aVR":
+                Comman.log("RadioButton","---AVR");
+                I=false;
+                II=false;
+                III=false;
+                AVR=true;
+                AVF=false;
+                AVL=false;
+                V=false;
+                break;
+            case "aVL":
+                Comman.log("RadioButton","---AVL");
+                I=false;
+                II=false;
+                III=false;
+                AVR=false;
+                AVF=false;
+                AVL=true;
+                V=false;
+                break;
+            case "aVF":
+                Comman.log("RadioButton","---AVF");
+                I=false;
+                II=false;
+                III=false;
+                AVR=false;
+                AVF=true;
+                AVL=false;
+                V=false;
+                break;
+            case "V":
+                Comman.log("RadioButton","---V");
+                I=false;
+                II=false;
+                III=false;
+                AVR=false;
+                AVF=false;
+                AVL=false;
+                V=true;
+                break;
+        }
     }
 
 }

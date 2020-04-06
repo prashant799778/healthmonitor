@@ -54,7 +54,9 @@
         <activity
             android:name="com.monitor.activities.Main2Activity"
             android:screenOrientation="landscape" />
-        <activity android:name="com.monitor.activities.UserDashboard" />
+        <activity
+            android:name="com.monitor.activities.UserDashboard"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.monitor.activities.UserDisplayActivity"
             android:screenOrientation="landscape" />

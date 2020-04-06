@@ -3,6 +3,8 @@ package com.monitor.util;
 
 import android.widget.Toast;
 
+import com.monitor.http.Model.Ecgwave;
+
 import java.util.concurrent.LinkedBlockingQueue;
 
 /**
@@ -24,6 +26,7 @@ public class DataParser {
     private final int     PKG_SW_VER          = 0xfc;
     private final int     PKG_HW_VER          = 0xfd;
     private final int     PKG_SPO2_WAVE       = 0xfe;
+    private final int     PKG_RESP_WAVE        =0xff;
     public static byte[]  CMD_START_NIBP = new byte[]{0x55, (byte) 0xaa, 0x04, 0x02, 0x01, (byte) 0xf8};
     public static byte[]  CMD_STOP_NIBP  = new byte[]{0x55, (byte) 0xaa, 0x04, 0x02, 0x00, (byte) 0xf9};
     public static byte[]  CMD_FW_VERSION = new byte[]{0x55, (byte) 0xaa, 0x04, (byte) 0xfc, 0x00, (byte) 0xff};
@@ -43,16 +46,14 @@ public class DataParser {
         void onSpO2WaveReceived(int dat);
         void onRespReceived(int dat);
         void onSpO2Received(SpO2 spo2);
-
         void onECGWaveReceived(int dat);
         void onECGReceived(ECG ecg);
-
         void onTempReceived(Temp temp);
-
         void onNIBPReceived(NIBP nibp);
-
         void onFirmwareReceived(String str);
+        void onRespWaveReceived(int dat);
         void onHardwareReceived(String str);
+        void OnAllECGReceived(Ecgwave ecgwave);
     }
 
     //Constructor
@@ -96,7 +97,6 @@ public class DataParser {
                         }
 
                         if(CheckSum(packageData)){
-
                             ParsePackage(packageData);
                         }
                     }
@@ -115,6 +115,10 @@ public class DataParser {
         switch (pkgType) {
             case PKG_ECG_WAVE:
                 mListener.onECGWaveReceived(pkgData[4]);
+                mListener.OnAllECGReceived(new Ecgwave(pkgData[4],pkgData[5],pkgData[6],pkgData[7],pkgData[8],pkgData[9],pkgData[10]));
+                break;
+            case PKG_RESP_WAVE:
+                mListener.onRespWaveReceived(pkgData[4]);
                 break;
             case PKG_SPO2_WAVE:
                 mListener.onSpO2WaveReceived(pkgData[4]);

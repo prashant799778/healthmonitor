@@ -1192,6 +1192,7 @@ color white
 color whitebutton
 color wrongnummber
 color yallow
+color your_color
 dimen Size
 dimen _100sdp
 dimen _100ssp
@@ -2590,6 +2591,7 @@ drawable warning_circle
 drawable warning_sigh
 drawable welcomrbutton
 drawable xmlid_518
+drawable yourbuttonbackground
 id ALT
 id BOTTOM_END
 id BOTTOM_START
@@ -2688,6 +2690,9 @@ id amdp_ok
 id async
 id auto
 id auto_center
+id avf
+id avl
+id avr
 id b
 id barrier
 id bck
@@ -2934,7 +2939,11 @@ id progress_dialog
 id progress_horizontal
 id progress_layout
 id r
+id r1
+id r2
+id r3
 id radio
+id radioGp
 id reclycle
 id relative_top
 id resp

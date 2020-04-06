@@ -46,9 +46,9 @@
     <string name="resp">RESP(bpm)</string>
     <string name="Emial_ID">Email ID</string>
     <string name="Password">Password</string>
-    <string name="Prescribe_medicine">Prescribe medicine</string>
+    <string name="Prescribe_medicine">Provide Opinion</string>
     <string name="Show">Show Message</string>
-    <string name="Prescribe_medicine_list">Prescribe medicine List</string>
+    <string name="Prescribe_medicine_list">Provided Opinion List</string>
     <string name="forgot_Password">Forgot Password?</string>
     <string name="Please_enter_a_new_password">Please enter a new password</string>
     <string name="BacktoLogin">Back to Login </string>

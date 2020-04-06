@@ -249,10 +249,10 @@ public class AlarmActivity extends AppCompatActivity {
         np1.setMinValue(0);
         np2.setMaxValue(low);
         np2.setMinValue(0);
-        int Width =(int) (getResources().getDisplayMetrics().widthPixels*0.95);
-        int Height =(int) (getResources().getDisplayMetrics().heightPixels*0.90);
+//        int Width =(int) (getResources().getDisplayMetrics().widthPixels*0.95);
+//        int Height =(int) (getResources().getDisplayMetrics().heightPixels*0.90);
         dialog.show();
-        dialog.getWindow().setLayout(Width,Height);
+//        dialog.getWindow().setLayout(Width,Height);
         int h1=0,l1=0;
         h=h1;l=l1;
         np1.setValue(npi1);

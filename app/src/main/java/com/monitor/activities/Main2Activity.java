@@ -22,6 +22,7 @@ import com.monitor.bluetooth.BTController;
 
 import com.monitor.dialogs.BluetoothDeviceAdapter;
 import com.monitor.dialogs.SearchDevicesDialog;
+import com.monitor.http.Model.Ecgwave;
 import com.monitor.util.Comman;
 import com.monitor.util.DataParser;
 import com.monitor.util.ECG;
@@ -317,6 +318,11 @@ public class Main2Activity  extends BaseActivity implements BTController.Listene
     }
 
     @Override
+    public void onRespWaveReceived(int dat) {
+
+    }
+
+    @Override
     public void onHardwareReceived(final String str) {
         runOnUiThread(new Runnable() {
             @Override
@@ -324,6 +330,11 @@ public class Main2Activity  extends BaseActivity implements BTController.Listene
                 tvHWVersion.setText("Hardware Version:" + str);
             }
         });
+    }
+
+    @Override
+    public void OnAllECGReceived(Ecgwave ecgwave) {
+
     }
 
 }

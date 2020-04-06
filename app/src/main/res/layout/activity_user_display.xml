@@ -167,7 +167,7 @@
                             android:paddingLeft="15dp"
                             android:gravity="center_vertical"
                             android:textColor="@color/red"
-                            android:textSize="@dimen/_10sdp"
+                            android:textSize="@dimen/_8sdp"
                             >
                         </com.monitor.widget.GothamBookFontForLable>
 
@@ -235,7 +235,7 @@
                             android:orientation="horizontal"
                             android:layout_height="match_parent">
                             <com.monitor.widget.Lato_Regular
-                                android:layout_width="150dp"
+                                android:layout_width="350dp"
                                 android:background="@color/red"
                                 android:id="@+id/send"
                                 android:layout_height="match_parent"

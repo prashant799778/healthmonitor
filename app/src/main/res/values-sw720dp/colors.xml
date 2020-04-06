@@ -16,6 +16,7 @@
     <color name="icon">#586270</color>
     <color name="bg">#1e1e2f</color>
     <color name="cc">#ffb500</color>
+    <color name="your_color">#01bc0e</color>
     <color name="hintcolor">#636e6e</color>
     <color name="hintColorNew">#434958</color>
     <color name="textfieldcolor">#3b4654</color>

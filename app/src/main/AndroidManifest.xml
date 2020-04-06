@@ -43,7 +43,8 @@
         <activity
             android:name=".activities.Main2Activity"
             android:screenOrientation="landscape" />
-        <activity android:name=".activities.UserDashboard" />
+        <activity android:name=".activities.UserDashboard"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.UserDisplayActivity"
             android:screenOrientation="landscape" />

@@ -89,7 +89,6 @@ public class UserDisplayActivity extends BaseActivity  {
         dialog.show();
 
 
-
         try {
             afd = UserDisplayActivity.this.getAssets().openFd("peak.wav");
             player = new MediaPlayer();
@@ -175,7 +174,8 @@ public class UserDisplayActivity extends BaseActivity  {
         if (Comman.isNetworkConnected(UserDisplayActivity.this)){
         connectMqtt_Json();
         connectMqtt_Ecg();
-        connect_Notification_MQTT();}
+        connect_Notification_MQTT();
+        }
         pname.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
