@@ -4011,9 +4011,9 @@ def downloadPatientDetails():
             i["spo2"]=json.loads(i["spo2"])
             i["temperature"]=json.loads(i["temperature"])
         # print(patientDetails)
+        df=pd.DataFrame(patientDetails)
         PatientName=df.PatientName[0]
         print(PatientName,"===========PatientName====")
-        df=pd.DataFrame(patientDetails)
         data_df_heartRate={"lower":[],"upper":[]}
         for i in df.heartRate:
             del i["status"]
