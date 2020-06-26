@@ -4084,10 +4084,10 @@ def downloadPatientDetails():
         df.to_excel("/var/www/Healthmonitor/patient_vital_Excel/patient_vital_Excel.xlsx")
         output = {"result":"Updated Successfully","status":"true"}
         return {"patientDetails":patientDetails}  
-    except KeyError :
-        print("Key Exception---->",str(e))   
-        output = {"result":"key error","status":"false"}
-        return output  
+    # except KeyError :
+    #     print("Key Exception---->",str(e))   
+    #     output = {"result":"key error","status":"false"}
+    #     return output  
 
     except Exception as e :
         print("Exception---->" +str(e))    
