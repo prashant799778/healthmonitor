@@ -3979,7 +3979,7 @@ def novastore():
         return output
 
 @app.route('/downloadPatientDetails', methods=['POST'])
-def editDoctorProfile():
+def downloadPatientDetails():
     try:
        
         json1=request.get_data() 
