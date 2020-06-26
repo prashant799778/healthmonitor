@@ -3978,6 +3978,32 @@ def novastore():
         output = {"result":"somthing went wrong","status":"false"}
         return output
 
+@app.route('/downloadPatientDetails', methods=['POST'])
+def editDoctorProfile():
+    try:
+       
+        json1=request.get_data() 
+        data=json.loads(json1.decode("utf-8")) 
+       
+        query1 = " update userMaster set  licenseNo='" + str(data["licenseNo"])+ "'  where Email = '" + str(data["Email"])+ "'   ;"
+        print(query1)
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query1)
+        patientDetails = cursor.fetchall()
+        conn.commit()
+        cursor.close()
+        output = {"result":"Updated Successfully","status":"true"}
+        return patientDetails  
+    except KeyError :
+        print("Key Exception---->")   
+        output = {"result":"key error","status":"false"}
+        return output  
+
+    except Exception as e :
+        print("Exception---->" +str(e))    
+        output = {"result":"somthing went wrong","status":"false"}
+        return output
  
 if __name__ == "__main__":
     CORS(app, support_credentials=True)
