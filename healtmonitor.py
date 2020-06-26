@@ -4003,7 +4003,7 @@ def downloadPatientDetails():
             i["pulseRate"]=json.loads(i["pulseRate"])
             i["spo2"]=json.loads(i["spo2"])
             i["temperature"]=json.loads(i["temperature"])
-        df=pd.DataFrame(data)
+        df=pd.DataFrame(patientDetails)
         data_df_heartRate={"lower":[],"upper":[]}
         for i in df.heartRate:
             data2=(list(i.values()))
