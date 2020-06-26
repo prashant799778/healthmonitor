@@ -6,6 +6,7 @@ import json
 import ConstantData
 import dlib
 import scipy
+import pandas as pd
 # import scipy.misc
 import numpy as np
 import pandas as pd 
@@ -3987,11 +3988,7 @@ def downloadPatientDetails():
         query1= " select  p.DateCreate,p.Patient_Id,pm.PatientName,p.temperature,p.lowPressure,"
         query1=query1+"p.highPressure,p.heartRate,p.pulseRate,p.spo2 from Patient_Vital_master p,"
         query1=query1+"Patient_master pm where pm.PatientId=p.Patient_Id and p.Patient_Id="+str(data["Patient_Id"])+" limit 10;"
-        # query=query +str(data["PatientId"]) + "' , RESP ='" + str(data["RESP"]) + "' , ECG ='" 
-        # query=query + str(data["ECG"]) + "' , SPO2 = '" + str(data["SPO2"]) + "' , NIBP = '"
-        # query=query + str(data["NIBP"]) + "', TEMP ='" + str(data["TEMP"]) + "'  ,  UserUpdate ='"
-        # query=query + str(data["UserUpdate"]) + "' , Status ='1'  where Id = '" + str(data["Id"])+ "';"
-        # query1 = " select * from Patient_Vital_master where+  limit 10   ;"
+        
         print(query1)
         conn=Connection()
         cursor = conn.cursor()
@@ -4006,9 +4003,79 @@ def downloadPatientDetails():
             i["pulseRate"]=json.loads(i["pulseRate"])
             i["spo2"]=json.loads(i["spo2"])
             i["temperature"]=json.loads(i["temperature"])
+        df=pd.DataFrame(data)
+        data_df_heartRate={"lower":[],"upper":[]}
+        for i in df.heartRate:
+            data2=(list(i.values()))
+            data_df_heartRate["lower"].append(data2[0])
+        #     data_df_heartRate["status"].append(data2[1])
+            data_df_heartRate["upper"].append(data2[2])
+        data_df_heartRate=pd.DataFrame(data_df_heartRate)
+        data_df_heartRate.rename(columns={'lower': 'heartRate_lower','upper': 'heartRate_upper'}, inplace=True)
+        df.drop("heartRate",axis=1,inplace=True)
+        df=pd.concat([df,data_df_heartRate],ignore_index=False,axis=1)
 
-            
 
+
+        data_df_highPressure={"lower":[],"upper":[]}
+        for i in df.highPressure:
+            data2=(list(i.values()))
+            data_df_highPressure["lower"].append(data2[0])
+            data_df_highPressure["upper"].append(data2[2])
+        data_df_highPressure=pd.DataFrame(data_df_highPressure)
+        data_df_highPressure.rename(columns={'lower': 'highPressure_lower','upper': 'highPressure_upper'}, inplace=True)
+        df.drop("highPressure",axis=1,inplace=True)
+        df=pd.concat([df,data_df_highPressure],ignore_index=False,axis=1)
+
+
+        data_df_lowPressure={"lower":[],"upper":[]}
+        for i in df.lowPressure:
+            data2=(list(i.values()))
+            data_df_lowPressure["lower"].append(data2[0])
+            data_df_lowPressure["upper"].append(data2[2])
+        data_df_lowPressure=pd.DataFrame(data_df_lowPressure)
+        data_df_lowPressure.rename(columns={'lower': 'lowPressure_lower','upper': 'lowPressure_upper'}, inplace=True)
+        df.drop("lowPressure",axis=1,inplace=True)
+        df=pd.concat([df,data_df_lowPressure],ignore_index=False,axis=1)
+
+
+        data_df_pulseRate={"lower":[],"upper":[]}
+        for i in df.pulseRate:
+            data2=(list(i.values()))
+            data_df_pulseRate["lower"].append(data2[0])
+            data_df_pulseRate["upper"].append(data2[2])
+        data_df_pulseRate=pd.DataFrame(data_df_pulseRate)
+        data_df_pulseRate.rename(columns={'lower': 'pulseRate_lower','upper': 'pulseRate_upper'}, inplace=True)
+        df.drop("pulseRate",axis=1,inplace=True)
+        df=pd.concat([df,data_df_pulseRate],ignore_index=False,axis=1)
+
+
+
+
+
+        data_df_spo2={"lower":[],"upper":[]}
+        for i in df.spo2:
+            data2=(list(i.values()))
+            data_df_spo2["lower"].append(data2[0])
+            data_df_spo2["upper"].append(data2[2])
+        data_df_spo2=pd.DataFrame(data_df_spo2)
+        data_df_spo2.rename(columns={'lower': 'spo2_lower','upper': 'spo2_upper'}, inplace=True)
+        df.drop("spo2",axis=1,inplace=True)
+        df=pd.concat([df,data_df_spo2],ignore_index=False,axis=1)
+
+
+
+        data_df_temperature={"lower":[],"upper":[]}
+        for i in df.temperature:
+            data2=(list(i.values()))
+            data_df_temperature["lower"].append(data2[0])
+            data_df_temperature["upper"].append(data2[2])
+        data_df_temperature=pd.DataFrame(data_df_temperature)
+        data_df_temperature.rename(columns={'lower': 'temperature_lower','upper': 'temperature_upper'}, inplace=True)
+        df.drop("temperature",axis=1,inplace=True)
+        df=pd.concat([df,data_df_temperature],ignore_index=False,axis=1)
+                
+        df.to_excel("/var/www/Healthmonitor/patient_vital_Excel")
         output = {"result":"Updated Successfully","status":"true"}
         return {"patientDetails":patientDetails}  
     except KeyError :
