@@ -3982,9 +3982,9 @@ def novastore():
 def downloadPatientDetails():
     try:
        
-        # json1=request.get_data() 
-        # data=json.loads(json1.decode("utf-8")) 
-        query1= " select  p.DateCreate,p.Patient_Id,pm.PatientName,p.temperature,p.lowPressure,p.highPressure,p.heartRate,p.pulseRate,p.spo2 from Patient_Vital_master p,Patient_master pm where pm.PatientId=p.Patient_Id limit 10;"
+        json1=request.get_data() 
+        data=json.loads(json1.decode("utf-8")) 
+        query1= " select  p.DateCreate,p.Patient_Id,pm.PatientName,p.temperature,p.lowPressure,p.highPressure,p.heartRate,p.pulseRate,p.spo2 from Patient_Vital_master p,Patient_master pm where pm.PatientId=p.Patient_Id and p.Patient_Id"+str(data["Patient_Id"])+" limit 10;"
         # query=query +str(data["PatientId"]) + "' , RESP ='" + str(data["RESP"]) + "' , ECG ='" 
         # query=query + str(data["ECG"]) + "' , SPO2 = '" + str(data["SPO2"]) + "' , NIBP = '"
         # query=query + str(data["NIBP"]) + "', TEMP ='" + str(data["TEMP"]) + "'  ,  UserUpdate ='"
