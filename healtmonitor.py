@@ -4023,10 +4023,10 @@ def downloadPatientDetails():
         print("============1================")
 
         data_df_highPressure={"lower":[],"upper":[]}
-        for i in df.highPressure:
-            del i["status"]
-            data_df_heartRate["lower"].append(i["lower"])
-            data_df_heartRate["upper"].append(i["upper"])
+        for j in df.highPressure:
+            del j["status"]
+            data_df_heartRate["lower"].append(j["lower"])
+            data_df_heartRate["upper"].append(j["upper"])
         data_df_highPressure=pd.DataFrame(data_df_highPressure)
         data_df_highPressure.rename(columns={'lower': 'highPressure_lower','upper': 'highPressure_upper'}, inplace=True)
         df.drop("highPressure",axis=1,inplace=True)
