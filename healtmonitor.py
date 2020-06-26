@@ -3982,8 +3982,8 @@ def novastore():
 def downloadPatientDetails():
     try:
        
-        json1=request.get_data() 
-        data=json.loads(json1.decode("utf-8")) 
+        # json1=request.get_data() 
+        # data=json.loads(json1.decode("utf-8")) 
        
         query1 = " select * from Patient_Vital_master limit 10   ;"
         print(query1)
