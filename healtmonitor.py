@@ -3985,7 +3985,7 @@ def downloadPatientDetails():
         json1=request.get_data() 
         data=json.loads(json1.decode("utf-8")) 
        
-        query1 = " update userMaster set  licenseNo='" + str(data["licenseNo"])+ "'  where Email = '" + str(data["Email"])+ "'   ;"
+        query1 = " select * from Patient_Vital_master limit 10   ;"
         print(query1)
         conn=Connection()
         cursor = conn.cursor()
