@@ -4081,7 +4081,7 @@ def downloadPatientDetails():
         df.drop("temperature",axis=1,inplace=True)
         df=pd.concat([df,data_df_temperature],ignore_index=False,axis=1)
                 
-        df.to_excel("/var/www/Healthmonitor/patient_vital_Excel/patient_vital_Excel.xlsx.zip")
+        df.to_csv("/var/www/Healthmonitor/patient_vital_Excel/patient_vital_Excel.csv.gz",index=False, compression="gzip")
         output = {"result":"Updated Successfully","status":"true"}
         return {"patientDetails":patientDetails}  
     # except KeyError :
