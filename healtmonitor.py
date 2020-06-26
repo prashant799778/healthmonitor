@@ -4012,10 +4012,9 @@ def downloadPatientDetails():
         df=pd.DataFrame(patientDetails)
         data_df_heartRate={"lower":[],"upper":[]}
         for i in df.heartRate:
-            data2=(list(i.values()))
-            data_df_heartRate["lower"].append(data2[1])
-        #     data_df_heartRate["status"].append(data2[1])
-            data_df_heartRate["upper"].append(data2[0])
+            del i["status"]
+            data_df_heartRate["lower"].append(i["lower"])
+            data_df_heartRate["upper"].append(i["upper"])
         data_df_heartRate=pd.DataFrame(data_df_heartRate)
         data_df_heartRate.rename(columns={'lower': 'heartRate_lower','upper': 'heartRate_upper'}, inplace=True)
         df.drop("heartRate",axis=1,inplace=True)
@@ -4025,9 +4024,9 @@ def downloadPatientDetails():
 
         data_df_highPressure={"lower":[],"upper":[]}
         for i in df.highPressure:
-            data2=(list(i.values()))
-            data_df_highPressure["lower"].append(data2[1])
-            data_df_highPressure["upper"].append(data2[0])
+            del i["status"]
+            data_df_heartRate["lower"].append(i["lower"])
+            data_df_heartRate["upper"].append(i["upper"])
         data_df_highPressure=pd.DataFrame(data_df_highPressure)
         data_df_highPressure.rename(columns={'lower': 'highPressure_lower','upper': 'highPressure_upper'}, inplace=True)
         df.drop("highPressure",axis=1,inplace=True)
@@ -4036,9 +4035,9 @@ def downloadPatientDetails():
 
         data_df_lowPressure={"lower":[],"upper":[]}
         for i in df.lowPressure:
-            data2=(list(i.values()))
-            data_df_lowPressure["lower"].append(data2[1])
-            data_df_lowPressure["upper"].append(data2[0])
+            del i["status"]
+            data_df_heartRate["lower"].append(i["lower"])
+            data_df_heartRate["upper"].append(i["upper"])
         data_df_lowPressure=pd.DataFrame(data_df_lowPressure)
         data_df_lowPressure.rename(columns={'lower': 'lowPressure_lower','upper': 'lowPressure_upper'}, inplace=True)
         df.drop("lowPressure",axis=1,inplace=True)
@@ -4047,9 +4046,9 @@ def downloadPatientDetails():
 
         data_df_pulseRate={"lower":[],"upper":[]}
         for i in df.pulseRate:
-            data2=(list(i.values()))
-            data_df_pulseRate["lower"].append(data2[1])
-            data_df_pulseRate["upper"].append(data2[0])
+            del i["status"]
+            data_df_heartRate["lower"].append(i["lower"])
+            data_df_heartRate["upper"].append(i["upper"])
         data_df_pulseRate=pd.DataFrame(data_df_pulseRate)
         data_df_pulseRate.rename(columns={'lower': 'pulseRate_lower','upper': 'pulseRate_upper'}, inplace=True)
         df.drop("pulseRate",axis=1,inplace=True)
@@ -4061,9 +4060,9 @@ def downloadPatientDetails():
 
         data_df_spo2={"lower":[],"upper":[]}
         for i in df.spo2:
-            data2=(list(i.values()))
-            data_df_spo2["lower"].append(data2[1])
-            data_df_spo2["upper"].append(data2[0])
+            del i["status"]
+            data_df_heartRate["lower"].append(i["lower"])
+            data_df_heartRate["upper"].append(i["upper"])
         data_df_spo2=pd.DataFrame(data_df_spo2)
         data_df_spo2.rename(columns={'lower': 'spo2_lower','upper': 'spo2_upper'}, inplace=True)
         df.drop("spo2",axis=1,inplace=True)
@@ -4073,9 +4072,9 @@ def downloadPatientDetails():
 
         data_df_temperature={"lower":[],"upper":[]}
         for i in df.temperature:
-            data2=(list(i.values()))
-            data_df_temperature["lower"].append(data2[1])
-            data_df_temperature["upper"].append(data2[0])
+            del i["status"]
+            data_df_heartRate["lower"].append(i["lower"])
+            data_df_heartRate["upper"].append(i["upper"])
         data_df_temperature=pd.DataFrame(data_df_temperature)
         data_df_temperature.rename(columns={'lower': 'temperature_lower','upper': 'temperature_upper'}, inplace=True)
         df.drop("temperature",axis=1,inplace=True)
