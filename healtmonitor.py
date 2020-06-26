@@ -4020,7 +4020,7 @@ def downloadPatientDetails():
         df.drop("heartRate",axis=1,inplace=True)
         df=pd.concat([df,data_df_heartRate],ignore_index=False,axis=1)
 
-
+        print("============1================")
 
         data_df_highPressure={"lower":[],"upper":[]}
         for i in df.highPressure:
@@ -4032,6 +4032,7 @@ def downloadPatientDetails():
         df.drop("highPressure",axis=1,inplace=True)
         df=pd.concat([df,data_df_highPressure],ignore_index=False,axis=1)
 
+        print("============2================")
 
         data_df_lowPressure={"lower":[],"upper":[]}
         for i in df.lowPressure:
