@@ -19,5 +19,5 @@ def Connection():
     return connection
 
 
-
+url="https://api.digitologyhealthcare.com"
 #healthmonitor

@@ -7,6 +7,7 @@ import ConstantData
 import dlib
 import scipy
 import pandas as pd
+import config
 # import scipy.misc
 import numpy as np
 import pandas as pd 
@@ -4081,19 +4082,40 @@ def downloadPatientDetails():
         df.drop("temperature",axis=1,inplace=True)
         df=pd.concat([df,data_df_temperature],ignore_index=False,axis=1)
                 
-        df.to_csv("/var/www/Healthmonitor/patient_vital_Excel/patient_vital_Excel.csv.gz",index=False, compression="gzip")
+        df.to_csv("/var/www/Healthmonitor/patient_vital_Excel/patient_vital_data.csv.gz",index=False, compression="gzip")
         output = {"result":"Updated Successfully","status":"true"}
-        return {"patientDetails":patientDetails}  
-    # except KeyError :
-    #     print("Key Exception---->",str(e))   
-    #     output = {"result":"key error","status":"false"}
-    #     return output  
+        return {"status":True,"path":config.url+"/var/www/Healthmonitor/patient_vital_Excel/patient_vital_data.csv.gz"}  
+    
 
     except Exception as e :
         print("Exception---->" +str(e))    
         output = {"result":"somthing went wrong","status":"false"}
         return output
- 
+
+@app.route('/downloadPatientDetails1', methods=['POST'])
+def downloadPatientDetails1():
+    try:
+       
+        json1=request.get_data() 
+        data=json.loads(json1.decode("utf-8")) 
+        query1= " select  p.DateCreate,p.Patient_Id,pm.PatientName,p.temperature,p.lowPressure,"
+        query1=query1+"p.highPressure,p.heartRate,p.pulseRate,p.spo2 from Patient_Vital_master p,"
+        query1=query1+"Patient_master pm where pm.PatientId=p.Patient_Id and p.Patient_Id="+str(data["Patient_Id"])+" limit 10;"
+        
+        print(query1)
+        conn=Connection()
+        cursor = conn.cursor()
+        cursor.execute(query1)
+        patientDetails = cursor.fetchall()
+        conn.commit()
+        cursor.close()
+        return {"patientDetails":patientDetails} 
+    except Exception as e :
+        print("Exception---->" +str(e))    
+        output = {"result":"somthing went wrong","status":"false"}
+        return output
+
+
 if __name__ == "__main__":
     CORS(app, support_credentials=True)
     app.run(host='0.0.0.0',port=5053,debug=True)
