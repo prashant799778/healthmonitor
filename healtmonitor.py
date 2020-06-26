@@ -3994,7 +3994,7 @@ def downloadPatientDetails():
         conn.commit()
         cursor.close()
         output = {"result":"Updated Successfully","status":"true"}
-        return patientDetails  
+        return {"patientDetails":patientDetails}  
     except KeyError :
         print("Key Exception---->")   
         output = {"result":"key error","status":"false"}
