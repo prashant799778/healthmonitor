@@ -68,7 +68,12 @@ def CampImages(image_name):
     except FileNotFoundError:
         abort(404)
 
-
+@app.route("/var/www/Healthmonitor/patient_vital_Excel/<image_name>")
+def downloadfile(image_name):
+    try:
+        return send_from_directory('/var/www/Healthmonitor/patient_vital_Excel', filename=image_name, as_attachment=False)
+    except FileNotFoundError:
+        abort(404)
 
 @app.route('/login', methods=['GET'])
 def login1():
