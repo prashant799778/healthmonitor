@@ -4085,7 +4085,7 @@ def downloadPatientDetails():
         output = {"result":"Updated Successfully","status":"true"}
         return {"patientDetails":patientDetails}  
     except KeyError :
-        print("Key Exception---->")   
+        print("Key Exception---->",str(e))   
         output = {"result":"key error","status":"false"}
         return output  
 
