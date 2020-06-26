@@ -4100,7 +4100,8 @@ def downloadPatientDetails1():
         data=json.loads(json1.decode("utf-8")) 
         query1= " select  p.DateCreate,p.Patient_Id,pm.PatientName,p.temperature,p.lowPressure,"
         query1=query1+"p.highPressure,p.heartRate,p.pulseRate,p.spo2 from Patient_Vital_master p,"
-        query1=query1+"Patient_master pm where pm.PatientId=p.Patient_Id and p.Patient_Id="+str(data["Patient_Id"])+" limit 10;"
+        query1=query1+"Patient_master pm where pm.PatientId=p.Patient_Id and p.Patient_Id="+str(data["Patient_Id"])+
+        query1=query1+" and DateCreate <="+data["toDate"])+" and DateCreate >="+data["fromDate"])+ ";"
         
         print(query1)
         conn=Connection()
