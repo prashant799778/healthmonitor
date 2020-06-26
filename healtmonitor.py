@@ -3994,12 +3994,12 @@ def downloadPatientDetails():
         conn.commit()
         cursor.close()
         for i in patientDetails:
-            i["heartRate"]=jso.loads(i["heartRate"])
-            i["highPressure"]=jso.loads(i["highPressure"])
-            i["lowPressure"]=jso.loads(i["lowPressure"])
-            i["pulseRate"]=jso.loads(i["pulseRate"])
-            i["spo2"]=jso.loads(i["spo2"])
-            i["temperature"]=jso.loads(i["temperature"])
+            i["heartRate"]=json.loads(i["heartRate"])
+            i["highPressure"]=json.loads(i["highPressure"])
+            i["lowPressure"]=json.loads(i["lowPressure"])
+            i["pulseRate"]=json.loads(i["pulseRate"])
+            i["spo2"]=json.loads(i["spo2"])
+            i["temperature"]=json.loads(i["temperature"])
 
             
 
