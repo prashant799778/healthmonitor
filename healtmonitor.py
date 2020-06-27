@@ -4121,7 +4121,7 @@ def downloadPatientDetails1():
             i["pulseRate"]=json.loads(i["pulseRate"])
             i["spo2"]=json.loads(i["spo2"])
             i["temperature"]=json.loads(i["temperature"])
-        print(patientDetails)
+        # print(patientDetails)
         df=pd.DataFrame(patientDetails)
         # Patient=df.PatientName[0]
         # PatientName=Patient.split()[0]
