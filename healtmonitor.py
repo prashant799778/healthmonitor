@@ -4123,9 +4123,9 @@ def downloadPatientDetails1():
             i["temperature"]=json.loads(i["temperature"])
         print(patientDetails)
         df=pd.DataFrame(patientDetails)
-        Patient=df.PatientName[0]
-        PatientName=Patient.split()[0]
-        print(PatientName,"===========PatientName====")
+        # Patient=df.PatientName[0]
+        # PatientName=Patient.split()[0]
+        # print(PatientName,"===========PatientName====")
         data_df_heartRate={"lower":[],"upper":[]}
         for i in df.heartRate:
             del i["status"]
@@ -4196,7 +4196,7 @@ def downloadPatientDetails1():
         data_df_temperature.rename(columns={'lower': 'temperature_lower','upper': 'temperature_upper'}, inplace=True)
         df.drop("temperature",axis=1,inplace=True)
         df=pd.concat([df,data_df_temperature],ignore_index=False,axis=1)
-        path="/var/www/Healthmonitor/patient_vital_Excel/"+PatientName+"_vital_data.csv.gz"       
+        path="/var/www/Healthmonitor/patient_vital_Excel/ABC_vital_data.csv.gz"       
         df.to_csv(path,index=False, compression="gzip")
         output = {"result":"Updated Successfully","status":"true"}
         return {"status":True,"path":config.url+path}  
