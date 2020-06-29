@@ -4010,7 +4010,8 @@ def downloadPatientDetails():
             i["pulseRate"]=json.loads(i["pulseRate"])
             i["spo2"]=json.loads(i["spo2"])
             i["temperature"]=json.loads(i["temperature"])
-        # print(patientDetails)
+        print(patientDetails)
+
         df=pd.DataFrame(patientDetails)
         print(df)
         Patient=df.PatientName[0]
