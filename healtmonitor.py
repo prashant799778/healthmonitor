@@ -4012,6 +4012,7 @@ def downloadPatientDetails():
             i["temperature"]=json.loads(i["temperature"])
         # print(patientDetails)
         df=pd.DataFrame(patientDetails)
+        print(df)
         Patient=df.PatientName[0]
         PatientName=Patient.split()[0]
         print(PatientName,"===========PatientName====")
