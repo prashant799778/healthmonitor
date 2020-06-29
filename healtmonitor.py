@@ -4011,87 +4011,89 @@ def downloadPatientDetails():
             i["spo2"]=json.loads(i["spo2"])
             i["temperature"]=json.loads(i["temperature"])
         print(patientDetails)
+        if patientDetails==():
+            return {"status":False,"message":"No Data Found At This Time Duration"}
+        else:
+            df=pd.DataFrame(patientDetails)
+            print(df)
+            Patient=df.PatientName[0]
+            PatientName=Patient.split()[0]
+            print(PatientName,"===========PatientName====")
+            data_df_heartRate={"lower":[],"upper":[]}
+            for i in df.heartRate:
+                del i["status"]
+                data_df_heartRate["lower"].append(i["lower"])
+                data_df_heartRate["upper"].append(i["upper"])
+            data_df_heartRate=pd.DataFrame(data_df_heartRate)
+            data_df_heartRate.rename(columns={'lower': 'heartRate_lower','upper': 'heartRate_upper'}, inplace=True)
+            df.drop("heartRate",axis=1,inplace=True)
+            df=pd.concat([df,data_df_heartRate],ignore_index=False,axis=1)
 
-        df=pd.DataFrame(patientDetails)
-        print(df)
-        Patient=df.PatientName[0]
-        PatientName=Patient.split()[0]
-        print(PatientName,"===========PatientName====")
-        data_df_heartRate={"lower":[],"upper":[]}
-        for i in df.heartRate:
-            del i["status"]
-            data_df_heartRate["lower"].append(i["lower"])
-            data_df_heartRate["upper"].append(i["upper"])
-        data_df_heartRate=pd.DataFrame(data_df_heartRate)
-        data_df_heartRate.rename(columns={'lower': 'heartRate_lower','upper': 'heartRate_upper'}, inplace=True)
-        df.drop("heartRate",axis=1,inplace=True)
-        df=pd.concat([df,data_df_heartRate],ignore_index=False,axis=1)
+            print("============1================")
 
-        print("============1================")
+            data_df_highPressure={"lower":[],"upper":[]}
+            for i in df.highPressure:
+                del i["status"]
+                data_df_highPressure["lower"].append(i["lower"])
+                data_df_highPressure["upper"].append(i["upper"])
+            data_df_highPressure=pd.DataFrame(data_df_highPressure)
+            data_df_highPressure.rename(columns={'lower': 'highPressure_lower','upper': 'highPressure_upper'}, inplace=True)
+            df.drop("highPressure",axis=1,inplace=True)
+            df=pd.concat([df,data_df_highPressure],ignore_index=False,axis=1)
 
-        data_df_highPressure={"lower":[],"upper":[]}
-        for i in df.highPressure:
-            del i["status"]
-            data_df_highPressure["lower"].append(i["lower"])
-            data_df_highPressure["upper"].append(i["upper"])
-        data_df_highPressure=pd.DataFrame(data_df_highPressure)
-        data_df_highPressure.rename(columns={'lower': 'highPressure_lower','upper': 'highPressure_upper'}, inplace=True)
-        df.drop("highPressure",axis=1,inplace=True)
-        df=pd.concat([df,data_df_highPressure],ignore_index=False,axis=1)
+            print("============2================")
 
-        print("============2================")
-
-        data_df_lowPressure={"lower":[],"upper":[]}
-        for i in df.lowPressure:
-            del i["status"]
-            data_df_lowPressure["lower"].append(i["lower"])
-            data_df_lowPressure["upper"].append(i["upper"])
-        data_df_lowPressure=pd.DataFrame(data_df_lowPressure)
-        data_df_lowPressure.rename(columns={'lower': 'lowPressure_lower','upper': 'lowPressure_upper'}, inplace=True)
-        df.drop("lowPressure",axis=1,inplace=True)
-        df=pd.concat([df,data_df_lowPressure],ignore_index=False,axis=1)
-
-
-        data_df_pulseRate={"lower":[],"upper":[]}
-        for i in df.pulseRate:
-            del i["status"]
-            data_df_pulseRate["lower"].append(i["lower"])
-            data_df_pulseRate["upper"].append(i["upper"])
-        data_df_pulseRate=pd.DataFrame(data_df_pulseRate)
-        data_df_pulseRate.rename(columns={'lower': 'pulseRate_lower','upper': 'pulseRate_upper'}, inplace=True)
-        df.drop("pulseRate",axis=1,inplace=True)
-        df=pd.concat([df,data_df_pulseRate],ignore_index=False,axis=1)
+            data_df_lowPressure={"lower":[],"upper":[]}
+            for i in df.lowPressure:
+                del i["status"]
+                data_df_lowPressure["lower"].append(i["lower"])
+                data_df_lowPressure["upper"].append(i["upper"])
+            data_df_lowPressure=pd.DataFrame(data_df_lowPressure)
+            data_df_lowPressure.rename(columns={'lower': 'lowPressure_lower','upper': 'lowPressure_upper'}, inplace=True)
+            df.drop("lowPressure",axis=1,inplace=True)
+            df=pd.concat([df,data_df_lowPressure],ignore_index=False,axis=1)
 
 
-
-
-
-        data_df_spo2={"lower":[],"upper":[]}
-        for i in df.spo2:
-            del i["status"]
-            data_df_spo2["lower"].append(i["lower"])
-            data_df_spo2["upper"].append(i["upper"])
-        data_df_spo2=pd.DataFrame(data_df_spo2)
-        data_df_spo2.rename(columns={'lower': 'spo2_lower','upper': 'spo2_upper'}, inplace=True)
-        df.drop("spo2",axis=1,inplace=True)
-        df=pd.concat([df,data_df_spo2],ignore_index=False,axis=1)
+            data_df_pulseRate={"lower":[],"upper":[]}
+            for i in df.pulseRate:
+                del i["status"]
+                data_df_pulseRate["lower"].append(i["lower"])
+                data_df_pulseRate["upper"].append(i["upper"])
+            data_df_pulseRate=pd.DataFrame(data_df_pulseRate)
+            data_df_pulseRate.rename(columns={'lower': 'pulseRate_lower','upper': 'pulseRate_upper'}, inplace=True)
+            df.drop("pulseRate",axis=1,inplace=True)
+            df=pd.concat([df,data_df_pulseRate],ignore_index=False,axis=1)
 
 
 
-        data_df_temperature={"lower":[],"upper":[]}
-        for i in df.temperature:
-            del i["status"]
-            data_df_temperature["lower"].append(i["lower"])
-            data_df_temperature["upper"].append(i["upper"])
-        data_df_temperature=pd.DataFrame(data_df_temperature)
-        data_df_temperature.rename(columns={'lower': 'temperature_lower','upper': 'temperature_upper'}, inplace=True)
-        df.drop("temperature",axis=1,inplace=True)
-        df=pd.concat([df,data_df_temperature],ignore_index=False,axis=1)
-        path="/var/www/Healthmonitor/patient_vital_Excel/"+PatientName+"_vital_data.csv.gz"       
-        df.to_csv(path,index=False, compression="gzip")
-        output = {"result":"Updated Successfully","status":"true"}
-        return {"status":True,"path":config.url+path}  
-    
+
+
+            data_df_spo2={"lower":[],"upper":[]}
+            for i in df.spo2:
+                del i["status"]
+                data_df_spo2["lower"].append(i["lower"])
+                data_df_spo2["upper"].append(i["upper"])
+            data_df_spo2=pd.DataFrame(data_df_spo2)
+            data_df_spo2.rename(columns={'lower': 'spo2_lower','upper': 'spo2_upper'}, inplace=True)
+            df.drop("spo2",axis=1,inplace=True)
+            df=pd.concat([df,data_df_spo2],ignore_index=False,axis=1)
+
+
+
+            data_df_temperature={"lower":[],"upper":[]}
+            for i in df.temperature:
+                del i["status"]
+                data_df_temperature["lower"].append(i["lower"])
+                data_df_temperature["upper"].append(i["upper"])
+            data_df_temperature=pd.DataFrame(data_df_temperature)
+            data_df_temperature.rename(columns={'lower': 'temperature_lower','upper': 'temperature_upper'}, inplace=True)
+            df.drop("temperature",axis=1,inplace=True)
+            df=pd.concat([df,data_df_temperature],ignore_index=False,axis=1)
+            path="/var/www/Healthmonitor/patient_vital_Excel/"+PatientName+"_vital_data.csv.gz"       
+            df.to_csv(path,index=False, compression="gzip")
+            output = {"result":"Updated Successfully","status":"true"}
+            return {"status":True,"path":config.url+path}  
+        
 
     except Exception as e :
         print("Exception---->" +str(e))    
